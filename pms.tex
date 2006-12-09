@@ -1,0 +1,41 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage{pslatex}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{fullpage}
+\usepackage{draftcopy}
+
+\parskip          6pt
+\parindent        0pt
+
+\title{Package Manager Specification}
+\author{
+    Stephen P. Bennett \\
+    Ciaran McCreesh
+}
+
+\begin{document}
+\maketitle
+
+\include{introduction}
+
+\include{tree-layout}
+
+\include{profiles}
+
+\include{version-specs}
+
+\include{base-system}
+
+\include{ebuild-format}
+
+\include{ebuild-vars}
+
+\include{ebuild-functions}
+
+\include{ebuild-environment}
+
+\end{document}
+
+% vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
+
