@@ -1,4 +1,42 @@
 \chapter{Tree Layout}
 
+\section{Top Level}
+
+An ebuild repository shall occupy one directory on disk, with the following subdirectories:
+\begin{itemize}
+\item One directory per category, whose name shall be the name of the category. The layout of
+    these directories shall be as described in section \ref{category_dirs}.
+\item A \t{profiles} directory (optional), described in section \ref{profiles_dir}.
+\item A \t{licenses} directory (optional), described in section \ref{licenses_dir}.
+\item An \t{eclass} directory (optional), described in section \ref{eclass_dir}.
+\item A \t{metadata} directory (optional), described in section \ref{metadata_dir}.
+\item Other optional support files (skeleton ebuilds or ChangeLogs, for example) may exist
+    but are not covered by this specification.
+
+\end{itemize}
+
+\section{Category Directories}
+\label{category_dirs}
+
+\section{The Profiles Directory}
+\label{profiles_dir}
+
+\section{The Licenses Directory}
+\label{licenses_dir}
+
+The \t{licenses} directory shall contain copies of the licenses used by packages in the
+repository. Each file will be named according to the name used in the \t{LICENSE} variable as
+described in section \ref{ebuild_var_LICENSE}, and will contain the complete text of the license in
+human-readable form. Plain text and PDF formats are permitted, with the former strongly preferred.
+
+\section{The Eclass Directory}
+\label{eclass_dir}
+
+The \t{eclass} directory shall contain copies of the eclasses provided by this repository. The
+format of these files is described in section \ref{eclasses}. It may also contain, in their own
+directory, support files needed by these eclasses.
+
+\section{The Metadata Directory}
+\label{metadata_dir}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

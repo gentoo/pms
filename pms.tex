@@ -8,24 +8,30 @@
 \parskip          6pt
 \parindent        0pt
 
+\renewcommand{\t}[1]{\texttt{#1}}
+
 \title{Package Manager Specification}
-\author{Stephen P. Bennett\\\texttt{spb@gentoo.org} \and Ciaran
-McCreesh\\\texttt{ciaranm@ciaranm.org}}
+\author{Stephen P. Bennett\\\texttt{spb@gentoo.org}
+\and Ciaran McCreesh\\\texttt{ciaranm@ciaranm.org}}
 
 \begin{document}
 \maketitle
 
+\tableofcontents
+
 \include{introduction}
+
+\include{names}
 
 \include{tree-layout}
 
 \include{profiles}
 
-\include{version-specs}
-
 \include{base-system}
 
 \include{ebuild-format}
+
+\include{eclasses}
 
 \include{ebuild-vars}
 

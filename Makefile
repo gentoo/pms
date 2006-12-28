@@ -9,6 +9,7 @@ clean :
 LATEXFILES = \
 	pms.tex \
 	introduction.tex \
+	names.tex \
 	tree-layout.tex \
 	profiles.tex \
 	version-specs.tex \
@@ -24,6 +25,7 @@ pms.pdf: pms.dvi
 	dvipdf $<
 
 pms.dvi: $(LATEXFILES)
+	latex pms.tex
 	latex pms.tex
 
 .default: pms.pdf
