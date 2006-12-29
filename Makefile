@@ -4,7 +4,7 @@ check : pms.pdf
 	xpdf pms.pdf
 
 clean :
-	rm *~ *.pdf *.dvi *.log *.aux || true
+	rm *~ *.pdf *.dvi *.log *.aux *.bbl *.blg *.toc || true
 
 LATEXFILES = \
 	pms.tex \
@@ -24,9 +24,13 @@ LATEXFILES = \
 pms.pdf: pms.dvi
 	dvipdf $<
 
-pms.dvi: $(LATEXFILES)
-	latex pms.tex
-	latex pms.tex
+pms.bbl: pms.bib pms.tex
+	latex pms
+	bibtex pms
+
+pms.dvi: $(LATEXFILES) pms.bbl
+	latex pms
+	latex pms
 
 .default: pms.pdf
 

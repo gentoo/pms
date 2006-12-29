@@ -5,38 +5,102 @@
 An ebuild repository shall occupy one directory on disk, with the following subdirectories:
 \begin{itemize}
 \item One directory per category, whose name shall be the name of the category. The layout of
-    these directories shall be as described in section \ref{category_dirs}.
-\item A \t{profiles} directory (optional), described in section \ref{profiles_dir}.
-\item A \t{licenses} directory (optional), described in section \ref{licenses_dir}.
-\item An \t{eclass} directory (optional), described in section \ref{eclass_dir}.
-\item A \t{metadata} directory (optional), described in section \ref{metadata_dir}.
+    these directories shall be as described in section \ref{category-dirs}.
+\item A \t{profiles} directory (optional), described in section \ref{profiles-dir}.
+\item A \t{licenses} directory (optional), described in section \ref{licenses-dir}.
+\item An \t{eclass} directory (optional), described in section \ref{eclass-dir}.
+\item A \t{metadata} directory (optional), described in section \ref{metadata-dir}.
 \item Other optional support files (skeleton ebuilds or ChangeLogs, for example) may exist
     but are not covered by this specification.
 
 \end{itemize}
 
 \section{Category Directories}
-\label{category_dirs}
+\label{category-dirs}
+
+Each category provided by the repository (see also: the \t{profiles/categories} file, section
+\ref{profiles-categories}) shall be contained in one directory, whose name shall be that of the
+category. Each category directory shall contain:
+\begin{itemize}
+\item A \t{metadata.xml} file, as described in appendix \ref{metadata-xml}. Optional.
+\item Zero or more package directories, one for each package in the category, as described in section
+    \ref{package-dirs}. The name of the package directory shall be the corresponding package name.
+\end{itemize}
+
+\section{Package Directories}
+\label{package-dirs}
+
+A package directory contains the following:
+\begin{itemize}
+\item One or more ebuilds. These are as described in section \ref{ebuild-format} and others.
+\item A \t{metadata.xml} file, as described in appendix \ref{metadata-xml}.
+\item A \t{ChangeLog}, in a format determined by the provider of the respository. Optional.
+\item A \t{Manifest} file, whose format is described in \cite{Glep44}
+\item A \t{files} directory, containing any support files needed by the ebuilds.
+\end{itemize}
 
 \section{The Profiles Directory}
-\label{profiles_dir}
+\label{profiles-dir}
+
+The profiles directory shall contain zero or more profile directories as described in section
+\ref{profiles}, as well as the following files and directories. In any line-based file, lines
+beginning with a \# character are treated as comments, while blank lines are ignored.
+\begin{description}
+\item[arch.list] Contains a list, one entry per line, of permissible values for the \t{ARCH}
+    variable.
+\item[categories] Contains a list, one entry per line, of categories provided by this repository.
+\item[info\_pkgs] Contains a list, one entry per line, of (EAPI-0) dependency atoms. Any package
+    matching one of these is to be listed when a package manager displays a `system information'
+    listing.
+\item[info\_vars] Contains a list, one entry per line, of profile, configuration, and environment
+    variables which are considered to be of interest. The value of each of these is to be included
+    when the package manager displays a `system information' listing.
+\item[package.mask] Contains a list, one entry per line, of (EAPI-0) dependency atoms. Any package
+    version matching one of these is considered to be masked, and will not be installed regardless
+    of profile unless it is unmasked by the user configuration.
+\item[profiles.desc] Described below in section \ref{profiles.desc}.
+\item[repo\_name] Contains, on a single line, the name of this repository. The repository name must
+    conform to section \ref{repository-names}.
+\item[thirdpartymirrors] Described below in section \ref{thirdpartymirrors}.
+\item[use.desc] Contains descriptions of valid global USE flags for this repository. The format is
+    described in section \ref{use.desc}.
+\item[use.local.desc] Contains descriptions of valid local USE flags for this repository, along with
+    the packages to which they apply. The format is as described in section \ref{use.desc}.
+\item[desc/] This directory contains files analogous to \t{use.desc} for the various \t{USE\_EXPAND}
+    variables. Each file in it is named \t{<varname>.desc}, where \t{<varname>} is the variable
+    name, in lowercase, whose possible values the file describes. The format of each file is as for
+    \t{use.desc}, described in section \ref{use.desc}.
+\item[updates/] This directory is described in section \ref{updates-dir}.
+\end{description}
+
+\subsection{The profiles.desc file}
+\label{profiles.desc}
+
+\subsection{The thirdpartymirrors file}
+\label{thirdpartymirrors}
+
+\subsection{The use.desc file}
+\label{use.desc}
+
+\subsection{The updates directory}
+\label{updates-dir}
 
 \section{The Licenses Directory}
-\label{licenses_dir}
+\label{licenses-dir}
 
 The \t{licenses} directory shall contain copies of the licenses used by packages in the
 repository. Each file will be named according to the name used in the \t{LICENSE} variable as
-described in section \ref{ebuild_var_LICENSE}, and will contain the complete text of the license in
+described in section \ref{ebuild-var-LICENSE}, and will contain the complete text of the license in
 human-readable form. Plain text and PDF formats are permitted, with the former strongly preferred.
 
 \section{The Eclass Directory}
-\label{eclass_dir}
+\label{eclass-dir}
 
 The \t{eclass} directory shall contain copies of the eclasses provided by this repository. The
 format of these files is described in section \ref{eclasses}. It may also contain, in their own
 directory, support files needed by these eclasses.
 
 \section{The Metadata Directory}
-\label{metadata_dir}
+\label{metadata-dir}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

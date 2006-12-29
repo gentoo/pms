@@ -18,6 +18,11 @@ A USE flag name may contain any of the characters [\t{A-Za-z0-9+\_@:-}]. It must
 a hyphen. Underscores are reserved for \t{USE\_EXPAND}, as described in section
 \ref{use-expand}.
 
+\subsection{Repository Names}
+\label{repository-names}
+A repository name may contain any of the characters [\t{A-Za-z0-9\_-}]. It must not begin with a
+hyphen.
+
 \section{Version Specifications}
 Version specifications are given as ordered integer tuples, seperated by decimal points, with any or
 none of the following suffixes:
@@ -31,7 +36,8 @@ none of the following suffixes:
 
 \section{Version Comparison}
 Version specifications are compared using strict integer comparison, moving left to right. \t{2.10}
-is newer than \t{2.9}, which is newer than \t{1.500}. If the numeric parts are found to be equal, the
+is newer than \t{2.9}, which is newer than \t{1.500}. Any numeric value is newer than none, so
+\t{1.0.0} is newer than \t{1.0}. If the numeric parts are found to be equal, the
 suffixes above are considered, in the order listed. Letter suffixes are compared alphabetically,
 with any letter being newer than no letter. If these are equal, the next part is considered. The
 ordering of this is complex: \t{\_alpha} is older than \t{\_beta}, which is older than \t{\_pre},
