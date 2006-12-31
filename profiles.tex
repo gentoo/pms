@@ -24,7 +24,8 @@ with the parent profile vary between files, and are described below.
 If a profile contains a file named \t{deprecated}, it is treated as such. The first line of this
 file should contain the path from the \t{profiles} directory of the repository to a valid profile
 that is the recommended upgrade path from this profile. The remainder of the file can contain any
-text, which may be displayed to users using this profile by the package manager.
+text, which may be displayed to users using this profile by the package manager. This file is not
+inherited -- profiles which inherit from a deprecated profile are \e{not} deprecated.
 
 \subsection{make.defaults}
 \t{make.defaults} is used to define defaults for various environment and configuration variables.
@@ -80,61 +81,40 @@ considered to be provided by the system regardless of whether it is actually ins
 has severe adverse effects on USE-based and slot-based dependencies, its use is strongly deprecated
 and package manager support should be regarded as purely optional.
 
-\subsubsection{use.mask}
-\t{use.mask} contains a list of USE flags that should never be activated on this profile. After the
-normal inheritance and commenting rules, the file contains one flag name per line. Unfortunately,
-\t{use.mask} is not the final word on the matter -- see section \ref{package-use-mask-force} for the
-logic used to determine whether a flag is masked.
+\subsection{USE masking and forcing}
+\label{use-masking}
+This section covers the four files \t{use.mask}, \t{use.force}, \t{package.use.mask} and
+\t{package.use.force}. They are described together because they interact in a non-trivial manner.
 
-\subsubsection{use.force}
-\t{use.force} contains a list of USE flags that should always be active on this profile. Its syntax
-is as for \t{use.mask}, but the meaning reversed. As with \t{use.mask}, see section
-\ref{package-use-mask-force} for the logic required to determine whether a flag is forced or not.
+Simply speaking, \t{use.mask} and \t{use.force} are used to say that a given USE flag must never or
+always, respectively, be enabled when using this profile. \t{package.use.mask} and
+\t{package.use.force} do the same thing on a per-package, or per-version, basis. The precise manner
+in which they interact is less simple, and is best described in terms of the algorithm used to
+determine whether a flag is masked for a given package version. This is described in Algorithm
+\ref{alg:use-masking}.
+\begin{algorithm}
+\caption{USE masking logic} \label{alg:use-masking}
+\begin{algorithmic}[1]
+\STATE let masked = false
+\FOR{each profile in the inheritance stack, ending with the current one}
+    \IF{\t{use.mask} contains $flag$}
+        \STATE let masked = true
+    \ELSIF{\t{use.mask} contains $-flag$}
+        \STATE let masked = false
+    \ENDIF
+    \FOR{each $line$ in package.use.mask, in order, for which the atom matches $package$}
+        \IF{$line$ contains $flag$}
+            \STATE let masked = true
+        \ELSIF{$line$ contains $-flag$}
+            \STATE let masked = false
+        \ENDIF
+    \ENDFOR
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
 
-\subsection{package.use.mask and package.use.force}
-\label{package-use-mask-force}
-These two files act as for \t{use.mask} and \t{use.force} respectively, but on a per-package basis.
-For reasons unknown, these files interact in a complex manner with parent profiles and with their
-global counterparts, so they will be described seperately from other files. The following
-description is for \t{package.use.mask}; \t{package.use.force} follows the same logic in stacking
-lists but forces flags to be enabled rather than disabled.
-
-Once again, lines beginning with a \# character and blank lines are discarded. The remaining lines
-should have the following format:
-\begin{verbatim}
-<atom> <flag1> ... <flagN>
-\end{verbatim}
-where \t{<atom>} is a dependency atom and \t{<flag1>} through \t{<flagN>} are either USE flag names,
-or USE flag names prefixed with a hyphen. The first form adds a mask while the second removes it.
-One list is maintained per dependency atom of masks and unmasks -- if a flag name without a
-hyphen is encountered, that name is added to the mask list and removed from the unmask list, and if
-one with a hyphen is encountered it is removed from the mask list and added to the unmask one.
-
-When determining whether a USE flag is to be masked for a given package version, the following
-applies:
-\begin{itemize}
-\item If the flag name is not listed in the final \t{use.mask} list and no dependency atom in the
-    \t{package.use.mask} list matches the package, the flag is not masked.
-\item If the flag name is listed in the final \t{use.mask} list and no dependency atom in the
-    \t{package.use.mask} list matches the package, the flag is masked.
-\item If the package matches one or more of the dependency atoms in the \t{package.use.mask} list,
-    then:
-    \begin{itemize}
-    \item If the flag name appears in one or more `mask' list and not in any `unmask' list of the
-        atoms which match the package name, it is masked.
-    \item If the flag name appears in one or more `unmask' list and not in any `mask' list of the
-        applicable atoms, then it is not masked. Note that in this case the profile's \t{use.mask}
-        can be overridden by \t{package.use.mask}.
-    \item If the flag appears in both a mask and an unmask list, then the `most specific' atom of
-        those whose lists contain the flag name is used. How to determine specificity is not here
-        defined. If the flag name appears in this atom's mask list it is masked, otherwise it is
-        not.
-    \item Otherwise, the flag name appears in no package-specific mask or unmask list. In this case,
-        the global masks are consulted. If the flag name appears in the \t{use.mask} list it is
-        masked; otherwise it is not.
-    \end{itemize}
-\end{itemize}
-
+The logic for \t{use.force} and \t{package.use.force} is identical. If a flag is both masked and
+forced, the mask is considered to take precedence.
 
 \label{use-expand}
 

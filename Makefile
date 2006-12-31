@@ -6,20 +6,7 @@ check : pms.pdf
 clean :
 	rm *~ *.pdf *.dvi *.log *.aux *.bbl *.blg *.toc || true
 
-LATEXFILES = \
-	pms.tex \
-	introduction.tex \
-	names.tex \
-	tree-layout.tex \
-	profiles.tex \
-	version-specs.tex \
-	base-system.tex \
-	ebuild-format.tex \
-	ebuild-vars.tex \
-	ebuild-functions.tex \
-	ebuild-environment.tex \
-	ebuild-env-vars.tex \
-	ebuild-env-commands.tex
+LATEXFILES = $(shell ls *.tex)
 
 pms.pdf: pms.dvi
 	dvipdf $<
