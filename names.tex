@@ -1,9 +1,13 @@
 \chapter{Names and Versions}
 
 \section{Names}
+
+No name may be empty. Package managers must not impose fixed upper boundaries upon the length of any
+name.
+
 \subsection{Category Names}
 A category name may contain any of the characters [\t{A-Za-z0-9+\_.-}]. It must not begin with
-a hyphen.
+a hyphen or a dot.
 
 \subsection{Package Names}
 A package name may contain any of the characters [\t{A-Za-z0-9+\_-}]. It must not begin with a
@@ -12,7 +16,7 @@ hyphen, and must not end in a hyphen followed by one or more digits.
 \subsection{Slot Names}
 \label{slot-names}
 A slot name may contain any of the characters [\t{A-Za-z0-9+\_.-}]. It must not begin with a
-hyphen.
+hyphen or a dot.
 
 \subsection{USE Flag Names}
 A USE flag name may contain any of the characters [\t{A-Za-z0-9+\_@:-}]. It must not start with
@@ -24,27 +28,38 @@ a hyphen. Underscores are reserved for \t{USE\_EXPAND}, as described in section
 A repository name may contain any of the characters [\t{A-Za-z0-9\_-}]. It must not begin with a
 hyphen.
 
+\subsection{Keyword Names}
+\label{keyword-names}
+A keyword name may contain any of the characters [\t{A-Za-z0-9\_-}]. It must not begin with a
+hyphen or a dot. In contexts where it makes sense to do so, a keyword name may be prefixed by
+a tilde or a hyphen. In some contexts, $-*$ is also acceptable as a keyword.
+
 \section{Version Specifications}
-Version specifications are given as ordered integer tuples, seperated by decimal points, with any or
+Version specifications are given as ordered integer tuples, separated by decimal points, with any or
 none of the following suffixes:
 \begin{itemize}
 \item One of the letters [\t{a-z}].
 \item One of \t{\_alpha}, \t{\_beta}, \t{\_pre}, \t{\_rc}, and \t{\_p}, optionally followed by an
-    integer. If the integer is ommitted, it is assumed to be 0.
+    integer. If the integer is omitted, it is assumed to be 0.
 \item The string \t{-r} followed immediately by an integer (the ``revision number''). If this section
     is not present, it is assumed to be \t{-r0}.
 \end{itemize}
 
 \section{Version Comparison}
+
 Version specifications are compared using strict integer comparison, moving left to right. \t{2.10}
 is newer than \t{2.9}, which is newer than \t{1.500}. Any numeric value is newer than none, so
-\t{1.0.0} is newer than \t{1.0}. If the numeric parts are found to be equal, the
-suffixes above are considered, in the order listed. Letter suffixes are compared alphabetically,
-with any letter being newer than no letter. If these are equal, the next part is considered. The
-ordering of this is complex: \t{\_alpha} is older than \t{\_beta}, which is older than \t{\_pre},
-which is older than \t{\_rc}, which is older than no suffix, which is older than \t{\_p}. If the two
-versions being compared have the same suffix, the associated integer is compared. If at this point
-the two versions are still equal, the revision number is compared. If the revision numbers are
-equal, so are the two versions.
+\t{1.0.0} is newer than \t{1.0} (and, by extension, \t{1.0.0\_alpha} is newer than \t{1.0}).
+If the numeric parts are found to be equal, the suffixes above are considered, in the order listed.
+
+Letter suffixes are compared alphabetically, with any letter being newer than no letter.
+
+If letters are equal, the next part is considered. The ordering of this is complex: \t{\_alpha} is
+older than \t{\_beta}, which is older than \t{\_pre}, which is older than \t{\_rc}, which is older
+than no suffix, which is older than \t{\_p}. If the two versions being compared have the same
+suffix, the associated integer is compared.
+
+If at this point the two versions are still equal, the revision number is compared. If the revision
+numbers are equal, so are the two versions.
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
