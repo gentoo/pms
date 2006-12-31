@@ -1,6 +1,141 @@
 \chapter{Profiles}
 \label{profiles}
 
+\section{General principles}
+Generally, a profile defines information specific to a certain `type' of system -- it lies somewhere
+between repository-level defaults and user configuration in that the information it contains is not
+necessarily applicable to all machines, but is sufficiently general that it should not be left to
+the user to configure it. Some parts of the profile can be overridden by user configuration, some
+only by another profile.
+
+The format of a profile is relatively simple. Each profile is a directory containing any number of
+the files described in this chapter, and possibly inheriting another profile. The files themselves
+follow a few basic conventions as regards inheritance and format; these are described in the next
+section.
+
+\section{Files that make up a profile}
+\subsection{The parent file}
+A profile may contain a \t{parent} file. This must contain, on its first line, the relative path to
+another profile which will be considered as this profile's parent. Any settings from the parent are
+inherited by this profile, and can be overridden by it. Precise rules for how settings are combined
+with the parent profile vary between files, and are described below.
+
+\subsection{deprecated}
+If a profile contains a file named \t{deprecated}, it is treated as such. The first line of this
+file should contain the path from the \t{profiles} directory of the repository to a valid profile
+that is the recommended upgrade path from this profile. The remainder of the file can contain any
+text, which may be displayed to users using this profile by the package manager.
+
+\subsection{make.defaults}
+\t{make.defaults} is used to define defaults for various environment and configuration variables.
+This file is unusual in that it is not combined at a file level with the parent -- instead, each
+variable is combined or overridden individually as described in section \ref{profile-variables}.
+
+The file itself is a line-based key-value format. Each line contains a single \verb|VAR="value"|
+entry. Quoting and expansion of other variables defined in \t{make.defaults} is allowed in the bash
+style. One logical line may be continued over multiple physical lines by escaping the newline with a
+backslash.
+
+\subsection{virtuals}
+The \t{virtuals} file defines default providers for ``old-style'' virtual packages. It is a simple
+line-based file, with each line containing two whitespace-delimited tokens. The first is a virtual
+package name (for example, \t{virtual/alsa}) and the second is a dependency atom. Blank lines and
+those beginning with a \# character are ignored. When attempting to resolve a virtual name to a
+concrete package, the atom defined in the active profile's \t{virtuals} list should be used if no
+provider is already installed.
+
+The \t{virtuals} file is inherited in the simplest manner: all entries from the parent profile are
+loaded, then entries from the current profile. If a virtual package name appears in both, the entry
+in the parent profile is discarded.
+
+\subsection{Simple line-based files}
+\label{line-stacking}
+These files are a simple one-item-per-line list, which is inherited in the following manner: the
+parent profile's list is taken, and the current profile's list appended. If any line begins with a
+hyphen, then any lines previous to it whose contents are equal to the remainder of that line are
+removed from the list. Once again, blank lines and those beginning with a \# are discarded.
+
+\subsubsection{packages}
+The \t{packages} is used to define the `system set' for this profile. After the above rules for
+inheritance and comments are applied, its lines should take one of two forms: a dep atom prefixed by
+\t{*} denotes that the atom forms part of the system set. A dep atom on its own may also appear for
+legacy reasons, but should be ignored when calculating the system set.
+
+\subsubsection{packages.build}
+The \t{packages.build} file is used by Gentoo's Catalyst tool to generate stage1 tarballs, and has
+no relevance to the operation of a package manager. It is thus outside the scope of this document,
+but is mentioned here for completeness.
+
+\subsubsection{package.mask}
+\t{package.mask} is used to prevent packages from being installed on a given profile. Each line
+contains one dep atom; anything matching this atom will not be installed unless unmasked by the
+user's configuration.
+
+Note that the the \t{-atom} syntax can be used to remove a mask in a parent profile, but not
+necessarily a global mask (from \t{profiles/package.mask}, section \ref{profiles-package.mask}).
+
+\subsubsection{package.provided}
+\t{package.provided} is used to tell the package manager that a certain package version should be
+considered to be provided by the system regardless of whether it is actually installed. Because it
+has severe adverse effects on USE-based and slot-based dependencies, its use is strongly deprecated
+and package manager support should be regarded as purely optional.
+
+\subsubsection{use.mask}
+\t{use.mask} contains a list of USE flags that should never be activated on this profile. After the
+normal inheritance and commenting rules, the file contains one flag name per line. Unfortunately,
+\t{use.mask} is not the final word on the matter -- see section \ref{package-use-mask-force} for the
+logic used to determine whether a flag is masked.
+
+\subsubsection{use.force}
+\t{use.force} contains a list of USE flags that should always be active on this profile. Its syntax
+is as for \t{use.mask}, but the meaning reversed. As with \t{use.mask}, see section
+\ref{package-use-mask-force} for the logic required to determine whether a flag is forced or not.
+
+\subsection{package.use.mask and package.use.force}
+\label{package-use-mask-force}
+These two files act as for \t{use.mask} and \t{use.force} respectively, but on a per-package basis.
+For reasons unknown, these files interact in a complex manner with parent profiles and with their
+global counterparts, so they will be described seperately from other files. The following
+description is for \t{package.use.mask}; \t{package.use.force} follows the same logic in stacking
+lists but forces flags to be enabled rather than disabled.
+
+Once again, lines beginning with a \# character and blank lines are discarded. The remaining lines
+should have the following format:
+\begin{verbatim}
+<atom> <flag1> ... <flagN>
+\end{verbatim}
+where \t{<atom>} is a dependency atom and \t{<flag1>} through \t{<flagN>} are either USE flag names,
+or USE flag names prefixed with a hyphen. The first form adds a mask while the second removes it.
+One list is maintained per dependency atom of masks and unmasks -- if a flag name without a
+hyphen is encountered, that name is added to the mask list and removed from the unmask list, and if
+one with a hyphen is encountered it is removed from the mask list and added to the unmask one.
+
+When determining whether a USE flag is to be masked for a given package version, the following
+applies:
+\begin{itemize}
+\item If the flag name is not listed in the final \t{use.mask} list and no dependency atom in the
+    \t{package.use.mask} list matches the package, the flag is not masked.
+\item If the flag name is listed in the final \t{use.mask} list and no dependency atom in the
+    \t{package.use.mask} list matches the package, the flag is masked.
+\item If the package matches one or more of the dependency atoms in the \t{package.use.mask} list,
+    then:
+    \begin{itemize}
+    \item If the flag name appears in one or more `mask' list and not in any `unmask' list of the
+        atoms which match the package name, it is masked.
+    \item If the flag name appears in one or more `unmask' list and not in any `mask' list of the
+        applicable atoms, then it is not masked. Note that in this case the profile's \t{use.mask}
+        can be overridden by \t{package.use.mask}.
+    \item If the flag appears in both a mask and an unmask list, then the `most specific' atom of
+        those whose lists contain the flag name is used. How to determine specificity is not here
+        defined. If the flag name appears in this atom's mask list it is masked, otherwise it is
+        not.
+    \item Otherwise, the flag name appears in no package-specific mask or unmask list. In this case,
+        the global masks are consulted. If the flag name appears in the \t{use.mask} list it is
+        masked; otherwise it is not.
+    \end{itemize}
+\end{itemize}
+
+
 \label{use-expand}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
