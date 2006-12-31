@@ -1,4 +1,34 @@
 \chapter{Ebuild-defined Variables}
 
+Note: This section describes variables that may or must be defined by ebuilds. For variables that
+are passed from the package manager to the ebuild, see section \ref{ebuild-env-vars}.
+
+\section{Mandatory Ebuild-defined Variables}
+
+All ebuilds must define at least the following variables:
+
+\begin{description}
+\item[DESCRIPTION] A short human-readable description of the package's purpose. May be defined by an
+    eclass.
+\item[SRC\_URI] A list of source URIs for the package. Valid protocols are \t{http://},
+    \t{https://}, \t{ftp://}. Fetch restricted packages may include URL parts consisting of just a
+    filename.  Use-conditional and all-of groups are allowed; other constructs, such as any-of
+    groups, are forbidden. May be defined by an eclass, and may be empty.
+\item[HOMEPAGE] The package's homepage or (whitespace separated) homepages, including protocol. May
+    be defined by an eclass.
+\item[SLOT] The package's slot. Must be a valid slot name, as per section \ref{slot-names}. May
+    be defined by an eclass.
+\item[LICENSE] The package's license. Each text token must correspond to a tree ``licenses/`` entry
+    (see section \ref{licenses-dir}). Use-conditional, any-of and all-of groups are allowed.
+    May be defined by an eclass.
+\item[IUSE] The \t{USE} flags used by the ebuild. Historically, \t{USE\_EXPAND} values were not
+    included; package managers should support this for backwards compatibility reasons. Ebuilds
+    should list only flags used by the ebuild itself. Any eclass that works with \t{USE} flags
+    should also set \t{IUSE}, listing only the variables used by that eclass. The package manager is
+    responsible for merging these values.
+\end{description}
+
+If any of these variables are undefined, or if any of these variables are set to invalid values,
+the package manager's behaviour is undefined.
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
