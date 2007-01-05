@@ -34,6 +34,28 @@ All ebuilds must define at least the following variables:
 \end{description}
 
 If any of these variables are undefined, or if any of these variables are set to invalid values,
-the package manager's behaviour is undefined.
+the package manager's behaviour is undefined; ideally, an error in one ebuild should not prevent
+operations upon other ebuilds or packages.
+
+\section{Optional Ebuild-defined Variables}
+
+Ebuilds may define any of the following variables:
+
+\begin{description}
+\item[S] The path to the temporary build directory, used by \t{src\_compile}, \t{src\_install}
+    etc. Defaults to \t{\$\{WORKDIR\}/\$\{P\}}.
+\item[DEPEND] See section \ref{dependencies}.
+\item[RDEPEND] See section \ref{dependencies}.
+\item[PDEPEND] See section \ref{dependencies}.
+\item[PROVIDE] Any \e{old style} virtuals provided by this package. May contain use conditionals.
+\item[EAPI] The EAPI, by default \t{0}.
+\item[INHERITED] List of inherited eclass names. This is handled magically by \t{inherit} and
+    shouldn't be modified manually.
+\item[RESTRICT] Zero or more of \t{mirror}, \t{fetch}, \t{strip}. Package managers may recognise
+    other values, but ebuilds may not rely upon them being supported.
+\end{description}
+
+If any of these variables are set to invalid values, the package manager's behaviour is undefined;
+ideally, an error in one ebuild should not prevent operations upon other ebuilds or packages.
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
