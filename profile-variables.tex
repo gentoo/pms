@@ -7,8 +7,8 @@ profile's \t{make.defaults} file.
 \i{Incremental} variables must stack between parent and child profiles in the following manner:
 Beginning with the highest parent profile, tokenise the variable's value based on whitespace and
 concatenate the lists. Then, for any token $T$ beginning with a hyphen, remove it and any previous
-tokens whose value is equal to $T$ with the hyphen removed. The following variables must be treated
-in this fashion:
+tokens whose value is equal to $T$ with the hyphen removed, or, if $T$ is equal to $-*$, remove
+all previous values. The following variables must be treated in this fashion:
 \begin{itemize}
 \item \t{USE}
 \item \t{USE\_EXPAND}
