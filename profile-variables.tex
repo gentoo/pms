@@ -1,0 +1,57 @@
+\section{Profile variables}
+
+This section documents variables that have special meaning, or special behaviour, when defined in a
+profile's \t{make.defaults} file.
+
+\subsection{Incremental Variables}
+\i{Incremental} variables must stack between parent and child profiles in the following manner:
+Beginning with the highest parent profile, tokenise the variable's value based on whitespace and
+concatenate the lists. Then, for any token $T$ beginning with a hyphen, remove it and any previous
+tokens whose value is equal to $T$ with the hyphen removed. The following variables must be treated
+in this fashion:
+\begin{itemize}
+\item \t{USE}
+\item \t{USE\_EXPAND}
+\item \t{USE\_EXPAND\_HIDDEN}
+\item \t{CONFIG\_PROTECT}
+\item \t{CONFIG\_PROTECT\_MASK}
+\item Any variable whose name is listed in \t{USE\_EXPAND}
+\end{itemize}
+
+Other variables, except where they affect only package-manager-specific functionality (such as
+Portage's \t{FEATURES} variable), should not be treated incrementally.
+
+\subsection{Specific variables and their meanings}
+The following variables have specific meanings when set in profiles.
+\begin{description}
+\item[ARCH] The system's architecture. Must be a value listed in \t{profiles/arch.list}; see section
+    \ref{arch.list} for more information.
+\item[CONFIG\_PROTECT] Contains a list of directories whose contents should be treated as
+    configuration files and protected accordingly. See section \ref{config-protect}.
+\item[CONFIG\_PROTECT\_MASK] Contains a list of directories whose contents should \b{not} be treated
+    as configuration files. See section \ref{config-protect}.
+\item[USE] Defines the list of default USE flags for this profile. Flags may be added or removed by
+    the user's configuration.
+\item[USE\_EXPAND] \label{use-expand} Defines a list of variables which are to be treated
+    incrementally and whose contents are to be expanded into the USE variable as passed to ebuilds.
+    Expansion is done as per Algorithm \ref{alg:use-expand}.
+    \begin{algorithm}
+    \caption{USE\_EXPAND logic} \label{alg:use-expand}
+    \begin{algorithmic}
+        \FOR{each variable $V$ listed in \t{USE\_EXPAND}}
+            \FOR{each token $T$ in $V$}
+                \STATE append $v$\_$T$ to \t{USE}, where $v$ is the lowercase of $V$
+            \ENDFOR
+        \ENDFOR
+    \end{algorithmic}
+    \end{algorithm}
+    So, for example, if \t{USE\_EXPAND} contains `ALSA\_CARDS', and the \t{ALSA\_CARDS} variable
+    contains `foo', `alsa\_cards\_foo' will be appended to \t{USE}.
+\item[USE\_EXPAND\_HIDDEN] Contains a list of variables contained in \t{USE\_EXPAND} which are not
+    to be displayed to the end user.
+\end{description}
+
+Any other variables set in \t{make.defaults} should be passed on into the ebuild environment as-is,
+and are not required to be interpreted by the package manager.
+
+% vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
