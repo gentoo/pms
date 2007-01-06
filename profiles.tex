@@ -49,6 +49,12 @@ The \t{virtuals} file is inherited in the simplest manner: all entries from the 
 loaded, then entries from the current profile. If a virtual package name appears in both, the entry
 in the parent profile is discarded.
 
+\subsection{use.defaults}
+The \t{use.defaults} file is used to implement `autouse' -- switching USE flags on or off depending
+upon which packages are installed. It is considered deprecated, and is not used by default by any
+current package manager. Support is regarded as purely optional, and its format is not discussed
+here.
+
 \subsection{Simple line-based files}
 \label{line-stacking}
 These files are a simple one-item-per-line list, which is inherited in the following manner: the
@@ -56,18 +62,18 @@ parent profile's list is taken, and the current profile's list appended. If any 
 hyphen, then any lines previous to it whose contents are equal to the remainder of that line are
 removed from the list. Once again, blank lines and those beginning with a \# are discarded.
 
-\subsubsection{packages}
+\subsection{packages}
 The \t{packages} is used to define the `system set' for this profile. After the above rules for
 inheritance and comments are applied, its lines should take one of two forms: a dep atom prefixed by
 \t{*} denotes that the atom forms part of the system set. A dep atom on its own may also appear for
 legacy reasons, but should be ignored when calculating the system set.
 
-\subsubsection{packages.build}
+\subsection{packages.build}
 The \t{packages.build} file is used by Gentoo's Catalyst tool to generate stage1 tarballs, and has
 no relevance to the operation of a package manager. It is thus outside the scope of this document,
 but is mentioned here for completeness.
 
-\subsubsection{package.mask}
+\subsection{package.mask}
 \t{package.mask} is used to prevent packages from being installed on a given profile. Each line
 contains one dep atom; anything matching this atom will not be installed unless unmasked by the
 user's configuration.
@@ -75,7 +81,7 @@ user's configuration.
 Note that the the \t{-atom} syntax can be used to remove a mask in a parent profile, but not
 necessarily a global mask (from \t{profiles/package.mask}, section \ref{profiles-package.mask}).
 
-\subsubsection{package.provided}
+\subsection{package.provided}
 \t{package.provided} is used to tell the package manager that a certain package version should be
 considered to be provided by the system regardless of whether it is actually installed. Because it
 has severe adverse effects on USE-based and slot-based dependencies, its use is strongly deprecated
@@ -97,15 +103,15 @@ determine whether a flag is masked for a given package version. This is describe
 \begin{algorithmic}[1]
 \STATE let masked = false
 \FOR{each profile in the inheritance stack, ending with the current one}
-    \IF{\t{use.mask} contains $flag$}
+    \IF{\t{use.mask} contains \i{flag}}
         \STATE let masked = true
-    \ELSIF{\t{use.mask} contains $-flag$}
+    \ELSIF{\t{use.mask} contains \i{-flag}}
         \STATE let masked = false
     \ENDIF
     \FOR{each $line$ in package.use.mask, in order, for which the atom matches $package$}
-        \IF{$line$ contains $flag$}
+        \IF{$line$ contains \i{flag}}
             \STATE let masked = true
-        \ELSIF{$line$ contains $-flag$}
+        \ELSIF{$line$ contains \i{-flag}}
             \STATE let masked = false
         \ENDIF
     \ENDFOR
@@ -116,6 +122,6 @@ determine whether a flag is masked for a given package version. This is describe
 The logic for \t{use.force} and \t{package.use.force} is identical. If a flag is both masked and
 forced, the mask is considered to take precedence.
 
-\label{use-expand}
+\input{profile-variables.tex}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

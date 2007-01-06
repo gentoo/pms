@@ -1,0 +1,55 @@
+\chapter{Eclasses}
+\label{eclasses}
+
+Eclasses serve to store common code that is used by more than one ebuild, which greatly aids
+maintainability and reduces the tree size. However, due to metadata cache issues, care must be taken
+in their use. In format they are similar to an ebuild, and indeed are sourced as part of any ebuild
+using them. The interpreter is therefore the same, and the same requirements for being parseable
+hold.
+
+Eclasses should be located in the \t{eclass} directory in the top level of the repository -- see
+section \ref{eclass-dir}. Each eclass is a single file named \t{<name>.eclass}, where \t{<name>} is
+the name of this eclass, used by \t{inherit} and \t{EXPORT\_FUNCTIONS} among other places.
+
+\section{The inherit command}
+
+An ebuild wishing to make use of an eclass does so by using the \t{inherit} command in global scope.
+This will cause the eclass to be sourced as part of the ebuild -- any function or variable
+definitions in the eclass will appear as part of the ebuild, with exceptions for certain metadata
+variables, as described below.
+
+\section{Eclass-defined Metadata Keys}
+
+The \t{IUSE}, \t{KEYWORDS}, \t{DEPEND}, \t{RDEPEND} and \t{PDEPEND} variables are handled specially
+when set by an eclass. They should be accumulated across eclasses, appending the value set by each
+eclass to the resulting value after the previous one is loaded. Then the eclass-defined value is
+appended to that defined by the ebuild. In the case of \t{RDEPEND}, this is done after the
+implicit \t{RDEPEND} rules are applied.
+
+\section{EXPORT\_FUNCTIONS}
+
+There is one command available in the eclass environment that is neither available nor meaningful
+in ebuilds -- \t{EXPORT\_FUNCTIONS}. This can be used to `export' ebuild phase functions from the
+eclass so that an ebuild inherits a default definition, but retains the ability to override this and
+call the eclass-defined version from it. The use of it is best illustrated by an example; this is
+given in listing \ref{lst:export-functions} and is a snippet from a hypothetical \t{foo.eclass}.
+
+\begin{lstlisting}[float,caption=EXPORT\_FUNCTIONS example: foo.eclass,label=lst:export-functions]
+foo_src_compile()
+{
+    econf --enable-gerbil \
+            $(use_enable fnord) \
+            || die "econf failed"
+    emake gerbil || die "Couldn't make a gerbil"
+    emake || die "emake failed"
+}
+
+EXPORT_FUNCTIONS src_compile
+\end{lstlisting}
+
+This example defines an eclass \t{src\_compile} function and uses \t{EXPORT\_FUNCTIONS} to export
+it. Then any ebuild that inherits \t{foo.eclass} will have a default \t{src\_compile} defined, but
+should the author wish to override it he can access the function in \t{foo.eclass} by calling
+\t{foo\_src\_compile}.
+
+% vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

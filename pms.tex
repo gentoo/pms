@@ -8,6 +8,9 @@
 \usepackage{url}
 \usepackage{algorithm}
 \usepackage{algorithmic}
+\usepackage{listings}
+
+\lstloadlanguages{bash}
 
 \bibliographystyle{plainurl}
 
@@ -17,6 +20,7 @@
 \renewcommand{\t}[1]{\texttt{#1}}
 \renewcommand{\i}[1]{{\it #1}}
 \newcommand{\e}[1]{\emph{#1}}
+\renewcommand{\b}[1]{\textbf{#1}}
 \newcommand{\note}[1]{\paragraph{Note:} #1}
 
 \title{Package Manager Specification}
@@ -28,6 +32,7 @@
 
 \tableofcontents
 \listofalgorithms
+\lstlistoflistings
 
 \include{introduction}
 
@@ -36,8 +41,6 @@
 \include{tree-layout}
 
 \include{profiles}
-
-\include{base-system}
 
 \include{ebuild-format}
 
