@@ -4,7 +4,7 @@ check : pms.pdf
 	xpdf pms.pdf
 
 clean :
-	rm *~ *.pdf *.dvi *.log *.aux *.bbl *.blg *.toc || true
+	rm *~ *.pdf *.dvi *.log *.aux *.bbl *.blg *.toc *.lol *.loa || true
 
 LATEXFILES = $(shell ls *.tex)
 
