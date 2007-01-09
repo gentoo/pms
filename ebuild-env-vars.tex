@@ -2,6 +2,7 @@
 \label{ebuild-env-vars}
 
 \subsection{Globally Defined Variables}
+\label{global-ebuild-vars}
 
 The following variables are available, read-only, in all phases of the ebuild environment. They
 should not be modified by ebuild code.
@@ -21,8 +22,29 @@ should not be modified by ebuild code.
 \item[WORKDIR] The full path to the ebuild's working directory, in which all build data should be
     contained.
 \item[T] The full path to a temporary directory for use by the ebuild.
+\item[USE] A whitespace-delimited list of all active USE flags for this ebuild, including those
+    originating from variables in \t{USE\_EXPAND}.
+\item[] All variables set in the active profiles' \t{make.defaults} files will be exported to the
+    ebuild environment.
+\item[HOME] The full path to an appropriate temporary directory for use by any programs invoked by
+    the ebuild that may read or modify the home directory.
+\item[PATH] Must contain at least \t{/sbin:/usr/sbin:/bin:/usr/bin} and any directories required
+    by the package manager.
 \end{description}
 
+\subsection{Phase-specific variables}
 
+In addition to the global list in section \ref{global-ebuild-vars}, there are several extra
+variables available in specific ebuild phases.
+
+\subsubsection{src\_install}
+\begin{description}
+\item[D] Contains the full path to the image directory into which the package should be installed.
+\end{description}
+
+\subsubsection{pkg\_preinst}
+\begin{description}
+\item[IMAGE] Contains the full path to the image directory of the package about to be merged.
+\end{description}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

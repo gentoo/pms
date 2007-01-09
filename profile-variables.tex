@@ -19,7 +19,8 @@ all previous values. The following variables must be treated in this fashion:
 \end{itemize}
 
 Other variables, except where they affect only package-manager-specific functionality (such as
-Portage's \t{FEATURES} variable), should not be treated incrementally.
+Portage's \t{FEATURES} variable), should not be treated incrementally -- later definitions should
+completely override those in parent profiles.
 
 \subsection{Specific variables and their meanings}
 The following variables have specific meanings when set in profiles.
