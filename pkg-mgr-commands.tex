@@ -1,0 +1,38 @@
+The following commands will always be available in the ebuild environment, provided by the package
+manager:
+
+\subsubsection{Sandbox commands}
+These commands affect the behaviour of the sandbox.
+\begin{description}
+\item[addread] Add a directory to the permitted read list.
+\item[addwrite] Add a directory to the permitted write list.
+\item[addpredict] Add a directory to the predict list. Any write to a location in this list will be
+    denied, but will not trigger access violation messages or abort the build process.
+\item[adddeny] Add a directory to the deny list.
+\end{description}
+
+\subsubsection{Package manager query commands}
+These commands are used to extract information about the host system.
+\begin{description}
+\item[has\_version] Takes exactly one dependency atom as an argument. Returns true if a package
+    matching the atom is installed in \t{\$ROOT}, and false otherwise.
+\item[best\_version] Takes exactly one dependency atom as an argument. If a matching package is
+    installed, prints the category, package name and version of the highest matching version.
+\end{description}
+
+\subsubsection{Output commands}
+These commands display messages to the user.
+\begin{description}
+\item[einfo] Displays an informational message.
+\item[elog] Displays an informational message of slightly higher importance. The package manager may
+    choose to log \t{elog} messages by default where \t{einfo} messages are not, for example.
+\item[ewarn] Displays a warning message.
+\item[eerror] Displays an error message.
+\item[ebegin] Displays an informational message. Should be used when beginning a possibly lengthy
+    process, and followed by a call to \t{eend}.
+\item[eend] Indicates that the process begun with an \t{ebegin} message has completed. Takes one
+    fixed argument, which is a numeric return code, and an optional message in all subsequent
+    arguments. If the first argument is 0, print a success indicator; otherwise, print the message
+    followed by a failure indicator.
+
+% vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

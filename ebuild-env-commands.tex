@@ -14,9 +14,31 @@ equivalent, which is inherited by all available profiles. If an ebuild requires 
 provided by the system profile, or that are provided conditionally based on USE flags, appropriate
 dependencies must be used to ensure their presence.
 
-\subsubsection{Commands provided by package dependencies}
+\subsubsection{Guaranteed system commands}
 
+The following commands must always be available in the ebuild environment:
+\item All builtin commands in GNU bash, version 3.0.
+\item \t{sed} must be available, and must support all forms of invocations valid for GNU sed
+    version 4 or later.
+\item \t{make} must be available, and must support all forms of invocation valid for GNU Make.
+\item \t{patch} must be available, and must support all inputs valid for GNU patch.
+\item \t{which} must be available, and must behave as does GNU which.
+\item All other utilities specified by POSIX must be present.
 
+\subsection{Commands provided by package dependencies}
 
+In some cases a package's build process will require the availability of executables not provided by
+the core system, a common example being autotools. Commands provided by dependencies are available
+in the following cases:
+\begin{itemize}
+\item In the \t{src\_unpack}, \t{src\_compile}, \t{src\_install} and \t{src\_test} phases, any
+    command provided by a package listed in \t{DEPEND} is available.
+\item In the \t{pkg\_setup}, \t{pkg\_preinst}, \t{pkg\_postinst}, \t{pkg\_prerm} and \t{pkg\_postrm}
+    phases, commands provided by a package listed in both \t{DEPEND} \b{and} \t{RDEPEND} are
+    available, unless the package being merged is part of a circular dependency loop.
+\end{itemize}
+
+\subsection{Ebuild-specific Commands}
+\input{pkg-mgr-commands.tex}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
