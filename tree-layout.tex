@@ -3,17 +3,18 @@
 \section{Top Level}
 
 An ebuild repository shall occupy one directory on disk, with the following subdirectories:
-\begin{itemize}
+\begin{bulletlist}
 \item One directory per category, whose name shall be the name of the category. The layout of
     these directories shall be as described in section \ref{category-dirs}.
 \item A \t{profiles} directory, described in section \ref{profiles-dir}.
 \item A \t{licenses} directory (optional), described in section \ref{licenses-dir}.
 \item An \t{eclass} directory (optional), described in section \ref{eclass-dir}.
 \item A \t{metadata} directory (optional), described in section \ref{metadata-dir}.
-\item Other optional support files (skeleton ebuilds or ChangeLogs, for example) may exist
-    but are not covered by this specification.
+\item Other optional support files and directories (skeleton ebuilds or ChangeLogs,
+    for example) may exist but are not covered by this specification. The package manager must
+    ignore any of these files or directories that it does not recognise.
 
-\end{itemize}
+\end{bulletlist}
 
 \section{Category Directories}
 \label{category-dirs}
@@ -21,30 +22,34 @@ An ebuild repository shall occupy one directory on disk, with the following subd
 Each category provided by the repository (see also: the \t{profiles/categories} file, section
 \ref{profiles-categories}) shall be contained in one directory, whose name shall be that of the
 category. Each category directory shall contain:
-\begin{itemize}
+\begin{bulletlist}
 \item A \t{metadata.xml} file, as described in appendix \ref{metadata-xml}. Optional.
 \item Zero or more package directories, one for each package in the category, as described in section
     \ref{package-dirs}. The name of the package directory shall be the corresponding package name.
-\end{itemize}
+\end{bulletlist}
+Category directories may contain additional files, whose purpose is not covered by this
+specification. Additional directories may \i{not} be present, to avoid conflicts with package
+name directories; an exception is made for \t{.dirs}, which the package manager must ignore.
 
 \section{Package Directories}
 \label{package-dirs}
 
 A package directory contains the following:
-\begin{itemize}
+\begin{bulletlist}
 \item One or more ebuilds. These are as described in section \ref{ebuild-format} and others.
-\item A \t{metadata.xml} file, as described in appendix \ref{metadata-xml}.
+\item A \t{metadata.xml} file, as described in appendix \ref{metadata-xml}. Optional only for
+    legacy support.
 \item A \t{ChangeLog}, in a format determined by the provider of the respository. Optional.
-\item A \t{Manifest} file, whose format is described in \cite{Glep44}
+\item A \t{Manifest} file, whose format is described in \cite{Glep44}.
 \item A \t{files} directory, containing any support files needed by the ebuilds.
-\end{itemize}
+\end{bulletlist}
 
 \section{The Profiles Directory}
 \label{profiles-dir}
 
 The profiles directory shall contain zero or more profile directories as described in section
 \ref{profiles}, as well as the following files and directories. In any line-based file, lines
-beginning with a \# character are treated as comments, while blank lines are ignored.
+beginning with a \# character are treated as comments, whilst blank lines are ignored.
 \begin{description}
 \item[arch.list] \label{arch.list} Contains a list, one entry per line, of permissible values for
     the \t{ARCH} variable.

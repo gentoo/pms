@@ -9,14 +9,14 @@ Beginning with the highest parent profile, tokenise the variable's value based o
 concatenate the lists. Then, for any token $T$ beginning with a hyphen, remove it and any previous
 tokens whose value is equal to $T$ with the hyphen removed, or, if $T$ is equal to $-*$, remove
 all previous values. The following variables must be treated in this fashion:
-\begin{itemize}
+\begin{bulletlist}
 \item \t{USE}
 \item \t{USE\_EXPAND}
 \item \t{USE\_EXPAND\_HIDDEN}
 \item \t{CONFIG\_PROTECT}
 \item \t{CONFIG\_PROTECT\_MASK}
 \item Any variable whose name is listed in \t{USE\_EXPAND}
-\end{itemize}
+\end{bulletlist}
 
 Other variables, except where they affect only package-manager-specific functionality (such as
 Portage's \t{FEATURES} variable), should not be treated incrementally -- later definitions should

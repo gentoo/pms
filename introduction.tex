@@ -1,23 +1,33 @@
 \chapter{Introduction}
 
 \section{Aims and Motivation}
-This document aims to document fully the format of an ebuild repository and the ebuilds therein, as
-well as certain aspects of package manager behaviour required to support such a repository. The
-reason is simple: at present the only definition of what an ebuild can assume about its environment,
-the only definition of what is valid in an ebuild, is the source code of the latest Portage release
+
+This document aims to fully describe the format of an ebuild repository and the ebuilds therein, as
+well as certain aspects of package manager behaviour required to support such a repository.
+
+This document is \i{not} designed to be an introduction to ebuild development. Prior knowledge of
+ebuild creation and an understanding of how the package management system works is assumed; certain
+less familiar terms are explained in the Glossary in chapter \ref{glossary}.
+
+This document does not specify any user or package manager configuration information.
+
+\section{Rationale}
+
+At present the only definition of what an ebuild can assume about its environment,
+and the only definition of what is valid in an ebuild, is the source code of the latest Portage release
 and a general consensus about which features are too new to assume availability. This has several
 drawbacks: not only is it impossible to change any aspect of Portage behaviour without verifying
 that nothing in the tree relies upon it, but if a new package manager should appear it becomes
-impossible to fully support such an ill-defined standard. This document aims to address both of
-these concerns by defining almost all aspects of what an ebuild repository looks like, and how an
-ebuild is allowed to behave. Thus, both Portage and other package managers can change aspects of
-their behaviour not defined here without worry of incompatibilities with any particular repository.
+impossible to fully support such an ill-defined standard.
+
+This document aims to address both of these concerns by defining almost all aspects of what an
+ebuild repository looks like, and how an ebuild is allowed to behave. Thus, both Portage and other
+package managers can change aspects of their behaviour not defined here without worry of
+incompatibilities with any particular repository.
 
 \section{Conventions}
-Text in \t{teletype} is used for filenames or variable names. \i{Italic} text is used for terms
-whose meaning may not be obvious to someone without specific prior knowledge, though a good
-knowledge of ebuild development is assumed throughout. Most of these terms are explained in the
-Glossary in chapter \ref{glossary}.
 
+Text in \t{teletype} is used for filenames or variable names. \i{Italic} text is used for terms
+with a particular technical meaning in places where there may otherwise be ambiguity.
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
