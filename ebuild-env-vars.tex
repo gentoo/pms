@@ -16,6 +16,9 @@ should not be modified by ebuild code.
 \item[A] All source files available for the package. Does not include any that are disabled because
     of USE conditionals. The value is calculated from the base names of each element of the
     \t{SRC\_URI} ebuild metadata variable.
+\item[AA] All source files that could be available for the package, including any that are disabled
+    in \t{A} because of USE conditionals. The value is calculated from the base names of each element
+    of the \t{SRC\_URI} ebuild metadata variable.
 \item[CATEGORY] The package's category, for example \t{app-editors}.
 \item[FILESDIR] The full path to the package's files directory, used for small support files or
     patches. See section \ref{package-dirs}.
