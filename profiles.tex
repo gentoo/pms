@@ -33,9 +33,14 @@ This file is unusual in that it is not combined at a file level with the parent 
 variable is combined or overridden individually as described in section \ref{profile-variables}.
 
 The file itself is a line-based key-value format. Each line contains a single \verb|VAR="value"|
-entry. Quoting and expansion of other variables defined in \t{make.defaults} is allowed in the bash
-style. One logical line may be continued over multiple physical lines by escaping the newline with a
-backslash.
+entry. Additional syntax, which is a small subset of bash syntax, is allowed as follows:
+
+\begin{bulletlist}
+\item Variables inside double-quoted strings in the form \t{\$\{foo\}} or \t{\$foo} are recognised and
+  expanded from variables previously set in this or earlier \t{make.defaults} files.
+\item One logical line may be continued over multiple physical lines by escaping the newline with a
+  backslash. This is permitted inside quoted strings too.
+\end{bulletlist}
 
 \subsection{virtuals}
 The \t{virtuals} file defines default providers for ``old-style'' virtual packages. It is a simple
