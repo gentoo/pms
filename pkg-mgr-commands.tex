@@ -2,7 +2,8 @@ The following commands will always be available in the ebuild environment, provi
 manager:
 
 \subsubsection{Sandbox commands}
-These commands affect the behaviour of the sandbox.
+These commands affect the behaviour of the sandbox. Each command takes a single directory as
+argument.
 \begin{description}
 \item[addread] Add a directory to the permitted read list.
 \item[addwrite] Add a directory to the permitted write list.
@@ -21,9 +22,11 @@ These commands are used to extract information about the host system.
 \end{description}
 
 \subsubsection{Output commands}
-These commands display messages to the user.
+These commands display messages to the user. Unless otherwise stated, the entire argument list is
+used as a message, as in the simple invocations of \t{echo}.
 \begin{description}
 \item[einfo] Displays an informational message.
+\item[einfon] Displays an informational message without a trailing newline.
 \item[elog] Displays an informational message of slightly higher importance. The package manager may
     choose to log \t{elog} messages by default where \t{einfo} messages are not, for example.
 \item[ewarn] Displays a warning message.
@@ -34,6 +37,17 @@ These commands display messages to the user.
     fixed argument, which is a numeric return code, and an optional message in all subsequent
     arguments. If the first argument is 0, print a success indicator; otherwise, print the message
     followed by a failure indicator.
+\end{description}
+
+\subsubsection{Error commands}
+These commands are used when an error is detected that will prevent the build process from
+completing.
+\begin{description}
+\item[die] Displays a failure message provided in its first and only argument, and then aborts the
+    build process. \t{die} is \e{not} guaranteed to work correctly if called from a subshell
+    environment.
+\item[assert] Checks the value of the shell's pipe status variable, and if any component is non-zero
+    (indicating failure), calls \t{die} with its first argument as a failure message.
 \end{description}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
