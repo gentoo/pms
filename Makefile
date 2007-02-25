@@ -1,15 +1,17 @@
-all : pms.pdf
+all : pms.dvi pms.pdf
 
 check : pms.pdf
 	xpdf pms.pdf
 
 clean :
-	rm *~ *.pdf *.dvi *.log *.aux *.bbl *.blg *.toc *.lol *.loa || true
+	rm -f *~ *.pdf *.dvi *.log *.aux *.bbl *.blg *.toc *.lol *.loa pdfinfo.tex || true
 
 LATEXFILES = $(shell ls *.tex)
 
-pms.pdf: pms.dvi
-	dvipdf $<
+pms.pdf: pdfinfo.tex
+	pdflatex pms
+	pdflatex pms
+	pdflatex pms
 
 pms.bbl: pms.bib pms.tex
 	latex pms
@@ -18,8 +20,14 @@ pms.bbl: pms.bib pms.tex
 pms.dvi: $(LATEXFILES) pms.bbl
 	latex pms
 	latex pms
+	latex pms
 
-.default: pms.pdf
+pdfinfo.tex: pdfinfo.tex.in
+	@sed  \
+	     -e 's/@CREATIONDATE@/$(shell date "+%Y%m%d%H%M%S")/' \
+	     < $< > $@
+
+.default: pms.dvi pms.pdf
 
 .phony: clean
 
