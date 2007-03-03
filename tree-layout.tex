@@ -160,4 +160,36 @@ directory, support files needed by these eclasses.
 \section{The Metadata Directory}
 \label{metadata-dir}
 
+The \t{metadata} directory contains various repository-level metadata that is not contained in
+\t{profiles/}. All contents are optional. In this standard only the \t{cache} subdirectory is
+described; other contents are optional but may include security advisories, DTD files for the
+various XML files used in the repository, and repository timestamps.
+
+\subsection{The metadata cache}
+
+The \t{metadata/cache} directory contains a cached form of all important ebuild metadata variables.
+The cache directory, if it exists, contains (up to) one directory per category in the repository --
+not all categories and packages must be contained in it. Each subdirectory contains one file per
+package version, named \t{<package>-<version>}, in the following format:
+
+Each cache file contains the textual values of various metadata keys, one per line, in the following
+order:
+\begin{enumerate}
+\item Build-time dependencies (\t{DEPEND})
+\item Run-time dependencies (\t{RDEPEND})
+\item Slot (\t{SLOT})
+\item Source tarball URIs (\t{SRC\_URI})
+\item \t{RESTRICT}
+\item Package homepage (\t{HOMEPAGE})
+\item Package license (\t{LICENSE})
+\item Package description (\t{DESCRIPTION})
+\item Package keywords (\t{KEYWORDS})
+\item Inherited eclasses (\t{INHERITED})
+\item Use flags that this package respects (\t{IUSE})
+\item No longer used; this line is to be ignored.
+\item Post dependencies (\t{PDEPEND})
+\item Old-style virtuals provided by this package (\t{PROVIDE})
+\item The ebuild API version to which this package conforms (\t{EAPI})
+\end{enumerate}
+
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
