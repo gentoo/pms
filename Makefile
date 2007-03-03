@@ -8,7 +8,7 @@ clean :
 
 LATEXFILES = $(shell ls *.tex)
 
-pms.pdf: pdfinfo.tex
+pms.pdf: $(LATEXFILES) pms.bbl pdfinfo.tex
 	pdflatex pms
 	pdflatex pms
 	pdflatex pms

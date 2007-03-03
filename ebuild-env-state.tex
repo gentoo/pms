@@ -1,0 +1,27 @@
+\section{The state of variables between functions}
+\label{ebuild-env-state}
+
+Ebuild functions are allowed to change variables that are introduced in the global scope
+and the package manager must make sure that he modifications are available in the next
+function executed. See listing \ref{lst:env-saving} for an example of how this behaviour should
+work.
+
+\begin{lstlisting}[float,caption=Environment state between functions,label=lst:env-saving]
+
+GLOBAL_VARIABLE="a"
+
+src_compile()
+{
+    GLOBAL_VARIABLE="b"
+}
+
+src_install(){
+    if [[ ${GLOBAL_VARIABLE} = b ]]; then
+        true; # correct
+    else
+        false; # not correct
+    fi
+}
+\end{lstlisting}
+
+% vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
