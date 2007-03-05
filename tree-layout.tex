@@ -49,7 +49,11 @@ A package directory contains the following:
 
 The profiles directory shall contain zero or more profile directories as described in section
 \ref{profiles}, as well as the following files and directories. In any line-based file, lines
-beginning with a \# character are treated as comments, whilst blank lines are ignored.
+beginning with a \# character are treated as comments, whilst blank lines are ignored. All contents
+of this directory, with the exception of \t{repo\_name}, are optional if the repository is not
+intended to be stand-alone; if they are not present their contents are to be taken, where necessary,
+from the master repository.
+
 \begin{description}
 \item[arch.list] \label{arch.list} Contains a list, one entry per line, of permissible values for
     the \t{ARCH} variable.

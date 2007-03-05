@@ -13,6 +13,12 @@ be immediately obvious.
     installs no files and uses its dependency requirements to pull in a `provider'. This is more
     flexible than the old-style virtuals described above, and requires no special package manager
     code.
+\item[stand-alone repository] An (ebuild) repository which is intended to function on its own as the
+    only, or primary, repository on a system. Contrast with \i{slave repository} below.
+\item[slave repository, non-stand-alone repository] An (ebuild) repository which is not complete
+    enough to function on its own, but needs one or more \i{master repositories} to
+    satisfy dependencies and provide repository-level support files. Known in Portage as an overlay.
+\item[master repository] See above.
 
 \end{description}
 
