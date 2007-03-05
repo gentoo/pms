@@ -23,6 +23,7 @@
 \newcommand{\e}[1]{\emph{#1}}
 \renewcommand{\b}[1]{\textbf{#1}}
 \newcommand{\note}[1]{\paragraph{Note:} #1}
+\newcommand{\todiscuss}[1]{\paragraph{To be discussed before release:} #1}
 \newenvironment{bulletlist}%
     {\begin{itemize}[topsep=0pt, itemsep=0pt, partopsep=0pt]}%
     {\end{itemize}}
@@ -55,6 +56,8 @@
 \include{eclasses}
 
 \include{ebuild-vars}
+
+\include{dependencies}
 
 \include{ebuild-functions}
 
