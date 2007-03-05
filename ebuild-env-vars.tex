@@ -51,4 +51,15 @@ variables available in specific ebuild phases.
 \item[IMAGE] Contains the full path to the image directory of the package about to be merged.
 \end{description}
 
+\subsubsection{pkg\_*}
+\begin{description}
+\item[ROOT] The absolute path to the root directory into which the package is to be merged. \t{ROOT}
+    is only guaranteed to be available in \t{pkg\_setup}, \t{pkg\_preinst}, \t{pkg\_postinst},
+    \t{pkg\_prerm} and \t{pkg\_portrm}. Other phases should not make use of it, as any binary
+    package generated should not depend on the value of \t{ROOT}. Those phases which run with full
+    filesystem access should not touch any files outside of the directory given in \t{ROOT}. Also of
+    note is that in a cross-compiling environment, binaries inside of \t{ROOT} will not be
+    executable on the build machine, so ebuilds should not call them.
+\end{description}
+
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
