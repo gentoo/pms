@@ -4,6 +4,10 @@
 This section documents the commands available to an ebuild. Unless otherwise specified, they may be
 aliases, shell functions, or executables in the ebuild's \t{PATH}.
 
+When an ebuild is being sourced for metadata querying rather than for a build (that is to say,
+when none of the \t{src\_} or \t{pkg\_} functions are to be called), no external command may
+be executed. The package manager may take steps to enforce this.
+
 \subsection{System commands}
 
 Any ebuild not listed in the system set for the active profile(s) may assume the presence of every
