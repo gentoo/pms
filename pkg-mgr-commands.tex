@@ -115,7 +115,7 @@ all filenames created or modified are relative to the staging directory, given b
 
 \begin{description}
 \item[dobin] Installs the given files into \t{DESTTREE/bin}, where \t{DESTTREE} defaults to
-    "/usr". Also makes the files executable.
+    \t{/usr}. Also makes the files executable.
 
 \item[doconfd] Installs the given files into /etc/conf.d/.
 
@@ -123,10 +123,11 @@ all filenames created or modified are relative to the staging directory, given b
     by setting \t{DIROPTIONS} with the \t{diropts} function.
 
 \item[dodoc] Installs the given files into \t{/usr/share/doc/\$PF/\$DOCDESTTREE/}, where
-    \t{DOCDESTTREE} defaults to "". These files may optionally be compressed by the package manager.
+    \t{DOCDESTTREE} defaults to the empty string. These files may optionally be compressed by the
+    package manager.
 
 \item[doexe] Installs the given files into \t{EXEDESTTREE}, where \t{EXEDESTTREE} defaults to
-    "".
+    the empty string.
 
 \item[dohard] Takes two parameters. Creates a hardlink from the second to the first.
 
@@ -152,14 +153,14 @@ all filenames created or modified are relative to the staging directory, given b
 \IF{CONF\_LIBDIR is set in the environment}
     \STATE let LIBDIR\_default=CONF\_LIBDIR
 \ELSE
-    \STATE let LIBDIR\_default="lib"
+    \STATE let LIBDIR\_default=``lib''
 \ENDIF
 \IF{ABI is set in the environment}
     \STATE let abi=ABI
 \ELSIF{DEFAULT\_ABI is set in the environment}
     \STATE let abi=DEFAULT\_ABI
 \ELSE
-    \STATE let abi="default"
+    \STATE let abi=``default''
 \ENDIF
 \STATE return the value of LIBDIR\_\$abi
 \end{algorithmic}

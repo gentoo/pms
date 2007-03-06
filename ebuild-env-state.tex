@@ -19,7 +19,8 @@ src_install(){
     if [[ ${GLOBAL_VARIABLE} = b ]]; then
         true; # correct
     else
-        die "Your package manager has deficient environment handling."
+        die "Your package manager has deficient" \
+            "environment handling."
     fi
 }
 \end{lstlisting}
