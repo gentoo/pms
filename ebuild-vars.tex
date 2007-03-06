@@ -30,7 +30,7 @@ All ebuilds must define at least the following variables:
     be defined by an eclass.
 \item[LICENSE] The package's license. Each text token must correspond to a tree ``licenses/`` entry
     (see section \ref{licenses-dir}). Use-conditional, any-of and all-of groups are allowed.
-    May be defined by an eclass.
+    May be defined by an eclass. \label{ebuild-var-LICENSE}
 \item[IUSE] The \t{USE} flags used by the ebuild. Historically, \t{USE\_EXPAND} values and \t{ARCH}
     were not included; package managers should support this for backwards compatibility reasons. Ebuilds
     should list only flags used by the ebuild itself. Any eclass that works with \t{USE} flags
