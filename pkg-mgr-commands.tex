@@ -50,4 +50,224 @@ completing.
     (indicating failure), calls \t{die} with its first argument as a failure message.
 \end{description}
 
+\subsubsection{Build commands}
+These commands are used during the \t{src\_compile} and \t{src\_install} phases to run the
+package's build commands.
+
+\begin{description}
+\item[econf] Calls the program's \t{./configure} script. This is designed to work with GNU
+    Autoconf-generated scripts. Any additional parameters passed to \t{econf} are passed directly
+    to \t{./configure}. \t{econf} will look in the current working directory for a configure script
+    unless the \t{ECONF\_SOURCE} environment variable is set, in which case it is taken to be the
+    directory containing it. \t{econf} must pass the following options to the configure script:
+    \begin{itemize}
+    \item --prefix should default to \t{/usr} unless overridden by \t{econf}'s caller.
+    \item --mandir should be \t{/usr/share/man}
+    \item --infodir should be \t{/usr/share/info}
+    \item --datadir should be \t{/usr/share}
+    \item --sysconfdir should be \t{/etc}
+    \item --localstatedir should be \t{/var/lib}
+    \item --host should be the value of the \t{CHOST} environment variable.
+    \item --libdir should be set according to Algorithm \ref{alg:econf-libdir}.
+    \end{itemize}
+
+\begin{algorithm}
+\caption{econf --libdir logic} \label{alg:econf-libdir}
+\begin{algorithmic}[1]
+\STATE let prefix=/usr
+\IF{the caller specified --prefix=\$p}
+    \STATE let prefix=\$p
+\ENDIF
+\STATE let libdir=
+\IF{the ABI environment variable is set}
+    \STATE let libvar=LIBDIR\_\$ABI
+    \IF{the environment variable named by libvar is set}
+        \STATE let libdir=the value of the variable named by libvar
+    \ENDIF
+\ENDIF
+\IF{libdir is non-empty}
+    \STATE pass --libdir=\$prefix/\$libdir to configure
+\ENDIF
+\end{algorithmic}
+\end{algorithm}
+
+\item[emake] Calls the system make command. Any arguments given are passed directly to the make
+    command, as are the user's chosen \t{MAKEOPTS}. Arguments given to \t{emake} override user
+    configuration. See also section \ref{guaranteed-system-commands}.
+\item[einstall] A shortcut for the command given in Listing \ref{lst:einstall}. Its use is
+    discouraged in favour of using \t{make DESTDIR=\$\{D\} install}.
+
+\begin{lstlisting}[caption=einstall command,label=lst:einstall]
+emake \
+   prefix="${D}"/usr \
+   mandir="${D}"/usr/share/man \
+   infodir="${D}"/usr/share/info \
+   libdir="${D}"/usr/$(get_libdir) \
+   install
+\end{lstlisting}
+
+\end{description}
+
+\subsubsection{Installation commands}
+These commands are used to install files into the staging area, in cases where the package's \t{make
+install} target cannot be used or does not install all needed files. Except where otherwise stated,
+all filenames created or modified are relative to the staging directory, given by \$\{D\}.
+
+\begin{description}
+\item[dobin] Installs the given files into \t{DESTTREE/bin}, where \t{DESTTREE} defaults to
+    "/usr". Also makes the files executable.
+
+\item[doconfd] Installs the given files into /etc/conf.d/.
+
+\item[dodir] Creates the given directories, by default with file mode 0755. This can be overridden
+    by setting \t{DIROPTIONS} with the \t{diropts} function.
+
+\item[dodoc] Installs the given files into \t{/usr/share/doc/\$PF/\$DOCDESTTREE/}, where
+    \t{DOCDESTTREE} defaults to "". These files may optionally be compressed by the package manager.
+
+\item[doexe] Installs the given files into \t{EXEDESTTREE}, where \t{EXEDESTTREE} defaults to
+    "".
+
+\item[dohard] Takes two parameters. Creates a hardlink from the second to the first.
+
+\item[dohtml] \TODO{Write dohtml.}
+
+\item[doinfo] Installs a GNU Info file into the \t{/usr/share/info} area, optionally compressed.
+
+\item[doinitd] Installs an initscript into \t{/etc/init.d}.
+
+\item[doins] Takes any number of files as arguments and installs them into \t{\$INSDESTTREE}. If
+    the first argument is \t{-r}, then operates recursively, descending into any directories given.
+
+\item[dolib] For each argument, installs it into the appropriate library directory as determined by
+    Algorithm \ref{ebuild-libdir}. Any symlinks are installed into the same directory as relative
+    links to their original target.
+
+\begin{algorithm}
+\caption{Determining the library directory} \label{ebuild-libdir}
+\begin{algorithmic}[1]
+\IF{CONF\_LIBDIR\_OVERRIDE is set in the environment}
+    \STATE return CONF\_LIBDIR\_OVERRIDE
+\ENDIF
+\IF{CONF\_LIBDIR is set in the environment}
+    \STATE let LIBDIR\_default=CONF\_LIBDIR
+\ELSE
+    \STATE let LIBDIR\_default="lib"
+\ENDIF
+\IF{ABI is set in the environment}
+    \STATE let abi=ABI
+\ELSIF{DEFAULT\_ABI is set in the environment}
+    \STATE let abi=DEFAULT\_ABI
+\ELSE
+    \STATE let abi="default"
+\ENDIF
+\STATE return the value of LIBDIR\_\$abi
+\end{algorithmic}
+\end{algorithm}
+
+\item[doman] Installs a man page into the appropriate subdirectory of \t{/usr/share/man} depending
+    upon its apparent section suffix. Optionally compresses it.
+
+\item[domo] Installs a \t{.mo} file into the appropriate subdirectory of \t{DESTTREE/share/locale},
+    generated by taking the basename of the file, removing the \t{.*} suffix, and appending
+    \t{/LC\_MESSAGES}.
+
+\item[donewins] Deprecated synonym for \t{newins}.
+
+\item[dosbin] Installs a file into \t{DESTTREE/sbin}, making it executable if necessary.
+
+\item[dosym] Creates a symbolic link named as for its second parameter, pointing to the first. If
+    the directory containing the new link does not exist, creates it.
+
+\item[fowners] Acts as for \t{chown}, but takes paths relative to the image directory.
+
+\item[fperms] Acts as for \t{chmod}, but takes paths relative to the image directory.
+
+\item[newbin] As for \t{dobin}, but takes two parameters. The first is the file to install; the
+    second is the new filename under which it will be installed.
+
+\item[newconfd] As for \t{doconfd}, but takes two parameters as for \t{newbin}.
+
+\item[newdoc] As above, for \t{dodoc}.
+
+\item[newenvd] As above, for \t{doenvd}.
+
+\item[newexe] As above, for \t{doexe}.
+
+\item[newinitd] As above, for \t{doinitd}.
+
+\item[newins] As above, for \t{doins}.
+
+\item[newman] As above, for \t{doman}.
+
+\item[newsbin] As above, for \t{dosbin}.
+
+\item[keepdir] Creates a directory as for \t{dodir}, and an empty \t{.keep} file in it to ensure
+    that the directory does not get removed by the package manager should it be empty at any point.
+
+\item[into] Sets the value of \t{DESTTREE} for future invocations of the above utilities.
+
+\item[insinto] Sets the value of \t{INSDESTTREE} for future invocations of the above utilities.
+
+\item[exeinto] Sets the value of \t{EXEDESTTREE} for future invocations of \t{doexe} and \t{newexe}.
+
+\item[docinto] Sets the value of \t{DOCDESTTREE} for future invocations of \t{dodoc} et al.
+
+\item[insopts] Sets the options passed by \t{doins} et al. to the \t{install} command.
+
+\item[diropts] Sets the options passed by \t{dodir} et al. to the \t{install} command.
+
+\item[exeopts] Sets the options passed by \t{doexe} et al. to the \t{install} command.
+
+\item[libopts] Sets the options passed by \t{dolib} et al. to the \t{install} command.
+
+\end{description}
+
+\subsubsection{List Functions}
+These functions work on variables containing space-separated lists (e.g. \t{USE}).
+
+\begin{description}
+\item[use] Returns true (0) if the first argument (a \t{USE} flag name) is enabled, false otherwise.
+Also, the use flag can be negated (by prefixing it with a \t{!}).
+\item[usev] The same as \t{use()}, only it also outputs the use flag if it is enabled.
+\item[useq] Behaves the same as \t{use()}.
+\\
+\item[has] Returns true (0) if the first argument (a word) is found in the second argument (a
+variable, e.g. \t{USE} or \t{FEATURES}). Returns false (1) otherwise.
+\item[hasv] The same as \t{has()}, only it also outputs the found variable 
+\item[hasq] Behaves the same as \t{has()}.
+\\
+\item[use\_with] Outputs a suitable \t{--with-} or \t{--without-} argument to be passed to
+\t{econf()}, based upon whether a given \t{USE} flag is enabled or disabled. Takes 2 arguments: The
+first is the name of the \t{USE} flag to check. The second is the name of the \t{--with\{,out\}-}
+argument. If not given, defaults to the \t{USE} flag name. As with \t{use()}, flag names can be
+inverted by prefixing them with a \t{!}.
+\item[use\_enable] Works the same as \t{use\_with()}, only it outputs \t{--enable-} or \t{--disable-}
+instead.
+\end{description}
+
+\subsubsection{Misc Commands}
+The following commands are always available in the ebuild environment, but don't really fit in any
+of the above categories.
+
+\begin{description}
+\item[dosed] Uses \t{sed} to remove any references to the image directory in each file named by its
+    arguments.
+\item[unpack] Unpacks a source archive into the current directory. Must be able to unpack the
+    following file formats, if the relevant binaries are available:
+    \begin{itemize}
+    \item tar files (\t{*.tar})
+    \item gzip-compressed tar files (\t{*.tar.gz, *.tgz, *.tar.Z})
+    \item bzip2-compressed tar files (\t{*.tar.bz2, *.tbz2})
+    \item zip files (\t{*.zip, *.ZIP, *.jar}) (with \t{unzip} available)
+    \item gzip files (\t{*.gz, *.Z, *.z})
+    \item bzip2 files (\t{*.bz2})
+    \item rar files (\t{*.rar, *.RAR}) (with \t{unrar} available)
+    \item LHA archives (\t{*.LHA, *.LHa, *.lha, *.lhz}) (with \t{lha} available)
+    \item ar archives (\t{*.a, *.deb})
+    \end{itemize}
+    It is up to the ebuild to ensure that the relevant external utilities are available, whether by
+    being in the system set or via dependencies.
+\end{description}
+
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

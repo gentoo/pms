@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{report}
+\documentclass[a4paper,12pt,draft]{report}
 \usepackage{pslatex}
 \usepackage{graphicx}
 \usepackage{enumitem}
@@ -9,6 +9,7 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{listings}
+\usepackage{fixme}
 
 \lstloadlanguages{bash}
 
@@ -22,7 +23,8 @@
 \newcommand{\e}[1]{\emph{#1}}
 \renewcommand{\b}[1]{\textbf{#1}}
 \newcommand{\note}[1]{\paragraph{Note:} #1}
-\newcommand{\todiscuss}[1]{\paragraph{To be discussed before release:} #1}
+\newcommand{\todiscuss}[1]{\fxnote[inline]{#1}}
+\newcommand{\TODO}[1]{\fixme[inline]{TODO: #1}}
 \newenvironment{bulletlist}%
     {\begin{itemize}[topsep=0pt, itemsep=0pt, partopsep=0pt]}%
     {\end{itemize}}
@@ -30,8 +32,8 @@
 \include{pdfinfo}
 
 \title{Package Manager Specification}
-\author{Stephen P. Bennett\\\texttt{spb@gentoo.org}
-\and Ciaran McCreesh\\\texttt{ciaranm@ciaranm.org}}
+\author{Stephen P. Bennett\\\t{spb@gentoo.org}
+\and Ciaran McCreesh\\\t{ciaranm@ciaranm.org}}
 
 \begin{document}
 \maketitle
@@ -39,6 +41,7 @@
 \tableofcontents
 \listofalgorithms
 \lstlistoflistings
+\listoffixmes
 
 \include{introduction}
 
