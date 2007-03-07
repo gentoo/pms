@@ -1,5 +1,114 @@
 \chapter{Ebuild-defined Functions}
 \label{ebuild-functions}
 
+\section{List of Functions}
+\label{functions}
+
+The following is a list of functions that an ebuild, or eclass, may define, and which will be called
+by the package manager as part of the build and/or install process. In all cases the package manager
+must provide a default implementation of these functions; unless otherwise stated this should be a
+no-op. Most functions should assume only that they have write access to the package's working
+directory (the \t{WORKDIR} environment variable; see section \ref{env-var-WORKDIR}); exceptions are
+noted below. All functions may assume that they have read access to all system libraries, binaries
+and configuration files that are accessible to normal users.
+
+\subsection{pkg\_setup}
+\label{pkg-setup-function}
+The \t{pkg\_setup} function sets up the ebuild's environment for all following functions, before
+the build process starts. Further, it checks whether necessary prerequisites - which are not covered
+by the package manager, e.g. that certain kernel configuration options are enabled - are fulfilled.
+
+\t{pkg\_setup} must be run with full filesystem permissions, including the ability to add new users
+and/or groups to the system.
+
+\subsection{src\_unpack}
+\label{src-unpack-function}
+
+The \t{src\_unpack} function extracts all of the package's sources, applies patches and sets up the
+package's build system for further use.
+
+The default implementation in case that the ebuild lacks the \t{src\_unpack} function is:
+
+\begin{lstlisting}
+src_unpack() {
+    if [ "${A}" != "" ]; then
+        unpack ${A}
+    fi
+}
+\end{lstlisting}
+
+\subsection{src\_compile}
+\label{src-compile-function}
+
+The \t{src\_compile} function configures the package's build environment and builds the package.
+
+The default implementation in case that the ebuild lacks the \t{src\_compile} function is:
+
+\begin{lstlisting}
+src_compile() {
+    if [ -x ./configure ]; then
+        econf
+    fi
+    if [ -f Makefile ] || [ -f GNUmakefile ] || [ -f makefile ]; then
+        emake || die "emake failed"
+    fi
+}
+\end{lstlisting}
+
+\subsection{src\_test}
+\label{src-test-function}
+
+The \t{src\_test} function runs unit tests for the newly build but yet uninstalled package as
+provided.
+
+The default implementation in case that the ebuild lacks the \t{src\_test} function must, if tests
+are enabled, run \t{make check} or \t{make test}, whichever exists, and abort if this fails.
+
+\subsection{src\_install}
+\label{src-install-function}
+
+The \t{src\_install} function installs the package's content to a directory specified in
+\t{\${D}}.
+
+The default implementation in case that the ebuild lacks the \t{src\_install} function is a no-op.
+
+\subsection{pkg\_preinst}
+\label{pkg-preinst-function}
+
+The \t{pkg\_preinst} function performs any special tasks that are required immediately before
+merging the package to the live filesystem. It should not write outside of the directory specified
+in the \t{ROOT} environment variable.
+
+\t{pkg\_preinst} must be run with full access to all files and directories below that specified by
+the \t{ROOT} environment variable.
+
+\subsection{pkg\_postinst}
+\label{pkg-postinst-function}
+
+The \t{pkg\_postinst} function performs any special tasks that are required immediately after
+merging the package to the live filesystem. It should not write outside of the directory specified
+in the \t{ROOT} environment variable.
+
+\t{pkg\_postinst}, like, \t{pkg\_preinst}, must be run with full access to all files and directories
+below that specified by the \t{ROOT} environment variable.
+
+\subsection{pkg\_config}
+\label{pkg-config-function}
+
+The \t{pkg\_config} performs any custom steps required to configure a package after it has been
+fully installed. It is the only ebuild function which may be interactive and prompt for user input.
+
+\t{pkg\_config} must be run with full access to all files and directories inside of \t{ROOT}.
+
+\subsection{pkg\_nofetch}
+\label{pkg-nofetch-function}
+
+The \t{pkg\_nofetch} function is run when the fetch phase of an fetch-restricted ebuild is run, and
+the relevant source files are not available. It should direct the user to download all relevant
+source files from their respective locations, with notes concerning licensing if applicable.
+
+\t{pkg\_nofetch} should require no write access to any part of the filesystem.
+
+\fixme{Check that pkg\_nofetch doesn't write anywhere.}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

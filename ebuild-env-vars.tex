@@ -23,7 +23,7 @@ should not be modified by ebuild code.
 \item[FILESDIR] The full path to the package's files directory, used for small support files or
     patches. See section \ref{package-dirs}.
 \item[WORKDIR] The full path to the ebuild's working directory, in which all build data should be
-    contained.
+    contained. \label{env-var-WORKDIR}
 \item[T] The full path to a temporary directory for use by the ebuild.
 \item[USE] A whitespace-delimited list of all active USE flags for this ebuild, including those
     originating from variables in \t{USE\_EXPAND}.
@@ -35,7 +35,7 @@ should not be modified by ebuild code.
     by the package manager.
 \end{description}
 
-\FIXME{Do we require specific ordering for A and AA? Some ebuilds rely upon it. Should they be
+\fixme{Do we require specific ordering for A and AA? Some ebuilds rely upon it. Should they be
 allowed to? What about exact whitespace? Do we mandate exactly one space separation and no leading
 or trailing space?}
 
