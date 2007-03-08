@@ -12,6 +12,11 @@ phase. In particular, ebuild metadata can and will be generated on a different s
 which the ebuild will be used, and the ebuild must generate identical metadata every time it
 is used.
 
+Globally defined ebuild variables without a special meaning must similarly not rely upon
+variable data.
+
+\TODO{Wording sucks}
+
 \section{Mandatory Ebuild-defined Variables}
 
 All ebuilds must define at least the following variables:
