@@ -18,6 +18,14 @@ This will cause the eclass to be sourced as part of the ebuild -- any function o
 definitions in the eclass will appear as part of the ebuild, with exceptions for certain metadata
 variables, as described below.
 
+The \t{inherit} command must also ensure that:
+
+\begin{bulletlist}
+\item The \t{ECLASS} variable is set to the name of the current eclass, when inside an eclass.
+\item The \t{INHERITED} metadata variable contains the name of every eclass used, separated
+    by whitespace.
+\end{bulletlist}
+
 \section{Eclass-defined Metadata Keys}
 
 The \t{IUSE}, \t{KEYWORDS}, \t{DEPEND}, \t{RDEPEND} and \t{PDEPEND} variables are handled specially

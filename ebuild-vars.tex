@@ -66,6 +66,8 @@ Ebuilds may define any of the following variables:
 \item[EAPI] The EAPI, by default \t{0}.
 \item[INHERITED] List of inherited eclass names. This is handled magically by \t{inherit} and
     shouldn't be modified manually.
+\item[ECLASS] The current eclass, or unset if there is no current eclass. Again, this is handled
+    magically by \t{inherit}.
 \item[RESTRICT] Zero or more of \t{mirror}, \t{fetch}, \t{strip}, \t{userpriv}, \t{test}.
     Package managers may recognise other values, but ebuilds may not rely upon them being
     supported.
