@@ -62,11 +62,13 @@ Letter suffixes are compared alphabetically, with any letter being newer than no
 
 If letters are equal, the next part is considered. The ordering of this is complex: \t{\_alpha} is
 older than \t{\_beta}, which is older than \t{\_pre}, which is older than \t{\_rc}, which is older
-than no suffix, which is older than \t{\_p}. If the two versions being compared have the same
-suffix, the associated integer is compared.
+than no suffix, which is older than \t{\_p}. A suffix has an associated integer, which, if not
+specified, defaults to \t{0}. If the two versions being compared have the same suffix, the
+associated integer is compared.
 
-If at this point the two versions are still equal, the revision number is compared. If the revision
-numbers are equal, so are the two versions.
+If at this point the two versions are still equal, the revision number is compared. The revision
+number has an optional integer suffix as per the previous part. If the revision numbers are equal,
+so are the two versions.
 
 It is illegal for two identically named packages in the same repository to have equal versions.
 
