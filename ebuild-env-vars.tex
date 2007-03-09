@@ -36,6 +36,7 @@ should not be modified by ebuild code.
 \item[CHOST,CBUILD,CTARGET] If not set by profiles, must contain either an appropriate
     machine tuple (the definition of appropriate is beyond the scope of this specification) or
     be unset.
+\item[GZIP,BZIP,BZIP2,CDPATH,GREP\_OPTIONS,GREP\_COLOR,GLOBIGNORE] must not be set.
 \end{description}
 
 \fixme{Do we require specific ordering for A and AA? Some ebuilds rely upon it. Should they be
