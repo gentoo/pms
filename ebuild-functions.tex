@@ -79,11 +79,11 @@ The default implementation in case that the ebuild lacks the \t{src\_install} fu
 \label{pkg-preinst-function}
 
 The \t{pkg\_preinst} function performs any special tasks that are required immediately before
-merging the package to the live filesystem. It should not write outside of the directory specified
-in the \t{ROOT} environment variable.
+merging the package to the live filesystem. It must not write outside of the directories specified
+by the \t{ROOT} and \t{D} environment variables.
 
 \t{pkg\_preinst} must be run with full access to all files and directories below that specified by
-the \t{ROOT} environment variable.
+the \t{ROOT} and \t{D} environment variables.
 
 \subsection{pkg\_postinst}
 \label{pkg-postinst-function}
