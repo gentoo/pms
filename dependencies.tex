@@ -88,16 +88,16 @@ exclamation mark prefix), all of the child elements must be matched.
 
 \subsection{Any-of Dependency Specifications}
 
-Any-of dependency specifications only make sense for dependencies.
+Any-of dependency specifications only make sense for dependencies and licenses.
 
 Any use-conditional group that is an immediate child of an any-of group, if not enabled (disabled
 for an exclamation mark prefixed use flag name), is not considered a member of the any-of group
 for dependency resolution purposes.
 
 In an any-of group, at least one immediate child element must be matched. A blocker is
-considered to be matched if it is not installed.
+considered to be matched if it is not installed (or, for licenses, matched).
 
-An empty any-of group counts as being installed.
+An empty any-of group counts as being installed (or, for licenses, matched).
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 
