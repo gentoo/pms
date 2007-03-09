@@ -45,6 +45,10 @@ hyphen. In contexts where it makes sense to do so, a keyword name may be prefixe
 a tilde or a hyphen. In some contexts, $-*$ is also acceptable as a keyword.
 
 \section{Version Specifications}
+The package manager must not impose fixed limits upon the number of version components. No version
+component represented by an integer may exceed the maximum value of a 32 bit signed two's complement
+integer.
+
 Version specifications are given as ordered integer tuples, separated by decimal points, with any or
 none of the following suffixes in this order:
 \begin{bulletlist}
