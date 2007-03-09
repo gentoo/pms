@@ -52,7 +52,8 @@ variables available in specific ebuild phases.
 
 \subsubsection{pkg\_preinst}
 \begin{description}
-\item[IMAGE] Contains the full path to the image directory of the package about to be merged.
+\item[D] Contains the full path to the image directory of the package about to be merged.
+\item[IMAGE] Must be identical to \t{D}, for legacy reasons.
 \end{description}
 
 \subsubsection{pkg\_*}
