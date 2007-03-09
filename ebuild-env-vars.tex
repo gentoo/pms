@@ -33,6 +33,9 @@ should not be modified by ebuild code.
     the ebuild that may read or modify the home directory.
 \item[PATH] Must contain at least \t{/sbin:/usr/sbin:/bin:/usr/bin} and any directories required
     by the package manager.
+\item[CHOST,CBUILD,CTARGET] If not set by profiles, must contain either an appropriate
+    machine tuple (the definition of appropriate is beyond the scope of this specification) or
+    be unset.
 \end{description}
 
 \fixme{Do we require specific ordering for A and AA? Some ebuilds rely upon it. Should they be
