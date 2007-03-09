@@ -56,14 +56,15 @@ The profiles directory shall contain zero or more profile directories as describ
 beginning with a \# character are treated as comments, whilst blank lines are ignored. All contents
 of this directory, with the exception of \t{repo\_name}, are optional if the repository is not
 intended to be stand-alone; if they are not present their contents are to be taken, where necessary,
-from the master repository.
+from the master repository. Other files may exist, but may not be relied upon. The package manager
+must ignore any files in this directory that it does not recognise.
 
 \begin{description}
 \item[arch.list] \label{arch.list} Contains a list, one entry per line, of permissible values for
-    the \t{ARCH} variable.
+    the \t{ARCH} variable, and hence permissible keywords for packages in this repository.
 \item[categories] \label{profiles-categories} Contains a list, one entry per line, of categories
     provided by this repository.
-\item[info\_pkgs] Contains a list, one entry per line, of (EAPI-0) dependency atoms. Any package
+\item[info\_pkgs] Contains a list, one entry per line, of qualified package names. Any package
     matching one of these is to be listed when a package manager displays a `system information'
     listing.
 \item[info\_vars] Contains a list, one entry per line, of profile, configuration, and environment

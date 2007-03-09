@@ -28,10 +28,9 @@ The following variables have specific meanings when set in profiles.
 \begin{description}
 \item[ARCH] The system's architecture. Must be a value listed in \t{profiles/arch.list}; see section
     \ref{arch.list} for more information.
-\item[CONFIG\_PROTECT] Contains a list of directories whose contents should be treated as
-    configuration files and protected accordingly. See section \ref{config-protect}.
-\item[CONFIG\_PROTECT\_MASK] Contains a list of directories whose contents should \b{not} be treated
-    as configuration files. See section \ref{config-protect}.
+\item[CONFIG\_PROTECT, CONFIG\_PROTECT\_MASK] Contain whitespace-delimited lists of directories used
+    to control the configuration file protection. Described more fully in chapter
+    \ref{config-protect}.
 \item[USE] Defines the list of default USE flags for this profile. Flags may be added or removed by
     the user's configuration.
 \item[USE\_EXPAND] \label{use-expand} Defines a list of variables which are to be treated

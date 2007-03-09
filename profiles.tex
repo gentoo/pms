@@ -46,8 +46,8 @@ entry. Additional syntax, which is a small subset of bash syntax, is allowed as 
 \label{profiles-virtuals}
 The \t{virtuals} file defines default providers for ``old-style'' virtual packages. It is a simple
 line-based file, with each line containing two whitespace-delimited tokens. The first is a virtual
-package name (for example, \t{virtual/alsa}) and the second is a dependency atom. Blank lines and
-those beginning with a \# character are ignored. When attempting to resolve a virtual name to a
+package name (for example, \t{virtual/alsa}) and the second is a qualified package name. Blank lines
+and those beginning with a \# character are ignored. When attempting to resolve a virtual name to a
 concrete package, the atom defined in the active profile's \t{virtuals} list should be used if no
 provider is already installed.
 
@@ -58,8 +58,8 @@ in the parent profile is discarded.
 \subsection{use.defaults}
 The \t{use.defaults} file is used to implement `autouse' -- switching USE flags on or off depending
 upon which packages are installed. It is considered deprecated, and is not used by default by any
-current package manager. Support is regarded as purely optional, and its format is not discussed
-here.
+current package manager. It is mentioned here for completeness only, and its format is not
+discussed.
 
 \subsection{Simple line-based files}
 \label{line-stacking}
@@ -70,9 +70,9 @@ removed from the list. Once again, blank lines and those beginning with a \# are
 
 \subsection{packages}
 The \t{packages} is used to define the `system set' for this profile. After the above rules for
-inheritance and comments are applied, its lines should take one of two forms: a dep atom prefixed by
-\t{*} denotes that the atom forms part of the system set. A dep atom on its own may also appear for
-legacy reasons, but should be ignored when calculating the system set.
+inheritance and comments are applied, its lines should take one of two forms: a dependency atom
+prefixed by \t{*} denotes that the atom forms part of the system set. A dependency atom on its own
+may also appear for legacy reasons, but should be ignored when calculating the system set.
 
 \subsection{packages.build}
 The \t{packages.build} file is used by Gentoo's Catalyst tool to generate stage1 tarballs, and has
