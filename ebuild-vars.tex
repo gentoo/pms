@@ -5,6 +5,7 @@
 variables that are passed from the package manager to the ebuild, see section \ref{ebuild-env-vars}.
 
 \section{Metadata invariance}
+\ref{metadata-invariance}
 
 All ebuild-defined variables discussed in this chapter must be defined independently of
 any system, profile or tree dependent data, and it must not vary depending upon the ebuild
@@ -67,10 +68,6 @@ Ebuilds may define any of the following variables:
 \item[PROVIDE] Any \e{old style} virtuals provided by this package. May contain use conditionals.
     \label{ebuild-var-provide}
 \item[EAPI] The EAPI, by default \t{0}.
-\item[INHERITED] List of inherited eclass names. This is handled magically by \t{inherit} and
-    shouldn't be modified manually.
-\item[ECLASS] The current eclass, or unset if there is no current eclass. Again, this is handled
-    magically by \t{inherit}.
 \item[RESTRICT] Zero or more of \t{mirror}, \t{fetch}, \t{strip}, \t{userpriv}, \t{test}.
     Package managers may recognise other values, but ebuilds may not rely upon them being
     supported.
@@ -78,5 +75,20 @@ Ebuilds may define any of the following variables:
 
 If any of these variables are set to invalid values, the package manager's behaviour is undefined;
 ideally, an error in one ebuild should not prevent operations upon other ebuilds or packages.
+
+\section{Magic Ebuild-defined Variables}
+
+The following variables may be defined magically by \t{inherit}, and may be considered to be part
+of the ebuild's metadata:
+
+\begin{description}
+\item[INHERITED] List of inherited eclass names. This is handled magically by \t{inherit} and
+    shouldn't be modified manually.
+\item[ECLASS] The current eclass, or unset if there is no current eclass. Again, this is handled
+    magically by \t{inherit}.
+\end{description}
+
+\note Thus, by extension of section \ref{metadata-invariance}, \t{inherit} may not be used
+    conditionally, except upon constant conditions.
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
