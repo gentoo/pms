@@ -47,6 +47,9 @@ All ebuilds must define at least the following variables:
     which indicates that the package will not work on the specified arch.
 \end{description}
 
+\TODO{\t{KEYWORDS} in eclass is banned by the above. Do we drop this requirement and just consider
+    it to be a QA thing?}
+
 If any of these variables are undefined, or if any of these variables are set to invalid values,
 the package manager's behaviour is undefined; ideally, an error in one ebuild should not prevent
 operations upon other ebuilds or packages.
