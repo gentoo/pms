@@ -1,10 +1,16 @@
 \section{The state of variables between functions}
 \label{ebuild-env-state}
 
-Ebuild functions are allowed to change variables that are introduced in the global scope
-and the package manager must make sure that he modifications are available in the next
-function executed. See listing \ref{lst:env-saving} for an example of how this behaviour should
-work.
+Exported and default scope variables are saved between functions. A non-local variable set in a
+function earlier in the call sequence must have its value preserved for later functions. Variables
+that were exported must remain exported in later functions; variables with default visibility may
+retain default visibility or be exported.
+
+Global variables may only contain invariant values (see \ref{metadata-invariance}). If a global
+variable's value is invariant, it may have the value that would be generated at any given point
+in the build sequence.
+
+This is demonstrated by code listing \ref{lst:env-saving}.
 
 \begin{lstlisting}[float,caption=Environment state between functions,label=lst:env-saving]
 
@@ -13,15 +19,27 @@ GLOBAL_VARIABLE="a"
 src_compile()
 {
     GLOBAL_VARIABLE="b"
+    DEFAULT_VARIABLE="c"
+    export EXPORTED_VARIABLE="d"
+    local LOCAL_VARIABLE="e"
 }
 
 src_install(){
-    if [[ ${GLOBAL_VARIABLE} = b ]]; then
-        true; # correct
-    else
-        die "Your package manager has deficient" \
-            "environment handling."
-    fi
+    [[ ${GLOBAL_VARIABLE} == "a" ]] \
+        || [[ ${GLOBAL_VARIABLE} == "b" ]] \
+        || die "broken env saving for globals"
+
+    [[ ${DEFAULT_VARIABLE} == "c" ]] \
+        || die "broken env saving for default"
+
+    [[ ${EXPORTED_VARIABLE} == "d" ]] \
+        || die "broken env saving for exported"
+
+    [[ $(printenv ${EXPORTED_VARIABLE} ) == "d" ]] \
+        || die "broken env saving for exported"
+
+    [[ -z ${LOCAL_VARIABLE} ]] \
+        || die "broken env saving for locals"
 }
 \end{lstlisting}
 
