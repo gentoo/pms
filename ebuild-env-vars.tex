@@ -5,7 +5,7 @@
 \label{global-ebuild-vars}
 
 The following variables are available, read-only, in all phases of the ebuild environment. They
-should not be modified by ebuild code.
+must not be modified by ebuild code.
 \begin{description}
 \item[P] Package name and version, without the revision part. For example, \t{vim-7.0.174}.
 \item[PN] Package name, for example \t{vim}.
@@ -55,7 +55,7 @@ variables available in specific ebuild phases.
 \item[INSDESTTREE] Controls the location where doins installs things.
 \end{description}
 
-\subsubsection{pkg\_preinst}
+\subsubsection{pkg\_preinst, pkg\_postinst}
 \begin{description}
 \item[D] Contains the full path to the image directory of the package about to be merged.
 \item[IMAGE] Must be identical to \t{D}, for legacy reasons.
