@@ -15,11 +15,15 @@ temporary directory \t{T}; exceptions are noted below. All functions may assume 
 access to all system libraries, binaries and configuration files that are accessible to normal
 users.
 
+Some functions may assume that their initial working directory is set to a particular location;
+these are noted below. If no initial working directory is mandated, it may be set to anything and
+the ebuild must not rely upon a particular location for it.
+
 \subsection{pkg\_setup}
 \label{pkg-setup-function}
 The \t{pkg\_setup} function sets up the ebuild's environment for all following functions, before
-the build process starts. Further, it checks whether necessary prerequisites - which are not covered
-by the package manager, e.g. that certain kernel configuration options are enabled - are fulfilled.
+the build process starts. Further, it checks whether any necessary prerequisites not covered
+by the package manager, e.g. that certain kernel configuration options are enabled are fulfilled.
 
 \t{pkg\_setup} must be run with full filesystem permissions, including the ability to add new users
 and/or groups to the system.
@@ -30,7 +34,8 @@ and/or groups to the system.
 The \t{src\_unpack} function extracts all of the package's sources, applies patches and sets up the
 package's build system for further use.
 
-The default implementation in case that the ebuild lacks the \t{src\_unpack} function is:
+The initial working directory must be \t{WORKDIR}, and the default implementation used when
+the ebuild lacks the \t{src\_unpack} function is:
 
 \begin{lstlisting}
 src_unpack() {
@@ -45,7 +50,8 @@ src_unpack() {
 
 The \t{src\_compile} function configures the package's build environment and builds the package.
 
-The default implementation in case that the ebuild lacks the \t{src\_compile} function is:
+The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
+The default implementation used when the ebuild lacks the \t{src\_compile} function is:
 
 \begin{lstlisting}
 src_compile() {
@@ -64,8 +70,9 @@ src_compile() {
 The \t{src\_test} function runs unit tests for the newly build but yet uninstalled package as
 provided.
 
-The default implementation in case that the ebuild lacks the \t{src\_test} function must, if tests
-are enabled, run \t{make check} or \t{make test}, whichever exists, and abort if this fails.
+The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
+The default implementation used when the ebuild lacks the \t{src\_test} function must, if tests are
+enabled, run \t{make check} or \t{make test}, whichever exists, and abort if this fails.
 
 \subsection{src\_install}
 \label{src-install-function}
@@ -73,7 +80,8 @@ are enabled, run \t{make check} or \t{make test}, whichever exists, and abort if
 The \t{src\_install} function installs the package's content to a directory specified in
 \t{\${D}}.
 
-The default implementation in case that the ebuild lacks the \t{src\_install} function is a no-op.
+The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
+The default implementation used when the ebuild lacks the \t{src\_install} function is a no-op.
 
 \subsection{pkg\_preinst}
 \label{pkg-preinst-function}
