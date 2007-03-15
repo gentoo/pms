@@ -21,7 +21,9 @@ must not be modified by ebuild code.
     of the \t{SRC\_URI} ebuild metadata variable.
 \item[CATEGORY] The package's category, for example \t{app-editors}.
 \item[FILESDIR] The full path to the package's files directory, used for small support files or
-    patches. See section \ref{package-dirs}.
+    patches. See section \ref{package-dirs}. May or may not exist; if a repository provides no
+    support files for the package in question then an ebuild must be prepared for the situation
+    where \t{FILESDIR} points to a non-existent directory.
 \item[WORKDIR] The full path to the ebuild's working directory, in which all build data should be
     contained. \label{env-var-WORKDIR}
 \item[T] The full path to a temporary directory for use by the ebuild.
@@ -37,6 +39,11 @@ must not be modified by ebuild code.
 \item[CHOST,CBUILD,CTARGET] If not set by profiles, must contain either an appropriate
     machine tuple (the definition of appropriate is beyond the scope of this specification) or
     be unset.
+\item[EBUILD\_PHASE] Takes one of the values \t{setup}, \t{nofetch}, \t{unpack}, \t{compile},
+    \t{test}, \t{install}, \t{preinst}, \t{postinst}, \t{prerm}, \t{postrm} according to the ebuild
+    function currently being executed.
+\item[TMPDIR] Must be set to the location of a usable temporary directory, for any applications
+    called by an ebuild. Should not be used by ebuilds directly; see \t{T} above.
 \item[GZIP,BZIP,BZIP2,CDPATH,GREP\_OPTIONS,GREP\_COLOR,GLOBIGNORE] must not be set.
 \end{description}
 
@@ -58,7 +65,6 @@ variables available in specific ebuild phases.
 \subsubsection{pkg\_preinst}
 \begin{description}
 \item[D] Contains the full path to the image directory of the package about to be merged.
-\item[IMAGE] Must be identical to \t{D}, for legacy reasons.
 \end{description}
 
 \subsubsection{pkg\_*}
