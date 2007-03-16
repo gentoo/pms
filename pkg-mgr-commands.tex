@@ -1,7 +1,9 @@
 \label{pkg-mgr-commands}
 
 The following commands will always be available in the ebuild environment, provided by the package
-manager:
+manager. Except where otherwise noted, they may be internal (shell functions or aliases) or external
+commands available in \t{PATH}; where this is not specified, ebuilds may not rely upon either
+behaviour.
 
 \subsubsection{Sandbox commands}
 These commands affect the behaviour of the sandbox. Each command takes a single directory as
@@ -73,6 +75,9 @@ package's build commands.
     \item --libdir should be set according to Algorithm \ref{alg:econf-libdir}.
     \end{itemize}
 
+    \t{econf} must be implemented internally -- that is, as a bash function and not an external
+    script.
+
 \begin{algorithm}
 \caption{econf --libdir logic} \label{alg:econf-libdir}
 \begin{algorithmic}[1]
@@ -95,7 +100,8 @@ package's build commands.
 
 \item[emake] Calls the system make command. Any arguments given are passed directly to the make
     command, as are the user's chosen \t{MAKEOPTS}. Arguments given to \t{emake} override user
-    configuration. See also section \ref{guaranteed-system-commands}.
+    configuration. See also section \ref{guaranteed-system-commands}. \t{emake} must be an external
+    program and cannot be a function or alias -- it must be callable from e.g. \t{xargs}.
 \item[einstall] A shortcut for the command given in Listing \ref{lst:einstall}. Its use is
     discouraged in favour of using \t{make DESTDIR=\$\{D\} install}.
 
@@ -113,7 +119,9 @@ emake \
 \subsubsection{Installation commands}
 These commands are used to install files into the staging area, in cases where the package's \t{make
 install} target cannot be used or does not install all needed files. Except where otherwise stated,
-all filenames created or modified are relative to the staging directory, given by \$\{D\}.
+all filenames created or modified are relative to the staging directory, given by \t{\$\{D\}}. These
+commands must all be external programs and not bash functions or aliases -- that is, they must be
+callable from \t{xargs}.
 
 \begin{description}
 \item[dobin] Installs the given files into \t{DESTTREE/bin}, where \t{DESTTREE} defaults to
@@ -208,6 +216,11 @@ all filenames created or modified are relative to the staging directory, given b
 
 \item[keepdir] Creates a directory as for \t{dodir}, and an empty \t{.keep} file in it to ensure
     that the directory does not get removed by the package manager should it be empty at any point.
+
+\subsubsection{Commands affecting install destinations}
+The following commands are used to set the various destination trees, all relative to \t{\$\{D\}},
+used by the above installation commands. They must be shell functions or aliases, due to the need to
+set variables read by the above commands.
 
 \item[into] Sets the value of \t{DESTTREE} for future invocations of the above utilities.
 
