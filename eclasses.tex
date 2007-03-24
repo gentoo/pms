@@ -28,7 +28,7 @@ The \t{inherit} command must also ensure that:
 
 \section{Eclass-defined Metadata Keys}
 
-The \t{IUSE}, \t{KEYWORDS}, \t{DEPEND}, \t{RDEPEND} and \t{PDEPEND} variables are handled specially
+The \t{IUSE}, \t{DEPEND}, \t{RDEPEND} and \t{PDEPEND} variables are handled specially
 when set by an eclass. They should be accumulated across eclasses, appending the value set by each
 eclass to the resulting value after the previous one is loaded. Then the eclass-defined value is
 appended to that defined by the ebuild. In the case of \t{RDEPEND}, this is done after the
