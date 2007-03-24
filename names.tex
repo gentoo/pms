@@ -89,6 +89,11 @@ If at this point the two versions are still equal, the revision number is compar
 number has an optional integer suffix as per the previous part. If the revision numbers are equal,
 so are the two versions.
 
+\TODOBUG{170659}{Portage does funky things for versions that start with a leading zero. The
+    behaviour is inconsistent and a throwback to early days when people thought that Perl's old
+    version oddities could be handled consistently (which they can't, since not all weird Perl
+    versions start with a 0).}
+
 \section{Uniqueness of versions}
 
 No two packages in a given repository may have the same qualified package name and equal versions.
