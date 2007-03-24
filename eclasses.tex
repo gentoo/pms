@@ -37,8 +37,8 @@ implicit \t{RDEPEND} rules are applied.
 \section{EXPORT\_FUNCTIONS}
 
 There is one command available in the eclass environment that is neither available nor meaningful
-in ebuilds -- \t{EXPORT\_FUNCTIONS}. This can be used to `export' ebuild phase functions from the
-eclass so that an ebuild inherits a default definition, but retains the ability to override this and
+in ebuilds -- \t{EXPORT\_FUNCTIONS}. This can be used to alias ebuild phase functions from the
+eclass so that an ebuild inherits a default definition whilst retaining the ability to override and
 call the eclass-defined version from it. The use of it is best illustrated by an example; this is
 given in listing \ref{lst:export-functions} and is a snippet from a hypothetical \t{foo.eclass}.
 
@@ -55,10 +55,13 @@ foo_src_compile()
 EXPORT_FUNCTIONS src_compile
 \end{lstlisting}
 
-This example defines an eclass \t{src\_compile} function and uses \t{EXPORT\_FUNCTIONS} to export
+This example defines an eclass \t{src\_compile} function and uses \t{EXPORT\_FUNCTIONS} to alias
 it. Then any ebuild that inherits \t{foo.eclass} will have a default \t{src\_compile} defined, but
 should the author wish to override it he can access the function in \t{foo.eclass} by calling
 \t{foo\_src\_compile}.
+
+\t{EXPORT\_FUNCTIONS} may only be used on ebuild phase functions. The function that is aliased
+must be named \t{eclassname_phasefunctionname}, where \t{eclassname} is the name of the eclass.
 
 \t{EXPORT\_FUNCTIONS} may be used at most once per eclass.
 
