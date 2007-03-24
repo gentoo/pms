@@ -60,7 +60,8 @@ The following operators are available:
 \item[\t{<=}] Less than or equal to the specified version.
 \item[\t{=}] Exactly equal to the specified version. Special exception: if the version
     specified has an asterisk immediately following it, a string prefix comparison is
-    used instead. (An asterisk used with any other operator is illegal.)
+    used instead. When an asterisk is used, the specification must remain valid if the
+    asterisk were removed. (An asterisk used with any other operator is illegal.)
 \item[\t{\~}] Equal to the specified version, except the revision part of the matching
     package may be greater than the revision part of the specified version (\t{-r0} is
     assumed if no revision is explicitly stated).
