@@ -7,5 +7,23 @@ The \t{metadata.xml} file is used to contain extra package- or category-level in
 what is stored in ebuild metadata. Its exact format is strictly beyond the scope of this document,
 and is described in the DTD file located at \url{http://www.gentoo.org/dtd/metadata.dtd}.
 
+\chapter{Unspecified Items}
+
+The following items are not specified by this document, and may not be relied upon by ebuilds.
+This is, of course, an incomplete list---it covers only the things that the authors know have
+been abused in the past.
+
+\begin{bulletlist}
+\item The \t{FEATURES} variable. This is Portage specific.
+\item Similarly, any \t{PORTAGE\_} variable not explicitly listed.
+\item Any Portage configuration file.
+\item The VDB (\t{/var/db/pkg}). Ebuilds may not access this or rely upon it existing or being
+    in any particular format.
+\item The \t{portageq} command. The \t{has\_version} and \t{best\_version} commands are
+    available as functions.
+\item The \t{emerge} command.
+\item Binary packages.
+\item The \t{PORTDIR\_OVERLAY} variable, and overlay behaviour in general.
+\end{bulletlist}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
