@@ -32,6 +32,10 @@ category. Each category directory shall contain:
 \item Zero or more package directories, one for each package in the category, as described in section
     \ref{package-dirs}. The name of the package directory shall be the corresponding package name.
 \end{bulletlist}
+
+\TODO{Disallow empty categories? This bites people who aren't using CVS correctly since CVS doesn't
+    nuke directories sensibly...}
+
 Category directories may contain additional files, whose purpose is not covered by this
 specification. Additional directories may \i{not} be present, to avoid conflicts with package
 name directories; an exception is made for filesystem components whose name starts with a dot,
