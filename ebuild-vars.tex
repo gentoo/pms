@@ -68,13 +68,32 @@ Ebuilds may define any of the following variables:
 \item[PROVIDE] Any \e{old style} virtuals provided by this package. May contain use conditionals.
     \label{ebuild-var-provide}
 \item[EAPI] The EAPI, by default \t{0}.
-\item[RESTRICT] Zero or more of \t{mirror}, \t{fetch}, \t{strip}, \t{userpriv}, \t{test}.
-    Package managers may recognise other values, but ebuilds may not rely upon them being
-    supported.
+\item[RESTRICT] See section \ref{restrict}.
 \end{description}
 
 If any of these variables are set to invalid values, the package manager's behaviour is undefined;
 ideally, an error in one ebuild should not prevent operations upon other ebuilds or packages.
+
+\subsection{Restrict}
+\label{restrict}
+
+The \t{RESTRICT} variable may contain zero or more whitespace separated tokens. The following
+tokens have predefined meanings:
+
+\begin{description}
+\item[mirror] The package's \t{SRC\_URI} entries may not be mirrored, and mirrors should not
+    be checked when fetching.
+\item[fetch] The package's \t{SRC\_URI} entries may not be downloaded automatically. If
+    entries are not available, \t{pkg\_nofetch} is called.
+\item[strip] No stripping of files to be installed may be performed.
+\item[userpriv] The package manager may not drop root privileges when building the package.
+\item[test] The \t{src\_test} phase must not be run.
+\item[sandbox] The \t{sandbox} tool must not be used when building the package.
+\end{description}
+
+Package managers may recognise other tokens, but ebuilds may not rely upon them being supported.
+
+\TODO{Portage allows use conditionals here. Is this useful behaviour?}
 
 \section{Magic Ebuild-defined Variables}
 
