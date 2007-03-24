@@ -1,4 +1,4 @@
-\chapter{Virtual packages}
+\chapter{Old-Style Virtual Packages}
 \label{old-virtuals}
 
 Old-style virtuals are pseudo-packages -- they can be depended upon or installed, but do not exist
@@ -20,6 +20,8 @@ providing the virtual is installed, and the \t{virtuals} file in the active prof
 (via \t{PROVIDE}), then it should be used to satisfy the dependency. Otherwise, the profiles
 \t{virtuals} file (section \ref{profiles-virtuals}) should be consulted to choose an appropriate
 provider.
+
+Dependencies on old style virtuals may not use any kind of version restriction.
 
 \subsection{Blocks on virtual packages}
 
