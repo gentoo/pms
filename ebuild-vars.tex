@@ -8,7 +8,7 @@ variables that are passed from the package manager to the ebuild, see section \r
 \label{metadata-invariance}
 
 All ebuild-defined variables discussed in this chapter must be defined independently of
-any system, profile or tree dependent data, and it must not vary depending upon the ebuild
+any system, profile or tree dependent data, and must not vary depending upon the ebuild
 phase. In particular, ebuild metadata can and will be generated on a different system from that upon
 which the ebuild will be used, and the ebuild must generate identical metadata every time it
 is used.
