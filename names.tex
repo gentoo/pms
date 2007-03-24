@@ -1,6 +1,6 @@
 \chapter{Names and Versions}
 
-\section{Names}
+\section{Restrictions upon Names}
 
 No name may be empty. Package managers must not impose fixed upper boundaries upon the length of any
 name.
@@ -42,7 +42,11 @@ hyphen.
 \label{keyword-names}
 A keyword name may contain any of the characters [\t{A-Za-z0-9\_-}]. It must not begin with a
 hyphen. In contexts where it makes sense to do so, a keyword name may be prefixed by
-a tilde or a hyphen. In some contexts, $-*$ is also acceptable as a keyword.
+a tilde or a hyphen. In \t{KEYWORDS}, $-*$ is also acceptable as a keyword, to indicate that
+a package will only work on listed targets.
+
+A tilde prefixed keyword is, by convention, used to indicate a less stable package. It is generally
+assumed that any user accepting keyword \t{~foo} will also accept \t{foo}.
 
 \section{Version Specifications}
 The package manager must not impose fixed limits upon the number of version components. No version
@@ -61,6 +65,10 @@ none of the following suffixes in this order:
 
 \TODO{New portage allows multiple suffixes. There's bug 166522 open about this asking for the feature
     to be removed.}
+
+\TODO{Portage has a really nasty -cvs thing that was designed to work around Portage's lack of
+    ability to ignore versions it doesn't recognise. This should probably remain excluded and replaced
+    by a proper solution in future EAPIs.}
 
 \section{Version Comparison}
 
