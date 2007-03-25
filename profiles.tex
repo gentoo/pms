@@ -2,7 +2,7 @@
 \label{profiles}
 
 \section{General principles}
-Generally, a profile defines information specific to a certain `type' of system -- it lies somewhere
+Generally, a profile defines information specific to a certain `type' of system---it lies somewhere
 between repository-level defaults and user configuration in that the information it contains is not
 necessarily applicable to all machines, but is sufficiently general that it should not be left to
 the user to configure it. Some parts of the profile can be overridden by user configuration, some
@@ -25,11 +25,11 @@ If a profile contains a file named \t{deprecated}, it is treated as such. The fi
 file should contain the path from the \t{profiles} directory of the repository to a valid profile
 that is the recommended upgrade path from this profile. The remainder of the file can contain any
 text, which may be displayed to users using this profile by the package manager. This file is not
-inherited -- profiles which inherit from a deprecated profile are \e{not} deprecated.
+inherited---profiles which inherit from a deprecated profile are \e{not} deprecated.
 
 \subsection{make.defaults}
 \t{make.defaults} is used to define defaults for various environment and configuration variables.
-This file is unusual in that it is not combined at a file level with the parent -- instead, each
+This file is unusual in that it is not combined at a file level with the parent---instead, each
 variable is combined or overridden individually as described in section \ref{profile-variables}.
 
 The file itself is a line-based key-value format. Each line contains a single \verb|VAR="value"|
@@ -56,7 +56,7 @@ loaded, then entries from the current profile. If a virtual package name appears
 in the parent profile is discarded.
 
 \subsection{use.defaults}
-The \t{use.defaults} file is used to implement `autouse' -- switching USE flags on or off depending
+The \t{use.defaults} file is used to implement `autouse'---switching USE flags on or off depending
 upon which packages are installed. It is considered deprecated, and is not used by default by any
 current package manager. It is mentioned here for completeness only, and its format is not
 discussed.

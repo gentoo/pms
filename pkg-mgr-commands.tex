@@ -75,7 +75,7 @@ package's build commands.
     \item --libdir should be set according to Algorithm \ref{alg:econf-libdir}.
     \end{itemize}
 
-    \t{econf} must be implemented internally -- that is, as a bash function and not an external
+    \t{econf} must be implemented internally---that is, as a bash function and not an external
     script.
 
 \begin{algorithm}
@@ -101,7 +101,7 @@ package's build commands.
 \item[emake] Calls the system make command. Any arguments given are passed directly to the make
     command, as are the user's chosen \t{MAKEOPTS}. Arguments given to \t{emake} override user
     configuration. See also section \ref{guaranteed-system-commands}. \t{emake} must be an external
-    program and cannot be a function or alias -- it must be callable from e.g. \t{xargs}.
+    program and cannot be a function or alias---it must be callable from e.g. \t{xargs}.
 \item[einstall] A shortcut for the command given in Listing \ref{lst:einstall}. Its use is
     discouraged in favour of using \t{make DESTDIR=\$\{D\} install}.
 
@@ -120,7 +120,7 @@ emake \
 These commands are used to install files into the staging area, in cases where the package's \t{make
 install} target cannot be used or does not install all needed files. Except where otherwise stated,
 all filenames created or modified are relative to the staging directory, given by \t{\$\{D\}}. These
-commands must all be external programs and not bash functions or aliases -- that is, they must be
+commands must all be external programs and not bash functions or aliases---that is, they must be
 callable from \t{xargs}.
 
 \begin{description}

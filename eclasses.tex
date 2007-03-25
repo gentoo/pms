@@ -14,7 +14,7 @@ the name of this eclass, used by \t{inherit} and \t{EXPORT\_FUNCTIONS} among oth
 \section{The inherit command}
 
 An ebuild wishing to make use of an eclass does so by using the \t{inherit} command in global scope.
-This will cause the eclass to be sourced as part of the ebuild -- any function or variable
+This will cause the eclass to be sourced as part of the ebuild---any function or variable
 definitions in the eclass will appear as part of the ebuild, with exceptions for certain metadata
 variables, as described below.
 
@@ -37,7 +37,7 @@ implicit \t{RDEPEND} rules are applied.
 \section{EXPORT\_FUNCTIONS}
 
 There is one command available in the eclass environment that is neither available nor meaningful
-in ebuilds -- \t{EXPORT\_FUNCTIONS}. This can be used to alias ebuild phase functions from the
+in ebuilds---\t{EXPORT\_FUNCTIONS}. This can be used to alias ebuild phase functions from the
 eclass so that an ebuild inherits a default definition whilst retaining the ability to override and
 call the eclass-defined version from it. The use of it is best illustrated by an example; this is
 given in listing \ref{lst:export-functions} and is a snippet from a hypothetical \t{foo.eclass}.

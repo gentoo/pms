@@ -1,13 +1,13 @@
 \chapter{Old-Style Virtual Packages}
 \label{old-virtuals}
 
-Old-style virtuals are pseudo-packages -- they can be depended upon or installed, but do not exist
+Old-style virtuals are pseudo-packages---they can be depended upon or installed, but do not exist
 in the ebuild repository. This is in contrast to \i{new-style} virtuals, which are simply ebuilds in
 the \t{virtual} category which install no files and use their dependency strings to select
 providers. An old-style virtual requires several things in the repository: at least
 one ebuild must list the virtual, whose category must always be \t{virtual}, in its \t{PROVIDE}
 variable, and there must be at least one entry in a profiles \t{virtuals} file listing the default
-provider for each profile -- see sections \ref{ebuild-var-provide} and \ref{profiles-virtuals} for
+provider for each profile---see sections \ref{ebuild-var-provide} and \ref{profiles-virtuals} for
 specifics on these two. Old-style virtuals require special handling as regards dependencies; this is
 described below.
 

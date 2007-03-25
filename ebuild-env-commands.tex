@@ -12,7 +12,7 @@ be executed. The package manager may take steps to enforce this.
 
 Any ebuild not listed in the system set for the active profile(s) may assume the presence of every
 command that is always provided by the system set for that profile. However, it must target the
-lowest common denominator of all systems on which it might be installed -- in most cases this means
+lowest common denominator of all systems on which it might be installed---in most cases this means
 that the only packages that can be assumed to be present are those listed in the \t{base} profile or
 equivalent, which is inherited by all available profiles. If an ebuild requires any applications not
 provided by the system profile, or that are provided conditionally based on USE flags, appropriate
