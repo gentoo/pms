@@ -35,7 +35,7 @@ src_install(){
     [[ ${EXPORTED_VARIABLE} == "d" ]] \
         || die "broken env saving for exported"
 
-    [[ $(printenv ${EXPORTED_VARIABLE} ) == "d" ]] \
+    [[ $(printenv EXPORTED_VARIABLE ) == "d" ]] \
         || die "broken env saving for exported"
 
     [[ -z ${LOCAL_VARIABLE} ]] \
