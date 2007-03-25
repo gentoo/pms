@@ -27,7 +27,10 @@ pdfinfo.tex: pdfinfo.tex.in
 	     -e 's/@CREATIONDATE@/$(shell date "+%Y%m%d%H%M%S")/' \
 	     < $< > $@
 
+upload: pms.pdf
+	scp pms.pdf dev.gentoo.org:public_html
+
 .default: pms.dvi pms.pdf
 
-.phony: clean
+.phony: clean upload
 

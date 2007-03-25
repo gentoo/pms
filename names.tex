@@ -51,7 +51,7 @@ assumed that any user accepting keyword \t{\textasciitilde{}foo} will also accep
 \section{Version Specifications}
 The package manager must not impose fixed limits upon the number of version components. No version
 component represented by an integer may exceed the maximum value of a 32 bit signed two's complement
-integer.
+integer. All integers in version specifications must be non-negative.
 
 Version specifications are given as ordered integer tuples, separated by decimal points, with any or
 none of the following suffixes in this order:
