@@ -28,16 +28,16 @@ items separated by whitespace:
 \item A package dependency specification (for \t{DEPEND} etc.), or a URI (for \t{SRC\_URI}),
     or a package name (for \t{PROVIDE}), or a license name (for \t{LICENSE}).
 \item An all-of group, which consists of an open parenthesis, followed by whitespace,
-    followed by (zero or more dependency items of any kind followed by whitespace), followed
+    followed by zero or more of (a dependency item of any kind followed by whitespace), followed
     by a close parenthesis. More formally:
     \t{all-of ::= '(' whitespace (item whitespace)* ')'}.
 \item An any-of group, which consists of the string \t{||}, followed by whitespace,
-    followed by an open parenthesis, followed by whitespace, followed by (zero or more
-    dependency items of any kind followed by whitespace), followed by a close parenthesis.
+    followed by an open parenthesis, followed by whitespace, followed by zero or more
+    of (a dependency item of any kind followed by whitespace), followed by a close parenthesis.
     More formally: \t{any-of ::= '||' whitespace '(' whitespace (item whitespace)* ')'}.
 \item A use-conditional group, which consists of an optional exclamation mark, followed by
     a use flag name, followed by a question mark, followed by whitespace, followed by
-    an open parenthesis, followed by whitespace, followed by (zero or more dependency items
+    an open parenthesis, followed by whitespace, followed by zero or more of (a dependency item
     of any kind followed by whitespace), followed by a close parenthesis. More formally:
     \t{use-conditional ::= '!'? flag-name '?' whitespace '(' whitespace (item whitespace)* ')'}.
 \end{bulletlist}
