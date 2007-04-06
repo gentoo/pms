@@ -87,10 +87,10 @@ If at this point the two versions are still equal, the revision number is compar
 number has an optional integer suffix as per the previous part. If the revision numbers are equal,
 so are the two versions.
 
-\TODOBUG{170659}{Portage does funky things for versions that start with a leading zero. The
-    behaviour is inconsistent and a throwback to early days when people thought that Perl's old
-    version oddities could be handled consistently (which they can't, since not all weird Perl
-    versions start with a 0).}
+\note Portage has slightly different behaviour where a version component begins with a zero. This
+    behaviour is deliberately not specified here, as it is self-inconsistent and exists for legacy
+    reasons only. The Gentoo tree should be fixed so as not to rely upon this behaviour, then it
+    should be removed from future Portage releases.
 
 \section{Uniqueness of versions}
 
