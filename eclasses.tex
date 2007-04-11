@@ -18,12 +18,17 @@ This will cause the eclass to be sourced as part of the ebuild---any function or
 definitions in the eclass will appear as part of the ebuild, with exceptions for certain metadata
 variables, as described below.
 
+The \t{inherit} command takes one or more parameters, which must be the names of eclasses (excluding
+the \t{.eclass} suffix and the path). For each parameter, in order, the named eclass is sourced.
+
+Eclasses may end up being sourced multiple times.
+
 The \t{inherit} command must also ensure that:
 
 \begin{bulletlist}
 \item The \t{ECLASS} variable is set to the name of the current eclass, when inside an eclass.
-\item The \t{INHERITED} metadata variable contains the name of every eclass used, separated
-    by whitespace.
+\item Once all inheriting has been done, the \t{INHERITED} metadata variable contains the name of
+    every eclass used, separated  by whitespace.
 \end{bulletlist}
 
 \section{Eclass-defined Metadata Keys}
