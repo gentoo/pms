@@ -1,8 +1,6 @@
 \chapter{Ebuild-defined Functions}
 \label{ebuild-functions}
 
-\TODO{Call order}
-
 \section{List of Functions}
 \label{functions}
 
@@ -123,5 +121,45 @@ the relevant source files are not available. It should direct the user to downlo
 source files from their respective locations, with notes concerning licensing if applicable.
 
 \t{pkg\_nofetch} should require no write access to any part of the filesystem.
+
+\section{Call Order}
+
+The call order for installing a package is:
+
+\begin{bulletlist}
+\item \t{pkg\_setup}
+\item \t{src\_unpack}
+\item \t{src\_compile}
+\item \t{src\_test} (except if \t{RESTRICT=test})
+\item \t{src\_install}
+\item \t{pkg\_preinst}
+\item \t{pkg\_postinst}
+\end{bulletlist}
+
+The call order for uninstalling a package is:
+
+\begin{bulletlist}
+\item \t{pkg\_prerm}
+\item \t{pkg\_postrm}
+\end{bulletlist}
+
+The call order for upgrading, downgrading or reinstalling a package is:
+
+\item \t{pkg\_setup}
+\item \t{src\_unpack}
+\item \t{src\_compile}
+\item \t{src\_test} (except if \t{RESTRICT=test})
+\item \t{src\_install}
+\item \t{pkg\_preinst}
+\item \t{pkg\_prerm} for the package being replaced
+\item \t{pkg\_postrm} for the package being replaced
+\item \t{pkg\_postinst}
+
+The \t{pkg\_config} and \t{pkg\_nofetch} functions are not called in a normal sequence.
+
+For installing binary packages, the \t{src} phases are not called.
+
+When building binary packages that are not to be installed locally, the \t{pkg\_preinst}
+and \t{pkg\_postinst} functions are not called.
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
