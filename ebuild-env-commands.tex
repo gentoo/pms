@@ -36,10 +36,8 @@ In some cases a package's build process will require the availability of executa
 the core system, a common example being autotools. Commands provided by dependencies are available
 in the following cases:
 \begin{bulletlist}
-\item In the \t{src\_unpack}, \t{src\_compile}, \t{src\_install} and \t{src\_test} phases, any
-    command provided by a package listed in \t{DEPEND} is available.
-\item In the \t{pkg\_setup}, \t{pkg\_preinst}, \t{pkg\_postinst}, \t{pkg\_prerm} and \t{pkg\_postrm}
-    phases, commands provided by a package listed in both \t{DEPEND} \b{and} \t{RDEPEND} are
+\item In the \t{src} phases, any command provided by a package listed in \t{DEPEND} is available.
+\item In the \t{pkg} phases, commands provided by a package listed in both \t{DEPEND} \b{and} \t{RDEPEND} are
     available, unless the package being merged is part of a circular dependency loop.
 \end{bulletlist}
 
