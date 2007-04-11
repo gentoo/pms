@@ -20,12 +20,16 @@ another profile which will be considered as this profile's parent. Any settings 
 inherited by this profile, and can be overridden by it. Precise rules for how settings are combined
 with the parent profile vary between files, and are described below.
 
+This file must not contain comments, blank lines or make use of line continuations.
+
 \subsection{deprecated}
 If a profile contains a file named \t{deprecated}, it is treated as such. The first line of this
 file should contain the path from the \t{profiles} directory of the repository to a valid profile
 that is the recommended upgrade path from this profile. The remainder of the file can contain any
 text, which may be displayed to users using this profile by the package manager. This file is not
 inherited---profiles which inherit from a deprecated profile are \e{not} deprecated.
+
+This file must not contain comments or make use of line continuations.
 
 \subsection{make.defaults}
 \t{make.defaults} is used to define defaults for various environment and configuration variables.
