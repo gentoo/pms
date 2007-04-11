@@ -65,14 +65,14 @@ package's build commands.
     unless the \t{ECONF\_SOURCE} environment variable is set, in which case it is taken to be the
     directory containing it. \t{econf} must pass the following options to the configure script:
     \begin{itemize}
-    \item --prefix should default to \t{/usr} unless overridden by \t{econf}'s caller.
-    \item --mandir should be \t{/usr/share/man}
-    \item --infodir should be \t{/usr/share/info}
-    \item --datadir should be \t{/usr/share}
-    \item --sysconfdir should be \t{/etc}
-    \item --localstatedir should be \t{/var/lib}
-    \item --host should be the value of the \t{CHOST} environment variable.
-    \item --libdir should be set according to Algorithm \ref{alg:econf-libdir}.
+    \item --prefix must default to \t{/usr} unless overridden by \t{econf}'s caller.
+    \item --mandir must be \t{/usr/share/man}
+    \item --infodir must be \t{/usr/share/info}
+    \item --datadir must be \t{/usr/share}
+    \item --sysconfdir must be \t{/etc}
+    \item --localstatedir must be \t{/var/lib}
+    \item --host must be the value of the \t{CHOST} environment variable.
+    \item --libdir must be set according to Algorithm \ref{alg:econf-libdir}.
     \end{itemize}
 
     \t{econf} must be implemented internally---that is, as a bash function and not an external

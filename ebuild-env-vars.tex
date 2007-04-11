@@ -45,7 +45,7 @@ must not be modified by ebuild code.
     \t{test}, \t{install}, \t{preinst}, \t{postinst}, \t{prerm}, \t{postrm} according to the ebuild
     function currently being executed.
 \item[TMPDIR] Must be set to the location of a usable temporary directory, for any applications
-    called by an ebuild. Should not be used by ebuilds directly; see \t{T} above.
+    called by an ebuild. Must not be used by ebuilds directly; see \t{T} above.
 \item[GZIP,BZIP,BZIP2,CDPATH,GREP\_OPTIONS,GREP\_COLOR,GLOBIGNORE] must not be set.
 \end{description}
 
@@ -71,11 +71,11 @@ variables available in specific ebuild phases.
 \begin{description}
 \item[ROOT] The absolute path to the root directory into which the package is to be merged. \t{ROOT}
     is only guaranteed to be available in \t{pkg\_setup}, \t{pkg\_preinst}, \t{pkg\_postinst},
-    \t{pkg\_prerm} and \t{pkg\_postrm}. Other phases should not make use of it, as any binary
-    package generated should not depend on the value of \t{ROOT}. Those phases which run with full
-    filesystem access should not touch any files outside of the directory given in \t{ROOT}. Also of
+    \t{pkg\_prerm} and \t{pkg\_postrm}. Other phases must not make use of it, as any binary
+    package generated must not depend on the value of \t{ROOT}. Those phases which run with full
+    filesystem access must not touch any files outside of the directory given in \t{ROOT}. Also of
     note is that in a cross-compiling environment, binaries inside of \t{ROOT} will not be
-    executable on the build machine, so ebuilds should not call them. \t{ROOT} must be non-empty
+    executable on the build machine, so ebuilds must not call them. \t{ROOT} must be non-empty
     and end in a trailing slash.
 \end{description}
 

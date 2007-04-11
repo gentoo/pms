@@ -39,8 +39,8 @@ All ebuilds must define at least the following variables:
     May be defined by an eclass. \label{ebuild-var-LICENSE}
 \item[IUSE] The \t{USE} flags used by the ebuild. Historically, \t{USE\_EXPAND} values and \t{ARCH}
     were not included; package managers should support this for backwards compatibility reasons. Ebuilds
-    should list only flags used by the ebuild itself. Any eclass that works with \t{USE} flags
-    should also set \t{IUSE}, listing only the variables used by that eclass. The package manager is
+    must list only flags used by the ebuild itself. Any eclass that works with \t{USE} flags
+    must also set \t{IUSE}, listing only the variables used by that eclass. The package manager is
     responsible for merging these values.
 \item[KEYWORDS] A whitespace separated list of keywords for the ebuild. Each token must be a
     valid keyword name, as per section \ref{keyword-names}. May include $-*$, which
@@ -101,7 +101,7 @@ of the ebuild's metadata:
 
 \begin{description}
 \item[INHERITED] List of inherited eclass names. This is handled magically by \t{inherit} and
-    shouldn't be modified manually.
+    must not be modified manually.
 \item[ECLASS] The current eclass, or unset if there is no current eclass. Again, this is handled
     magically by \t{inherit}.
 \end{description}
