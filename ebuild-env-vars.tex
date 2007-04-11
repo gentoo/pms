@@ -13,7 +13,9 @@ must not be modified by ebuild code.
 \item[PR] Package revision, or \t{r0} if none exists.
 \item[PVR] Package version and revision, for example \t{7.0.174-r0} or \t{7.0.174-r1}.
 \item[PF] Package name, version, and revision, for example \t{vim-7.0.174-r1}.
-\item[A] All source files available for the package. Does not include any that are disabled because
+\item[A] All source files available for the package, whitespace separated with no leading
+    or trailing whitespace, and in the order in which the item first appears in a matched
+    component of \t{SRC\_URI}. Does not include any that are disabled because
     of USE conditionals. The value is calculated from the base names of each element of the
     \t{SRC\_URI} ebuild metadata variable.
 \item[AA] All source files that could be available for the package, including any that are disabled
@@ -46,10 +48,6 @@ must not be modified by ebuild code.
     called by an ebuild. Should not be used by ebuilds directly; see \t{T} above.
 \item[GZIP,BZIP,BZIP2,CDPATH,GREP\_OPTIONS,GREP\_COLOR,GLOBIGNORE] must not be set.
 \end{description}
-
-\TODOBUG{170163}{Do we require specific ordering for A and AA? Some ebuilds rely
-upon it. Should they be allowed to? What about exact whitespace? Do we mandate exactly one space
-separation and no leading or trailing space?}
 
 \subsection{Phase-specific variables}
 
