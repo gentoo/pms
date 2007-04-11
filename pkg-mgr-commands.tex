@@ -132,11 +132,12 @@ callable from \t{xargs}.
 \item[dodir] Creates the given directories, by default with file mode 0755. This can be overridden
     by setting \t{DIROPTIONS} with the \t{diropts} function.
 
-\item[dodoc] Installs the given files into \t{/usr/share/doc/\$PF/\$DOCDESTTREE/}, where
-    \t{DOCDESTTREE} defaults to the empty string.
+\item[dodoc] Installs the given files into a subdirectory under \t{/usr/share/doc/\$PF/}. The
+    subdirectory is set by the most recent call to \t{docdesttree}. If \t{docdesttree} has not
+    yet been called, instead installs to the directory \t{/usr/share/doc/\$PF/}.
 
-\item[doexe] Installs the given files into \t{EXEDESTTREE}, where \t{EXEDESTTREE} defaults to
-    the empty string.
+\item[doexe] Installs the given files into the directory specified by the most recent
+    \t{exedesttree} call. If \t{exedesttree} has not yet been called, behaviour is undefined.
 
 \item[dohard] Takes two parameters. Creates a hardlink from the second to the first.
 
@@ -227,9 +228,9 @@ set variables read by the above commands.
 
 \item[insinto] Sets the value of \t{INSDESTTREE} for future invocations of the above utilities.
 
-\item[exeinto] Sets the value of \t{EXEDESTTREE} for future invocations of \t{doexe} and \t{newexe}.
+\item[exeinto] Sets the install path for \t{doexe} and \t{newexe}.
 
-\item[docinto] Sets the value of \t{DOCDESTTREE} for future invocations of \t{dodoc} et al.
+\item[docinto] Sets the install subdirectory for \t{dodoc} et al.
 
 \item[insopts] Sets the options passed by \t{doins} et al. to the \t{install} command.
 
