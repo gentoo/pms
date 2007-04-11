@@ -41,7 +41,7 @@ must not be modified by ebuild code.
 \item[CHOST,CBUILD,CTARGET] If not set by profiles, must contain either an appropriate
     machine tuple (the definition of appropriate is beyond the scope of this specification) or
     be unset.
-\item[EBUILD\_PHASE] Takes one of the values \t{setup}, \t{nofetch}, \t{unpack}, \t{compile},
+\item[EBUILD\_PHASE] Takes one of the values \t{config}, \t{setup}, \t{nofetch}, \t{unpack}, \t{compile},
     \t{test}, \t{install}, \t{preinst}, \t{postinst}, \t{prerm}, \t{postrm} according to the ebuild
     function currently being executed.
 \item[TMPDIR] Must be set to the location of a usable temporary directory, for any applications
