@@ -57,12 +57,14 @@ variables available in specific ebuild phases.
 \subsubsection{src\_install}
 \begin{description}
 \item[D] Contains the full path to the image directory into which the package should be installed.
+    Must be non-empty and end in a trailing slash.
 \item[INSDESTTREE] Controls the location where doins installs things.
 \end{description}
 
 \subsubsection{pkg\_preinst}
 \begin{description}
-\item[D] Contains the full path to the image directory of the package about to be merged.
+\item[D] Contains the full path to the image directory of the package about to be merged. Must be
+    non-empty and end in a trailing slash.
 \end{description}
 
 \subsubsection{pkg\_*}
@@ -73,8 +75,8 @@ variables available in specific ebuild phases.
     package generated should not depend on the value of \t{ROOT}. Those phases which run with full
     filesystem access should not touch any files outside of the directory given in \t{ROOT}. Also of
     note is that in a cross-compiling environment, binaries inside of \t{ROOT} will not be
-    executable on the build machine, so ebuilds should not call them. If \t{ROOT} is empty, ebuilds
-    must behave as if \t{ROOT} were equal to \t{/}.
+    executable on the build machine, so ebuilds should not call them. \t{ROOT} must be non-empty
+    and end in a trailing slash.
 \end{description}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
