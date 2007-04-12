@@ -143,7 +143,7 @@ The call order for uninstalling a package is:
 \item \t{pkg\_postrm}
 \end{bulletlist}
 
-The call order for upgrading, downgrading or reinstalling a package is:
+The call order for reinstalling a package is:
 
 \begin{bulletlist}
 \item \t{pkg\_setup}
@@ -155,6 +155,20 @@ The call order for upgrading, downgrading or reinstalling a package is:
 \item \t{pkg\_prerm} for the package being replaced
 \item \t{pkg\_postrm} for the package being replaced
 \item \t{pkg\_postinst}
+\end{bulletlist}
+
+The call order for upgrading or downgrading a package is:
+
+\begin{bulletlist}
+\item \t{pkg\_setup}
+\item \t{src\_unpack}
+\item \t{src\_compile}
+\item \t{src\_test} (except if \t{RESTRICT=test})
+\item \t{src\_install}
+\item \t{pkg\_preinst}
+\item \t{pkg\_postinst}
+\item \t{pkg\_prerm} for the package being replaced
+\item \t{pkg\_postrm} for the package being replaced
 \end{bulletlist}
 
 The \t{pkg\_config} and \t{pkg\_nofetch} functions are not called in a normal sequence.
