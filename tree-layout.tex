@@ -121,6 +121,9 @@ Fields are whitespace-delimited. When parsing a URI of the form \t{mirror://name
 URIs in the subsequent fields have \t{filename} appended to them to generate the URIs from which a
 download is attempted.
 
+Each mirror name may appear at most once in a file. Behaviour when a mirror name appears multiple
+times is undefined.
+
 \subsection{use.desc and related files}
 \label{use.desc}
 \t{use.desc} contains descriptions of every valid global USE flag for this repository. It is a
