@@ -22,7 +22,7 @@ All ebuilds must define at least the following variables:
 
 \begin{description}
 \item[DESCRIPTION] A short human-readable description of the package's purpose. May be defined by an
-    eclass.
+    eclass. Must not be empty.
 \item[SRC\_URI] A list of source URIs for the package. Valid protocols are \t{http://},
     \t{https://}, \t{ftp://} and \t{mirror://} (see section \ref{thirdpartymirrors} for mirror behaviour).
     Fetch restricted packages may include URL parts consisting of just a filename.  Use-conditional and
@@ -31,7 +31,7 @@ All ebuilds must define at least the following variables:
 \item[HOMEPAGE] The URI for a package's homepage or (whitespace separated) the URIs for a package's
     homepages, including protocol. May be defined by an eclass.
 \item[SLOT] The package's slot. Must be a valid slot name, as per section \ref{slot-names}. May
-    be defined by an eclass.
+    be defined by an eclass. Must not be empty.
 \item[LICENSE] The package's license. Each text token must correspond to a tree ``licenses/`` entry
     (see section \ref{licenses-dir}). Use-conditional, any-of and all-of groups are allowed.
     May be defined by an eclass. \label{ebuild-var-LICENSE}
