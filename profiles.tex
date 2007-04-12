@@ -55,7 +55,7 @@ The \t{virtuals} file defines default providers for ``old-style'' virtual packag
 line-based file, with each line containing two whitespace-delimited tokens. The first is a virtual
 package name (for example, \t{virtual/alsa}) and the second is a qualified package name. Blank lines
 and those beginning with a \# character are ignored. When attempting to resolve a virtual name to a
-concrete package, the atom defined in the active profile's \t{virtuals} list should be used if no
+concrete package, the specification defined in the active profile's \t{virtuals} list should be used if no
 provider is already installed.
 
 The \t{virtuals} file is inherited in the simplest manner: all entries from the parent profile are
@@ -76,10 +76,11 @@ hyphen, then any lines previous to it whose contents are equal to the remainder 
 removed from the list. Once again, blank lines and those beginning with a \# are discarded.
 
 \subsection{packages}
-The \t{packages} file is used to define the `system set' for this profile. After the above rules for
-inheritance and comments are applied, its lines must take one of two forms: a dependency atom
-prefixed by \t{*} denotes that the atom forms part of the system set. A dependency atom on its own
-may also appear for legacy reasons, but should be ignored when calculating the system set.
+The \t{packages} file is used to define the `system set' for this profile.
+After the above rules for inheritance and comments are applied, its lines must take one of two
+forms: a package dependency specification prefixed by \t{*} denotes that the atom forms part of the
+system set. A package dependency specification on its own may also appear for legacy reasons, but
+should be ignored when calculating the system set.
 
 \subsection{packages.build}
 The \t{packages.build} file is used by Gentoo's Catalyst tool to generate stage1 tarballs, and has
@@ -88,10 +89,10 @@ but is mentioned here for completeness.
 
 \subsection{package.mask}
 \t{package.mask} is used to prevent packages from being installed on a given profile. Each line
-contains one dep atom; anything matching this atom will not be installed unless unmasked by the
-user's configuration.
+contains one package dependency specification; anything matching this specification will not be
+installed unless unmasked by the user's configuration.
 
-Note that the \t{-atom} syntax can be used to remove a mask in a parent profile, but not
+Note that the \t{-spec} syntax can be used to remove a mask in a parent profile, but not
 necessarily a global mask (from \t{profiles/package.mask}, section \ref{profiles-package.mask}).
 
 \note Portage currently treats \t{profiles/package.mask} as being on the leftmost branch of the
@@ -124,7 +125,7 @@ determine whether a flag is masked for a given package version. This is describe
     \ELSIF{\t{use.mask} contains \i{-flag}}
         \STATE let masked = false
     \ENDIF
-    \FOR{each $line$ in package.use.mask, in order, for which the atom matches $package$}
+    \FOR{each $line$ in package.use.mask, in order, for which the spec matches $package$}
         \IF{$line$ contains \i{flag}}
             \STATE let masked = true
         \ELSIF{$line$ contains \i{-flag}}

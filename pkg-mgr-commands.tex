@@ -19,10 +19,11 @@ argument.
 \subsubsection{Package manager query commands}
 These commands are used to extract information about the host system.
 \begin{description}
-\item[has\_version] Takes exactly one dependency atom as an argument. Returns true if a package
-    matching the atom is installed in \t{\$ROOT}, and false otherwise.
-\item[best\_version] Takes exactly one dependency atom as an argument. If a matching package is
-    installed, prints the category, package name and version of the highest matching version.
+\item[has\_version] Takes exactly one package dependency specification as an argument. Returns
+    true if a package matching the atom is installed in \t{\$ROOT}, and false otherwise.
+\item[best\_version] Takes exactly one package dependency specification as an argument. If a
+    matching package is installed, prints the category, package name and version of the highest
+    matching version.
 \end{description}
 
 \subsubsection{Output commands}

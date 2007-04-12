@@ -74,7 +74,7 @@ must ignore any files in this directory that it does not recognise.
     variables which are considered to be of interest. The value of each of these is to be included
     when the package manager displays a `system information' listing.
 \item[package.mask] \label{profiles-package.mask}
-    Contains a list, one entry per line, of (EAPI-0) dependency atoms. Any package
+    Contains a list, one entry per line, of (EAPI-0) package dependency specifications. Any package
     version matching one of these is considered to be masked, and will not be installed regardless
     of profile unless it is unmasked by the user configuration.
 \item[profiles.desc] Described below in section \ref{profiles.desc}.
@@ -150,13 +150,14 @@ names, or that a version has changed SLOT. It contains one file per quarter year
 formats:
 \begin{verbatim}
 move <qpn1> <qpn2>
-slotmove <atom> <slot1> <slot2>
+slotmove <spec> <slot1> <slot2>
 \end{verbatim}
 The first form, where \t{qpn1} and \t{qpn2} are \i{qualified package names}, instructs the package
 manager that the package \t{qpn1} has changed name, category, or both, and is now called \t{qpn2}.
 
 The second form instructs the package manager that any currently installed package version matching
-\t{atom} whose \t{SLOT} is set to \t{slot1} should have it updated to \t{slot2}.
+package dependency specification \t{spec} whose \t{SLOT} is set to \t{slot1} should have it updated
+to \t{slot2}.
 
 
 \section{The Licenses Directory}
