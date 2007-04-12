@@ -185,9 +185,10 @@ various XML files used in the repository, and repository timestamps.
 \subsection{The metadata cache}
 
 The \t{metadata/cache} directory contains a cached form of all important ebuild metadata variables.
-The cache directory, if it exists, contains (up to) one directory per category in the repository---
-not all categories and packages must be contained in it. Each subdirectory contains one file per
-package version, named \t{<package>-<version>}, in the following format:
+The cache directory, if it exists, contains directories whose names are the same as categories in
+the repository---not all categories and packages must be contained in it. Each subdirectory may
+optionally contain one file per package version in that category, named \t{<package>-<version>},
+in the following format:
 
 Each cache file contains the textual values of various metadata keys, one per line, in the following
 order. Other lines may be present following these; their meanings are not defined here.
