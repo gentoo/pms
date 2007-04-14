@@ -77,7 +77,7 @@ package's build commands.
     \end{itemize}
 
     \t{econf} must be implemented internally---that is, as a bash function and not an external
-    script.
+    script. Should any portion of it fail, it must abort the build using \t{die}.
 
 \begin{algorithm}
 \caption{econf --libdir logic} \label{alg:econf-libdir}
