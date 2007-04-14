@@ -103,7 +103,8 @@ package's build commands.
     command, as are the user's chosen \t{MAKEOPTS}. Arguments given to \t{emake} override user
     configuration. See also section \ref{guaranteed-system-commands}. \t{emake} must be an external
     program and cannot be a function or alias---it must be callable from e.g. \t{xargs}.
-\item[einstall] A shortcut for the command given in Listing \ref{lst:einstall}.
+\item[einstall] A shortcut for the command given in Listing \ref{lst:einstall}. Any arguments given
+    to \t{einstall} are passed verbatim to \t{emake}, as shown.
 
 \begin{lstlisting}[caption=einstall command,label=lst:einstall]
 emake \
@@ -111,6 +112,7 @@ emake \
    mandir="${D}"/usr/share/man \
    infodir="${D}"/usr/share/info \
    libdir="${D}"/usr/$(get_libdir) \
+   "$@" \
    install
 \end{lstlisting}
 
