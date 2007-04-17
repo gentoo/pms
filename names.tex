@@ -79,8 +79,7 @@ Any subsequent components of the number part are compared as follows:
   comparison.
 \item Otherwise, if a component has a leading zero, any trailing zeroes in that component
   are stripped (if this makes the component empty, proceed as if it were \t{0} instead),
-  and the other component is multiplied by ten for each leading zero. The
-  modified values are then compared using strict integer comparison.
+  and the components are compared using a stringwise comparison.
 \end{bulletlist}
 
 Note in particular that \t{1.0} is less than \t{1.0.0}.
