@@ -47,22 +47,20 @@ A tilde prefixed keyword is, by convention, used to indicate a less stable packa
 assumed that any user accepting keyword \t{\textasciitilde{}foo} will also accept \t{foo}.
 
 \section{Version Specifications}
-The package manager must not impose fixed limits upon the number of version components. No version
-component represented by an integer may exceed the maximum value of a 32 bit signed two's complement
-integer. All integers in version specifications must be non-negative.
+The package manager must not impose fixed limits upon the number of version components. No
+integer part of a version specification may contain more than eight digits.
 
-Version specifications are given as ordered integer tuples, separated by (but not surrounded by)
-decimal points, with any or none of the following suffixes in this order:
-\begin{bulletlist}
-\item One of the letters [\t{a-z}].
-\item One of \t{\_alpha}, \t{\_beta}, \t{\_pre}, \t{\_rc}, and \t{\_p}, optionally followed by an
-    integer. If the integer is omitted, it is assumed to be 0.
-\item The string \t{-r} followed immediately by an integer (the ``revision number''). If this section
-    is not present, it is assumed to be \t{-r0}.
-\end{bulletlist}
+A version starts with the number part, which is in the form \t{[0-9]+($\backslash$.[0-9]+)*} (a positive
+integer, followed by zero or more dot-prefixed positive integers).
 
-\TODO{New portage allows multiple suffixes. There's bug 166522 open about this asking for the feature
-    to be removed.}
+This may optionally be followed by one of \t{[a-z]} (a lowercase letter).
+
+This may be followed by zero or more of the suffixes \t{\_alpha}, \t{\_beta}, \t{\_pre},
+\t{\_rc} or \t{\_p}, which themselves may be suffixed by an optional integer (if not present,
+this integer is assumed to be zero).
+
+This may optionally be followed by the suffix \t{-r} followed immediately by an integer (the
+``revision number``). If this suffix is not present, it is assumed to be \t{-r0}.
 
 \TODO{Portage has a really nasty -cvs thing that was designed to work around Portage's lack of
     ability to ignore versions it doesn't recognise. This should probably remain excluded and replaced
@@ -70,27 +68,33 @@ decimal points, with any or none of the following suffixes in this order:
 
 \section{Version Comparison}
 
-Version specifications are compared using strict integer comparison, moving left to right. \t{2.10}
-is newer than \t{2.9}, which is newer than \t{1.500}. Any numeric value is newer than none, so
-\t{1.0.0} is newer than \t{1.0} (and, by extension, \t{1.0.0\_alpha} is newer than \t{1.0}).
-If the numeric parts are found to be equal, the suffixes above are considered, in the order listed.
+Version specifications are compared component by component, moving from left to right.
+
+The first component of the number part is compared using strict integer comparison.
+
+Any subsequent components of the number part are compared as follows:
+
+\begin{bulletlist}
+\item If neither component has a leading zero, components are compared using strict integer
+  comparison.
+\item Otherwise, if a component has a leading zero, any trailing zeroes in that component
+  are stripped (if this makes the component empty, proceed as if it were \t{0} instead),
+  and the other component is multiplied by ten for each leading zero. The
+  modified values are then compared using strict integer comparison.
+\end{bulletlist}
+
+Note in particular that \t{1.0} is less than \t{1.0.0}.
 
 Letter suffixes are compared alphabetically, with any letter being newer than no letter.
 
-If letters are equal, the next part is considered. The ordering of this is complex: \t{\_alpha} is
-older than \t{\_beta}, which is older than \t{\_pre}, which is older than \t{\_rc}, which is older
-than no suffix, which is older than \t{\_p}. A suffix has an associated integer, which, if not
-specified, defaults to \t{0}. If the two versions being compared have the same suffix, the
-associated integer is compared.
+If the letters are equal, suffixes are compared. The ordering is \t{\_alpha} is less than
+\t{\_beta} is less than \t{\_pre} is less than \t{\_rc} is less than no suffix is less than
+\t{\_p}. If a suffix string is equal, the associated integer parts (which default to zero)
+are compared.
 
 If at this point the two versions are still equal, the revision number is compared. The revision
 number has an optional integer suffix as per the previous part. If the revision numbers are equal,
 so are the two versions.
-
-\note Portage has slightly different behaviour where a version component begins with a zero. This
-    behaviour is deliberately not specified here, as it is self-inconsistent and exists for legacy
-    reasons only. The Gentoo tree should be fixed so as not to rely upon this behaviour, then it
-    should be removed from future Portage releases.
 
 \section{Uniqueness of versions}
 
