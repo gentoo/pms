@@ -13,33 +13,36 @@ There are three classes of dependencies supported by ebuilds:
     the ebuild if they are not already installed.
 \end{bulletlist}
 
-In addition, \t{SRC\_URI}, \t{PROVIDE} and \t{LICENSE} use the dependency specification format
-to specify their values.
-
-\note The term 'dependency specification' is perhaps not the best name, but it is the name
-    most easily recognised by developers
+In addition, \t{SRC\_URI}, \t{PROVIDE} and \t{LICENSE} use dependency-style specifications to
+specify their values.
 
 \section{Dependency Specification Format}
 
-The dependency specification format is a string containing zero or more of the following
-items separated by whitespace:
+The following elements are recognised in at least one class of specification. All elements must
+be surrounded on both sides by whitespace, except at the start and end of the string.
 
 \begin{bulletlist}
-\item A package dependency specification (for \t{DEPEND} etc.), or a URI (for \t{SRC\_URI}),
-    or a package name (for \t{PROVIDE}), or a license name (for \t{LICENSE}).
+\item A package dependency specification. Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}.
+\item A simple qualified package name. Permitted in \t{PROVIDE} (and inside \t{DEPEND} etc
+    via the previous item).
+\item A URI or flat filename. Permitted in \t{SRC\_URI}.
+\item A license name (e.g. \t{GPL-2}. Permittedin \t{LICENSE}.
 \item An all-of group, which consists of an open parenthesis, followed by whitespace,
     followed by zero or more of (a dependency item of any kind followed by whitespace), followed
     by a close parenthesis. More formally:
-    \t{all-of ::= '(' whitespace (item whitespace)* ')'}.
+    \t{all-of ::= '(' whitespace (item whitespace)* ')'}. Permitted in all specification style
+    variables.
 \item An any-of group, which consists of the string \t{||}, followed by whitespace,
     followed by an open parenthesis, followed by whitespace, followed by zero or more
     of (a dependency item of any kind followed by whitespace), followed by a close parenthesis.
     More formally: \t{any-of ::= '||' whitespace '(' whitespace (item whitespace)* ')'}.
+    Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}, \t{LICENSE}.
 \item A use-conditional group, which consists of an optional exclamation mark, followed by
     a use flag name, followed by a question mark, followed by whitespace, followed by
     an open parenthesis, followed by whitespace, followed by zero or more of (a dependency item
     of any kind followed by whitespace), followed by a close parenthesis. More formally:
     \t{use-conditional ::= '!'? flag-name '?' whitespace '(' whitespace (item whitespace)* ')'}.
+    Permitted in all specification style variables.
 \end{bulletlist}
 
 In particular, note that whitespace is not optional.
@@ -90,16 +93,14 @@ exclamation mark prefix), all of the child elements must be matched.
 
 \subsection{Any-of Dependency Specifications}
 
-Any-of dependency specifications only make sense for dependencies and licenses.
-
 Any use-conditional group that is an immediate child of an any-of group, if not enabled (disabled
 for an exclamation mark prefixed use flag name), is not considered a member of the any-of group
-for dependency resolution purposes.
+for match purposes.
 
 In an any-of group, at least one immediate child element must be matched. A blocker is
-considered to be matched if it is not installed (or, for licenses, matched).
+considered to be matched if its associated package dependency specification is not matched.
 
-An empty any-of group counts as being installed (or, for licenses, matched).
+An empty any-of group counts as being matched..
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 
