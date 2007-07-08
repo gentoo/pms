@@ -13,8 +13,8 @@ There are three classes of dependencies supported by ebuilds:
     the ebuild if they are not already installed.
 \end{bulletlist}
 
-In addition, \t{SRC\_URI}, \t{PROVIDE} and \t{LICENSE} use dependency-style specifications to
-specify their values.
+In addition, \t{SRC\_URI}, \t{HOMEPAGE}, \t{PROVIDE} and \t{LICENSE} use dependency-style
+specifications to specify their values.
 
 \section{Dependency Specification Format}
 
@@ -25,7 +25,8 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 \item A package dependency specification. Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}.
 \item A simple qualified package name. Permitted in \t{PROVIDE} (and inside \t{DEPEND} etc
     via the previous item).
-\item A URI or flat filename. Permitted in \t{SRC\_URI}.
+\item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC\_URI} and \t{HOMEPAGE}.
+\item A flat filename. Permitted in \t{SRC\_URI}.
 \item A license name (e.g. \t{GPL-2}. Permittedin \t{LICENSE}.
 \item An all-of group, which consists of an open parenthesis, followed by whitespace,
     followed by zero or more of (a dependency item of any kind followed by whitespace), followed

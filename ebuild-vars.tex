@@ -25,15 +25,15 @@ All ebuilds must define at least the following variables:
     eclass. Must not be empty.
 \item[SRC\_URI] A list of source URIs for the package. Valid protocols are \t{http://},
     \t{https://}, \t{ftp://} and \t{mirror://} (see section \ref{thirdpartymirrors} for mirror behaviour).
-    Fetch restricted packages may include URL parts consisting of just a filename.  Use-conditional and
-    all-of groups are allowed (see section \ref{dependencies}); other constructs,
-    such as any-of groups, are forbidden. May be defined by an eclass, and may be empty.
+    Fetch restricted packages may include URL parts consisting of just a filename. See
+    section \ref{dependencies} for full syntax.
 \item[HOMEPAGE] The URI for a package's homepage or (whitespace separated) the URIs for a package's
-    homepages, including protocol. May be defined by an eclass.
+    homepages, including protocol. May be defined by an eclass. See section \ref{dependencies} for full
+    syntax.
 \item[SLOT] The package's slot. Must be a valid slot name, as per section \ref{slot-names}. May
     be defined by an eclass. Must not be empty.
 \item[LICENSE] The package's license. Each text token must correspond to a tree ``licenses/`` entry
-    (see section \ref{licenses-dir}). Use-conditional, any-of and all-of groups are allowed.
+    (see section \ref{licenses-dir}). See section \ref{dependencies} for full syntax.
     May be defined by an eclass. \label{ebuild-var-LICENSE}
 \item[IUSE] The \t{USE} flags used by the ebuild. Historically, \t{USE\_EXPAND} values and \t{ARCH}
     were not included; package managers should support this for backwards compatibility reasons. Ebuilds
@@ -62,8 +62,7 @@ Ebuilds may define any of the following variables:
 \item[RDEPEND] See section \ref{dependencies}.
 \item[PDEPEND] See section \ref{dependencies}.
 \item[PROVIDE] Zero or more qualified package names of any \e{old style}
-    virtuals provided by this package. May contain use conditionals. May not contain version
-    restrictions. \label{ebuild-var-provide}
+    virtuals provided by this package. See \ref{description} for full syntax. \label{ebuild-var-provide}
 \item[EAPI] The EAPI, by default \t{0}.
 \item[RESTRICT] See section \ref{restrict}.
 \end{description}
