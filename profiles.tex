@@ -15,10 +15,11 @@ section. It may also contain any number of subdirectories containing other profi
 
 \section{Files that make up a profile}
 \subsection{The parent file}
-A profile may contain a \t{parent} file. This must contain, on its first line, the relative path to
-another profile which will be considered as this profile's parent. Any settings from the parent are
+A profile may contain a \t{parent} file. Each line must contain a relative path to another profile
+which will be considered as one of this profile's parents. Any settings from the parent are
 inherited by this profile, and can be overridden by it. Precise rules for how settings are combined
-with the parent profile vary between files, and are described below.
+with the parent profile vary between files, and are described below. Parents are handled depth
+first, left to right, with duplicate parent paths being sourced for every time they are encountered.
 
 This file must not contain comments, blank lines or make use of line continuations.
 
