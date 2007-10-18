@@ -30,4 +30,29 @@ incompatibilities with any particular repository.
 Text in \t{teletype} is used for filenames or variable names. \i{Italic} text is used for terms
 with a particular technical meaning in places where there may otherwise be ambiguity.
 
+\section{EAPIs}
+
+An EAPI can be thought of as a 'version' of this specification to which a package conforms. An EAPI
+value is a string (all EAPIs defined by this specification currently use an integer, but package
+managers must not assume that this will hold in the future, and package managers must not assume
+that any kind of comparison other than equality between EAPI values makes sense). There are two
+EAPIs defined by this specification:
+
+\begin{description}
+\item[0] The 'original' base EAPI.
+\item[1] EAPI '1' contains a number of extensions to EAPI '0'. Except where explicitly noted, it is
+    in all other ways identical to EAPI '0'.
+\end{description}
+
+Except where explicitly noted, everything in this specification applies to both EAPIs.
+
+If a package manager encounters a package version with an unrecognised EAPI, it must not attempt to
+perform any operations upon it. It could, for example, ignore the package version entirely (although
+this can lead to user confusion), or it could mark the package version as masked. A package manager
+must not use any metadata generated from a package with an unrecognised EAPI.
+
+EAPIs whose value consists purely of an integer are reserved for future versions of this
+specification. EAPIs whose value starts with the string \t{paludis-} are reserved for experimental
+use by the Paludis package manager.
+
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

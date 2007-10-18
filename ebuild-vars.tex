@@ -40,6 +40,10 @@ All ebuilds must define at least the following variables:
     must list only flags used by the ebuild itself. Any eclass that works with \t{USE} flags
     must also set \t{IUSE}, listing only the variables used by that eclass. The package manager is
     responsible for merging these values.
+
+    In EAPI 1, any use flag name in \t{IUSE} may be prefixed by at most one of a plus or a minus
+    sign. If such a prefix is present, the package manager may use it as a suggestion as to the
+    default value of the use flag if no other configuration overrides it.
 \item[KEYWORDS] A whitespace separated list of keywords for the ebuild. Each token must be a
     valid keyword name, as per section \ref{keyword-names}. May include $-*$, which
     indicates that the package will only work on explicitly listed archs. May include $-arch$,

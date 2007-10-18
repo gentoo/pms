@@ -50,13 +50,16 @@ In particular, note that whitespace is not optional.
 
 \subsection{Package Dependency Specifications}
 
-In EAPI-0, a package dependency can be in one of the following base formats:
+A package dependency can be in one of the following base formats:
 
 \begin{bulletlist}
 \item A simple \t{category/package} name.
 \item An operator, followed immediately by \t{category/package}, followed by a hyphen,
    followed by a version specification.
 \end{bulletlist}
+
+In EAPI 1, either of the above formats may additionally be suffixed by a \t{:slot}
+restriction.
 
 The following operators are available:
 
@@ -74,9 +77,9 @@ The following operators are available:
 \item[\t{>}] Strictly greater than the specified version.
 \end{description}
 
-If the operator is prefixed with an exclamation mark, the named dependency is a block
-rather than a requirement---that is to say, the specified package must not be
-installed, except with the following exceptions:
+If the specification is prefixed with an exclamation mark, the named dependency is a block rather
+than a requirement---that is to say, the specified package must not be installed, except with the
+following exceptions:
 
 \begin{bulletlist}
 \item Blocks on a package provided by the ebuild do not count. \label{provided-blocks}
