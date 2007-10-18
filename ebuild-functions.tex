@@ -18,8 +18,8 @@ these are noted below. If no initial working directory is mandated, it may be se
 the ebuild must not rely upon a particular location for it.
 
 The environment for functions run outside of the build sequence (that is, \t{pkg\_config},
-\t{pkg\_prerm} and \t{pkg\_postrm}) must be the environment used for the build of the package,
-not the current configuration.
+\t{pkg\_info}, \t{pkg\_prerm} and \t{pkg\_postrm}) must be the environment used for the build of the
+package, not the current configuration.
 
 \subsection{pkg\_setup}
 \label{pkg-setup-function}
@@ -122,10 +122,18 @@ below that specified by the \t{ROOT} environment variable.
 \subsection{pkg\_config}
 \label{pkg-config-function}
 
-The \t{pkg\_config} performs any custom steps required to configure a package after it has been
+The \t{pkg\_config} function performs any custom steps required to configure a package after it has been
 fully installed. It is the only ebuild function which may be interactive and prompt for user input.
 
 \t{pkg\_config} must be run with full access to all files and directories inside of \t{ROOT}.
+
+\subsection{pkg\_info}
+\label{pkg-info-function}
+
+The \t{pkg\_info} function may be called by the package manager when displaying information about an
+installed package.
+
+\t{pkg\_info} must not write to the filesystem.
 
 \subsection{pkg\_nofetch}
 \label{pkg-nofetch-function}
