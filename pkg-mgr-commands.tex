@@ -296,4 +296,16 @@ of the above categories.
     being in the system set or via dependencies.
 \end{description}
 
+\subsubsection{Debug Commands}
+The following commands are available for debugging. Normally all of these commands should be no ops;
+a package manager may provide a special debug mode where these commands instead do something.
+
+\begin{description}
+\item[debug-print] If in a special debug mode, the arguments should be outputted or recorded using
+    some kind of debug logging.
+\item[debug-print-function] Calls \t{debug-print} with \t{\$1: entering function} as the first
+    argument and the remaining arguments as additional arguments.
+\item[debug-print-section] Calls \t{debug-print} with \t{now in section \$*}.
+\end{description}
+
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
