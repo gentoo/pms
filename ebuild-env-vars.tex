@@ -15,7 +15,7 @@ must not be modified by ebuild code.
 \item[PF] Package name, version, and revision, for example \t{vim-7.0.174-r1}.
 \item[A] All source files available for the package, whitespace separated with no leading
     or trailing whitespace, and in the order in which the item first appears in a matched
-    component of \t{SRC\_URI}. Does not include any that are disabled because
+    component of \t{SRC\_URI}\@. Does not include any that are disabled because
     of USE conditionals. The value is calculated from the base names of each element of the
     \t{SRC\_URI} ebuild metadata variable.
 \item[AA] All source files that could be available for the package, including any that are disabled
@@ -72,8 +72,8 @@ variables available in specific ebuild phases.
 \item[ROOT] The absolute path to the root directory into which the package is to be merged. \t{ROOT}
     is only guaranteed to be available in \t{pkg\_setup}, \t{pkg\_preinst}, \t{pkg\_postinst},
     \t{pkg\_prerm} and \t{pkg\_postrm}. Other phases must not make use of it, as any binary
-    package generated must not depend on the value of \t{ROOT}. Those phases which run with full
-    filesystem access must not touch any files outside of the directory given in \t{ROOT}. Also of
+    package generated must not depend on the value of \t{ROOT}\@. Those phases which run with full
+    filesystem access must not touch any files outside of the directory given in \t{ROOT}\@. Also of
     note is that in a cross-compiling environment, binaries inside of \t{ROOT} will not be
     executable on the build machine, so ebuilds must not call them. \t{ROOT} must be non-empty
     and end in a trailing slash.

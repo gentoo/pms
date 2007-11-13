@@ -8,7 +8,7 @@ profile's \t{make.defaults} file.
 \i{Incremental} variables must stack between parent and child profiles in the following manner:
 Beginning with the highest parent profile, tokenise the variable's value based on whitespace and
 concatenate the lists. Then, for any token $T$ beginning with a hyphen, remove it and any previous
-tokens whose value is equal to $T$ with the hyphen removed, or, if $T$ is equal to $-*$, remove
+tokens whose value is equal to $T$ with the hyphen removed, or, if $T$ is equal to \t{-*}, remove
 all previous values. Note that because of this treatment, the order of tokens in the final result is
 arbitrary, not necessarily related to the order of tokens in any given profile. The following
 variables must be treated in this fashion:

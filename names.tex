@@ -40,7 +40,7 @@ hyphen.
 \label{keyword-names}
 A keyword name may contain any of the characters [\t{A-Za-z0-9\_-}]. It must not begin with a
 hyphen. In contexts where it makes sense to do so, a keyword name may be prefixed by
-a tilde or a hyphen. In \t{KEYWORDS}, $-*$ is also acceptable as a keyword, to indicate that
+a tilde or a hyphen. In \t{KEYWORDS}, \t{-*} is also acceptable as a keyword, to indicate that
 a package will only work on listed targets.
 
 A tilde prefixed keyword is, by convention, used to indicate a less stable package. It is generally
@@ -60,7 +60,7 @@ This may be followed by zero or more of the suffixes \t{\_alpha}, \t{\_beta}, \t
 this integer is assumed to be zero).
 
 This may optionally be followed by the suffix \t{-r} followed immediately by an integer (the
-``revision number``). If this suffix is not present, it is assumed to be \t{-r0}.
+``revision number''). If this suffix is not present, it is assumed to be \t{-r0}.
 
 \TODO{Portage has a really nasty -cvs thing that was designed to work around Portage's lack of
     ability to ignore versions it doesn't recognise. This should probably remain excluded and replaced

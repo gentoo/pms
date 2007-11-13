@@ -28,7 +28,7 @@ Each category provided by the repository (see also: the \t{profiles/categories} 
 \ref{profiles-categories}) shall be contained in one directory, whose name shall be that of the
 category. Each category directory shall contain:
 \begin{bulletlist}
-\item A \t{metadata.xml} file, as described in appendix \ref{metadata-xml}. Optional.
+\item A \t{metadata.xml} file, as described in appendix \ref{metadata-xml}\@. Optional.
 \item Zero or more package directories, one for each package in the category, as described in section
     \ref{package-dirs}. The name of the package directory shall be the corresponding package name.
 \end{bulletlist}
@@ -44,7 +44,7 @@ starts with a dot, which the package manager must ignore, and for any directory 
 A package directory contains the following:
 \begin{bulletlist}
 \item One or more ebuilds. These are as described in section \ref{ebuild-format} and others.
-\item A \t{metadata.xml} file, as described in appendix \ref{metadata-xml}. Optional only for
+\item A \t{metadata.xml} file, as described in appendix \ref{metadata-xml}\@. Optional only for
     legacy support.
 \item A \t{ChangeLog}, in a format determined by the provider of the respository. Optional.
 \item A \t{Manifest} file, whose format is described in \cite{Glep44}.

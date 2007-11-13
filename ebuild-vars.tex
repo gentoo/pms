@@ -32,7 +32,7 @@ All ebuilds must define at least the following variables:
     syntax.
 \item[SLOT] The package's slot. Must be a valid slot name, as per section \ref{slot-names}. May
     be defined by an eclass. Must not be empty.
-\item[LICENSE] The package's license. Each text token must correspond to a tree ``licenses/`` entry
+\item[LICENSE] The package's license. Each text token must correspond to a tree ``licenses/'' entry
     (see section \ref{licenses-dir}). See section \ref{dependencies} for full syntax.
     May be defined by an eclass. \label{ebuild-var-LICENSE}
 \item[IUSE] The \t{USE} flags used by the ebuild. Historically, \t{USE\_EXPAND} values and \t{ARCH}
@@ -45,8 +45,8 @@ All ebuilds must define at least the following variables:
     sign. If such a prefix is present, the package manager may use it as a suggestion as to the
     default value of the use flag if no other configuration overrides it.
 \item[KEYWORDS] A whitespace separated list of keywords for the ebuild. Each token must be a
-    valid keyword name, as per section \ref{keyword-names}. May include $-*$, which
-    indicates that the package will only work on explicitly listed archs. May include $-arch$,
+    valid keyword name, as per section \ref{keyword-names}. May include \t{-*}, which
+    indicates that the package will only work on explicitly listed archs. May include \t{-arch},
     which indicates that the package will not work on the specified arch. May be empty, which
     indicates uncertain functionality on any architecture. May be defined in an eclass.
 \end{description}
