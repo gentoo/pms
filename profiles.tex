@@ -143,6 +143,10 @@ determine whether a flag is masked for a given package version. This is describe
 The logic for \t{use.force} and \t{package.use.force} is identical. If a flag is both masked and
 forced, the mask is considered to take precedence.
 
+\t{USE\_EXPAND} values may be forced or masked by using \t{expand\_name\_value}.
+
+A package manager may treat \t{ARCH} values that are not the current architecture as being masked.
+
 \input{profile-variables.tex}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
