@@ -55,6 +55,11 @@ A package directory contains the following:
 \item A \t{files} directory, containing any support files needed by the ebuilds. Optional.
 \end{bulletlist}
 
+A package directory that contains no correctly named ebuilds shall be considered a package with no
+versions. A package with no versions shall be considered equivalent to a package that does not
+exist (and by extension, a package manager may treat a package that does not exist as a package
+with no versions).
+
 \section{The Profiles Directory}
 \label{profiles-dir}
 
