@@ -21,6 +21,9 @@ inherited by this profile, and can be overridden by it. Precise rules for how se
 with the parent profile vary between files, and are described below. Parents are handled depth
 first, left to right, with duplicate parent paths being sourced for every time they are encountered.
 
+It is illegal for a profile's parent tree to contain cycles. Package manager behaviour upon
+encountering a cycle is undefined.
+
 This file must not contain comments, blank lines or make use of line continuations.
 
 \subsection{deprecated}
