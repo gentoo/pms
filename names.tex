@@ -91,7 +91,7 @@ Letter suffixes are compared alphabetically, with any letter being newer than no
 If the letters are equal, suffixes are compared. The ordering is \t{\_alpha} is less than
 \t{\_beta} is less than \t{\_pre} is less than \t{\_rc} is less than no suffix is less than
 \t{\_p}. If a suffix string is equal, the associated integer parts (which default to zero)
-are compared.
+are compared using strict integer comparison.
 
 If at this point the two versions are still equal, the revision number is compared. The revision
 number has an optional integer suffix as per the previous part. If the revision numbers are equal,
