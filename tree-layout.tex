@@ -73,10 +73,13 @@ this specification.
 The profiles directory shall contain zero or more profile directories as described in section
 \ref{profiles}, as well as the following files and directories. In any line-based file, lines
 beginning with a \# character are treated as comments, whilst blank lines are ignored. All contents
-of this directory, with the exception of \t{repo\_name}, are optional if the repository is not
-intended to be stand-alone; if they are not present their contents are to be taken, where necessary,
-from the master repository. Other files may exist, but may not be relied upon. The package manager
-must ignore any files in this directory that it does not recognise.
+of this directory, with the exception of \t{repo\_name}, are optional.
+
+If the repository is not intended to be stand-alone, the contents of these files are to be taken
+from or merged with the master repository as necessary.
+
+Other files not described by this specification may exist, but may not be relied upon. The package
+manager must ignore any files in this directory that it does not recognise.
 
 \begin{description}
 \item[arch.list] \label{arch.list} Contains a list, one entry per line, of permissible values for
