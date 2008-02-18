@@ -49,8 +49,9 @@ The following variables have specific meanings when set in profiles.
     \end{algorithm}
     So, for example, if \t{USE\_EXPAND} contains `ALSA\_CARDS', and the \t{ALSA\_CARDS} variable
     contains `foo', `alsa\_cards\_foo' will be appended to \t{USE}.
-\item[USE\_EXPAND\_HIDDEN] Contains a list of variables contained in \t{USE\_EXPAND} which are not
-    to be displayed to the end user.
+\item[USE\_EXPAND\_HIDDEN] Contains a (possibly empty) subset of names from \t{USE\_EXPAND}. The
+    package manager may use this set as a hint to avoid displaying uninteresting or unhelpful
+    information to an end user.
 \end{description}
 
 Any other variables set in \t{make.defaults} must be passed on into the ebuild environment as-is,
