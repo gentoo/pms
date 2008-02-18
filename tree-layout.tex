@@ -55,6 +55,10 @@ A package directory contains the following:
 \item A \t{files} directory, containing any support files needed by the ebuilds. Optional.
 \end{bulletlist}
 
+Any ebuild in a package directory must be named \t{name-ver.ebuild}, where \t{name} is the
+(unqualified) package name, and \t{ver} is the package's version. Package managers must ignore
+any ebuild file that does not match these rules.
+
 A package directory that contains no correctly named ebuilds shall be considered a package with no
 versions. A package with no versions shall be considered equivalent to a package that does not
 exist (and by extension, a package manager may treat a package that does not exist as a package
