@@ -183,6 +183,9 @@ The second form instructs the package manager that any currently installed packa
 package dependency specification \t{spec} whose \t{SLOT} is set to \t{slot1} should have it updated
 to \t{slot2}.
 
+Any name that has appeared as the origin of a move must not be reused in the future. Any slot
+that has appeared as the origin of a slot move may not be used by packages matching the spec of
+that slot move in the future.
 
 \section{The Licenses Directory}
 \label{licenses-dir}
