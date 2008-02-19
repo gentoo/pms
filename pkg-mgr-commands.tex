@@ -17,7 +17,9 @@ argument.
 \end{description}
 
 \subsubsection{Package manager query commands}
-These commands are used to extract information about the host system.
+These commands are used to extract information about the host system. Ebuilds must not run any of
+these commands in parallel with any other package manager command. Ebuilds must not run any of
+these commands once the current phase function has returned.
 \begin{description}
 \item[has\_version] Takes exactly one package dependency specification as an argument. Returns
     true if a package matching the atom is installed in \t{\$ROOT}, and false otherwise.
