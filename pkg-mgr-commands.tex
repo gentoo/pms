@@ -7,7 +7,7 @@ behaviour.
 
 \subsubsection{Sandbox commands}
 These commands affect the behaviour of the sandbox. Each command takes a single directory as
-argument.
+argument. Ebuilds must not run any of these commands once the current phase function has returned.
 \begin{description}
 \item[addread] Add a directory to the permitted read list.
 \item[addwrite] Add a directory to the permitted write list.
@@ -30,7 +30,8 @@ these commands once the current phase function has returned.
 
 \subsubsection{Output commands}
 These commands display messages to the user. Unless otherwise stated, the entire argument list is
-used as a message, as in the simple invocations of \t{echo}.
+used as a message, as in the simple invocations of \t{echo}. Ebuilds must not run any of these
+commands once the current phase function has returned.
 \begin{description}
 \item[einfo] Displays an informational message to stderr.
 \item[einfon] Displays an informational message without a trailing newline to stderr.
@@ -49,7 +50,7 @@ used as a message, as in the simple invocations of \t{echo}.
 
 \subsubsection{Error commands}
 These commands are used when an error is detected that will prevent the build process from
-completing.
+completing. Ebuilds must not run any of these commands once the current phase function has returned.
 \begin{description}
 \item[die] Displays a failure message provided in its first and only argument, and then aborts the
     build process. \t{die} is \e{not} guaranteed to work correctly if called from a subshell
@@ -60,7 +61,8 @@ completing.
 
 \subsubsection{Build commands}
 These commands are used during the \t{src\_compile} and \t{src\_install} phases to run the
-package's build commands.
+package's build commands. Ebuilds must not run any of these commands once the current phase function
+has returned.
 
 \begin{description}
 \item[econf] Calls the program's \t{./configure} script. This is designed to work with GNU
@@ -126,7 +128,8 @@ These commands are used to install files into the staging area, in cases where t
 install} target cannot be used or does not install all needed files. Except where otherwise stated,
 all filenames created or modified are relative to the staging directory, given by \t{\$\{D\}}. These
 commands must all be external programs and not bash functions or aliases---that is, they must be
-callable from \t{xargs}.
+callable from \t{xargs}. Ebuilds must not run any of these commands once the current phase function
+has returned.
 
 \begin{description}
 \item[dobin] Installs the given files into \t{DESTTREE/bin}, where \t{DESTTREE} defaults to
@@ -227,7 +230,8 @@ callable from \t{xargs}.
 \subsubsection{Commands affecting install destinations}
 The following commands are used to set the various destination trees, all relative to \t{\$\{D\}},
 used by the above installation commands. They must be shell functions or aliases, due to the need to
-set variables read by the above commands.
+set variables read by the above commands. Ebuilds must not run any of these commands once the
+current phase function has returned.
 
 \item[into] Sets the value of \t{DESTTREE} for future invocations of the above utilities.
 
@@ -248,7 +252,8 @@ set variables read by the above commands.
 \end{description}
 
 \subsubsection{List Functions}
-These functions work on variables containing whitespace-delimited lists (e.g. \t{USE}).
+These functions work on variables containing whitespace-delimited lists (e.g. \t{USE}). Ebuilds must
+not run any of these commands once the current phase function has returned.
 
 \begin{description}
 \item[use] Returns shell true (0) if the first argument (a \t{USE} flag name) is enabled, false
@@ -274,7 +279,8 @@ instead of \t{--with-} or \t{--without-}.
 
 \subsubsection{Misc Commands}
 The following commands are always available in the ebuild environment, but don't really fit in any
-of the above categories.
+of the above categories. Ebuilds must not run any of these commands once the current phase function
+has returned.
 
 \begin{description}
 \item[dosed] Takes any number of arguments, which can be files or \t{sed} expressions. For each
@@ -302,6 +308,7 @@ of the above categories.
 \subsubsection{Debug Commands}
 The following commands are available for debugging. Normally all of these commands should be no ops;
 a package manager may provide a special debug mode where these commands instead do something.
+Ebuilds must not run any of these commands once the current phase function has returned.
 
 \begin{description}
 \item[debug-print] If in a special debug mode, the arguments should be outputted or recorded using
