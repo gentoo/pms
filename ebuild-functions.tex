@@ -90,7 +90,9 @@ provided.
 
 The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
 The default implementation used when the ebuild lacks the \t{src\_test} function must, if tests are
-enabled, run \t{make check} or \t{make test}, whichever exists, and abort if this fails.
+enabled, run \t{make check} if and only if such a target is available, or if not run \t{make test},
+if and only such a target is available. In both cases, if make returns non-zero the build must be
+aborted.
 
 \subsection{src\_install}
 \label{src-install-function}
