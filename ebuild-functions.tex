@@ -37,7 +37,7 @@ The \t{src\_unpack} function extracts all of the package's sources, applies patc
 package's build system for further use.
 
 The initial working directory must be \t{WORKDIR}, and the default implementation used when
-the ebuild lacks the \t{src\_unpack} function is:
+the ebuild lacks the \t{src\_unpack} function shall behave as:
 
 \begin{lstlisting}
 src_unpack() {
@@ -54,7 +54,8 @@ The \t{src\_compile} function configures the package's build environment and bui
 
 The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
 
-For EAPI 0, the default implementation used when the ebuild lacks the \t{src\_compile} function is:
+For EAPI 0, the default implementation used when the ebuild lacks the \t{src\_compile} function
+shall behave as:
 
 \begin{lstlisting}
 src_compile() {
@@ -67,7 +68,8 @@ src_compile() {
 }
 \end{lstlisting}
 
-For EAPI 1, the default implementation used when the ebuild lacks the \t{src\_compile} function is:
+For EAPI 1, the default implementation used when the ebuild lacks the \t{src\_compile} function
+shall behave as:
 
 \begin{lstlisting}
 src_compile() {
