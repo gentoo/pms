@@ -24,6 +24,8 @@ The following exclusivity and invariancy requirements are mandated:
     a package's \t{pkg\_postinst}, except for any variancy introduced
     by that package.
 \item Any non-default \t{pkg} phase function must be run exclusively.
+\item Each phase function must be called at most once during the build
+    process for any given package.
 \end{bulletlist}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
