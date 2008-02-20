@@ -219,7 +219,8 @@ The call order for upgrading or downgrading a package is:
 \item \t{pkg\_postrm} for the package being replaced
 \end{bulletlist}
 
-The \t{pkg\_config} and \t{pkg\_nofetch} functions are not called in a normal sequence.
+The \t{pkg\_config}, \t{pkg\_info} and \t{pkg\_nofetch} functions are not called in a normal
+sequence.
 
 For installing binary packages, the \t{src} phases are not called.
 
