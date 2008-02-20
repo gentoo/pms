@@ -123,7 +123,7 @@ determine whether a flag is masked for a given package version. This is describe
 \caption{USE masking logic} \label{alg:use-masking}
 \begin{algorithmic}[1]
 \STATE let masked = false
-\FOR{each profile in the inheritance stack, ending with the current one}
+\FOR{each profile in the inheritance tree, depth first}
     \IF{\t{use.mask} contains \i{flag}}
         \STATE let masked = true
     \ELSIF{\t{use.mask} contains \i{-flag}}
