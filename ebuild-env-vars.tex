@@ -43,7 +43,7 @@ must not be modified by ebuild code.
     be unset.
 \item[EBUILD\_PHASE] Takes one of the values \t{config}, \t{setup}, \t{nofetch}, \t{unpack},
     \t{compile}, \t{test}, \t{install}, \t{preinst}, \t{postinst}, \t{prerm}, \t{postrm}, \t{info}
-    according to the ebuild function currently being executed.
+    according to the top level ebuild function that was executed by the package manager.
 \item[TMPDIR] Must be set to the location of a usable temporary directory, for any applications
     called by an ebuild. Must not be used by ebuilds directly; see \t{T} above.
 \item[GZIP,BZIP,BZIP2,CDPATH,GREP\_OPTIONS,GREP\_COLOR,GLOBIGNORE] must not be set.
