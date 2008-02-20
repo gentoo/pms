@@ -50,7 +50,8 @@ In particular, note that whitespace is not optional.
 
 \subsection{Package Dependency Specifications}
 
-A package dependency can be in one of the following base formats:
+A package dependency can be in one of the following base formats. A package manager must warn or
+error on non-compliant input.
 
 \begin{bulletlist}
 \item A simple \t{category/package} name.
@@ -59,7 +60,7 @@ A package dependency can be in one of the following base formats:
 \end{bulletlist}
 
 In EAPI 1, either of the above formats may additionally be suffixed by a \t{:slot}
-restriction.
+restriction. A package manager must warn or error if slot dependencies are used with EAPI 0.
 
 The following operators are available:
 
