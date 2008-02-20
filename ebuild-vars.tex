@@ -68,9 +68,17 @@ Ebuilds may define any of the following variables:
 \item[PROVIDE] Zero or more qualified package names of any \e{old style}
     virtuals provided by this package. See section \ref{dependencies} for full syntax.
     \label{ebuild-var-provide}
-\item[EAPI] The EAPI, by default \t{0}.
+\item[EAPI] The EAPI, by default \t{0} or an empty string.
 \item[RESTRICT] See section \ref{restrict}.
 \end{description}
+
+An empty \t{EAPI} value is equal to \t{0}. Ebuilds must not assume that they will get a particular
+one of these two values if they are expecting one of these two values.
+
+The package manager must either pre-set the \t{EAPI} variable to \t{0} or ensure that it is unset
+before sourcing the ebuild for metadata generation. When using the ebuild for other purposes, the
+package manager must either pre-set \t{EAPI} to the value specified by the ebuild's metadata or
+ensure that it is unset.
 
 If any of these variables are set to invalid values, the package manager's behaviour is undefined;
 ideally, an error in one ebuild should not prevent operations upon other ebuilds or packages.
