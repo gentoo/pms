@@ -227,11 +227,15 @@ has returned.
     \t{.keep} in that directory to ensure that the directory does not get removed by the
     package manager should it be empty at any point.
 
+\end{description}
+
 \subsubsection{Commands affecting install destinations}
 The following commands are used to set the various destination trees, all relative to \t{\$\{D\}},
 used by the above installation commands. They must be shell functions or aliases, due to the need to
 set variables read by the above commands. Ebuilds must not run any of these commands once the
 current phase function has returned.
+
+\begin{description}
 
 \item[into] Sets the value of \t{DESTTREE} for future invocations of the above utilities.
 
