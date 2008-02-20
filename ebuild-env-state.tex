@@ -2,9 +2,9 @@
 \label{ebuild-env-state}
 
 Exported and default scope variables are saved between functions. A non-local variable set in a
-function earlier in the call sequence must have its value preserved for later functions. Variables
-that were exported must remain exported in later functions; variables with default visibility may
-retain default visibility or be exported.
+function earlier in the call sequence must have its value preserved for later functions, including
+functions executed as part of a later uninstall. Variables that were exported must remain exported
+in later functions; variables with default visibility may retain default visibility or be exported.
 
 Variables with special meanings to the package manager are excluded from this rule.
 
