@@ -237,13 +237,18 @@ current phase function has returned.
 
 \begin{description}
 
-\item[into] Sets the value of \t{DESTTREE} for future invocations of the above utilities.
+\item[into] Sets the value of \t{DESTTREE} for future invocations of the above utilities.  Creates
+    the directory under \t{\$\{D\}}, using \t{install -d} with no additional options, if it does not
+    already exist.
 
-\item[insinto] Sets the value of \t{INSDESTTREE} for future invocations of the above utilities.
+\item[insinto] Sets the value of \t{INSDESTTREE} for future invocations of the above utilities.  Creates
+    the directory, as specified for \t{into}.
 
-\item[exeinto] Sets the install path for \t{doexe} and \t{newexe}.
+\item[exeinto] Sets the install path for \t{doexe} and \t{newexe}.  Creates the directory, as specified
+    for \t{into}.
 
-\item[docinto] Sets the install subdirectory for \t{dodoc} et al.
+\item[docinto] Sets the install subdirectory for \t{dodoc} et al.  Creates the directory, as specified
+    for \t{into}.
 
 \item[insopts] Sets the options passed by \t{doins} et al. to the \t{install} command.
 
