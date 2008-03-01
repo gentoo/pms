@@ -257,7 +257,10 @@ current phase function has returned.
 
 \subsubsection{List Functions}
 These functions work on variables containing whitespace-delimited lists (e.g. \t{USE}). Ebuilds must
-not run any of these commands once the current phase function has returned.
+not run any of these commands once the current phase function has returned. Ebuilds must not call
+any function that operates upon \t{USE} to query a value that is not either listed in \t{IUSE}, a
+\t{USE\_EXPAND} value or an \t{ARCH} value; package manager behaviour is undefined if such a call
+is made.
 
 \begin{description}
 \item[use] Returns shell true (0) if the first argument (a \t{USE} flag name) is enabled, false
