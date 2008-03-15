@@ -45,13 +45,13 @@ entry, where the value must be double quoted. A variable name must start with on
 and may contain \t{a-zA-Z0-9\_-}. Additional syntax, which is a small subset of
 bash syntax, is allowed as follows:
 
-\begin{bulletlist}
+\begin{compactitem}
 \item Variables to the right of the equals sign in the form \t{\$\{foo\}} or \t{\$foo} are recognised and
   expanded from variables previously set in this or earlier \t{make.defaults} files.
 \item One logical line may be continued over multiple physical lines by escaping the newline with a
   backslash. This is also permitted inside quoted strings.
 \item Backslashes, except for line continuations, are not allowed.
-\end{bulletlist}
+\end{compactitem}
 
 \subsection{virtuals}
 \label{profiles-virtuals}

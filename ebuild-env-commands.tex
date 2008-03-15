@@ -22,23 +22,23 @@ dependencies must be used to ensure their presence.
 \label{guaranteed-system-commands}
 
 The following commands must always be available in the ebuild environment:
-\begin{bulletlist}
+\begin{compactitem}
 \item All builtin commands in GNU bash, version 3.0.
 \item \t{sed} must be available, and must support all forms of invocations valid for GNU sed
     version 4 or later.
 \item \t{patch} must be available, and must support all inputs valid for GNU patch.
-\end{bulletlist}
+\end{compactitem}
 
 \subsection{Commands provided by package dependencies}
 
 In some cases a package's build process will require the availability of executables not provided by
 the core system, a common example being autotools. Commands provided by dependencies are available
 in the following cases:
-\begin{bulletlist}
+\begin{compactitem}
 \item In the \t{src} phases, any command provided by a package listed in \t{DEPEND} is available.
 \item In the \t{pkg} phases, commands provided by a package listed in both \t{DEPEND} \b{and} \t{RDEPEND} are
     available, unless the package being merged is part of a circular dependency loop.
-\end{bulletlist}
+\end{compactitem}
 
 \subsection{Ebuild-specific Commands}
 \input{pkg-mgr-commands.tex}

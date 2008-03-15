@@ -77,13 +77,13 @@ The first component of the number part is compared using strict integer comparis
 
 Any subsequent components of the number part are compared as follows:
 
-\begin{bulletlist}
+\begin{compactitem}
 \item If neither component has a leading zero, components are compared using strict integer
   comparison.
 \item Otherwise, if a component has a leading zero, any trailing zeroes in that component
   are stripped (if this makes the component empty, proceed as if it were \t{0} instead),
   and the components are compared using a stringwise comparison.
-\end{bulletlist}
+\end{compactitem}
 
 Note in particular that \t{1.0} is less than \t{1.0.0}.
 

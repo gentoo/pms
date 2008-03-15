@@ -5,13 +5,13 @@
 
 There are three classes of dependencies supported by ebuilds:
 
-\begin{bulletlist}
+\begin{compactitem}
 \item Build dependencies (\t{DEPEND}). These must be installed before the ebuild is installed.
 \item Runtime dependencies (\t{RDEPEND}). These should usually be installed before the ebuild,
     but may be dropped to post dependencies where necessary to resolve cycles.
 \item Post dependencies (\t{PDEPEND}). These should be installed at some point, usually after
     the ebuild if they are not already installed.
-\end{bulletlist}
+\end{compactitem}
 
 In addition, \t{SRC\_URI}, \t{HOMEPAGE}, \t{PROVIDE} and \t{LICENSE} use dependency-style
 specifications to specify their values.
@@ -21,7 +21,7 @@ specifications to specify their values.
 The following elements are recognised in at least one class of specification. All elements must
 be surrounded on both sides by whitespace, except at the start and end of the string.
 
-\begin{bulletlist}
+\begin{compactitem}
 \item A package dependency specification. Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}.
 \item A simple qualified package name. Permitted in \t{PROVIDE} (and inside \t{DEPEND} etc
     via the previous item).
@@ -44,7 +44,7 @@ be surrounded on both sides by whitespace, except at the start and end of the st
     of any kind followed by whitespace), followed by a close parenthesis. More formally:
     \t{use-conditional ::= '!'? flag-name '?' whitespace '(' whitespace (item whitespace)* ')'}.
     Permitted in all specification style variables.
-\end{bulletlist}
+\end{compactitem}
 
 In particular, note that whitespace is not optional.
 
@@ -53,11 +53,11 @@ In particular, note that whitespace is not optional.
 A package dependency can be in one of the following base formats. A package manager must warn or
 error on non-compliant input.
 
-\begin{bulletlist}
+\begin{compactitem}
 \item A simple \t{category/package} name.
 \item An operator, followed immediately by \t{category/package}, followed by a hyphen,
    followed by a version specification.
-\end{bulletlist}
+\end{compactitem}
 
 In EAPI 1, either of the above formats may additionally be suffixed by a \t{:slot}
 restriction. A package manager must warn or error if slot dependencies are used with EAPI 0.
@@ -82,10 +82,10 @@ If the specification is prefixed with an exclamation mark, the named dependency 
 than a requirement---that is to say, the specified package must not be installed, except with the
 following exceptions:
 
-\begin{bulletlist}
+\begin{compactitem}
 \item Blocks on a package provided by the ebuild do not count. \label{provided-blocks}
 \item Blocks on the ebuild itself do not count.
-\end{bulletlist}
+\end{compactitem}
 
 \subsection{All-of Dependency Specifications}
 

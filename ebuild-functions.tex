@@ -174,7 +174,7 @@ source files from their respective locations, with notes concerning licensing if
 
 The call order for installing a package is:
 
-\begin{bulletlist}
+\begin{compactitem}
 \item \t{pkg\_setup}
 \item \t{src\_unpack}
 \item \t{src\_compile}
@@ -182,18 +182,18 @@ The call order for installing a package is:
 \item \t{src\_install}
 \item \t{pkg\_preinst}
 \item \t{pkg\_postinst}
-\end{bulletlist}
+\end{compactitem}
 
 The call order for uninstalling a package is:
 
-\begin{bulletlist}
+\begin{compactitem}
 \item \t{pkg\_prerm}
 \item \t{pkg\_postrm}
-\end{bulletlist}
+\end{compactitem}
 
 The call order for reinstalling a package is:
 
-\begin{bulletlist}
+\begin{compactitem}
 \item \t{pkg\_setup}
 \item \t{src\_unpack}
 \item \t{src\_compile}
@@ -203,11 +203,11 @@ The call order for reinstalling a package is:
 \item \t{pkg\_prerm} for the package being replaced
 \item \t{pkg\_postrm} for the package being replaced
 \item \t{pkg\_postinst}
-\end{bulletlist}
+\end{compactitem}
 
 The call order for upgrading or downgrading a package is:
 
-\begin{bulletlist}
+\begin{compactitem}
 \item \t{pkg\_setup}
 \item \t{src\_unpack}
 \item \t{src\_compile}
@@ -217,7 +217,7 @@ The call order for upgrading or downgrading a package is:
 \item \t{pkg\_postinst}
 \item \t{pkg\_prerm} for the package being replaced
 \item \t{pkg\_postrm} for the package being replaced
-\end{bulletlist}
+\end{compactitem}
 
 The \t{pkg\_config}, \t{pkg\_info} and \t{pkg\_nofetch} functions are not called in a normal
 sequence.

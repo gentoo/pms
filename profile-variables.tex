@@ -12,14 +12,14 @@ tokens whose value is equal to $T$ with the hyphen removed, or, if $T$ is equal 
 all previous values. Note that because of this treatment, the order of tokens in the final result is
 arbitrary, not necessarily related to the order of tokens in any given profile. The following
 variables must be treated in this fashion:
-\begin{bulletlist}
+\begin{compactitem}
 \item \t{USE}
 \item \t{USE\_EXPAND}
 \item \t{USE\_EXPAND\_HIDDEN}
 \item \t{CONFIG\_PROTECT}
 \item \t{CONFIG\_PROTECT\_MASK}
 \item Any variable whose name is listed in \t{USE\_EXPAND}
-\end{bulletlist}
+\end{compactitem}
 
 Other variables, except where they affect only package-manager-specific functionality (such as
 Portage's \t{FEATURES} variable), must not be treated incrementally---later definitions shall
