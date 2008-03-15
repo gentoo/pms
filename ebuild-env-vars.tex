@@ -1,82 +1,178 @@
 \section{Defined Variables}
 \label{ebuild-env-vars}
 
-\subsection{Globally Defined Variables}
-\label{global-ebuild-vars}
+The package manager must define the following environment variables. Not all variables are
+meaningful in all phases; variables that are not meaningful in a given phase may be unset or set to
+any value. Ebuilds must not attempt to modify any of these variables.
 
-The following variables are available, read-only, in all phases of the ebuild environment. They
-must not be modified by ebuild code.
-\begin{description}
-\item[P] Package name and version, without the revision part. For example, \t{vim-7.0.174}.
-\item[PN] Package name, for example \t{vim}.
-\item[PV] Package version, for example \t{7.0.174}.
-\item[PR] Package revision, or \t{r0} if none exists.
-\item[PVR] Package version and revision, for example \t{7.0.174-r0} or \t{7.0.174-r1}.
-\item[PF] Package name, version, and revision, for example \t{vim-7.0.174-r1}.
-\item[A] All source files available for the package, whitespace separated with no leading
-    or trailing whitespace, and in the order in which the item first appears in a matched
-    component of \t{SRC\_URI}\@. Does not include any that are disabled because
-    of USE conditionals. The value is calculated from the base names of each element of the
-    \t{SRC\_URI} ebuild metadata variable.
-\item[AA] All source files that could be available for the package, including any that are disabled
-    in \t{A} because of USE conditionals. The value is calculated from the base names of each element
-    of the \t{SRC\_URI} ebuild metadata variable.
-\item[CATEGORY] The package's category, for example \t{app-editors}.
-\item[FILESDIR] The full path to the package's files directory, used for small support files or
+Because of their special meanings, these variables may not be preserved consistently across all
+phases as would normally happen due to environment saving (see \ref{ebuild-env-state}). For example,
+\t{EBUILD\_PHASE} is different for every phase, and \t{ROOT} may have changed between the various
+different \t{pkg\_*} phases. Ebuilds must recalculate any variable they derive from an inconsistent
+variable.
+
+\topcaption{Defined variables}
+\tablefirsthead{
+    \hline
+    \multicolumn{1}{c}{\textbf{Variable}} &
+    \multicolumn{1}{c}{\textbf{Legal in}} &
+    \multicolumn{1}{c}{\textbf{Consistent?}} &
+    \multicolumn{1}{c}{\textbf{Description}} \\
+    \hline
+    }
+\tablehead{\multicolumn{4}{c}%
+    {{\tablename\ \thetable{} -- continued from previous page}} \\
+    \hline
+    \multicolumn{1}{c}{\textbf{Variable}} &
+    \multicolumn{1}{c}{\textbf{Legal in}} &
+    \multicolumn{1}{c}{\textbf{Consistent?}} &
+    \multicolumn{1}{c}{\textbf{Description}} \\
+    \hline
+}
+\tablehead{\multicolumn{4}{c}%
+    {{\tablename\ \thetable{} -- concluded from previous page}} \\
+    \hline
+    \multicolumn{1}{c}{\textbf{Variable}} &
+    \multicolumn{1}{c}{\textbf{Legal in}} &
+    \multicolumn{1}{c}{\textbf{Consistent?}} &
+    \multicolumn{1}{c}{\textbf{Description}} \\
+    \hline
+}
+\tabletail{\hline \multicolumn{4}{r}{{Continued on next page}} \\ }
+\tablelasttail{\hline}
+\begin{mpxtabular}{ l p{0.15\textwidth} l p{0.5\textwidth} }
+\t{P} &
+    all &
+    No \footnote{May change if a package has been updated (see \ref{updates-dir})} &
+    Package name and version, without the revision part. For example, \t{vim-7.0.174}. \\
+\t{PN} &
+    all &
+    ditto &
+    Package name, for example \t{vim}. \\
+\t{CATEGORY} &
+    all &
+    ditto &
+    The package's category, for example \t{app-editors}. \\
+\t{PV} &
+    all &
+    Yes &
+    Package version, with no revision. For example \t{7.0.174}. \\
+\t{PR} &
+    all &
+    Yes &
+    Package revision, or \t{r0} if none exists. \\
+\t{PVR} &
+    all &
+    Yes &
+    Package version and revision, for example \t{7.0.174-r0} or \t{7.0.174-r1}. \\
+\t{PF} &
+    all &
+    Yes &
+    Package name, version, and revision, for example \t{vim-7.0.174-r1}. \\
+\t{A} &
+    \t{src\_*} &
+    Yes &
+    All source files available for the package, whitespace separated with no leading or trailing
+    whitespace, and in the order in which the item first appears in a matched component of
+    \t{SRC\_URI}\@. Does not include any that are disabled because of USE conditionals. The value is
+    calculated from the base names of each element of the \t{SRC\_URI} ebuild metadata variable. \\
+\t{AA} \footnote{This variable is generally considered deprecated. However, ebuilds must still
+    assume that the package manager sets it. For example, a few configure scripts use this variable
+    to find the \t{aalib} package; ebuilds calling such configure scripts must thus work around
+    this.} &
+    \t{src\_*} &
+    Yes &
+    All source files that could be available for the package, including any that are disabled in
+    \t{A} because of USE conditionals. The value is calculated from the base names of each element
+    of the \t{SRC\_URI} ebuild metadata variable. \\
+\t{FILESDIR} &
+    \t{src\_*} \footnote{Not necessarily present when installing from a binary package} &
+    No &
+    The full path to the package's files directory, used for small support files or
     patches. See section \ref{package-dirs}. May or may not exist; if a repository provides no
     support files for the package in question then an ebuild must be prepared for the situation
-    where \t{FILESDIR} points to a non-existent directory.
-\item[WORKDIR] The full path to the ebuild's working directory, in which all build data should be
-    contained. \label{env-var-WORKDIR}
-\item[T] The full path to a temporary directory for use by the ebuild.
-\item[USE] A whitespace-delimited list of all active USE flags for this ebuild, including those
-    originating from variables in \t{USE\_EXPAND}.
-\item[] All variables set in the active profiles' \t{make.defaults} files will be exported to the
-    ebuild environment.
-\item[HOME] The full path to an appropriate temporary directory for use by any programs invoked by
-    the ebuild that may read or modify the home directory.
-\item[PATH] Must be initialized by the package manager to a ``usable'' default.  The exact value here
-    is left up to interpretation, but it should include the equivalent ``sbin'' and ``bin'' and any
-    package manager specific directories.
-\item[CHOST,CBUILD,CTARGET] If not set by profiles, must contain either an appropriate
-    machine tuple (the definition of appropriate is beyond the scope of this specification) or
-    be unset.
-\item[EBUILD\_PHASE] Takes one of the values \t{config}, \t{setup}, \t{nofetch}, \t{unpack},
+    where \t{FILESDIR} points to a non-existent directory. \\
+\t{PORTDIR} &
+    ditto &
+    No &
+    The full path to the master repository's base directory. \\
+\t{DISTDIR} &
+    ditto &
+    No &
+    The full path to the directory in which the files in the \t{A} variable are stored. \\
+\t{ROOT} &
+   \t{pkg\_*} &
+   No &
+   The absolute path to the root directory into which the package is to be merged.  Phases which run
+   with full filesystem access must not touch any files outside of the directory given in
+   \t{ROOT}\@. Also of note is that in a cross-compiling environment, binaries inside of \t{ROOT}
+   will not be executable on the build machine, so ebuilds must not call them. \t{ROOT} must be
+   non-empty and end in a trailing slash. \\
+\t{T} &
+    All &
+    Partially \footnote{Consistent and preserved across a single connected sequence of install or
+    uninstall phases, but not between install and uninstall. When reinstalling a package, this
+    variable must have different values for the install and the replacement.} &
+    The full path to a temporary directory for use by the ebuild. \\
+\t{TMPDIR} &
+    All &
+    Ditto &
+    Must be set to the location of a usable temporary directory, for any applications
+    called by an ebuild. Must not be used by ebuilds directly; see \t{T} above. \\
+\t{HOME} &
+    All &
+    Ditto &
+    The full path to an appropriate temporary directory for use by any programs invoked by the
+    ebuild that may read or modify the home directory. \\
+\t{D} &
+    \t{src\_install} &
+    No &
+    Contains the full path to the image directory into which the package should be installed.
+    Must be non-empty and end in a trailing slash. \\
+\t{D} (continued) &
+    \t{pkg\_preinst}, \t{pkg\_postinst} &
+    Yes &
+    Contains the full path to the image that is about to be or has just been merged. Must be
+    non-empty and end in a trailing slash. \\
+\t{IMAGE} \footnote{Deprecated in favour of \t{D}.} &
+    \t{pkg\_preinst}, \t{pkg\_postinst} &
+    Yes &
+    Equal to \t{D}. \\
+\t{INSDESTTREE} &
+    \t{src\_install} &
+    No &
+    Controls the location where doins installs things. \\
+\t{USE} &
+    All &
+    Yes &
+    A whitespace-delimited list of all active USE flags for this ebuild, including those
+    originating from variables in \t{USE\_EXPAND}. \\
+\t{EBUILD\_PHASE} &
+    All &
+    No &
+    Takes one of the values \t{config}, \t{setup}, \t{nofetch}, \t{unpack},
     \t{compile}, \t{test}, \t{install}, \t{preinst}, \t{postinst}, \t{prerm}, \t{postrm}, \t{info}
-    according to the top level ebuild function that was executed by the package manager.
-\item[TMPDIR] Must be set to the location of a usable temporary directory, for any applications
-    called by an ebuild. Must not be used by ebuilds directly; see \t{T} above.
-\item[GZIP,BZIP,BZIP2,CDPATH,GREP\_OPTIONS,GREP\_COLOR,GLOBIGNORE] must not be set.
-\end{description}
+    according to the top level ebuild function that was executed by the package manager. May be
+    unset or any single word that is not any of the above when the ebuild is being sourced for
+    other (e.g. metadata or QA) purposes. \\
+\t{WORKDIR} &
+    \t{src\_*} &
+    Yes &
+    The full path to the ebuild's working directory, in which all build data should be
+    contained. \label{env-var-WORKDIR} \\
+\hline
+\end{mpxtabular}
 
-\subsection{Phase-specific variables}
+All variables set in the active profiles' \t{make.defaults} files must be exported to the ebuild
+environment. \t{CHOST}, \t{CBUILD} and \t{CTARGET}, if not set by profiles, must contain either an
+appropriate machine tuple (the definition of appropriate is beyond the scope of this specification)
+or be unset.
 
-In addition to the global list in section \ref{global-ebuild-vars}, there are several extra
-variables available in specific ebuild phases.
+\t{PATH} must be initialized by the package manager to a ``usable'' default.  The exact value here
+is left up to interpretation, but it should include the equivalent ``sbin'' and ``bin'' and any
+package manager specific directories.
 
-\subsubsection{src\_install}
-\begin{description}
-\item[D] Contains the full path to the image directory into which the package should be installed.
-    Must be non-empty and end in a trailing slash.
-\item[INSDESTTREE] Controls the location where doins installs things.
-\end{description}
-
-\subsubsection{pkg\_preinst}
-\begin{description}
-\item[D] Contains the full path to the image directory of the package about to be merged. Must be
-    non-empty and end in a trailing slash.
-\end{description}
-
-\subsubsection{pkg\_*}
-\begin{description}
-\item[ROOT] The absolute path to the root directory into which the package is to be merged. \t{ROOT}
-    is only guaranteed to be available in \t{pkg\_setup}, \t{pkg\_preinst}, \t{pkg\_postinst},
-    \t{pkg\_prerm} and \t{pkg\_postrm}. Other phases must not make use of it, as any binary
-    package generated must not depend on the value of \t{ROOT}\@. Those phases which run with full
-    filesystem access must not touch any files outside of the directory given in \t{ROOT}\@. Also of
-    note is that in a cross-compiling environment, binaries inside of \t{ROOT} will not be
-    executable on the build machine, so ebuilds must not call them. \t{ROOT} must be non-empty
-    and end in a trailing slash.
-\end{description}
+\t{GZIP}, \t{BZIP}, \t{BZIP2}, \t{CDPATH}, \t{GREP\_OPTIONS}, \t{GREP\_COLOR} and \t{GLOBIGNORE}
+must not be set.
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
