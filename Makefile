@@ -20,11 +20,6 @@ pms.dvi: $(LATEXFILES) pms.bbl
 	latex pms
 	latex pms
 
-pdfinfo.tex: pdfinfo.tex.in
-	@sed  \
-	     -e 's/@CREATIONDATE@/$(shell date "+%Y%m%d%H%M%S")/' \
-	     < $< > $@
-
 upload: pms.pdf
 	scp pms.pdf dev.gentoo.org:public_html
 
