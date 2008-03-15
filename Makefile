@@ -1,7 +1,4 @@
-all : pms.dvi pms.pdf
-
-check : pms.pdf
-	xpdf pms.pdf
+all : pms.pdf
 
 clean :
 	rm -f *~ *.pdf *.dvi *.log *.aux *.bbl *.blg *.toc *.lol *.loa *.lox \
