@@ -28,7 +28,7 @@ pdfinfo.tex: pdfinfo.tex.in
 upload: pms.pdf
 	scp pms.pdf dev.gentoo.org:public_html
 
-.default: pms.dvi pms.pdf
+.default: all
 
 .phony: clean upload
 
