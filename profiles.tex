@@ -38,7 +38,7 @@ This file must not contain comments or make use of line continuations.
 \subsection{make.defaults}
 \t{make.defaults} is used to define defaults for various environment and configuration variables.
 This file is unusual in that it is not combined at a file level with the parent---instead, each
-variable is combined or overridden individually as described in section \ref{profile-variables}.
+variable is combined or overridden individually as described in section~\ref{profile-variables}.
 
 The file itself is a line-based key-value format. Each line contains a single \verb|VAR="value"|
 entry, where the value must be double quoted. A variable name must start with one of \t{a-zA-Z}
@@ -97,7 +97,7 @@ contains one package dependency specification; anything matching this specificat
 installed unless unmasked by the user's configuration.
 
 Note that the \t{-spec} syntax can be used to remove a mask in a parent profile, but not
-necessarily a global mask (from \t{profiles/package.mask}, section \ref{profiles-package.mask}).
+necessarily a global mask (from \t{profiles/package.mask}, section~\ref{profiles-package.mask}).
 
 \note Portage currently treats \t{profiles/package.mask} as being on the leftmost branch of the
     inherit tree when it comes to \t{-lines}. This behaviour may not be relied upon.
@@ -117,8 +117,7 @@ Simply speaking, \t{use.mask} and \t{use.force} are used to say that a given USE
 always, respectively, be enabled when using this profile. \t{package.use.mask} and
 \t{package.use.force} do the same thing on a per-package, or per-version, basis. The precise manner
 in which they interact is less simple, and is best described in terms of the algorithm used to
-determine whether a flag is masked for a given package version. This is described in Algorithm
-\ref{alg:use-masking}.
+determine whether a flag is masked for a given package version. This is described in Algorithm~\ref{alg:use-masking}.
 \begin{algorithm}
 \caption{USE masking logic} \label{alg:use-masking}
 \begin{algorithmic}[1]

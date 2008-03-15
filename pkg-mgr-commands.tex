@@ -78,7 +78,7 @@ has returned.
     \item -{}-sysconfdir must be \t{/etc}
     \item -{}-localstatedir must be \t{/var/lib}
     \item -{}-host must be the value of the \t{CHOST} environment variable.
-    \item -{}-libdir must be set according to Algorithm \ref{alg:econf-libdir}.
+    \item -{}-libdir must be set according to Algorithm~\ref{alg:econf-libdir}.
     \end{itemize}
 
     \t{econf} must be implemented internally---that is, as a bash function and not an external
@@ -106,9 +106,9 @@ has returned.
 
 \item[emake] Calls GNU make. Any arguments given are passed directly to the make
     command, as are the user's chosen \t{MAKEOPTS}\@. Arguments given to \t{emake} override user
-    configuration. See also section \ref{guaranteed-system-commands}. \t{emake} must be an external
+    configuration. See also section~\ref{guaranteed-system-commands}. \t{emake} must be an external
     program and cannot be a function or alias---it must be callable from e.g. \t{xargs}.
-\item[einstall] A shortcut for the command given in Listing \ref{lst:einstall}. Any arguments given
+\item[einstall] A shortcut for the command given in Listing~\ref{lst:einstall}. Any arguments given
     to \t{einstall} are passed verbatim to \t{emake}, as shown.
 
 \begin{lstlisting}[caption=einstall command,label=lst:einstall]
@@ -159,7 +159,7 @@ has returned.
     the first argument is \t{-r}, then operates recursively, descending into any directories given.
 
 \item[dolib] For each argument, installs it into the appropriate library directory as determined by
-    Algorithm \ref{ebuild-libdir}. Any symlinks are installed into the same directory as relative
+    Algorithm~\ref{ebuild-libdir}. Any symlinks are installed into the same directory as relative
     links to their original target.
 
 \item[dolib.so] As for dolib. Installs the file with mode \t{0755}.

@@ -8,11 +8,11 @@ in later functions; variables with default visibility may retain default visibil
 
 Variables with special meanings to the package manager are excluded from this rule.
 
-Global variables must only contain invariant values (see \ref{metadata-invariance}). If a global
+Global variables must only contain invariant values (see~\ref{metadata-invariance}). If a global
 variable's value is invariant, it may have the value that would be generated at any given point
 in the build sequence.
 
-This is demonstrated by code listing \ref{lst:env-saving}.
+This is demonstrated by code listing~\ref{lst:env-saving}.
 
 \begin{lstlisting}[float,caption=Environment state between functions,label=lst:env-saving]
 

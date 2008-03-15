@@ -8,7 +8,7 @@ using them. The interpreter is therefore the same, and the same requirements for
 hold.
 
 Eclasses must be located in the \t{eclass} directory in the top level of the repository---see
-section \ref{eclass-dir}. Each eclass is a single file named \t{<name>.eclass}, where \t{<name>} is
+section~\ref{eclass-dir}. Each eclass is a single file named \t{<name>.eclass}, where \t{<name>} is
 the name of this eclass, used by \t{inherit} and \t{EXPORT\_FUNCTIONS} among other places.
 
 \section{The inherit command}
@@ -45,7 +45,7 @@ There is one command available in the eclass environment that is neither availab
 in ebuilds---\t{EXPORT\_FUNCTIONS}. This can be used to alias ebuild phase functions from the
 eclass so that an ebuild inherits a default definition whilst retaining the ability to override and
 call the eclass-defined version from it. The use of it is best illustrated by an example; this is
-given in listing \ref{lst:export-functions} and is a snippet from a hypothetical \t{foo.eclass}.
+given in listing~\ref{lst:export-functions} and is a snippet from a hypothetical \t{foo.eclass}.
 
 \begin{lstlisting}[float,caption=EXPORT\_FUNCTIONS example: foo.eclass,label=lst:export-functions]
 foo_src_compile()

@@ -28,15 +28,17 @@ completely override those in parent profiles.
 \subsection{Specific variables and their meanings}
 The following variables have specific meanings when set in profiles.
 \begin{description}
-\item[ARCH] The system's architecture. Must be a value listed in \t{profiles/arch.list}; see section
-    \ref{arch.list} for more information. Must be equal to the primary \t{KEYWORD} for this profile.
+\item[ARCH] The system's architecture. Must be a value listed in
+  \t{profiles/arch.list}; see section~\ref{arch.list}
+  for more information. Must be equal to the primary \t{KEYWORD} for this
+  profile.
 \item[CONFIG\_PROTECT, CONFIG\_PROTECT\_MASK] Contain whitespace-delimited lists used to control the
-    configuration file protection. Described more fully in chapter \ref{config-protect}.
+    configuration file protection. Described more fully in chapter~\ref{config-protect}.
 \item[USE] Defines the list of default USE flags for this profile. Flags may be added or removed by
     the user's configuration. \t{USE\_EXPAND} values must not be specified in this way.
 \item[USE\_EXPAND] \label{use-expand} Defines a list of variables which are to be treated
     incrementally and whose contents are to be expanded into the USE variable as passed to ebuilds.
-    Expansion is done as per Algorithm \ref{alg:use-expand}.
+    Expansion is done as per Algorithm~\ref{alg:use-expand}.
     \begin{algorithm}
     \caption{USE\_EXPAND logic} \label{alg:use-expand}
     \begin{algorithmic}

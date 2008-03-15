@@ -2,7 +2,7 @@
 \label{ebuild-vars}
 
 \note This section describes variables that may or must be defined by ebuilds. For
-variables that are passed from the package manager to the ebuild, see section \ref{ebuild-env-vars}.
+variables that are passed from the package manager to the ebuild, see section~\ref{ebuild-env-vars}.
 
 \section{Metadata invariance}
 \label{metadata-invariance}
@@ -24,16 +24,16 @@ All ebuilds must define at least the following variables:
 \item[DESCRIPTION] A short human-readable description of the package's purpose. May be defined by an
     eclass. Must not be empty.
 \item[SRC\_URI] A list of source URIs for the package. Valid protocols are \t{http://},
-    \t{https://}, \t{ftp://} and \t{mirror://} (see section \ref{thirdpartymirrors} for mirror behaviour).
+    \t{https://}, \t{ftp://} and \t{mirror://} (see section~\ref{thirdpartymirrors} for mirror behaviour).
     Fetch restricted packages may include URL parts consisting of just a filename. See
-    section \ref{dependencies} for full syntax.
+    section~\ref{dependencies} for full syntax.
 \item[HOMEPAGE] The URI for a package's homepage or (whitespace separated) the URIs for a package's
-    homepages, including protocol. May be defined by an eclass. See section \ref{dependencies} for full
+    homepages, including protocol. May be defined by an eclass. See section~\ref{dependencies} for full
     syntax.
-\item[SLOT] The package's slot. Must be a valid slot name, as per section \ref{slot-names}. May
+\item[SLOT] The package's slot. Must be a valid slot name, as per section~\ref{slot-names}. May
     be defined by an eclass. Must not be empty.
 \item[LICENSE] The package's license. Each text token must correspond to a tree ``licenses/'' entry
-    (see section \ref{licenses-dir}). See section \ref{dependencies} for full syntax.
+    (see section~\ref{licenses-dir}). See section~\ref{dependencies} for full syntax.
     May be defined by an eclass. \label{ebuild-var-LICENSE}
 \item[IUSE] The \t{USE} flags used by the ebuild. Historically, \t{USE\_EXPAND} values and \t{ARCH}
     were not included; package managers should support this for backwards compatibility reasons. Ebuilds
@@ -45,7 +45,7 @@ All ebuilds must define at least the following variables:
     sign. If such a prefix is present, the package manager may use it as a suggestion as to the
     default value of the use flag if no other configuration overrides it.
 \item[KEYWORDS] A whitespace separated list of keywords for the ebuild. Each token must be a
-    valid keyword name, as per section \ref{keyword-names}. May include \t{-*}, which
+    valid keyword name, as per section~\ref{keyword-names}. May include \t{-*}, which
     indicates that the package will only work on explicitly listed archs. May include \t{-arch},
     which indicates that the package will not work on the specified arch. May be empty, which
     indicates uncertain functionality on any architecture. May be defined in an eclass.
@@ -62,14 +62,14 @@ Ebuilds may define any of the following variables:
 \begin{description}
 \item[S] The path to the temporary build directory, used by \t{src\_compile}, \t{src\_install}
     etc. Defaults to \t{\$\{WORKDIR\}/\$\{P\}}.
-\item[DEPEND] See section \ref{dependencies}.
-\item[RDEPEND] See section \ref{dependencies}.
-\item[PDEPEND] See section \ref{dependencies}.
+\item[DEPEND] See section~\ref{dependencies}.
+\item[RDEPEND] See section~\ref{dependencies}.
+\item[PDEPEND] See section~\ref{dependencies}.
 \item[PROVIDE] Zero or more qualified package names of any \e{old style}
-    virtuals provided by this package. See section \ref{dependencies} for full syntax.
+    virtuals provided by this package. See section~\ref{dependencies} for full syntax.
     \label{ebuild-var-provide}
 \item[EAPI] The EAPI, by default \t{0} or an empty string.
-\item[RESTRICT] See section \ref{restrict}.
+\item[RESTRICT] See section~\ref{restrict}.
 \end{description}
 
 An empty \t{EAPI} value is equal to \t{0}. Ebuilds must not assume that they will get a particular
@@ -114,7 +114,7 @@ of the ebuild's metadata:
     magically by \t{inherit}.
 \end{description}
 
-\note Thus, by extension of section \ref{metadata-invariance}, \t{inherit} may not be used
+\note Thus, by extension of section~\ref{metadata-invariance}, \t{inherit} may not be used
     conditionally, except upon constant conditions.
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

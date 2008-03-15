@@ -8,7 +8,7 @@ The following is a list of functions that an ebuild, or eclass, may define, and 
 by the package manager as part of the build and/or install process. In all cases the package manager
 must provide a default implementation of these functions; unless otherwise stated this must be a
 no-op. Most functions must assume only that they have write access to the package's working
-directory (the \t{WORKDIR} environment variable; see section \ref{env-var-WORKDIR}), and the
+directory (the \t{WORKDIR} environment variable; see section~\ref{env-var-WORKDIR}), and the
 temporary directory \t{T}; exceptions are noted below. All functions may assume that they have read
 access to all system libraries, binaries and configuration files that are accessible to normal
 users.
