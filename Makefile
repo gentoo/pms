@@ -2,11 +2,11 @@ all : pms.pdf
 
 clean :
 	rm -f *~ *.pdf *.dvi *.log *.aux *.bbl *.blg *.toc *.lol *.loa *.lox \
-	    *.lot pdfinfo.tex *.out || true
+	    *.lot *.out || true
 
 LATEXFILES = $(shell ls *.tex)
 
-pms.pdf: $(LATEXFILES) pms.bbl pdfinfo.tex
+pms.pdf: $(LATEXFILES) pms.bbl
 	pdflatex pms
 	pdflatex pms
 	pdflatex pms
