@@ -9,7 +9,7 @@ must be enforced.
 In order to ensure interoperability with configuration update tools, the following scheme must be
 used by all package managers when merging any (regular) file:
 
-\begin{enumerate}
+\begin{compactenum}
 \item If the directory containing the file to be merged is not listed in \t{CONFIG\_PROTECT}, and
      is not a subdirectory of any such directory, and if the file is not listed in \t{CONFIG\_PROTECT},
      the file is merged normally.
@@ -23,7 +23,7 @@ used by all package managers when merging any (regular) file:
 \item Otherwise, increment the number portion (to form \t{.\_cfg0001\_<name>}) and repeat step 4.
     Continue this process until a usable filename is found.
 \item If 9999 is reached in this way, behaviour is undefined.
-\end{enumerate}
+\end{compactenum}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 

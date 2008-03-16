@@ -226,7 +226,7 @@ in the following format:
 Each cache file contains the textual values of various metadata keys, one per line, in the following
 order. Other lines may be present following these; their meanings are not defined here.
 
-\begin{enumerate}
+\begin{compactenum}
 \item Build-time dependencies (\t{DEPEND})
 \item Run-time dependencies (\t{RDEPEND})
 \item Slot (\t{SLOT})
@@ -243,7 +243,7 @@ order. Other lines may be present following these; their meanings are not define
 \item Old-style virtuals provided by this package (\t{PROVIDE})
 \item The ebuild API version to which this package conforms (\t{EAPI})
 \item Blank lines to pad the file to 22 lines long
-\end{enumerate}
+\end{compactenum}
 
 Future EAPIs may define new variables, remove existing variables, change the line number or
 format used for a particular variable, add or reduce the total length of the file and so on.
