@@ -43,7 +43,7 @@ variable.
 \begin{mpxtabular}{ l p{0.15\textwidth} l p{0.5\textwidth} }
 \t{P} &
     all &
-    No \footnote{May change if a package has been updated (see~\ref{updates-dir})} &
+    No\footnote{May change if a package has been updated (see~\ref{updates-dir})} &
     Package name and version, without the revision part. For example, \t{vim-7.0.174}. \\
 \t{PN} &
     all &
@@ -76,7 +76,7 @@ variable.
     whitespace, and in the order in which the item first appears in a matched component of
     \t{SRC\_URI}\@. Does not include any that are disabled because of USE conditionals. The value is
     calculated from the base names of each element of the \t{SRC\_URI} ebuild metadata variable. \\
-\t{AA} \footnote{This variable is generally considered deprecated. However, ebuilds must still
+\t{AA}\footnote{This variable is generally considered deprecated. However, ebuilds must still
     assume that the package manager sets it. For example, a few configure scripts use this variable
     to find the \t{aalib} package; ebuilds calling such configure scripts must thus work around
     this.} &
@@ -86,7 +86,7 @@ variable.
     \t{A} because of USE conditionals. The value is calculated from the base names of each element
     of the \t{SRC\_URI} ebuild metadata variable. \\
 \t{FILESDIR} &
-    \t{src\_*} \footnote{Not necessarily present when installing from a binary package} &
+    \t{src\_*}\footnote{Not necessarily present when installing from a binary package} &
     No &
     The full path to the package's files directory, used for small support files or
     patches. See section~\ref{package-dirs}. May or may not exist; if a repository provides no
@@ -110,7 +110,7 @@ variable.
    non-empty and end in a trailing slash. \\
 \t{T} &
     All &
-    Partially \footnote{Consistent and preserved across a single connected sequence of install or
+    Partially\footnote{Consistent and preserved across a single connected sequence of install or
     uninstall phases, but not between install and uninstall. When reinstalling a package, this
     variable must have different values for the install and the replacement.} &
     The full path to a temporary directory for use by the ebuild. \\
@@ -134,7 +134,7 @@ variable.
     Yes &
     Contains the full path to the image that is about to be or has just been merged. Must be
     non-empty and end in a trailing slash. \\
-\t{IMAGE} \footnote{Deprecated in favour of \t{D}.} &
+\t{IMAGE}\footnote{Deprecated in favour of \t{D}.} &
     \t{pkg\_preinst}, \t{pkg\_postinst} &
     Yes &
     Equal to \t{D}. \\
