@@ -6,7 +6,7 @@ meaningful in all phases; variables that are not meaningful in a given phase may
 any value. Ebuilds must not attempt to modify any of these variables.
 
 Because of their special meanings, these variables may not be preserved consistently across all
-phases as would normally happen due to environment saving (see \ref{ebuild-env-state}). For example,
+phases as would normally happen due to environment saving (see~\ref{ebuild-env-state}). For example,
 \t{EBUILD\_PHASE} is different for every phase, and \t{ROOT} may have changed between the various
 different \t{pkg\_*} phases. Ebuilds must recalculate any variable they derive from an inconsistent
 variable.
@@ -43,7 +43,7 @@ variable.
 \begin{mpxtabular}{ l p{0.15\textwidth} l p{0.5\textwidth} }
 \t{P} &
     all &
-    No \footnote{May change if a package has been updated (see \ref{updates-dir})} &
+    No \footnote{May change if a package has been updated (see~\ref{updates-dir})} &
     Package name and version, without the revision part. For example, \t{vim-7.0.174}. \\
 \t{PN} &
     all &
@@ -89,7 +89,7 @@ variable.
     \t{src\_*} \footnote{Not necessarily present when installing from a binary package} &
     No &
     The full path to the package's files directory, used for small support files or
-    patches. See section \ref{package-dirs}. May or may not exist; if a repository provides no
+    patches. See section~\ref{package-dirs}. May or may not exist; if a repository provides no
     support files for the package in question then an ebuild must be prepared for the situation
     where \t{FILESDIR} points to a non-existent directory. \\
 \t{PORTDIR} &
