@@ -122,15 +122,24 @@ manager must ignore any files in this directory that it does not recognise.
 rules from section~\ref{profiles-dir}, containing a list of profiles
 that are valid for use, along with their associated architecture and
 status. Each line has the format:
+
 \begin{verbatim}
-<keyword> <profile path> stable|dev
+<keyword> <profile path> <stability>
 \end{verbatim}
-Where \t{<keyword>} is the default keyword for the profile and the \t{ARCH} for which the profile is
-valid, \t{<profile path>} is the (relative) path from the \t{profiles} directory to the profile in
-question, and the third field is either \t{stable} or \t{dev}, depending upon whether the profile is
-reckoned to be `stable' for normal use. Fields are whitespace-delimited. The last field is of most
-use to QA scanning tools, which may display certain errors with reduced severity should they appear
-in a `dev' profile.
+
+Where:
+
+\begin{compactitem}
+\item \t{<keyword>} is the default keyword for the profile and the \t{ARCH} for which the profile is
+    valid.
+\item \t{<profile path>} is the (relative) path from the \t{profiles} directory to the profile in
+    question.
+\item \t{<stability>} indicates the stability of the profile. This may be useful for QA tools, which
+    may wish to display warnings with a reduced severity for some profiles. The values \t{stable}
+    and \t{dev} are widely used, but repositories may use other values.
+\end{compactitem}
+
+Fields are whitespace-delimited.
 
 \subsection{The thirdpartymirrors file}
 \label{thirdpartymirrors}
