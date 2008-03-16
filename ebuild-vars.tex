@@ -27,9 +27,8 @@ All ebuilds must define at least the following variables:
     \t{https://}, \t{ftp://} and \t{mirror://} (see section~\ref{thirdpartymirrors} for mirror behaviour).
     Fetch restricted packages may include URL parts consisting of just a filename. See
     section~\ref{dependencies} for full syntax.
-\item[HOMEPAGE] The URI for a package's homepage or (whitespace separated) the URIs for a package's
-    homepages, including protocol. May be defined by an eclass. See section~\ref{dependencies} for full
-    syntax.
+\item[HOMEPAGE] The URI or URIs for a package's homepage, including protocols. May be defined by an
+    eclass. See section~\ref{dependencies} for full syntax.
 \item[SLOT] The package's slot. Must be a valid slot name, as per section~\ref{slot-names}. May
     be defined by an eclass. Must not be empty.
 \item[LICENSE] The package's license. Each text token must correspond to a tree ``licenses/'' entry
@@ -69,7 +68,8 @@ Ebuilds may define any of the following variables:
     virtuals provided by this package. See section~\ref{dependencies} for full syntax.
     \label{ebuild-var-provide}
 \item[EAPI] The EAPI, by default \t{0} or an empty string.
-\item[RESTRICT] See section~\ref{restrict}.
+\item[RESTRICT] Zero or more behaviour restrictions for this package. See section~\ref{restrict}
+    for value meanings and section~\ref{dependencies} for full syntax.
 \end{description}
 
 An empty \t{EAPI} value is equal to \t{0}. Ebuilds must not assume that they will get a particular
@@ -86,8 +86,8 @@ ideally, an error in one ebuild should not prevent operations upon other ebuilds
 \subsection{Restrict}
 \label{restrict}
 
-The \t{RESTRICT} variable may contain zero or more whitespace separated tokens. The following
-tokens have predefined meanings:
+The \t{RESTRICT} variable is a dependency-type variable as described in section~\ref{dependencies},
+with the following tokens as values:
 
 \begin{description}
 \item[mirror] The package's \t{SRC\_URI} entries may not be mirrored, and mirrors should not
