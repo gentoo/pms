@@ -40,9 +40,9 @@ specification. Additional directories that are not for a package may \i{not} be 
 conflicts with package name directories; an exception is made for filesystem components whose name
 starts with a dot, which the package manager must ignore, and for any directory named \t{CVS}.
 
-A category directory may not exist. A category directory that does not exist shall be considered
-equivalent to an empty category (and by extension, a package manager may treat an empty category as
-a category that does not exist).
+It is not required that a directory exists for each category provided by the repository. A category
+directory that does not exist shall be considered equivalent to an empty category (and by extension,
+a package manager may treat an empty category as a category that does not exist).
 
 \section{Package Directories}
 \label{package-dirs}
