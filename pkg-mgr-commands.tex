@@ -31,21 +31,22 @@ these commands once the current phase function has returned.
 \subsubsection{Output commands}
 These commands display messages to the user. Unless otherwise stated, the entire argument list is
 used as a message, as in the simple invocations of \t{echo}. Ebuilds must not run any of these
-commands once the current phase function has returned.
+commands once the current phase function has returned. Unless otherwise noted, output may be sent to
+stdout, stderr or some other appropriate facility.
 \begin{description}
-\item[einfo] Displays an informational message to stderr.
-\item[einfon] Displays an informational message without a trailing newline to stderr.
-\item[elog] Displays an informational message of slightly higher importance to stderr. The package
+\item[einfo] Displays an informational message.
+\item[einfon] Displays an informational message without a trailing newline.
+\item[elog] Displays an informational message of slightly higher importance. The package
     manager may choose to log \t{elog} messages by default where \t{einfo} messages are not, for
     example.
-\item[ewarn] Displays a warning message to stderr.
-\item[eerror] Displays an error message to stderr.
-\item[ebegin] Displays an informational message to stderr. Should be used when beginning a possibly
+\item[ewarn] Displays a warning message. Must not go to stdout.
+\item[eerror] Displays an error message. Must not go to stdout.
+\item[ebegin] Displays an informational message. Should be used when beginning a possibly
     lengthy process, and followed by a call to \t{eend}.
 \item[eend] Indicates that the process begun with an \t{ebegin} message has completed. Takes one
     fixed argument, which is a numeric return code, and an optional message in all subsequent
-    arguments. If the first argument is 0, print a success indicator to stderr; otherwise, print
-    the message followed by a failure indicator to stderr.
+    arguments.  If the first argument is 0, print a success indicator; otherwise, print the message
+    followed by a failure indicator.
 \end{description}
 
 \subsubsection{Error commands}
