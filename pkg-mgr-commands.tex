@@ -105,10 +105,11 @@ has returned.
 \end{algorithmic}
 \end{algorithm}
 
-\item[emake] Calls GNU make. Any arguments given are passed directly to the make
-    command, as are the user's chosen \t{MAKEOPTS}\@. Arguments given to \t{emake} override user
-    configuration. See also section~\ref{guaranteed-system-commands}. \t{emake} must be an external
-    program and cannot be a function or alias---it must be callable from e.g. \t{xargs}.
+\item[emake] Calls the \t{\$MAKE} program, or GNU make if the \t{MAKE} variable is unset.  Any
+    arguments given are passed directly to the make command, as are the user's chosen \t{MAKEOPTS}\@.
+    Arguments given to \t{emake} override user configuration. See also
+    section~\ref{guaranteed-system-commands}. \t{emake} must be an external program and cannot be a
+    function or alias---it must be callable from e.g. \t{xargs}.
 \item[einstall] A shortcut for the command given in Listing~\ref{lst:einstall}. Any arguments given
     to \t{einstall} are passed verbatim to \t{emake}, as shown.
 
