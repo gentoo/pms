@@ -5,8 +5,10 @@ clean :
 	    *.lot *.out || true
 
 LATEXFILES = $(shell ls *.tex)
+LISTINGFILES = $(shell ls *.listing)
+SOURCEFILES = $(LATEXFILES) $(LISTINGFILES)
 
-pms.pdf: $(LATEXFILES) pms.bbl
+pms.pdf: $(SOURCEFILES) pms.bbl
 	pdflatex pms
 	pdflatex pms
 	pdflatex pms
@@ -15,7 +17,7 @@ pms.bbl: pms.bib pms.tex
 	latex pms
 	bibtex pms
 
-pms.dvi: $(LATEXFILES) pms.bbl
+pms.dvi: $(SOURCEFILES) pms.bbl
 	latex pms
 	latex pms
 	latex pms

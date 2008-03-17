@@ -14,36 +14,8 @@ in the build sequence.
 
 This is demonstrated by code listing~\ref{lst:env-saving}.
 
-\begin{lstlisting}[float,caption=Environment state between functions,label=lst:env-saving]
-
-GLOBAL_VARIABLE="a"
-
-src_compile()
-{
-    GLOBAL_VARIABLE="b"
-    DEFAULT_VARIABLE="c"
-    export EXPORTED_VARIABLE="d"
-    local LOCAL_VARIABLE="e"
-}
-
-src_install(){
-    [[ ${GLOBAL_VARIABLE} == "a" ]] \
-        || [[ ${GLOBAL_VARIABLE} == "b" ]] \
-        || die "broken env saving for globals"
-
-    [[ ${DEFAULT_VARIABLE} == "c" ]] \
-        || die "broken env saving for default"
-
-    [[ ${EXPORTED_VARIABLE} == "d" ]] \
-        || die "broken env saving for exported"
-
-    [[ $(printenv EXPORTED_VARIABLE ) == "d" ]] \
-        || die "broken env saving for exported"
-
-    [[ -z ${LOCAL_VARIABLE} ]] \
-        || die "broken env saving for locals"
-}
-\end{lstlisting}
+\lstinputlisting[float,caption=Environment state between functions,label=lst:env-saving]{%
+env-saving.listing}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 
