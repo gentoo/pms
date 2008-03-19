@@ -189,21 +189,21 @@ below that specified by the \t{ROOT} environment variable.
 \label{pkg-prerm-function}
 
 The \t{pkg\_prerm} function performs any special tasks that are required immediately before
-unmerging the package from the live filesystem. It must not write outside of the directories specified
-by the \t{ROOT} and \t{D} environment variables.
+unmerging the package from the live filesystem. It must not write outside of the directory specified
+by the \t{ROOT} environment variable.
 
 \t{pkg\_prerm} must be run with full access to all files and directories below that specified by
-the \t{ROOT} and \t{D} environment variables.
+the \t{ROOT} environment variable.
 
 \subsection{pkg\_postrm}
 \label{pkg-postrm-function}
 
 The \t{pkg\_postrm} function performs any special tasks that are required immediately after
-unmerging the package from the live filesystem. It must not write outside of the directories specified
-by the \t{ROOT} and \t{D} environment variables.
+unmerging the package from the live filesystem. It must not write outside of the directory specified
+by the \t{ROOT} environment variable.
 
 \t{pkg\_postrm} must be run with full access to all files and directories below that specified by
-the \t{ROOT} and \t{D} environment variables.
+the \t{ROOT} environment variable.
 
 \subsection{pkg\_config}
 \label{pkg-config-function}
