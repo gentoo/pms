@@ -98,7 +98,8 @@ Ebuilds may define any of the following variables:
 \item[S] The path to the temporary build directory, used by \t{src\_compile}, \t{src\_install}
     etc. Defaults to \t{\$\{WORKDIR\}/\$\{P\}}.
 \item[DEPEND] See section~\ref{dependencies}.
-\item[RDEPEND] See section~\ref{dependencies}.
+\item[RDEPEND] See section~\ref{dependencies}. \t{RDEPEND} has special behaviour for its value if
+    unset and when used with an eclass. See section~\ref{rdepend-depend} for details.
 \item[PDEPEND] See section~\ref{dependencies}.
 \IFKDEBUILDELSE
 {
@@ -155,6 +156,16 @@ ensure that it is unset.
 
 If any of these variables are set to invalid values, the package manager's behaviour is undefined;
 ideally, an error in one ebuild should not prevent operations upon other ebuilds or packages.
+
+\section{\t{RDEPEND} value}
+\label{rdepend-depend}
+
+If \t{RDEPEND} is unset (but not if it is set to an empty string) in an ebuild, the package manager
+must set its value to be equal to the value of \t{DEPEND}.
+
+When dealing with eclasses, only values set in the ebuild itself are considered for this behaviour;
+any \t{DEPEND} or \t{RDEPEND} set in an eclass does not change the implicit \t{RDEPEND=\$DEPEND} for
+the ebuild portion, and any \t{DEPEND} value set in an eclass does not get added to \t{RDEPEND}.
 
 \section{Magic Ebuild-defined Variables}
 
