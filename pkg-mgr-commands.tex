@@ -5,6 +5,36 @@ manager. Except where otherwise noted, they may be internal (shell functions or 
 commands available in \t{PATH}; where this is not specified, ebuilds may not rely upon either
 behaviour.
 
+\IFKDEBUILDELSE
+{
+    \subsubsection{Banned commands}
+    \label{banned-commands}
+
+    Some commands are banned in some EAPIs. If a banned command is called, the package manager must
+    abort the build process indicating an error.
+
+    \begin{center}
+    \topcaption{Banned commands}
+    \tablehead{
+        \hline
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{3}{c}{\textbf{Command banned?}} \\
+        \multicolumn{1}{c}{} &
+        \multicolumn{1}{c}{\textbf{\t{dohard}}} &
+        \multicolumn{1}{c}{\textbf{\t{dohtml}}} &
+        \multicolumn{1}{c}{\textbf{\t{dosed}}} \\
+        \hline
+    }
+    \begin{mpxtabular}{ l l l l } \label{banned-commands-table}
+    \t{0} & No & No & No \\
+    \t{1} & No & No & No \\
+    \t{kdebuild-1} & Yes & Yes & Yes \\
+    \hline
+    \end{mpxtabular}
+    \end{center}
+}{
+}
+
 \subsubsection{Sandbox commands}
 These commands affect the behaviour of the sandbox. Each command takes a single directory as
 argument. Ebuilds must not run any of these commands once the current phase function has returned.
@@ -149,9 +179,21 @@ has returned.
 \item[doexe] Installs the given files into the directory specified by the most recent
     \t{exedesttree} call. If \t{exedesttree} has not yet been called, behaviour is undefined.
 
-\item[dohard] Takes two parameters. Creates a hardlink from the second to the first.
+\IFKDEBUILDELSE
+{
+    \item[dohard] Takes two parameters. Creates a hardlink from the second to the first. In EAPIs
+    listed in table~\ref{banned-commands-table}, this command is banned as per
+    section~\ref{banned-commands}.
+}{
+    \item[dohard] Takes two parameters. Creates a hardlink from the second to the first.
+}
 
-\item[dohtml] \TODO{Write dohtml.}
+\IFKDEBUILDELSE
+{
+    \item[dohtml] \TODO{Write dohtml. It's banned in kdebuild-1.}
+}{
+    \item[dohtml] \TODO{Write dohtml.}
+}
 
 \item[doinfo] Installs a GNU Info file into the \t{/usr/share/info} area.
 
@@ -199,8 +241,15 @@ has returned.
 
 \item[dosbin] As \t{dobin}, but installs to \t{DESTTREE/sbin}.
 
-\item[dosym] Creates a symbolic link named as for its second parameter, pointing to the first. If
-    the directory containing the new link does not exist, creates it.
+\IFKDEBUILDELSE
+{
+    \item[dosym] Creates a symbolic link named as for its second parameter, pointing to the first. If
+        the directory containing the new link does not exist, creates it if EAPI is listed in
+        table~\ref{dosym-table} as making the directory, or aborts the build process otherwise.
+}{
+    \item[dosym] Creates a symbolic link named as for its second parameter, pointing to the first. If
+        the directory containing the new link does not exist, creates it.
+}
 
 \item[fowners] Acts as for \t{chown}, but takes paths relative to the image directory.
 
@@ -231,6 +280,26 @@ has returned.
 
 \end{description}
 
+\IFKDEBUILDELSE
+{
+    \begin{center}
+    \topcaption{EAPIs where \t{dosym} makes the directory}
+    \tablehead{
+        \hline
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{\t{dosym} makes the directory?}} \\
+        \hline
+    }
+    \begin{mpxtabular}{ l l } \label{dosym-table}
+    \t{0} & Yes \\
+    \t{1} & Yes \\
+    \t{kdebuild-1} & No \\
+    \hline
+    \end{mpxtabular}
+    \end{center}
+}{
+}
+
 \subsubsection{Commands affecting install destinations}
 The following commands are used to set the various destination trees, all relative to \t{\$\{D\}},
 used by the above installation commands. They must be shell functions or aliases, due to the need to
@@ -240,16 +309,16 @@ current phase function has returned.
 \begin{description}
 
 \item[into] Sets the value of \t{DESTTREE} for future invocations of the above utilities.  Creates
-    the directory under \t{\$\{D\}}, using \t{install -d} with no additional options, if it does not
-    already exist.
+the directory under \t{\$\{D\}}, using \t{install -d} with no additional options, if it does not
+already exist.
 
-\item[insinto] Sets the value of \t{INSDESTTREE} for future invocations of the above utilities.  Creates
-    the directory, as specified for \t{into}.
+\item[insinto] Sets the value of \t{INSDESTTREE} for future invocations of the above utilities. May
+    create the directory, as specified for \t{into}.
 
-\item[exeinto] Sets the install path for \t{doexe} and \t{newexe}.  Creates the directory, as specified
+\item[exeinto] Sets the install path for \t{doexe} and \t{newexe}. May create the directory, as specified
     for \t{into}.
 
-\item[docinto] Sets the install subdirectory for \t{dodoc} et al.  Creates the directory, as specified
+\item[docinto] Sets the install subdirectory for \t{dodoc} et al. May creates the directory, as specified
     for \t{into}.
 
 \item[insopts] Sets the options passed by \t{doins} et al. to the \t{install} command.
@@ -297,10 +366,21 @@ of the above categories. Ebuilds must not run any of these commands once the cur
 has returned.
 
 \begin{description}
-\item[dosed] Takes any number of arguments, which can be files or \t{sed} expressions. For each
-    argument, if it names, relative to \t{D} a file which exists, then \t{sed} is run with the
-    current expression on that file. Otherwise, the current expression is set to the text of the
-    argument. The initial value of the expression is \t{s:\$\{D\}::g}.
+\IFKDEBUILDELSE
+{
+    \item[dosed] Takes any number of arguments, which can be files or \t{sed} expressions. For each
+        argument, if it names, relative to \t{D} a file which exists, then \t{sed} is run with the
+        current expression on that file. Otherwise, the current expression is set to the text of the
+        argument. The initial value of the expression is \t{s:\$\{D\}::g}. In EAPIs listed in
+        table~\ref{banned-commands-table}, this command is banned as per
+        section~\ref{banned-commands}.
+}{
+    \item[dosed] Takes any number of arguments, which can be files or \t{sed} expressions. For each
+        argument, if it names, relative to \t{D} a file which exists, then \t{sed} is run with the
+        current expression on that file. Otherwise, the current expression is set to the text of the
+        argument. The initial value of the expression is \t{s:\$\{D\}::g}.
+}
+
 \item[unpack] Unpacks a source archive into the current directory. Must be able to unpack the
     following file formats, if the relevant binaries are available:
     \begin{itemize}

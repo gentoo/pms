@@ -59,8 +59,15 @@ integer, followed by zero or more dot-prefixed positive integers).
 This may optionally be followed by one of \t{[a-z]} (a lowercase letter).
 
 This may be followed by zero or more of the suffixes \t{\_alpha}, \t{\_beta}, \t{\_pre},
-\t{\_rc} or \t{\_p}, which themselves may be suffixed by an optional integer (if not present,
-this integer is assumed to be zero).
+\t{\_rc} or \t{\_p}, which themselves may be suffixed by an optional integer.
+
+\IFKDEBUILDELSE
+{
+    In ebuilds using EAPIs listed in table~\ref{scm-table} as requiring support for the \t{-scm}
+    suffix, the preceding version syntax may be either replaced or suffixed by a \t{scm} part. If
+    both a ``normal'' version and a \t{scm} part are present, they must be separated by a hyphen.
+}{
+}
 
 This may optionally be followed by the suffix \t{-r} followed immediately by an integer (the
 ``revision number''). If this suffix is not present, it is assumed to be \t{-r0}.
@@ -69,11 +76,38 @@ This may optionally be followed by the suffix \t{-r} followed immediately by an 
     ability to ignore versions it doesn't recognise. This should probably remain excluded and replaced
     by a proper solution in future EAPIs.}
 
+\IFKDEBUILDELSE
+{
+    \begin{center}
+    \topcaption{EAPIs requiring \t{scm} support}
+    \tablehead{
+        \hline
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Requires \t{scm} support?}} \\
+        \hline
+    }
+    \begin{mpxtabular}{ l l } \label{scm-table}
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{kdebuild-1} & Yes \\
+    \hline
+    \end{mpxtabular}
+    \end{center}
+}{
+}
+
 \section{Version Comparison}
 
 Version specifications are compared component by component, moving from left to right.
 
-The first component of the number part is compared using strict integer comparison.
+\IFKDEBUILDELSE
+{
+    If a version starts with \t{scm}, it orders higher than any version that does not
+    start with \t{scm}.  Otherwise, if neither version starts with \t{scm}, the
+}{
+    The
+}
+first component of the number part is compared using strict integer comparison.
 
 Any subsequent components of the number part are compared as follows:
 
@@ -91,8 +125,25 @@ Letter suffixes are compared alphabetically, with any letter being newer than no
 
 If the letters are equal, suffixes are compared. The ordering is \t{\_alpha} is less than
 \t{\_beta} is less than \t{\_pre} is less than \t{\_rc} is less than no suffix is less than
-\t{\_p}. If a suffix string is equal, the associated integer parts (which default to zero)
-are compared using strict integer comparison.
+\IFKDEBUILDELSE
+{
+    \t{\_p} is less than \t{-scm}.
+}{
+    \t{\_p}.
+}
+If a suffix string is equal, the associated integer parts
+\IFKDEBUILDELSE
+{
+    (except for \t{scm} parts)
+}{}
+are compared using strict integer comparison.  A missing integer part is treated as
+\IFKDEBUILDELSE
+{
+    zero, unless the suffix is directly followed by \t{-scm}, in which case it is treated as being
+    higher than any integer.
+}{
+    zero.
+}
 
 If at this point the two versions are still equal, the revision number is compared. The revision
 number has an optional integer suffix and is compared using strict integer comparison as per the

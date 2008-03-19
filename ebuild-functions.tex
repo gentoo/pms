@@ -56,8 +56,8 @@ The \t{src\_compile} function configures the package's build environment and bui
 
 The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
 
-For EAPI 0, the default implementation used when the ebuild lacks the \t{src\_compile} function
-shall behave as:
+For EAPIs not listed in table~\ref{src-compile-table} as being \t{ECONF\_SOURCE} aware, the default
+implementation used when the ebuild lacks the \t{src\_compile} function shall behave as:
 
 \begin{lstlisting}
 src_compile() {
@@ -70,8 +70,8 @@ src_compile() {
 }
 \end{lstlisting}
 
-For EAPI 1, the default implementation used when the ebuild lacks the \t{src\_compile} function
-shall behave as:
+For EAPIs listed in table~\ref{src-compile-table} as being \t{ECONF\_SOURCE} aware, the default
+implementation used when the ebuild lacks the \t{src\_compile} function shall behave as:
 
 \begin{lstlisting}
 src_compile() {
@@ -84,6 +84,40 @@ src_compile() {
 }
 \end{lstlisting}
 
+\IFKDEBUILDELSE
+{
+    \begin{center}
+    \topcaption{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}}
+    \tablehead{
+        \hline
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{ECONF\_SOURCE}?}} \\
+        \hline
+        }
+    \begin{mpxtabular}{ l l } \label{src-compile-table}
+    \t{0} & No \\
+    \t{1} & Yes \\
+    \t{kdebuild-1} & Yes \\
+    \hline
+    \end{mpxtabular}
+    \end{center}
+}{
+    \begin{center}
+    \topcaption{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}}
+    \tablehead{
+        \hline
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{ECONF\_SOURCE}?}} \\
+        \hline
+        }
+    \begin{mpxtabular}{ l l } \label{src-compile-table}
+    \t{0} & No \\
+    \t{1} & Yes \\
+    \hline
+    \end{mpxtabular}
+    \end{center}
+}
+
 \subsection{src\_test}
 \label{src-test-function}
 
@@ -95,6 +129,32 @@ The default implementation used when the ebuild lacks the \t{src\_test} function
 enabled, run \t{make check} if and only if such a target is available, or if not run \t{make test},
 if and only such a target is available. In both cases, if make returns non-zero the build must be
 aborted.
+
+The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{restrict}.
+
+\IFKDEBUILDELSE
+{
+    In some EAPIs, \t{src\_test} should only be run at user option (and never if restrictions are in
+    place). In others, it must always be run (excepting restrictions). See table~\ref{test-required-table}
+    for which EAPIs fit into which category.
+
+    \begin{center}
+    \topcaption{EAPIs requiring \t{src\_test}}
+    \tablehead{
+        \hline
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Requires \t{src\_test}?}} \\
+        \hline
+        }
+    \begin{mpxtabular}{ l l } \label{test-required-table}
+    \t{0} & At user option \\
+    \t{1} & At user option \\
+    \t{kdebuild-1} & Required \\
+    \hline
+    \end{mpxtabular}
+    \end{center}
+}{
+}
 
 \subsection{src\_install}
 \label{src-install-function}
@@ -156,10 +216,39 @@ fully installed. It is the only ebuild function which may be interactive and pro
 \subsection{pkg\_info}
 \label{pkg-info-function}
 
-The \t{pkg\_info} function may be called by the package manager when displaying information about an
-installed package.
+\IFKDEBUILDELSE
+{
+    The \t{pkg\_info} function may be called by the package manager when displaying information about an
+    installed package. In EAPIs listed in table~\ref{pkg-info-table} as supporting \t{pkg\_info} on
+    uninstalled packages, it may also be called by the package manager when displaying information
+    about an uninstalled package. In this case, ebuild authors should note that dependencies may not be
+    installed.
+}{
+    The \t{pkg\_info} function may be called by the package manager when displaying information about an
+    installed package.
+}
 
 \t{pkg\_info} must not write to the filesystem.
+
+\IFKDEBUILDELSE
+{
+    \begin{center}
+    \topcaption{EAPIs supporting \t{pkg\_info} on uninstalled packages}
+    \tablehead{
+        \hline
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{pkg\_info} on uninstalled packages?}} \\
+        \hline
+    }
+    \begin{mpxtabular}{ l l } \label{pkg-info-table}
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{kdebuild-1} & Yes \\
+    \hline
+    \end{mpxtabular}
+    \end{center}
+}{
+}
 
 \subsection{pkg\_nofetch}
 \label{pkg-nofetch-function}

@@ -57,9 +57,20 @@ A package directory contains the following:
 \item A \t{files} directory, containing any support files needed by the ebuilds. Optional.
 \end{compactitem}
 
-Any ebuild in a package directory must be named \t{name-ver.ebuild}, where \t{name} is the
-(unqualified) package name, and \t{ver} is the package's version. Package managers must ignore
-any ebuild file that does not match these rules.
+Any ebuild in a package directory must be named \t{name-ver.suffix}, where:
+
+\begin{compactitem}
+\item \t{name} is the (unqualified) package name.
+\item \t{ver} is the package's version.
+\IFKDEBUILDELSE
+{
+    \item \t{suffix} is \t{ebuild} or \t{kdebuild-1}.
+}{
+    \item \t{suffix} is \t{ebuild}.
+}
+\end{compactitem}
+
+Package managers must ignore any ebuild file that does not match these rules.
 
 A package directory that contains no correctly named ebuilds shall be considered a package with no
 versions. A package with no versions shall be considered equivalent to a package that does not

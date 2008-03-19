@@ -36,6 +36,32 @@
 \newcommand{\TODOBUG}[2]{\fixme[inline]{(discussion on bug \##1) #2}}
 \newcommand{\TODO}[1]{\fixme[inline]{#1}}
 
+\usepackage{ifthen}
+\newboolean{ENABLE-ALL-OPTIONS}
+\newboolean{ENABLE-KDEBUILD}
+
+%%% Enable the below option if you'd like to see both sides of KDEBUILD conditionals shown in
+%%% different colours. Disable it to either fully enable or fully disable KDEBUILD.
+\setboolean{ENABLE-ALL-OPTIONS}{true}
+
+%%% Enable the below if you'd like to see KDEBUILD things.
+\setboolean{ENABLE-KDEBUILD}{true}
+
+\usepackage{color}
+\ifthenelse{\boolean{ENABLE-ALL-OPTIONS}}
+{
+    \definecolor{deepblue}{rgb}{0.0, 0.2, 0.7}
+    \definecolor{deeppurple}{rgb}{0.7, 0.0, 0.8}
+    \newcommand{\IFKDEBUILDELSE}[2]{{\color{deepblue} #1}{\color{deeppurple} #2}}
+}{
+    \ifthenelse{\boolean{ENABLE-KDEBUILD}}
+    {
+        \newcommand{\IFKDEBUILDELSE}[2]{ #1 }
+    }{
+        \newcommand{\IFKDEBUILDELSE}[2]{ #2 }
+    }
+}
+
 \hypersetup{%
   urlcolor=black,
   colorlinks=true,

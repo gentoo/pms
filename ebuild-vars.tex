@@ -40,9 +40,10 @@ All ebuilds must define at least the following variables:
     must also set \t{IUSE}, listing only the variables used by that eclass. The package manager is
     responsible for merging these values.
 
-    In EAPI 1, any use flag name in \t{IUSE} may be prefixed by at most one of a plus or a minus
-    sign. If such a prefix is present, the package manager may use it as a suggestion as to the
-    default value of the use flag if no other configuration overrides it.
+    In EAPIs shown in table~\ref{iuse-defaults-table} as supporting \t{IUSE} defaults, any use flag
+    name in \t{IUSE} may be prefixed by at most one of a plus or a minus sign. If such a prefix is
+    present, the package manager may use it as a suggestion as to the default value of the use flag
+    if no other configuration overrides it.
 \item[KEYWORDS] A whitespace separated list of keywords for the ebuild. Each token must be a
     valid keyword name, as per section~\ref{keyword-names}. May include \t{-*}, which
     indicates that the package will only work on explicitly listed archs. May include \t{-arch},
@@ -54,6 +55,41 @@ If any of these variables are undefined, or if any of these variables are set to
 the package manager's behaviour is undefined; ideally, an error in one ebuild should not prevent
 operations upon other ebuilds or packages.
 
+\IFKDEBUILDELSE
+{
+    \begin{center}
+    \topcaption{EAPIs supporting \t{IUSE} defaults}
+    \tablehead{
+        \hline
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{IUSE} defaults?}} \\
+        \hline
+        }
+    \begin{mpxtabular}{ l l } \label{iuse-defaults-table}
+    \t{0} & No \\
+    \t{1} & Yes \\
+    \t{kdebuild-1} & Yes \\
+    \hline
+    \end{mpxtabular}
+    \end{center}
+}
+{
+    \begin{center}
+    \topcaption{EAPIs supporting \t{IUSE} defaults}
+    \tablehead{
+        \hline
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{IUSE} defaults?}} \\
+        \hline
+        }
+    \begin{mpxtabular}{ l l } \label{iuse-defaults-table}
+    \t{0} & No \\
+    \t{1} & Yes \\
+    \hline
+    \end{mpxtabular}
+    \end{center}
+}
+
 \section{Optional Ebuild-defined Variables}
 
 Ebuilds may define any of the following variables:
@@ -64,13 +100,42 @@ Ebuilds may define any of the following variables:
 \item[DEPEND] See section~\ref{dependencies}.
 \item[RDEPEND] See section~\ref{dependencies}.
 \item[PDEPEND] See section~\ref{dependencies}.
-\item[PROVIDE] Zero or more qualified package names of any \e{old style}
-    virtuals provided by this package. See section~\ref{dependencies} for full syntax.
-    \label{ebuild-var-provide}
-\item[EAPI] The EAPI, by default \t{0} or an empty string.
+\IFKDEBUILDELSE
+{
+    \item[PROVIDE] Zero or more qualified package names of any \e{old style}
+        virtuals provided by this package. See section~\ref{dependencies} for full syntax.  In EAPIs
+        listed in table~\ref{provide-table} as not supporting \t{PROVIDE}, ebuilds must not set this
+        variable and the package manager must reject any ebuild that does so.
+        \label{ebuild-var-provide}
+}{
+    \item[PROVIDE] Zero or more qualified package names of any \e{old style}
+        virtuals provided by this package. See section~\ref{dependencies} for full syntax.
+        \label{ebuild-var-provide}
+}
+\item[EAPI] The EAPI. See below for defaults.
 \item[RESTRICT] Zero or more behaviour restrictions for this package. See section~\ref{restrict}
     for value meanings and section~\ref{dependencies} for full syntax.
 \end{description}
+
+\IFKDEBUILDELSE
+{
+    \begin{center}
+    \topcaption{EAPIs supporting \t{PROVIDE}}
+    \tablehead{
+        \hline
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{PROVIDE}?}} \\
+        \hline
+    }
+    \begin{mpxtabular}{ l l } \label{provide-table}
+    \t{0} & Yes \\
+    \t{1} & Yes \\
+    \t{kdebuild-1} & No \\
+    \hline
+    \end{mpxtabular}
+    \end{center}
+}{
+}
 
 An empty \t{EAPI} value is equal to \t{0}. Ebuilds must not assume that they will get a particular
 one of these two values if they are expecting one of these two values.
@@ -80,27 +145,16 @@ before sourcing the ebuild for metadata generation. When using the ebuild for ot
 package manager must either pre-set \t{EAPI} to the value specified by the ebuild's metadata or
 ensure that it is unset.
 
+\IFKDEBUILDELSE
+{
+    When sourcing an ebuild with file extension \t{kdebuild-1}, the package manager must pre-set the
+    \t{EAPI} variable to \t{kdebuild-1}; leaving it empty is not allowed. Ebuilds with this
+    extension must not modify the \t{EAPI} variable.
+}{
+}
+
 If any of these variables are set to invalid values, the package manager's behaviour is undefined;
 ideally, an error in one ebuild should not prevent operations upon other ebuilds or packages.
-
-\subsection{Restrict}
-\label{restrict}
-
-The \t{RESTRICT} variable is a dependency-type variable as described in section~\ref{dependencies},
-with the following tokens as values:
-
-\begin{description}
-\item[mirror] The package's \t{SRC\_URI} entries may not be mirrored, and mirrors should not
-    be checked when fetching.
-\item[fetch] The package's \t{SRC\_URI} entries may not be downloaded automatically. If
-    entries are not available, \t{pkg\_nofetch} is called.
-\item[strip] No stripping of debug symbols from files to be installed may be performed.
-\item[userpriv] The package manager may not drop root privileges when building the package.
-\item[test] The \t{src\_test} phase must not be run.
-\item[sandbox] The \t{sandbox} tool must not be used when building the package.
-\end{description}
-
-Package managers may recognise other tokens, but ebuilds may not rely upon them being supported.
 
 \section{Magic Ebuild-defined Variables}
 

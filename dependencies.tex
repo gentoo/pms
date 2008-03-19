@@ -13,8 +13,8 @@ There are three classes of dependencies supported by ebuilds:
     the ebuild if they are not already installed.
 \end{compactitem}
 
-In addition, \t{SRC\_URI}, \t{HOMEPAGE}, \t{PROVIDE} and \t{LICENSE} use dependency-style
-specifications to specify their values.
+In addition, \t{SRC\_URI}, \t{HOMEPAGE}, \t{PROVIDE}, \t{RESTRICT} and \t{LICENSE} use
+dependency-style specifications to specify their values.
 
 \section{Dependency Specification Format}
 
@@ -25,7 +25,16 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 \item A package dependency specification. Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}.
 \item A simple qualified package name. Permitted in \t{PROVIDE} (and inside \t{DEPEND} etc
     via the previous item).
-\item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC\_URI} and \t{HOMEPAGE}.
+\IFKDEBUILDELSE
+{
+    \item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC\_URI} and \t{HOMEPAGE}.
+    In EAPIs listed in table~\ref{uri-arrows-table} as supporting \t{SRC\_URI} arrows, may
+    optionally be followed by whitespace, then \t{->}, then whitespace, then a simple filename
+    when in \t{SRC\_URI}. For \t{SRC\_URI} behaviour, see section~\ref{src-uri-behaviour}.
+}{
+    \item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC\_URI} and \t{HOMEPAGE}.
+    For \t{SRC\_URI} behaviour, see section~\ref{src-uri-behaviour}.
+}
 \item A flat filename. Permitted in \t{SRC\_URI}.
 \item A license name (e.g. \t{GPL-2}). Permitted in \t{LICENSE}.
 \item A simple string. Permitted in \t{RESTRICT}.
@@ -45,48 +54,69 @@ be surrounded on both sides by whitespace, except at the start and end of the st
     of any kind followed by whitespace), followed by a close parenthesis. More formally:
     \t{use-conditional ::= '!'? flag-name '?' whitespace '(' whitespace (item whitespace)* ')'}.
     Permitted in all specification style variables.
+\IFKDEBUILDELSE
+{
+    \item A label, which is a string without whitespace followed by a colon. Permitted in
+    \t{SRC\_URI} in EAPIs shown in table~\ref{uri-labels-table} as supporting \t{SRC\_URI} labels,
+    and in \t{PDEPEND} in EAPIs shown in table~\ref{pdepend-labels-table} as supporting \t{PDEPEND}
+    labels.
+}{
+}
 \end{compactitem}
 
 In particular, note that whitespace is not optional.
 
-\subsection{Package Dependency Specifications}
+\IFKDEBUILDELSE
+{
+    \begin{center}
+    \topcaption{EAPIs supporting \t{SRC\_URI} arrows}
+    \tablehead{
+        \hline
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{SRC\_URI} arrows?}} \\
+        \hline
+    }
+    \begin{mpxtabular}{ l l } \label{uri-arrows-table}
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{kdebuild-1} & Yes \\
+    \hline
+    \end{mpxtabular}
+    \end{center}
 
-A package dependency can be in one of the following base formats. A package manager must warn or
-error on non-compliant input.
+    \begin{center}
+    \topcaption{EAPIs supporting \t{SRC\_URI} labels}
+    \tablehead{
+        \hline
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{SRC\_URI} labels?}} \\
+        \hline
+    }
+    \begin{mpxtabular}{ l l } \label{uri-labels-table}
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{kdebuild-1} & Yes \\
+    \hline
+    \end{mpxtabular}
+    \end{center}
 
-\begin{compactitem}
-\item A simple \t{category/package} name.
-\item An operator, followed immediately by \t{category/package}, followed by a hyphen,
-   followed by a version specification.
-\end{compactitem}
-
-In EAPI 1, either of the above formats may additionally be suffixed by a \t{:slot}
-restriction. A package manager must warn or error if slot dependencies are used with EAPI 0.
-
-The following operators are available:
-
-\begin{description}
-\item[\t{<}] Strictly less than the specified version.
-\item[\t{<=}] Less than or equal to the specified version.
-\item[\t{=}] Exactly equal to the specified version. Special exception: if the version
-    specified has an asterisk immediately following it, a string prefix comparison is
-    used instead. When an asterisk is used, the specification must remain valid if the
-    asterisk were removed. (An asterisk used with any other operator is illegal.)
-\item[\t{\~}] Equal to the specified version, except the revision part of the matching
-    package may be greater than the revision part of the specified version (\t{-r0} is
-    assumed if no revision is explicitly stated).
-\item[\t{>=}] Greater than or equal to the specified version.
-\item[\t{>}] Strictly greater than the specified version.
-\end{description}
-
-If the specification is prefixed with an exclamation mark, the named dependency is a block rather
-than a requirement---that is to say, the specified package must not be installed, except with the
-following exceptions:
-
-\begin{compactitem}
-\item Blocks on a package provided by the ebuild do not count. \label{provided-blocks}
-\item Blocks on the ebuild itself do not count.
-\end{compactitem}
+    \begin{center}
+    \topcaption{EAPIs supporting \t{PDEPEND} labels}
+    \tablehead{
+        \hline
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{PDEPEND} labels?}} \\
+        \hline
+    }
+    \begin{mpxtabular}{ l l } \label{pdepend-labels-table}
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{kdebuild-1} & Yes \\
+    \hline
+    \end{mpxtabular}
+    \end{center}
+}{
+}
 
 \subsection{All-of Dependency Specifications}
 
@@ -107,6 +137,311 @@ In an any-of group, at least one immediate child element must be matched. A bloc
 considered to be matched if its associated package dependency specification is not matched.
 
 An empty any-of group counts as being matched.
+
+\IFKDEBUILDELSE
+{
+    \subsection{Labels}
+    \label{labels}
+
+    A label alters the behaviour of any subsequent items (including those inside subgroups) in the
+    current group. This is demonstrated by code listing~\ref{lst:labels-listing}.
+
+\lstinputlisting[float,caption=How labels are applied,label=lst:labels-listing]{labels.listing}
+}{
+}
+
+\subsection{Package Dependency Specifications}
+
+A package dependency can be in one of the following base formats. A package manager must warn or
+error on non-compliant input.
+
+\begin{compactitem}
+\item A simple \t{category/package} name.
+\item An operator, as described in section~\ref{dep-operator}, followed immediately by
+    \t{category/package}, followed by a hyphen, followed by a version specification.
+\end{compactitem}
+
+In EAPIs shown in table~\ref{slot-deps-table} as supporting \t{SLOT} dependencies, either of the
+above formats may additionally be suffixed by a \t{:slot} restriction, as described in
+section~\ref{slot-dep}. A package manager must warn or error if slot dependencies are used with an
+EAPI not supporting \t{SLOT} dependencies.
+
+\IFKDEBUILDELSE
+{
+    In EAPIs shown in table~\ref{range-deps-table} as supporting ranged dependencies, a
+    specification that does not use an operator at the start may additionally be suffixed by one
+    \t{[range]} restriction, as described in section~\ref{range-dep}. A package manager must warn or
+    error if this feature is used with an EAPI not supporting ranged dependencies.
+
+    In EAPIs shown in table~\ref{use-deps-table} as supporting \t{USE} dependencies, a specification
+    may additionally be suffixed by one or more \t{[use]} restrictions, as described in
+    section~\ref{use-dep}. A package manager must warn or error if this feature is used with an EAPI
+    not supporting use dependencies.
+
+    \note Order is important. The slot restriction must come before the range restriction, which
+    must come before use dependencies.
+}{
+}
+
+\IFKDEBUILDELSE
+{
+    \begin{center}
+    \topcaption{EAPIs supporting \t{SLOT} dependencies}
+    \tablehead{
+        \hline
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{Supports \t{SLOT} dependencies?}} \\
+            \hline
+    }
+    \begin{mpxtabular}{ l l } \label{slot-deps-table}
+    \t{0} & No \\
+    \t{1} & Named only \\
+    \t{kdebuild-1} & Named and operator \\
+    \hline
+    \end{mpxtabular}
+    \end{center}
+}{
+    \begin{center}
+    \topcaption{EAPIs supporting \t{SLOT} dependencies}
+    \tablehead{
+        \hline
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{Supports \t{SLOT} dependencies?}} \\
+            \hline
+    }
+    \begin{mpxtabular}{ l l } \label{slot-deps-table}
+    \t{0} & No \\
+    \t{1} & Yes \\
+    \hline
+    \end{mpxtabular}
+    \end{center}
+}
+
+\IFKDEBUILDELSE
+{
+    \begin{center}
+    \topcaption{EAPIs supporting ranged dependencies}
+    \tablehead{
+        \hline
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports ranged dependencies?}} \\
+        \hline
+    }
+    \begin{mpxtabular}{ l l } \label{range-deps-table}
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{kdebuild-1} & Yes \\
+    \hline
+    \end{mpxtabular}
+    \end{center}
+
+    \begin{center}
+    \topcaption{EAPIs supporting \t{USE} dependencies}
+    \tablehead{
+        \hline
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{USE} dependencies?}} \\
+        \hline
+    }
+    \begin{mpxtabular}{ l l } \label{use-deps-table}
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{kdebuild-1} & Yes \\
+    \hline
+    \end{mpxtabular}
+    \end{center}
+}{
+}
+
+\subsubsection{Operators}
+\label{dep-operator}
+
+The following operators are available:
+
+\begin{description}
+\item[\t{<}] Strictly less than the specified version.
+\item[\t{<=}] Less than or equal to the specified version.
+\item[\t{=}] Exactly equal to the specified version. Special exception: if the version
+    specified has an asterisk immediately following it, a string prefix comparison is
+    used instead. When an asterisk is used, the specification must remain valid if the
+    asterisk were removed. (An asterisk used with any other operator is illegal.)
+\item[\t{\~}] Equal to the specified version, except the revision part of the matching
+    package may be greater than the revision part of the specified version (\t{-r0} is
+    assumed if no revision is explicitly stated).
+\item[\t{>=}] Greater than or equal to the specified version.
+\item[\t{>}] Strictly greater than the specified version.
+\end{description}
+
+\subsubsection{Block Operator}
+
+If the specification is prefixed with an exclamation mark, the named dependency is a block rather
+than a requirement---that is to say, the specified package must not be installed, except with the
+following exceptions:
+
+\begin{compactitem}
+\item Blocks on a package provided by the ebuild do not count. \label{provided-blocks}
+\item Blocks on the ebuild itself do not count.
+\end{compactitem}
+
+\subsubsection{Slot Dependencies}
+\label{slot-dep}
+
+A named slot dependency consists of a colon followed by a slot name. A specification with a named
+slot dependency matches only if the slot of the matched package is equal to the slot specified. If
+the slot of the package to match cannot be determined (e.g. because it is not a supported \t{EAPI}),
+the match is treated as unsuccessful.
+
+\IFKDEBUILDELSE
+{
+    An operator slot dependency consists of a colon followed by one of the following operators:
+
+    \begin{description}
+    \item[*] Indicates that any slot value is acceptable. In addition, for runtime dependencies,
+    indicates that the package will not break if the matched package is uninstalled and replaced by
+    a different matching package in a different slot.
+    \item[=] Indicates that any slot value is acceptable. In addition, for runtime dependencies,
+    indicates that the package will break unless a matching package with slot equal to the slot of
+    the best installed version at the time the package was installed is available.
+    \end{description}
+
+    To implement the equals slot operator, the package manager will need to store the slot of the
+    best installed version of the matching package. The package manager may do this by appending
+    the appropriate slot after the equals sign when saving the package's dependencies. This syntax
+    is only for package manager use and must not be used by ebuilds.
+}{
+}
+
+\IFKDEBUILDELSE
+{
+    \subsubsection{Ranged Dependencies}
+    \label{range-dep}
+
+    A ranged dependency consists of an open square bracket, followed by zero or more of (a depend
+    operator followed by a version spec followed by a logical operator) followed by a depend
+    operator followed by a version spec followed by a close equare bracket. More formally:
+    \t{ranged-dep ::= '[' (op ver logical-op)* op ver ']' }.
+
+    The following logical operators are supported:
+
+    \begin{description}
+    \item[\&] An 'and' match. All op-ver pairs must match for a successful match.
+    \item[|] An 'or' match. At least one op-ver pair must match for a successful match.
+    \end{description}
+
+    A ranged dependency must not mix logical operators.
+}{
+}
+
+\IFKDEBUILDELSE
+{
+    \subsubsection{Use Dependencies}
+    \label{use-dep}
+
+    A use dependency consists of one of the following:
+
+    \begin{description}
+    \item{[opt]} The flag must be enabled.
+    \item{[opt=]} The flag must be enabled if the flag is enabled for the package with the
+        dependency, or disabled otherwise.
+    \item{[opt!=]} The flag must be disabled if the flag is enabled for the package with the
+        dependency, or enabled otherwise.
+    \item{[opt?]} The flag must be enabled if the flag is enabled for the package with the
+        dependency.
+    \item{[opt!?]} The flag must be enabled if the use flag is disabled for the package with the
+        dependency.
+    \item{[-opt]} The flag must be disabled.
+    \item{[-opt?]} The flag must be disabled if the flag is enabled for the package with the
+        dependency.
+    \item{[-opt!?]} The flag must be disabled if the flag is disabled for the package with the
+        dependency.
+    \end{description}
+
+    When multiple use dependencies are specified, all must match for a successful match.
+}{
+}
+
+\IFKDEBUILDELSE
+{
+    \subsection{Package Dependency Labels}
+
+    In EAPIs supporting \t{PDEPEND} labels, the following labels are legal. See
+    section~\ref{labels} for label behaviour in general.
+
+    \begin{description}
+    \item[required] Indicates a required post dependency.
+    \item[suggested] Indicates a suggested post dependency. The package manager may ignore the
+        suggestion or install it at user option.
+    \end{description}
+
+    The default label is \t{required}.
+}{
+}
+
+\subsection{Restrict}
+\label{restrict}
+
+The following tokens are permitted inside \t{RESTRICT}:
+
+\begin{description}
+\item[mirror] The package's \t{SRC\_URI} entries may not be mirrored, and mirrors should not
+    be checked when fetching.
+\item[fetch] The package's \t{SRC\_URI} entries may not be downloaded automatically. If
+    entries are not available, \t{pkg\_nofetch} is called.
+\item[strip] No stripping of debug symbols from files to be installed may be performed.
+\item[userpriv] The package manager may not drop root privileges when building the package.
+\item[test] The \t{src\_test} phase must not be run.
+\item[sandbox] The \t{sandbox} tool must not be used when building the package.
+\end{description}
+
+Package managers may recognise other tokens, but ebuilds may not rely upon them being supported.
+
+\subsection{SRC\_URI}
+\label{src-uri-behaviour}
+
+All filename components that are enabled (i.e. not inside a use-conditional block that is not
+matched) in \t{SRC\_URI} must be available in the \t{DISTDIR} directory. In addition, these
+components are used to make the \t{A} and \t{AA} variables.
+
+If a component contains a full URI with protocol, that download location must be used. Package
+managers may also consult mirrors for their files.
+
+The special \t{mirror://} protocol must be supported. See section~\ref{thirdpartymirrors} for mirror
+details.
+
+If a simple filename rather than a full URI is provided, the package manager can only use mirrors to
+download the file.
+
+\IFKDEBUILDELSE
+{
+    The \t{RESTRICT} metadata key can be used to impose additional restrictions upon downloading---see
+    section~\ref{restrict} for details. Labels also alter behaviour---see below for details.
+}{
+    The \t{RESTRICT} metadata key can be used to impose additional restrictions upon downloading---see
+    section~\ref{restrict} for details.
+}
+
+\IFKDEBUILDELSE
+{
+In EAPIs supporting arrows, if an arrow is used, the filename used when saving to \t{DISTDIR} shall
+instead be the name on the right of the arrow. When consulting mirrors (except for those explicitly
+listed on the left of the arrow, if \t{mirror://} is used), the filename to the right of the arrow
+shall be requested instead of the filename in the URI.
+
+In EAPIs supporting labels, the following labels are legal. See section~\ref{labels} for label
+behaviour in general.
+
+\begin{description}
+\item[mirrors-first] Mirrors shall be consulted before the listed URI.
+\item[mirrors-only] Only mirrors shall be consulted, and the listed URI shall be ignored.
+\item[listed-first] The listed URI shall be consulted before mirrors.
+\item[listed-only] Only the listed URI shall be consulted.
+\item[manual] No URI shall be consulted. A manual download is required.
+\end{description}
+
+The default label is \t{mirrors-first}, unless \t{RESTRICT} contains \t{mirror}, in which case it is
+\t{listed-only}, unless \t{RESTRICT} contains \t{fetch}, in which case it is \t{manual}.
+}{
+}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 

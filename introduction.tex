@@ -37,27 +37,54 @@ applicable to tools or other applications that interact with ebuilds or ebuild r
 \section{EAPIs}
 
 An EAPI can be thought of as a `version' of this specification to which a package conforms. An EAPI
-value is a string (all EAPIs defined by this specification currently use an integer, but package
-managers must not assume that this will hold in the future, and package managers must not assume
-that any kind of comparison other than equality between EAPI values makes sense). There are two
-EAPIs defined by this specification:
+value is a string. The following EAPIs are defined by this specification:
 
 \begin{description}
 \item[0] The `original' base EAPI.
 \item[1] EAPI `1' contains a number of extensions to EAPI `0'. Except where explicitly noted, it is
     in all other ways identical to EAPI `0'.
+\IFKDEBUILDELSE
+{
+    \item[kdebuild-1] A series of extensions to EAPI `1' used by the Gentoo KDE project. Except where
+        explicitly noted, it is in all other ways identical to EAPI `1'.
+}{
+}
 \end{description}
 
-Except where explicitly noted, everything in this specification applies to both EAPIs.
+\ifthenelse{\boolean{ENABLE-ALL-OPTIONS}}
+{
+    \note We're not sure whether \t{kdebuild-1} will end up in the final version of this
+    specification. For now, it's included but can easily be hidden using a switch in the master
+    \t{pms.tex} file. To make editing easier, we also have a mode that shows the document both with
+    and without the \t{kdebuild-1} stuff enabled. You currently have that mode enabled---
+    \IFKDEBUILDELSE{
+        text only shown when \t{kdebuild-1} is enabled looks like this,
+    }{
+        and text only shown when it is disabled looks like this.
+    }
+}{
+}
+
+Except where explicitly noted, everything in this specification applies to all EAPIs.
 
 If a package manager encounters a package version with an unrecognised EAPI, it must not attempt to
 perform any operations upon it. It could, for example, ignore the package version entirely (although
 this can lead to user confusion), or it could mark the package version as masked. A package manager
 must not use any metadata generated from a package with an unrecognised EAPI.
 
-EAPIs whose value consists purely of an integer are reserved for future versions of this
-specification. EAPIs whose value starts with the string \t{paludis-} are reserved for experimental
-use by the Paludis package manager.
+The package manager must not attempt to perform any kind of comparison test other than equality upon
+EAPIs.
+
+\subsection{Reserved EAPIs}
+
+\begin{compactitem}
+\item EAPIs whose value consists purely of an integer are reserved for future versions of this
+    specification.
+\item EAPIs whose value starts with the string \t{paludis-} are reserved for experimental
+    use by the Paludis package manager.
+\item EAPIs whose value starts iwth the string \t{kdebuild-} are reserved for the Gentoo KDE
+    project.
+\end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 
