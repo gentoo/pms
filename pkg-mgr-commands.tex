@@ -381,10 +381,14 @@ has returned.
         argument. The initial value of the expression is \t{s:\$\{D\}::g}.
 }
 
-\item[unpack] Unpacks a source archive into the current directory. After unpacking, must
-    ensure that all filesystem objects inside the current working directory (but not the current working
-    directory itself) have permissions \t{a+r,u+w,go-w} and that all directories under the current
-    working directory additionally have permissions \t{a+x}.
+\item[unpack] Unpacks one or more source archives, in order, into the current directory. After
+    unpacking, must ensure that all filesystem objects inside the current working directory (but not
+    the current working directory itself) have permissions \t{a+r,u+w,go-w} and that all directories
+    under the current working directory additionally have permissions \t{a+x}.
+
+    All arguments to \t{unpack} must be either a filename without path, in which case \t{unpack}
+    looks in \t{DISTDIR} for the file, or start with the string \t{./}, in which case \t{unpack}
+    uses the argument as a path relative to the working directory.
 
     Must be able to unpack the following file formats, if the relevant binaries are available:
     \begin{itemize}
