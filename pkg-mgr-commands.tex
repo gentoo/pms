@@ -392,17 +392,20 @@ has returned.
 
     Must be able to unpack the following file formats, if the relevant binaries are available:
     \begin{itemize}
-    \item tar files (\t{*.tar})
-    \item gzip-compressed tar files (\t{*.tar.gz, *.tgz, *.tar.Z, *.tbz})
-    \item bzip2-compressed tar files (\t{*.tar.bz2, *.tbz2, *.tar.bz})
-    \item zip files (\t{*.zip, *.ZIP, *.jar}) (with \t{unzip} available)
-    \item gzip files (\t{*.gz, *.Z, *.z})
-    \item bzip2 files (\t{*.bz, *.bz2})
-    \item 7zip files (\t{*.7z, *.7Z})
-    \item rar files (\t{*.rar, *.RAR}) (with \t{unrar} available)
-    \item LHA archives (\t{*.LHA, *.LHa, *.lha, *.lhz}) (with \t{lha} available)
-    \item ar archives (\t{*.a, *.deb})
-    \item lzma archives (\t{*.lzma})
+    \item tar files (\t{*.tar}). Ebuilds must ensure that GNU tar installed.
+    \item gzip-compressed tar files (\t{*.tar.gz, *.tgz, *.tar.Z, *.tbz}). Ebuilds must ensure that
+    GNU gzip and GNU tar are installed.
+    \item bzip2-compressed tar files (\t{*.tar.bz2, *.tbz2, *.tar.bz}). Ebuilds must ensure that
+    bzip2 and GNU tar are installed.
+    \item zip files (\t{*.zip, *.ZIP, *.jar}). Ebuilds must ensure that Info-ZIP Unzip is installed.
+    \item gzip files (\t{*.gz, *.Z, *.z}). Ebuilds must ensure that GNU gzip is installed.
+    \item bzip2 files (\t{*.bz, *.bz2}). Ebuilds must ensure that bzip2 is installed.
+    \item 7zip files (\t{*.7z, *.7Z}). Ebuilds must ensure that P7ZIP is installed.
+    \item rar files (\t{*.rar, *.RAR}). Ebuilds must ensure that RARLAB's unrar is installed.
+    \item LHA archives (\t{*.LHA, *.LHa, *.lha, *.lhz}). Ebuilds must ensure that the lha program is
+    installed.
+    \item ar archives (\t{*.a, *.deb}). Ebuilds must ensure that GNU binutils is installed.
+    \item lzma archives (\t{*.lzma}). Ebuilds must ensure that LZMA Utils is installed.
     \end{itemize}
     It is up to the ebuild to ensure that the relevant external utilities are available, whether by
     being in the system set or via dependencies.
