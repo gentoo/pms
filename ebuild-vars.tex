@@ -173,10 +173,9 @@ The following variables must be defined by \t{inherit}, and may be considered to
 of the ebuild's metadata:
 
 \begin{description}
-\item[ECLASS] The current eclass, or unset if there is no current eclass. Again, this is handled
-\item[INHERITED] List of inherited eclass names. This is handled magically by \t{inherit} and
-    must not be modified manually.
-    magically by \t{inherit}.
+\item[ECLASS] The current eclass, or unset if there is no current eclass. This is handled magically
+	by \t{inherit} and must not be modified manually.
+\item[INHERITED] List of inherited eclass names. Again, this is handled magically by \t{inherit}.
 \end{description}
 
 \note Thus, by extension of section~\ref{metadata-invariance}, \t{inherit} may not be used
