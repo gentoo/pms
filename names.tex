@@ -74,21 +74,21 @@ This may optionally be followed by the suffix \t{-r} followed immediately by an 
 
 \IFKDEBUILDELSE
 {
+    \begin{table}
     \begin{center}
-    \topcaption{EAPIs requiring \t{scm} support}
-    \tablehead{
+    \abovecaption{EAPIs requiring \t{scm} support} \label{scm-table}
+    \begin{tabular}{ l l }
         \hline
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{Requires \t{scm} support?}} \\
         \hline
-    }
-    \begin{mpxtabular}{ l l } \label{scm-table}
     \t{0} & No \\
     \t{1} & No \\
     \t{kdebuild-1} & Yes \\
     \hline
-    \end{mpxtabular}
+    \end{tabular}
     \end{center}
+    \end{table}
 }{
 }
 

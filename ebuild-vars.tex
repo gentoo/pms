@@ -57,37 +57,37 @@ operations upon other ebuilds or packages.
 
 \IFKDEBUILDELSE
 {
+    \begin{table}
     \begin{center}
-    \topcaption{EAPIs supporting \t{IUSE} defaults}
-    \tablehead{
+    \abovecaption{EAPIs supporting \t{IUSE} defaults} \label{iuse-defaults-table}
+    \begin{tabular}{ l l }
         \hline
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{Supports \t{IUSE} defaults?}} \\
         \hline
-        }
-    \begin{mpxtabular}{ l l } \label{iuse-defaults-table}
     \t{0} & No \\
     \t{1} & Yes \\
     \t{kdebuild-1} & Yes \\
     \hline
-    \end{mpxtabular}
+    \end{tabular}
     \end{center}
+    \end{table}
 }
 {
+    \begin{table}
     \begin{center}
-    \topcaption{EAPIs supporting \t{IUSE} defaults}
-    \tablehead{
+    \abovecaption{EAPIs supporting \t{IUSE} defaults} \label{iuse-defaults-table}
+    \begin{tabular}{ l l }
         \hline
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{Supports \t{IUSE} defaults?}} \\
         \hline
-        }
-    \begin{mpxtabular}{ l l } \label{iuse-defaults-table}
     \t{0} & No \\
     \t{1} & Yes \\
     \hline
-    \end{mpxtabular}
+    \end{tabular}
     \end{center}
+    \end{table}
 }
 
 \section{Optional Ebuild-defined Variables}
@@ -120,21 +120,21 @@ Ebuilds may define any of the following variables:
 
 \IFKDEBUILDELSE
 {
+    \begin{table}
     \begin{center}
-    \topcaption{EAPIs supporting \t{PROVIDE}}
-    \tablehead{
+    \abovecaption{EAPIs supporting \t{PROVIDE}} \label{provide-table}
+    \begin{tabular}{ l l }
         \hline
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{Supports \t{PROVIDE}?}} \\
         \hline
-    }
-    \begin{mpxtabular}{ l l } \label{provide-table}
     \t{0} & Yes \\
     \t{1} & Yes \\
     \t{kdebuild-1} & No \\
     \hline
-    \end{mpxtabular}
+    \end{tabular}
     \end{center}
+    \end{table}
 }{
 }
 

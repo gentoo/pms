@@ -13,9 +13,10 @@ behaviour.
     Some commands are banned in some EAPIs. If a banned command is called, the package manager must
     abort the build process indicating an error.
 
+    \begin{table}
     \begin{center}
-    \topcaption{Banned commands}
-    \tablehead{
+    \abovecaption{Banned commands} \label{banned-commands-table}
+    \begin{tabular}{ l l l l }
         \hline
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{3}{c}{\textbf{Command banned?}} \\
@@ -24,14 +25,13 @@ behaviour.
         \multicolumn{1}{c}{\textbf{\t{dohtml}}} &
         \multicolumn{1}{c}{\textbf{\t{dosed}}} \\
         \hline
-    }
-    \begin{mpxtabular}{ l l l l } \label{banned-commands-table}
     \t{0} & No & No & No \\
     \t{1} & No & No & No \\
     \t{kdebuild-1} & Yes & Yes & Yes \\
     \hline
-    \end{mpxtabular}
+    \end{tabular}
     \end{center}
+    \end{table}
 }{
 }
 
@@ -282,21 +282,21 @@ has returned.
 
 \IFKDEBUILDELSE
 {
+    \begin{table}
     \begin{center}
-    \topcaption{EAPIs where \t{dosym} makes the directory}
-    \tablehead{
+    \abovecaption{EAPIs where \t{dosym} makes the directory} \label{dosym-table}
+    \begin{tabular}{ l l }
         \hline
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{\t{dosym} makes the directory?}} \\
         \hline
-    }
-    \begin{mpxtabular}{ l l } \label{dosym-table}
     \t{0} & Yes \\
     \t{1} & Yes \\
     \t{kdebuild-1} & No \\
     \hline
-    \end{mpxtabular}
+    \end{tabular}
     \end{center}
+    \end{table}
 }{
 }
 

@@ -86,36 +86,38 @@ src_compile() {
 
 \IFKDEBUILDELSE
 {
+    \begin{table}
     \begin{center}
-    \topcaption{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}}
-    \tablehead{
+    \abovecaption{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}} \label{src-compile-table}
+    \begin{tabular}{ l l }
         \hline
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{Supports \t{ECONF\_SOURCE}?}} \\
         \hline
-        }
-    \begin{mpxtabular}{ l l } \label{src-compile-table}
     \t{0} & No \\
     \t{1} & Yes \\
     \t{kdebuild-1} & Yes \\
     \hline
-    \end{mpxtabular}
+    \end{tabular}
     \end{center}
+    \end{table}
 }{
+    \begin{table}
     \begin{center}
-    \topcaption{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}}
+    \abovecaption{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}} \label{src-compile-table}
+    \begin{tabular}{ l l }
     \tablehead{
         \hline
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{Supports \t{ECONF\_SOURCE}?}} \\
         \hline
         }
-    \begin{mpxtabular}{ l l } \label{src-compile-table}
     \t{0} & No \\
     \t{1} & Yes \\
     \hline
-    \end{mpxtabular}
+    \end{tabular}
     \end{center}
+    \end{table}
 }
 
 \subsection{src\_test}
@@ -138,21 +140,21 @@ The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{res
     place). In others, it must always be run (excepting restrictions). See table~\ref{test-required-table}
     for which EAPIs fit into which category.
 
+    \begin{table}
     \begin{center}
-    \topcaption{EAPIs requiring \t{src\_test}}
-    \tablehead{
+    \abovecaption{EAPIs requiring \t{src\_test}} \label{test-required-table}
+    \begin{tabular}{ l l }
         \hline
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{Requires \t{src\_test}?}} \\
         \hline
-        }
-    \begin{mpxtabular}{ l l } \label{test-required-table}
     \t{0} & At user option \\
     \t{1} & At user option \\
     \t{kdebuild-1} & Required \\
     \hline
-    \end{mpxtabular}
+    \end{tabular}
     \end{center}
+    \end{table}
 }{
 }
 
@@ -232,21 +234,21 @@ fully installed. It is the only ebuild function which may be interactive and pro
 
 \IFKDEBUILDELSE
 {
+    \begin{table}
     \begin{center}
-    \topcaption{EAPIs supporting \t{pkg\_info} on uninstalled packages}
-    \tablehead{
+    \abovecaption{EAPIs supporting \t{pkg\_info} on uninstalled packages} \label{pkg-info-table}
+    \begin{tabular}{ l l }
         \hline
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{Supports \t{pkg\_info} on uninstalled packages?}} \\
         \hline
-    }
-    \begin{mpxtabular}{ l l } \label{pkg-info-table}
     \t{0} & No \\
     \t{1} & No \\
     \t{kdebuild-1} & Yes \\
     \hline
-    \end{mpxtabular}
+    \end{tabular}
     \end{center}
+    \end{table}
 }{
 }
 

@@ -68,53 +68,53 @@ In particular, note that whitespace is not optional.
 
 \IFKDEBUILDELSE
 {
+    \begin{table}
     \begin{center}
-    \topcaption{EAPIs supporting \t{SRC\_URI} arrows}
-    \tablehead{
+    \abovecaption{EAPIs supporting \t{SRC\_URI} arrows} \label{uri-arrows-table}
+    \begin{tabular}{ l l }
         \hline
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{Supports \t{SRC\_URI} arrows?}} \\
         \hline
-    }
-    \begin{mpxtabular}{ l l } \label{uri-arrows-table}
     \t{0} & No \\
     \t{1} & No \\
     \t{kdebuild-1} & Yes \\
     \hline
-    \end{mpxtabular}
+    \end{tabular}
     \end{center}
+    \end{table}
 
+    \begin{table}
     \begin{center}
-    \topcaption{EAPIs supporting \t{SRC\_URI} labels}
-    \tablehead{
+    \abovecaption{EAPIs supporting \t{SRC\_URI} labels} \label{uri-labels-table}
+    \begin{tabular}{ l l }
         \hline
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{Supports \t{SRC\_URI} labels?}} \\
         \hline
-    }
-    \begin{mpxtabular}{ l l } \label{uri-labels-table}
     \t{0} & No \\
     \t{1} & No \\
     \t{kdebuild-1} & Yes \\
     \hline
-    \end{mpxtabular}
+    \end{tabular}
     \end{center}
+    \end{table}
 
+    \begin{table}
     \begin{center}
-    \topcaption{EAPIs supporting \t{PDEPEND} labels}
-    \tablehead{
+    \abovecaption{EAPIs supporting \t{PDEPEND} labels} \label{pdepend-labels-table}
+    \begin{tabular}{ l l }
         \hline
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{Supports \t{PDEPEND} labels?}} \\
         \hline
-    }
-    \begin{mpxtabular}{ l l } \label{pdepend-labels-table}
     \t{0} & No \\
     \t{1} & No \\
     \t{kdebuild-1} & Yes \\
     \hline
-    \end{mpxtabular}
+    \end{tabular}
     \end{center}
+    \end{table}
 }{
 }
 
@@ -185,71 +185,71 @@ EAPI not supporting \t{SLOT} dependencies.
 
 \IFKDEBUILDELSE
 {
+    \begin{table}
     \begin{center}
-    \topcaption{EAPIs supporting \t{SLOT} dependencies}
-    \tablehead{
+    \abovecaption{EAPIs supporting \t{SLOT} dependencies} \label{slot-deps-table}
+    \begin{tabular}{ l l }
         \hline
             \multicolumn{1}{c}{\textbf{EAPI}} &
             \multicolumn{1}{c}{\textbf{Supports \t{SLOT} dependencies?}} \\
             \hline
-    }
-    \begin{mpxtabular}{ l l } \label{slot-deps-table}
     \t{0} & No \\
     \t{1} & Named only \\
     \t{kdebuild-1} & Named and operator \\
     \hline
-    \end{mpxtabular}
+    \end{tabular}
     \end{center}
+    \end{table}
 }{
+    \begin{table}
     \begin{center}
-    \topcaption{EAPIs supporting \t{SLOT} dependencies}
-    \tablehead{
+    \abovecaption{EAPIs supporting \t{SLOT} dependencies} \label{slot-deps-table}
+    \begin{tabular}{ l l }
         \hline
             \multicolumn{1}{c}{\textbf{EAPI}} &
             \multicolumn{1}{c}{\textbf{Supports \t{SLOT} dependencies?}} \\
             \hline
-    }
-    \begin{mpxtabular}{ l l } \label{slot-deps-table}
     \t{0} & No \\
     \t{1} & Yes \\
     \hline
-    \end{mpxtabular}
+    \end{tabular}
     \end{center}
+    \end{table}
 }
 
 \IFKDEBUILDELSE
 {
+    \begin{table}
     \begin{center}
-    \topcaption{EAPIs supporting ranged dependencies}
-    \tablehead{
+    \abovecaption{EAPIs supporting ranged dependencies} \label{range-deps-table}
+    \begin{tabular}{ l l }
         \hline
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{Supports ranged dependencies?}} \\
         \hline
-    }
-    \begin{mpxtabular}{ l l } \label{range-deps-table}
     \t{0} & No \\
     \t{1} & No \\
     \t{kdebuild-1} & Yes \\
     \hline
-    \end{mpxtabular}
+    \end{tabular}
     \end{center}
+    \end{table}
 
+    \begin{table}
     \begin{center}
-    \topcaption{EAPIs supporting \t{USE} dependencies}
-    \tablehead{
+    \abovecaption{EAPIs supporting \t{USE} dependencies} \label{use-deps-table}
+    \begin{tabular}{ l l }
         \hline
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{Supports \t{USE} dependencies?}} \\
         \hline
-    }
-    \begin{mpxtabular}{ l l } \label{use-deps-table}
     \t{0} & No \\
     \t{1} & No \\
     \t{kdebuild-1} & Yes \\
     \hline
-    \end{mpxtabular}
+    \end{tabular}
     \end{center}
+    \end{table}
 }{
 }
 
