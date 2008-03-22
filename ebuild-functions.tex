@@ -90,14 +90,14 @@ src_compile() {
     \begin{center}
     \abovecaption{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}} \label{src-compile-table}
     \begin{tabular}{ l l }
-        \hline
+        \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{Supports \t{ECONF\_SOURCE}?}} \\
-        \hline
+        \midrule
     \t{0} & No \\
     \t{1} & Yes \\
     \t{kdebuild-1} & Yes \\
-    \hline
+    \bottomrule
     \end{tabular}
     \end{center}
     \end{table}
@@ -107,14 +107,14 @@ src_compile() {
     \abovecaption{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}} \label{src-compile-table}
     \begin{tabular}{ l l }
     \tablehead{
-        \hline
+        \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{Supports \t{ECONF\_SOURCE}?}} \\
-        \hline
+        \midrule
         }
     \t{0} & No \\
     \t{1} & Yes \\
-    \hline
+    \bottomrule
     \end{tabular}
     \end{center}
     \end{table}
@@ -144,14 +144,14 @@ The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{res
     \begin{center}
     \abovecaption{EAPIs requiring \t{src\_test}} \label{test-required-table}
     \begin{tabular}{ l l }
-        \hline
+        \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{Requires \t{src\_test}?}} \\
-        \hline
+        \midrule
     \t{0} & At user option \\
     \t{1} & At user option \\
     \t{kdebuild-1} & Required \\
-    \hline
+    \bottomrule
     \end{tabular}
     \end{center}
     \end{table}
@@ -238,14 +238,14 @@ fully installed. It is the only ebuild function which may be interactive and pro
     \begin{center}
     \abovecaption{EAPIs supporting \t{pkg\_info} on uninstalled packages} \label{pkg-info-table}
     \begin{tabular}{ l l }
-        \hline
+        \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{Supports \t{pkg\_info} on uninstalled packages?}} \\
-        \hline
+        \midrule
     \t{0} & No \\
     \t{1} & No \\
     \t{kdebuild-1} & Yes \\
-    \hline
+    \bottomrule
     \end{tabular}
     \end{center}
     \end{table}
