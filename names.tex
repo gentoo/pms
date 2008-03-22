@@ -115,6 +115,14 @@ Any subsequent components of the number part are compared as follows:
   and the components are compared using a stringwise comparison.
 \end{compactitem}
 
+If one number part is a prefix of the other, then the version with the longer number part is
+\IFKDEBUILDELSE
+{
+    greater, unless the shorter part is immediately followed by \t{-scm}, in which
+    case the version with the shorter part is greater.
+}{
+    greater.
+}
 Note in particular that \t{1.0} is less than \t{1.0.0}.
 
 Letter suffixes are compared alphabetically, with any letter being newer than no letter.
