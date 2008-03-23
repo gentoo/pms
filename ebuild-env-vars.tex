@@ -11,16 +11,19 @@ phases as would normally happen due to environment saving (see~\ref{ebuild-env-s
 different \t{pkg\_*} phases. Ebuilds must recalculate any variable they derive from an inconsistent
 variable.
 
-\topcaption{Defined variables}
-\tablehead{
+\begin{longtable}{l p{0.15\textwidth} l p{0.5\textwidth}}
+\caption{Defined variables}\\
     \toprule
     \multicolumn{1}{c}{\b{Variable}} &
     \multicolumn{1}{c}{\b{Legal in}} &
     \multicolumn{1}{c}{\b{Consistent?}} &
     \multicolumn{1}{c}{\b{Description}} \\
     \midrule
-}
-\begin{mpxtabular}{ l p{0.15\textwidth} l p{0.5\textwidth} }
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
 \t{P} &
     all &
     No\footnote{May change if a package has been updated (see~\ref{updates-dir})} &
@@ -144,8 +147,7 @@ variable.
     Yes &
     The full path to the ebuild's working directory, in which all build data should be
     contained. \label{env-var-WORKDIR} \\
-\bottomrule
-\end{mpxtabular}
+\end{longtable}
 
 All variables set in the active profiles' \t{make.defaults} files must be exported to the ebuild
 environment. \t{CHOST}, \t{CBUILD} and \t{CTARGET}, if not set by profiles, must contain either an
