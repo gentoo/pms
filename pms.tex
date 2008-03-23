@@ -9,6 +9,7 @@
 % algorithmic and algorithm to be loaded last to avoid failures
 \usepackage{appendix,
   booktabs,
+  color,
   enumitem,
   fullpage,
   graphicx,
@@ -48,6 +49,9 @@
   \end{table}
 }
 
+\definecolor{deepblue}{rgb}{0.0, 0.2, 0.7}
+\definecolor{deeppurple}{rgb}{0.7, 0.0, 0.8}
+
 \newboolean{ENABLE-ALL-OPTIONS}
 \newboolean{ENABLE-KDEBUILD}
 
@@ -58,11 +62,8 @@
 %%% Enable the below if you'd like to see KDEBUILD things.
 \setboolean{ENABLE-KDEBUILD}{true}
 
-\usepackage{color}
 \ifthenelse{\boolean{ENABLE-ALL-OPTIONS}}
 {
-    \definecolor{deepblue}{rgb}{0.0, 0.2, 0.7}
-    \definecolor{deeppurple}{rgb}{0.7, 0.0, 0.8}
     \newcommand{\IFKDEBUILDELSE}[2]{{\color{deepblue} #1}{\color{deeppurple} #2}}
 }{
     \ifthenelse{\boolean{ENABLE-KDEBUILD}}
