@@ -6,8 +6,8 @@
 }
 \usepackage[scaled=.90]{helvet}
 %
-\usepackage{algorithm,
-  algorithmic,
+% algorithmic and algorithm to be loaded last to avoid failures
+\usepackage{
   appendix,
   booktabs,
   enumitem,
@@ -19,6 +19,8 @@
   paralist,
   parskip,
   xtab,
+  algorithm,
+  algorithmic
 }
 \usepackage[position=top]{caption}
 \usepackage[utf8]{inputenc}
