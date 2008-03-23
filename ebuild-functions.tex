@@ -87,7 +87,7 @@ src_compile() {
 \IFKDEBUILDELSE
 {
     \begin{table}
-    \begin{center}
+    \centering
     \abovecaption{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}} \label{src-compile-table}
     \begin{tabular}{ l l }
         \toprule
@@ -99,11 +99,10 @@ src_compile() {
     \t{kdebuild-1} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{center}
     \end{table}
 }{
     \begin{table}
-    \begin{center}
+    \centering
     \abovecaption{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}} \label{src-compile-table}
     \begin{tabular}{ l l }
     \tablehead{
@@ -116,7 +115,6 @@ src_compile() {
     \t{1} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{center}
     \end{table}
 }
 
@@ -141,7 +139,7 @@ The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{res
     for which EAPIs fit into which category.
 
     \begin{table}
-    \begin{center}
+    \centering
     \abovecaption{EAPIs requiring \t{src\_test}} \label{test-required-table}
     \begin{tabular}{ l l }
         \toprule
@@ -153,7 +151,7 @@ The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{res
     \t{kdebuild-1} & Required \\
     \bottomrule
     \end{tabular}
-    \end{center}
+
     \end{table}
 }{
 }
@@ -235,7 +233,7 @@ fully installed. It is the only ebuild function which may be interactive and pro
 \IFKDEBUILDELSE
 {
     \begin{table}
-    \begin{center}
+    \centering
     \abovecaption{EAPIs supporting \t{pkg\_info} on uninstalled packages} \label{pkg-info-table}
     \begin{tabular}{ l l }
         \toprule
@@ -247,7 +245,6 @@ fully installed. It is the only ebuild function which may be interactive and pro
     \t{kdebuild-1} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{center}
     \end{table}
 }{
 }
