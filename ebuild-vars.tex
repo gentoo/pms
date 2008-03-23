@@ -57,9 +57,7 @@ operations upon other ebuilds or packages.
 
 \IFKDEBUILDELSE
 {
-    \begin{table}
-    \centering
-    \caption{EAPIs supporting \t{IUSE} defaults} \label{iuse-defaults-table}
+    \begin{centertable}{EAPIs supporting \t{IUSE} defaults} \label{iuse-defaults-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -70,12 +68,10 @@ operations upon other ebuilds or packages.
     \t{kdebuild-1} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{table}
+    \end{centertable}
 }
 {
-    \begin{table}
-    \centering
-    \caption{EAPIs supporting \t{IUSE} defaults} \label{iuse-defaults-table}
+    \begin{centertable}{EAPIs supporting \t{IUSE} defaults} \label{iuse-defaults-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -85,7 +81,7 @@ operations upon other ebuilds or packages.
     \t{1} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{table}
+    \end{centertable}
 }
 
 \section{Optional Ebuild-defined Variables}
@@ -118,9 +114,7 @@ Ebuilds may define any of the following variables:
 
 \IFKDEBUILDELSE
 {
-    \begin{table}
-    \centering
-    \caption{EAPIs supporting \t{PROVIDE}} \label{provide-table}
+    \begin{centertable}{EAPIs supporting \t{PROVIDE}} \label{provide-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -131,7 +125,7 @@ Ebuilds may define any of the following variables:
     \t{kdebuild-1} & No \\
     \bottomrule
     \end{tabular}
-    \end{table}
+    \end{centertable}
 }{
 }
 

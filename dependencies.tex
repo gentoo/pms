@@ -68,9 +68,7 @@ In particular, note that whitespace is not optional.
 
 \IFKDEBUILDELSE
 {
-    \begin{table}
-    \centering
-    \caption{EAPIs supporting \t{SRC\_URI} arrows} \label{uri-arrows-table}
+    \begin{centertable}{EAPIs supporting \t{SRC\_URI} arrows} \label{uri-arrows-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -81,11 +79,9 @@ In particular, note that whitespace is not optional.
     \t{kdebuild-1} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{table}
+    \end{centertable}
 
-    \begin{table}
-    \centering
-    \caption{EAPIs supporting \t{SRC\_URI} labels} \label{uri-labels-table}
+    \begin{centertable}{EAPIs supporting \t{SRC\_URI} labels} \label{uri-labels-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -96,11 +92,9 @@ In particular, note that whitespace is not optional.
     \t{kdebuild-1} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{table}
+    \end{centertable}
 
-    \begin{table}
-    \centering
-    \caption{EAPIs supporting \t{PDEPEND} labels} \label{pdepend-labels-table}
+    \begin{centertable}{EAPIs supporting \t{PDEPEND} labels} \label{pdepend-labels-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -111,7 +105,7 @@ In particular, note that whitespace is not optional.
     \t{kdebuild-1} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{table}
+    \end{centertable}
 }{
 }
 
@@ -182,9 +176,7 @@ EAPI not supporting \t{SLOT} dependencies.
 
 \IFKDEBUILDELSE
 {
-    \begin{table}
-    \centering
-    \caption{EAPIs supporting \t{SLOT} dependencies} \label{slot-deps-table}
+    \begin{centertable}{EAPIs supporting \t{SLOT} dependencies} \label{slot-deps-table}
     \begin{tabular}{ l l }
         \toprule
             \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -195,11 +187,9 @@ EAPI not supporting \t{SLOT} dependencies.
     \t{kdebuild-1} & Named and operator \\
     \bottomrule
     \end{tabular}
-    \end{table}
+    \end{centertable}
 }{
-    \begin{table}
-    \centering
-    \caption{EAPIs supporting \t{SLOT} dependencies} \label{slot-deps-table}
+    \begin{centertable}{EAPIs supporting \t{SLOT} dependencies} \label{slot-deps-table}
     \begin{tabular}{ l l }
         \toprule
             \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -209,14 +199,12 @@ EAPI not supporting \t{SLOT} dependencies.
     \t{1} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{table}
+    \end{centertable}
 }
 
 \IFKDEBUILDELSE
 {
-    \begin{table}
-    \centering
-    \caption{EAPIs supporting ranged dependencies} \label{range-deps-table}
+    \begin{centertable}{EAPIs supporting ranged dependencies} \label{range-deps-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -227,11 +215,9 @@ EAPI not supporting \t{SLOT} dependencies.
     \t{kdebuild-1} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{table}
+    \end{centertable}
 
-    \begin{table}
-    \centering
-    \caption{EAPIs supporting \t{USE} dependencies} \label{use-deps-table}
+    \begin{centertable}{EAPIs supporting \t{USE} dependencies} \label{use-deps-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -242,7 +228,7 @@ EAPI not supporting \t{SLOT} dependencies.
     \t{kdebuild-1} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{table}
+    \end{centertable}
 }{
 }
 

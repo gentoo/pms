@@ -86,9 +86,7 @@ src_compile() {
 
 \IFKDEBUILDELSE
 {
-    \begin{table}
-    \centering
-    \caption{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}} \label{src-compile-table}
+    \begin{centertable}{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}} \label{src-compile-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -99,11 +97,9 @@ src_compile() {
     \t{kdebuild-1} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{table}
+    \end{centertable}
 }{
-    \begin{table}
-    \centering
-    \caption{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}} \label{src-compile-table}
+    \begin{centertable}{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}} \label{src-compile-table}
     \begin{tabular}{ l l }
     \tablehead{
         \toprule
@@ -115,7 +111,7 @@ src_compile() {
     \t{1} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{table}
+    \end{centertable}
 }
 
 \subsection{src\_test}
@@ -138,9 +134,7 @@ The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{res
     place). In others, it must always be run (excepting restrictions). See table~\ref{test-required-table}
     for which EAPIs fit into which category.
 
-    \begin{table}
-    \centering
-    \caption{EAPIs requiring \t{src\_test}} \label{test-required-table}
+    \begin{centertable}{EAPIs requiring \t{src\_test}} \label{test-required-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -152,7 +146,7 @@ The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{res
     \bottomrule
     \end{tabular}
 
-    \end{table}
+    \end{centertable}
 }{
 }
 
@@ -232,9 +226,7 @@ fully installed. It is the only ebuild function which may be interactive and pro
 
 \IFKDEBUILDELSE
 {
-    \begin{table}
-    \centering
-    \caption{EAPIs supporting \t{pkg\_info} on uninstalled packages} \label{pkg-info-table}
+    \begin{centertable}{EAPIs supporting \t{pkg\_info} on uninstalled packages} \label{pkg-info-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -245,7 +237,7 @@ fully installed. It is the only ebuild function which may be interactive and pro
     \t{kdebuild-1} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{table}
+    \end{centertable}
 }{
 }
 

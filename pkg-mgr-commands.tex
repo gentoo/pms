@@ -13,9 +13,7 @@ behaviour.
     Some commands are banned in some EAPIs. If a banned command is called, the package manager must
     abort the build process indicating an error.
 
-    \begin{table}
-    \centering
-    \caption{Banned commands} \label{banned-commands-table}
+    \begin{centertable}{Banned commands} \label{banned-commands-table}
     \begin{tabular}{ l l l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -30,7 +28,7 @@ behaviour.
     \t{kdebuild-1} & Yes & Yes & Yes \\
     \bottomrule
     \end{tabular}
-    \end{table}
+    \end{centertable}
 }{
 }
 
@@ -281,9 +279,7 @@ has returned.
 
 \IFKDEBUILDELSE
 {
-    \begin{table}
-    \centering
-    \caption{EAPIs where \t{dosym} makes the directory} \label{dosym-table}
+    \begin{centertable}{EAPIs where \t{dosym} makes the directory} \label{dosym-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -294,7 +290,7 @@ has returned.
     \t{kdebuild-1} & No \\
     \bottomrule
     \end{tabular}
-    \end{table}
+    \end{centertable}
 }{
 }
 

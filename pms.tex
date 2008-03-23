@@ -40,6 +40,14 @@
 \newcommand{\note}[1]{\paragraph{Note:} #1}
 \newcommand{\TODOBUG}[2]{\fixme[inline]{(discussion on bug \##1) #2}}
 \newcommand{\TODO}[1]{\fixme[inline]{#1}}
+\newenvironment{centertable}[1]%
+{
+  \begin{table}
+    \centering
+    \caption{#1}
+  }{
+  \end{table}
+}
 
 \newboolean{ENABLE-ALL-OPTIONS}
 \newboolean{ENABLE-KDEBUILD}
