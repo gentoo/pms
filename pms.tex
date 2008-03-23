@@ -13,12 +13,13 @@
   hyperref,
   algorithm,
   algorithmic,
-  listings,
   xtab,
+  listings,
   booktabs,
   parskip,
   paralist
 }
+\usepackage[position=top]{caption}
 \usepackage[utf8]{inputenc}
 \usepackage[light]{draftcopy}
 \usepackage[draft,nomargin,inline,marginclue]{fixme}
@@ -36,11 +37,6 @@
 \newcommand{\note}[1]{\paragraph{Note:} #1}
 \newcommand{\TODOBUG}[2]{\fixme[inline]{(discussion on bug \##1) #2}}
 \newcommand{\TODO}[1]{\fixme[inline]{#1}}
-% the "caption" package seems to interfere with other things
-\newcommand{\abovecaption}[1]{
-    \setlength{\belowcaptionskip}{\abovecaptionskip}%
-    \setlength{\abovecaptionskip}{0pt}%
-    \caption{#1}}
 
 \usepackage{ifthen}
 \newboolean{ENABLE-ALL-OPTIONS}
