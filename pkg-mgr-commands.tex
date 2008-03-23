@@ -185,11 +185,28 @@ has returned.
     \item[dohard] Takes two parameters. Creates a hardlink from the second to the first.
 }
 
+\item[dohtml] Installs the given HTML files into a subdirectory under \t{/usr/share/doc/\$PF/}.
+The subdirectory is \t{html} by default, but this can be changed by the \t{\$DOCDESTTREE}
+variable. Files to be installed automatically are determined by extension and the default
+extensions are \t{png}, \t{gif}, \t{html}, \t{htm}, \t{jpg}, \t{css}, and \t{js}. These default
+extensions can be extended or reduced (see below). The options that can be passed to \t{dohtml}
+are as follows:
+    \begin{description}
+    \item{\t{-r}} --- enables recursion into directories.
+    \item{\t{-V}} --- enables verbosity.
+    \item{\t{-A}} --- adds file type extensions to the default list.
+    \item{\t{-a}} --- sets file type extensions to only those specified.
+    \item{\t{-f}} --- list of files that are able to be installed.
+    \item{\t{-x}} --- list of directories that files will not be installed from(only used in
+    conjunction with \t{-r}).
+    \item{\t{-p}} --- sets a document prefix for installed files.
+    \end{description}
+
 \IFKDEBUILDELSE
 {
-    \item[dohtml] \TODO{Write dohtml. It's banned in kdebuild-1.}
+    In EAPIs listed in table~\ref{banned-commands-table}, this command is banned as
+    per section ~\ref{banned-commands}.
 }{
-    \item[dohtml] \TODO{Write dohtml.}
 }
 
 \item[doinfo] Installs a GNU Info file into the \t{/usr/share/info} area.
