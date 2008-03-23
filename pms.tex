@@ -6,18 +6,19 @@
 }
 \usepackage[scaled=.90]{helvet}
 %
-\usepackage{graphicx,
+\usepackage{algorithm,
+  algorithmic,
+  appendix,
+  booktabs,
   enumitem,
   fullpage,
-  appendix,
+  graphicx,
   hyperref,
-  algorithm,
-  algorithmic,
-  xtab,
+  ifthen,
   listings,
-  booktabs,
+  paralist,
   parskip,
-  paralist
+  xtab,
 }
 \usepackage[position=top]{caption}
 \usepackage[utf8]{inputenc}
@@ -38,7 +39,6 @@
 \newcommand{\TODOBUG}[2]{\fixme[inline]{(discussion on bug \##1) #2}}
 \newcommand{\TODO}[1]{\fixme[inline]{#1}}
 
-\usepackage{ifthen}
 \newboolean{ENABLE-ALL-OPTIONS}
 \newboolean{ENABLE-KDEBUILD}
 
