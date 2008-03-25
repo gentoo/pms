@@ -174,7 +174,7 @@ has returned.
     yet been called, instead installs to the directory \t{/usr/share/doc/\$PF/}.
 
 \item[doexe] Installs the given files into the directory specified by the most recent
-    \t{exedesttree} call. If \t{exedesttree} has not yet been called, behaviour is undefined.
+    \t{exeinto} call. If \t{exeinto} has not yet been called, behaviour is undefined.
 
 \IFKDEBUILDELSE
 {
@@ -329,7 +329,7 @@ already exist.
 \item[exeinto] Sets the install path for \t{doexe} and \t{newexe}. May create the directory, as specified
     for \t{into}.
 
-\item[docinto] Sets the install subdirectory for \t{dodoc} et al. May creates the directory, as specified
+\item[docinto] Sets the install subdirectory for \t{dodoc} et al. May create the directory, as specified
     for \t{into}.
 
 \item[insopts] Sets the options passed by \t{doins} et al. to the \t{install} command.
