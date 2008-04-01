@@ -108,6 +108,13 @@ considered to be provided by the system regardless of whether it is actually ins
 has severe adverse effects on USE-based and slot-based dependencies, its use is strongly deprecated
 and package manager support must be regarded as purely optional.
 
+\subsection{package.use}
+The \t{package.use} file may be used by the package manager to override the default USE flags specified
+by \t{make.defaults} on a per package basis.  The format is to have a package dependency specification,
+and then a space delimited list of USE flags to enable.  A USE flag in the form of \t{-flag} indicates
+that the package should have the USE flag disabled.  The package dependency specification is limited to
+the forms defined by \t{EAPI 0}.
+
 \subsection{USE masking and forcing}
 \label{use-masking}
 This section covers the four files \t{use.mask}, \t{use.force}, \t{package.use.mask} and
