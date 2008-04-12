@@ -1,0 +1,8 @@
+DEPEND="
+    flag? (
+        taken/if-true
+    ) : (
+        taken/if-false
+    )
+    "
+

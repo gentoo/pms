@@ -26,6 +26,35 @@ been abused in the past.
 \item The \t{PORTDIR\_OVERLAY} variable, and overlay behaviour in general.
 \end{compactitem}
 
+\chapter{Historical Curiosities}
+
+The items described in this chapter are included for information only. They were deprecated or
+abandoned long before \t{EAPI} was introduced. Ebuilds must not use these features, and package
+managers should not be changed to support them.
+
+\section{If-else use blocks}
+
+Historically, Portage supported if-else use conditionals, as shown by
+listing~\ref{lst:if-else-use-listing}. The block before the colon would be taken if the condition
+was met, and the block after the colon would be taken if the condition was not met.
+
+This feature was deprecated and removed from the tree long before the introduction of \t{EAPI}.
+
+\lstinputlisting[float,caption=If-else use blocks,label=lst:if-else-use-listing]{if-else-use.listing}
+
+\section{cvs Versions}
+
+Portage has very crude support for CVS packages. The package \t{foo} could contain a file named
+\t{foo-cvs.1.2.3.ebuild}. This version would order \i{higher} than any non-CVS version (including
+\t{foo-2.ebuild}). This feature has not seen real world use and breaks versioned dependencies, so
+it must not be used.
+
+\IFKDEBUILDELSE
+{
+    The \t{scm} version rules specified in section~\ref{scm-versions} solve all of these issues.
+}{
+}
+
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 
 %%% Local Variables:
