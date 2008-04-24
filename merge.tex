@@ -1,0 +1,118 @@
+\chapter{Merging and Unmerging}
+
+\note{In this chapter, \e{file} and \e{regular file} have their Unix meanings.}
+
+\section{Overview}
+
+The merge process merges the contents of the \t{D} directory onto the filesystem under \t{ROOT}.
+This is not a straight copy; there are various subtleties which must be addressed.
+
+The unmerge process removes an installed package's files. It is not covered in detail in this
+specification.
+
+\section{Directories}
+
+Directories are merged recursively onto the filesystem. The method used to perform the merge is not
+specified, so long as the end result is correct. In particular, merging a directory may alter or
+remove the source directory under \t{D}.
+
+Ebuilds must not attempt to merge a directory on top of any existing file that is not either a
+directory or a symlink to a directory.
+
+\subsection{Permissions}
+
+The owner, group and mode (including set*id and sticky bits) of the directory must be preserved,
+except as follows:
+
+\begin{compactitem}
+\item Any directory owned by the user used to perform the build must become owned by the root user.
+\item Any directory whose group is the primary group of the user used to perform the build must have
+    its group be that of the root user.
+\end{compactitem}
+
+On SELinux systems, the SELinux context must also be preserved. Other directory attributes may be discarded.
+
+\subsection{Empty Directories}
+
+Behaviour upon encountering an empty directory is undefined. Ebuilds must not attempt to install an
+empty directory.
+
+\section{Regular Files}
+
+Regular files are merged onto the filesystem (but see the notes on configuration file protection,
+below). The method used to perform the merge is not specified, so long as the end result is correct.
+In particular, merging a regular file may alter or remove the source file under \t{D}.
+
+Ebuilds must not attempt to merge a regular file on top of any existing file that is not either a
+regular file or a symlink to a regular file.
+
+\subsection{Permissions}
+
+The owner, group and mode (including set*id and sticky bits) of the file must be preserved, except
+as follows:
+
+\begin{compactitem}
+\item Any file owned by the user used to perform the build must become owned by the root user.
+\item Any file whose group is the primary group of the user used to perform the build must have
+    its group be that of the root user.
+\item The package manager may reduce read and write permissions on executable files that have a
+    set*id bit set.
+\end{compactitem}
+
+On SELinux systems, the SELinux context must also be preserved. Other file attributes may be discarded.
+
+\subsection{Configuration File Protection}
+\label{config-protect}
+
+The package manager must provide a means to prevent user configuration files from being
+overwritten by any package updates. The profile variables \t{CONFIG\_PROTECT} and
+\t{CONFIG\_PROTECT\_MASK} (section~\ref{profile-variables}) control the paths for which this
+must be enforced.
+
+In order to ensure interoperability with configuration update tools, the following scheme must be
+used by all package managers when merging any regular file:
+
+\begin{compactenum}
+\item If the directory containing the file to be merged is not listed in \t{CONFIG\_PROTECT}, and
+     is not a subdirectory of any such directory, and if the file is not listed in \t{CONFIG\_PROTECT},
+     the file is merged normally.
+\item If the directory containing the file to be merged is listed in \t{CONFIG\_PROTECT\_MASK}, or
+    is a subdirectory of such a directory, or if the file is listed in \t{CONFIG\_PROTECT\_MASK},
+    the file is merged normally.
+\item If no existing file with the intended filename exists, or the existing file has identical
+    content to the one being merged, the file is installed normally.
+\item Otherwise, prepend the filename with \t{.\_cfg0000\_}. If no file with the new name exists,
+    then the file is merged with this name.
+\item Otherwise, increment the number portion (to form \t{.\_cfg0001\_<name>}) and repeat step 4.
+    Continue this process until a usable filename is found.
+\item If 9999 is reached in this way, behaviour is undefined.
+\end{compactenum}
+
+\section{Symlinks}
+
+Symlinks are merged as symlinks onto the filesystem. The link destination for a merged link shall be
+the same as the link destination for the link under \t{D}, except as noted below. The method used to
+perform the merge is not specified, so long as the end result is correct; in particular, merging a
+symlink may alter or remove the symlink under \t{D}.
+
+Ebuilds must not attempt to merge a symlink on top of a directory.
+
+\subsection{Rewriting}
+
+Any absolute symlink whose link starts with \t{D} must be rewritten with the leading \t{D} removed.
+The package manager should issue a notice when doing this.
+
+\section{Hard links}
+
+A hard link may be merged either as a single file with links or as multiple independent files.
+
+\section{Other Files}
+
+Ebuilds must not attempt to install any other type of file (FIFOs, device nodes etc).
+
+% vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "pms"
+%%% End:
