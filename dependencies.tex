@@ -6,11 +6,11 @@
 There are three classes of dependencies supported by ebuilds:
 
 \begin{compactitem}
-\item Build dependencies (\t{DEPEND}). These must be installed before the ebuild is installed.
-\item Runtime dependencies (\t{RDEPEND}). These should usually be installed before the ebuild,
-    but may be dropped to post dependencies where necessary to resolve cycles.
-\item Post dependencies (\t{PDEPEND}). These should be installed at some point, usually after
-    the ebuild if they are not already installed.
+\item Build dependencies (\t{DEPEND}). These must be installed and usable before the ebuild
+    is installed.
+\item Runtime dependencies (\t{RDEPEND}). These must be installed and usable before the ebuild
+    is treated as usable.
+\item Post dependencies (\t{PDEPEND}). These must be installed at some point.
 \end{compactitem}
 
 In addition, \t{SRC\_URI}, \t{HOMEPAGE}, \t{PROVIDE}, \t{RESTRICT} and \t{LICENSE} use

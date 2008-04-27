@@ -36,8 +36,11 @@ the core system, a common example being autotools. Commands provided by dependen
 in the following cases:
 \begin{compactitem}
 \item In the \t{src} phases, any command provided by a package listed in \t{DEPEND} is available.
-\item In the \t{pkg} phases, commands provided by a package listed in both \t{DEPEND} \b{and} \t{RDEPEND} are
-    available, unless the package being merged is part of a circular dependency loop.
+\item In the \t{pkg} phases, at least one of the following conditions must be met:
+    \begin{compactitem}
+    \item Any command provided by a package listed in \t{DEPEND} is available.
+    \item Any command provided by a package listed in \t{RDEPEND} is available.
+    \end{compactitem}
 \end{compactitem}
 
 \subsection{Ebuild-specific Commands}
