@@ -84,9 +84,9 @@ src_compile() {
 }
 \end{lstlisting}
 
+\begin{centertable}{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}} \label{src-compile-table}
 \IFKDEBUILDELSE
 {
-    \begin{centertable}{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}} \label{src-compile-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -97,9 +97,7 @@ src_compile() {
     \t{kdebuild-1} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{centertable}
 }{
-    \begin{centertable}{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}} \label{src-compile-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -109,8 +107,8 @@ src_compile() {
     \t{1} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{centertable}
 }
+\end{centertable}
 
 \subsection{src\_test}
 \label{src-test-function}

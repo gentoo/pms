@@ -40,14 +40,6 @@
 \newcommand{\note}[1]{\paragraph{Note:} #1}
 \newcommand{\TODOBUG}[2]{\fixme[inline]{(discussion on bug \##1) #2}}
 \newcommand{\TODO}[1]{\fixme[inline]{#1}}
-\newenvironment{centertable}[1]%
-{
-  \begin{table}
-    \centering
-    \caption{#1}
-  }{
-  \end{table}
-}
 
 \definecolor{deepblue}{rgb}{0.0, 0.2, 0.7}
 \definecolor{deeppurple}{rgb}{0.7, 0.0, 0.8}
@@ -64,14 +56,24 @@
 
 \ifthenelse{\boolean{ENABLE-ALL-OPTIONS}}
 {
-    \newcommand{\IFKDEBUILDELSE}[2]{{\color{deepblue} #1}{\color{deeppurple} #2}}
+    \newcommand{\IFKDEBUILDELSE}[2]{{\def\mycolour{\color{deepblue}}\mycolour #1}{\def\mycolour{\color{deeppurple}}\mycolour #2}}
 }{
     \ifthenelse{\boolean{ENABLE-KDEBUILD}}
     {
-        \newcommand{\IFKDEBUILDELSE}[2]{ #1 }
+        \newcommand{\IFKDEBUILDELSE}[2]{#1}
     }{
-        \newcommand{\IFKDEBUILDELSE}[2]{ #2 }
+        \newcommand{\IFKDEBUILDELSE}[2]{#2}
     }
+}
+
+\newenvironment{centertable}[1]%
+{
+  \begin{table}
+    \ifx\mycolour\undefined\else\mycolour\fi
+    \centering
+    \caption{#1}
+  }{
+  \end{table}
 }
 
 \hypersetup{%

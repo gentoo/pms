@@ -97,11 +97,11 @@ Version specifications are compared component by component, moving from left to 
 \IFKDEBUILDELSE
 {
     If a version starts with \t{scm}, it orders higher than any version that does not
-    start with \t{scm}.  Otherwise, if neither version starts with \t{scm}, the
+    start with \t{scm}.  Otherwise, if neither version starts with \t{scm}, the first
+    component of the number part is compared using strict integer comparison.
 }{
-    The
+    The first component of the number part is compared using strict integer comparison.
 }
-first component of the number part is compared using strict integer comparison.
 
 Any subsequent components of the number part are compared as follows:
 
@@ -113,38 +113,37 @@ Any subsequent components of the number part are compared as follows:
   and the components are compared using a stringwise comparison.
 \end{compactitem}
 
-If one number part is a prefix of the other, then the version with the longer number part is
 \IFKDEBUILDELSE
 {
-    greater, unless the shorter part is immediately followed by \t{-scm}, in which
+    If one number part is a prefix of the other, then the version with the longer number
+    part is greater, unless the shorter part is immediately followed by \t{-scm}, in which
     case the version with the shorter part is greater.
 }{
-    greater.
+    If one number part is a prefix of the other, then the version with the longer number
+    part is greater.
 }
 Note in particular that \t{1.0} is less than \t{1.0.0}.
 
 Letter suffixes are compared alphabetically, with any letter being newer than no letter.
 
-If the letters are equal, suffixes are compared. The ordering is \t{\_alpha} is less than
-\t{\_beta} is less than \t{\_pre} is less than \t{\_rc} is less than no suffix is less than
+If the letters are equal, suffixes are compared.
 \IFKDEBUILDELSE
 {
-    \t{\_p} is less than \t{-scm}.
+     The ordering is \t{\_alpha} is less than \t{\_beta} is less than \t{\_pre} is less
+     than \t{\_rc} is less than no suffix is less than \t{\_p} is less than \t{-scm}.
 }{
-    \t{\_p}.
+     The ordering is \t{\_alpha} is less than \t{\_beta} is less than \t{\_pre} is less
+     than \t{\_rc} is less than no suffix is less than \t{\_p}.
 }
 If a suffix string is equal, the associated integer parts
+\IFKDEBUILDELSE{(except for \t{scm} parts)}{}
+are compared using strict integer comparison.
 \IFKDEBUILDELSE
 {
-    (except for \t{scm} parts)
-}{}
-are compared using strict integer comparison.  A missing integer part is treated as
-\IFKDEBUILDELSE
-{
-    zero, unless the suffix is directly followed by \t{-scm}, in which case it is treated as being
-    higher than any integer.
+    A missing integer part is treated as zero, unless the suffix is directly followed
+    by \t{-scm}, in which case it is treated as being higher than any integer.
 }{
-    zero.
+    A missing integer part is treated as zero.
 }
 
 If at this point the two versions are still equal, the revision number is compared using strict
