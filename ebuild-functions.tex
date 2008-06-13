@@ -43,7 +43,7 @@ the ebuild lacks the \t{src\_unpack} function shall behave as:
 
 \begin{lstlisting}
 src_unpack() {
-    if [ "${A}" != "" ]; then
+    if [[ -n ${A} ]]; then
         unpack ${A}
     fi
 }
@@ -61,10 +61,10 @@ implementation used when the ebuild lacks the \t{src\_compile} function shall be
 
 \begin{lstlisting}
 src_compile() {
-    if [ -x ./configure ]; then
+    if [[ -x ./configure ]]; then
         econf
     fi
-    if [ -f Makefile ] || [ -f GNUmakefile ] || [ -f makefile ]; then
+    if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]]; then
         emake || die "emake failed"
     fi
 }
@@ -75,10 +75,10 @@ implementation used when the ebuild lacks the \t{src\_compile} function shall be
 
 \begin{lstlisting}
 src_compile() {
-    if [ -x ${ECONF_SOURCE:-.}/configure ]; then
+    if [[ -x ${ECONF_SOURCE:-.}/configure ]]; then
         econf
     fi
-    if [ -f Makefile ] || [ -f GNUmakefile ] || [ -f makefile ]; then
+    if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]]; then
         emake || die "emake failed"
     fi
 }
