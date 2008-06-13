@@ -41,13 +41,13 @@ package's build system for further use.
 The initial working directory must be \t{WORKDIR}, and the default implementation used when
 the ebuild lacks the \t{src\_unpack} function shall behave as:
 
-\begin{lstlisting}
+\begin{verbatim}
 src_unpack() {
     if [[ -n ${A} ]]; then
         unpack ${A}
     fi
 }
-\end{lstlisting}
+\end{verbatim}
 
 \subsection{src\_compile}
 \label{src-compile-function}
@@ -59,7 +59,7 @@ The initial working directory must be \t{S} if that exists, falling back to \t{W
 For EAPIs not listed in table~\ref{src-compile-table} as being \t{ECONF\_SOURCE} aware, the default
 implementation used when the ebuild lacks the \t{src\_compile} function shall behave as:
 
-\begin{lstlisting}
+\begin{verbatim}
 src_compile() {
     if [[ -x ./configure ]]; then
         econf
@@ -68,12 +68,12 @@ src_compile() {
         emake || die "emake failed"
     fi
 }
-\end{lstlisting}
+\end{verbatim}
 
 For EAPIs listed in table~\ref{src-compile-table} as being \t{ECONF\_SOURCE} aware, the default
 implementation used when the ebuild lacks the \t{src\_compile} function shall behave as:
 
-\begin{lstlisting}
+\begin{verbatim}
 src_compile() {
     if [[ -x ${ECONF_SOURCE:-.}/configure ]]; then
         econf
@@ -82,7 +82,7 @@ src_compile() {
         emake || die "emake failed"
     fi
 }
-\end{lstlisting}
+\end{verbatim}
 
 \begin{centertable}{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}} \label{src-compile-table}
 \IFKDEBUILDELSE

@@ -55,7 +55,9 @@ eclass so that an ebuild inherits a default definition whilst retaining the abil
 call the eclass-defined version from it. The use of it is best illustrated by an example; this is
 given in listing~\ref{lst:export-functions} and is a snippet from a hypothetical \t{foo.eclass}.
 
-\begin{lstlisting}[float,caption=EXPORT\_FUNCTIONS example: foo.eclass,label=lst:export-functions]
+\begin{listing}
+  \caption{EXPORT\_FUNCTIONS example: foo.eclass}\label{lst:export-functions}
+  \begin{verbatim}
 foo_src_compile()
 {
     econf --enable-gerbil \
@@ -66,7 +68,8 @@ foo_src_compile()
 }
 
 EXPORT_FUNCTIONS src_compile
-\end{lstlisting}
+  \end{verbatim}
+\end{listing}
 
 This example defines an eclass \t{src\_compile} function and uses \t{EXPORT\_FUNCTIONS} to alias
 it. Then any ebuild that inherits \t{foo.eclass} will have a default \t{src\_compile} defined, but

@@ -140,7 +140,9 @@ has returned.
 \item[einstall] A shortcut for the command given in Listing~\ref{lst:einstall}. Any arguments given
     to \t{einstall} are passed verbatim to \t{emake}, as shown.
 
-\begin{lstlisting}[caption=einstall command,label=lst:einstall]
+\begin{listing}[H]
+  \caption{einstall command}\label{lst:einstall}
+  \begin{verbatim}
 emake \
    prefix="${D}"/usr \
    mandir="${D}"/usr/share/man \
@@ -148,7 +150,8 @@ emake \
    libdir="${D}"/usr/$(get_libdir) \
    "$@" \
    install
-\end{lstlisting}
+  \end{verbatim}
+\end{listing}
 
 \end{description}
 

@@ -11,14 +11,15 @@
   booktabs,
   color,
   enumitem,
+  float,
   fullpage,
   graphicx,
   hyperref,
   ifthen,
-  listings,
   longtable,
   paralist,
   parskip,
+  verbatim,
   algorithm,
   algorithmic
 }
@@ -27,9 +28,10 @@
 \usepackage[light]{draftcopy}
 \usepackage[draft,nomargin,inline,marginclue]{fixme}
 
-\lstloadlanguages{bash}
-\lstset{basicstyle=\ttfamily,
-        keywordstyle=\bfseries}
+\floatstyle{plaintop}
+\newfloat{listing}{tbp}{lol}[chapter]
+\floatname{listing}{Listing}
+\newcommand{\listoflistings}{\listof{listing}{Listings}}
 
 \bibliographystyle{plainurl}
 
@@ -100,7 +102,7 @@
 
 \tableofcontents
 \listofalgorithms
-\lstlistoflistings
+\listoflistings
 \listoftables
 \listoffixmes
 
