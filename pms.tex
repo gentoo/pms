@@ -1,10 +1,6 @@
 \documentclass[a4paper]{report}
 % Definition of fonts, choose T1 encoding for fonts
 \usepackage[T1]{fontenc}
-\usepackage{mathptmx,
-  courier
-}
-\usepackage[scaled=.90]{helvet}
 %
 % algorithmic and algorithm to be loaded last to avoid failures
 \usepackage{appendix,
@@ -27,6 +23,17 @@
 \usepackage[utf8]{inputenc}
 \usepackage[light]{draftcopy}
 \usepackage[draft,nomargin,inline,marginclue]{fixme}
+
+\newboolean{TEX4HT-HACKS}
+\ifx\HCode\undefined
+    \usepackage{mathptmx,
+      courier
+    }
+    \usepackage[scaled=.90]{helvet}
+    \setboolean{TEX4HT-HACKS}{false}
+\else
+    \setboolean{TEX4HT-HACKS}{true}
+\fi
 
 \floatstyle{plaintop}
 \newfloat{listing}{tbp}{lol}[chapter]
@@ -51,12 +58,13 @@
 
 %%% Enable the below option if you'd like to see both sides of KDEBUILD conditionals shown in
 %%% different colours. Disable it to either fully enable or fully disable KDEBUILD.
+%%% Not compatible with HTML output.
 \setboolean{ENABLE-ALL-OPTIONS}{false}
 
 %%% Enable the below if you'd like to see KDEBUILD things.
 \setboolean{ENABLE-KDEBUILD}{true}
 
-\ifthenelse{\boolean{ENABLE-ALL-OPTIONS}}
+\ifthenelse{\boolean{ENABLE-ALL-OPTIONS}\and\not\boolean{TEX4HT-HACKS}}
 {
     \newcommand{\IFKDEBUILDELSE}[2]{{\def\mycolour{\color{deepblue}}\mycolour #1}{\def\mycolour{\color{deeppurple}}\mycolour #2}}
 }{
