@@ -3,7 +3,7 @@
 
 The package manager must define the following environment variables. Not all variables are
 meaningful in all phases; variables that are not meaningful in a given phase may be unset or set to
-any value. Ebuilds must not attempt to modify any of these variables.
+any value. Ebuilds must not attempt to modify any of these variables, unless otherwise specified.
 
 Because of their special meanings, these variables may not be preserved consistently across all
 phases as would normally happen due to environment saving (see~\ref{ebuild-env-state}). For example,
@@ -154,6 +154,11 @@ variable.
     Yes &
     The full path to the ebuild's working directory, in which all build data should be
     contained. \label{env-var-WORKDIR} \\
+\t{KV} &
+    All &
+    Yes &
+    The version of the running kernel at the time the ebuild was first executed, as
+    returned by the \t{uname~-r} command or equivalent.  May be modified by ebuilds.
 \end{longtable}
 
 All variables set in the active profiles' \t{make.defaults} files must be exported to the ebuild
