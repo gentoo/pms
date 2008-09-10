@@ -1,0 +1,12 @@
+*.aux
+*.bbl
+*.blg
+*.loa
+*.log
+*.pdf
+*.toc
+*.lot
+*.lol
+*.lox
+*.out
+*.dvi
