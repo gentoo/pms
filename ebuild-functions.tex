@@ -346,6 +346,41 @@ source files from their respective locations, with notes concerning licensing if
 
 \t{pkg\_nofetch} must require no write access to any part of the filesystem.
 
+\subsection{\t{default\_} Phase Functions}
+
+In EAPIs listed in table~\ref{default-phase-function-table} as supporting \t{default\_} phase
+functions, a function named \t{default\_\$\{EBUILD\_PHASE\}} that behaves as the default
+implementation for that EAPI shall be defined when executing any given \t{EBUILD\_PHASE}. Ebuilds
+must not call these functions except when in the phase in question.
+
+\begin{centertable}{EAPIs supporting \t{default\_} phase functions} \label{default-phase-function-table}
+\IFKDEBUILDELSE
+{
+    \begin{tabular}{ l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{Supports \t{default\_} phase functions?}} \\
+            \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{kdebuild-1} & No \\
+    \t{2} & Yes \\
+    \bottomrule
+    \end{tabular}
+}{
+    \begin{tabular}{ l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{Supports \t{default\_} phase functions?}} \\
+            \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & Yes \\
+    \bottomrule
+    \end{tabular}
+}
+\end{centertable}
+
 \section{Call Order}
 
 The call order for installing a package is:
