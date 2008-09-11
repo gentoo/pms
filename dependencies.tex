@@ -254,14 +254,49 @@ The following operators are available:
 
 \subsubsection{Block Operator}
 
-If the specification is prefixed with an exclamation mark, the named dependency is a block rather
-than a requirement---that is to say, the specified package must not be installed, with the
+If the specification is prefixed with one or two exclamation marks, the named dependency is a block
+rather than a requirement---that is to say, the specified package must not be installed, with the
 following exceptions:
 
 \begin{compactitem}
 \item Blocks on a package provided exclusively by the ebuild do not count. \label{provided-blocks}
 \item Blocks on the ebuild itself do not count.
 \end{compactitem}
+
+There are two strengths of block: weak and strong. A weak block may be ignored by the package
+manager, so long as any blocked package will be uninstalled later on. A strong block must not be
+ignored. The mapping from one or two exclamation marks to strength is described in
+table~\ref{bang-strength-table}.
+
+\begin{centertable}{Exclamation mark strengths for EAPIs} \label{bang-strength-table}
+\IFKDEBUILDELSE
+{
+    \begin{tabular}{ l l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{\t{!}}} &
+            \multicolumn{1}{c}{\textbf{\t{!!}}} \\
+            \midrule
+    \t{0} & Unspecified & Forbidden \\
+    \t{1} & Unspecified & Forbidden \\
+    \t{kdebuild-1} & Unspecified & Forbidden \\
+    \t{2} & Weak & Strong \\
+    \bottomrule
+    \end{tabular}
+}{
+    \begin{tabular}{ l l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{\t{!}}} &
+            \multicolumn{1}{c}{\textbf{\t{!!}}} \\
+            \midrule
+    \t{0} & Unspecified & Forbidden \\
+    \t{1} & Unspecified & Forbidden \\
+    \t{2} & Weak & Strong \\
+    \bottomrule
+    \end{tabular}
+}
+\end{centertable}
 
 \subsubsection{Slot Dependencies}
 \label{slot-dep}
