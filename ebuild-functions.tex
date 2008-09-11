@@ -49,15 +49,102 @@ src_unpack() {
 }
 \end{verbatim}
 
-\subsection{src\_compile}
-\label{src-compile-function}
+\subsection{src\_prepare}
+\label{src-prepare-function}
 
-The \t{src\_compile} function configures the package's build environment and builds the package.
+The \t{src\_prepare} function is only called for EAPIs listed in table~\ref{src-prepare-table} as
+supporting it.
+
+The \t{src\_prepare} function can be used for post-unpack source preparation. The default
+implementation does nothing.
 
 The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
 
-For EAPIs not listed in table~\ref{src-compile-table} as being \t{ECONF\_SOURCE} aware, the default
-implementation used when the ebuild lacks the \t{src\_compile} function shall behave as:
+\begin{centertable}{EAPIs supporting \t{src\_prepare}} \label{src-prepare-table}
+\IFKDEBUILDELSE
+{
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{src\_prepare}?}} \\
+        \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{kdebuild-1} & No \\
+    \t{2} & Yes \\
+    \bottomrule
+    \end{tabular}
+}{
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{src\_prepare}?}} \\
+        \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & Yes \\
+    \bottomrule
+    \end{tabular}
+}
+\end{centertable}
+
+\subsection{src\_configure}
+\label{src-configure-function}
+
+The \t{src\_configure} function is only called for EAPIs listed in table~\ref{src-configure-table} as
+supporting it.
+
+The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
+
+The \t{src\_configure} function configures the package's build environment. The default
+implementation used when the ebuild lacks the \t{src\_configure} function shall behave as:
+
+\begin{verbatim}
+src_configure() {
+    if [[ -x ${ECONF_SOURCE:-.}/configure ]]; then
+        econf
+    fi
+}
+\end{verbatim}
+
+\begin{centertable}{EAPIs supporting \t{src\_configure}} \label{src-configure-table}
+\IFKDEBUILDELSE
+{
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{src\_configure}?}} \\
+        \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{kdebuild-1} & No \\
+    \t{2} & Yes \\
+    \bottomrule
+    \end{tabular}
+}{
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{src\_configure}?}} \\
+        \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & Yes \\
+    \bottomrule
+    \end{tabular}
+}
+\end{centertable}
+
+\subsection{src\_compile}
+\label{src-compile-function}
+
+The \t{src\_compile} function configures the package's build environment in EAPIs lacking
+\t{src\_configure}, and builds the package in all EAPIs.
+
+The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
+
+For EAPIs listed in table~\ref{src-compile-table} as using format 0, the default implementation used
+when the ebuild lacks the \t{src\_compile} function shall behave as:
 
 \begin{verbatim}
 src_compile() {
@@ -70,8 +157,8 @@ src_compile() {
 }
 \end{verbatim}
 
-For EAPIs listed in table~\ref{src-compile-table} as being \t{ECONF\_SOURCE} aware, the default
-implementation used when the ebuild lacks the \t{src\_compile} function shall behave as:
+For EAPIs listed in table~\ref{src-compile-table} as using format 1, the default implementation used
+when the ebuild lacks the \t{src\_compile} function shall behave as:
 
 \begin{verbatim}
 src_compile() {
@@ -84,27 +171,40 @@ src_compile() {
 }
 \end{verbatim}
 
-\begin{centertable}{EAPIs supporting \t{ECONF\_SOURCE} in \t{src\_compile}} \label{src-compile-table}
+For EAPIs listed in table~\ref{src-compile-table} as using format 2, the default implementation used
+when the ebuild lacks the \t{src\_compile} function shall behave as:
+
+\begin{verbatim}
+src_compile() {
+    if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]]; then
+        emake || die "emake failed"
+    fi
+}
+\end{verbatim}
+
+\begin{centertable}{\t{src\_compile} behaviour for EAPIs} \label{src-compile-table}
 \IFKDEBUILDELSE
 {
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{ECONF\_SOURCE}?}} \\
+        \multicolumn{1}{c}{\textbf{Format}} \\
         \midrule
-    \t{0} & No \\
-    \t{1} & Yes \\
-    \t{kdebuild-1} & Yes \\
+    \t{0} & 0 \\
+    \t{1} & 1 \\
+    \t{kdebuild-1} & 1 \\
+    \t{2} & 2 \\
     \bottomrule
     \end{tabular}
 }{
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{ECONF\_SOURCE}?}} \\
+        \multicolumn{1}{c}{\textbf{Format}} \\
         \midrule
-    \t{0} & No \\
-    \t{1} & Yes \\
+    \t{0} & 0 \\
+    \t{1} & 1 \\
+    \t{2} & 2 \\
     \bottomrule
     \end{tabular}
 }
@@ -253,6 +353,8 @@ The call order for installing a package is:
 \begin{compactitem}
 \item \t{pkg\_setup}
 \item \t{src\_unpack}
+\item \t{src\_prepare} (only for EAPIs listed in table~\ref{src-prepare-table})
+\item \t{src\_configure} (only for EAPIs listed in table~\ref{src-prepare-table})
 \item \t{src\_compile}
 \item \t{src\_test} (except if \t{RESTRICT=test})
 \item \t{src\_install}
@@ -272,6 +374,8 @@ The call order for reinstalling a package is:
 \begin{compactitem}
 \item \t{pkg\_setup}
 \item \t{src\_unpack}
+\item \t{src\_prepare} (only for EAPIs listed in table~\ref{src-prepare-table})
+\item \t{src\_configure} (only for EAPIs listed in table~\ref{src-prepare-table})
 \item \t{src\_compile}
 \item \t{src\_test} (except if \t{RESTRICT=test})
 \item \t{src\_install}
@@ -286,6 +390,8 @@ The call order for upgrading or downgrading a package is:
 \begin{compactitem}
 \item \t{pkg\_setup}
 \item \t{src\_unpack}
+\item \t{src\_prepare} (only for EAPIs listed in table~\ref{src-prepare-table})
+\item \t{src\_configure} (only for EAPIs listed in table~\ref{src-prepare-table})
 \item \t{src\_compile}
 \item \t{src\_test} (except if \t{RESTRICT=test})
 \item \t{src\_install}
