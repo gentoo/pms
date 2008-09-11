@@ -25,16 +25,10 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 \item A package dependency specification. Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}.
 \item A simple qualified package name. Permitted in \t{PROVIDE} (and inside \t{DEPEND} etc
     via the previous item).
-\IFKDEBUILDELSE
-{
-    \item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC\_URI} and \t{HOMEPAGE}.
-    In EAPIs listed in table~\ref{uri-arrows-table} as supporting \t{SRC\_URI} arrows, may
-    optionally be followed by whitespace, then \t{->}, then whitespace, then a simple filename
-    when in \t{SRC\_URI}. For \t{SRC\_URI} behaviour, see section~\ref{src-uri-behaviour}.
-}{
-    \item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC\_URI} and \t{HOMEPAGE}.
-    For \t{SRC\_URI} behaviour, see section~\ref{src-uri-behaviour}.
-}
+\item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC\_URI} and \t{HOMEPAGE}.
+In EAPIs listed in table~\ref{uri-arrows-table} as supporting \t{SRC\_URI} arrows, may
+optionally be followed by whitespace, then \t{->}, then whitespace, then a simple filename
+when in \t{SRC\_URI}. For \t{SRC\_URI} behaviour, see section~\ref{src-uri-behaviour}.
 \item A flat filename. Permitted in \t{SRC\_URI}.
 \item A license name (e.g. \t{GPL-2}). Permitted in \t{LICENSE}.
 \item A simple string. Permitted in \t{RESTRICT}.
@@ -66,9 +60,9 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 
 In particular, note that whitespace is not optional.
 
+\begin{centertable}{EAPIs supporting \t{SRC\_URI} arrows} \label{uri-arrows-table}
 \IFKDEBUILDELSE
 {
-    \begin{centertable}{EAPIs supporting \t{SRC\_URI} arrows} \label{uri-arrows-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -77,10 +71,25 @@ In particular, note that whitespace is not optional.
     \t{0} & No \\
     \t{1} & No \\
     \t{kdebuild-1} & Yes \\
+    \t{2} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{centertable}
+}{
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{SRC\_URI} arrows?}} \\
+        \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & Yes \\
+    \bottomrule
+    \end{tabular}
+}
+\end{centertable}
 
+\IFKDEBUILDELSE
+{
     \begin{centertable}{EAPIs supporting \t{SRC\_URI} labels} \label{uri-labels-table}
     \begin{tabular}{ l l }
         \toprule
