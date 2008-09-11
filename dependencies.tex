@@ -175,15 +175,29 @@ EAPI not supporting \t{SLOT} dependencies.
     specification that does not use an operator at the start may additionally be suffixed by one
     \t{[range]} restriction, as described in section~\ref{range-dep}. A package manager must warn or
     error if this feature is used with an EAPI not supporting ranged dependencies.
+}{
+}
 
-    In EAPIs shown in table~\ref{use-deps-table} as supporting \t{USE} dependencies, a specification
-    may additionally be suffixed by one or more \t{[use]} restrictions, as described in
-    section~\ref{use-dep}. A package manager must warn or error if this feature is used with an EAPI
-    not supporting use dependencies.
+\IFKDEBUILDELSE
+{
+    In EAPIs shown in table~\ref{use-deps-table} as supporting kdebuild-style \t{USE} dependencies,
+    a specification may additionally be suffixed by one or more kdebuild-style \t{[use]}
+    restrictions, as described in section~\ref{kdebuild-use-dep}. A package manager must warn or
+    error if this feature is used with an EAPI not supporting use dependencies.
+}{
+}
 
+In EAPIs shown in table~\ref{use-deps-table} as supporting 2-style \t{USE} dependencies, a specification
+may additionally be suffixed by at most one 2-style \t{[use]} restriction, as described in
+section~\ref{use-dep}. A package manager must warn or error if this feature is used with an EAPI
+not supporting use dependencies.
+
+\IFKDEBUILDELSE
+{
     \note Order is important. The slot restriction must come before the range restriction, which
     must come before use dependencies.
 }{
+    \note Order is important. The slot restriction must come before use dependencies.
 }
 
 \begin{centertable}{EAPIs supporting \t{SLOT} dependencies} \label{slot-deps-table}
@@ -226,7 +240,11 @@ EAPI not supporting \t{SLOT} dependencies.
     \bottomrule
     \end{tabular}
     \end{centertable}
+}{
+}
 
+\IFKDEBUILDELSE
+{
     \begin{centertable}{EAPIs supporting \t{USE} dependencies} \label{use-deps-table}
     \begin{tabular}{ l l }
         \toprule
@@ -235,11 +253,24 @@ EAPI not supporting \t{SLOT} dependencies.
         \midrule
     \t{0} & No \\
     \t{1} & No \\
-    \t{kdebuild-1} & Yes \\
+    \t{kdebuild-1} & kdebuild-style \\
+    \t{2} & 2-style \\
     \bottomrule
     \end{tabular}
     \end{centertable}
 }{
+    \begin{centertable}{EAPIs supporting \t{USE} dependencies} \label{use-deps-table}
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{USE} dependencies?}} \\
+        \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & 2-style \\
+    \bottomrule
+    \end{tabular}
+    \end{centertable}
 }
 
 \subsubsection{Operators}
@@ -358,10 +389,10 @@ the match is treated as unsuccessful.
 
 \IFKDEBUILDELSE
 {
-    \subsubsection{Use Dependencies}
-    \label{use-dep}
+    \subsubsection{kdebuild Style Use Dependencies}
+    \label{kdebuild-use-dep}
 
-    A use dependency consists of one of the following:
+    A kdebuild-style use dependency consists of one of the following:
 
     \begin{description}
     \item{[opt]} The flag must be enabled.
@@ -381,8 +412,38 @@ the match is treated as unsuccessful.
     \end{description}
 
     When multiple use dependencies are specified, all must match for a successful match.
+
+    It is an error for a use dependency to be applied to an ebuild which does not have the flag in
+    question in \t{IUSE}, or for an ebuild to use a conditional use dependency when that ebuild does
+    not have the flag in \t{IUSE}.
 }{
 }
+
+\subsubsection{2-Style Use Dependencies}
+\label{use-dep}
+
+A 2-style use dependency consists of one of the following:
+
+\begin{description}
+\item{[opt]} The flag must be enabled.
+\item{[opt=]} The flag must be enabled if the flag is enabled for the package with the
+    dependency, or disabled otherwise.
+\item{[!opt=]} The flag must be disabled if the flag is enabled for the package with the
+    dependency, or enabled otherwise.
+\item{[opt?]} The flag must be enabled if the flag is enabled for the package with the
+    dependency.
+\item{[!opt?]} The flag must be enabled if the use flag is disabled for the package with the
+    dependency.
+\item{[-opt]} The flag must be disabled.
+\end{description}
+
+Multiple requirements may be combined using commas, e.g. \t{[first,-second,third?]}.
+
+When multiple requirements are specified, all must match for a successful match.
+
+It is an error for a use dependency to be applied to an ebuild which does not have the flag in
+question in \t{IUSE}, or for an ebuild to use a conditional use dependency when that ebuild does
+not have the flag in \t{IUSE}.
 
 \IFKDEBUILDELSE
 {
