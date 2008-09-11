@@ -455,7 +455,38 @@ has returned.
     being in the system set or via dependencies.
 
 \item[inherit] See section~\ref{inherit}.
+
+\item[default] Calls the \t{default\_\$\{EBUILD\_PHASE\}} function. Only available in EAPIs listed in
+    table~\ref{default-function-table}.
 \end{description}
+
+\begin{centertable}{EAPIs supporting the \t{default} function} \label{default-function-table}
+\IFKDEBUILDELSE
+{
+    \begin{tabular}{ l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{Supports \t{default} function?}} \\
+            \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{kdebuild-1} & No \\
+    \t{2} & Yes \\
+    \bottomrule
+    \end{tabular}
+}{
+    \begin{tabular}{ l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{Supports \t{default} function?}} \\
+            \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & Yes \\
+    \bottomrule
+    \end{tabular}
+}
+\end{centertable}
 
 \subsubsection{Debug Commands}
 The following commands are available for debugging. Normally all of these commands should be no ops;
