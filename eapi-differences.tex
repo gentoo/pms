@@ -1,0 +1,254 @@
+\chapter{Feature Availability by EAPI}
+
+\note This chapter is informative and for convenience only. Refer to the main text for specifics.
+
+\begin{longtable}{\IFANYKDEBUILDELSE{llllll}{lllll}}
+\caption{Features in EAPIs}\\
+\toprule
+\multicolumn{1}{c}{\b{Feature}} &
+\multicolumn{1}{c}{\b{Reference}} &
+\IFANYKDEBUILDELSE{\multicolumn{4}{c}{\b{EAPIs}} \\}{\multicolumn{3}{c}{\b{EAPIs}} \\}
+\multicolumn{1}{c}{} &
+\multicolumn{1}{c}{} &
+\multicolumn{1}{c}{0} &
+\multicolumn{1}{c}{1} &
+\IFANYKDEBUILDELSE{\multicolumn{1}{c}{\IFKDEBUILDCOLOUR{kdebuild-1}} &}{}
+\multicolumn{1}{c}{2} \\
+\midrule
+\endfirsthead
+\midrule
+\multicolumn{1}{c}{\b{Feature}} &
+\multicolumn{1}{c}{\b{Reference}} &
+\IFANYKDEBUILDELSE{\multicolumn{4}{c}{\b{EAPIs}} \\}{\multicolumn{3}{c}{\b{EAPIs}} \\}
+\multicolumn{1}{c}{} &
+\multicolumn{1}{c}{} &
+\multicolumn{1}{c}{0} &
+\multicolumn{1}{c}{1} &
+\IFANYKDEBUILDELSE{\multicolumn{1}{c}{\IFKDEBUILDCOLOUR{kdebuild-1}} &}{}
+\multicolumn{1}{c}{2} \\
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+
+\IFANYKDEBUILDELSE{
+    \IFKDEBUILDCOLOUR{\t{scm} support} &
+    \IFKDEBUILDCOLOUR{table~\ref{scm-table}} &
+    \IFKDEBUILDCOLOUR{Optional} &
+    \IFKDEBUILDCOLOUR{Optional} &
+    \IFKDEBUILDCOLOUR{Required} &
+    \IFKDEBUILDCOLOUR{Optional} \\
+}{}
+
+\IFANYKDEBUILDELSE{
+    \IFKDEBUILDCOLOUR{File extension} &
+    \IFKDEBUILDCOLOUR{section~\ref{file-extension}} &
+    \IFKDEBUILDCOLOUR{\t{.ebuild}} &
+    \IFKDEBUILDCOLOUR{\t{.ebuild}} &
+    \IFKDEBUILDCOLOUR{\t{.kdebuild-1}} &
+    \IFKDEBUILDCOLOUR{\t{.ebuild}} \\
+}{}
+
+\t{IUSE} defaults & table~\ref{iuse-defaults-table} & No & Yes & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes \\
+
+\IFANYKDEBUILDELSE{
+    \IFKDEBUILDCOLOUR{\t{PROVIDE} support} &
+    \IFKDEBUILDCOLOUR{table~\ref{provide-table}} &
+    \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{No} &
+    \IFKDEBUILDCOLOUR{Yes} \\
+}{}
+
+\IFANYKDEBUILDELSE{
+    \IFKDEBUILDCOLOUR{Pre-source \t{EAPI}} &
+    \IFKDEBUILDCOLOUR{section~\ref{pre-source-eapi}} &
+    \IFKDEBUILDCOLOUR{0 or unset} &
+    \IFKDEBUILDCOLOUR{0 or unset} &
+    \IFKDEBUILDCOLOUR{kdebuild-1} &
+    \IFKDEBUILDCOLOUR{0 or unset} \\
+}{}
+
+\t{SRC\_URI} arrows & table~\ref{uri-arrows-table} & No & No & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes \\
+
+\IFANYKDEBUILDELSE{
+    \IFKDEBUILDCOLOUR{\t{SRC\_URI} labels} &
+    \IFKDEBUILDCOLOUR{table~\ref{uri-labels-table}} &
+    \IFKDEBUILDCOLOUR{No} &
+    \IFKDEBUILDCOLOUR{No} &
+    \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{No} \\
+}{}
+
+\IFANYKDEBUILDELSE{
+    \IFKDEBUILDCOLOUR{\t{PDEPEND} labels} &
+    \IFKDEBUILDCOLOUR{table~\ref{pdepend-labels-table}} &
+    \IFKDEBUILDCOLOUR{No} &
+    \IFKDEBUILDCOLOUR{No} &
+    \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{No} \\
+}{}
+
+\IFANYKDEBUILDELSE{
+    \IFKDEBUILDCOLOUR{Ranged Dependencies} &
+    \IFKDEBUILDCOLOUR{table~\ref{range-deps-table}} &
+    \IFKDEBUILDCOLOUR{No} &
+    \IFKDEBUILDCOLOUR{No} &
+    \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{No} \\
+}{}
+
+Slot dependencies &
+    table~\ref{slot-deps-table} &
+    No &
+    \IFKDEBUILDELSE{Named}{Yes} &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Named and Operator} &}{}
+    \IFKDEBUILDELSE{Named}{Yes} \\
+
+Use dependencies & table~\ref{use-deps-table} & No & No &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{kdebuild-style} &}{} 2-style \\
+
+\t{!} blockers & table~\ref{bang-strength-table} & Unspecified & Unspecified &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Unspecified} &}{} Weak \\
+
+\t{!!} blockers & table~\ref{bang-strength-table} & Forbidden & Forbidden &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Forbidden} &}{} Strong \\
+
+\t{src\_prepare} & table~\ref{src-prepare-table} & No & No & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes \\
+
+\t{src\_configure} & table~\ref{src-configure-table} & No & No & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes \\
+
+\t{src\_compile} style & table~\ref{src-compile-table} & 0 & 1 &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{1} &}{} 2 \\
+
+\IFANYKDEBUILDELSE{
+    \IFKDEBUILDCOLOUR{\t{src\_test}} &
+    \IFKDEBUILDCOLOUR{table~\ref{test-required-table}} &
+    \IFKDEBUILDCOLOUR{User option} &
+    \IFKDEBUILDCOLOUR{User option} &
+    \IFKDEBUILDCOLOUR{Required} &
+    \IFKDEBUILDCOLOUR{User option} \\
+}{}
+
+\IFANYKDEBUILDELSE{
+    \IFKDEBUILDCOLOUR{\t{pkg\_info}} &
+    \IFKDEBUILDCOLOUR{table~\ref{pkg-info-table}} &
+    \IFKDEBUILDCOLOUR{Installed} &
+    \IFKDEBUILDCOLOUR{Installed} &
+    \IFKDEBUILDCOLOUR{Both} &
+    \IFKDEBUILDCOLOUR{Installed} \\
+}{}
+
+\t{default\_} phase functions & table~\ref{default-phase-function-table} & No & No &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes \\
+
+\IFANYKDEBUILDELSE{
+    \IFKDEBUILDCOLOUR{\t{dohard}} &
+    \IFKDEBUILDCOLOUR{table~\ref{banned-commands-table}} &
+    \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{Banned} &
+    \IFKDEBUILDCOLOUR{Yes} \\
+}{}
+
+\IFANYKDEBUILDELSE{
+    \IFKDEBUILDCOLOUR{\t{dohtml}} &
+    \IFKDEBUILDCOLOUR{table~\ref{banned-commands-table}} &
+    \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{Banned} &
+    \IFKDEBUILDCOLOUR{Yes} \\
+}{}
+
+\IFANYKDEBUILDELSE{
+    \IFKDEBUILDCOLOUR{\t{dosed}} &
+    \IFKDEBUILDCOLOUR{table~\ref{banned-commands-table}} &
+    \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{Banned} &
+    \IFKDEBUILDCOLOUR{Yes} \\
+}{}
+
+\t{doman} languages & table~\ref{doman-table} & No & No &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes \\
+
+\IFANYKDEBUILDELSE{
+    \IFKDEBUILDCOLOUR{\t{dosym} does \t{dodir}} &
+    \IFKDEBUILDCOLOUR{table~\ref{dosym-table}} &
+    \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{No} &
+    \IFKDEBUILDCOLOUR{Yes} \\
+}{}
+
+\t{default} function & table~\ref{default-function-table} & No & No &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes \\
+
+\end{longtable}
+
+\chapter{Differences Between EAPIs}
+
+\note This chapter is informative and for convenience only. Refer to the main text for specifics.
+
+\section*{EAPI 0}
+
+EAPI 0 is the base EAPI.
+
+\section*{EAPI 1}
+
+EAPI 1 is EAPI 0 with the following changes:
+
+\begin{compactitem}
+\item \t{IUSE} defaults, table~\ref{iuse-defaults-table}.
+\item Slot dependencies, table~\ref{slot-deps-table}.
+\item Different \t{src\_compile} implementation, table~\ref{src-compile-table}.
+\end{compactitem}
+
+\IFKDEBUILDELSE
+{
+    \section*{EAPI kdebuild-1}
+
+    EAPI kdebuild-1 is EAPI 1 with the following changes:
+
+    \begin{compactitem}
+    \item \t{scm} support, table~\ref{scm-table}.
+    \item \t{kdebuild-1} file extension, section~\ref{file-extension}.
+    \item \t{PROVIDE} banned, table~\ref{provide-table}.
+    \item Pre-source EAPI is \t{kdebuild-1}, section~\ref{pre-source-eapi}.
+    \item \t{SRC\_URI} arrows, table~\ref{uri-arrows-table}.
+    \item \t{SRC\_URI} labels, table~\ref{uri-labels-table}.
+    \item \t{PDEPEND} labels, table~\ref{pdepend-labels-table}.
+    \item Ranged dependencies, table~\ref{range-deps-table}.
+    \item Use dependencies, table~\ref{use-deps-table}.
+    \item \t{src\_test} mandatory, table~\ref{test-required-table}.
+    \item \t{pkg\_info} can run on uninstalled packages, table~\ref{pkg-info-table}.
+    \item \t{dohard}, \t{dohtml}, \t{dosed} banned, table~\ref{banned-commands-table}.
+    \item \t{dosym} will not do \t{dodir}, table~\ref{dosym-table}.
+    \end{compactitem}
+}{
+}
+
+\section*{EAPI 2}
+
+EAPI 2 is EAPI 1 with the following changes:
+
+\begin{compactitem}
+\item \t{SRC\_URI} arrows, table~\ref{uri-arrows-table}.
+\item Use dependencies, table~\ref{use-deps-table}.
+\item \t{!} and \t{!!} blockers, table~\ref{bang-strength-table}.
+\item \t{src\_prepare}, table~\ref{src-prepare-table}.
+\item \t{src\_configure}, table~\ref{src-configure-table}.
+\item Different \t{src\_compile} implementation, table~\ref{src-compile-table}.
+\item \t{default\_} phase functions, table~\ref{default-phase-function-table}.
+\item \t{doman} languages support, table~\ref{doman-table}.
+\item \t{default} function, table~\ref{default-function-table}.
+\end{compactitem}
+
+% vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "pms"
+%%% End:

@@ -67,12 +67,18 @@
 \ifthenelse{\boolean{ENABLE-ALL-OPTIONS}\and\not\boolean{TEX4HT-HACKS}}
 {
     \newcommand{\IFKDEBUILDELSE}[2]{{\def\mycolour{\color{deepblue}}\mycolour #1}{\def\mycolour{\color{deeppurple}}\mycolour #2}}
+    \newcommand{\IFANYKDEBUILDELSE}[2]{#1}
+    \newcommand{\IFKDEBUILDCOLOUR}[1]{{\def\mycolour{\color{deepblue}}\mycolour #1}}
 }{
     \ifthenelse{\boolean{ENABLE-KDEBUILD}}
     {
         \newcommand{\IFKDEBUILDELSE}[2]{#1}
+        \newcommand{\IFANYKDEBUILDELSE}[2]{#1}
+        \newcommand{\IFKDEBUILDCOLOUR}[1]{#1}
     }{
         \newcommand{\IFKDEBUILDELSE}[2]{#2}
+        \newcommand{\IFANYKDEBUILDELSE}[2]{#2}
+        \newcommand{\IFKDEBUILDCOLOUR}[1]{#1}
     }
 }
 
@@ -143,6 +149,8 @@
 \include{glossary}
 
 \include{appendices}
+
+\include{eapi-differences}
 
 \bibliography{pms}
 

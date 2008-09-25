@@ -25,16 +25,10 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 \item A package dependency specification. Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}.
 \item A simple qualified package name. Permitted in \t{PROVIDE} (and inside \t{DEPEND} etc
     via the previous item).
-\IFKDEBUILDELSE
-{
-    \item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC\_URI} and \t{HOMEPAGE}.
-    In EAPIs listed in table~\ref{uri-arrows-table} as supporting \t{SRC\_URI} arrows, may
-    optionally be followed by whitespace, then \t{->}, then whitespace, then a simple filename
-    when in \t{SRC\_URI}. For \t{SRC\_URI} behaviour, see section~\ref{src-uri-behaviour}.
-}{
-    \item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC\_URI} and \t{HOMEPAGE}.
-    For \t{SRC\_URI} behaviour, see section~\ref{src-uri-behaviour}.
-}
+\item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC\_URI} and \t{HOMEPAGE}.
+In EAPIs listed in table~\ref{uri-arrows-table} as supporting \t{SRC\_URI} arrows, may
+optionally be followed by whitespace, then \t{->}, then whitespace, then a simple filename
+when in \t{SRC\_URI}. For \t{SRC\_URI} behaviour, see section~\ref{src-uri-behaviour}.
 \item A flat filename. Permitted in \t{SRC\_URI}.
 \item A license name (e.g. \t{GPL-2}). Permitted in \t{LICENSE}.
 \item A simple string. Permitted in \t{RESTRICT}.
@@ -66,9 +60,9 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 
 In particular, note that whitespace is not optional.
 
+\begin{centertable}{EAPIs supporting \t{SRC\_URI} arrows} \label{uri-arrows-table}
 \IFKDEBUILDELSE
 {
-    \begin{centertable}{EAPIs supporting \t{SRC\_URI} arrows} \label{uri-arrows-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -77,10 +71,25 @@ In particular, note that whitespace is not optional.
     \t{0} & No \\
     \t{1} & No \\
     \t{kdebuild-1} & Yes \\
+    \t{2} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{centertable}
+}{
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{SRC\_URI} arrows?}} \\
+        \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & Yes \\
+    \bottomrule
+    \end{tabular}
+}
+\end{centertable}
 
+\IFKDEBUILDELSE
+{
     \begin{centertable}{EAPIs supporting \t{SRC\_URI} labels} \label{uri-labels-table}
     \begin{tabular}{ l l }
         \toprule
@@ -90,6 +99,7 @@ In particular, note that whitespace is not optional.
     \t{0} & No \\
     \t{1} & No \\
     \t{kdebuild-1} & Yes \\
+    \t{2} & No \\
     \bottomrule
     \end{tabular}
     \end{centertable}
@@ -103,6 +113,7 @@ In particular, note that whitespace is not optional.
     \t{0} & No \\
     \t{1} & No \\
     \t{kdebuild-1} & Yes \\
+    \t{2} & No \\
     \bottomrule
     \end{tabular}
     \end{centertable}
@@ -166,15 +177,29 @@ EAPI not supporting \t{SLOT} dependencies.
     specification that does not use an operator at the start may additionally be suffixed by one
     \t{[range]} restriction, as described in section~\ref{range-dep}. A package manager must warn or
     error if this feature is used with an EAPI not supporting ranged dependencies.
+}{
+}
 
-    In EAPIs shown in table~\ref{use-deps-table} as supporting \t{USE} dependencies, a specification
-    may additionally be suffixed by one or more \t{[use]} restrictions, as described in
-    section~\ref{use-dep}. A package manager must warn or error if this feature is used with an EAPI
-    not supporting use dependencies.
+\IFKDEBUILDELSE
+{
+    In EAPIs shown in table~\ref{use-deps-table} as supporting kdebuild-style \t{USE} dependencies,
+    a specification may additionally be suffixed by one or more kdebuild-style \t{[use]}
+    restrictions, as described in section~\ref{kdebuild-use-dep}. A package manager must warn or
+    error if this feature is used with an EAPI not supporting use dependencies.
+}{
+}
 
+In EAPIs shown in table~\ref{use-deps-table} as supporting 2-style \t{USE} dependencies, a specification
+may additionally be suffixed by at most one 2-style \t{[use]} restriction, as described in
+section~\ref{use-dep}. A package manager must warn or error if this feature is used with an EAPI
+not supporting use dependencies.
+
+\IFKDEBUILDELSE
+{
     \note Order is important. The slot restriction must come before the range restriction, which
     must come before use dependencies.
 }{
+    \note Order is important. The slot restriction must come before use dependencies.
 }
 
 \begin{centertable}{EAPIs supporting \t{SLOT} dependencies} \label{slot-deps-table}
@@ -188,6 +213,7 @@ EAPI not supporting \t{SLOT} dependencies.
     \t{0} & No \\
     \t{1} & Named only \\
     \t{kdebuild-1} & Named and operator \\
+    \t{2} & Named only \\
     \bottomrule
     \end{tabular}
 }{
@@ -198,6 +224,7 @@ EAPI not supporting \t{SLOT} dependencies.
             \midrule
     \t{0} & No \\
     \t{1} & Yes \\
+    \t{2} & Yes \\
     \bottomrule
     \end{tabular}
 }
@@ -214,10 +241,15 @@ EAPI not supporting \t{SLOT} dependencies.
     \t{0} & No \\
     \t{1} & No \\
     \t{kdebuild-1} & Yes \\
+    \t{2} & No \\
     \bottomrule
     \end{tabular}
     \end{centertable}
+}{
+}
 
+\IFKDEBUILDELSE
+{
     \begin{centertable}{EAPIs supporting \t{USE} dependencies} \label{use-deps-table}
     \begin{tabular}{ l l }
         \toprule
@@ -226,11 +258,24 @@ EAPI not supporting \t{SLOT} dependencies.
         \midrule
     \t{0} & No \\
     \t{1} & No \\
-    \t{kdebuild-1} & Yes \\
+    \t{kdebuild-1} & kdebuild-style \\
+    \t{2} & 2-style \\
     \bottomrule
     \end{tabular}
     \end{centertable}
 }{
+    \begin{centertable}{EAPIs supporting \t{USE} dependencies} \label{use-deps-table}
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{USE} dependencies?}} \\
+        \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & 2-style \\
+    \bottomrule
+    \end{tabular}
+    \end{centertable}
 }
 
 \subsubsection{Operators}
@@ -254,14 +299,49 @@ The following operators are available:
 
 \subsubsection{Block Operator}
 
-If the specification is prefixed with an exclamation mark, the named dependency is a block rather
-than a requirement---that is to say, the specified package must not be installed, with the
+If the specification is prefixed with one or two exclamation marks, the named dependency is a block
+rather than a requirement---that is to say, the specified package must not be installed, with the
 following exceptions:
 
 \begin{compactitem}
 \item Blocks on a package provided exclusively by the ebuild do not count. \label{provided-blocks}
 \item Blocks on the ebuild itself do not count.
 \end{compactitem}
+
+There are two strengths of block: weak and strong. A weak block may be ignored by the package
+manager, so long as any blocked package will be uninstalled later on. A strong block must not be
+ignored. The mapping from one or two exclamation marks to strength is described in
+table~\ref{bang-strength-table}.
+
+\begin{centertable}{Exclamation mark strengths for EAPIs} \label{bang-strength-table}
+\IFKDEBUILDELSE
+{
+    \begin{tabular}{ l l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{\t{!}}} &
+            \multicolumn{1}{c}{\textbf{\t{!!}}} \\
+            \midrule
+    \t{0} & Unspecified & Forbidden \\
+    \t{1} & Unspecified & Forbidden \\
+    \t{kdebuild-1} & Unspecified & Forbidden \\
+    \t{2} & Weak & Strong \\
+    \bottomrule
+    \end{tabular}
+}{
+    \begin{tabular}{ l l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{\t{!}}} &
+            \multicolumn{1}{c}{\textbf{\t{!!}}} \\
+            \midrule
+    \t{0} & Unspecified & Forbidden \\
+    \t{1} & Unspecified & Forbidden \\
+    \t{2} & Weak & Strong \\
+    \bottomrule
+    \end{tabular}
+}
+\end{centertable}
 
 \subsubsection{Slot Dependencies}
 \label{slot-dep}
@@ -314,10 +394,10 @@ the match is treated as unsuccessful.
 
 \IFKDEBUILDELSE
 {
-    \subsubsection{Use Dependencies}
-    \label{use-dep}
+    \subsubsection{kdebuild Style Use Dependencies}
+    \label{kdebuild-use-dep}
 
-    A use dependency consists of one of the following:
+    A kdebuild-style use dependency consists of one of the following:
 
     \begin{description}
     \item{[opt]} The flag must be enabled.
@@ -337,8 +417,38 @@ the match is treated as unsuccessful.
     \end{description}
 
     When multiple use dependencies are specified, all must match for a successful match.
+
+    It is an error for a use dependency to be applied to an ebuild which does not have the flag in
+    question in \t{IUSE}, or for an ebuild to use a conditional use dependency when that ebuild does
+    not have the flag in \t{IUSE}.
 }{
 }
+
+\subsubsection{2-Style Use Dependencies}
+\label{use-dep}
+
+A 2-style use dependency consists of one of the following:
+
+\begin{description}
+\item{[opt]} The flag must be enabled.
+\item{[opt=]} The flag must be enabled if the flag is enabled for the package with the
+    dependency, or disabled otherwise.
+\item{[!opt=]} The flag must be disabled if the flag is enabled for the package with the
+    dependency, or enabled otherwise.
+\item{[opt?]} The flag must be enabled if the flag is enabled for the package with the
+    dependency.
+\item{[!opt?]} The flag must be disabled if the use flag is disabled for the package with the
+    dependency.
+\item{[-opt]} The flag must be disabled.
+\end{description}
+
+Multiple requirements may be combined using commas, e.g. \t{[first,-second,third?]}.
+
+When multiple requirements are specified, all must match for a successful match.
+
+It is an error for a use dependency to be applied to an ebuild which does not have the flag in
+question in \t{IUSE}, or for an ebuild to use a conditional use dependency when that ebuild does
+not have the flag in \t{IUSE}.
 
 \IFKDEBUILDELSE
 {

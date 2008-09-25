@@ -66,6 +66,7 @@ operations upon other ebuilds or packages.
     \t{0} & No \\
     \t{1} & Yes \\
     \t{kdebuild-1} & Yes \\
+    \t{2} & Yes \\
     \bottomrule
     \end{tabular}
 }
@@ -77,6 +78,7 @@ operations upon other ebuilds or packages.
         \midrule
     \t{0} & No \\
     \t{1} & Yes \\
+    \t{2} & Yes \\
     \bottomrule
     \end{tabular}
 }
@@ -121,11 +123,15 @@ Ebuilds may define any of the following variables:
     \t{0} & Yes \\
     \t{1} & Yes \\
     \t{kdebuild-1} & No \\
+    \t{2} & Yes \\
     \bottomrule
     \end{tabular}
     \end{centertable}
 }{
 }
+
+\subsection{EAPI}
+\label{pre-source-eapi}
 
 An empty \t{EAPI} value is equal to \t{0}. Ebuilds must not assume that they will get a particular
 one of these two values if they are expecting one of these two values.
