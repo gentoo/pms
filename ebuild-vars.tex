@@ -108,6 +108,10 @@ Ebuilds may define any of the following variables:
     unset and when used with an eclass. See section~\ref{rdepend-depend} for details.
 \item[RESTRICT] Zero or more behaviour restrictions for this package. See section~\ref{restrict}
     for value meanings and section~\ref{dependencies} for full syntax.
+\item[PROPERTIES] Zero or more properties for this package. See section~\ref{properties}
+    for value meanings and section~\ref{dependencies} for full syntax. For EAPIs listed in
+    table~\ref{properties-table} as having optional support, ebuilds must not rely upon the
+    package manager recognising or understanding this variable in any way.
 \item[S] The path to the temporary build directory, used by \t{src\_compile}, \t{src\_install}
     etc. Defaults to \t{\$\{WORKDIR\}/\$\{P\}}.
 \end{description}
@@ -129,6 +133,35 @@ Ebuilds may define any of the following variables:
     \end{centertable}
 }{
 }
+
+\begin{centertable}{EAPIs supporting \t{PROPERTIES}} \label{properties-table}
+\IFKDEBUILDELSE
+{
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{PROPERTIES}?}} \\
+        \midrule
+    \t{0} & Optionally \\
+    \t{1} & Optionally \\
+    \t{kdebuild-1} & Optionally \\
+    \t{2} & Optionally \\
+    \bottomrule
+    \end{tabular}
+}
+{
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{PROPERTIES}?}} \\
+        \midrule
+    \t{0} & Optionally \\
+    \t{1} & Optionally \\
+    \t{2} & Optionally \\
+    \bottomrule
+    \end{tabular}
+}
+\end{centertable}
 
 \subsection{EAPI}
 \label{pre-source-eapi}
