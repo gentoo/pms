@@ -21,8 +21,6 @@
 }
 \usepackage[position=top]{caption}
 \usepackage[utf8]{inputenc}
-\usepackage[light]{draftcopy}
-\usepackage[draft,nomargin,inline,marginclue]{fixme}
 
 \newboolean{TEX4HT-HACKS}
 \ifx\HCode\undefined
@@ -47,8 +45,6 @@
 \newcommand{\e}[1]{\emph{#1}}
 \renewcommand{\b}[1]{\textbf{#1}}
 \newcommand{\note}[1]{\paragraph{Note:} #1}
-\newcommand{\TODOBUG}[2]{\fixme[inline]{(discussion on bug \##1) #2}}
-\newcommand{\TODO}[1]{\fixme[inline]{#1}}
 
 \definecolor{deepblue}{rgb}{0.0, 0.2, 0.7}
 \definecolor{deeppurple}{rgb}{0.7, 0.0, 0.8}
@@ -103,7 +99,7 @@
   pdfsubject={Defining a feature set for package managers in the
     Gentoo world},
   pdflang={en},
-  pdfkeywords={Gentoo, package manager, specification, draft},
+  pdfkeywords={Gentoo, package manager, specification},
   pdfproducer={pdfLaTeX and hyperref},
 }
 
@@ -118,7 +114,6 @@
 \listofalgorithms
 \listoflistings
 \listoftables
-\listoffixmes
 
 \include{credits}
 
