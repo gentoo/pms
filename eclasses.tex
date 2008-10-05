@@ -62,8 +62,7 @@ given in listing~\ref{lst:export-functions} and is a snippet from a hypothetical
 foo_src_compile()
 {
     econf --enable-gerbil \
-            $(use_enable fnord) \
-            || die "econf failed"
+            $(use_enable fnord)
     emake gerbil || die "Couldn't make a gerbil"
     emake || die "emake failed"
 }
