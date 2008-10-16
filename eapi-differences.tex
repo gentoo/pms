@@ -143,8 +143,9 @@ Use dependencies & table~\ref{use-deps-table} & No & No &
     \IFKDEBUILDCOLOUR{Installed} \\
 }{}
 
-\t{default\_} phase functions & table~\ref{default-phase-function-table} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes \\
+\t{default\_} phase functions & table~\ref{default-phase-function-table} & None & None &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{None} &}{} \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack},
+    \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test}} \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{dohard}} &
@@ -243,7 +244,8 @@ EAPI 2 is EAPI 1 with the following changes:
 \item \t{src\_prepare}, table~\ref{src-prepare-table}.
 \item \t{src\_configure}, table~\ref{src-configure-table}.
 \item Different \t{src\_compile} implementation, table~\ref{src-compile-table}.
-\item \t{default\_} phase functions, table~\ref{default-phase-function-table}.
+\item \t{default\_} phase functions for phases \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare},
+    \t{src\_configure}, \t{src\_compile} and \t{src\_test}; table~\ref{default-phase-function-table}.
 \item \t{doman} languages support, table~\ref{doman-table}.
 \item \t{default} function, table~\ref{default-function-table}.
 \end{compactitem}

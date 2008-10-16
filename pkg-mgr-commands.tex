@@ -460,8 +460,9 @@ has returned.
 
 \item[inherit] See section~\ref{inherit}.
 
-\item[default] Calls the \t{default\_\$\{EBUILD\_PHASE\}} function. Only available in EAPIs listed in
-    table~\ref{default-function-table}.
+\item[default] Calls the \t{default\_} function for the current phase (see section~\ref{default-phase-functions}).
+    Must not be called if the \t{default\_} function does not exist for the current phase in the current EAPI.
+    Only available in EAPIs listed in table~\ref{default-function-table}.
 \end{description}
 
 \begin{centertable}{EAPIs supporting the \t{default} function} \label{default-function-table}

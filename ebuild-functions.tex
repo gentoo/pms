@@ -349,10 +349,11 @@ source files from their respective locations, with notes concerning licensing if
 \t{pkg\_nofetch} must require no write access to any part of the filesystem.
 
 \subsection{\t{default\_} Phase Functions}
+\label{default-phase-functions}
 
 In EAPIs listed in table~\ref{default-phase-function-table} as supporting \t{default\_} phase
-functions, a function named \t{default\_\$\{EBUILD\_PHASE\}} that behaves as the default
-implementation for that EAPI shall be defined when executing any given \t{EBUILD\_PHASE}. Ebuilds
+functions, a function named \t{default\_}(phase) that behaves as the default
+implementation for that EAPI shall be defined when executing any ebuild phase listed in the table. Ebuilds
 must not call these functions except when in the phase in question.
 
 \begin{centertable}{EAPIs supporting \t{default\_} phase functions} \label{default-phase-function-table}
@@ -361,23 +362,25 @@ must not call these functions except when in the phase in question.
     \begin{tabular}{ l l }
         \toprule
             \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{default\_} phase functions?}} \\
+            \multicolumn{1}{c}{\textbf{Supports \t{default\_} functions in phases}} \\
             \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{kdebuild-1} & No \\
-    \t{2} & Yes \\
+    \t{0} & None \\
+    \t{1} & None \\
+    \t{kdebuild-1} & None \\
+    \t{2} & \parbox[t]{3in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
+        \t{src\_compile}, \t{src\_test}} \\
     \bottomrule
     \end{tabular}
 }{
     \begin{tabular}{ l l }
         \toprule
             \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{default\_} phase functions?}} \\
+            \multicolumn{1}{c}{\textbf{Supports \t{default\_} functions in phases}} \\
             \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & Yes \\
+    \t{0} & None \\
+    \t{1} & None \\
+    \t{2} & \parbox[t]{3in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
+        \t{src\_compile}, \t{src\_test}} \\
     \bottomrule
     \end{tabular}
 }
