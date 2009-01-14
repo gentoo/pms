@@ -14,6 +14,7 @@ follow a few basic conventions as regards inheritance and format; these are desc
 section. It may also contain any number of subdirectories containing other profiles.
 
 \section{Files that make up a profile}
+
 \subsection{The parent file}
 A profile may contain a \t{parent} file. Each line must contain a relative path to another profile
 which will be considered as one of this profile's parents. Any settings from the parent are
@@ -25,6 +26,14 @@ It is illegal for a profile's parent tree to contain cycles. Package manager beh
 encountering a cycle is undefined.
 
 This file must not contain comments, blank lines or make use of line continuations.
+
+\subsection{The eapi file}
+\label{profile-eapi}
+A profile directory may contain an \t{eapi} file. This file, if it exists, must contain a single line
+with the name of an EAPI. This specifies the EAPI to use when handling the directory in question; a
+package manager must not attempt to use any profile using a directory which requires an EAPI it does
+not support. If no \t{eapi} file is present, EAPI 0 shall be used. The EAPI is not inherited via the
+\t{parent} file.
 
 \subsection{deprecated}
 If a profile contains a file named \t{deprecated}, it is treated as such. The first line of this
@@ -113,7 +122,7 @@ The \t{package.use} file may be used by the package manager to override the defa
 by \t{make.defaults} on a per package basis.  The format is to have a package dependency specification,
 and then a space delimited list of USE flags to enable.  A USE flag in the form of \t{-flag} indicates
 that the package should have the USE flag disabled.  The package dependency specification is limited to
-the forms defined by \t{EAPI 0}.
+the forms defined by the directory's EAPI.
 
 \subsection{USE masking and forcing}
 \label{use-masking}

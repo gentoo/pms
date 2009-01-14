@@ -90,6 +90,11 @@ character are treated as comments, whilst blank lines are ignored. All
 contents of this directory, with the exception of \t{repo\_name}, are
 optional.
 
+The profiles directory may contain an \t{eapi} file. This file, if it exists, must contain a single
+line with the name of an EAPI. This specifies the EAPI to use when handling the profiles directory;
+a package manager must not attempt to use any repository whose profile directory requires an EAPI it
+does not support. If no \t{eapi} file is present, EAPI 0 shall be used.
+
 If the repository is not intended to be stand-alone, the contents of these files are to be taken
 from or merged with the master repository as necessary.
 
@@ -101,6 +106,7 @@ manager must ignore any files in this directory that it does not recognise.
     the \t{ARCH} variable, and hence permissible keywords for packages in this repository.
 \item[categories] \label{profiles-categories} Contains a list, one entry per line, of categories
     provided by this repository.
+\item[eapi] See above.
 \item[info\_pkgs] Contains a list, one entry per line, of qualified package names. Any package
     matching one of these is to be listed when a package manager displays a `system information'
     listing.
@@ -108,9 +114,9 @@ manager must ignore any files in this directory that it does not recognise.
     variables which are considered to be of interest. The value of each of these variables may be
     shown when the package manager displays a `system information' listing.
 \item[package.mask] \label{profiles-package.mask}
-    Contains a list, one entry per line, of (EAPI-0) package dependency specifications. Any package
-    version matching one of these is considered to be masked, and will not be installed regardless
-    of profile unless it is unmasked by the user configuration.
+    Contains a list, one entry per line, of package dependency specifications (using the directory's
+    EAPI). Any package version matching one of these is considered to be masked, and will not be
+    installed regardless of profile unless it is unmasked by the user configuration.
 \item[profiles.desc] Described below in section~\ref{profiles.desc}.
 \item[repo\_name] Contains, on a single line, the name of this repository. The repository name must
     conform to section~\ref{repository-names}.
