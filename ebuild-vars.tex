@@ -209,6 +209,20 @@ of the ebuild's metadata:
 \note Thus, by extension of section~\ref{metadata-invariance}, \t{inherit} may not be used
     conditionally, except upon constant conditions.
 
+The following are special variables defined by the package manager for internal use and may or may
+not be exported to the ebuild environment:
+
+\begin{description}
+\item[DEFINED\_PHASES] A space separated arbitrarily ordered list of phase names (e.g. \t{configure
+setup unpack}) whose phase functions are defined by the ebuild or an eclass inherited by the ebuild.
+If no phase functions are defined, a single hyphen is used instead of an empty string. Package
+managers may not rely upon the metadata cache having this variable defined, and must treat an empty
+string as ``this information is not available''.
+\end{description}
+
+\note Thus, by extension of section~\ref{metadata-invariance}, phase functions must not be defined
+based upon any variant condition.
+
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 
 %%% Local Variables:
