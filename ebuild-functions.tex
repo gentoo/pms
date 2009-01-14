@@ -15,7 +15,9 @@ users.
 
 Some functions may assume that their initial working directory is set to a particular location;
 these are noted below. If no initial working directory is mandated, it may be set to anything and
-the ebuild must not rely upon a particular location for it.
+the ebuild must not rely upon a particular location for it. The ebuild \e{may} assume that the
+initial working directory for any phase is a trusted location that may only be written to by a
+privileged user and group.
 
 The environment for functions run outside of the build sequence (that is, \t{pkg\_config},
 \t{pkg\_info}, \t{pkg\_prerm} and \t{pkg\_postrm}) must be the environment used for the build of the
