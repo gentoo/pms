@@ -50,7 +50,7 @@ these commands in parallel with any other package manager command. Ebuilds must 
 these commands once the current phase function has returned.
 \begin{description}
 \item[has\_version] Takes exactly one package dependency specification as an argument. Returns
-    true if a package matching the atom is installed in \t{\$ROOT}, and false otherwise.
+    true if a package matching the atom is installed in \t{ROOT}, and false otherwise.
 \item[best\_version] Takes exactly one package dependency specification as an argument. If a
     matching package is installed, prints the category, package name and version of the highest
     matching version.
@@ -159,7 +159,7 @@ emake \
 \subsubsection{Installation commands}
 These commands are used to install files into the staging area, in cases where the package's \t{make
 install} target cannot be used or does not install all needed files. Except where otherwise stated,
-all filenames created or modified are relative to the staging directory, given by \t{\$\{D\}}. These
+all filenames created or modified are relative to the staging directory, given by \t{D}. These
 commands must all be external programs and not bash functions or aliases---that is, they must be
 callable from \t{xargs}. Ebuilds must not run any of these commands once the current phase function
 has returned.
@@ -173,9 +173,9 @@ has returned.
 \item[dodir] Creates the given directories, by default with file mode \t{0755}. This can be overridden
     by setting \t{DIROPTIONS} with the \t{diropts} function.
 
-\item[dodoc] Installs the given files into a subdirectory under \t{/usr/share/doc/\$PF/}. The
+\item[dodoc] Installs the given files into a subdirectory under \t{/usr/share/doc/\$\{PF\}/}. The
     subdirectory is set by the most recent call to \t{docinto}. If \t{docinto} has not
-    yet been called, instead installs to the directory \t{/usr/share/doc/\$PF/}.
+    yet been called, instead installs to the directory \t{/usr/share/doc/\$\{PF\}/}.
 
 \item[doexe] Installs the given files into the directory specified by the most recent
     \t{exeinto} call. If \t{exeinto} has not yet been called, behaviour is undefined.
@@ -190,7 +190,7 @@ has returned.
 }
 
 \item[dohtml] Installs the given HTML files into a subdirectory under \t{/usr/share/doc/\$PF/}.
-The subdirectory is \t{html} by default, but this can be changed by the \t{\$DOCDESTTREE}
+The subdirectory is \t{html} by default, but this can be changed by the \t{DOCDESTTREE}
 variable. Files to be installed automatically are determined by extension and the default
 extensions are \t{css}, \t{gif}, \t{htm}, \t{html}, \t{jpeg}, \t{jpg}, \t{js} and \t{png}. These default
 extensions can be extended or reduced (see below). The options that can be passed to \t{dohtml}
@@ -217,7 +217,7 @@ are as follows:
 
 \item[doinitd] Installs an initscript into \t{/etc/init.d}.
 
-\item[doins] Takes any number of files as arguments and installs them into \t{\$INSDESTTREE}\@. If
+\item[doins] Takes any number of files as arguments and installs them into \t{INSDESTTREE}\@. If
     the first argument is \t{-r}, then operates recursively, descending into any directories given.
 
 \item[dolib] For each argument, installs it into the appropriate library directory as determined by
@@ -399,13 +399,13 @@ is made.
 \item[hasq] Deprecated synonym for \t{has}.
 \\
 \item[use\_with] Has one-, two-, and three-argument forms. The first argument is a USE flag name,
-    the second a \t{configure} option name (\t{\$opt}), defaulting to the same as the first argument
-    if not provided, and the third is a string value (\t{\$value}), defaulting to nothing. If the
-    USE flag is set, outputs \t{--with-\$opt=\$value} if the third argument was provided, and
-    \t{--with-\$opt} otherwise. If the flag is not set, then it outputs \t{--without-\$opt}.
+    the second a \t{configure} option name (\t{\$\{opt\}}), defaulting to the same as the first argument
+    if not provided, and the third is a string value (\t{\$\{value\}}), defaulting to nothing. If the
+    USE flag is set, outputs \t{-{}-with-\$\{opt\}=\$\{value\}} if the third argument was provided, and
+    \t{-{}-with-\$\{opt\}} otherwise. If the flag is not set, then it outputs \t{-{}-without-\$\{opt\}}.
 
-\item[use\_enable] Works the same as \t{use\_with()}, but outputs \t{--enable-} or \t{--disable-}
-instead of \t{--with-} or \t{--without-}.
+\item[use\_enable] Works the same as \t{use\_with()}, but outputs \t{-{}-enable-} or \t{-{}-disable-}
+instead of \t{-{}-with-} or \t{-{}-without-}.
 \end{description}
 
 \subsubsection{Misc Commands}
