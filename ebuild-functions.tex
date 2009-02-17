@@ -1,8 +1,8 @@
 \chapter{Ebuild-defined Functions}
-\label{ebuild-functions}
+\label{sec:ebuild-functions}
 
 \section{List of Functions}
-\label{functions}
+\label{sec:functions}
 
 The following is a list of functions that an ebuild, or eclass, may define, and which will be called
 by the package manager as part of the build and/or install process. In all cases the package manager
@@ -26,7 +26,7 @@ package, not the current configuration.
 Ebuilds must not call nor assume the existence of any phase functions.
 
 \subsection{pkg\_setup}
-\label{pkg-setup-function}
+\label{sec:pkg-setup-function}
 The \t{pkg\_setup} function sets up the ebuild's environment for all following functions, before
 the build process starts. Further, it checks whether any necessary prerequisites not covered
 by the package manager, e.g.\ that certain kernel configuration options are fulfilled.
@@ -35,7 +35,7 @@ by the package manager, e.g.\ that certain kernel configuration options are fulf
 and/or groups to the system.
 
 \subsection{src\_unpack}
-\label{src-unpack-function}
+\label{sec:src-unpack-function}
 
 The \t{src\_unpack} function extracts all of the package's sources, applies patches and sets up the
 package's build system for further use.
@@ -52,9 +52,9 @@ src_unpack() {
 \end{verbatim}
 
 \subsection{src\_prepare}
-\label{src-prepare-function}
+\label{sec:src-prepare-function}
 
-The \t{src\_prepare} function is only called for EAPIs listed in table~\ref{src-prepare-table} as
+The \t{src\_prepare} function is only called for EAPIs listed in table~\ref{tab:src-prepare-table} as
 supporting it.
 
 The \t{src\_prepare} function can be used for post-unpack source preparation. The default
@@ -62,7 +62,7 @@ implementation does nothing.
 
 The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
 
-\begin{centertable}{EAPIs supporting \t{src\_prepare}} \label{src-prepare-table}
+\begin{centertable}{EAPIs supporting \t{src\_prepare}} \label{tab:src-prepare-table}
 \IFKDEBUILDELSE
 {
     \begin{tabular}{ l l }
@@ -91,9 +91,9 @@ The initial working directory must be \t{S} if that exists, falling back to \t{W
 \end{centertable}
 
 \subsection{src\_configure}
-\label{src-configure-function}
+\label{sec:src-configure-function}
 
-The \t{src\_configure} function is only called for EAPIs listed in table~\ref{src-configure-table} as
+The \t{src\_configure} function is only called for EAPIs listed in table~\ref{tab:src-configure-table} as
 supporting it.
 
 The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
@@ -109,7 +109,7 @@ src_configure() {
 }
 \end{verbatim}
 
-\begin{centertable}{EAPIs supporting \t{src\_configure}} \label{src-configure-table}
+\begin{centertable}{EAPIs supporting \t{src\_configure}} \label{tab:src-configure-table}
 \IFKDEBUILDELSE
 {
     \begin{tabular}{ l l }
@@ -138,14 +138,14 @@ src_configure() {
 \end{centertable}
 
 \subsection{src\_compile}
-\label{src-compile-function}
+\label{sec:src-compile-function}
 
 The \t{src\_compile} function configures the package's build environment in EAPIs lacking
 \t{src\_configure}, and builds the package in all EAPIs.
 
 The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
 
-For EAPIs listed in table~\ref{src-compile-table} as using format 0, the default implementation used
+For EAPIs listed in table~\ref{tab:src-compile-table} as using format 0, the default implementation used
 when the ebuild lacks the \t{src\_compile} function shall behave as:
 
 \begin{verbatim}
@@ -159,7 +159,7 @@ src_compile() {
 }
 \end{verbatim}
 
-For EAPIs listed in table~\ref{src-compile-table} as using format 1, the default implementation used
+For EAPIs listed in table~\ref{tab:src-compile-table} as using format 1, the default implementation used
 when the ebuild lacks the \t{src\_compile} function shall behave as:
 
 \begin{verbatim}
@@ -173,7 +173,7 @@ src_compile() {
 }
 \end{verbatim}
 
-For EAPIs listed in table~\ref{src-compile-table} as using format 2, the default implementation used
+For EAPIs listed in table~\ref{tab:src-compile-table} as using format 2, the default implementation used
 when the ebuild lacks the \t{src\_compile} function shall behave as:
 
 \begin{verbatim}
@@ -184,7 +184,7 @@ src_compile() {
 }
 \end{verbatim}
 
-\begin{centertable}{\t{src\_compile} behaviour for EAPIs} \label{src-compile-table}
+\begin{centertable}{\t{src\_compile} behaviour for EAPIs} \label{tab:src-compile-table}
 \IFKDEBUILDELSE
 {
     \begin{tabular}{ l l }
@@ -213,7 +213,7 @@ src_compile() {
 \end{centertable}
 
 \subsection{src\_test}
-\label{src-test-function}
+\label{sec:src-test-function}
 
 The \t{src\_test} function runs unit tests for the newly built but not yet installed package as
 provided.
@@ -224,15 +224,15 @@ enabled, run \t{make check} if and only if such a target is available, or if not
 if and only such a target is available. In both cases, if make returns non-zero the build must be
 aborted.
 
-The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{restrict}.
+The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{sec:restrict}.
 
 \IFKDEBUILDELSE
 {
     In some EAPIs, \t{src\_test} should only be run at user option (and never if restrictions are in
-    place). In others, it must always be run (excepting restrictions). See table~\ref{test-required-table}
+    place). In others, it must always be run (excepting restrictions). See table~\ref{tab:test-required-table}
     for which EAPIs fit into which category.
 
-    \begin{centertable}{EAPIs requiring \t{src\_test}} \label{test-required-table}
+    \begin{centertable}{EAPIs requiring \t{src\_test}} \label{tab:test-required-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -250,7 +250,7 @@ The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{res
 }
 
 \subsection{src\_install}
-\label{src-install-function}
+\label{sec:src-install-function}
 
 The \t{src\_install} function installs the package's content to a directory specified in
 \t{D}.
@@ -259,7 +259,7 @@ The initial working directory must be \t{S} if that exists, falling back to \t{W
 The default implementation used when the ebuild lacks the \t{src\_install} function is a no-op.
 
 \subsection{pkg\_preinst}
-\label{pkg-preinst-function}
+\label{sec:pkg-preinst-function}
 
 The \t{pkg\_preinst} function performs any special tasks that are required immediately before
 merging the package to the live filesystem. It must not write outside of the directories specified
@@ -269,7 +269,7 @@ by the \t{ROOT} and \t{D} environment variables.
 the \t{ROOT} and \t{D} environment variables.
 
 \subsection{pkg\_postinst}
-\label{pkg-postinst-function}
+\label{sec:pkg-postinst-function}
 
 The \t{pkg\_postinst} function performs any special tasks that are required immediately after
 merging the package to the live filesystem. It must not write outside of the directory specified
@@ -279,7 +279,7 @@ in the \t{ROOT} environment variable.
 below that specified by the \t{ROOT} environment variable.
 
 \subsection{pkg\_prerm}
-\label{pkg-prerm-function}
+\label{sec:pkg-prerm-function}
 
 The \t{pkg\_prerm} function performs any special tasks that are required immediately before
 unmerging the package from the live filesystem. It must not write outside of the directory specified
@@ -289,7 +289,7 @@ by the \t{ROOT} environment variable.
 the \t{ROOT} environment variable.
 
 \subsection{pkg\_postrm}
-\label{pkg-postrm-function}
+\label{sec:pkg-postrm-function}
 
 The \t{pkg\_postrm} function performs any special tasks that are required immediately after
 unmerging the package from the live filesystem. It must not write outside of the directory specified
@@ -299,7 +299,7 @@ by the \t{ROOT} environment variable.
 the \t{ROOT} environment variable.
 
 \subsection{pkg\_config}
-\label{pkg-config-function}
+\label{sec:pkg-config-function}
 
 The \t{pkg\_config} function performs any custom steps required to configure a package after it has been
 fully installed. It is the only ebuild function which may be interactive and prompt for user input.
@@ -307,12 +307,12 @@ fully installed. It is the only ebuild function which may be interactive and pro
 \t{pkg\_config} must be run with full access to all files and directories inside of \t{ROOT}.
 
 \subsection{pkg\_info}
-\label{pkg-info-function}
+\label{sec:pkg-info-function}
 
 \IFKDEBUILDELSE
 {
     The \t{pkg\_info} function may be called by the package manager when displaying information about an
-    installed package. In EAPIs listed in table~\ref{pkg-info-table} as supporting \t{pkg\_info} on
+    installed package. In EAPIs listed in table~\ref{tab:pkg-info-table} as supporting \t{pkg\_info} on
     uninstalled packages, it may also be called by the package manager when displaying information
     about an uninstalled package. In this case, ebuild authors should note that dependencies may not be
     installed.
@@ -325,7 +325,7 @@ fully installed. It is the only ebuild function which may be interactive and pro
 
 \IFKDEBUILDELSE
 {
-    \begin{centertable}{EAPIs supporting \t{pkg\_info} on uninstalled packages} \label{pkg-info-table}
+    \begin{centertable}{EAPIs supporting \t{pkg\_info} on uninstalled packages} \label{tab:pkg-info-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -342,7 +342,7 @@ fully installed. It is the only ebuild function which may be interactive and pro
 }
 
 \subsection{pkg\_nofetch}
-\label{pkg-nofetch-function}
+\label{sec:pkg-nofetch-function}
 
 The \t{pkg\_nofetch} function is run when the fetch phase of an fetch-restricted ebuild is run, and
 the relevant source files are not available. It should direct the user to download all relevant
@@ -351,14 +351,14 @@ source files from their respective locations, with notes concerning licensing if
 \t{pkg\_nofetch} must require no write access to any part of the filesystem.
 
 \subsection{\t{default\_} Phase Functions}
-\label{default-phase-functions}
+\label{sec:default-phase-functions}
 
-In EAPIs listed in table~\ref{default-phase-function-table} as supporting \t{default\_} phase
+In EAPIs listed in table~\ref{tab:default-phase-function-table} as supporting \t{default\_} phase
 functions, a function named \t{default\_}(phase) that behaves as the default
 implementation for that EAPI shall be defined when executing any ebuild phase listed in the table. Ebuilds
 must not call these functions except when in the phase in question.
 
-\begin{centertable}{EAPIs supporting \t{default\_} phase functions} \label{default-phase-function-table}
+\begin{centertable}{EAPIs supporting \t{default\_} phase functions} \label{tab:default-phase-function-table}
 \IFKDEBUILDELSE
 {
     \begin{tabular}{ l l }
@@ -395,8 +395,8 @@ The call order for installing a package is:
 \begin{compactitem}
 \item \t{pkg\_setup}
 \item \t{src\_unpack}
-\item \t{src\_prepare} (only for EAPIs listed in table~\ref{src-prepare-table})
-\item \t{src\_configure} (only for EAPIs listed in table~\ref{src-configure-table})
+\item \t{src\_prepare} (only for EAPIs listed in table~\ref{tab:src-prepare-table})
+\item \t{src\_configure} (only for EAPIs listed in table~\ref{tab:src-configure-table})
 \item \t{src\_compile}
 \item \t{src\_test} (except if \t{RESTRICT=test})
 \item \t{src\_install}
@@ -416,8 +416,8 @@ The call order for reinstalling a package is:
 \begin{compactitem}
 \item \t{pkg\_setup}
 \item \t{src\_unpack}
-\item \t{src\_prepare} (only for EAPIs listed in table~\ref{src-prepare-table})
-\item \t{src\_configure} (only for EAPIs listed in table~\ref{src-configure-table})
+\item \t{src\_prepare} (only for EAPIs listed in table~\ref{tab:src-prepare-table})
+\item \t{src\_configure} (only for EAPIs listed in table~\ref{tab:src-configure-table})
 \item \t{src\_compile}
 \item \t{src\_test} (except if \t{RESTRICT=test})
 \item \t{src\_install}
@@ -432,8 +432,8 @@ The call order for upgrading or downgrading a package is:
 \begin{compactitem}
 \item \t{pkg\_setup}
 \item \t{src\_unpack}
-\item \t{src\_prepare} (only for EAPIs listed in table~\ref{src-prepare-table})
-\item \t{src\_configure} (only for EAPIs listed in table~\ref{src-configure-table})
+\item \t{src\_prepare} (only for EAPIs listed in table~\ref{tab:src-prepare-table})
+\item \t{src\_configure} (only for EAPIs listed in table~\ref{tab:src-configure-table})
 \item \t{src\_compile}
 \item \t{src\_test} (except if \t{RESTRICT=test})
 \item \t{src\_install}

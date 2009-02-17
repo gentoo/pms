@@ -1,4 +1,4 @@
-\label{pkg-mgr-commands}
+\label{sec:pkg-mgr-commands}
 
 The following commands will always be available in the ebuild environment, provided by the package
 manager. Except where otherwise noted, they may be internal (shell functions or aliases) or external
@@ -8,12 +8,12 @@ behaviour.
 \IFKDEBUILDELSE
 {
     \subsubsection{Banned commands}
-    \label{banned-commands}
+    \label{sec:banned-commands}
 
     Some commands are banned in some EAPIs. If a banned command is called, the package manager must
     abort the build process indicating an error.
 
-    \begin{centertable}{Banned commands} \label{banned-commands-table}
+    \begin{centertable}{Banned commands} \label{tab:banned-commands-table}
     \begin{tabular}{ l l l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -136,7 +136,7 @@ has returned.
 \item[emake] Calls the \t{\$MAKE} program, or GNU make if the \t{MAKE} variable is unset.  Any
     arguments given are passed directly to the make command, as are the user's chosen \t{MAKEOPTS}\@.
     Arguments given to \t{emake} override user configuration. See also
-    section~\ref{guaranteed-system-commands}. \t{emake} must be an external program and cannot be a
+    section~\ref{sec:guaranteed-system-commands}. \t{emake} must be an external program and cannot be a
     function or alias---it must be callable from e.g. \t{xargs}.
 \item[einstall] A shortcut for the command given in Listing~\ref{lst:einstall}. Any arguments given
     to \t{einstall} are passed verbatim to \t{emake}, as shown.
@@ -183,8 +183,8 @@ has returned.
 \IFKDEBUILDELSE
 {
     \item[dohard] Takes two parameters. Creates a hardlink from the second to the first. In EAPIs
-    listed in table~\ref{banned-commands-table}, this command is banned as per
-    section~\ref{banned-commands}.
+    listed in table~\ref{tab:banned-commands-table}, this command is banned as per
+    section~\ref{sec:banned-commands}.
 }{
     \item[dohard] Takes two parameters. Creates a hardlink from the second to the first.
 }
@@ -208,8 +208,8 @@ are as follows:
 
 \IFKDEBUILDELSE
 {
-    In EAPIs listed in table~\ref{banned-commands-table}, this command is banned as
-    per section ~\ref{banned-commands}.
+    In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as
+    per section ~\ref{sec:banned-commands}.
 }{
 }
 
@@ -221,7 +221,7 @@ are as follows:
     the first argument is \t{-r}, then operates recursively, descending into any directories given.
 
 \item[dolib] For each argument, installs it into the appropriate library directory as determined by
-    Algorithm~\ref{ebuild-libdir}. Any symlinks are installed into the same directory as relative
+    Algorithm~\ref{alg:ebuild-libdir}. Any symlinks are installed into the same directory as relative
     links to their original target.
 
 \item[dolib.so] As for dolib. Installs the file with mode \t{0755}.
@@ -229,7 +229,7 @@ are as follows:
 \item[dolib.a] As for dolib. Installs the file with mode \t{0644}.
 
 \begin{algorithm}
-\caption{Determining the library directory} \label{ebuild-libdir}
+\caption{Determining the library directory} \label{alg:ebuild-libdir}
 \begin{algorithmic}[1]
 \IF{CONF\_LIBDIR\_OVERRIDE is set in the environment}
     \STATE return CONF\_LIBDIR\_OVERRIDE
@@ -252,7 +252,7 @@ are as follows:
 
 \item[doman] Installs a man page into the appropriate subdirectory of \t{/usr/share/man} depending
     upon its apparent section suffix (e.g. \t{foo.1} goes to \t{/usr/share/man/man1/foo.1}.
-    In EAPIs listed in table~\ref{doman-table} as supporting language codes, a man page with
+    In EAPIs listed in table~\ref{tab:doman-table} as supporting language codes, a man page with
     name of the form\t{foo.lang.1} shall go to \t{/usr/share/man/lang/man1/foo.1}, where \t{lang}
     refers to a pair of lower-case ASCII letters optionally followed by an underscore and a pair
     of upper-case ASCII letters.
@@ -267,7 +267,7 @@ are as follows:
 {
     \item[dosym] Creates a symbolic link named as for its second parameter, pointing to the first. If
         the directory containing the new link does not exist, creates it if EAPI is listed in
-        table~\ref{dosym-table} as making the directory, or aborts the build process otherwise.
+        table~\ref{tab:dosym-table} as making the directory, or aborts the build process otherwise.
 }{
     \item[dosym] Creates a symbolic link named as for its second parameter, pointing to the first. If
         the directory containing the new link does not exist, creates it.
@@ -302,7 +302,7 @@ are as follows:
 
 \end{description}
 
-\begin{centertable}{EAPIs supporting \t{doman} languages} \label{doman-table}
+\begin{centertable}{EAPIs supporting \t{doman} languages} \label{tab:doman-table}
 \IFKDEBUILDELSE
 {
     \begin{tabular}{ l l }
@@ -332,7 +332,7 @@ are as follows:
 
 \IFKDEBUILDELSE
 {
-    \begin{centertable}{EAPIs where \t{dosym} makes the directory} \label{dosym-table}
+    \begin{centertable}{EAPIs where \t{dosym} makes the directory} \label{tab:dosym-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -420,8 +420,8 @@ has returned.
         argument, if it names, relative to \t{D} a file which exists, then \t{sed} is run with the
         current expression on that file. Otherwise, the current expression is set to the text of the
         argument. The initial value of the expression is \t{s:\$\{D\}::g}. In EAPIs listed in
-        table~\ref{banned-commands-table}, this command is banned as per
-        section~\ref{banned-commands}.
+        table~\ref{tab:banned-commands-table}, this command is banned as per
+        section~\ref{sec:banned-commands}.
 }{
     \item[dosed] Takes any number of arguments, which can be files or \t{sed} expressions. For each
         argument, if it names, relative to \t{D} a file which exists, then \t{sed} is run with the
@@ -458,14 +458,14 @@ has returned.
     It is up to the ebuild to ensure that the relevant external utilities are available, whether by
     being in the system set or via dependencies.
 
-\item[inherit] See section~\ref{inherit}.
+\item[inherit] See section~\ref{sec:inherit}.
 
-\item[default] Calls the \t{default\_} function for the current phase (see section~\ref{default-phase-functions}).
+\item[default] Calls the \t{default\_} function for the current phase (see section~\ref{sec:default-phase-functions}).
     Must not be called if the \t{default\_} function does not exist for the current phase in the current EAPI.
-    Only available in EAPIs listed in table~\ref{default-function-table}.
+    Only available in EAPIs listed in table~\ref{tab:default-function-table}.
 \end{description}
 
-\begin{centertable}{EAPIs supporting the \t{default} function} \label{default-function-table}
+\begin{centertable}{EAPIs supporting the \t{default} function} \label{tab:default-function-table}
 \IFKDEBUILDELSE
 {
     \begin{tabular}{ l l }

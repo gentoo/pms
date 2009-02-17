@@ -10,11 +10,11 @@ differently from normal.
 An ebuild repository shall occupy one directory on disk, with the following subdirectories:
 \begin{compactitem}
 \item One directory per category, whose name shall be the name of the category. The layout of
-    these directories shall be as described in section~\ref{category-dirs}.
-\item A \t{profiles} directory, described in section~\ref{profiles-dir}.
-\item A \t{licenses} directory (optional), described in section~\ref{licenses-dir}.
-\item An \t{eclass} directory (optional), described in section~\ref{eclass-dir}.
-\item A \t{metadata} directory (optional), described in section~\ref{metadata-dir}.
+    these directories shall be as described in section~\ref{sec:category-dirs}.
+\item A \t{profiles} directory, described in section~\ref{sec:profiles-dir}.
+\item A \t{licenses} directory (optional), described in section~\ref{sec:licenses-dir}.
+\item An \t{eclass} directory (optional), described in section~\ref{sec:eclass-dir}.
+\item A \t{metadata} directory (optional), described in section~\ref{sec:metadata-dir}.
 \item Other optional support files and directories (skeleton ebuilds or ChangeLogs,
     for example) may exist but are not covered by this specification. The package manager must
     ignore any of these files or directories that it does not recognise.
@@ -22,16 +22,16 @@ An ebuild repository shall occupy one directory on disk, with the following subd
 \end{compactitem}
 
 \section{Category Directories}
-\label{category-dirs}
+\label{sec:category-dirs}
 
 Each category provided by the repository (see also: the
 \t{profiles/categories} file, section~\ref{profiles-categories}) shall
 be contained in one directory, whose name shall be that of the
 category. Each category directory shall contain:
 \begin{compactitem}
-\item A \t{metadata.xml} file, as described in appendix~\ref{metadata-xml}\@. Optional.
+\item A \t{metadata.xml} file, as described in appendix~\ref{sec:metadata-xml}\@. Optional.
 \item Zero or more package directories, one for each package in the
-  category, as described in section~\ref{package-dirs}. The name of
+  category, as described in section~\ref{sec:package-dirs}. The name of
   the package directory shall be the corresponding package name.
 \end{compactitem}
 
@@ -45,12 +45,12 @@ directory that does not exist shall be considered equivalent to an empty categor
 a package manager may treat an empty category as a category that does not exist).
 
 \section{Package Directories}
-\label{package-dirs}
+\label{sec:package-dirs}
 
 A package directory contains the following:
 \begin{compactitem}
-\item Zero or more ebuilds. These are as described in section~\ref{ebuild-format} and others.
-\item A \t{metadata.xml} file, as described in appendix~\ref{metadata-xml}\@. Optional only for
+\item Zero or more ebuilds. These are as described in section~\ref{sec:ebuild-format} and others.
+\item A \t{metadata.xml} file, as described in appendix~\ref{sec:metadata-xml}\@. Optional only for
     legacy support.
 \item A \t{ChangeLog}, in a format determined by the provider of the respository. Optional.
 \item A \t{Manifest} file, whose format is described in \cite{Glep44}.
@@ -81,10 +81,10 @@ A package directory may contain other files or directories, whose purpose is not
 this specification.
 
 \section{The Profiles Directory}
-\label{profiles-dir}
+\label{sec:profiles-dir}
 
 The profiles directory shall contain zero or more profile directories
-as described in section~\ref{profiles}, as well as the following files
+as described in section~\ref{sec:profiles}, as well as the following files
 and directories. In any line-based file, lines beginning with a \#
 character are treated as comments, whilst blank lines are ignored. All
 contents of this directory, with the exception of \t{repo\_name}, are
@@ -117,26 +117,26 @@ manager must ignore any files in this directory that it does not recognise.
     Contains a list, one entry per line, of package dependency specifications (using the directory's
     EAPI). Any package version matching one of these is considered to be masked, and will not be
     installed regardless of profile unless it is unmasked by the user configuration.
-\item[profiles.desc] Described below in section~\ref{profiles.desc}.
+\item[profiles.desc] Described below in section~\ref{sec:profiles.desc}.
 \item[repo\_name] Contains, on a single line, the name of this repository. The repository name must
-    conform to section~\ref{repository-names}.
-\item[thirdpartymirrors] Described below in section~\ref{thirdpartymirrors}.
+    conform to section~\ref{sec:repository-names}.
+\item[thirdpartymirrors] Described below in section~\ref{sec:thirdpartymirrors}.
 \item[use.desc] Contains descriptions of valid global USE flags for this repository. The format is
-    described in section~\ref{use.desc}.
+    described in section~\ref{sec:use.desc}.
 \item[use.local.desc] Contains descriptions of valid local USE flags for this repository, along with
-    the packages to which they apply. The format is as described in section~\ref{use.desc}.
+    the packages to which they apply. The format is as described in section~\ref{sec:use.desc}.
 \item[desc/] This directory contains files analogous to \t{use.desc} for the various \t{USE\_EXPAND}
     variables. Each file in it is named \t{<varname>.desc}, where \t{<varname>} is the variable
     name, in lowercase, whose possible values the file describes. The format of each file is as for
-    \t{use.desc}, described in section~\ref{use.desc}. The \t{USE\_EXPAND} name is \i{not}
+    \t{use.desc}, described in section~\ref{sec:use.desc}. The \t{USE\_EXPAND} name is \i{not}
     included as a prefix here.
-\item[updates/] This directory is described in section~\ref{updates-dir}.
+\item[updates/] This directory is described in section~\ref{sec:updates-dir}.
 \end{description}
 
 \subsection{The profiles.desc file}
-\label{profiles.desc}
+\label{sec:profiles.desc}
 \t{profiles.desc} is a line-based file, with the standard commenting
-rules from section~\ref{profiles-dir}, containing a list of profiles
+rules from section~\ref{sec:profiles-dir}, containing a list of profiles
 that are valid for use, along with their associated architecture and
 status. Each line has the format:
 
@@ -159,7 +159,7 @@ Where:
 Fields are whitespace-delimited.
 
 \subsection{The thirdpartymirrors file}
-\label{thirdpartymirrors}
+\label{sec:thirdpartymirrors}
 \t{thirdpartymirrors} is another simple line-based file, describing the valid mirrors for use with
 \t{mirror://} URIs in this repository, and the associated download locations. The format of each
 line is:
@@ -180,7 +180,7 @@ The mirror with the name equal to the repository's name (and if the repository h
 the master's name) may be consulted for all downloads.
 
 \subsection{use.desc and related files}
-\label{use.desc}
+\label{sec:use.desc}
 \t{use.desc} contains descriptions of every valid global USE flag for this repository. It is a
 line-based file with the standard rules for comments and blank lines. The format of each line is:
 \begin{verbatim}
@@ -197,7 +197,7 @@ Flags must be listed once for each package to which they apply, or if a flag is 
 differs from that described in \t{use.desc}.
 
 \subsection{The updates directory}
-\label{updates-dir}
+\label{sec:updates-dir}
 The \t{updates} directory is used to inform the package manager that a package has moved categories,
 names, or that a version has changed SLOT. It contains one file per quarter year, named
 \t{[1-4]Q-[YYYY]} for the first to fourth quarter of a given year, for example \t{1Q-2004} or
@@ -219,7 +219,7 @@ that has appeared as the origin of a slot move may not be used by packages match
 that slot move in the future.
 
 \section{The Licenses Directory}
-\label{licenses-dir}
+\label{sec:licenses-dir}
 
 The \t{licenses} directory shall contain copies of the licenses used by packages in the
 repository. Each file will be named according to the name used in the \t{LICENSE} variable as
@@ -227,14 +227,14 @@ described in section~\ref{ebuild-var-LICENSE}, and will contain the complete tex
 human-readable form. Plain text format is strongly preferred but not required.
 
 \section{The Eclass Directory}
-\label{eclass-dir}
+\label{sec:eclass-dir}
 
 The \t{eclass} directory shall contain copies of the eclasses provided by this repository. The
-format of these files is described in section~\ref{eclasses}. It may also contain, in their own
+format of these files is described in section~\ref{sec:eclasses}. It may also contain, in their own
 directory, support files needed by these eclasses.
 
 \section{The Metadata Directory}
-\label{metadata-dir}
+\label{sec:metadata-dir}
 
 The \t{metadata} directory contains various repository-level metadata that is not contained in
 \t{profiles/}. All contents are optional. In this standard only the \t{cache} subdirectory is

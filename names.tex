@@ -20,7 +20,7 @@ hyphen, and must not end in a hyphen followed by one or more digits.
 where a \t{category/package} pair is meant.
 
 \subsection{Slot Names}
-\label{slot-names}
+\label{sec:slot-names}
 A slot name may contain any of the characters [\t{A-Za-z0-9+\_.-}]. It must not begin with a
 hyphen or a dot.
 
@@ -32,12 +32,12 @@ described in section~\ref{use-expand}.
 \note The at-sign is required for \t{LINGUAS}.
 
 \subsection{Repository Names}
-\label{repository-names}
+\label{sec:repository-names}
 A repository name may contain any of the characters [\t{A-Za-z0-9\_-}]. It must not begin with a
 hyphen.
 
 \subsection{Keyword Names}
-\label{keyword-names}
+\label{sec:keyword-names}
 A keyword name may contain any of the characters [\t{A-Za-z0-9\_-}]. It must not begin with a
 hyphen. In contexts where it makes sense to do so, a keyword name may be prefixed by
 a tilde or a hyphen. In \t{KEYWORDS}, \t{-*} is also acceptable as a keyword, to indicate that
@@ -61,7 +61,7 @@ This may be followed by zero or more of the suffixes \t{\_alpha}, \t{\_beta}, \t
 
 \IFKDEBUILDELSE
 {
-    \label{scm-versions} In ebuilds using EAPIs listed in table~\ref{scm-table} as requiring support
+    \label{scm-versions} In ebuilds using EAPIs listed in table~\ref{tab:scm-table} as requiring support
     for the \t{-scm} suffix, the preceding version syntax may be either replaced or suffixed by a
     \t{scm} part. If both a ``normal'' version and a \t{scm} part are present, they must be
     separated by a hyphen.
@@ -73,7 +73,7 @@ This may optionally be followed by the suffix \t{-r} followed immediately by an 
 
 \IFKDEBUILDELSE
 {
-    \begin{centertable}{EAPIs requiring \t{scm} support} \label{scm-table}
+    \begin{centertable}{EAPIs requiring \t{scm} support} \label{tab:scm-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &

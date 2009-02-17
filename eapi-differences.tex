@@ -35,7 +35,7 @@
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{scm} support} &
-    \IFKDEBUILDCOLOUR{table~\ref{scm-table}} &
+    \IFKDEBUILDCOLOUR{table~\ref{tab:scm-table}} &
     \IFKDEBUILDCOLOUR{Optional} &
     \IFKDEBUILDCOLOUR{Optional} &
     \IFKDEBUILDCOLOUR{Required} &
@@ -51,33 +51,33 @@
     \IFKDEBUILDCOLOUR{\t{.ebuild}} \\
 }{}
 
-\t{IUSE} defaults & table~\ref{iuse-defaults-table} & No & Yes & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes \\
+\t{IUSE} defaults & table~\ref{tab:iuse-defaults-table} & No & Yes & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{PROVIDE} support} &
-    \IFKDEBUILDCOLOUR{table~\ref{provide-table}} &
+    \IFKDEBUILDCOLOUR{table~\ref{tab:provide-table}} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{Yes} \\
 }{}
 
-\t{PROPERTIES} & table~\ref{properties-table} & Optionally & Optionally & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Optionally} &}{} Optionally \\
+\t{PROPERTIES} & table~\ref{tab:properties-table} & Optionally & Optionally & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Optionally} &}{} Optionally \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{Pre-source \t{EAPI}} &
-    \IFKDEBUILDCOLOUR{section~\ref{pre-source-eapi}} &
+    \IFKDEBUILDCOLOUR{section~\ref{sec:pre-source-eapi}} &
     \IFKDEBUILDCOLOUR{0 or unset} &
     \IFKDEBUILDCOLOUR{0 or unset} &
     \IFKDEBUILDCOLOUR{kdebuild-1} &
     \IFKDEBUILDCOLOUR{0 or unset} \\
 }{}
 
-\t{SRC\_URI} arrows & table~\ref{uri-arrows-table} & No & No & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes \\
+\t{SRC\_URI} arrows & table~\ref{tab:uri-arrows-table} & No & No & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{SRC\_URI} labels} &
-    \IFKDEBUILDCOLOUR{table~\ref{uri-labels-table}} &
+    \IFKDEBUILDCOLOUR{table~\ref{tab:uri-labels-table}} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{Yes} &
@@ -86,7 +86,7 @@
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{PDEPEND} labels} &
-    \IFKDEBUILDCOLOUR{table~\ref{pdepend-labels-table}} &
+    \IFKDEBUILDCOLOUR{table~\ref{tab:pdepend-labels-table}} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{Yes} &
@@ -95,7 +95,7 @@
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{Ranged Dependencies} &
-    \IFKDEBUILDCOLOUR{table~\ref{range-deps-table}} &
+    \IFKDEBUILDCOLOUR{table~\ref{tab:range-deps-table}} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{Yes} &
@@ -103,31 +103,31 @@
 }{}
 
 Slot dependencies &
-    table~\ref{slot-deps-table} &
+    table~\ref{tab:slot-deps-table} &
     No &
     \IFKDEBUILDELSE{Named}{Yes} &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Named and Operator} &}{}
     \IFKDEBUILDELSE{Named}{Yes} \\
 
-Use dependencies & table~\ref{use-deps-table} & No & No &
+Use dependencies & table~\ref{tab:use-deps-table} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{kdebuild-style} &}{} 2-style \\
 
-\t{!} blockers & table~\ref{bang-strength-table} & Unspecified & Unspecified &
+\t{!} blockers & table~\ref{tab:bang-strength-table} & Unspecified & Unspecified &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Unspecified} &}{} Weak \\
 
-\t{!!} blockers & table~\ref{bang-strength-table} & Forbidden & Forbidden &
+\t{!!} blockers & table~\ref{tab:bang-strength-table} & Forbidden & Forbidden &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Forbidden} &}{} Strong \\
 
-\t{src\_prepare} & table~\ref{src-prepare-table} & No & No & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes \\
+\t{src\_prepare} & table~\ref{tab:src-prepare-table} & No & No & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes \\
 
-\t{src\_configure} & table~\ref{src-configure-table} & No & No & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes \\
+\t{src\_configure} & table~\ref{tab:src-configure-table} & No & No & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes \\
 
-\t{src\_compile} style & table~\ref{src-compile-table} & 0 & 1 &
+\t{src\_compile} style & table~\ref{tab:src-compile-table} & 0 & 1 &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{1} &}{} 2 \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{src\_test}} &
-    \IFKDEBUILDCOLOUR{table~\ref{test-required-table}} &
+    \IFKDEBUILDCOLOUR{table~\ref{tab:test-required-table}} &
     \IFKDEBUILDCOLOUR{User option} &
     \IFKDEBUILDCOLOUR{User option} &
     \IFKDEBUILDCOLOUR{Required} &
@@ -136,20 +136,20 @@ Use dependencies & table~\ref{use-deps-table} & No & No &
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{pkg\_info}} &
-    \IFKDEBUILDCOLOUR{table~\ref{pkg-info-table}} &
+    \IFKDEBUILDCOLOUR{table~\ref{tab:pkg-info-table}} &
     \IFKDEBUILDCOLOUR{Installed} &
     \IFKDEBUILDCOLOUR{Installed} &
     \IFKDEBUILDCOLOUR{Both} &
     \IFKDEBUILDCOLOUR{Installed} \\
 }{}
 
-\t{default\_} phase functions & table~\ref{default-phase-function-table} & None & None &
+\t{default\_} phase functions & table~\ref{tab:default-phase-function-table} & None & None &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{None} &}{} \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack},
     \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test}} \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{dohard}} &
-    \IFKDEBUILDCOLOUR{table~\ref{banned-commands-table}} &
+    \IFKDEBUILDCOLOUR{table~\ref{tab:banned-commands-table}} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Banned} &
@@ -158,7 +158,7 @@ Use dependencies & table~\ref{use-deps-table} & No & No &
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{dohtml}} &
-    \IFKDEBUILDCOLOUR{table~\ref{banned-commands-table}} &
+    \IFKDEBUILDCOLOUR{table~\ref{tab:banned-commands-table}} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Banned} &
@@ -167,26 +167,26 @@ Use dependencies & table~\ref{use-deps-table} & No & No &
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{dosed}} &
-    \IFKDEBUILDCOLOUR{table~\ref{banned-commands-table}} &
+    \IFKDEBUILDCOLOUR{table~\ref{tab:banned-commands-table}} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Banned} &
     \IFKDEBUILDCOLOUR{Yes} \\
 }{}
 
-\t{doman} languages & table~\ref{doman-table} & No & No &
+\t{doman} languages & table~\ref{tab:doman-table} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{dosym} does \t{dodir}} &
-    \IFKDEBUILDCOLOUR{table~\ref{dosym-table}} &
+    \IFKDEBUILDCOLOUR{table~\ref{tab:dosym-table}} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{Yes} \\
 }{}
 
-\t{default} function & table~\ref{default-function-table} & No & No &
+\t{default} function & table~\ref{tab:default-function-table} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes \\
 
 \end{longtable}
@@ -204,9 +204,9 @@ EAPI 0 is the base EAPI.
 EAPI 1 is EAPI 0 with the following changes:
 
 \begin{compactitem}
-\item \t{IUSE} defaults, table~\ref{iuse-defaults-table}.
-\item Slot dependencies, table~\ref{slot-deps-table}.
-\item Different \t{src\_compile} implementation, table~\ref{src-compile-table}.
+\item \t{IUSE} defaults, table~\ref{tab:iuse-defaults-table}.
+\item Slot dependencies, table~\ref{tab:slot-deps-table}.
+\item Different \t{src\_compile} implementation, table~\ref{tab:src-compile-table}.
 \end{compactitem}
 
 \IFKDEBUILDELSE
@@ -216,19 +216,19 @@ EAPI 1 is EAPI 0 with the following changes:
     EAPI kdebuild-1 is EAPI 1 with the following changes:
 
     \begin{compactitem}
-    \item \t{scm} support, table~\ref{scm-table}.
+    \item \t{scm} support, table~\ref{tab:scm-table}.
     \item \t{kdebuild-1} file extension, section~\ref{file-extension}.
-    \item \t{PROVIDE} banned, table~\ref{provide-table}.
-    \item Pre-source EAPI is \t{kdebuild-1}, section~\ref{pre-source-eapi}.
-    \item \t{SRC\_URI} arrows, table~\ref{uri-arrows-table}.
-    \item \t{SRC\_URI} labels, table~\ref{uri-labels-table}.
-    \item \t{PDEPEND} labels, table~\ref{pdepend-labels-table}.
-    \item Ranged dependencies, table~\ref{range-deps-table}.
-    \item Use dependencies, table~\ref{use-deps-table}.
-    \item \t{src\_test} mandatory, table~\ref{test-required-table}.
-    \item \t{pkg\_info} can run on uninstalled packages, table~\ref{pkg-info-table}.
-    \item \t{dohard}, \t{dohtml}, \t{dosed} banned, table~\ref{banned-commands-table}.
-    \item \t{dosym} will not do \t{dodir}, table~\ref{dosym-table}.
+    \item \t{PROVIDE} banned, table~\ref{tab:provide-table}.
+    \item Pre-source EAPI is \t{kdebuild-1}, section~\ref{sec:pre-source-eapi}.
+    \item \t{SRC\_URI} arrows, table~\ref{tab:uri-arrows-table}.
+    \item \t{SRC\_URI} labels, table~\ref{tab:uri-labels-table}.
+    \item \t{PDEPEND} labels, table~\ref{tab:pdepend-labels-table}.
+    \item Ranged dependencies, table~\ref{tab:range-deps-table}.
+    \item Use dependencies, table~\ref{tab:use-deps-table}.
+    \item \t{src\_test} mandatory, table~\ref{tab:test-required-table}.
+    \item \t{pkg\_info} can run on uninstalled packages, table~\ref{tab:pkg-info-table}.
+    \item \t{dohard}, \t{dohtml}, \t{dosed} banned, table~\ref{tab:banned-commands-table}.
+    \item \t{dosym} will not do \t{dodir}, table~\ref{tab:dosym-table}.
     \end{compactitem}
 }{
 }
@@ -238,16 +238,16 @@ EAPI 1 is EAPI 0 with the following changes:
 EAPI 2 is EAPI 1 with the following changes:
 
 \begin{compactitem}
-\item \t{SRC\_URI} arrows, table~\ref{uri-arrows-table}.
-\item Use dependencies, table~\ref{use-deps-table}.
-\item \t{!} and \t{!!} blockers, table~\ref{bang-strength-table}.
-\item \t{src\_prepare}, table~\ref{src-prepare-table}.
-\item \t{src\_configure}, table~\ref{src-configure-table}.
-\item Different \t{src\_compile} implementation, table~\ref{src-compile-table}.
+\item \t{SRC\_URI} arrows, table~\ref{tab:uri-arrows-table}.
+\item Use dependencies, table~\ref{tab:use-deps-table}.
+\item \t{!} and \t{!!} blockers, table~\ref{tab:bang-strength-table}.
+\item \t{src\_prepare}, table~\ref{tab:src-prepare-table}.
+\item \t{src\_configure}, table~\ref{tab:src-configure-table}.
+\item Different \t{src\_compile} implementation, table~\ref{tab:src-compile-table}.
 \item \t{default\_} phase functions for phases \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare},
-    \t{src\_configure}, \t{src\_compile} and \t{src\_test}; table~\ref{default-phase-function-table}.
-\item \t{doman} languages support, table~\ref{doman-table}.
-\item \t{default} function, table~\ref{default-function-table}.
+    \t{src\_configure}, \t{src\_compile} and \t{src\_test}; table~\ref{tab:default-phase-function-table}.
+\item \t{doman} languages support, table~\ref{tab:doman-table}.
+\item \t{default} function, table~\ref{tab:default-function-table}.
 \end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

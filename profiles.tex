@@ -1,5 +1,5 @@
 \chapter{Profiles}
-\label{profiles}
+\label{sec:profiles}
 
 \section{General principles}
 Generally, a profile defines information specific to a certain `type' of system---it lies somewhere
@@ -28,7 +28,7 @@ encountering a cycle is undefined.
 This file must not contain comments, blank lines or make use of line continuations.
 
 \subsection{The eapi file}
-\label{profile-eapi}
+\label{sec:profile-eapi}
 A profile directory may contain an \t{eapi} file. This file, if it exists, must contain a single line
 with the name of an EAPI. This specifies the EAPI to use when handling the directory in question; a
 package manager must not attempt to use any profile using a directory which requires an EAPI it does
@@ -47,7 +47,7 @@ This file must not contain comments or make use of line continuations.
 \subsection{make.defaults}
 \t{make.defaults} is used to define defaults for various environment and configuration variables.
 This file is unusual in that it is not combined at a file level with the parent---instead, each
-variable is combined or overridden individually as described in section~\ref{profile-variables}.
+variable is combined or overridden individually as described in section~\ref{sec:profile-variables}.
 
 The file itself is a line-based key-value format. Each line contains a single \verb|VAR="value"|
 entry, where the value must be double quoted. A variable name must start with one of \t{a-zA-Z}
@@ -63,7 +63,7 @@ bash syntax, is allowed as follows:
 \end{compactitem}
 
 \subsection{virtuals}
-\label{profiles-virtuals}
+\label{sec:profiles-virtuals}
 The \t{virtuals} file defines default providers for ``old-style'' virtual packages. It is a simple
 line-based file, with each line containing two whitespace-delimited tokens. The first is a virtual
 package name (for example, \t{virtual/alsa}) and the second is a qualified package name. Blank lines
@@ -82,7 +82,7 @@ current package manager. It is mentioned here for completeness only, and its for
 discussed.
 
 \subsection{Simple line-based files}
-\label{line-stacking}
+\label{sec:line-stacking}
 These files are a simple one-item-per-line list, which is inherited in the following manner: the
 parent profile's list is taken, and the current profile's list appended. If any line begins with a
 hyphen, then any lines previous to it whose contents are equal to the remainder of that line are
@@ -125,7 +125,7 @@ that the package should have the USE flag disabled.  The package dependency spec
 the forms defined by the directory's EAPI.
 
 \subsection{USE masking and forcing}
-\label{use-masking}
+\label{sec:use-masking}
 This section covers the four files \t{use.mask}, \t{use.force}, \t{package.use.mask} and
 \t{package.use.force}. They are described together because they interact in a non-trivial manner.
 

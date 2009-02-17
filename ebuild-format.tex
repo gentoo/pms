@@ -1,11 +1,11 @@
 \chapter{Ebuild File Format}
-\label{ebuild-format}
+\label{sec:ebuild-format}
 
 The ebuild file format is in its basic form a subset of the format of a bash script. The interpreter
 is assumed to be GNU bash, version 3.0 or later. The file encoding must be UTF-8 with Unix-style
 newlines. When sourced, the
-ebuild must define certain variables and functions (see sections~\ref{ebuild-vars} and
-\ref{ebuild-functions} for specific information), and must not call any external programs, write
+ebuild must define certain variables and functions (see sections~\ref{sec:ebuild-vars} and
+\ref{sec:ebuild-functions} for specific information), and must not call any external programs, write
 anything to standard output or standard error, or modify the state of the system in any way.
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

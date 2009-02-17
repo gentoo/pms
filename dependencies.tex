@@ -1,5 +1,5 @@
 \chapter{Dependencies}
-\label{dependencies}
+\label{sec:dependencies}
 
 \section{Dependency Classes}
 
@@ -26,9 +26,9 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 \item A simple qualified package name. Permitted in \t{PROVIDE} (and inside \t{DEPEND} etc
     via the previous item).
 \item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC\_URI} and \t{HOMEPAGE}.
-In EAPIs listed in table~\ref{uri-arrows-table} as supporting \t{SRC\_URI} arrows, may
+In EAPIs listed in table~\ref{tab:uri-arrows-table} as supporting \t{SRC\_URI} arrows, may
 optionally be followed by whitespace, then \t{->}, then whitespace, then a simple filename
-when in \t{SRC\_URI}. For \t{SRC\_URI} behaviour, see section~\ref{src-uri-behaviour}.
+when in \t{SRC\_URI}. For \t{SRC\_URI} behaviour, see section~\ref{sec:src-uri-behaviour}.
 \item A flat filename. Permitted in \t{SRC\_URI}.
 \item A license name (e.g. \t{GPL-2}). Permitted in \t{LICENSE}.
 \item A simple string. Permitted in \t{RESTRICT} and \t{PROPERTIES}.
@@ -51,8 +51,8 @@ when in \t{SRC\_URI}. For \t{SRC\_URI} behaviour, see section~\ref{src-uri-behav
 \IFKDEBUILDELSE
 {
     \item A label, which is a string without whitespace followed by a colon. Permitted in
-    \t{SRC\_URI} in EAPIs shown in table~\ref{uri-labels-table} as supporting \t{SRC\_URI} labels,
-    and in \t{PDEPEND} in EAPIs shown in table~\ref{pdepend-labels-table} as supporting \t{PDEPEND}
+    \t{SRC\_URI} in EAPIs shown in table~\ref{tab:uri-labels-table} as supporting \t{SRC\_URI} labels,
+    and in \t{PDEPEND} in EAPIs shown in table~\ref{tab:pdepend-labels-table} as supporting \t{PDEPEND}
     labels.
 }{
 }
@@ -60,7 +60,7 @@ when in \t{SRC\_URI}. For \t{SRC\_URI} behaviour, see section~\ref{src-uri-behav
 
 In particular, note that whitespace is not optional.
 
-\begin{centertable}{EAPIs supporting \t{SRC\_URI} arrows} \label{uri-arrows-table}
+\begin{centertable}{EAPIs supporting \t{SRC\_URI} arrows} \label{tab:uri-arrows-table}
 \IFKDEBUILDELSE
 {
     \begin{tabular}{ l l }
@@ -90,7 +90,7 @@ In particular, note that whitespace is not optional.
 
 \IFKDEBUILDELSE
 {
-    \begin{centertable}{EAPIs supporting \t{SRC\_URI} labels} \label{uri-labels-table}
+    \begin{centertable}{EAPIs supporting \t{SRC\_URI} labels} \label{tab:uri-labels-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -104,7 +104,7 @@ In particular, note that whitespace is not optional.
     \end{tabular}
     \end{centertable}
 
-    \begin{centertable}{EAPIs supporting \t{PDEPEND} labels} \label{pdepend-labels-table}
+    \begin{centertable}{EAPIs supporting \t{PDEPEND} labels} \label{tab:pdepend-labels-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -143,7 +143,7 @@ An empty any-of group counts as being matched.
 \IFKDEBUILDELSE
 {
     \subsection{Labels}
-    \label{labels}
+    \label{sec:labels}
 
     A label alters the behaviour of any subsequent items (including those inside subgroups) in the
     current group. This is demonstrated by code listing~\ref{lst:labels-listing}.
@@ -162,36 +162,36 @@ error on non-compliant input.
 
 \begin{compactitem}
 \item A simple \t{category/package} name.
-\item An operator, as described in section~\ref{dep-operator}, followed immediately by
+\item An operator, as described in section~\ref{sec:dep-operator}, followed immediately by
     \t{category/package}, followed by a hyphen, followed by a version specification.
 \end{compactitem}
 
-In EAPIs shown in table~\ref{slot-deps-table} as supporting \t{SLOT} dependencies, either of the
+In EAPIs shown in table~\ref{tab:slot-deps-table} as supporting \t{SLOT} dependencies, either of the
 above formats may additionally be suffixed by a \t{:slot} restriction, as described in
-section~\ref{slot-dep}. A package manager must warn or error if slot dependencies are used with an
+section~\ref{sec:slot-dep}. A package manager must warn or error if slot dependencies are used with an
 EAPI not supporting \t{SLOT} dependencies.
 
 \IFKDEBUILDELSE
 {
-    In EAPIs shown in table~\ref{range-deps-table} as supporting ranged dependencies, a
+    In EAPIs shown in table~\ref{tab:range-deps-table} as supporting ranged dependencies, a
     specification that does not use an operator at the start may additionally be suffixed by one
-    \t{[range]} restriction, as described in section~\ref{range-dep}. A package manager must warn or
+    \t{[range]} restriction, as described in section~\ref{sec:range-dep}. A package manager must warn or
     error if this feature is used with an EAPI not supporting ranged dependencies.
 }{
 }
 
 \IFKDEBUILDELSE
 {
-    In EAPIs shown in table~\ref{use-deps-table} as supporting kdebuild-style \t{USE} dependencies,
+    In EAPIs shown in table~\ref{tab:use-deps-table} as supporting kdebuild-style \t{USE} dependencies,
     a specification may additionally be suffixed by one or more kdebuild-style \t{[use]}
-    restrictions, as described in section~\ref{kdebuild-use-dep}. A package manager must warn or
+    restrictions, as described in section~\ref{sec:kdebuild-use-dep}. A package manager must warn or
     error if this feature is used with an EAPI not supporting use dependencies.
 }{
 }
 
-In EAPIs shown in table~\ref{use-deps-table} as supporting 2-style \t{USE} dependencies, a specification
+In EAPIs shown in table~\ref{tab:use-deps-table} as supporting 2-style \t{USE} dependencies, a specification
 may additionally be suffixed by at most one 2-style \t{[use]} restriction, as described in
-section~\ref{use-dep}. A package manager must warn or error if this feature is used with an EAPI
+section~\ref{sec:use-dep}. A package manager must warn or error if this feature is used with an EAPI
 not supporting use dependencies.
 
 \IFKDEBUILDELSE
@@ -202,7 +202,7 @@ not supporting use dependencies.
     \note Order is important. The slot restriction must come before use dependencies.
 }
 
-\begin{centertable}{EAPIs supporting \t{SLOT} dependencies} \label{slot-deps-table}
+\begin{centertable}{EAPIs supporting \t{SLOT} dependencies} \label{tab:slot-deps-table}
 \IFKDEBUILDELSE
 {
     \begin{tabular}{ l l }
@@ -232,7 +232,7 @@ not supporting use dependencies.
 
 \IFKDEBUILDELSE
 {
-    \begin{centertable}{EAPIs supporting ranged dependencies} \label{range-deps-table}
+    \begin{centertable}{EAPIs supporting ranged dependencies} \label{tab:range-deps-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -250,7 +250,7 @@ not supporting use dependencies.
 
 \IFKDEBUILDELSE
 {
-    \begin{centertable}{EAPIs supporting \t{USE} dependencies} \label{use-deps-table}
+    \begin{centertable}{EAPIs supporting \t{USE} dependencies} \label{tab:use-deps-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -264,7 +264,7 @@ not supporting use dependencies.
     \end{tabular}
     \end{centertable}
 }{
-    \begin{centertable}{EAPIs supporting \t{USE} dependencies} \label{use-deps-table}
+    \begin{centertable}{EAPIs supporting \t{USE} dependencies} \label{tab:use-deps-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -279,7 +279,7 @@ not supporting use dependencies.
 }
 
 \subsubsection{Operators}
-\label{dep-operator}
+\label{sec:dep-operator}
 
 The following operators are available:
 
@@ -311,9 +311,9 @@ following exceptions:
 There are two strengths of block: weak and strong. A weak block may be ignored by the package
 manager, so long as any blocked package will be uninstalled later on. A strong block must not be
 ignored. The mapping from one or two exclamation marks to strength is described in
-table~\ref{bang-strength-table}.
+table~\ref{tab:bang-strength-table}.
 
-\begin{centertable}{Exclamation mark strengths for EAPIs} \label{bang-strength-table}
+\begin{centertable}{Exclamation mark strengths for EAPIs} \label{tab:bang-strength-table}
 \IFKDEBUILDELSE
 {
     \begin{tabular}{ l l l }
@@ -344,7 +344,7 @@ table~\ref{bang-strength-table}.
 \end{centertable}
 
 \subsubsection{Slot Dependencies}
-\label{slot-dep}
+\label{sec:slot-dep}
 
 A named slot dependency consists of a colon followed by a slot name. A specification with a named
 slot dependency matches only if the slot of the matched package is equal to the slot specified. If
@@ -374,7 +374,7 @@ the match is treated as unsuccessful.
 \IFKDEBUILDELSE
 {
     \subsubsection{Ranged Dependencies}
-    \label{range-dep}
+    \label{sec:range-dep}
 
     A ranged dependency consists of an open square bracket, followed by zero or more of (a depend
     operator followed by a version spec followed by a logical operator) followed by a depend
@@ -395,7 +395,7 @@ the match is treated as unsuccessful.
 \IFKDEBUILDELSE
 {
     \subsubsection{kdebuild Style Use Dependencies}
-    \label{kdebuild-use-dep}
+    \label{sec:kdebuild-use-dep}
 
     A kdebuild-style use dependency consists of one of the following:
 
@@ -425,7 +425,7 @@ the match is treated as unsuccessful.
 }
 
 \subsubsection{2-Style Use Dependencies}
-\label{use-dep}
+\label{sec:use-dep}
 
 A 2-style use dependency consists of one of the following:
 
@@ -455,7 +455,7 @@ not have the flag in \t{IUSE}.
     \subsection{Package Dependency Labels}
 
     In EAPIs supporting \t{PDEPEND} labels, the following labels are legal. See
-    section~\ref{labels} for label behaviour in general.
+    section~\ref{sec:labels} for label behaviour in general.
 
     \begin{description}
     \item[required] Indicates a required post dependency.
@@ -468,7 +468,7 @@ not have the flag in \t{IUSE}.
 }
 
 \subsection{Restrict}
-\label{restrict}
+\label{sec:restrict}
 
 The following tokens are permitted inside \t{RESTRICT}:
 
@@ -486,7 +486,7 @@ The following tokens are permitted inside \t{RESTRICT}:
 Package managers may recognise other tokens, but ebuilds may not rely upon them being supported.
 
 \subsection{Properties}
-\label{properties}
+\label{sec:properties}
 
 The following tokens are permitted inside \t{PROPERTIES}:
 
@@ -497,7 +497,7 @@ The following tokens are permitted inside \t{PROPERTIES}:
 Ebuilds may not rely upon any token being supported.
 
 \subsection{SRC\_URI}
-\label{src-uri-behaviour}
+\label{sec:src-uri-behaviour}
 
 All filename components that are enabled (i.e. not inside a use-conditional block that is not
 matched) in \t{SRC\_URI} must be available in the \t{DISTDIR} directory. In addition, these
@@ -506,7 +506,7 @@ components are used to make the \t{A} and \t{AA} variables.
 If a component contains a full URI with protocol, that download location must be used. Package
 managers may also consult mirrors for their files.
 
-The special \t{mirror://} protocol must be supported. See section~\ref{thirdpartymirrors} for mirror
+The special \t{mirror://} protocol must be supported. See section~\ref{sec:thirdpartymirrors} for mirror
 details.
 
 If a simple filename rather than a full URI is provided, the package manager can only use mirrors to
@@ -515,10 +515,10 @@ download the file.
 \IFKDEBUILDELSE
 {
     The \t{RESTRICT} metadata key can be used to impose additional restrictions upon downloading---see
-    section~\ref{restrict} for details. Labels also alter behaviour---see below for details.
+    section~\ref{sec:restrict} for details. Labels also alter behaviour---see below for details.
 }{
     The \t{RESTRICT} metadata key can be used to impose additional restrictions upon downloading---see
-    section~\ref{restrict} for details.
+    section~\ref{sec:restrict} for details.
 }
 
 \IFKDEBUILDELSE
@@ -528,7 +528,7 @@ instead be the name on the right of the arrow. When consulting mirrors (except f
 listed on the left of the arrow, if \t{mirror://} is used), the filename to the right of the arrow
 shall be requested instead of the filename in the URI.
 
-In EAPIs supporting labels, the following labels are legal. See section~\ref{labels} for label
+In EAPIs supporting labels, the following labels are legal. See section~\ref{sec:labels} for label
 behaviour in general.
 
 \begin{description}

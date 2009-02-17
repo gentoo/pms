@@ -1,5 +1,5 @@
 \section{The state of variables between functions}
-\label{ebuild-env-state}
+\label{sec:ebuild-env-state}
 
 Exported and default scope variables are saved between functions. A non-local variable set in a
 function earlier in the call sequence must have its value preserved for later functions, including
@@ -8,7 +8,7 @@ in later functions; variables with default visibility may retain default visibil
 
 Variables with special meanings to the package manager are excluded from this rule.
 
-Global variables must only contain invariant values (see~\ref{metadata-invariance}). If a global
+Global variables must only contain invariant values (see~\ref{sec:metadata-invariance}). If a global
 variable's value is invariant, it may have the value that would be generated at any given point
 in the build sequence.
 

@@ -1,11 +1,11 @@
 \chapter{Ebuild-defined Variables}
-\label{ebuild-vars}
+\label{sec:ebuild-vars}
 
 \note This section describes variables that may or must be defined by ebuilds. For
-variables that are passed from the package manager to the ebuild, see section~\ref{ebuild-env-vars}.
+variables that are passed from the package manager to the ebuild, see section~\ref{sec:ebuild-env-vars}.
 
 \section{Metadata invariance}
-\label{metadata-invariance}
+\label{sec:metadata-invariance}
 
 All ebuild-defined variables discussed in this chapter must be defined independently of
 any system, profile or tree dependent data, and must not vary depending upon the ebuild
@@ -24,38 +24,38 @@ All ebuilds must define at least the following variables:
 \item[DESCRIPTION] A short human-readable description of the package's purpose. May be defined by an
     eclass. Must not be empty.
 \item[HOMEPAGE] The URI or URIs for a package's homepage, including protocols. May be defined by an
-    eclass. See section~\ref{dependencies} for full syntax.
+    eclass. See section~\ref{sec:dependencies} for full syntax.
 \item[IUSE] The \t{USE} flags used by the ebuild. Historically, \t{USE\_EXPAND} values and \t{ARCH}
     were not included; package managers should support this for backwards compatibility reasons. Ebuilds
     must list only flags used by the ebuild itself. Any eclass that works with \t{USE} flags
     must also set \t{IUSE}, listing only the variables used by that eclass. The package manager is
     responsible for merging these values.
 
-    In EAPIs shown in table~\ref{iuse-defaults-table} as supporting \t{IUSE} defaults, any use flag
+    In EAPIs shown in table~\ref{tab:iuse-defaults-table} as supporting \t{IUSE} defaults, any use flag
     name in \t{IUSE} may be prefixed by at most one of a plus or a minus sign. If such a prefix is
     present, the package manager may use it as a suggestion as to the default value of the use flag
     if no other configuration overrides it.
 \item[KEYWORDS] A whitespace separated list of keywords for the ebuild. Each token must be a
-    valid keyword name, as per section~\ref{keyword-names}. May include \t{-*}, which
+    valid keyword name, as per section~\ref{sec:keyword-names}. May include \t{-*}, which
     indicates that the package will only work on explicitly listed archs. May include \t{-arch},
     which indicates that the package will not work on the specified arch. May be empty, which
     indicates uncertain functionality on any architecture. May be defined in an eclass.
 \item[LICENSE] The package's license. Each text token must correspond to a tree ``licenses/'' entry
-    (see section~\ref{licenses-dir}). See section~\ref{dependencies} for full syntax.
+    (see section~\ref{sec:licenses-dir}). See section~\ref{sec:dependencies} for full syntax.
     May be defined by an eclass. \label{ebuild-var-LICENSE}
-\item[SLOT] The package's slot. Must be a valid slot name, as per section~\ref{slot-names}. May
+\item[SLOT] The package's slot. Must be a valid slot name, as per section~\ref{sec:slot-names}. May
     be defined by an eclass. Must not be empty.
 \item[SRC\_URI] A list of source URIs for the package. Valid protocols are \t{http://},
-    \t{https://}, \t{ftp://} and \t{mirror://} (see section~\ref{thirdpartymirrors} for mirror behaviour).
+    \t{https://}, \t{ftp://} and \t{mirror://} (see section~\ref{sec:thirdpartymirrors} for mirror behaviour).
     Fetch restricted packages may include URL parts consisting of just a filename. See
-    section~\ref{dependencies} for full syntax.
+    section~\ref{sec:dependencies} for full syntax.
 \end{description}
 
 If any of these variables are undefined, or if any of these variables are set to invalid values,
 the package manager's behaviour is undefined; ideally, an error in one ebuild should not prevent
 operations upon other ebuilds or packages.
 
-\begin{centertable}{EAPIs supporting \t{IUSE} defaults} \label{iuse-defaults-table}
+\begin{centertable}{EAPIs supporting \t{IUSE} defaults} \label{tab:iuse-defaults-table}
 \IFKDEBUILDELSE
 {
     \begin{tabular}{ l l }
@@ -89,28 +89,28 @@ operations upon other ebuilds or packages.
 Ebuilds may define any of the following variables:
 
 \begin{description}
-\item[DEPEND] See section~\ref{dependencies}.
+\item[DEPEND] See section~\ref{sec:dependencies}.
 \item[EAPI] The EAPI. See below for defaults.
-\item[PDEPEND] See section~\ref{dependencies}.
+\item[PDEPEND] See section~\ref{sec:dependencies}.
 \IFKDEBUILDELSE
 {
     \item[PROVIDE] Zero or more qualified package names of any \e{old style}
-        virtuals provided by this package. See section~\ref{dependencies} for full syntax.  In EAPIs
-        listed in table~\ref{provide-table} as not supporting \t{PROVIDE}, ebuilds must not set this
+        virtuals provided by this package. See section~\ref{sec:dependencies} for full syntax.  In EAPIs
+        listed in table~\ref{tab:provide-table} as not supporting \t{PROVIDE}, ebuilds must not set this
         variable and the package manager must reject any ebuild that does so.
         \label{ebuild-var-provide}
 }{
     \item[PROVIDE] Zero or more qualified package names of any \e{old style}
-        virtuals provided by this package. See section~\ref{dependencies} for full syntax.
+        virtuals provided by this package. See section~\ref{sec:dependencies} for full syntax.
         \label{ebuild-var-provide}
 }
-\item[RDEPEND] See section~\ref{dependencies}. \t{RDEPEND} has special behaviour for its value if
-    unset and when used with an eclass. See section~\ref{rdepend-depend} for details.
-\item[RESTRICT] Zero or more behaviour restrictions for this package. See section~\ref{restrict}
-    for value meanings and section~\ref{dependencies} for full syntax.
-\item[PROPERTIES] Zero or more properties for this package. See section~\ref{properties}
-    for value meanings and section~\ref{dependencies} for full syntax. For EAPIs listed in
-    table~\ref{properties-table} as having optional support, ebuilds must not rely upon the
+\item[RDEPEND] See section~\ref{sec:dependencies}. \t{RDEPEND} has special behaviour for its value if
+    unset and when used with an eclass. See section~\ref{sec:rdepend-depend} for details.
+\item[RESTRICT] Zero or more behaviour restrictions for this package. See section~\ref{sec:restrict}
+    for value meanings and section~\ref{sec:dependencies} for full syntax.
+\item[PROPERTIES] Zero or more properties for this package. See section~\ref{sec:properties}
+    for value meanings and section~\ref{sec:dependencies} for full syntax. For EAPIs listed in
+    table~\ref{tab:properties-table} as having optional support, ebuilds must not rely upon the
     package manager recognising or understanding this variable in any way.
 \item[S] The path to the temporary build directory, used by \t{src\_compile}, \t{src\_install}
     etc. Defaults to \t{\$\{WORKDIR\}/\$\{P\}}.
@@ -118,7 +118,7 @@ Ebuilds may define any of the following variables:
 
 \IFKDEBUILDELSE
 {
-    \begin{centertable}{EAPIs supporting \t{PROVIDE}} \label{provide-table}
+    \begin{centertable}{EAPIs supporting \t{PROVIDE}} \label{tab:provide-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -134,7 +134,7 @@ Ebuilds may define any of the following variables:
 }{
 }
 
-\begin{centertable}{EAPIs supporting \t{PROPERTIES}} \label{properties-table}
+\begin{centertable}{EAPIs supporting \t{PROPERTIES}} \label{tab:properties-table}
 \IFKDEBUILDELSE
 {
     \begin{tabular}{ l l }
@@ -164,7 +164,7 @@ Ebuilds may define any of the following variables:
 \end{centertable}
 
 \subsection{EAPI}
-\label{pre-source-eapi}
+\label{sec:pre-source-eapi}
 
 An empty \t{EAPI} value is equal to \t{0}. Ebuilds must not assume that they will get a particular
 one of these two values if they are expecting one of these two values.
@@ -186,7 +186,7 @@ If any of these variables are set to invalid values, the package manager's behav
 ideally, an error in one ebuild should not prevent operations upon other ebuilds or packages.
 
 \section{\t{RDEPEND} value}
-\label{rdepend-depend}
+\label{sec:rdepend-depend}
 
 If \t{RDEPEND} is unset (but not if it is set to an empty string) in an ebuild, the package manager
 must set its value to be equal to the value of \t{DEPEND}.
@@ -206,7 +206,7 @@ of the ebuild's metadata:
 \item[INHERITED] List of inherited eclass names. Again, this is handled magically by \t{inherit}.
 \end{description}
 
-\note Thus, by extension of section~\ref{metadata-invariance}, \t{inherit} may not be used
+\note Thus, by extension of section~\ref{sec:metadata-invariance}, \t{inherit} may not be used
     conditionally, except upon constant conditions.
 
 The following are special variables defined by the package manager for internal use and may or may
@@ -220,7 +220,7 @@ managers may not rely upon the metadata cache having this variable defined, and 
 string as ``this information is not available''.
 \end{description}
 
-\note Thus, by extension of section~\ref{metadata-invariance}, phase functions must not be defined
+\note Thus, by extension of section~\ref{sec:metadata-invariance}, phase functions must not be defined
 based upon any variant condition.
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
