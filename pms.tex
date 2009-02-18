@@ -1,4 +1,5 @@
 \documentclass[a4paper]{report}
+\input{vc}
 % Definition of fonts, choose T1 encoding for fonts
 \usepackage[T1]{fontenc}
 %
@@ -19,6 +20,7 @@
   algorithm,
   algorithmic
 }
+\usepackage[orig,english]{isodate}
 \usepackage[DIV13]{typearea}
 \usepackage[position=top]{caption}
 \usepackage[utf8]{inputenc}
@@ -103,10 +105,17 @@
   pdfkeywords={Gentoo, package manager, specification},
   pdfproducer={pdfLaTeX and hyperref},
 }
-
 \title{Package Manager Specification}
 \author{Stephen P. Bennett\\\url{spb@exherbo.org}
 \and Ciaran McCreesh\\\url{ciaran.mccreesh@googlemail.com}}
+% Make the build succeed even when no Git repository is available
+\ifthenelse{\equal{\VCDateISO}{}}
+{
+  \date{Generated on: \today}
+}{
+  \date{\printdate{\VCDateISO}}
+}
+
 \pagestyle{myheadings}
 \markboth{\scshape Package Manager Specification}{\scshape Package
   Manager Specification}

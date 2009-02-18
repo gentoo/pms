@@ -3,13 +3,13 @@ html : pms.html
 
 clean :
 	rm -f *~ *.pdf *.dvi *.log *.aux *.bbl *.blg *.toc *.lol *.loa *.lox \
-	    *.lot *.out *.html *.css *.png *.4ct *.4tc *.idv *.lg *.tmp *.xref || true
+	    *.lot *.out *.html *.css *.png *.4ct *.4tc *.idv *.lg *.tmp *.xref vc.tex || true
 
 LATEXFILES = $(shell ls *.tex)
 LISTINGFILES = $(shell ls *.listing)
 SOURCEFILES = $(LATEXFILES) $(LISTINGFILES)
 
-pms.pdf: $(SOURCEFILES) pms.bbl
+pms.pdf: $(SOURCEFILES) pms.bbl vc.tex
 	pdflatex pms
 	pdflatex pms
 	pdflatex pms
@@ -27,9 +27,12 @@ pms.html: $(SOURCEFILES) pms.bbl
 	@# align algorithm line numbers properly
 	sed -i -e '/<span class="ALCitem">/{N;s/\n\(class="[^"]\+">\)\([0-9]:\)<\/span>/\1\&#x2007;\2/}' pms.html
 
-pms.bbl: pms.bib pms.tex
+pms.bbl: pms.bib pms.tex vc.tex
 	latex pms
 	bibtex pms
+
+vc.tex: pms.tex
+	/bin/sh ./vc
 
 pms.dvi: $(SOURCEFILES) pms.bbl
 	latex pms
