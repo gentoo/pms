@@ -147,6 +147,9 @@ Use dependencies & table~\ref{tab:use-deps-table} & No & No &
 \t{src\_compile} style & table~\ref{tab:src-compile-table} & 0 & 1 &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{1} &}{} 2 & 2 \\
 
+\t{src\_install} style & table~\ref{tab:src-install-table} & no-op & no-op &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{no-op} &}{} no-op & 3 \\
+
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{src\_test}} &
     \IFKDEBUILDCOLOUR{table~\ref{tab:test-required-table}} &
@@ -170,7 +173,8 @@ Use dependencies & table~\ref{tab:use-deps-table} & No & No &
 \t{default\_} phase functions & table~\ref{tab:default-phase-function-table} & None & None &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{None} &}{}
     \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test}} &
-    \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test}} \\
+    \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
+        \t{src\_compile}, \t{src\_install}, \t{src\_test}} \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{dohard}} &
@@ -290,6 +294,7 @@ EAPI 3 is EAPI 2 with the following changes:
 \item Use dependency defaults, table~\ref{tab:use-deps-table}.
 \item \t{DEFINED\_PHASES} support is mandatory, table~\ref{tab:defined-phases-table}.
 \item \t{PROPERTIES} support is mandatory, table~\ref{tab:properties-table}.
+\item Default \t{src\_install} no longer a no-op, table~\ref{tab:src-install-table}.
 \end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
