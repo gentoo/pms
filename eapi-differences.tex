@@ -192,6 +192,10 @@ Use dependencies & table~\ref{tab:use-deps-table} & No & No &
 \t{dosed} & table~\ref{tab:banned-commands-table} & Yes & Yes &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Banned} &}{} Yes & Banned \\
 
+\t{econf} arguments & table~\ref{tab:econf-options-table} &  &  &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{} &}{} &
+    \parbox[t]{1in}{disable dependency tracking} \\
+
 \t{dodoc -r} & table~\ref{tab:dodoc-table} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
 
@@ -301,6 +305,7 @@ EAPI 3 is EAPI 2 with the following changes:
 \item \t{doins} supports symlinks, table~\ref{tab:doins-table}.
 \item \t{dohard}, \t{dosed} banned, table~\ref{tab:banned-commands-table}.
 \item \t{unpack} supports \t{.xz} and \t{.tar.xz}, table~\ref{tab:unpack-extensions-table}.
+\item \t{econf} adds \t{-{}-disable-dependency-tracking}, table~\ref{tab:econf-options-table}.
 \end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
