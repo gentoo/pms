@@ -218,7 +218,7 @@ not supporting use dependencies.
     \t{1} & Named only \\
     \t{kdebuild-1} & Named and operator \\
     \t{2} & Named only \\
-    \t{3} & Named only \\
+    \t{3} & Named and operator \\
     \bottomrule
     \end{tabular}
 }{
@@ -228,9 +228,9 @@ not supporting use dependencies.
             \multicolumn{1}{c}{\textbf{Supports \t{SLOT} dependencies?}} \\
             \midrule
     \t{0} & No \\
-    \t{1} & Yes \\
-    \t{2} & Yes \\
-    \t{3} & Yes \\
+    \t{1} & Named only \\
+    \t{2} & Named only \\
+    \t{3} & Named and operator \\
     \bottomrule
     \end{tabular}
 }
@@ -361,25 +361,21 @@ slot dependency matches only if the slot of the matched package is equal to the 
 the slot of the package to match cannot be determined (e.g. because it is not a supported \t{EAPI}),
 the match is treated as unsuccessful.
 
-\IFKDEBUILDELSE
-{
-    An operator slot dependency consists of a colon followed by one of the following operators:
+An operator slot dependency consists of a colon followed by one of the following operators:
 
-    \begin{description}
-    \item[*] Indicates that any slot value is acceptable. In addition, for runtime dependencies,
-    indicates that the package will not break if the matched package is uninstalled and replaced by
-    a different matching package in a different slot.
-    \item[=] Indicates that any slot value is acceptable. In addition, for runtime dependencies,
-    indicates that the package will break unless a matching package with slot equal to the slot of
-    the best installed version at the time the package was installed is available.
-    \end{description}
+\begin{description}
+\item[*] Indicates that any slot value is acceptable. In addition, for runtime dependencies,
+indicates that the package will not break if the matched package is uninstalled and replaced by
+a different matching package in a different slot.
+\item[=] Indicates that any slot value is acceptable. In addition, for runtime dependencies,
+indicates that the package will break unless a matching package with slot equal to the slot of
+the best installed version at the time the package was installed is available.
+\end{description}
 
-    To implement the equals slot operator, the package manager will need to store the slot of the
-    best installed version of the matching package. The package manager may do this by appending
-    the appropriate slot after the equals sign when saving the package's dependencies. This syntax
-    is only for package manager use and must not be used by ebuilds.
-}{
-}
+To implement the equals slot operator, the package manager will need to store the slot of the
+best installed version of the matching package. The package manager may do this by appending
+the appropriate slot after the equals sign when saving the package's dependencies. This syntax
+is only for package manager use and must not be used by ebuilds.
 
 \IFKDEBUILDELSE
 {
