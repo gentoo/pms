@@ -206,6 +206,9 @@ Use dependencies & table~\ref{tab:use-deps-table} & No & No &
     \IFKDEBUILDCOLOUR{Yes} \\
 }{}
 
+\t{dodoc -r} & table~\ref{tab:dodoc-table} & No & No &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
+
 \t{doman} languages & table~\ref{tab:doman-table} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes \\
 
@@ -302,6 +305,7 @@ EAPI 3 is EAPI 2 with the following changes:
 \item \t{PROPERTIES} support is mandatory, table~\ref{tab:properties-table}.
 \item Default \t{src\_install} no longer a no-op, table~\ref{tab:src-install-table}.
 \item Controllable compression and \t{docompress}, table~\ref{tab:compression-table}.
+\item \t{dodoc -r} support, table~\ref{tab:dodoc-table}.
 \end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

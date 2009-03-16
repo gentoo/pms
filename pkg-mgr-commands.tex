@@ -178,7 +178,10 @@ has returned.
 \item[dodoc] Installs the given files into a subdirectory under \t{/usr/share/doc/\$\{PF\}/} with
     file mode \t{0644}. The subdirectory is set by the most recent call to \t{docinto}. If
     \t{docinto} has not yet been called, instead installs to the directory
-    \t{/usr/share/doc/\$\{PF\}/}.
+    \t{/usr/share/doc/\$\{PF\}/}. For EAPIs
+    listed in table~\ref{tab:dodoc-table} as supporting \t{-r}, if the first argument is \t{-r}, any
+    subsequent arguments that are directories are installed recursively to the appropriate location;
+    in any other case, it is an error for a directory to be specified.
 
 \item[doenvd] Installs the given environment files into \t{/etc/env.d/}, by default with file mode
     \t{0644}. This can be overridden by setting \t{INSOPTIONS} with the \t{insopts} function.
@@ -317,6 +320,36 @@ that can be passed to \t{dohtml} are as follows:
     package manager should it be empty at any point.
 
 \end{description}
+
+\begin{centertable}{EAPIs supporting \t{dodoc -r}} \label{tab:dodoc-table}
+\IFKDEBUILDELSE
+{
+    \begin{tabular}{ l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{Supports \t{dodoc -r}?}} \\
+            \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{kdebuild-1} & No \\
+    \t{2} & No \\
+    \t{3} & Yes \\
+    \bottomrule
+    \end{tabular}
+}{
+    \begin{tabular}{ l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{Supports \t{dodoc -r}?}} \\
+            \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & No \\
+    \t{3} & Yes \\
+    \bottomrule
+    \end{tabular}
+}
+\end{centertable}
 
 \begin{centertable}{EAPIs supporting \t{doman} languages} \label{tab:doman-table}
 \IFKDEBUILDELSE
