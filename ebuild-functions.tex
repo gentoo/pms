@@ -74,6 +74,7 @@ The initial working directory must be \t{S} if that exists, falling back to \t{W
     \t{1} & No \\
     \t{kdebuild-1} & No \\
     \t{2} & Yes \\
+    \t{3} & Yes \\
     \bottomrule
     \end{tabular}
 }{
@@ -85,6 +86,7 @@ The initial working directory must be \t{S} if that exists, falling back to \t{W
     \t{0} & No \\
     \t{1} & No \\
     \t{2} & Yes \\
+    \t{3} & Yes \\
     \bottomrule
     \end{tabular}
 }
@@ -121,6 +123,7 @@ src_configure() {
     \t{1} & No \\
     \t{kdebuild-1} & No \\
     \t{2} & Yes \\
+    \t{3} & Yes \\
     \bottomrule
     \end{tabular}
 }{
@@ -132,6 +135,7 @@ src_configure() {
     \t{0} & No \\
     \t{1} & No \\
     \t{2} & Yes \\
+    \t{3} & Yes \\
     \bottomrule
     \end{tabular}
 }
@@ -196,6 +200,7 @@ src_compile() {
     \t{1} & 1 \\
     \t{kdebuild-1} & 1 \\
     \t{2} & 2 \\
+    \t{3} & 2 \\
     \bottomrule
     \end{tabular}
 }{
@@ -207,6 +212,7 @@ src_compile() {
     \t{0} & 0 \\
     \t{1} & 1 \\
     \t{2} & 2 \\
+    \t{3} & 2 \\
     \bottomrule
     \end{tabular}
 }
@@ -240,8 +246,9 @@ The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{sec
         \midrule
     \t{0} & At user option \\
     \t{1} & At user option \\
-    \t{2} & At user option \\
     \t{kdebuild-1} & Required \\
+    \t{2} & At user option \\
+    \t{3} & At user option \\
     \bottomrule
     \end{tabular}
 
@@ -333,8 +340,9 @@ fully installed. It is the only ebuild function which may be interactive and pro
         \midrule
     \t{0} & No \\
     \t{1} & No \\
-    \t{2} & No \\
     \t{kdebuild-1} & Yes \\
+    \t{2} & No \\
+    \t{3} & No \\
     \bottomrule
     \end{tabular}
     \end{centertable}
@@ -371,6 +379,8 @@ must not call these functions except when in the phase in question.
     \t{kdebuild-1} & None \\
     \t{2} & \parbox[t]{3in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
         \t{src\_compile}, \t{src\_test}} \\
+    \t{3} & \parbox[t]{3in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
+        \t{src\_compile}, \t{src\_test}} \\
     \bottomrule
     \end{tabular}
 }{
@@ -382,6 +392,8 @@ must not call these functions except when in the phase in question.
     \t{0} & None \\
     \t{1} & None \\
     \t{2} & \parbox[t]{3in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
+        \t{src\_compile}, \t{src\_test}} \\
+    \t{3} & \parbox[t]{3in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
         \t{src\_compile}, \t{src\_test}} \\
     \bottomrule
     \end{tabular}

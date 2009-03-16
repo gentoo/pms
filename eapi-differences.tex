@@ -2,7 +2,8 @@
 
 \note This chapter is informative and for convenience only. Refer to the main text for specifics.
 
-\begin{longtable}{\IFANYKDEBUILDELSE{llllll}{lllll}}
+\begin{landscape}
+\begin{longtable}{\IFANYKDEBUILDELSE{lllllll}{llllll}}
 \caption{Features in EAPIs}\\
 \toprule
 \multicolumn{1}{c}{\b{Feature}} &
@@ -13,7 +14,8 @@
 \multicolumn{1}{c}{0} &
 \multicolumn{1}{c}{1} &
 \IFANYKDEBUILDELSE{\multicolumn{1}{c}{\IFKDEBUILDCOLOUR{kdebuild-1}} &}{}
-\multicolumn{1}{c}{2} \\
+\multicolumn{1}{c}{2} &
+\multicolumn{1}{c}{3} \\
 \midrule
 \endfirsthead
 \midrule
@@ -25,7 +27,8 @@
 \multicolumn{1}{c}{0} &
 \multicolumn{1}{c}{1} &
 \IFANYKDEBUILDELSE{\multicolumn{1}{c}{\IFKDEBUILDCOLOUR{kdebuild-1}} &}{}
-\multicolumn{1}{c}{2} \\
+\multicolumn{1}{c}{2} &
+\multicolumn{1}{c}{3} \\
 \midrule
 \endhead
 \midrule
@@ -39,6 +42,7 @@
     \IFKDEBUILDCOLOUR{Optional} &
     \IFKDEBUILDCOLOUR{Optional} &
     \IFKDEBUILDCOLOUR{Required} &
+    \IFKDEBUILDCOLOUR{Optional} &
     \IFKDEBUILDCOLOUR{Optional} \\
 }{}
 
@@ -48,10 +52,12 @@
     \IFKDEBUILDCOLOUR{\t{.ebuild}} &
     \IFKDEBUILDCOLOUR{\t{.ebuild}} &
     \IFKDEBUILDCOLOUR{\t{.kdebuild-1}} &
+    \IFKDEBUILDCOLOUR{\t{.ebuild}} &
     \IFKDEBUILDCOLOUR{\t{.ebuild}} \\
 }{}
 
-\t{IUSE} defaults & table~\ref{tab:iuse-defaults-table} & No & Yes & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes \\
+\t{IUSE} defaults & table~\ref{tab:iuse-defaults-table} & No & Yes &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes & Yes \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{PROVIDE} support} &
@@ -59,10 +65,12 @@
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{No} &
+    \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} \\
 }{}
 
-\t{PROPERTIES} & table~\ref{tab:properties-table} & Optionally & Optionally & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Optionally} &}{} Optionally \\
+\t{PROPERTIES} & table~\ref{tab:properties-table} & Optionally & Optionally &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Optionally} &}{} Optionally & Optionally \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{Pre-source \t{EAPI}} &
@@ -70,10 +78,12 @@
     \IFKDEBUILDCOLOUR{0 or unset} &
     \IFKDEBUILDCOLOUR{0 or unset} &
     \IFKDEBUILDCOLOUR{kdebuild-1} &
+    \IFKDEBUILDCOLOUR{0 or unset} &
     \IFKDEBUILDCOLOUR{0 or unset} \\
 }{}
 
-\t{SRC\_URI} arrows & table~\ref{tab:uri-arrows-table} & No & No & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes \\
+\t{SRC\_URI} arrows & table~\ref{tab:uri-arrows-table} & No & No &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes & Yes \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{SRC\_URI} labels} &
@@ -81,6 +91,7 @@
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{No} \\
 }{}
 
@@ -90,6 +101,7 @@
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{No} \\
 }{}
 
@@ -99,6 +111,7 @@
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{No} \\
 }{}
 
@@ -107,23 +120,26 @@ Slot dependencies &
     No &
     \IFKDEBUILDELSE{Named}{Yes} &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Named and Operator} &}{}
+    \IFKDEBUILDELSE{Named}{Yes} &
     \IFKDEBUILDELSE{Named}{Yes} \\
 
 Use dependencies & table~\ref{tab:use-deps-table} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{kdebuild-style} &}{} 2-style \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{kdebuild-style} &}{} 2-style & 2-style \\
 
 \t{!} blockers & table~\ref{tab:bang-strength-table} & Unspecified & Unspecified &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Unspecified} &}{} Weak \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Unspecified} &}{} Weak & Weak \\
 
 \t{!!} blockers & table~\ref{tab:bang-strength-table} & Forbidden & Forbidden &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Forbidden} &}{} Strong \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Forbidden} &}{} Strong & Strong \\
 
-\t{src\_prepare} & table~\ref{tab:src-prepare-table} & No & No & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes \\
+\t{src\_prepare} & table~\ref{tab:src-prepare-table} & No & No &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes \\
 
-\t{src\_configure} & table~\ref{tab:src-configure-table} & No & No & \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes \\
+\t{src\_configure} & table~\ref{tab:src-configure-table} & No & No &
+\IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes \\
 
 \t{src\_compile} style & table~\ref{tab:src-compile-table} & 0 & 1 &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{1} &}{} 2 \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{1} &}{} 2 & 2 \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{src\_test}} &
@@ -131,6 +147,7 @@ Use dependencies & table~\ref{tab:use-deps-table} & No & No &
     \IFKDEBUILDCOLOUR{User option} &
     \IFKDEBUILDCOLOUR{User option} &
     \IFKDEBUILDCOLOUR{Required} &
+    \IFKDEBUILDCOLOUR{User option} &
     \IFKDEBUILDCOLOUR{User option} \\
 }{}
 
@@ -140,12 +157,14 @@ Use dependencies & table~\ref{tab:use-deps-table} & No & No &
     \IFKDEBUILDCOLOUR{Installed} &
     \IFKDEBUILDCOLOUR{Installed} &
     \IFKDEBUILDCOLOUR{Both} &
+    \IFKDEBUILDCOLOUR{Installed} &
     \IFKDEBUILDCOLOUR{Installed} \\
 }{}
 
 \t{default\_} phase functions & table~\ref{tab:default-phase-function-table} & None & None &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{None} &}{} \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack},
-    \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test}} \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{None} &}{}
+    \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test}} &
+    \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test}} \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{dohard}} &
@@ -153,6 +172,7 @@ Use dependencies & table~\ref{tab:use-deps-table} & No & No &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Banned} &
+    \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} \\
 }{}
 
@@ -162,6 +182,7 @@ Use dependencies & table~\ref{tab:use-deps-table} & No & No &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Banned} &
+    \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} \\
 }{}
 
@@ -171,11 +192,12 @@ Use dependencies & table~\ref{tab:use-deps-table} & No & No &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Banned} &
+    \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} \\
 }{}
 
 \t{doman} languages & table~\ref{tab:doman-table} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{dosym} does \t{dodir}} &
@@ -183,13 +205,15 @@ Use dependencies & table~\ref{tab:use-deps-table} & No & No &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{No} &
+    \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} \\
 }{}
 
 \t{default} function & table~\ref{tab:default-function-table} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes \\
 
 \end{longtable}
+\end{landscape}
 
 \chapter{Differences Between EAPIs}
 
@@ -248,6 +272,14 @@ EAPI 2 is EAPI 1 with the following changes:
     \t{src\_configure}, \t{src\_compile} and \t{src\_test}; table~\ref{tab:default-phase-function-table}.
 \item \t{doman} languages support, table~\ref{tab:doman-table}.
 \item \t{default} function, table~\ref{tab:default-function-table}.
+\end{compactitem}
+
+\section*{EAPI 3}
+
+EAPI 3 is EAPI 2 with the following changes:
+
+\begin{compactitem}
+\item
 \end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
