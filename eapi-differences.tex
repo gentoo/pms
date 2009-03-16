@@ -132,6 +132,9 @@ Use dependencies & table~\ref{tab:use-deps-table} & No & No &
 \t{!!} blockers & table~\ref{tab:bang-strength-table} & Forbidden & Forbidden &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Forbidden} &}{} Strong & Strong \\
 
+\t{pkg\_pretend} & table~\ref{tab:pkg-pretend-table} & No & No &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
+
 \t{src\_prepare} & table~\ref{tab:src-prepare-table} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes \\
 
@@ -279,7 +282,7 @@ EAPI 2 is EAPI 1 with the following changes:
 EAPI 3 is EAPI 2 with the following changes:
 
 \begin{compactitem}
-\item
+\item \t{pkg\_pretend}, table~\ref{tab:pkg-pretend-table}.
 \end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
