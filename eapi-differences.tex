@@ -70,7 +70,10 @@
 }{}
 
 \t{PROPERTIES} & table~\ref{tab:properties-table} & Optionally & Optionally &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Optionally} &}{} Optionally & Optionally \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Optionally} &}{} Optionally & Yes \\
+
+\t{DEFINED\_PHASES} & table~\ref{tab:defined-phases-table} & Optionally & Optionally &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Optionally} &}{} Optionally & Yes \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{Pre-source \t{EAPI}} &
@@ -285,6 +288,8 @@ EAPI 3 is EAPI 2 with the following changes:
 \item \t{pkg\_pretend}, table~\ref{tab:pkg-pretend-table}.
 \item Slot operator dependencies, table~\ref{tab:slot-deps-table}.
 \item Use dependency defaults, table~\ref{tab:use-deps-table}.
+\item \t{DEFINED\_PHASES} support is mandatory, table~\ref{tab:defined-phases-table}.
+\item \t{PROPERTIES} support is mandatory, table~\ref{tab:properties-table}.
 \end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

@@ -149,7 +149,7 @@ Ebuilds may define any of the following variables:
     \t{1} & Optionally \\
     \t{kdebuild-1} & Optionally \\
     \t{2} & Optionally \\
-    \t{3} & Optionally \\
+    \t{3} & Yes \\
     \bottomrule
     \end{tabular}
 }
@@ -162,7 +162,7 @@ Ebuilds may define any of the following variables:
     \t{0} & Optionally \\
     \t{1} & Optionally \\
     \t{2} & Optionally \\
-    \t{3} & Optionally \\
+    \t{3} & Yes \\
     \bottomrule
     \end{tabular}
 }
@@ -220,13 +220,45 @@ not be exported to the ebuild environment:
 \begin{description}
 \item[DEFINED\_PHASES] A space separated arbitrarily ordered list of phase names (e.g. \t{configure
 setup unpack}) whose phase functions are defined by the ebuild or an eclass inherited by the ebuild.
-If no phase functions are defined, a single hyphen is used instead of an empty string. Package
-managers may not rely upon the metadata cache having this variable defined, and must treat an empty
-string as ``this information is not available''.
+If no phase functions are defined, a single hyphen is used instead of an empty string. For EAPIs
+listed in table~\ref{tab:defined-phases-table} as having optional \t{DEFINED\_PHASES} support,
+package managers may not rely upon the metadata cache having this variable defined, and must treat
+an empty string as ``this information is not available''.
 \end{description}
 
 \note Thus, by extension of section~\ref{sec:metadata-invariance}, phase functions must not be defined
 based upon any variant condition.
+
+\begin{centertable}{EAPIs supporting \t{DEFINED\_PHASES}} \label{tab:defined-phases-table}
+\IFKDEBUILDELSE
+{
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{DEFINED\_PHASES}?}} \\
+        \midrule
+    \t{0} & Optionally \\
+    \t{1} & Optionally \\
+    \t{kdebuild-1} & Optionally \\
+    \t{2} & Optionally \\
+    \t{3} & Yes \\
+    \bottomrule
+    \end{tabular}
+}
+{
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{DEFINED\_PHASES}?}} \\
+        \midrule
+    \t{0} & Optionally \\
+    \t{1} & Optionally \\
+    \t{2} & Optionally \\
+    \t{3} & Yes \\
+    \bottomrule
+    \end{tabular}
+}
+\end{centertable}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 
