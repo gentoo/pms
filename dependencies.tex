@@ -193,10 +193,10 @@ EAPI not supporting \t{SLOT} dependencies.
 }{
 }
 
-In EAPIs shown in table~\ref{tab:use-deps-table} as supporting 2-style \t{USE} dependencies, a specification
-may additionally be suffixed by at most one 2-style \t{[use]} restriction, as described in
-section~\ref{sec:use-dep}. A package manager must warn or error if this feature is used with an EAPI
-not supporting use dependencies.
+In EAPIs shown in table~\ref{tab:use-deps-table} as supporting 2-style or 3-style \t{USE}
+dependencies, a specification may additionally be suffixed by at most one 2-style or 3-style
+\t{[use]} restriction, as described in section~\ref{sec:use-dep}. A package manager must warn or
+error if this feature is used with an EAPI not supporting use dependencies.
 
 \IFKDEBUILDELSE
 {
@@ -267,7 +267,7 @@ not supporting use dependencies.
     \t{1} & No \\
     \t{kdebuild-1} & kdebuild-style \\
     \t{2} & 2-style \\
-    \t{3} & 2-style \\
+    \t{3} & 3-style \\
     \bottomrule
     \end{tabular}
     \end{centertable}
@@ -281,6 +281,7 @@ not supporting use dependencies.
     \t{0} & No \\
     \t{1} & No \\
     \t{2} & 2-style \\
+    \t{3} & 3-style \\
     \bottomrule
     \end{tabular}
     \end{centertable}
@@ -430,10 +431,10 @@ is only for package manager use and must not be used by ebuilds.
 }{
 }
 
-\subsubsection{2-Style Use Dependencies}
+\subsubsection{2-Style and 3-Style Use Dependencies}
 \label{sec:use-dep}
 
-A 2-style use dependency consists of one of the following:
+A 2-style or 3-style use dependency consists of one of the following:
 
 \begin{description}
 \item{[opt]} The flag must be enabled.
@@ -452,9 +453,20 @@ Multiple requirements may be combined using commas, e.g. \t{[first,-second,third
 
 When multiple requirements are specified, all must match for a successful match.
 
-It is an error for a use dependency to be applied to an ebuild which does not have the flag in
-question in \t{IUSE}, or for an ebuild to use a conditional use dependency when that ebuild does
-not have the flag in \t{IUSE}.
+In a 3-style use dependency, the flag name may immediately be followed by a \e{default} specified by
+either \t{(+)} or \t{(-)}. The former indicates that, when applying the use dependency to a package
+that does not have the flag in question in \t{IUSE}, the package manager shall behave as if the flag
+were present and enabled; the latter, present and disabled.
+
+Unless a 3-style default is specified, it is an error for a use dependency to be applied to an
+ebuild which does not have the flag in question in \t{IUSE}.
+
+\note By extension of the above, a default that could reference an ebuild using an EAPI not
+supporting profile \t{IUSE} injections cannot rely upon any particular behaviour for flags that
+would not have to be part of \t{IUSE}.
+
+It is an error for an ebuild to use a conditional use dependency when that ebuild does not have the
+flag in \t{IUSE}.
 
 \IFKDEBUILDELSE
 {

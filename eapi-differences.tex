@@ -124,7 +124,7 @@ Slot dependencies &
     Named and Operator \\
 
 Use dependencies & table~\ref{tab:use-deps-table} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{kdebuild-style} &}{} 2-style & 2-style \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{kdebuild-style} &}{} 2-style & 3-style \\
 
 \t{!} blockers & table~\ref{tab:bang-strength-table} & Unspecified & Unspecified &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Unspecified} &}{} Weak & Weak \\
@@ -284,6 +284,7 @@ EAPI 3 is EAPI 2 with the following changes:
 \begin{compactitem}
 \item \t{pkg\_pretend}, table~\ref{tab:pkg-pretend-table}.
 \item Slot operator dependencies, table~\ref{tab:slot-deps-table}.
+\item Use dependency defaults, table~\ref{tab:use-deps-table}.
 \end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
