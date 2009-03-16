@@ -419,38 +419,43 @@ fully installed. It is the only ebuild function which may be interactive and pro
 \subsection{pkg\_info}
 \label{sec:pkg-info-function}
 
-\IFKDEBUILDELSE
-{
-    The \t{pkg\_info} function may be called by the package manager when displaying information about an
-    installed package. In EAPIs listed in table~\ref{tab:pkg-info-table} as supporting \t{pkg\_info} on
-    uninstalled packages, it may also be called by the package manager when displaying information
-    about an uninstalled package. In this case, ebuild authors should note that dependencies may not be
-    installed.
-}{
-    The \t{pkg\_info} function may be called by the package manager when displaying information about an
-    installed package.
-}
+The \t{pkg\_info} function may be called by the package manager when displaying information about an
+installed package. In EAPIs listed in table~\ref{tab:pkg-info-table} as supporting \t{pkg\_info} on
+non-installed packages, it may also be called by the package manager when displaying information
+about a non-installed package. In this case, ebuild authors should note that dependencies may not be
+installed.
 
 \t{pkg\_info} must not write to the filesystem.
 
+\begin{centertable}{EAPIs supporting \t{pkg\_info} on non-installed packages} \label{tab:pkg-info-table}
 \IFKDEBUILDELSE
 {
-    \begin{centertable}{EAPIs supporting \t{pkg\_info} on uninstalled packages} \label{tab:pkg-info-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{pkg\_info} on uninstalled packages?}} \\
+        \multicolumn{1}{c}{\textbf{Supports \t{pkg\_info} on non-installed packages?}} \\
         \midrule
     \t{0} & No \\
     \t{1} & No \\
     \t{kdebuild-1} & Yes \\
     \t{2} & No \\
-    \t{3} & No \\
+    \t{3} & Yes \\
     \bottomrule
     \end{tabular}
-    \end{centertable}
 }{
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{pkg\_info} on non-installed packages?}} \\
+        \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & No \\
+    \t{3} & Yes \\
+    \bottomrule
+    \end{tabular}
 }
+\end{centertable}
 
 \subsection{pkg\_nofetch}
 \label{sec:pkg-nofetch-function}

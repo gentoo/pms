@@ -160,15 +160,8 @@ Use dependencies & table~\ref{tab:use-deps-table} & No & No &
     \IFKDEBUILDCOLOUR{User option} \\
 }{}
 
-\IFANYKDEBUILDELSE{
-    \IFKDEBUILDCOLOUR{\t{pkg\_info}} &
-    \IFKDEBUILDCOLOUR{table~\ref{tab:pkg-info-table}} &
-    \IFKDEBUILDCOLOUR{Installed} &
-    \IFKDEBUILDCOLOUR{Installed} &
-    \IFKDEBUILDCOLOUR{Both} &
-    \IFKDEBUILDCOLOUR{Installed} &
-    \IFKDEBUILDCOLOUR{Installed} \\
-}{}
+\t{pkg\_info} & table~\ref{tab:pkg-info-table} & Installed & Installed &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Both} &}{} Installed & Both \\
 
 \t{default\_} phase functions & table~\ref{tab:default-phase-function-table} & None & None &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{None} &}{}
@@ -265,7 +258,7 @@ EAPI 1 is EAPI 0 with the following changes:
     \item Ranged dependencies, table~\ref{tab:range-deps-table}.
     \item Use dependencies, table~\ref{tab:use-deps-table}.
     \item \t{src\_test} mandatory, table~\ref{tab:test-required-table}.
-    \item \t{pkg\_info} can run on uninstalled packages, table~\ref{tab:pkg-info-table}.
+    \item \t{pkg\_info} can run on non-installed packages, table~\ref{tab:pkg-info-table}.
     \item \t{dohard}, \t{dohtml}, \t{dosed} banned, table~\ref{tab:banned-commands-table}.
     \item \t{dosym} will not do \t{dodir}, table~\ref{tab:dosym-table}.
     \end{compactitem}
@@ -306,6 +299,7 @@ EAPI 3 is EAPI 2 with the following changes:
 \item \t{dohard}, \t{dosed} banned, table~\ref{tab:banned-commands-table}.
 \item \t{unpack} supports \t{.xz} and \t{.tar.xz}, table~\ref{tab:unpack-extensions-table}.
 \item \t{econf} adds \t{-{}-disable-dependency-tracking}, table~\ref{tab:econf-options-table}.
+\item \t{pkg\_info} can run on non-installed packages, table~\ref{tab:pkg-info-table}.
 \end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
