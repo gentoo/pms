@@ -618,9 +618,43 @@ has returned.
     installed.
     \item ar archives (\t{*.a, *.deb}). Ebuilds must ensure that GNU binutils is installed.
     \item lzma archives (\t{*.lzma}). Ebuilds must ensure that LZMA Utils is installed.
+    \item xz archives (\t{*.xz}). Ebuilds must ensure that XZ Utils is installed. Only for EAPIs
+        listed in table~\ref{tab:unpack-extensions-table} as supporting xz.
+    \item xz-compressed tar files (\t{*.tar.xz}). Ebuilds must ensure that XZ Utils is installed.
+        Only for EAPIs listed in table~\ref{tab:unpack-extensions-table} as supporting xz.
     \end{itemize}
     It is up to the ebuild to ensure that the relevant external utilities are available, whether by
     being in the system set or via dependencies.
+
+\begin{centertable}{\t{unpack} extensions for EAPIs} \label{tab:unpack-extensions-table}
+\IFKDEBUILDELSE
+{
+    \begin{tabular}{ l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{\t{.xz} and \t{.tar.xz}?}} \\
+            \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{kdebuild-1} & No \\
+    \t{2} & No \\
+    \t{3} & Yes \\
+    \bottomrule
+    \end{tabular}
+}{
+    \begin{tabular}{ l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{\t{.xz} and \t{.tar.xz}?}} \\
+            \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & No \\
+    \t{3} & Yes \\
+    \bottomrule
+    \end{tabular}
+}
+\end{centertable}
 
 \item[inherit] See section~\ref{sec:inherit}.
 
