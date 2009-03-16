@@ -56,6 +56,9 @@
     \IFKDEBUILDCOLOUR{\t{.ebuild}} \\
 }{}
 
+Profile \t{USE} injection & table~\ref{tab:profile-iuse-injection-table} & No & No &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
+
 \t{IUSE} defaults & table~\ref{tab:iuse-defaults-table} & No & Yes &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes & Yes \\
 
@@ -300,6 +303,7 @@ EAPI 3 is EAPI 2 with the following changes:
 \item \t{unpack} supports \t{.xz} and \t{.tar.xz}, table~\ref{tab:unpack-extensions-table}.
 \item \t{econf} adds \t{-{}-disable-dependency-tracking}, table~\ref{tab:econf-options-table}.
 \item \t{pkg\_info} can run on non-installed packages, table~\ref{tab:pkg-info-table}.
+\item \t{USE} is calculated differently, table~\ref{tab:profile-iuse-injection-table}.
 \end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

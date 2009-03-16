@@ -133,6 +133,9 @@ In an all-of group, all of the child elements must be matched.
 In a use-conditional group, if the associated use flag is enabled (or disabled if it has an
 exclamation mark prefix), all of the child elements must be matched.
 
+It is an error for a flag to be used if it is not included in \t{IUSE\_EFFECTIVE} as described in
+section~\ref{sec:use-iuse-handling}.
+
 \subsection{Any-of Dependency Specifications}
 
 Any use-conditional group that is an immediate child of an any-of group, if not enabled (disabled
@@ -426,8 +429,8 @@ is only for package manager use and must not be used by ebuilds.
     When multiple use dependencies are specified, all must match for a successful match.
 
     It is an error for a use dependency to be applied to an ebuild which does not have the flag in
-    question in \t{IUSE}, or for an ebuild to use a conditional use dependency when that ebuild does
-    not have the flag in \t{IUSE}.
+    question in \t{IUSE\_REFERENCEABLE}, or for an ebuild to use a conditional use dependency when
+    that ebuild does not have the flag in \t{IUSE\_EFFECTIVE}.
 }{
 }
 
@@ -455,18 +458,18 @@ When multiple requirements are specified, all must match for a successful match.
 
 In a 3-style use dependency, the flag name may immediately be followed by a \e{default} specified by
 either \t{(+)} or \t{(-)}. The former indicates that, when applying the use dependency to a package
-that does not have the flag in question in \t{IUSE}, the package manager shall behave as if the flag
-were present and enabled; the latter, present and disabled.
+that does not have the flag in question in \t{IUSE\_REFERENCEABLE}, the package manager shall behave
+as if the flag were present and enabled; the latter, present and disabled.
 
 Unless a 3-style default is specified, it is an error for a use dependency to be applied to an
-ebuild which does not have the flag in question in \t{IUSE}.
+ebuild which does not have the flag in question in \t{IUSE\_REFERENCEABLE}.
 
 \note By extension of the above, a default that could reference an ebuild using an EAPI not
 supporting profile \t{IUSE} injections cannot rely upon any particular behaviour for flags that
 would not have to be part of \t{IUSE}.
 
 It is an error for an ebuild to use a conditional use dependency when that ebuild does not have the
-flag in \t{IUSE}.
+flag in \t{IUSE\_EFFECTIVE}.
 
 \IFKDEBUILDELSE
 {

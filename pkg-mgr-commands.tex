@@ -583,12 +583,13 @@ in table~\ref{tab:compression-table} as supporting \t{docompress}.
 }
 \end{centertable}
 
-\subsubsection{List Functions}
-These functions work on variables containing whitespace-delimited lists (e.g. \t{USE}). Ebuilds must
-not run any of these commands once the current phase function has returned. Ebuilds must not call
-any function that operates upon \t{USE} to query a value that is not either listed in \t{IUSE}, a
-\t{USE\_EXPAND} value or an \t{ARCH} value; package manager behaviour is undefined if such a call
-is made.
+\subsubsection{Use List Functions}
+These functions provide behaviour based upon set or unset use flags. Ebuilds must not run any of
+these commands once the current phase function has returned. Ebuilds must not run any of these
+functions in global scope.
+
+If any of these functions is called with a flag value that is not included in \t{IUSE\_EFFECTIVE},
+either behaviour is undefined or it is an error as decided by table~\ref{tab:use-list-strictness}.
 
 \begin{description}
 \item[use] Returns shell true (0) if the first argument (a \t{USE} flag name) is enabled, false
@@ -596,20 +597,53 @@ is made.
     false if it is enabled. It is guaranteed that this command is quiet.
 \item[usev] The same as \t{use}, but also prints the flag name if it is enabled.
 \item[useq] Deprecated synonym for \t{use}.
-\\
-\item[has] Returns shell true (0) if the first argument (a word) is found in the list of subsequent
-    arguments, false otherwise. Guaranteed quiet.
-\item[hasv] The same as \t{has}, but also prints the first argument if found.
-\item[hasq] Deprecated synonym for \t{has}.
-\\
 \item[use\_with] Has one-, two-, and three-argument forms. The first argument is a USE flag name,
     the second a \t{configure} option name (\t{\$\{opt\}}), defaulting to the same as the first argument
     if not provided, and the third is a string value (\t{\$\{value\}}), defaulting to nothing. If the
     USE flag is set, outputs \t{-{}-with-\$\{opt\}=\$\{value\}} if the third argument was provided, and
     \t{-{}-with-\$\{opt\}} otherwise. If the flag is not set, then it outputs \t{-{}-without-\$\{opt\}}.
-
 \item[use\_enable] Works the same as \t{use\_with()}, but outputs \t{-{}-enable-} or \t{-{}-disable-}
 instead of \t{-{}-with-} or \t{-{}-without-}.
+\end{description}
+
+\begin{centertable}{EAPI Behaviour for Use Queries not in IUSE\_EFFECTIVE} \label{tab:use-list-strictness}
+\IFKDEBUILDELSE
+{
+    \begin{tabular}{ l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{Behaviour}} \\
+            \midrule
+    \t{0} & Undefined \\
+    \t{1} & Undefined  \\
+    \t{kdebuild-1} & Undefined  \\
+    \t{2} & Undefined \\
+    \t{3} & Error \\
+    \bottomrule
+    \end{tabular}
+}{
+    \begin{tabular}{ l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{Behaviour}} \\
+            \midrule
+    \t{0} & Undefined \\
+    \t{1} & Undefined  \\
+    \t{2} & Undefined \\
+    \t{3} & Error \\
+    \bottomrule
+    \end{tabular}
+}
+\end{centertable}
+
+\subsubsection{Text List Functions}
+These functions check whitespace-separated lists for a particular value.
+
+\begin{description}
+\item[has] Returns shell true (0) if the first argument (a word) is found in the list of subsequent
+    arguments, false otherwise. Guaranteed quiet.
+\item[hasv] The same as \t{has}, but also prints the first argument if found.
+\item[hasq] Deprecated synonym for \t{has}.
 \end{description}
 
 \subsubsection{Misc Commands}
