@@ -74,7 +74,8 @@ variable.
     Yes &
     All source files that could be available for the package, including any that are disabled in
     \t{A} because of USE conditionals. The value is calculated from the base names of each element
-    of the \t{SRC\_URI} ebuild metadata variable. \\
+    of the \t{SRC\_URI} ebuild metadata variable. Only for EAPIs listed in table~\ref{tab:env-vars-table} as
+    supporting \t{AA}. \\
 \t{FILESDIR} &
     \t{src\_*}\footnote{Not necessarily present when installing from a binary package} &
     No &
@@ -159,7 +160,41 @@ variable.
     Yes &
     The version of the running kernel at the time the ebuild was first executed, as
     returned by the \t{uname~-r} command or equivalent.  May be modified by ebuilds.
+    Only for EAPIs listed in table~\ref{tab:env-vars-table} as supporting \t{KV}.
 \end{longtable}
+
+\begin{centertable}{EAPIs supporting various env variables} \label{tab:env-vars-table}
+\IFKDEBUILDELSE
+{
+    \begin{tabular}{ l l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{AA}?}} \\
+        \multicolumn{1}{c}{\textbf{Supports \t{KV}?}} \\
+        \midrule
+    \t{0} & Yes & Yes \\
+    \t{1} & Yes & Yes \\
+    \t{kdebuild-1} & Yes & Yes \\
+    \t{2} & Yes & Yes \\
+    \t{3} & No & No \\
+    \bottomrule
+    \end{tabular}
+}
+{
+    \begin{tabular}{ l l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{AA}?}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{KV}?}} \\
+        \midrule
+    \t{0} & Yes & Yes \\
+    \t{1} & Yes & Yes \\
+    \t{2} & Yes & Yes \\
+    \t{3} & No & No \\
+    \bottomrule
+    \end{tabular}
+}
+\end{centertable}
 
 All variables set in the active profiles' \t{make.defaults} files must be exported to the ebuild
 environment. \t{CHOST}, \t{CBUILD} and \t{CTARGET}, if not set by profiles, must contain either an
