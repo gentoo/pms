@@ -209,6 +209,9 @@ Use dependencies & table~\ref{tab:use-deps-table} & No & No &
 \t{dodoc -r} & table~\ref{tab:dodoc-table} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
 
+\t{doins} handles symlinks & table~\ref{tab:doins-table} & No & No &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
+
 \t{doman} languages & table~\ref{tab:doman-table} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes \\
 
@@ -306,6 +309,7 @@ EAPI 3 is EAPI 2 with the following changes:
 \item Default \t{src\_install} no longer a no-op, table~\ref{tab:src-install-table}.
 \item Controllable compression and \t{docompress}, table~\ref{tab:compression-table}.
 \item \t{dodoc -r} support, table~\ref{tab:dodoc-table}.
+\item \t{doins} supports symlinks, table~\ref{tab:doins-table}.
 \end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
