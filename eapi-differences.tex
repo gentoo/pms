@@ -176,15 +176,8 @@ Use dependencies & table~\ref{tab:use-deps-table} & No & No &
     \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
         \t{src\_compile}, \t{src\_install}, \t{src\_test}} \\
 
-\IFANYKDEBUILDELSE{
-    \IFKDEBUILDCOLOUR{\t{dohard}} &
-    \IFKDEBUILDCOLOUR{table~\ref{tab:banned-commands-table}} &
-    \IFKDEBUILDCOLOUR{Yes} &
-    \IFKDEBUILDCOLOUR{Yes} &
-    \IFKDEBUILDCOLOUR{Banned} &
-    \IFKDEBUILDCOLOUR{Yes} &
-    \IFKDEBUILDCOLOUR{Yes} \\
-}{}
+\t{dohard} & table~\ref{tab:banned-commands-table} & Yes & Yes &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Banned} &}{} Yes & Banned \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{dohtml}} &
@@ -196,15 +189,8 @@ Use dependencies & table~\ref{tab:use-deps-table} & No & No &
     \IFKDEBUILDCOLOUR{Yes} \\
 }{}
 
-\IFANYKDEBUILDELSE{
-    \IFKDEBUILDCOLOUR{\t{dosed}} &
-    \IFKDEBUILDCOLOUR{table~\ref{tab:banned-commands-table}} &
-    \IFKDEBUILDCOLOUR{Yes} &
-    \IFKDEBUILDCOLOUR{Yes} &
-    \IFKDEBUILDCOLOUR{Banned} &
-    \IFKDEBUILDCOLOUR{Yes} &
-    \IFKDEBUILDCOLOUR{Yes} \\
-}{}
+\t{dosed} & table~\ref{tab:banned-commands-table} & Yes & Yes &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Banned} &}{} Yes & Banned \\
 
 \t{dodoc -r} & table~\ref{tab:dodoc-table} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
@@ -310,6 +296,7 @@ EAPI 3 is EAPI 2 with the following changes:
 \item Controllable compression and \t{docompress}, table~\ref{tab:compression-table}.
 \item \t{dodoc -r} support, table~\ref{tab:dodoc-table}.
 \item \t{doins} supports symlinks, table~\ref{tab:doins-table}.
+\item \t{dohard}, \t{dosed} banned, table~\ref{tab:banned-commands-table}.
 \end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

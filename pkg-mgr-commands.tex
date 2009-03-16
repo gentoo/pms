@@ -5,14 +5,14 @@ manager. Except where otherwise noted, they may be internal (shell functions or 
 commands available in \t{PATH}; where this is not specified, ebuilds may not rely upon either
 behaviour.
 
+\subsubsection{Banned commands}
+\label{sec:banned-commands}
+
+Some commands are banned in some EAPIs. If a banned command is called, the package manager must
+abort the build process indicating an error.
+
 \IFKDEBUILDELSE
 {
-    \subsubsection{Banned commands}
-    \label{sec:banned-commands}
-
-    Some commands are banned in some EAPIs. If a banned command is called, the package manager must
-    abort the build process indicating an error.
-
     \begin{centertable}{Banned commands} \label{tab:banned-commands-table}
     \begin{tabular}{ l l l l }
         \toprule
@@ -27,11 +27,27 @@ behaviour.
     \t{1} & No & No & No \\
     \t{kdebuild-1} & Yes & Yes & Yes \\
     \t{2} & No & No & No \\
-    \t{3} & No & No & No \\
+    \t{3} & Yes & No & Yes \\
     \bottomrule
     \end{tabular}
     \end{centertable}
 }{
+    \begin{centertable}{Banned commands} \label{tab:banned-commands-table}
+    \begin{tabular}{ l l l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{3}{c}{\textbf{Command banned?}} \\
+        \multicolumn{1}{c}{} &
+        \multicolumn{1}{c}{\textbf{\t{dohard}}} &
+        \multicolumn{1}{c}{\textbf{\t{dosed}}} \\
+        \midrule
+    \t{0} & No & No \\
+    \t{1} & No & No \\
+    \t{2} & No & No \\
+    \t{3} & Yes & Yes \\
+    \bottomrule
+    \end{tabular}
+    \end{centertable}
 }
 
 \subsubsection{Sandbox commands}
@@ -190,14 +206,9 @@ has returned.
     call, by default with file mode \t{0755}. This can be overridden by setting \t{EXEOPTIONS} with
     the \t{exeopts} function. If \t{exeinto} has not yet been called, behaviour is undefined.
 
-\IFKDEBUILDELSE
-{
-    \item[dohard] Takes two parameters. Creates a hardlink from the second to the first. In EAPIs
+\item[dohard] Takes two parameters. Creates a hardlink from the second to the first. In EAPIs
     listed in table~\ref{tab:banned-commands-table}, this command is banned as per
     section~\ref{sec:banned-commands}.
-}{
-    \item[dohard] Takes two parameters. Creates a hardlink from the second to the first.
-}
 
 \item[dohtml] Installs the given HTML files into a subdirectory under \t{/usr/share/doc/\$PF/}.
 The subdirectory is \t{html} by default, but this can be overridden by setting the \t{DOCDESTTREE}
@@ -575,20 +586,12 @@ of the above categories. Ebuilds must not run any of these commands once the cur
 has returned.
 
 \begin{description}
-\IFKDEBUILDELSE
-{
-    \item[dosed] Takes any number of arguments, which can be files or \t{sed} expressions. For each
-        argument, if it names, relative to \t{D} a file which exists, then \t{sed} is run with the
-        current expression on that file. Otherwise, the current expression is set to the text of the
-        argument. The initial value of the expression is \t{s:\$\{D\}::g}. In EAPIs listed in
-        table~\ref{tab:banned-commands-table}, this command is banned as per
-        section~\ref{sec:banned-commands}.
-}{
-    \item[dosed] Takes any number of arguments, which can be files or \t{sed} expressions. For each
-        argument, if it names, relative to \t{D} a file which exists, then \t{sed} is run with the
-        current expression on that file. Otherwise, the current expression is set to the text of the
-        argument. The initial value of the expression is \t{s:\$\{D\}::g}.
-}
+\item[dosed] Takes any number of arguments, which can be files or \t{sed} expressions. For each
+    argument, if it names, relative to \t{D} a file which exists, then \t{sed} is run with the
+    current expression on that file. Otherwise, the current expression is set to the text of the
+    argument. The initial value of the expression is \t{s:\$\{D\}::g}. In EAPIs listed in
+    table~\ref{tab:banned-commands-table}, this command is banned as per
+    section~\ref{sec:banned-commands}.
 
 \item[unpack] Unpacks one or more source archives, in order, into the current directory. After
     unpacking, must ensure that all filesystem objects inside the current working directory (but not
