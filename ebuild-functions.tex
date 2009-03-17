@@ -13,17 +13,65 @@ temporary directory \t{T}; exceptions are noted below. All functions may assume 
 access to all system libraries, binaries and configuration files that are accessible to normal
 users.
 
+The environment for functions run outside of the build sequence (that is, \t{pkg\_config},
+\t{pkg\_info}, \t{pkg\_prerm} and \t{pkg\_postrm}) must be the environment used for the build of the
+package, not the current configuration.
+
+Ebuilds must not call nor assume the existence of any phase functions.
+
+\subsection{Initial Working Directories}
+\label{sec:s-to-workdir-fallback}
+
 Some functions may assume that their initial working directory is set to a particular location;
 these are noted below. If no initial working directory is mandated, it may be set to anything and
 the ebuild must not rely upon a particular location for it. The ebuild \e{may} assume that the
 initial working directory for any phase is a trusted location that may only be written to by a
 privileged user and group.
 
-The environment for functions run outside of the build sequence (that is, \t{pkg\_config},
-\t{pkg\_info}, \t{pkg\_prerm} and \t{pkg\_postrm}) must be the environment used for the build of the
-package, not the current configuration.
+Some functions are described as having an initial working directory of \t{S} with an error or
+fallback to \t{WORKDIR}. For EAPIs listed in table~\ref{tab:s-fallback-table} as having the
+fallback, this means that if \t{S} is not a directory before the start of the phase function, the
+initial working directory shall be \t{WORKDIR} instead. For EAPIs where it is a conditional error,
+if \t{S} is not a directory before the start of the phase function, it is a fatal error, unless all
+of the following conditions are true, in which case the fallback to \t{WORKDIR} is used:
 
-Ebuilds must not call nor assume the existence of any phase functions.
+\begin{compactitem}
+\item The \t{A} variable contains no items.
+\item The phase function in question is not in \t{DEFINED\_PHASES}.
+\item None of the phase functions \t{unpack}, \t{prepare}, \t{configure}, \t{compile} or \t{install},
+    if supported by the EAPI in question and occurring prior to the phase about to be executed, are
+    in \t{DEFINED\_PHASES}.
+\end{compactitem}
+
+\begin{centertable}{EAPIs with \t{S} to \t{WORKDIR} fallbacks} \label{tab:s-fallback-table}
+\IFKDEBUILDELSE
+{
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Fallback to \t{WORKDIR} permitted?}} \\
+        \midrule
+    \t{0} & Always \\
+    \t{1} & Always \\
+    \t{kdebuild-1} & Always \\
+    \t{2} & Always \\
+    \t{3} & Conditional error \\
+    \bottomrule
+    \end{tabular}
+}{
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Fallback to \t{WORKDIR} permitted?}} \\
+        \midrule
+    \t{0} & Always \\
+    \t{1} & Always \\
+    \t{2} & Always \\
+    \t{3} & Conditional error \\
+    \bottomrule
+    \end{tabular}
+}
+\end{centertable}
 
 \subsection{pkg\_pretend}
 \label{sec:pkg-pretend-function}
@@ -108,7 +156,8 @@ supporting it.
 The \t{src\_prepare} function can be used for post-unpack source preparation. The default
 implementation does nothing.
 
-The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
+The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR} as discussed in
+section~\ref{sec:s-to-workdir-fallback}.
 
 \begin{centertable}{EAPIs supporting \t{src\_prepare}} \label{tab:src-prepare-table}
 \IFKDEBUILDELSE
@@ -146,7 +195,8 @@ The initial working directory must be \t{S} if that exists, falling back to \t{W
 The \t{src\_configure} function is only called for EAPIs listed in table~\ref{tab:src-configure-table} as
 supporting it.
 
-The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
+The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR} as discussed in
+section~\ref{sec:s-to-workdir-fallback}.
 
 The \t{src\_configure} function configures the package's build environment. The default
 implementation used when the ebuild lacks the \t{src\_configure} function shall behave as:
@@ -195,7 +245,8 @@ src_configure() {
 The \t{src\_compile} function configures the package's build environment in EAPIs lacking
 \t{src\_configure}, and builds the package in all EAPIs.
 
-The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
+The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR} as discussed in
+section~\ref{sec:s-to-workdir-fallback}.
 
 For EAPIs listed in table~\ref{tab:src-compile-table} as using format 0, the default implementation used
 when the ebuild lacks the \t{src\_compile} function shall behave as:
@@ -310,7 +361,8 @@ The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{sec
 The \t{src\_install} function installs the package's content to a directory specified in
 \t{D}.
 
-The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
+The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR} as discussed in
+section~\ref{sec:s-to-workdir-fallback}.
 
 For EAPIs listed in table~\ref{tab:src-install-table} as using format 3, the default implementation used
 when the ebuild lacks the \t{src\_install} function shall behave as:

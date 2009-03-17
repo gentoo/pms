@@ -138,6 +138,9 @@ Use dependencies & table~\ref{tab:use-deps-table} & No & No &
 \t{!!} blockers & table~\ref{tab:bang-strength-table} & Forbidden & Forbidden &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Forbidden} &}{} Strong & Strong \\
 
+\t{S} to \t{WORKDIR} fallback & table~\ref{tab:s-fallback-table} & Always & Always &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Always} &}{} Always & Conditional \\
+
 \t{pkg\_pretend} & table~\ref{tab:pkg-pretend-table} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
 
@@ -311,6 +314,7 @@ EAPI 3 is EAPI 2 with the following changes:
 \item \t{pkg\_info} can run on non-installed packages, table~\ref{tab:pkg-info-table}.
 \item \t{USE} is calculated differently, table~\ref{tab:profile-iuse-injection-table}.
 \item \t{AA} and \t{KV} are gone, table~\ref{tab:env-vars-table}.
+\item \t{S} to \t{WORKDIR} fallback restricted, table~\ref{tab:s-fallback-table}.
 \end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
