@@ -105,8 +105,9 @@ Ebuilds may define any of the following variables:
         virtuals provided by this package. See section~\ref{sec:dependencies} for full syntax.
         \label{ebuild-var-provide}
 }
-\item[RDEPEND] See section~\ref{sec:dependencies}. \t{RDEPEND} has special behaviour for its value if
-    unset and when used with an eclass. See section~\ref{sec:rdepend-depend} for details.
+\item[RDEPEND] See section~\ref{sec:dependencies}. For some EAPIs, \t{RDEPEND} has special behaviour
+    for its value if unset and when used with an eclass. See section~\ref{sec:rdepend-depend} for
+    details.
 \item[RESTRICT] Zero or more behaviour restrictions for this package. See section~\ref{sec:restrict}
     for value meanings and section~\ref{sec:dependencies} for full syntax.
 \item[PROPERTIES] Zero or more properties for this package. See section~\ref{sec:properties}
@@ -192,12 +193,44 @@ ideally, an error in one ebuild should not prevent operations upon other ebuilds
 \subsection{\t{RDEPEND} value}
 \label{sec:rdepend-depend}
 
-If \t{RDEPEND} is unset (but not if it is set to an empty string) in an ebuild, the package manager
-must set its value to be equal to the value of \t{DEPEND}.
+In EAPIs listed in table~\ref{tab:rdepend-depend-table} as having \t{RDEPEND=DEPEND}, if \t{RDEPEND}
+is unset (but not if it is set to an empty string) in an ebuild, the package manager must set its
+value to be equal to the value of \t{DEPEND}.
 
 When dealing with eclasses, only values set in the ebuild itself are considered for this behaviour;
 any \t{DEPEND} or \t{RDEPEND} set in an eclass does not change the implicit \t{RDEPEND=\$DEPEND} for
 the ebuild portion, and any \t{DEPEND} value set in an eclass does not get added to \t{RDEPEND}.
+
+\begin{centertable}{EAPIs with \t{RDEPEND=DEPEND} Default} \label{tab:rdepend-depend-table}
+\IFKDEBUILDELSE
+{
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{\t{RDEPEND=DEPEND}?}} \\
+        \midrule
+    \t{0} & Yes \\
+    \t{1} & Yes \\
+    \t{kdebuild-1} & Yes \\
+    \t{2} & Yes \\
+    \t{3} & No \\
+    \bottomrule
+    \end{tabular}
+}
+{
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{\t{RDEPEND=DEPEND}?}} \\
+        \midrule
+    \t{0} & Yes \\
+    \t{1} & Yes \\
+    \t{2} & Yes \\
+    \t{3} & No \\
+    \bottomrule
+    \end{tabular}
+}
+\end{centertable}
 
 \section{Magic Ebuild-defined Variables}
 
