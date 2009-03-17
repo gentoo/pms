@@ -190,6 +190,12 @@ Use dependencies & table~\ref{tab:use-deps-table} & No & No &
 \t{REPLACED\_BY\_VERSION} & table~\ref{tab:env-vars-table} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
 
+Most utilities die & table~\ref{tab:commands-die-table} & No & No &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
+
+\t{nonfatal} & table~\ref{tab:commands-die-table} & No & No &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
+
 \t{dohard} & table~\ref{tab:banned-commands-table} & Yes & Yes &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Banned} &}{} Yes & Banned \\
 
@@ -326,6 +332,8 @@ EAPI 3 is EAPI 2 with the following changes:
 \item \t{REPLACING\_VERSIONS} and \t{REPLACED\_BY\_VERSION}, table~\ref{tab:env-vars-table}.
 \item \t{S} to \t{WORKDIR} fallback restricted, table~\ref{tab:s-fallback-table}.
 \item \t{RDEPEND=DEPEND} no longer done, table~\ref{tab:rdepend-depend-table}.
+\item Utilities now die on failure unless called under \t{nonfatal},
+    table~\ref{tab:commands-die-table}.
 \end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

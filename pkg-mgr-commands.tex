@@ -5,6 +5,53 @@ manager. Except where otherwise noted, they may be internal (shell functions or 
 commands available in \t{PATH}; where this is not specified, ebuilds may not rely upon either
 behaviour.
 
+\subsubsection{Failure behaviour and related commands}
+\label{sec:failure-behaviour}
+
+Where a command is listed as having EAPI dependent failure behaviour, a failure shall either result
+in a non-zero exit status or abort the build process, as determined by
+table~\ref{tab:commands-die-table}.
+
+The following commands affect this behaviour:
+\begin{description}
+\item[nonfatal] Executes the remainder of its arguments as a command, preserving the exit status. If
+this results in a command being called that would normally abort the build process due to a failure,
+instead a non-zero exit status shall be returned. Only in EAPIs listed in
+table~\ref{tab:commands-die-table} as supporting \t{nonfatal}.
+\end{description}
+
+\begin{centertable}{EAPI Command Failure Behaviour} \label{tab:commands-die-table}
+\IFKDEBUILDELSE
+{
+    \begin{tabular}{ l l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{Command failure behaviour}} &
+            \multicolumn{1}{c}{\textbf{Supports \t{nonfatal}?}} \\
+            \midrule
+    \t{0} & Non-zero exit & No \\
+    \t{1} & Non-zero exit & No \\
+    \t{kdebuild-1} & Non-zero exit & No \\
+    \t{2} & Non-zero exit & No \\
+    \t{3} & Aborts & Yes \\
+    \bottomrule
+    \end{tabular}
+}{
+    \begin{tabular}{ l l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{Command failure behaviour}} &
+            \multicolumn{1}{c}{\textbf{Supports \t{nonfatal}?}} \\
+            \midrule
+    \t{0} & Non-zero exit & No \\
+    \t{1} & Non-zero exit & No \\
+    \t{2} & Non-zero exit & No \\
+    \t{3} & Aborts & Yes \\
+    \bottomrule
+    \end{tabular}
+}
+\end{centertable}
+
 \subsubsection{Banned commands}
 \label{sec:banned-commands}
 
@@ -160,7 +207,8 @@ has returned.
     \end{centertable}
 
     \t{econf} must be implemented internally---that is, as a bash function and not an external
-    script. Should any portion of it fail, it must abort the build using \t{die}.
+    script. Should any portion of it fail, it must abort the build using \t{die}, unless run using
+    \t{nonfatal}, in which case it must return non-zero exit status.
 
 \begin{algorithm}
 \caption{econf -{}-libdir logic} \label{alg:econf-libdir}
@@ -186,9 +234,11 @@ has returned.
     arguments given are passed directly to the make command, as are the user's chosen \t{MAKEOPTS}\@.
     Arguments given to \t{emake} override user configuration. See also
     section~\ref{sec:guaranteed-system-commands}. \t{emake} must be an external program and cannot be a
-    function or alias---it must be callable from e.g. \t{xargs}.
+    function or alias---it must be callable from e.g. \t{xargs}. Failure behaviour is EAPI dependent
+    as per section~\ref{sec:failure-behaviour}.
 \item[einstall] A shortcut for the command given in Listing~\ref{lst:einstall}. Any arguments given
-    to \t{einstall} are passed verbatim to \t{emake}, as shown.
+    to \t{einstall} are passed verbatim to \t{emake}, as shown. Failure behaviour is EAPI dependent
+    as per section~\ref{sec:failure-behaviour}.
 
 \begin{listing}[H]
   \caption{einstall command}\label{lst:einstall}
@@ -215,13 +265,16 @@ has returned.
 
 \begin{description}
 \item[dobin] Installs the given files into \t{DESTTREE/bin}, where \t{DESTTREE} defaults to
-    \t{/usr}. Gives the files mode \t{0755} and ownership \t{root:root}.
+    \t{/usr}. Gives the files mode \t{0755} and ownership \t{root:root}. Failure behaviour is EAPI
+    dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[doconfd] Installs the given config files into \t{/etc/conf.d/}, by default with file mode
     \t{0644}. This can be overridden by setting \t{INSOPTIONS} with the \t{insopts} function.
+    Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[dodir] Creates the given directories, by default with file mode \t{0755}. This can be overridden
-    by setting \t{DIROPTIONS} with the \t{diropts} function.
+    by setting \t{DIROPTIONS} with the \t{diropts} function. Failure behaviour is EAPI dependent as
+    per section~\ref{sec:failure-behaviour}.
 
 \item[dodoc] Installs the given files into a subdirectory under \t{/usr/share/doc/\$\{PF\}/} with
     file mode \t{0644}. The subdirectory is set by the most recent call to \t{docinto}. If
@@ -229,18 +282,22 @@ has returned.
     \t{/usr/share/doc/\$\{PF\}/}. For EAPIs
     listed in table~\ref{tab:dodoc-table} as supporting \t{-r}, if the first argument is \t{-r}, any
     subsequent arguments that are directories are installed recursively to the appropriate location;
-    in any other case, it is an error for a directory to be specified.
+    in any other case, it is an error for a directory to be specified. Failure behaviour is EAPI
+    dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[doenvd] Installs the given environment files into \t{/etc/env.d/}, by default with file mode
     \t{0644}. This can be overridden by setting \t{INSOPTIONS} with the \t{insopts} function.
+    Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[doexe] Installs the given files into the directory specified by the most recent \t{exeinto}
     call, by default with file mode \t{0755}. This can be overridden by setting \t{EXEOPTIONS} with
     the \t{exeopts} function. If \t{exeinto} has not yet been called, behaviour is undefined.
+    Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[dohard] Takes two parameters. Creates a hardlink from the second to the first. In EAPIs
     listed in table~\ref{tab:banned-commands-table}, this command is banned as per
-    section~\ref{sec:banned-commands}.
+    section~\ref{sec:banned-commands}. Failure behaviour is EAPI dependent as per
+    section~\ref{sec:failure-behaviour}.
 
 \item[dohtml] Installs the given HTML files into a subdirectory under \t{/usr/share/doc/\$PF/}.
 The subdirectory is \t{html} by default, but this can be overridden by setting the \t{DOCDESTTREE}
@@ -259,6 +316,8 @@ that can be passed to \t{dohtml} are as follows:
     \item{\t{-p}} --- sets a document prefix for installed files.
     \end{description}
 
+    Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
+
 \IFKDEBUILDELSE
 {
     In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as
@@ -267,21 +326,25 @@ that can be passed to \t{dohtml} are as follows:
 }
 
 \item[doinfo] Installs a GNU Info file into the \t{/usr/share/info} area with file mode \t{0644}.
+    Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[doinitd] Installs the given initscript files into \t{/etc/init.d}, by default with file mode
     \t{0755}. This can be overridden by setting \t{EXEOPTIONS} with the \t{exeopts} function.
+    Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[doins] Takes any number of files as arguments and installs them into \t{INSDESTTREE}, by
     default with file mode \t{0644}. This can be overridden by setting \t{INSOPTIONS} with the
     \t{insopts} function. If the first argument is \t{-r}, then operates recursively, descending
     into any directories given. For EAPIs listed in table~\ref{tab:doins-table}, \t{doins} must
     correctly handle symlinks when installing recursively; for other EAPIs, behaviour is undefined
-    if any symlink is encountered.
+    if any symlink is encountered. Failure behaviour is EAPI dependent as per
+    section~\ref{sec:failure-behaviour}.
 
 \item[dolib] For each argument, installs it into the appropriate library directory as determined by
     Algorithm~\ref{alg:ebuild-libdir}, by default with file mode \t{0644}. This can be overridden by
     setting \t{LIBOPTIONS} with the \t{libopts} function. Any symlinks are installed into the same
-    directory as relative links to their original target.
+    directory as relative links to their original target. Failure behaviour is EAPI dependent as per
+    section~\ref{sec:failure-behaviour}.
 
 \item[dolib.so] As for dolib except each file is installed with mode \t{0755}.
 
@@ -314,12 +377,13 @@ that can be passed to \t{dohtml} are as follows:
     mode \t{0644}. In EAPIs listed in table~\ref{tab:doman-table} as supporting language codes, a
     man page with name of the form\t{foo.lang.1} shall go to \t{/usr/share/man/lang/man1/foo.1},
     where \t{lang} refers to a pair of lower-case ASCII letters optionally followed by an underscore
-    and a pair of upper-case ASCII letters.
+    and a pair of upper-case ASCII letters. Failure behaviour is EAPI dependent as per
+    section~\ref{sec:failure-behaviour}.
 
 \item[domo] Installs a \t{.mo} file with file mode \t{0644} into the appropriate subdirectory of
     \t{DESTTREE/share/locale}, generated by taking the basename of the file, removing the \t{.*}
     suffix, and appending \t{/LC\_MESSAGES}. The name of the installed files is the package name
-    with \t{.mo} appended.
+    with \t{.mo} appended. Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[dosbin] As \t{dobin}, but installs to \t{DESTTREE/sbin}.
 
@@ -328,14 +392,18 @@ that can be passed to \t{dohtml} are as follows:
     \item[dosym] Creates a symbolic link named as for its second parameter, pointing to the first. If
         the directory containing the new link does not exist, creates it if EAPI is listed in
         table~\ref{tab:dosym-table} as making the directory, or aborts the build process otherwise.
+        Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 }{
     \item[dosym] Creates a symbolic link named as for its second parameter, pointing to the first. If
-        the directory containing the new link does not exist, creates it.
+        the directory containing the new link does not exist, creates it. Failure behaviour is EAPI
+        dependent as per section~\ref{sec:failure-behaviour}.
 }
 
-\item[fowners] Acts as for \t{chown}, but takes paths relative to the image directory.
+\item[fowners] Acts as for \t{chown}, but takes paths relative to the image directory. Failure
+    behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
-\item[fperms] Acts as for \t{chmod}, but takes paths relative to the image directory.
+\item[fperms] Acts as for \t{chmod}, but takes paths relative to the image directory. Failure
+    behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[newbin] As for \t{dobin}, but takes two parameters. The first is the file to install; the
     second is the new filename under which it will be installed.
@@ -362,7 +430,8 @@ that can be passed to \t{dohtml} are as follows:
 
 \item[keepdir] Creates a directory as for \t{dodir}, and an empty file whose name starts with
     \t{.keep} in that directory to ensure that the directory does not get removed by the
-    package manager should it be empty at any point.
+    package manager should it be empty at any point. Failure behaviour is EAPI dependent as per
+    section~\ref{sec:failure-behaviour}.
 
 \end{description}
 
@@ -485,7 +554,7 @@ current phase function has returned.
 
 \item[into] Sets the value of \t{DESTTREE} for future invocations of the above utilities.  Creates
 the directory under \t{\$\{D\}}, using \t{install -d} with no additional options, if it does not
-already exist.
+already exist. Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[insinto] Sets the value of \t{INSDESTTREE} for future invocations of the above utilities. May
     create the directory, as specified for \t{into}.
@@ -657,7 +726,8 @@ has returned.
     current expression on that file. Otherwise, the current expression is set to the text of the
     argument. The initial value of the expression is \t{s:\$\{D\}::g}. In EAPIs listed in
     table~\ref{tab:banned-commands-table}, this command is banned as per
-    section~\ref{sec:banned-commands}.
+    section~\ref{sec:banned-commands}. Failure behaviour is EAPI dependent as per
+    section~\ref{sec:failure-behaviour}.
 
 \item[unpack] Unpacks one or more source archives, in order, into the current directory. After
     unpacking, must ensure that all filesystem objects inside the current working directory (but not
@@ -667,6 +737,8 @@ has returned.
     All arguments to \t{unpack} must be either a filename without path, in which case \t{unpack}
     looks in \t{DISTDIR} for the file, or start with the string \t{./}, in which case \t{unpack}
     uses the argument as a path relative to the working directory.
+
+    If unpacking a supported file format fails, \t{unpack} shall abort the build process.
 
     Must be able to unpack the following file formats, if the relevant binaries are available:
     \begin{itemize}
