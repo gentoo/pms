@@ -521,26 +521,26 @@ download the file.
     section~\ref{sec:restrict} for details.
 }
 
-\IFKDEBUILDELSE
-{
 In EAPIs supporting arrows, if an arrow is used, the filename used when saving to \t{DISTDIR} shall
 instead be the name on the right of the arrow. When consulting mirrors (except for those explicitly
 listed on the left of the arrow, if \t{mirror://} is used), the filename to the right of the arrow
 shall be requested instead of the filename in the URI.
 
-In EAPIs supporting labels, the following labels are legal. See section~\ref{sec:labels} for label
-behaviour in general.
+\IFKDEBUILDELSE
+{
+    In EAPIs supporting labels, the following labels are legal. See section~\ref{sec:labels} for label
+    behaviour in general.
 
-\begin{description}
-\item[mirrors-first] Mirrors shall be consulted before the listed URI.
-\item[mirrors-only] Only mirrors shall be consulted, and the listed URI shall be ignored.
-\item[listed-first] The listed URI shall be consulted before mirrors.
-\item[listed-only] Only the listed URI shall be consulted.
-\item[manual] No URI shall be consulted. A manual download is required.
-\end{description}
+    \begin{description}
+    \item[mirrors-first] Mirrors shall be consulted before the listed URI.
+    \item[mirrors-only] Only mirrors shall be consulted, and the listed URI shall be ignored.
+    \item[listed-first] The listed URI shall be consulted before mirrors.
+    \item[listed-only] Only the listed URI shall be consulted.
+    \item[manual] No URI shall be consulted. A manual download is required.
+    \end{description}
 
-The default label is \t{mirrors-first}, unless \t{RESTRICT} contains \t{mirror}, in which case it is
-\t{listed-only}, unless \t{RESTRICT} contains \t{fetch}, in which case it is \t{manual}.
+    The default label is \t{mirrors-first}, unless \t{RESTRICT} contains \t{mirror}, in which case it is
+    \t{listed-only}, unless \t{RESTRICT} contains \t{fetch}, in which case it is \t{manual}.
 }{
 }
 
