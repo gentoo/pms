@@ -179,6 +179,9 @@ has returned.
     \t{docinto} has not yet been called, instead installs to the directory
     \t{/usr/share/doc/\$\{PF\}/}.
 
+\item[doenvd] Installs the given environment files into \t{/etc/env.d/}, by default with file mode
+    \t{0644}. This can be overridden by setting \t{INSOPTIONS} with the \t{insopts} function.
+
 \item[doexe] Installs the given files into the directory specified by the most recent \t{exeinto}
     call, by default with file mode \t{0755}. This can be overridden by setting \t{EXEOPTIONS} with
     the \t{exeopts} function. If \t{exeinto} has not yet been called, behaviour is undefined.
@@ -299,6 +302,10 @@ that can be passed to \t{dohtml} are as follows:
 \item[newinitd] As above, for \t{doinitd}.
 
 \item[newins] As above, for \t{doins}.
+
+\item[newlib.a] As above, for \t{dolib.a}.
+
+\item[newlib.so] As above, for \t{dolib.so}.
 
 \item[newman] As above, for \t{doman}.
 
