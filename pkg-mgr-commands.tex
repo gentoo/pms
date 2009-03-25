@@ -168,7 +168,7 @@ has returned.
 \item[dobin] Installs the given files into \t{DESTTREE/bin}, where \t{DESTTREE} defaults to
     \t{/usr}. Gives the files mode \t{0755} and ownership \t{root:root}.
 
-\item[doconfd] Installs the given files into /etc/conf.d/, by default with file mode
+\item[doconfd] Installs the given config files into \t{/etc/conf.d/}, by default with file mode
     \t{0644}. This can be overridden by setting \t{INSOPTIONS} with the \t{insopts} function.
 
 \item[dodir] Creates the given directories, by default with file mode \t{0755}. This can be overridden
@@ -193,18 +193,18 @@ has returned.
 }
 
 \item[dohtml] Installs the given HTML files into a subdirectory under \t{/usr/share/doc/\$PF/}.
-The subdirectory is \t{html} by default, but this can be changed by the \t{DOCDESTTREE}
-variable. Files to be installed automatically are determined by extension and the default
-extensions are \t{css}, \t{gif}, \t{htm}, \t{html}, \t{jpeg}, \t{jpg}, \t{js} and \t{png}. These default
-extensions can be extended or reduced (see below). The options that can be passed to \t{dohtml}
-are as follows:
+The subdirectory is \t{html} by default, but this can be overridden by setting the \t{DOCDESTTREE}
+variable with the \t{docinto} function. Files to be installed automatically are determined by
+extension and the default extensions are \t{css}, \t{gif}, \t{htm}, \t{html}, \t{jpeg}, \t{jpg},
+\t{js} and \t{png}. These default extensions can be extended or reduced (see below). The options
+that can be passed to \t{dohtml} are as follows:
     \begin{description}
     \item{\t{-r}} --- enables recursion into directories.
     \item{\t{-V}} --- enables verbosity.
     \item{\t{-A}} --- adds file type extensions to the default list.
     \item{\t{-a}} --- sets file type extensions to only those specified.
     \item{\t{-f}} --- list of files that are able to be installed.
-    \item{\t{-x}} --- list of directories that files will not be installed from(only used in
+    \item{\t{-x}} --- list of directories that files will not be installed from (only used in
     conjunction with \t{-r}).
     \item{\t{-p}} --- sets a document prefix for installed files.
     \end{description}
@@ -218,8 +218,8 @@ are as follows:
 
 \item[doinfo] Installs a GNU Info file into the \t{/usr/share/info} area with file mode \t{0644}.
 
-\item[doinitd] Installs an initscript into \t{/etc/init.d}, by default with file mode \t{0755}.
-    This can be overridden by setting \t{EXEOPTIONS} with the \t{exeopts} function.
+\item[doinitd] Installs the given initscript files into \t{/etc/init.d}, by default with file mode
+    \t{0755}. This can be overridden by setting \t{EXEOPTIONS} with the \t{exeopts} function.
 
 \item[doins] Takes any number of files as arguments and installs them into \t{INSDESTTREE}, by
     default with file mode \t{0644}. This can be overridden by setting \t{INSOPTIONS} with the
@@ -231,9 +231,9 @@ are as follows:
     setting \t{LIBOPTIONS} with the \t{libopts} function. Any symlinks are installed into the same
     directory as relative links to their original target.
 
-\item[dolib.so] As for dolib. Installs the file with mode \t{0755}.
+\item[dolib.so] As for dolib except each file is installed with mode \t{0755}.
 
-\item[dolib.a] As for dolib. Installs the file with mode \t{0644}.
+\item[dolib.a] As for dolib except each file is installed with mode \t{0644}.
 
 \begin{algorithm}
 \caption{Determining the library directory} \label{alg:ebuild-libdir}
