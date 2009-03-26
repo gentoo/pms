@@ -404,12 +404,12 @@ is made.
 \begin{description}
 \item[use] Returns shell true (0) if the first argument (a \t{USE} flag name) is enabled, false
     otherwise.  If the flag name is prefixed with \t{!}, returns true if the flag is disabled, and
-    false if it is enabled.
+    false if it is enabled. It is guaranteed that this command is quiet.
 \item[usev] The same as \t{use}, but also prints the flag name if it is enabled.
 \item[useq] Deprecated synonym for \t{use}.
 \\
 \item[has] Returns shell true (0) if the first argument (a word) is found in the list of subsequent
-    arguments, false otherwise.
+    arguments, false otherwise. Guaranteed quiet.
 \item[hasv] The same as \t{has}, but also prints the first argument if found.
 \item[hasq] Deprecated synonym for \t{has}.
 \\
