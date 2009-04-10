@@ -28,6 +28,7 @@ the ebuild must not rely upon a particular location for it. The ebuild \e{may} a
 initial working directory for any phase is a trusted location that may only be written to by a
 privileged user and group.
 
+\featurelabel{s-workdir-fallback}
 Some functions are described as having an initial working directory of \t{S} with an error or
 fallback to \t{WORKDIR}. For EAPIs listed in table~\ref{tab:s-fallback-table} as having the
 fallback, this means that if \t{S} is not a directory before the start of the phase function, the
@@ -76,6 +77,7 @@ of the following conditions are true, in which case the fallback to \t{WORKDIR} 
 \subsection{pkg\_pretend}
 \label{sec:pkg-pretend-function}
 
+\featurelabel{pkg-pretend}
 The \t{pkg\_pretend} function is only called for EAPIs listed in table~\ref{tab:pkg-pretend-table} as
 supporting it.
 
@@ -133,6 +135,7 @@ and/or groups to the system.
 \subsection{src\_unpack}
 \label{sec:src-unpack-function}
 
+\featurelabel{src-unpack}
 The \t{src\_unpack} function extracts all of the package's sources, applies patches and sets up the
 package's build system for further use.
 
@@ -150,6 +153,7 @@ src_unpack() {
 \subsection{src\_prepare}
 \label{sec:src-prepare-function}
 
+\featurelabel{src-prepare}
 The \t{src\_prepare} function is only called for EAPIs listed in table~\ref{tab:src-prepare-table} as
 supporting it.
 
@@ -192,6 +196,7 @@ section~\ref{sec:s-to-workdir-fallback}.
 \subsection{src\_configure}
 \label{sec:src-configure-function}
 
+\featurelabel{src-configure}
 The \t{src\_configure} function is only called for EAPIs listed in table~\ref{tab:src-configure-table} as
 supporting it.
 
@@ -242,12 +247,14 @@ src_configure() {
 \subsection{src\_compile}
 \label{sec:src-compile-function}
 
+\featurelabel{src-compile}
 The \t{src\_compile} function configures the package's build environment in EAPIs lacking
 \t{src\_configure}, and builds the package in all EAPIs.
 
 The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR} as discussed in
 section~\ref{sec:s-to-workdir-fallback}.
 
+\featurelabel{src-compile-0}
 For EAPIs listed in table~\ref{tab:src-compile-table} as using format 0, the default implementation used
 when the ebuild lacks the \t{src\_compile} function shall behave as:
 
@@ -262,6 +269,7 @@ src_compile() {
 }
 \end{verbatim}
 
+\featurelabel{src-compile-1}
 For EAPIs listed in table~\ref{tab:src-compile-table} as using format 1, the default implementation used
 when the ebuild lacks the \t{src\_compile} function shall behave as:
 
@@ -276,6 +284,7 @@ src_compile() {
 }
 \end{verbatim}
 
+\featurelabel{src-compile-2}
 For EAPIs listed in table~\ref{tab:src-compile-table} as using format 2, the default implementation used
 when the ebuild lacks the \t{src\_compile} function shall behave as:
 
@@ -333,6 +342,7 @@ The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{sec
 
 \IFKDEBUILDELSE
 {
+    \featurelabel{src-test-required}
     In some EAPIs, \t{src\_test} should only be run at user option (and never if restrictions are in
     place). In others, it must always be run (excepting restrictions). See table~\ref{tab:test-required-table}
     for which EAPIs fit into which category.
@@ -358,12 +368,14 @@ The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{sec
 \subsection{src\_install}
 \label{sec:src-install-function}
 
+\featurelabel{src-install}
 The \t{src\_install} function installs the package's content to a directory specified in
 \t{D}.
 
 The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR} as discussed in
 section~\ref{sec:s-to-workdir-fallback}.
 
+\featurelabel{src-install-3}
 For EAPIs listed in table~\ref{tab:src-install-table} as using format 3, the default implementation used
 when the ebuild lacks the \t{src\_install} function shall behave as:
 
@@ -471,6 +483,7 @@ fully installed. It is the only ebuild function which may be interactive and pro
 \subsection{pkg\_info}
 \label{sec:pkg-info-function}
 
+\featurelabel{pkg-info}
 The \t{pkg\_info} function may be called by the package manager when displaying information about an
 installed package. In EAPIs listed in table~\ref{tab:pkg-info-table} as supporting \t{pkg\_info} on
 non-installed packages, it may also be called by the package manager when displaying information
@@ -521,6 +534,7 @@ source files from their respective locations, with notes concerning licensing if
 \subsection{\t{default\_} Phase Functions}
 \label{sec:default-phase-functions}
 
+\featurelabel{default-phase-functions}
 In EAPIs listed in table~\ref{tab:default-phase-function-table} as supporting \t{default\_} phase
 functions, a function named \t{default\_}(phase) that behaves as the default
 implementation for that EAPI shall be defined when executing any ebuild phase listed in the table. Ebuilds

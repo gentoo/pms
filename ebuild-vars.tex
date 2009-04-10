@@ -30,6 +30,7 @@ All ebuilds must define at least the following variables:
     responsible for merging these values. See section~\ref{sec:use-iuse-handling} for discussion on
     which values must be listed this variable.
 
+    \featurelabel{iuse-defaults}
     In EAPIs shown in table~\ref{tab:iuse-defaults-table} as supporting \t{IUSE} defaults, any use flag
     name in \t{IUSE} may be prefixed by at most one of a plus or a minus sign. If such a prefix is
     present, the package manager may use it as a suggestion as to the default value of the use flag
@@ -95,6 +96,7 @@ Ebuilds may define any of the following variables:
 \item[PDEPEND] See section~\ref{sec:dependencies}.
 \IFKDEBUILDELSE
 {
+    \featurelabel{provide}
     \item[PROVIDE] Zero or more qualified package names of any \e{old style}
         virtuals provided by this package. See section~\ref{sec:dependencies} for full syntax.  In EAPIs
         listed in table~\ref{tab:provide-table} as not supporting \t{PROVIDE}, ebuilds must not set this
@@ -110,7 +112,8 @@ Ebuilds may define any of the following variables:
     details.
 \item[RESTRICT] Zero or more behaviour restrictions for this package. See section~\ref{sec:restrict}
     for value meanings and section~\ref{sec:dependencies} for full syntax.
-\item[PROPERTIES] Zero or more properties for this package. See section~\ref{sec:properties}
+\item[PROPERTIES] \featurelabel{properties}
+    Zero or more properties for this package. See section~\ref{sec:properties}
     for value meanings and section~\ref{sec:dependencies} for full syntax. For EAPIs listed in
     table~\ref{tab:properties-table} as having optional support, ebuilds must not rely upon the
     package manager recognising or understanding this variable in any way.
@@ -181,6 +184,7 @@ ensure that it is unset.
 
 \IFKDEBUILDELSE
 {
+    \featurelabel{pre-source-eapi}
     When sourcing an ebuild with file extension \t{kdebuild-1}, the package manager must pre-set the
     \t{EAPI} variable to \t{kdebuild-1}; leaving it empty is not allowed. Ebuilds with this
     extension must not modify the \t{EAPI} variable.
@@ -193,6 +197,7 @@ ideally, an error in one ebuild should not prevent operations upon other ebuilds
 \subsection{\t{RDEPEND} value}
 \label{sec:rdepend-depend}
 
+\featurelabel{rdepend-depend}
 In EAPIs listed in table~\ref{tab:rdepend-depend-table} as having \t{RDEPEND=DEPEND}, if \t{RDEPEND}
 is unset (but not if it is set to an empty string) in an ebuild, the package manager must set its
 value to be equal to the value of \t{DEPEND}.
@@ -250,7 +255,8 @@ The following are special variables defined by the package manager for internal 
 not be exported to the ebuild environment:
 
 \begin{description}
-\item[DEFINED\_PHASES] A space separated arbitrarily ordered list of phase names (e.g. \t{configure
+\item[DEFINED\_PHASES] \featurelabel{defined-phases}
+A space separated arbitrarily ordered list of phase names (e.g. \t{configure
 setup unpack}) whose phase functions are defined by the ebuild or an eclass inherited by the ebuild.
 If no phase functions are defined, a single hyphen is used instead of an empty string. For EAPIs
 listed in table~\ref{tab:defined-phases-table} as having optional \t{DEFINED\_PHASES} support,

@@ -38,7 +38,7 @@
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{scm} support} &
-    \IFKDEBUILDCOLOUR{table~\ref{tab:scm-table}} &
+    \IFKDEBUILDCOLOUR{\compactfeatureref{scm}} &
     \IFKDEBUILDCOLOUR{Optional} &
     \IFKDEBUILDCOLOUR{Optional} &
     \IFKDEBUILDCOLOUR{Required} &
@@ -48,7 +48,7 @@
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{File extension} &
-    \IFKDEBUILDCOLOUR{section~\ref{file-extension}} &
+    \IFKDEBUILDCOLOUR{\compactfeatureref{file-extension}} &
     \IFKDEBUILDCOLOUR{\t{.ebuild}} &
     \IFKDEBUILDCOLOUR{\t{.ebuild}} &
     \IFKDEBUILDCOLOUR{\t{.kdebuild-1}} &
@@ -56,15 +56,15 @@
     \IFKDEBUILDCOLOUR{\t{.ebuild}} \\
 }{}
 
-Profile \t{USE} injection & table~\ref{tab:profile-iuse-injection-table} & No & No &
+Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-injection} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
 
-\t{IUSE} defaults & table~\ref{tab:iuse-defaults-table} & No & Yes &
+\t{IUSE} defaults & \compactfeatureref{iuse-defaults} & No & Yes &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes & Yes \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{PROVIDE} support} &
-    \IFKDEBUILDCOLOUR{table~\ref{tab:provide-table}} &
+    \IFKDEBUILDCOLOUR{\compactfeatureref{provide}} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{No} &
@@ -72,18 +72,18 @@ Profile \t{USE} injection & table~\ref{tab:profile-iuse-injection-table} & No & 
     \IFKDEBUILDCOLOUR{Yes} \\
 }{}
 
-\t{PROPERTIES} & table~\ref{tab:properties-table} & Optionally & Optionally &
+\t{PROPERTIES} & \compactfeatureref{properties} & Optionally & Optionally &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Optionally} &}{} Optionally & Yes \\
 
-\t{RDEPEND=DEPEND} & table~\ref{tab:defined-phases-table} & Yes & Yes &
+\t{RDEPEND=DEPEND} & \compactfeatureref{rdepend-depend} & Yes & Yes &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes & No \\
 
-\t{DEFINED\_PHASES} & table~\ref{tab:defined-phases-table} & Optionally & Optionally &
+\t{DEFINED\_PHASES} & \compactfeatureref{defined-phases} & Optionally & Optionally &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Optionally} &}{} Optionally & Yes \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{Pre-source \t{EAPI}} &
-    \IFKDEBUILDCOLOUR{section~\ref{sec:pre-source-eapi}} &
+    \IFKDEBUILDCOLOUR{\compactfeatureref{pre-source-eapi}} &
     \IFKDEBUILDCOLOUR{0 or unset} &
     \IFKDEBUILDCOLOUR{0 or unset} &
     \IFKDEBUILDCOLOUR{kdebuild-1} &
@@ -91,12 +91,12 @@ Profile \t{USE} injection & table~\ref{tab:profile-iuse-injection-table} & No & 
     \IFKDEBUILDCOLOUR{0 or unset} \\
 }{}
 
-\t{SRC\_URI} arrows & table~\ref{tab:uri-arrows-table} & No & No &
+\t{SRC\_URI} arrows & \compactfeatureref{src-uri-arrows} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes & Yes \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{SRC\_URI} labels} &
-    \IFKDEBUILDCOLOUR{table~\ref{tab:uri-labels-table}} &
+    \IFKDEBUILDCOLOUR{\compactfeatureref{src-uri-labels}} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{Yes} &
@@ -106,7 +106,7 @@ Profile \t{USE} injection & table~\ref{tab:profile-iuse-injection-table} & No & 
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{PDEPEND} labels} &
-    \IFKDEBUILDCOLOUR{table~\ref{tab:pdepend-labels-table}} &
+    \IFKDEBUILDCOLOUR{\compactfeatureref{pdepend-labels}} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{Yes} &
@@ -116,7 +116,7 @@ Profile \t{USE} injection & table~\ref{tab:profile-iuse-injection-table} & No & 
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{Ranged Dependencies} &
-    \IFKDEBUILDCOLOUR{table~\ref{tab:range-deps-table}} &
+    \IFKDEBUILDCOLOUR{\compactfeatureref{ranged-deps}} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{Yes} &
@@ -125,43 +125,43 @@ Profile \t{USE} injection & table~\ref{tab:profile-iuse-injection-table} & No & 
 }{}
 
 Slot dependencies &
-    table~\ref{tab:slot-deps-table} &
+    \compactfeatureref{slot-deps} &
     No &
     Named &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Named and Operator} &}{}
     Named &
     Named and Operator \\
 
-Use dependencies & table~\ref{tab:use-deps-table} & No & No &
+Use dependencies & \compactfeatureref{use-deps} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{kdebuild-style} &}{} 2-style & 3-style \\
 
-\t{!} blockers & table~\ref{tab:bang-strength-table} & Unspecified & Unspecified &
+\t{!} blockers & \compactfeatureref{bang-strength} & Unspecified & Unspecified &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Unspecified} &}{} Weak & Weak \\
 
-\t{!!} blockers & table~\ref{tab:bang-strength-table} & Forbidden & Forbidden &
+\t{!!} blockers & \compactfeatureref{bang-strength} & Forbidden & Forbidden &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Forbidden} &}{} Strong & Strong \\
 
-\t{S} to \t{WORKDIR} fallback & table~\ref{tab:s-fallback-table} & Always & Always &
+\t{S} to \t{WORKDIR} fallback & \compactfeatureref{s-workdir-fallback} & Always & Always &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Always} &}{} Always & Conditional \\
 
-\t{pkg\_pretend} & table~\ref{tab:pkg-pretend-table} & No & No &
+\t{pkg\_pretend} & \compactfeatureref{pkg-pretend} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
 
-\t{src\_prepare} & table~\ref{tab:src-prepare-table} & No & No &
+\t{src\_prepare} & \compactfeatureref{src-prepare} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes \\
 
-\t{src\_configure} & table~\ref{tab:src-configure-table} & No & No &
+\t{src\_configure} & \compactfeatureref{src-configure} & No & No &
 \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes \\
 
-\t{src\_compile} style & table~\ref{tab:src-compile-table} & 0 & 1 &
+\t{src\_compile} style & \compactfeatureref{src-compile} & 0 & 1 &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{1} &}{} 2 & 2 \\
 
-\t{src\_install} style & table~\ref{tab:src-install-table} & no-op & no-op &
+\t{src\_install} style & \compactfeatureref{src-install} & no-op & no-op &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{no-op} &}{} no-op & 3 \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{src\_test}} &
-    \IFKDEBUILDCOLOUR{table~\ref{tab:test-required-table}} &
+    \IFKDEBUILDCOLOUR{\compactfeatureref{src-test-required}} &
     \IFKDEBUILDCOLOUR{User option} &
     \IFKDEBUILDCOLOUR{User option} &
     \IFKDEBUILDCOLOUR{Required} &
@@ -169,39 +169,39 @@ Use dependencies & table~\ref{tab:use-deps-table} & No & No &
     \IFKDEBUILDCOLOUR{User option} \\
 }{}
 
-\t{pkg\_info} & table~\ref{tab:pkg-info-table} & Installed & Installed &
+\t{pkg\_info} & \compactfeatureref{pkg-info} & Installed & Installed &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Both} &}{} Installed & Both \\
 
-\t{default\_} phase functions & table~\ref{tab:default-phase-function-table} & None & None &
+\t{default\_} phase functions & \compactfeatureref{default-phase-functions} & None & None &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{None} &}{}
     \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test}} &
     \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
         \t{src\_compile}, \t{src\_install}, \t{src\_test}} \\
 
-\t{AA} & table~\ref{tab:env-vars-table} & Yes & Yes &
+\t{AA} & \compactfeatureref{aa} & Yes & Yes &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes & No \\
 
-\t{KV} & table~\ref{tab:env-vars-table} & Yes & Yes &
+\t{KV} & \compactfeatureref{kv} & Yes & Yes &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes & No \\
 
-\t{REPLACING\_VERSIONS} & table~\ref{tab:env-vars-table} & No & No &
+\t{REPLACING\_VERSIONS} & \compactfeatureref{replace-version-vars} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
 
-\t{REPLACED\_BY\_VERSION} & table~\ref{tab:env-vars-table} & No & No &
+\t{REPLACED\_BY\_VERSION} & \compactfeatureref{replace-version-vars} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
 
-Most utilities die & table~\ref{tab:commands-die-table} & No & No &
+Most utilities die & \compactfeatureref{die-on-failure} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
 
-\t{nonfatal} & table~\ref{tab:commands-die-table} & No & No &
+\t{nonfatal} & \compactfeatureref{nonfatal} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
 
-\t{dohard} & table~\ref{tab:banned-commands-table} & Yes & Yes &
+\t{dohard} & \compactfeatureref{banned-commands} & Yes & Yes &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Banned} &}{} Yes & Banned \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{dohtml}} &
-    \IFKDEBUILDCOLOUR{table~\ref{tab:banned-commands-table}} &
+    \IFKDEBUILDCOLOUR{\compactfeatureref{banned-commands}} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Banned} &
@@ -209,25 +209,25 @@ Most utilities die & table~\ref{tab:commands-die-table} & No & No &
     \IFKDEBUILDCOLOUR{Yes} \\
 }{}
 
-\t{dosed} & table~\ref{tab:banned-commands-table} & Yes & Yes &
+\t{dosed} & \compactfeatureref{banned-commands} & Yes & Yes &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Banned} &}{} Yes & Banned \\
 
-\t{econf} arguments & table~\ref{tab:econf-options-table} &  &  &
+\t{econf} arguments & \compactfeatureref{econf-options} &  &  &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{} &}{} &
     \parbox[t]{1in}{disable dependency tracking} \\
 
-\t{dodoc -r} & table~\ref{tab:dodoc-table} & No & No &
+\t{dodoc -r} & \compactfeatureref{dodoc} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
 
-\t{doins} handles symlinks & table~\ref{tab:doins-table} & No & No &
+\t{doins} handles symlinks & \compactfeatureref{doins} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
 
-\t{doman} languages & table~\ref{tab:doman-table} & No & No &
+\t{doman} languages & \compactfeatureref{doman-langs} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{dosym} does \t{dodir}} &
-    \IFKDEBUILDCOLOUR{table~\ref{tab:dosym-table}} &
+    \IFKDEBUILDCOLOUR{\compactfeatureref{dosym-dodir}} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{No} &
@@ -235,16 +235,16 @@ Most utilities die & table~\ref{tab:commands-die-table} & No & No &
     \IFKDEBUILDCOLOUR{Yes} \\
 }{}
 
-Controllable compression & table~\ref{tab:compression-table} & No & No &
+Controllable compression & \compactfeatureref{controllable-compression} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
 
-\t{docompress} & table~\ref{tab:compression-table} & No & No &
+\t{docompress} & \compactfeatureref{controllable-compression} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
 
-\t{unpack} support for \t{xz}? & table~\ref{tab:unpack-extensions-table} & No & No &
+\t{unpack} support for \t{xz}? & \compactfeatureref{unpack-extensions} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
 
-\t{default} function & table~\ref{tab:default-function-table} & No & No &
+\t{default} function & \compactfeatureref{default-func} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes \\
 
 \end{longtable}
@@ -263,9 +263,9 @@ EAPI 0 is the base EAPI.
 EAPI 1 is EAPI 0 with the following changes:
 
 \begin{compactitem}
-\item \t{IUSE} defaults, table~\ref{tab:iuse-defaults-table}.
-\item Slot dependencies, table~\ref{tab:slot-deps-table}.
-\item Different \t{src\_compile} implementation, table~\ref{tab:src-compile-table}.
+\item \t{IUSE} defaults, \featureref{iuse-defaults}.
+\item Slot dependencies, \featureref{slot-deps}.
+\item Different \t{src\_compile} implementation, \featureref{src-compile-1}.
 \end{compactitem}
 
 \IFKDEBUILDELSE
@@ -275,19 +275,19 @@ EAPI 1 is EAPI 0 with the following changes:
     EAPI kdebuild-1 is EAPI 1 with the following changes:
 
     \begin{compactitem}
-    \item \t{scm} support, table~\ref{tab:scm-table}.
-    \item \t{kdebuild-1} file extension, section~\ref{file-extension}.
-    \item \t{PROVIDE} banned, table~\ref{tab:provide-table}.
-    \item Pre-source EAPI is \t{kdebuild-1}, section~\ref{sec:pre-source-eapi}.
-    \item \t{SRC\_URI} arrows, table~\ref{tab:uri-arrows-table}.
-    \item \t{SRC\_URI} labels, table~\ref{tab:uri-labels-table}.
-    \item \t{PDEPEND} labels, table~\ref{tab:pdepend-labels-table}.
-    \item Ranged dependencies, table~\ref{tab:range-deps-table}.
-    \item Use dependencies, table~\ref{tab:use-deps-table}.
-    \item \t{src\_test} mandatory, table~\ref{tab:test-required-table}.
-    \item \t{pkg\_info} can run on non-installed packages, table~\ref{tab:pkg-info-table}.
-    \item \t{dohard}, \t{dohtml}, \t{dosed} banned, table~\ref{tab:banned-commands-table}.
-    \item \t{dosym} will not do \t{dodir}, table~\ref{tab:dosym-table}.
+    \item \t{scm} support, \featureref{scm}.
+    \item \t{kdebuild-1} file extension, \featureref{file-extension}.
+    \item \t{PROVIDE} banned, \featureref{provide}.
+    \item Pre-source EAPI is \t{kdebuild-1}, \featureref{pre-source-eapi}.
+    \item \t{SRC\_URI} arrows, \featureref{src-uri-arrows}.
+    \item \t{SRC\_URI} labels, \featureref{src-uri-labels}.
+    \item \t{PDEPEND} labels, \featureref{pdepend-labels}.
+    \item Ranged dependencies, \featureref{ranged-deps}.
+    \item Use dependencies, \featureref{use-deps}.
+    \item \t{src\_test} mandatory, \featureref{src-test-required}.
+    \item \t{pkg\_info} can run on non-installed packages, \featureref{pkg-info}.
+    \item \t{dohard}, \t{dohtml}, \t{dosed} banned, \featureref{banned-commands}.
+    \item \t{dosym} will not do \t{dodir}, \featureref{dosym-dodir}.
     \end{compactitem}
 }{
 }
@@ -297,16 +297,16 @@ EAPI 1 is EAPI 0 with the following changes:
 EAPI 2 is EAPI 1 with the following changes:
 
 \begin{compactitem}
-\item \t{SRC\_URI} arrows, table~\ref{tab:uri-arrows-table}.
-\item Use dependencies, table~\ref{tab:use-deps-table}.
-\item \t{!} and \t{!!} blockers, table~\ref{tab:bang-strength-table}.
-\item \t{src\_prepare}, table~\ref{tab:src-prepare-table}.
-\item \t{src\_configure}, table~\ref{tab:src-configure-table}.
-\item Different \t{src\_compile} implementation, table~\ref{tab:src-compile-table}.
+\item \t{SRC\_URI} arrows, \featureref{src-uri-arrows}.
+\item Use dependencies, \featureref{use-deps}.
+\item \t{!} and \t{!!} blockers, \featureref{bang-strength}.
+\item \t{src\_prepare}, \featureref{src-prepare}.
+\item \t{src\_configure}, \featureref{src-configure}.
+\item Different \t{src\_compile} implementation, \featureref{src-compile-2}.
 \item \t{default\_} phase functions for phases \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare},
-    \t{src\_configure}, \t{src\_compile} and \t{src\_test}; table~\ref{tab:default-phase-function-table}.
-\item \t{doman} languages support, table~\ref{tab:doman-table}.
-\item \t{default} function, table~\ref{tab:default-function-table}.
+    \t{src\_configure}, \t{src\_compile} and \t{src\_test}; \featureref{default-phase-functions}.
+\item \t{doman} languages support, \featureref{doman-langs}.
+\item \t{default} function, \featureref{default-func}.
 \end{compactitem}
 
 \section*{EAPI 3}
@@ -314,26 +314,27 @@ EAPI 2 is EAPI 1 with the following changes:
 EAPI 3 is EAPI 2 with the following changes:
 
 \begin{compactitem}
-\item \t{pkg\_pretend}, table~\ref{tab:pkg-pretend-table}.
-\item Slot operator dependencies, table~\ref{tab:slot-deps-table}.
-\item Use dependency defaults, table~\ref{tab:use-deps-table}.
-\item \t{DEFINED\_PHASES} support is mandatory, table~\ref{tab:defined-phases-table}.
-\item \t{PROPERTIES} support is mandatory, table~\ref{tab:properties-table}.
-\item Default \t{src\_install} no longer a no-op, table~\ref{tab:src-install-table}.
-\item Controllable compression and \t{docompress}, table~\ref{tab:compression-table}.
-\item \t{dodoc -r} support, table~\ref{tab:dodoc-table}.
-\item \t{doins} supports symlinks, table~\ref{tab:doins-table}.
-\item \t{dohard}, \t{dosed} banned, table~\ref{tab:banned-commands-table}.
-\item \t{unpack} supports \t{.xz} and \t{.tar.xz}, table~\ref{tab:unpack-extensions-table}.
-\item \t{econf} adds \t{-{}-disable-dependency-tracking}, table~\ref{tab:econf-options-table}.
-\item \t{pkg\_info} can run on non-installed packages, table~\ref{tab:pkg-info-table}.
-\item \t{USE} is calculated differently, table~\ref{tab:profile-iuse-injection-table}.
-\item \t{AA} and \t{KV} are gone, table~\ref{tab:env-vars-table}.
-\item \t{REPLACING\_VERSIONS} and \t{REPLACED\_BY\_VERSION}, table~\ref{tab:env-vars-table}.
-\item \t{S} to \t{WORKDIR} fallback restricted, table~\ref{tab:s-fallback-table}.
-\item \t{RDEPEND=DEPEND} no longer done, table~\ref{tab:rdepend-depend-table}.
-\item Utilities now die on failure unless called under \t{nonfatal},
-    table~\ref{tab:commands-die-table}.
+\item \t{pkg\_pretend}, \featureref{pkg-pretend}.
+\item Slot operator dependencies, \featureref{slot-operator-deps}.
+\item Use dependency defaults, \featureref{use-dep-defaults}.
+\item \t{DEFINED\_PHASES} support is mandatory, \featureref{defined-phases}.
+\item \t{PROPERTIES} support is mandatory, \featureref{properties}.
+\item Default \t{src\_install} no longer a no-op, \featureref{src-install-3}.
+\item Controllable compression and \t{docompress}, \featureref{controllable-compression}.
+\item \t{dodoc -r} support, \featureref{dodoc}.
+\item \t{doins} supports symlinks, \featureref{doins}.
+\item \t{dohard}, \t{dosed} banned, \featureref{banned-commands}.
+\item \t{unpack} supports \t{.xz} and \t{.tar.xz}, \featureref{unpack-extensions}.
+\item \t{econf} adds \t{-{}-disable-dependency-tracking}, \featureref{econf-options}.
+\item \t{pkg\_info} can run on non-installed packages, \featureref{pkg-info}.
+\item \t{USE} is calculated differently, \featureref{profile-iuse-injection}.
+\item \t{AA} is gone, \featureref{aa}.
+\item \t{KV} is gone, \featureref{kv}.
+\item \t{REPLACING\_VERSIONS} and \t{REPLACED\_BY\_VERSION}, \featureref{replace-version-vars}.
+\item \t{S} to \t{WORKDIR} fallback restricted, \featureref{s-workdir-fallback}.
+\item \t{RDEPEND=DEPEND} no longer done, \featureref{rdepend-depend}.
+\item Utilities now die on failure, \featureref{die-on-failure}, unless called under \t{nonfatal},
+    \featureref{nonfatal}
 \end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

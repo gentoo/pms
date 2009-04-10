@@ -50,6 +50,11 @@
 \renewcommand{\b}[1]{\textbf{#1}}
 \newcommand{\note}[1]{\paragraph{Note:} #1}
 
+\newcommand{\featureref}[1]{\b{feat:#1} on page~\pageref{feat:#1}}
+\newcommand{\compactfeatureref}[1]{#1~p\pageref{feat:#1}}
+\newcommand{\featurelabel}[1]{\label{feat:#1} \visiblelabel{feat:#1} }
+\newcommand{\visiblelabel}[1]{\b{[#1]}}
+
 \definecolor{deepblue}{rgb}{0.0, 0.2, 0.7}
 \definecolor{deeppurple}{rgb}{0.7, 0.0, 0.8}
 

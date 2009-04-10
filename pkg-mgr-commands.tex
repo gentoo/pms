@@ -8,16 +8,17 @@ behaviour.
 \subsubsection{Failure behaviour and related commands}
 \label{sec:failure-behaviour}
 
+\featurelabel{die-on-failure}
 Where a command is listed as having EAPI dependent failure behaviour, a failure shall either result
 in a non-zero exit status or abort the build process, as determined by
 table~\ref{tab:commands-die-table}.
 
 The following commands affect this behaviour:
 \begin{description}
-\item[nonfatal] Executes the remainder of its arguments as a command, preserving the exit status. If
-this results in a command being called that would normally abort the build process due to a failure,
-instead a non-zero exit status shall be returned. Only in EAPIs listed in
-table~\ref{tab:commands-die-table} as supporting \t{nonfatal}.
+\item[nonfatal] \featurelabel{nonfatal} Executes the remainder of its arguments as a command,
+    preserving the exit status. If this results in a command being called that would normally abort
+    the build process due to a failure, instead a non-zero exit status shall be returned. Only in
+    EAPIs listed in table~\ref{tab:commands-die-table} as supporting \t{nonfatal}.
 \end{description}
 
 \begin{centertable}{EAPI Command Failure Behaviour} \label{tab:commands-die-table}
@@ -55,6 +56,7 @@ table~\ref{tab:commands-die-table} as supporting \t{nonfatal}.
 \subsubsection{Banned commands}
 \label{sec:banned-commands}
 
+\featurelabel{banned-commands}
 Some commands are banned in some EAPIs. If a banned command is called, the package manager must
 abort the build process indicating an error.
 
@@ -163,6 +165,8 @@ has returned.
     to \t{./configure}. \t{econf} will look in the current working directory for a configure script
     unless the \t{ECONF\_SOURCE} environment variable is set, in which case it is taken to be the
     directory containing it. \t{econf} must pass the following options to the configure script:
+
+    \featurelabel{econf-options}
     \begin{itemize}
     \item -{}-prefix must default to \t{/usr} unless overridden by \t{econf}'s caller.
     \item -{}-mandir must be \t{/usr/share/man}
@@ -276,7 +280,8 @@ has returned.
     by setting \t{DIROPTIONS} with the \t{diropts} function. Failure behaviour is EAPI dependent as
     per section~\ref{sec:failure-behaviour}.
 
-\item[dodoc] Installs the given files into a subdirectory under \t{/usr/share/doc/\$\{PF\}/} with
+\item[dodoc] \featurelabel{dodoc}
+    Installs the given files into a subdirectory under \t{/usr/share/doc/\$\{PF\}/} with
     file mode \t{0644}. The subdirectory is set by the most recent call to \t{docinto}. If
     \t{docinto} has not yet been called, instead installs to the directory
     \t{/usr/share/doc/\$\{PF\}/}. For EAPIs
@@ -332,7 +337,8 @@ that can be passed to \t{dohtml} are as follows:
     \t{0755}. This can be overridden by setting \t{EXEOPTIONS} with the \t{exeopts} function.
     Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
-\item[doins] Takes any number of files as arguments and installs them into \t{INSDESTTREE}, by
+\item[doins] \featurelabel{doins}
+    Takes any number of files as arguments and installs them into \t{INSDESTTREE}, by
     default with file mode \t{0644}. This can be overridden by setting \t{INSOPTIONS} with the
     \t{insopts} function. If the first argument is \t{-r}, then operates recursively, descending
     into any directories given. For EAPIs listed in table~\ref{tab:doins-table}, \t{doins} must
@@ -374,7 +380,10 @@ that can be passed to \t{dohtml} are as follows:
 
 \item[doman] Installs a man page into the appropriate subdirectory of \t{/usr/share/man} depending
     upon its apparent section suffix (e.g. \t{foo.1} goes to \t{/usr/share/man/man1/foo.1} with file
-    mode \t{0644}. In EAPIs listed in table~\ref{tab:doman-table} as supporting language codes, a
+    mode \t{0644}.
+
+    \featurelabel{doman-langs}
+    In EAPIs listed in table~\ref{tab:doman-table} as supporting language codes, a
     man page with name of the form\t{foo.lang.1} shall go to \t{/usr/share/man/lang/man1/foo.1},
     where \t{lang} refers to a pair of lower-case ASCII letters optionally followed by an underscore
     and a pair of upper-case ASCII letters. Failure behaviour is EAPI dependent as per
@@ -389,10 +398,12 @@ that can be passed to \t{dohtml} are as follows:
 
 \IFKDEBUILDELSE
 {
-    \item[dosym] Creates a symbolic link named as for its second parameter, pointing to the first. If
-        the directory containing the new link does not exist, creates it if EAPI is listed in
-        table~\ref{tab:dosym-table} as making the directory, or aborts the build process otherwise.
-        Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
+    \item[dosym] Creates a symbolic link named as for its second parameter, pointing to the first.
+
+        \featurelabel{dosym-dodir} If the directory containing the new link does not exist, creates
+        it if EAPI is listed in table~\ref{tab:dosym-table} as making the directory, or aborts the
+        build process otherwise.  Failure behaviour is EAPI dependent as per
+        section~\ref{sec:failure-behaviour}.
 }{
     \item[dosym] Creates a symbolic link named as for its second parameter, pointing to the first. If
         the directory containing the new link does not exist, creates it. Failure behaviour is EAPI
@@ -576,6 +587,8 @@ already exist. Failure behaviour is EAPI dependent as per section~\ref{sec:failu
 \end{description}
 
 \subsubsection{Commands affecting install compression}
+
+\featurelabel{controllable-compression}
 In EAPIs listed in table~\ref{tab:compression-table} as supporting controllable compression, the
 package manager may optionally compress a subset of the files under the \t{D} directory. To control
 which directories may or may not be compressed, the package manager shall maintain two lists:
@@ -738,8 +751,10 @@ has returned.
     looks in \t{DISTDIR} for the file, or start with the string \t{./}, in which case \t{unpack}
     uses the argument as a path relative to the working directory.
 
-    If unpacking a supported file format fails, \t{unpack} shall abort the build process.
+    Any unrecognised file format shall be skipped silently. If unpacking a supported file format
+    fails, \t{unpack} shall abort the build process.
 
+    \featurelabel{unpack-extensions}
     Must be able to unpack the following file formats, if the relevant binaries are available:
     \begin{itemize}
     \item tar files (\t{*.tar}). Ebuilds must ensure that GNU tar installed.
@@ -796,7 +811,9 @@ has returned.
 
 \item[inherit] See section~\ref{sec:inherit}.
 
-\item[default] Calls the \t{default\_} function for the current phase (see section~\ref{sec:default-phase-functions}).
+\item[default]
+    \featurelabel{default-func}
+    Calls the \t{default\_} function for the current phase (see section~\ref{sec:default-phase-functions}).
     Must not be called if the \t{default\_} function does not exist for the current phase in the current EAPI.
     Only available in EAPIs listed in table~\ref{tab:default-function-table}.
 \end{description}

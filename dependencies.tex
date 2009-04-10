@@ -25,10 +25,10 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 \item A package dependency specification. Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}.
 \item A simple qualified package name. Permitted in \t{PROVIDE} (and inside \t{DEPEND} etc
     via the previous item).
-\item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC\_URI} and \t{HOMEPAGE}.
-In EAPIs listed in table~\ref{tab:uri-arrows-table} as supporting \t{SRC\_URI} arrows, may
-optionally be followed by whitespace, then \t{->}, then whitespace, then a simple filename
-when in \t{SRC\_URI}. For \t{SRC\_URI} behaviour, see section~\ref{sec:src-uri-behaviour}.
+\item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC\_URI} and \t{HOMEPAGE}. In EAPIs
+    listed in table~\ref{tab:uri-arrows-table} as supporting \t{SRC\_URI} arrows, may optionally be
+    followed by whitespace, then \t{->}, then whitespace, then a simple filename when in
+    \t{SRC\_URI}.  For \t{SRC\_URI} behaviour, see section~\ref{sec:src-uri-behaviour}.
 \item A flat filename. Permitted in \t{SRC\_URI}.
 \item A license name (e.g. \t{GPL-2}). Permitted in \t{LICENSE}.
 \item A simple string. Permitted in \t{RESTRICT} and \t{PROPERTIES}.
@@ -187,15 +187,15 @@ EAPI not supporting \t{SLOT} dependencies.
 }{
 }
 
+\featurelabel{use-deps}
 \IFKDEBUILDELSE
 {
     In EAPIs shown in table~\ref{tab:use-deps-table} as supporting kdebuild-style \t{USE} dependencies,
     a specification may additionally be suffixed by one or more kdebuild-style \t{[use]}
     restrictions, as described in section~\ref{sec:kdebuild-use-dep}. A package manager must warn or
     error if this feature is used with an EAPI not supporting use dependencies.
-}{
-}
 
+}{}
 In EAPIs shown in table~\ref{tab:use-deps-table} as supporting 2-style or 3-style \t{USE}
 dependencies, a specification may additionally be suffixed by at most one 2-style or 3-style
 \t{[use]} restriction, as described in section~\ref{sec:use-dep}. A package manager must warn or
@@ -320,6 +320,7 @@ following exceptions:
 \item Blocks on the ebuild itself do not count.
 \end{compactitem}
 
+\featurelabel{bang-strength}
 There are two strengths of block: weak and strong. A weak block may be ignored by the package
 manager, so long as any blocked package will be uninstalled later on. A strong block must not be
 ignored. The mapping from one or two exclamation marks to strength is described in
@@ -360,11 +361,13 @@ table~\ref{tab:bang-strength-table}.
 \subsubsection{Slot Dependencies}
 \label{sec:slot-dep}
 
+\featurelabel{slot-deps}
 A named slot dependency consists of a colon followed by a slot name. A specification with a named
 slot dependency matches only if the slot of the matched package is equal to the slot specified. If
 the slot of the package to match cannot be determined (e.g. because it is not a supported \t{EAPI}),
 the match is treated as unsuccessful.
 
+\featurelabel{slot-operator-deps}
 An operator slot dependency consists of a colon followed by one of the following operators:
 
 \begin{description}
@@ -386,6 +389,7 @@ is only for package manager use and must not be used by ebuilds.
     \subsubsection{Ranged Dependencies}
     \label{sec:range-dep}
 
+    \featurelabel{ranged-deps}
     A ranged dependency consists of an open square bracket, followed by zero or more of (a depend
     operator followed by a version spec followed by a logical operator) followed by a depend
     operator followed by a version spec followed by a close equare bracket. More formally:
@@ -456,6 +460,7 @@ Multiple requirements may be combined using commas, e.g. \t{[first,-second,third
 
 When multiple requirements are specified, all must match for a successful match.
 
+\featurelabel{use-dep-defaults}
 In a 3-style use dependency, the flag name may immediately be followed by a \e{default} specified by
 either \t{(+)} or \t{(-)}. The former indicates that, when applying the use dependency to a package
 that does not have the flag in question in \t{IUSE\_REFERENCEABLE}, the package manager shall behave
@@ -542,6 +547,7 @@ download the file.
     section~\ref{sec:restrict} for details.
 }
 
+\featurelabel{src-uri-arrows}
 In EAPIs supporting arrows, if an arrow is used, the filename used when saving to \t{DISTDIR} shall
 instead be the name on the right of the arrow. When consulting mirrors (except for those explicitly
 listed on the left of the arrow, if \t{mirror://} is used), the filename to the right of the arrow
@@ -549,6 +555,7 @@ shall be requested instead of the filename in the URI.
 
 \IFKDEBUILDELSE
 {
+    \featurelabel{src-uri-labels}
     In EAPIs supporting labels, the following labels are legal. See section~\ref{sec:labels} for label
     behaviour in general.
 
