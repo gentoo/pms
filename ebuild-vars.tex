@@ -203,7 +203,7 @@ is unset (but not if it is set to an empty string) in an ebuild, the package man
 value to be equal to the value of \t{DEPEND}.
 
 When dealing with eclasses, only values set in the ebuild itself are considered for this behaviour;
-any \t{DEPEND} or \t{RDEPEND} set in an eclass does not change the implicit \t{RDEPEND=\$DEPEND} for
+any \t{DEPEND} or \t{RDEPEND} set in an eclass does not change the implicit \t{RDEPEND=DEPEND} for
 the ebuild portion, and any \t{DEPEND} value set in an eclass does not get added to \t{RDEPEND}.
 
 \begin{centertable}{EAPIs with \t{RDEPEND=DEPEND} Default} \label{tab:rdepend-depend-table}
