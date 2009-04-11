@@ -218,10 +218,10 @@ variable.
 }
 \end{centertable}
 
-All variables set in the active profiles' \t{make.defaults} files must be exported to the ebuild
-environment. \t{CHOST}, \t{CBUILD} and \t{CTARGET}, if not set by profiles, must contain either an
-appropriate machine tuple (the definition of appropriate is beyond the scope of this specification)
-or be unset.
+Except where otherwise noted, all variables set in the active profiles' \t{make.defaults} files must
+be exported to the ebuild environment. \t{CHOST}, \t{CBUILD} and \t{CTARGET}, if not set by
+profiles, must contain either an appropriate machine tuple (the definition of appropriate is beyond
+the scope of this specification) or be unset.
 
 \t{PATH} must be initialized by the package manager to a ``usable'' default.  The exact value here
 is left up to interpretation, but it should include the equivalent ``sbin'' and ``bin'' and any
