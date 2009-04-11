@@ -244,44 +244,8 @@ various XML files used in the repository, and repository timestamps.
 
 \subsection{The metadata cache}
 
-The \t{metadata/cache} directory contains a cached form of all important ebuild metadata variables.
-The cache directory, if it exists, contains directories whose names are the same as categories in
-the repository---not all categories and packages must be contained in it. Each subdirectory may
-optionally contain one file per package version in that category, named \t{<package>-<version>},
-in the following format:
-
-Each cache file contains the textual values of various metadata keys, one per line, in the following
-order. Other lines may be present following these; their meanings are not defined here.
-
-\begin{compactenum}
-\item Build-time dependencies (\t{DEPEND})
-\item Run-time dependencies (\t{RDEPEND})
-\item Slot (\t{SLOT})
-\item Source tarball URIs (\t{SRC\_URI})
-\item \t{RESTRICT}
-\item Package homepage (\t{HOMEPAGE})
-\item Package license (\t{LICENSE})
-\item Package description (\t{DESCRIPTION})
-\item Package keywords (\t{KEYWORDS})
-\item Inherited eclasses (\t{INHERITED})
-\item Use flags that this package respects (\t{IUSE})
-\item No longer used; this line is to be ignored.
-\item Post dependencies (\t{PDEPEND})
-\item Old-style virtuals provided by this package (\t{PROVIDE})
-\item The ebuild API version to which this package conforms (\t{EAPI})
-\item Properties (\t{PROPERTIES}). In some EAPIs, may optionally be blank, regardless of ebuild
-    metadata; see table~\ref{tab:properties-table}.
-\item Defined phases (\t{DEFINED\_PHASES}). In some EAPIs, may optionally be blank, regardless of
-    ebuild metadata; see table~\ref{tab:defined-phases-table}.
-\item Blank lines to pad the file to 22 lines long
-\end{compactenum}
-
-Future EAPIs may define new variables, remove existing variables, change the line number or
-format used for a particular variable, add or reduce the total length of the file and so on.
-Any future EAPI that uses this cache format will continue to place the EAPI value on
-line 15 if such a concept makes sense for that EAPI, and will place a value that is clearly
-not a supported EAPI on line 15 if it does not.
-
+The \t{metadata/cache} directory may contain a cached form of all important ebuild metadata
+variables. The contents of this directory are described in section~\ref{metadata-cache}.
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 
 %%% Local Variables:
