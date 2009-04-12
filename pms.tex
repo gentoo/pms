@@ -23,7 +23,7 @@
   marginnote
 }
 \usepackage[orig,english]{isodate}
-\usepackage[DIV13]{typearea}
+\usepackage{typearea}
 \usepackage[position=top]{caption}
 \usepackage[utf8]{inputenc}
 
@@ -125,6 +125,10 @@
 \pagestyle{myheadings}
 \markboth{\scshape Package Manager Specification}{\scshape Package
   Manager Specification}
+% This is some kind of hack.  We set the proportions of the text area
+% and then move it 20mm to the left to increase the right (outer)
+% margin.
+\areaset[-20mm]{400pt}{700pt}
 
 \begin{document}
 \maketitle
