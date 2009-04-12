@@ -5,7 +5,7 @@ clean :
 	rm -f *~ *.pdf *.dvi *.log *.aux *.bbl *.blg *.toc *.lol *.loa *.lox \
 	    *.lot *.out *.html *.css *.png *.4ct *.4tc *.idv *.lg *.tmp *.xref vc.tex || true
 
-LATEXFILES = $(shell ls *.tex)
+LATEXFILES = $(shell ls *.tex) pms.cls
 LISTINGFILES = $(shell ls *.listing)
 SOURCEFILES = $(LATEXFILES) $(LISTINGFILES)
 
