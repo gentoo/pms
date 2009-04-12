@@ -235,10 +235,10 @@ Most utilities die & \compactfeatureref{die-on-failure} & No & No &
     \IFKDEBUILDCOLOUR{Yes} \\
 }{}
 
-Controllable compression & \compactfeatureref{controllable-compression} & No & No &
+Controllable compression & \compactfeatureref{controllable-compress} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
 
-\t{docompress} & \compactfeatureref{controllable-compression} & No & No &
+\t{docompress} & \compactfeatureref{controllable-compress} & No & No &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
 
 \t{unpack} support for \t{xz}? & \compactfeatureref{unpack-extensions} & No & No &
@@ -320,7 +320,7 @@ EAPI 3 is EAPI 2 with the following changes:
 \item \t{DEFINED\_PHASES} support is mandatory, \featureref{defined-phases}.
 \item \t{PROPERTIES} support is mandatory, \featureref{properties}.
 \item Default \t{src\_install} no longer a no-op, \featureref{src-install-3}.
-\item Controllable compression and \t{docompress}, \featureref{controllable-compression}.
+\item Controllable compression and \t{docompress}, \featureref{controllable-compress}.
 \item \t{dodoc -r} support, \featureref{dodoc}.
 \item \t{doins} supports symlinks, \featureref{doins}.
 \item \t{dohard}, \t{dosed} banned, \featureref{banned-commands}.
