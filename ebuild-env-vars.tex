@@ -73,11 +73,10 @@ variable.
     this.} &
     \t{src\_*} &
     Yes &
-    \featurelabel{aa}
-    All source files that could be available for the package, including any that are disabled in
-    \t{A} because of USE conditionals. The value is calculated from the base names of each element
-    of the \t{SRC\_URI} ebuild metadata variable. Only for EAPIs listed in table~\ref{tab:env-vars-table} as
-    supporting \t{AA}. \\
+    \featurelabel{aa} All source files that could be available for the package, including any that
+    are disabled in \t{A} because of USE conditionals. The value is calculated from the base names
+    of each element of the \t{SRC\_URI} ebuild metadata variable. Only for EAPIs listed in
+    table~\ref{tab:env-vars-table} as supporting \t{AA}. \\
 \t{FILESDIR} &
     \t{src\_*}\footnote{Not necessarily present when installing from a binary package} &
     No &
@@ -160,10 +159,9 @@ variable.
 \t{KV} &
     All &
     Yes &
-    \featurelabel{kv}
-    The version of the running kernel at the time the ebuild was first executed, as
-    returned by the \t{uname~-r} command or equivalent.  May be modified by ebuilds.
-    Only for EAPIs listed in table~\ref{tab:env-vars-table} as supporting \t{KV}. \\
+    \featurelabel{kv} The version of the running kernel at the time the ebuild was first executed,
+    as returned by the \t{uname~-r} command or equivalent.  May be modified by ebuilds.  Only for
+    EAPIs listed in table~\ref{tab:env-vars-table} as supporting \t{KV}. \\
 \t{REPLACING\_VERSIONS} &
     \t{pkg\_*} (see text) &
     Yes &
@@ -262,9 +260,9 @@ For EAPIs listed in table~\ref{tab:profile-iuse-injection-table} as not supporti
     the profile \t{USE\_EXPAND} variable followed by an underscore.
 \end{compactitem}
 
-\featurelabel{profile-iuse-injection}
-For EAPIs listed in table~\ref{tab:profile-iuse-injection-table} as supporting profile defined \t{IUSE}
-injection, \t{IUSE\_EFFECTIVE} contains the following values:
+\featurelabel{profile-iuse-injection} For EAPIs listed in
+table~\ref{tab:profile-iuse-injection-table} as supporting profile defined \t{IUSE} injection,
+\t{IUSE\_EFFECTIVE} contains the following values:
 
 \begin{compactitem}
 \item All values in the calculated \t{IUSE} value.
@@ -296,11 +294,11 @@ installing a package. Details are beyond the scope of this specification.
 \subsection{\t{REPLACING\_VERSIONS} and \t{REPLACED\_BY\_VERSION}}
 \label{sec:replacing-versions}
 
-\featurelabel{replace-version-vars}
-In EAPIs listed in table~\ref{tab:env-vars-table} as supporting it, the \t{REPLACING\_VERSIONS}
-variable shall be defined in \t{pkg\_preinst} and \t{pkg\_postinst}. In addition, it \e{may} be
-defined in \t{pkg\_pretend} and \t{pkg\_setup}, although ebuild authors should take care to handle
-binary package creation and installation correctly when using it in these phases.
+\featurelabel{replace-version-vars} In EAPIs listed in table~\ref{tab:env-vars-table} as supporting
+it, the \t{REPLACING\_VERSIONS} variable shall be defined in \t{pkg\_preinst} and \t{pkg\_postinst}.
+In addition, it \e{may} be defined in \t{pkg\_pretend} and \t{pkg\_setup}, although ebuild authors
+should take care to handle binary package creation and installation correctly when using it in these
+phases.
 
 \t{REPLACING\_VERSIONS} is a list, not a single optional value, to handle pathological cases such as
 installing \t{foo-2:2} to replace \t{foo-2:1} and \t{foo-3:2}.
