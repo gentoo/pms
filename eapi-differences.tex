@@ -172,7 +172,7 @@ Use dependencies & \compactfeatureref{use-deps} & No & No &
 \t{pkg\_info} & \compactfeatureref{pkg-info} & Installed & Installed &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Both} &}{} Installed & Both \\
 
-\t{default\_} phase functions & \compactfeatureref{default-phase-functions} & None & None &
+\t{default\_} phase functions & \compactfeatureref{default-phase-funcs} & None & None &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{None} &}{}
     \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test}} &
     \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
@@ -304,7 +304,7 @@ EAPI 2 is EAPI 1 with the following changes:
 \item \t{src\_configure}, \featureref{src-configure}.
 \item Different \t{src\_compile} implementation, \featureref{src-compile-2}.
 \item \t{default\_} phase functions for phases \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare},
-    \t{src\_configure}, \t{src\_compile} and \t{src\_test}; \featureref{default-phase-functions}.
+    \t{src\_configure}, \t{src\_compile} and \t{src\_test}; \featureref{default-phase-funcs}.
 \item \t{doman} languages support, \featureref{doman-langs}.
 \item \t{default} function, \featureref{default-func}.
 \end{compactitem}
