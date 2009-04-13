@@ -5,13 +5,14 @@ clean :
 	rm -f *~ *.pdf *.dvi *.log *.aux *.bbl *.blg *.toc *.lol *.loa *.lox \
 	    *.lot *.out *.html *.css *.png *.4ct *.4tc *.idv *.lg *.tmp *.xref vc.tex || true
 
-LATEXFILES = $(shell ls *.tex) pms.cls
+LATEXFILES = $(shell find -name  '*.tex') pms.cls
 LISTINGFILES = $(shell ls *.listing)
 SOURCEFILES = $(LATEXFILES) $(LISTINGFILES)
 
-pms.pdf: $(SOURCEFILES) pms.bbl vc.tex
+pms.pdf: $(SOURCEFILES) pms.bbl vc.tex eapi-cheatsheet.pdf
 	pdflatex pms
 	pdflatex pms
+	pdflatex eapi-cheatsheet
 	pdflatex pms
 
 pms.html: $(SOURCEFILES) pms.bbl
@@ -30,6 +31,9 @@ pms.html: $(SOURCEFILES) pms.bbl
 pms.bbl: pms.bib pms.tex vc.tex
 	latex pms
 	bibtex pms
+
+eapi-cheatsheet.pdf: vc.tex
+	pdflatex eapi-cheatsheet
 
 vc.tex: pms.tex
 	/bin/sh ./vc

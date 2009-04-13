@@ -36,6 +36,7 @@
     marginnote, % Typeset a paragraph in the page margin
     paralist,	% Additional list environments
     parskip,	% Space between paragraps instead of intendation
+    pdfpages,	% Insert whole PDF documents as separate pages
     verbatim,	% Extend the print-as-is functionality
     algorithm,	%
     algorithmic % Set algorithms
