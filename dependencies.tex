@@ -416,19 +416,19 @@ is only for package manager use and must not be used by ebuilds.
     A kdebuild-style use dependency consists of one of the following:
 
     \begin{description}
-    \item{[opt]} The flag must be enabled.
-    \item{[opt=]} The flag must be enabled if the flag is enabled for the package with the
+    \item[{[opt]}] The flag must be enabled.
+    \item[{[opt=]}] The flag must be enabled if the flag is enabled for the package with the
         dependency, or disabled otherwise.
-    \item{[opt!=]} The flag must be disabled if the flag is enabled for the package with the
+    \item[{[opt!=]}] The flag must be disabled if the flag is enabled for the package with the
         dependency, or enabled otherwise.
-    \item{[opt?]} The flag must be enabled if the flag is enabled for the package with the
+    \item[{[opt?]}] The flag must be enabled if the flag is enabled for the package with the
         dependency.
-    \item{[opt!?]} The flag must be enabled if the use flag is disabled for the package with the
+    \item[{[opt!?]}] The flag must be enabled if the use flag is disabled for the package with the
         dependency.
-    \item{[-opt]} The flag must be disabled.
-    \item{[-opt?]} The flag must be disabled if the flag is enabled for the package with the
+    \item[{[-opt]}] The flag must be disabled.
+    \item[{[-opt?]}] The flag must be disabled if the flag is enabled for the package with the
         dependency.
-    \item{[-opt!?]} The flag must be disabled if the flag is disabled for the package with the
+    \item[{[-opt!?]}] The flag must be disabled if the flag is disabled for the package with the
         dependency.
     \end{description}
 
@@ -446,16 +446,16 @@ is only for package manager use and must not be used by ebuilds.
 A 2-style or 3-style use dependency consists of one of the following:
 
 \begin{description}
-\item{[opt]} The flag must be enabled.
-\item{[opt=]} The flag must be enabled if the flag is enabled for the package with the
+\item[{[opt]}] The flag must be enabled.
+\item[{[opt=]}] The flag must be enabled if the flag is enabled for the package with the
     dependency, or disabled otherwise.
-\item{[!opt=]} The flag must be disabled if the flag is enabled for the package with the
+\item[{[!opt=]}] The flag must be disabled if the flag is enabled for the package with the
     dependency, or enabled otherwise.
-\item{[opt?]} The flag must be enabled if the flag is enabled for the package with the
+\item[{[opt?]}] The flag must be enabled if the flag is enabled for the package with the
     dependency.
-\item{[!opt?]} The flag must be disabled if the use flag is disabled for the package with the
+\item[{[!opt?]}] The flag must be disabled if the use flag is disabled for the package with the
     dependency.
-\item{[-opt]} The flag must be disabled.
+\item[{[-opt]}] The flag must be disabled.
 \end{description}
 
 Multiple requirements may be combined using commas, e.g. \t{[first,-second,third?]}.
