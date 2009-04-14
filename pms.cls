@@ -140,3 +140,5 @@
 % and then move it 30mm to the left to increase the right (outer)
 % margin.
 \areaset[-30mm]{400pt}{700pt}
+
+% vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
