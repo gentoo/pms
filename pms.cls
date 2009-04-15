@@ -23,7 +23,6 @@
     typearea,	% Set page layout
     caption,	% Extended float environment formatting
     inputenc,	% Allow input methods apart from ASCII
-    appendix,
     booktabs,	% Nicer formatting of tables
     color,	% Support more than black&white
     enumitem,
