@@ -1,45 +1,53 @@
 \NeedsTeXFormat{LaTeX2e}%
 \newcommand{\ClassToLoad}{report}
-\ProvidesClass{pms}[2009/04/04]
+\ProvidesClass{pms}
+% Accept all options given through the loading tex file
 \DeclareOption*{%
     \PassOptionsToClass{\CurrentOption}{\ClassToLoad}
 }
 \PassOptionsToClass{a4paper}{\ClassToLoad}
+% Let the base class process all give options, either from this class
+% or user defined from an outside tex file.
 \ProcessOptions\relax
 \LoadClass{\ClassToLoad}
 \PassOptionsToPackage{T1}{fontenc}
 \PassOptionsToPackage{orig,english}{isodate}
+% Position caption of float environments at the top
 \PassOptionsToPackage{position=top}{caption}
+% Enable UTF-8 input encoding
 \PassOptionsToPackage{utf8}{inputenc}
 % algorithmic and algorithm to be loaded last to avoid failures
 \RequirePackage{%
-    fontenc,
-    isodate,
-    typearea,
-    caption,
-    inputenc,
+    fontenc,	% Load extended font sets
+    isodate,	% Date formatting and conversions
+    typearea,	% Set page layout
+    caption,	% Extended float environment formatting
+    inputenc,	% Allow input methods apart from ASCII
     appendix,
-    booktabs,
-    color,
+    booktabs,	% Nicer formatting of tables
+    color,	% Support more than black&white
     enumitem,
-    float,
+    float,	% More control over float environments
     fullpage,
-    graphicx,
-    hyperref,
-    ifthen,
-    longtable,
-    lscape,
-    marginnote,
-    paralist,
-    parskip,
-    verbatim,
-    algorithm,
-    algorithmic
+    graphicx,	% Image support
+    hyperref,	% Support for hyperlinks
+    ifthen,	% Comfortable conditional routines
+    longtable,	% Extend tables over more than one page
+    lscape,	% Rotating pages
+    marginnote, % Typeset a paragraph in the page margin
+    paralist,	% Additional list environments
+    parskip,	% Space between paragraps instead of intendation
+    verbatim,	% Extend the print-as-is functionality
+    algorithm,	%
+    algorithmic % Set algorithms
 }
 \ClassInfo{pms}{Capsulation of LaTeX stuff for the Package Manager
     Specification, loaded baseclass: \ClassToLoad\MessageBreak}
+% Contains information over the source control system, generated
+% through Makefile
 \input{vc}
 
+% Make processing with TeX4HT possible
 \newboolean{TEX4HT-HACKS}
 \ifx\HCode\undefined
     \RequirePackage{mathptmx,
@@ -55,11 +63,16 @@
 \newfloat{listing}{tbp}{lol}[chapter]
 \floatname{listing}{Listing}
 \newcommand{\listoflistings}{\listof{listing}{Listings}}
+% Define own label and reference commands, that display the label in
+% the page margin.
 \newcommand{\featureref}[1]{\textsc{#1} on page~\pageref{feat:#1}}
 \newcommand{\compactfeatureref}[1]{#1~p\pageref{feat:#1}}
-\newcommand{\featurelabel}[1]{\marginnote{\framebox{\textsc{#1}}}\label{feat:#1}}
+\newcommand{\featurelabel}[1]{\marginnote{%
+        \framebox{\textsc{#1}}}\label{feat:#1}
+}
 \bibliographystyle{plainurl}
 
+% Some shorthands for the lazy ones.
 \renewcommand{\t}[1]{\texttt{#1}}
 \renewcommand{\i}[1]{\textit{#1}}
 \newcommand{\e}[1]{\emph{#1}}
@@ -72,12 +85,12 @@
 \newboolean{ENABLE-ALL-OPTIONS}
 \newboolean{ENABLE-KDEBUILD}
 
-%%% Enable the below option if you'd like to see both sides of KDEBUILD conditionals shown in
-%%% different colours. Disable it to either fully enable or fully disable KDEBUILD.
-%%% Not compatible with HTML output.
+% Enable the below option if you'd like to see both sides of KDEBUILD
+% conditionals shown in different colours. Disable it to either fully
+% enable or fully disable KDEBUILD.  Not compatible with HTML output.
 \setboolean{ENABLE-ALL-OPTIONS}{false}
 
-%%% Enable the below if you'd like to see KDEBUILD things.
+% Enable the below if you'd like to see KDEBUILD things.
 \setboolean{ENABLE-KDEBUILD}{true}
 
 \ifthenelse{\boolean{ENABLE-ALL-OPTIONS}\and\not\boolean{TEX4HT-HACKS}}
@@ -98,6 +111,8 @@
     }
 }
 
+% Because we are lazy, we define a table environment to fullfil our
+% needs
 \newenvironment{centertable}[1]%
 {
   \begin{table}
@@ -108,6 +123,7 @@
   \end{table}
 }
 
+% Define some PDF meta-data.
 \hypersetup{%
     urlcolor=black,
     colorlinks=true,
@@ -122,10 +138,12 @@
     pdfkeywords={Gentoo, package manager, specification},
     pdfproducer={pdfLaTeX and hyperref},
 }
+% Some metadata needed for the title page generation
 \title{Package Manager Specification}
 \author{Stephen P. Bennett\\\url{spb@exherbo.org} \and Ciaran
     McCreesh\\\url{ciaran.mccreesh@googlemail.com}}
-% Make the build succeed even when no Git repository is available
+% Reads the last commit date from the Git repository and even succeeds
+% when none is available
 \ifthenelse{\equal{\VCDateISO}{}}
 {
     \date{Generated on: \today}
@@ -133,6 +151,7 @@
     \date{\printdate{\VCDateISO}}
 }
 
+% Set page title
 \pagestyle{myheadings}
 \markboth{\scshape Package Manager Specification}{\scshape Package
     Manager Specification}
