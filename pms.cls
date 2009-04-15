@@ -139,8 +139,10 @@
 }
 % Some metadata needed for the title page generation
 \title{Package Manager Specification}
-\author{Stephen P. Bennett\\\url{spb@exherbo.org} \and Ciaran
-    McCreesh\\\url{ciaran.mccreesh@googlemail.com}}
+\author{Stephen P. Bennett \\
+    \href{mailto:spb@exherbo.org}{spb@exherbo.org} \and Ciaran
+    McCreesh \\
+    \href{mailto:ciaran.mccreesh@googlemail.com}{ciaran.mccreesh@googlemail.com}}
 % Reads the last commit date from the Git repository and even succeeds
 % when none is available
 \ifthenelse{\equal{\VCDateISO}{}}
