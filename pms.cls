@@ -13,31 +13,31 @@
 \PassOptionsToPackage{utf8}{inputenc}
 % algorithmic and algorithm to be loaded last to avoid failures
 \RequirePackage{%
-  fontenc,
-  isodate,
-  typearea,
-  caption,
-  inputenc,
-  appendix,
-  booktabs,
-  color,
-  enumitem,
-  float,
-  fullpage,
-  graphicx,
-  hyperref,
-  ifthen,
-  longtable,
-  lscape,
-  marginnote,
-  paralist,
-  parskip,
-  verbatim,
-  algorithm,
-  algorithmic
+    fontenc,
+    isodate,
+    typearea,
+    caption,
+    inputenc,
+    appendix,
+    booktabs,
+    color,
+    enumitem,
+    float,
+    fullpage,
+    graphicx,
+    hyperref,
+    ifthen,
+    longtable,
+    lscape,
+    marginnote,
+    paralist,
+    parskip,
+    verbatim,
+    algorithm,
+    algorithmic
 }
 \ClassInfo{pms}{Capsulation of LaTeX stuff for the Package Manager
-  Specification, loaded baseclass: \ClassToLoad\MessageBreak}
+    Specification, loaded baseclass: \ClassToLoad\MessageBreak}
 \input{vc}
 
 \newboolean{TEX4HT-HACKS}
@@ -109,33 +109,33 @@
 }
 
 \hypersetup{%
-  urlcolor=black,
-  colorlinks=true,
-  citecolor=black,
-  linkcolor=black,
-  pdftitle={Package Manager Specification},
-  pdfauthor={Stephen P. Bennett, Ciaran McCreesh},
-  pdfcreator={pdfLaTeX and hyperref},
-  pdfsubject={Defining a feature set for package managers in the
-    Gentoo world},
-  pdflang={en},
-  pdfkeywords={Gentoo, package manager, specification},
-  pdfproducer={pdfLaTeX and hyperref},
+    urlcolor=black,
+    colorlinks=true,
+    citecolor=black,
+    linkcolor=black,
+    pdftitle={Package Manager Specification},
+    pdfauthor={Stephen P. Bennett, Ciaran McCreesh},
+    pdfcreator={pdfLaTeX and hyperref},
+    pdfsubject={Defining a feature set for package managers in the
+        Gentoo world},
+    pdflang={en},
+    pdfkeywords={Gentoo, package manager, specification},
+    pdfproducer={pdfLaTeX and hyperref},
 }
 \title{Package Manager Specification}
-\author{Stephen P. Bennett\\\url{spb@exherbo.org}
-\and Ciaran McCreesh\\\url{ciaran.mccreesh@googlemail.com}}
+\author{Stephen P. Bennett\\\url{spb@exherbo.org} \and Ciaran
+    McCreesh\\\url{ciaran.mccreesh@googlemail.com}}
 % Make the build succeed even when no Git repository is available
 \ifthenelse{\equal{\VCDateISO}{}}
 {
-  \date{Generated on: \today}
+    \date{Generated on: \today}
 }{
-  \date{\printdate{\VCDateISO}}
+    \date{\printdate{\VCDateISO}}
 }
 
 \pagestyle{myheadings}
 \markboth{\scshape Package Manager Specification}{\scshape Package
-  Manager Specification}
+    Manager Specification}
 % This is some kind of hack.  We set the proportions of the text area
 % and then move it 30mm to the left to increase the right (outer)
 % margin.
