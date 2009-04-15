@@ -28,14 +28,14 @@ pms.html: $(SOURCEFILES) pms.bbl
 	@# align algorithm line numbers properly
 	sed -i -e '/<span class="ALCitem">/{N;s/\n\(class="[^"]\+">\)\([0-9]:\)<\/span>/\1\&#x2007;\2/}' pms.html
 
-pms.bbl: pms.bib pms.tex vc.tex
+pms.bbl: pms.bib pms.tex vc.tex eapi-cheatsheet.pdf
 	latex pms
 	bibtex pms
 
 eapi-cheatsheet.pdf: vc.tex
 	pdflatex eapi-cheatsheet
 
-vc.tex: pms.tex
+vc.tex: pms.tex vc-git.awk
 	/bin/sh ./vc
 
 pms.dvi: $(SOURCEFILES) pms.bbl
