@@ -21,12 +21,12 @@ pms.html: $(SOURCEFILES) pms.bbl
 	xhlatex pms
 	@# work around irregularity in how links to longtables are
 	@# formatted in the List of Tables
-	sed -i -e '/<span class="lotToc" >&#x00A0;/{N;N;s/\(&#x00A0;<a \nhref="[^"]\+">\)\([0-9.]\+\)\n/\2\1/}' pms.html
+	LC_ALL=C sed -i -e '/<span class="lotToc" >&#x00A0;/{N;N;s/\(&#x00A0;<a \nhref="[^"]\+">\)\([0-9A-Z.]\+\)[ \n]/\2\1/}' pms.html
 	@# indent algorithms properly, and avoid adding extra vertical
 	@# space in Konqueror
-	sed -i -e 's/span style="width:/span style="display:-moz-inline-box;display:inline-block;height:1px;width:/' pms.html
+	LC_ALL=C sed -i -e 's/span style="width:/span style="display:-moz-inline-box;display:inline-block;height:1px;width:/' pms.html
 	@# align algorithm line numbers properly
-	sed -i -e '/<span class="ALCitem">/{N;s/\n\(class="[^"]\+">\)\([0-9]:\)<\/span>/\1\&#x2007;\2/}' pms.html
+	LC_ALL=C sed -i -e '/<span class="ALCitem">/{N;s/\n\(class="[^"]\+">\)\([0-9]:\)<\/span>/\1\&#x2007;\2/}' pms.html
 
 pms.bbl: pms.bib pms.tex vc.tex eapi-cheatsheet.pdf
 	latex pms
