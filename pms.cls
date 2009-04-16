@@ -21,15 +21,12 @@
     fontenc,	% Load extended font sets
     isodate,	% Date formatting and conversions
     typearea,	% Set page layout
-    caption,	% Extended float environment formatting
     inputenc,	% Allow input methods apart from ASCII
     booktabs,	% Nicer formatting of tables
     color,	% Support more than black&white
     enumitem,
-    float,	% More control over float environments
     fullpage,
     graphicx,	% Image support
-    hyperref,	% Support for hyperlinks
     ifthen,	% Comfortable conditional routines
     longtable,	% Extend tables over more than one page
     lscape,	% Rotating pages
@@ -37,9 +34,18 @@
     paralist,	% Additional list environments
     parskip,	% Space between paragraps instead of intendation
     pdfpages,	% Insert whole PDF documents as separate pages
-    verbatim,	% Extend the print-as-is functionality
-    algorithm,	%
-    algorithmic % Set algorithms
+    verbatim	% Extend the print-as-is functionality
+}
+
+% tex4ht workaround: hyperref needs to be loaded /after/ tex4ht injects itself
+\g@addto@macro\@documentclasshook{
+    \RequirePackage{
+        caption,	% Extended float environment formatting
+        float,		% More control over float environments
+        hyperref,	% Support for hyperlinks
+        algorithm,	%
+        algorithmic 	% Set algorithms
+    }
 }
 \ClassInfo{pms}{Capsulation of LaTeX stuff for the Package Manager
     Specification, loaded baseclass: \ClassToLoad\MessageBreak}
@@ -59,9 +65,12 @@
     \setboolean{TEX4HT-HACKS}{true}
 \fi
 
-\floatstyle{plaintop}
-\newfloat{listing}{tbp}{lol}[chapter]
-\floatname{listing}{Listing}
+% tex4ht workaround: these need to happen after loading the float package
+\g@addto@macro\@documentclasshook{
+    \floatstyle{plaintop}
+    \newfloat{listing}{tbp}{lol}[chapter]
+    \floatname{listing}{Listing}
+}
 \newcommand{\listoflistings}{\listof{listing}{Listings}}
 % Define own label and reference commands, that display the label in
 % the page margin.
@@ -74,7 +83,10 @@
 
 % Some shorthands for the lazy ones.
 \renewcommand{\t}[1]{\texttt{#1}}
-\renewcommand{\i}[1]{\textit{#1}}
+% tex4ht workaround: this needs to happen after loading hyperref
+\g@addto@macro\@documentclasshook{
+    \renewcommand{\i}[1]{\textit{#1}}
+}
 \newcommand{\e}[1]{\emph{#1}}
 \renewcommand{\b}[1]{\textbf{#1}}
 \newcommand{\note}[1]{\paragraph{Note:} #1}
@@ -124,19 +136,22 @@
 }
 
 % Define some PDF meta-data.
-\hypersetup{%
-    urlcolor=black,
-    colorlinks=true,
-    citecolor=black,
-    linkcolor=black,
-    pdftitle={Package Manager Specification},
-    pdfauthor={Stephen P. Bennett, Ciaran McCreesh},
-    pdfcreator={pdfLaTeX and hyperref},
-    pdfsubject={Defining a feature set for package managers in the
-        Gentoo world},
-    pdflang={en},
-    pdfkeywords={Gentoo, package manager, specification},
-    pdfproducer={pdfLaTeX and hyperref},
+% tex4ht workaround: this needs to happen after loading hyperref
+\g@addto@macro\@documentclasshook{
+    \hypersetup{%
+        urlcolor=black,
+        colorlinks=true,
+        citecolor=black,
+        linkcolor=black,
+        pdftitle={Package Manager Specification},
+        pdfauthor={Stephen P. Bennett, Ciaran McCreesh},
+        pdfcreator={pdfLaTeX and hyperref},
+        pdfsubject={Defining a feature set for package managers in the
+            Gentoo world},
+        pdflang={en},
+        pdfkeywords={Gentoo, package manager, specification},
+        pdfproducer={pdfLaTeX and hyperref},
+    }
 }
 % Some metadata needed for the title page generation
 \title{Package Manager Specification}
