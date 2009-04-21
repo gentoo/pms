@@ -337,7 +337,7 @@ that can be passed to \t{dohtml} are as follows:
     \t{INSDESTTREE}, by default with file mode \t{0644}. This can be overridden by setting
     \t{INSOPTIONS} with the \t{insopts} function. If the first argument is \t{-r}, then operates
     recursively, descending into any directories given. For EAPIs listed in
-    table~\ref{tab:doins-table}, \t{doins} must correctly handle symlinks when installing
+    table~\ref{tab:doins-table}, \t{doins} must install symlinks as symlinks when installing
     recursively; for other EAPIs, behaviour is undefined if any symlink is encountered. Failure
     behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
