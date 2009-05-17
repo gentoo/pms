@@ -122,9 +122,11 @@ these commands once the current phase function has returned.
 
 \subsubsection{Output commands}
 These commands display messages to the user. Unless otherwise stated, the entire argument list is
-used as a message, as in the simple invocations of \t{echo}. Ebuilds must not run any of these
-commands once the current phase function has returned. Unless otherwise noted, output may be sent to
-stdout, stderr or some other appropriate facility.
+used as a message, with backslash-escaped characters interpreted as for the \t{echo -e} command of
+bash, notably \t{\textbackslash t} for a horizontal tab, \t{\textbackslash n} for a new line, and
+\t{\textbackslash\textbackslash} for a literal backslash. Ebuilds must not run any of these commands
+once the current phase function has returned. Unless otherwise noted, output may be sent to stdout,
+stderr or some other appropriate facility.
 \begin{description}
 \item[einfo] Displays an informational message.
 \item[einfon] Displays an informational message without a trailing newline.
