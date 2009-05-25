@@ -673,7 +673,8 @@ either behaviour is undefined or it is an error as decided by table~\ref{tab:use
 \item[use] Returns shell true (0) if the first argument (a \t{USE} flag name) is enabled, false
     otherwise.  If the flag name is prefixed with \t{!}, returns true if the flag is disabled, and
     false if it is enabled. It is guaranteed that this command is quiet.
-\item[usev] The same as \t{use}, but also prints the flag name if it is enabled.
+\item[usev] The same as \t{use}, but also prints the flag name if the condition
+    is met.
 \item[useq] Deprecated synonym for \t{use}.
 \item[use\_with] Has one-, two-, and three-argument forms. The first argument is a USE flag name,
     the second a \t{configure} option name (\t{\$\{opt\}}), defaulting to the same as the first argument
