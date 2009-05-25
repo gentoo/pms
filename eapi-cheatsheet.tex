@@ -84,7 +84,7 @@ nonetheless.
     not disabled explicitly by user configuration) with a \code{+}
     sign in front.  See \featureref{iuse-defaults}.
     \item[Named slot dependencies] Dependencies can explicitly request
-    a specific slot by using the \code{dev-libs/foo:SLOT} syntax.  See
+    a specific slot by using the \code{dev-libs/foo:\emph{SLOT\_name}} syntax.  See
     \featureref{slot-deps}.
 \end{description}
 \section{EAPI 2 (2008-09-25)}
@@ -131,12 +131,11 @@ nonetheless.
     and \code{src\_test} can be called via
     \code{default\_\emph{phasename}}, so duplicating the standard
     implementation is no longer necessary for small additions.  The
-    \code{default} function calls the current phase's \code{default\_}
-    function automatically, so any small additions you need will not
-    be accompanied by a complete reimplementation of the phase.
-    Additionally as a shorthand for the current phase's default
-    definition \code{default} can be invoked.  See
-    \featureref{default-phase-funcs} and \featureref{default-func}.
+    short-hand \code{default} function calls the current phase's
+    \code{default\_} function automatically, so any small additions
+    you need will not be accompanied by a complete reimplementation of
+    the phase.  See \featureref{default-phase-funcs} and
+    \featureref{default-func}.
     \item[\code{doman} language support] The \code{doman} installation
     function recognizes lanugage specific man page extensions and
     behaves accordingly.  See \featureref{doman-langs}
@@ -148,8 +147,9 @@ nonetheless.
 \label{sec:cs:eapi3-additions}
 \begin{description}
     \item[\code{pkg\_pretend}] Some useful checks (kernel options for
-    example) can be placed in this new phase to inform the user early.
-    Most checks should usually be repeated in \code{pkg\_setup}.  See
+    example) can be placed in this new phase to inform the user early
+    (when just pretending to emerge the package).  Most checks should
+    usually be repeated in \code{pkg\_setup}.  See
     \featureref{pkg-pretend}.
     \item[\code{src\_install}] The \code{src\_install} phase is no
     longer empty but has a default now.  This comes along with an
@@ -203,7 +203,7 @@ nonetheless.
     \item[\code{nonfatal} for commands] If you call \code{nonfatal}
     the command given as argument will not abort the build process in
     case of a failure (as is the default) but will return non-zero on
-    failure rather than aborting the build..  See
+    failure rather than aborting the build.  See
     \featureref{nonfatal}.
 \end{description}
 \subsection{Removals/Bans}
