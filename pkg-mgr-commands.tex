@@ -767,11 +767,13 @@ has returned.
     \item LHA archives (\t{*.LHA, *.LHa, *.lha, *.lhz}). Ebuilds must ensure that the lha program is
     installed.
     \item ar archives (\t{*.a, *.deb}). Ebuilds must ensure that GNU binutils is installed.
-    \item lzma archives (\t{*.lzma}). Ebuilds must ensure that LZMA Utils is installed.
-    \item xz archives (\t{*.xz}). Ebuilds must ensure that XZ Utils is installed. Only for EAPIs
-        listed in table~\ref{tab:unpack-extensions-table} as supporting xz.
-    \item xz-compressed tar files (\t{*.tar.xz}). Ebuilds must ensure that XZ Utils is installed.
-        Only for EAPIs listed in table~\ref{tab:unpack-extensions-table} as supporting xz.
+    \item lzma-compressed files (\t{*.lzma}). Ebuilds must ensure that LZMA Utils is installed.
+    \item lzma-compressed tar files (\t{*.tar.lzma}). Ebuilds must ensure that LZMA Utils and
+        GNU tar are installed.
+    \item xz-compressed files (\t{*.xz}). Ebuilds must ensure that XZ Utils is installed. Only for
+        EAPIs listed in table~\ref{tab:unpack-extensions-table} as supporting xz.
+    \item xz-compressed tar files (\t{*.tar.xz}). Ebuilds must ensure that XZ Utils and GNU tar are
+        installed. Only for EAPIs listed in table~\ref{tab:unpack-extensions-table} as supporting xz.
     \end{itemize}
     It is up to the ebuild to ensure that the relevant external utilities are available, whether by
     being in the system set or via dependencies.
