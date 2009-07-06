@@ -245,6 +245,9 @@ This section discusses the handling of four variables:
 \item[USE] is a variable calculated by the package manager and exported to the ebuild environment.
 \end{description}
 
+In all cases, the values of \t{IUSE\_REFERENCEABLE} and \t{IUSE\_EFFECTIVE} are undefined during
+metadata generation.
+
 For EAPIs listed in table~\ref{tab:profile-iuse-injection-table} as not supporting profile defined
 \t{IUSE} injection, \t{IUSE\_REFERENCEABLE} is equal to the calculated \t{IUSE} value. For EAPIs
 where profile defined \t{IUSE} injection is supported, \t{IUSE\_REFERENCEABLE} is equal to
