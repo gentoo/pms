@@ -18,7 +18,6 @@ variables must be treated in this fashion:
 \item \t{USE\_EXPAND\_HIDDEN}
 \item \t{CONFIG\_PROTECT}
 \item \t{CONFIG\_PROTECT\_MASK}
-\item Any variable whose name is listed in \t{USE\_EXPAND}
 \end{compactitem}
 
 If the package manager supports any EAPI listed in table~\ref{tab:profile-iuse-injection-table} as
@@ -28,8 +27,6 @@ incrementally; otherwise, the following variables may or may not be treated incr
 \item \t{IUSE\_IMPLICIT}
 \item \t{USE\_EXPAND\_IMPLICIT}
 \item \t{USE\_EXPAND\_UNPREFIXED}
-\item Any variable whose name is \t{USE\_EXPAND\_VALUES\_\$\{value\}}, where \t{\$\{value\}} is any
-    value in \t{USE\_EXPAND\_IMPLICIT}.
 \end{compactitem}
 
 Other variables, except where they affect only package-manager-specific functionality (such as
