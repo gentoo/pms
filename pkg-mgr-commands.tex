@@ -16,7 +16,7 @@ The following commands affect this behaviour:
 \begin{description}
 \item[nonfatal] \featurelabel{nonfatal} Executes the remainder of its arguments as a command,
     preserving the exit status. If this results in a command being called that would normally abort
-    the build process due to a failure (but not due to an explicit \t{die} or \{assert} call),
+    the build process due to a failure (but not due to an explicit \t{die} or \t{assert} call),
     instead a non-zero exit status shall be returned. Only in EAPIs listed in
     table~\ref{tab:commands-die-table} as supporting \t{nonfatal}.
 \end{description}
