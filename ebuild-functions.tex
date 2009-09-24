@@ -134,8 +134,9 @@ and/or groups to the system.
 \subsection{src\_unpack}
 \label{sec:src-unpack-function}
 
-\featurelabel{src-unpack} The \t{src\_unpack} function extracts all of the package's sources,
-applies patches and sets up the package's build system for further use.
+\featurelabel{src-unpack} The \t{src\_unpack} function extracts all of
+the package's sources. In EAPIs lacking \t{src\_prepare}, it may also
+apply patches and set up the package's build system for further use.
 
 The initial working directory must be \t{WORKDIR}, and the default implementation used when
 the ebuild lacks the \t{src\_unpack} function shall behave as:
