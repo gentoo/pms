@@ -192,8 +192,8 @@ from which it was invoked.
 \begin{algorithm}
 \caption{Version comparison logic for letter components} \label{alg:version-comparison-letter}
 \begin{algorithmic}[1]
-  \STATE let $Al$ be the letter component of $A$ if any, otherwise the empty string
-  \STATE let $Bl$ be the letter component of $B$ if any, otherwise the empty string
+  \STATE let $Al$ be the letter component of $A$ if any, \IFKDEBUILDELSE{otherwise \t{zz} if $A$ has any suffixes and its first suffix is \t{-scm}, }{}otherwise the empty string
+  \STATE let $Bl$ be the letter component of $B$ if any, \IFKDEBUILDELSE{otherwise \t{zz} if $B$ has any suffixes and its first suffix is \t{-scm}, }{}otherwise the empty string
   \IF{$Al>Bl$ using ASCII stringwise comparison}
     \RETURN $A>B$
   \ELSIF{$Al<Bl$ using ASCII stringwise comparison}
