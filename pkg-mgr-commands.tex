@@ -322,6 +322,9 @@ that can be passed to \t{dohtml} are as follows:
 
     Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
+    It is undefined whether a failure shall occur if \t{-r} is not specified and a directory is
+    encountered. Ebuilds must not rely upon any particular behaviour.
+
 \IFKDEBUILDELSE
 {
     In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as
