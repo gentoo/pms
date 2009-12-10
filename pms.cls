@@ -103,7 +103,7 @@
 \setboolean{ENABLE-ALL-OPTIONS}{false}
 
 % Enable the below if you'd like to see KDEBUILD things.
-\setboolean{ENABLE-KDEBUILD}{true}
+\setboolean{ENABLE-KDEBUILD}{false}
 
 \ifthenelse{\boolean{ENABLE-ALL-OPTIONS}\and\not\boolean{TEX4HT-HACKS}}
 {
