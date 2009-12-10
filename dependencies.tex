@@ -73,6 +73,7 @@ In particular, note that whitespace is not optional.
     \t{kdebuild-1} & Yes \\
     \t{2} & Yes \\
     \t{3} & Yes \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }{
@@ -85,6 +86,7 @@ In particular, note that whitespace is not optional.
     \t{1} & No \\
     \t{2} & Yes \\
     \t{3} & Yes \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }
@@ -103,6 +105,7 @@ In particular, note that whitespace is not optional.
     \t{kdebuild-1} & Yes \\
     \t{2} & No \\
     \t{3} & No \\
+    \t{4} & No \\
     \bottomrule
     \end{tabular}
     \end{centertable}
@@ -118,6 +121,7 @@ In particular, note that whitespace is not optional.
     \t{kdebuild-1} & Yes \\
     \t{2} & No \\
     \t{3} & No \\
+    \t{4} & No \\
     \bottomrule
     \end{tabular}
     \end{centertable}
@@ -195,14 +199,14 @@ EAPI not supporting \t{SLOT} dependencies.
     package manager must warn or error if this feature is used with an EAPI not supporting use
     dependencies.
 
-    In EAPIs shown in table~\ref{tab:use-deps-table} as supporting 2-style or 3-style \t{USE}
-    dependencies, a specification may additionally be suffixed by at most one 2-style or 3-style
+    In EAPIs shown in table~\ref{tab:use-deps-table} as supporting 2-style or 4-style \t{USE}
+    dependencies, a specification may additionally be suffixed by at most one 2-style or 4-style
     \t{[use]} restriction, as described in section~\ref{sec:use-dep}. A package manager must warn or
     error if this feature is used with an EAPI not supporting use dependencies.
 }{
     \featurelabel{use-deps} In EAPIs shown in table~\ref{tab:use-deps-table} as supporting 2-style
-    or 3-style \t{USE} dependencies, a specification may additionally be suffixed by at most one
-    2-style or 3-style \t{[use]} restriction, as described in section~\ref{sec:use-dep}. A package
+    or 4-style \t{USE} dependencies, a specification may additionally be suffixed by at most one
+    2-style or 4-style \t{[use]} restriction, as described in section~\ref{sec:use-dep}. A package
     manager must warn or error if this feature is used with an EAPI not supporting use dependencies.
 }
 
@@ -226,7 +230,8 @@ EAPI not supporting \t{SLOT} dependencies.
     \t{1} & Named only \\
     \t{kdebuild-1} & Named and operator \\
     \t{2} & Named only \\
-    \t{3} & Named and operator \\
+    \t{3} & Named only \\
+    \t{4} & Named and operator \\
     \bottomrule
     \end{tabular}
 }{
@@ -238,7 +243,8 @@ EAPI not supporting \t{SLOT} dependencies.
     \t{0} & No \\
     \t{1} & Named only \\
     \t{2} & Named only \\
-    \t{3} & Named and operator \\
+    \t{3} & Named only \\
+    \t{4} & Named and operator \\
     \bottomrule
     \end{tabular}
 }
@@ -257,6 +263,7 @@ EAPI not supporting \t{SLOT} dependencies.
     \t{kdebuild-1} & Yes \\
     \t{2} & No \\
     \t{3} & No \\
+    \t{4} & No \\
     \bottomrule
     \end{tabular}
     \end{centertable}
@@ -275,7 +282,8 @@ EAPI not supporting \t{SLOT} dependencies.
     \t{1} & No \\
     \t{kdebuild-1} & kdebuild-style \\
     \t{2} & 2-style \\
-    \t{3} & 3-style \\
+    \t{3} & 2-style \\
+    \t{4} & 4-style \\
     \bottomrule
     \end{tabular}
     \end{centertable}
@@ -289,7 +297,8 @@ EAPI not supporting \t{SLOT} dependencies.
     \t{0} & No \\
     \t{1} & No \\
     \t{2} & 2-style \\
-    \t{3} & 3-style \\
+    \t{3} & 2-style \\
+    \t{4} & 4-style \\
     \bottomrule
     \end{tabular}
     \end{centertable}
@@ -344,6 +353,7 @@ described in table~\ref{tab:bang-strength-table}.
     \t{kdebuild-1} & Unspecified & Forbidden \\
     \t{2} & Weak & Strong \\
     \t{3} & Weak & Strong \\
+    \t{4} & Weak & Strong \\
     \bottomrule
     \end{tabular}
 }{
@@ -357,6 +367,7 @@ described in table~\ref{tab:bang-strength-table}.
     \t{1} & Unspecified & Forbidden \\
     \t{2} & Weak & Strong \\
     \t{3} & Weak & Strong \\
+    \t{4} & Weak & Strong \\
     \bottomrule
     \end{tabular}
 }
@@ -440,10 +451,10 @@ is only for package manager use and must not be used by ebuilds.
 }{
 }
 
-\subsubsection{2-Style and 3-Style Use Dependencies}
+\subsubsection{2-Style and 4-Style Use Dependencies}
 \label{sec:use-dep}
 
-A 2-style or 3-style use dependency consists of one of the following:
+A 2-style or 4-style use dependency consists of one of the following:
 
 \begin{description}
 \item[{[opt]}] The flag must be enabled.
@@ -462,13 +473,13 @@ Multiple requirements may be combined using commas, e.g. \t{[first,-second,third
 
 When multiple requirements are specified, all must match for a successful match.
 
-\featurelabel{use-dep-defaults} In a 3-style use dependency, the flag name may immediately be
+\featurelabel{use-dep-defaults} In a 4-style use dependency, the flag name may immediately be
 followed by a \e{default} specified by either \t{(+)} or \t{(-)}. The former indicates that, when
 applying the use dependency to a package that does not have the flag in question in
 \t{IUSE\_REFERENCEABLE}, the package manager shall behave as if the flag were present and enabled;
 the latter, present and disabled.
 
-Unless a 3-style default is specified, it is an error for a use dependency to be applied to an
+Unless a 4-style default is specified, it is an error for a use dependency to be applied to an
 ebuild which does not have the flag in question in \t{IUSE\_REFERENCEABLE}.
 
 \note By extension of the above, a default that could reference an ebuild using an EAPI not

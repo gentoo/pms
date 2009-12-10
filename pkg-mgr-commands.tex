@@ -34,7 +34,8 @@ The following commands affect this behaviour:
     \t{1} & Non-zero exit & No \\
     \t{kdebuild-1} & Non-zero exit & No \\
     \t{2} & Non-zero exit & No \\
-    \t{3} & Aborts & Yes \\
+    \t{3} & Non-zero exit & No \\
+    \t{4} & Aborts & Yes \\
     \bottomrule
     \end{tabular}
 }{
@@ -47,7 +48,8 @@ The following commands affect this behaviour:
     \t{0} & Non-zero exit & No \\
     \t{1} & Non-zero exit & No \\
     \t{2} & Non-zero exit & No \\
-    \t{3} & Aborts & Yes \\
+    \t{3} & Non-zero exit & No \\
+    \t{4} & Aborts & Yes \\
     \bottomrule
     \end{tabular}
 }
@@ -75,7 +77,8 @@ called, the package manager must abort the build process indicating an error.
     \t{1} & No & No & No \\
     \t{kdebuild-1} & Yes & Yes & Yes \\
     \t{2} & No & No & No \\
-    \t{3} & Yes & No & Yes \\
+    \t{3} & No & No & No \\
+    \t{4} & Yes & No & Yes \\
     \bottomrule
     \end{tabular}
     \end{centertable}
@@ -92,7 +95,8 @@ called, the package manager must abort the build process indicating an error.
     \t{0} & No & No \\
     \t{1} & No & No \\
     \t{2} & No & No \\
-    \t{3} & Yes & Yes \\
+    \t{3} & No & No \\
+    \t{4} & Yes & Yes \\
     \bottomrule
     \end{tabular}
     \end{centertable}
@@ -193,7 +197,8 @@ has returned.
         \t{1} & No \\
         \t{kdebuild-1} & No \\
         \t{2} & No \\
-        \t{3} & Yes \\
+        \t{3} & No \\
+        \t{4} & Yes \\
         \bottomrule
         \end{tabular}
     }{
@@ -205,7 +210,8 @@ has returned.
         \t{0} & No \\
         \t{1} & No \\
         \t{2} & No \\
-        \t{3} & Yes \\
+        \t{3} & No \\
+        \t{4} & Yes \\
         \bottomrule
         \end{tabular}
     }
@@ -458,7 +464,8 @@ that can be passed to \t{dohtml} are as follows:
     \t{1} & No \\
     \t{kdebuild-1} & No \\
     \t{2} & No \\
-    \t{3} & Yes \\
+    \t{3} & No \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }{
@@ -470,7 +477,8 @@ that can be passed to \t{dohtml} are as follows:
     \t{0} & No \\
     \t{1} & No \\
     \t{2} & No \\
-    \t{3} & Yes \\
+    \t{3} & No \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }
@@ -488,7 +496,8 @@ that can be passed to \t{dohtml} are as follows:
     \t{1} & No \\
     \t{kdebuild-1} & No \\
     \t{2} & No \\
-    \t{3} & Yes \\
+    \t{3} & No \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }{
@@ -500,7 +509,8 @@ that can be passed to \t{dohtml} are as follows:
     \t{0} & No \\
     \t{1} & No \\
     \t{2} & No \\
-    \t{3} & Yes \\
+    \t{3} & No \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }
@@ -519,6 +529,7 @@ that can be passed to \t{dohtml} are as follows:
     \t{kdebuild-1} & No \\
     \t{2} & Yes \\
     \t{3} & Yes \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }{
@@ -531,6 +542,7 @@ that can be passed to \t{dohtml} are as follows:
     \t{1} & No \\
     \t{2} & Yes \\
     \t{3} & Yes \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }
@@ -549,6 +561,7 @@ that can be passed to \t{dohtml} are as follows:
     \t{kdebuild-1} & No \\
     \t{2} & Yes \\
     \t{3} & Yes \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
     \end{centertable}
@@ -646,7 +659,8 @@ in table~\ref{tab:compression-table} as supporting \t{docompress}.
     \t{1} & No & No \\
     \t{kdebuild-1} & No & No \\
     \t{2} & No & No \\
-    \t{3} & Yes & Yes \\
+    \t{3} & No & No \\
+    \t{4} & Yes & Yes \\
     \bottomrule
     \end{tabular}
 }{
@@ -659,7 +673,8 @@ in table~\ref{tab:compression-table} as supporting \t{docompress}.
     \t{0} & No & No \\
     \t{1} & No & No \\
     \t{2} & No & No \\
-    \t{3} & Yes & Yes \\
+    \t{3} & No & No \\
+    \t{4} & Yes & Yes \\
     \bottomrule
     \end{tabular}
 }
@@ -701,7 +716,8 @@ instead of \t{-{}-with-} or \t{-{}-without-}.
     \t{1} & Undefined  \\
     \t{kdebuild-1} & Undefined  \\
     \t{2} & Undefined \\
-    \t{3} & Error \\
+    \t{3} & Undefined \\
+    \t{4} & Error \\
     \bottomrule
     \end{tabular}
 }{
@@ -713,7 +729,8 @@ instead of \t{-{}-with-} or \t{-{}-without-}.
     \t{0} & Undefined \\
     \t{1} & Undefined  \\
     \t{2} & Undefined \\
-    \t{3} & Error \\
+    \t{3} & Undefined \\
+    \t{4} & Error \\
     \bottomrule
     \end{tabular}
 }
@@ -794,7 +811,8 @@ has returned.
     \t{1} & No \\
     \t{kdebuild-1} & No \\
     \t{2} & No \\
-    \t{3} & Yes \\
+    \t{3} & No \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }{
@@ -806,7 +824,8 @@ has returned.
     \t{0} & No \\
     \t{1} & No \\
     \t{2} & No \\
-    \t{3} & Yes \\
+    \t{3} & No \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }
@@ -834,6 +853,7 @@ has returned.
     \t{kdebuild-1} & No \\
     \t{2} & Yes \\
     \t{3} & Yes \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }{
@@ -846,6 +866,7 @@ has returned.
     \t{1} & No \\
     \t{2} & Yes \\
     \t{3} & Yes \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }

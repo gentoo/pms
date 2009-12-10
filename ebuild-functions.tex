@@ -56,7 +56,8 @@ fallback to \t{WORKDIR} is used:
     \t{1} & Always \\
     \t{kdebuild-1} & Always \\
     \t{2} & Always \\
-    \t{3} & Conditional error \\
+    \t{3} & Always \\
+    \t{4} & Conditional error \\
     \bottomrule
     \end{tabular}
 }{
@@ -68,7 +69,8 @@ fallback to \t{WORKDIR} is used:
     \t{0} & Always \\
     \t{1} & Always \\
     \t{2} & Always \\
-    \t{3} & Conditional error \\
+    \t{3} & Always \\
+    \t{4} & Conditional error \\
     \bottomrule
     \end{tabular}
 }
@@ -104,7 +106,8 @@ before the next phase is executed.
     \t{1} & No \\
     \t{kdebuild-1} & No \\
     \t{2} & No \\
-    \t{3} & Yes \\
+    \t{3} & No \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }{
@@ -116,7 +119,8 @@ before the next phase is executed.
     \t{0} & No \\
     \t{1} & No \\
     \t{2} & No \\
-    \t{3} & Yes \\
+    \t{3} & No \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }
@@ -174,6 +178,7 @@ section~\ref{sec:s-to-workdir-fallback}.
     \t{kdebuild-1} & No \\
     \t{2} & Yes \\
     \t{3} & Yes \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }{
@@ -186,6 +191,7 @@ section~\ref{sec:s-to-workdir-fallback}.
     \t{1} & No \\
     \t{2} & Yes \\
     \t{3} & Yes \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }
@@ -224,6 +230,7 @@ src_configure() {
     \t{kdebuild-1} & No \\
     \t{2} & Yes \\
     \t{3} & Yes \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }{
@@ -236,6 +243,7 @@ src_configure() {
     \t{1} & No \\
     \t{2} & Yes \\
     \t{3} & Yes \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }
@@ -305,6 +313,7 @@ src_compile() {
     \t{kdebuild-1} & 1 \\
     \t{2} & 2 \\
     \t{3} & 2 \\
+    \t{4} & 2 \\
     \bottomrule
     \end{tabular}
 }{
@@ -317,6 +326,7 @@ src_compile() {
     \t{1} & 1 \\
     \t{2} & 2 \\
     \t{3} & 2 \\
+    \t{4} & 2 \\
     \bottomrule
     \end{tabular}
 }
@@ -353,6 +363,7 @@ The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{sec
     \t{kdebuild-1} & Required \\
     \t{2} & At user option \\
     \t{3} & At user option \\
+    \t{4} & At user option \\
     \bottomrule
     \end{tabular}
 
@@ -369,8 +380,8 @@ directory specified in \t{D}.
 The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR} as discussed in
 section~\ref{sec:s-to-workdir-fallback}.
 
-\featurelabel{src-install-3} For EAPIs listed in table~\ref{tab:src-install-table} as using format
-3, the default implementation used when the ebuild lacks the \t{src\_install} function shall behave
+\featurelabel{src-install-4} For EAPIs listed in table~\ref{tab:src-install-table} as using format
+4, the default implementation used when the ebuild lacks the \t{src\_install} function shall behave
 as:
 
 \begin{verbatim}
@@ -408,7 +419,8 @@ is a no-op.
     \t{1} & no-op \\
     \t{kdebuild-1} & no-op \\
     \t{2} & no-op \\
-    \t{3} & 3 \\
+    \t{3} & no-op \\
+    \t{4} & 4 \\
     \bottomrule
     \end{tabular}
 }{
@@ -420,7 +432,8 @@ is a no-op.
     \t{0} & no-op \\
     \t{1} & no-op \\
     \t{2} & no-op \\
-    \t{3} & 3 \\
+    \t{3} & no-op \\
+    \t{4} & 4 \\
     \bottomrule
     \end{tabular}
 }
@@ -497,7 +510,8 @@ that dependencies may not be installed.
     \t{1} & No \\
     \t{kdebuild-1} & Yes \\
     \t{2} & No \\
-    \t{3} & Yes \\
+    \t{3} & No \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }{
@@ -509,7 +523,8 @@ that dependencies may not be installed.
     \t{0} & No \\
     \t{1} & No \\
     \t{2} & No \\
-    \t{3} & Yes \\
+    \t{3} & No \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 }
@@ -547,6 +562,8 @@ when in the phase in question.
     \t{2} & \parbox[t]{3in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
         \t{src\_compile}, \t{src\_test}} \\
     \t{3} & \parbox[t]{3in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
+        \t{src\_compile}, \t{src\_test}} \\
+    \t{4} & \parbox[t]{3in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
         \t{src\_compile}, \t{src\_install}, \t{src\_test}} \\
     \bottomrule
     \end{tabular}
@@ -561,6 +578,8 @@ when in the phase in question.
     \t{2} & \parbox[t]{3in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
         \t{src\_compile}, \t{src\_test}} \\
     \t{3} & \parbox[t]{3in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
+        \t{src\_compile}, \t{src\_test}} \\
+    \t{4} & \parbox[t]{3in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
         \t{src\_compile}, \t{src\_install}, \t{src\_test}} \\
     \bottomrule
     \end{tabular}

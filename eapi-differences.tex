@@ -3,32 +3,34 @@
 \note This chapter is informative and for convenience only. Refer to the main text for specifics.
 
 \begin{landscape}
-\begin{longtable}{\IFANYKDEBUILDELSE{lllllll}{llllll}}
+\begin{longtable}{\IFANYKDEBUILDELSE{llllllll}{lllllll}}
 \caption{Features in EAPIs}\\
 \toprule
 \multicolumn{1}{c}{\b{Feature}} &
 \multicolumn{1}{c}{\b{Reference}} &
-\IFANYKDEBUILDELSE{\multicolumn{4}{c}{\b{EAPIs}} \\}{\multicolumn{3}{c}{\b{EAPIs}} \\}
+\IFANYKDEBUILDELSE{\multicolumn{5}{c}{\b{EAPIs}} \\}{\multicolumn{4}{c}{\b{EAPIs}} \\}
 \multicolumn{1}{c}{} &
 \multicolumn{1}{c}{} &
 \multicolumn{1}{c}{0} &
 \multicolumn{1}{c}{1} &
 \IFANYKDEBUILDELSE{\multicolumn{1}{c}{\IFKDEBUILDCOLOUR{kdebuild-1}} &}{}
 \multicolumn{1}{c}{2} &
-\multicolumn{1}{c}{3} \\
+\multicolumn{1}{c}{3} &
+\multicolumn{1}{c}{4} \\
 \midrule
 \endfirsthead
 \midrule
 \multicolumn{1}{c}{\b{Feature}} &
 \multicolumn{1}{c}{\b{Reference}} &
-\IFANYKDEBUILDELSE{\multicolumn{4}{c}{\b{EAPIs}} \\}{\multicolumn{3}{c}{\b{EAPIs}} \\}
+\IFANYKDEBUILDELSE{\multicolumn{5}{c}{\b{EAPIs}} \\}{\multicolumn{4}{c}{\b{EAPIs}} \\}
 \multicolumn{1}{c}{} &
 \multicolumn{1}{c}{} &
 \multicolumn{1}{c}{0} &
 \multicolumn{1}{c}{1} &
 \IFANYKDEBUILDELSE{\multicolumn{1}{c}{\IFKDEBUILDCOLOUR{kdebuild-1}} &}{}
 \multicolumn{1}{c}{2} &
-\multicolumn{1}{c}{3} \\
+\multicolumn{1}{c}{3} &
+\multicolumn{1}{c}{4} \\
 \midrule
 \endhead
 \midrule
@@ -43,6 +45,7 @@
     \IFKDEBUILDCOLOUR{Optional} &
     \IFKDEBUILDCOLOUR{Required} &
     \IFKDEBUILDCOLOUR{Optional} &
+    \IFKDEBUILDCOLOUR{Optional} &
     \IFKDEBUILDCOLOUR{Optional} \\
 }{}
 
@@ -53,14 +56,15 @@
     \IFKDEBUILDCOLOUR{\t{.ebuild}} &
     \IFKDEBUILDCOLOUR{\t{.kdebuild-1}} &
     \IFKDEBUILDCOLOUR{\t{.ebuild}} &
+    \IFKDEBUILDCOLOUR{\t{.ebuild}} &
     \IFKDEBUILDCOLOUR{\t{.ebuild}} \\
 }{}
 
 Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-injection} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & No & Yes \\
 
 \t{IUSE} defaults & \compactfeatureref{iuse-defaults} & No & Yes &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes & Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes & Yes & Yes \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{PROVIDE} support} &
@@ -69,17 +73,18 @@ Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-injection} & No & N
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} \\
 }{}
 
 \t{PROPERTIES} & \compactfeatureref{properties} & Optionally & Optionally &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Optionally} &}{} Optionally & Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Optionally} &}{} Optionally & Optionally & Yes \\
 
 \t{RDEPEND=DEPEND} & \compactfeatureref{rdepend-depend} & Yes & Yes &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes & No \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes & Yes & No \\
 
 \t{DEFINED\_PHASES} & \compactfeatureref{defined-phases} & Optionally & Optionally &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Optionally} &}{} Optionally & Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Optionally} &}{} Optionally & Optionally & Yes \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{Pre-source \t{EAPI}} &
@@ -88,11 +93,12 @@ Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-injection} & No & N
     \IFKDEBUILDCOLOUR{0 or unset} &
     \IFKDEBUILDCOLOUR{kdebuild-1} &
     \IFKDEBUILDCOLOUR{0 or unset} &
+    \IFKDEBUILDCOLOUR{0 or unset} &
     \IFKDEBUILDCOLOUR{0 or unset} \\
 }{}
 
 \t{SRC\_URI} arrows & \compactfeatureref{src-uri-arrows} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes & Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes & Yes & Yes \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{SRC\_URI} labels} &
@@ -100,6 +106,7 @@ Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-injection} & No & N
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{No} \\
 }{}
@@ -111,6 +118,7 @@ Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-injection} & No & N
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{No} &
+    \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{No} \\
 }{}
 
@@ -121,6 +129,7 @@ Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-injection} & No & N
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{No} &
+    \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{No} \\
 }{}
 
@@ -130,34 +139,35 @@ Slot dependencies &
     Named &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Named and Operator} &}{}
     Named &
+    Named &
     Named and Operator \\
 
 Use dependencies & \compactfeatureref{use-deps} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{kdebuild-style} &}{} 2-style & 3-style \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{kdebuild-style} &}{} 2-style & 2-style & 4-style \\
 
 \t{!} blockers & \compactfeatureref{bang-strength} & Unspecified & Unspecified &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Unspecified} &}{} Weak & Weak \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Unspecified} &}{} Weak & Weak & Weak \\
 
 \t{!!} blockers & \compactfeatureref{bang-strength} & Forbidden & Forbidden &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Forbidden} &}{} Strong & Strong \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Forbidden} &}{} Strong & Strong & Strong \\
 
 \t{S} to \t{WORKDIR} fallback & \compactfeatureref{s-workdir-fallback} & Always & Always &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Always} &}{} Always & Conditional \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Always} &}{} Always & Always & Conditional \\
 
 \t{pkg\_pretend} & \compactfeatureref{pkg-pretend} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & No & Yes \\
 
 \t{src\_prepare} & \compactfeatureref{src-prepare} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes & Yes \\
 
 \t{src\_configure} & \compactfeatureref{src-configure} & No & No &
-\IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes \\
+\IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes & Yes \\
 
 \t{src\_compile} style & \compactfeatureref{src-compile} & 0 & 1 &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{1} &}{} 2 & 2 \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{1} &}{} 2 & 2 & 2 \\
 
 \t{src\_install} style & \compactfeatureref{src-install} & no-op & no-op &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{no-op} &}{} no-op & 3 \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{no-op} &}{} no-op & no-op & 4 \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{src\_test}} &
@@ -166,38 +176,40 @@ Use dependencies & \compactfeatureref{use-deps} & No & No &
     \IFKDEBUILDCOLOUR{User option} &
     \IFKDEBUILDCOLOUR{Required} &
     \IFKDEBUILDCOLOUR{User option} &
+    \IFKDEBUILDCOLOUR{User option} &
     \IFKDEBUILDCOLOUR{User option} \\
 }{}
 
 \t{pkg\_info} & \compactfeatureref{pkg-info} & Installed & Installed &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Both} &}{} Installed & Both \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Both} &}{} Installed & Installed & Both \\
 
 \t{default\_} phase functions & \compactfeatureref{default-phase-funcs} & None & None &
     \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{None} &}{}
+    \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test}} &
     \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test}} &
     \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
         \t{src\_compile}, \t{src\_install}, \t{src\_test}} \\
 
 \t{AA} & \compactfeatureref{aa} & Yes & Yes &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes & No \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes & Yes & No \\
 
 \t{KV} & \compactfeatureref{kv} & Yes & Yes &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes & No \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Yes} &}{} Yes & Yes & No \\
 
 \t{REPLACING\_VERSIONS} & \compactfeatureref{replace-version-vars} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & No & Yes \\
 
 \t{REPLACED\_BY\_VERSION} & \compactfeatureref{replace-version-vars} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & No & Yes \\
 
 Most utilities die & \compactfeatureref{die-on-failure} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & No & Yes \\
 
 \t{nonfatal} & \compactfeatureref{nonfatal} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & No & Yes \\
 
 \t{dohard} & \compactfeatureref{banned-commands} & Yes & Yes &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Banned} &}{} Yes & Banned \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Banned} &}{} Yes & Yes & Banned \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{dohtml}} &
@@ -206,24 +218,25 @@ Most utilities die & \compactfeatureref{die-on-failure} & No & No &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Banned} &
     \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} \\
 }{}
 
 \t{dosed} & \compactfeatureref{banned-commands} & Yes & Yes &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Banned} &}{} Yes & Banned \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{Banned} &}{} Yes & Yes & Banned \\
 
 \t{econf} arguments & \compactfeatureref{econf-options} &  &  &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{} &}{} &
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{} &}{} & &
     \parbox[t]{1in}{disable dependency tracking} \\
 
 \t{dodoc -r} & \compactfeatureref{dodoc} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & No & Yes \\
 
 \t{doins} handles symlinks & \compactfeatureref{doins} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & No & Yes \\
 
 \t{doman} languages & \compactfeatureref{doman-langs} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes & Yes \\
 
 \IFANYKDEBUILDELSE{
     \IFKDEBUILDCOLOUR{\t{dosym} does \t{dodir}} &
@@ -232,20 +245,21 @@ Most utilities die & \compactfeatureref{die-on-failure} & No & No &
     \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{No} &
     \IFKDEBUILDCOLOUR{Yes} &
+    \IFKDEBUILDCOLOUR{Yes} &
     \IFKDEBUILDCOLOUR{Yes} \\
 }{}
 
 Controllable compression & \compactfeatureref{controllable-compress} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & No & Yes \\
 
 \t{docompress} & \compactfeatureref{controllable-compress} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & No & Yes \\
 
 \t{unpack} support for \t{xz}? & \compactfeatureref{unpack-extensions} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} No & No & Yes \\
 
 \t{default} function & \compactfeatureref{default-func} & No & No &
-    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes \\
+    \IFANYKDEBUILDELSE{\IFKDEBUILDCOLOUR{No} &}{} Yes & Yes & Yes \\
 
 \end{longtable}
 \end{landscape}
@@ -312,6 +326,13 @@ EAPI 2 is EAPI 1 with the following changes:
 \section*{EAPI 3}
 
 EAPI 3 is EAPI 2 with the following changes:
+\begin{compactitem}
+\item (to be completed)
+\end{compactitem}
+
+\section*{EAPI 4}
+
+EAPI 4 is EAPI 3 with the following changes:
 
 \begin{compactitem}
 \item \t{pkg\_pretend}, \featureref{pkg-pretend}.
@@ -319,7 +340,7 @@ EAPI 3 is EAPI 2 with the following changes:
 \item Use dependency defaults, \featureref{use-dep-defaults}.
 \item \t{DEFINED\_PHASES} support is mandatory, \featureref{defined-phases}.
 \item \t{PROPERTIES} support is mandatory, \featureref{properties}.
-\item Default \t{src\_install} no longer a no-op, \featureref{src-install-3}.
+\item Default \t{src\_install} no longer a no-op, \featureref{src-install-4}.
 \item Controllable compression and \t{docompress}, \featureref{controllable-compress}.
 \item \t{dodoc -r} support, \featureref{dodoc}.
 \item \t{doins} supports symlinks, \featureref{doins}.

@@ -99,7 +99,7 @@ nonetheless.
     \item[USE dependencies] Dependencies can specify USE flag
     requirements on their target, removing the need for
     \code{built\_with\_use} checks. A more powerful syntax that does
-    not require the flag to be in IUSE is in EAPI 3.
+    not require the flag to be in IUSE is in EAPI 4.
     \begin{description}
         \item[{[opt]}] The flag must be enabled.
         \item[{[opt=]}] The flag must be enabled if the flag is
@@ -141,10 +141,10 @@ nonetheless.
     behaves accordingly.  See \featureref{doman-langs}
 \end{description}
 \newpage
-\section{EAPI 3 (not yet approved)}
-\label{sec:cs:eapi3}
+\section{EAPI 4 (not yet approved)}
+\label{sec:cs:eapi4}
 \subsection{Additions/Changes}
-\label{sec:cs:eapi3-additions}
+\label{sec:cs:eapi4-additions}
 \begin{description}
     \item[\code{pkg\_pretend}] Some useful checks (kernel options for
     example) can be placed in this new phase to inform the user early
@@ -154,7 +154,7 @@ nonetheless.
     \item[\code{src\_install}] The \code{src\_install} phase is no
     longer empty but has a default now.  This comes along with an
     accompanying \code{default} function.  See
-    \featureref{src-install-3}.
+    \featureref{src-install-4}.
     \item[\code{pkg\_info} on non-installed packages] The
     \code{pkg\_info} phase can be called even for non-installed
     packages.  Be warned that dependencies might not have been
@@ -207,7 +207,7 @@ nonetheless.
     \featureref{nonfatal}.
 \end{description}
 \subsection{Removals/Bans}
-\label{sec:cs:eapi3-removalsbans}
+\label{sec:cs:eapi4-removalsbans}
 \begin{description}
     \item[\code{dohard}, \code{dosed}] Both functions are not allowed
     anymore.  See \featureref{banned-commands}.
