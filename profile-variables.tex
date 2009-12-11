@@ -34,22 +34,6 @@ Portage's \t{FEATURES} variable), must not be treated incrementally---later defi
 completely override those in parent profiles.
 
 \begin{centertable}{Profile-defined \t{IUSE} injection for EAPIs} \label{tab:profile-iuse-injection-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports profile-defined \t{IUSE} injection?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{kdebuild-1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & Yes \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -62,7 +46,6 @@ completely override those in parent profiles.
     \t{4} & Yes \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \subsection{Specific variables and their meanings}

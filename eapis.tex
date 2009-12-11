@@ -23,13 +23,6 @@ The following EAPIs are defined by this specification:
 \item[0] The `original' base EAPI.
 \item[1] EAPI `1' contains a number of extensions to EAPI `0'. Except where explicitly noted, it is
     in all other ways identical to EAPI `0'.
-\IFKDEBUILDELSE
-{
-    \item[kdebuild-1] A series of extensions to EAPI `1' used by the GenKDEsvn project and
-        formerly by the Gentoo KDE project. Except where
-        explicitly noted, it is in all other ways identical to EAPI `1'.
-}{
-}
 \item[2] EAPI `2' contains a number of extensions to EAPI `1'. Except where explicitly noted, it is
     in all other ways identical to EAPI `1'.
 \item[3] EAPI `3' contains a number of extensions to EAPI `2'. Except where explicitly noted, it is
@@ -38,21 +31,11 @@ The following EAPIs are defined by this specification:
     in all other ways identical to EAPI `3'.
 \end{description}
 
-\ifthenelse{\boolean{ENABLE-ALL-OPTIONS}\and\not\boolean{TEX4HT-HACKS}}
-{
-    \note We're not sure whether \t{kdebuild-1} will end up in the final version of this
-    specification. For now, it's included but can easily be hidden using a switch in the master
-    \t{pms.tex} file. To make editing easier, we also have a mode that shows the document both with
-    and without the \t{kdebuild-1} stuff enabled. You currently have that mode enabled---
-    \IFKDEBUILDELSE{
-        text only shown when \t{kdebuild-1} is enabled looks like this,
-    }{
-        and text only shown when it is disabled looks like this.
-    }
-}{
-}
-
-Except where explicitly noted, everything in this specification applies to all of the above EAPIs.
+Except where explicitly noted, everything in this specification
+applies to all of the above EAPIs.%
+\footnote{Another inofficial EAPI `kdebuild-1' was a series of
+    extensions to EAPI `1' formerly used by the Gentoo KDE project.
+    Some of its features have been included in EAPI `2' or later.}
 
 \section{Reserved EAPIs}
 
@@ -61,8 +44,6 @@ Except where explicitly noted, everything in this specification applies to all o
     specification.
 \item EAPIs whose value starts with the string \t{paludis-} are reserved for experimental
     use by the Paludis package manager.
-\item EAPIs whose value starts with the string \t{kdebuild-} are reserved for the GenKDEsvn
-    project, and were formerly used by the Gentoo KDE project.
 \end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

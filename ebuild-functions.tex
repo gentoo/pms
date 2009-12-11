@@ -45,22 +45,6 @@ fallback to \t{WORKDIR} is used:
 \end{compactitem}
 
 \begin{centertable}{EAPIs with \t{S} to \t{WORKDIR} fallbacks} \label{tab:s-fallback-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Fallback to \t{WORKDIR} permitted?}} \\
-        \midrule
-    \t{0} & Always \\
-    \t{1} & Always \\
-    \t{kdebuild-1} & Always \\
-    \t{2} & Always \\
-    \t{3} & Always \\
-    \t{4} & Conditional error \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -73,7 +57,6 @@ fallback to \t{WORKDIR} is used:
     \t{4} & Conditional error \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \subsection{pkg\_pretend}
@@ -95,22 +78,6 @@ before the next phase is executed.
 \t{pkg\_pretend} must not write to the filesystem.
 
 \begin{centertable}{EAPIs supporting \t{pkg\_pretend}} \label{tab:pkg-pretend-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{pkg\_pretend}?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{kdebuild-1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & Yes \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -123,7 +90,6 @@ before the next phase is executed.
     \t{4} & Yes \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \subsection{pkg\_setup}
@@ -166,22 +132,6 @@ The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR}
 section~\ref{sec:s-to-workdir-fallback}.
 
 \begin{centertable}{EAPIs supporting \t{src\_prepare}} \label{tab:src-prepare-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{src\_prepare}?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{kdebuild-1} & No \\
-    \t{2} & Yes \\
-    \t{3} & Yes \\
-    \t{4} & Yes \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -194,7 +144,6 @@ section~\ref{sec:s-to-workdir-fallback}.
     \t{4} & Yes \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \subsection{src\_configure}
@@ -218,22 +167,6 @@ src_configure() {
 \end{verbatim}
 
 \begin{centertable}{EAPIs supporting \t{src\_configure}} \label{tab:src-configure-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{src\_configure}?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{kdebuild-1} & No \\
-    \t{2} & Yes \\
-    \t{3} & Yes \\
-    \t{4} & Yes \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -246,7 +179,6 @@ src_configure() {
     \t{4} & Yes \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \subsection{src\_compile}
@@ -301,22 +233,6 @@ src_compile() {
 \end{verbatim}
 
 \begin{centertable}{\t{src\_compile} behaviour for EAPIs} \label{tab:src-compile-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Format}} \\
-        \midrule
-    \t{0} & 0 \\
-    \t{1} & 1 \\
-    \t{kdebuild-1} & 1 \\
-    \t{2} & 2 \\
-    \t{3} & 2 \\
-    \t{4} & 2 \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -329,7 +245,6 @@ src_compile() {
     \t{4} & 2 \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \subsection{src\_test}
@@ -345,31 +260,6 @@ if and only such a target is available. In both cases, if make returns non-zero 
 aborted.
 
 The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{sec:restrict}.
-
-\IFKDEBUILDELSE
-{
-    \featurelabel{src-test-required} In some EAPIs, \t{src\_test} should only be run at user option
-    (and never if restrictions are in place). In others, it must always be run (excepting
-    restrictions). See table~\ref{tab:test-required-table} for which EAPIs fit into which category.
-
-    \begin{centertable}{EAPIs requiring \t{src\_test}} \label{tab:test-required-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Requires \t{src\_test}?}} \\
-        \midrule
-    \t{0} & At user option \\
-    \t{1} & At user option \\
-    \t{kdebuild-1} & Required \\
-    \t{2} & At user option \\
-    \t{3} & At user option \\
-    \t{4} & At user option \\
-    \bottomrule
-    \end{tabular}
-
-    \end{centertable}
-}{
-}
 
 \subsection{src\_install}
 \label{sec:src-install-function}
@@ -408,22 +298,6 @@ For other EAPIs, the default implementation used when the ebuild lacks the \t{sr
 is a no-op.
 
 \begin{centertable}{\t{src\_install} behaviour for EAPIs} \label{tab:src-install-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Format}} \\
-        \midrule
-    \t{0} & no-op \\
-    \t{1} & no-op \\
-    \t{kdebuild-1} & no-op \\
-    \t{2} & no-op \\
-    \t{3} & no-op \\
-    \t{4} & 4 \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -436,7 +310,6 @@ is a no-op.
     \t{4} & 4 \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \subsection{pkg\_preinst}
@@ -499,22 +372,6 @@ that dependencies may not be installed.
 \t{pkg\_info} must not write to the filesystem.
 
 \begin{centertable}{EAPIs supporting \t{pkg\_info} on non-installed packages} \label{tab:pkg-info-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{pkg\_info} on non-installed packages?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{kdebuild-1} & Yes \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & Yes \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -527,7 +384,6 @@ that dependencies may not be installed.
     \t{4} & Yes \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \subsection{pkg\_nofetch}
@@ -549,25 +405,6 @@ when executing any ebuild phase listed in the table. Ebuilds must not call these
 when in the phase in question.
 
 \begin{centertable}{EAPIs supporting \t{default\_} phase functions} \label{tab:default-phase-function-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{default\_} functions in phases}} \\
-            \midrule
-    \t{0} & None \\
-    \t{1} & None \\
-    \t{kdebuild-1} & None \\
-    \t{2} & \parbox[t]{3in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
-        \t{src\_compile}, \t{src\_test}} \\
-    \t{3} & \parbox[t]{3in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
-        \t{src\_compile}, \t{src\_test}} \\
-    \t{4} & \parbox[t]{3in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
-        \t{src\_compile}, \t{src\_install}, \t{src\_test}} \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l }
         \toprule
             \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -583,7 +420,6 @@ when in the phase in question.
         \t{src\_compile}, \t{src\_install}, \t{src\_test}} \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \section{Call Order}

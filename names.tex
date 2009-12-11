@@ -60,37 +60,8 @@ This may optionally be followed by one of \t{[a-z]} (a lowercase letter).
 This may be followed by zero or more of the suffixes \t{\_alpha}, \t{\_beta}, \t{\_pre},
 \t{\_rc} or \t{\_p}, which themselves may be suffixed by an optional integer.
 
-\IFKDEBUILDELSE
-{
-    \featurelabel{scm} \label{scm-versions} In ebuilds using EAPIs listed in
-    table~\ref{tab:scm-table} as requiring support for the \t{-scm} suffix, the preceding version
-    syntax may be either replaced or suffixed by a \t{scm} part. If both a ``normal'' version and a
-    \t{scm} part are present, they must be separated by a hyphen.
-}{
-}
-
 This may optionally be followed by the suffix \t{-r} followed immediately by an integer (the
 ``revision number''). If this suffix is not present, it is assumed to be \t{-r0}.
-
-\IFKDEBUILDELSE
-{
-    \begin{centertable}{EAPIs requiring \t{scm} support} \label{tab:scm-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Requires \t{scm} support?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{kdebuild-1} & Yes \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & No \\
-    \bottomrule
-    \end{tabular}
-    \end{centertable}
-}{
-}
 
 \section{Version Comparison}
 
@@ -102,33 +73,14 @@ from which it was invoked.
 
 \begin{algorithm}
 \caption{Version comparison top-level logic} \label{alg:version-comparison}
-\IFKDEBUILDELSE{
-  \begin{algorithmic}[1]
-    \STATE let $A$ and $B$ be the versions to be compared
-    \IF{$A$ and $B$ both begin with \t{scm}}
-      \STATE compare revision components using Algorithm~\ref{alg:version-comparison-revision}
-    \ELSIF{$A$ begins with \t{scm}}
-      \RETURN $A>B$
-    \ELSIF{$B$ begins with \t{scm}}
-      \RETURN $A<B$
-    \ELSE
-      \STATE compare numeric components using Algorithm~\ref{alg:version-comparison-numeric}
-      \STATE compare letter components using Algorithm~\ref{alg:version-comparison-letter}
-      \STATE compare suffixes using Algorithm~\ref{alg:version-comparison-suffix}
-      \STATE compare revision components using Algorithm~\ref{alg:version-comparison-revision}
-    \ENDIF
-    \RETURN $A=B$
-  \end{algorithmic}
-}{
-  \begin{algorithmic}[1]
+\begin{algorithmic}[1]
     \STATE let $A$ and $B$ be the versions to be compared
     \STATE compare numeric components using Algorithm~\ref{alg:version-comparison-numeric}
     \STATE compare letter components using Algorithm~\ref{alg:version-comparison-letter}
     \STATE compare suffixes using Algorithm~\ref{alg:version-comparison-suffix}
     \STATE compare revision components using Algorithm~\ref{alg:version-comparison-revision}
     \RETURN $A=B$
-  \end{algorithmic}
-}
+\end{algorithmic}
 \end{algorithm}
 
 \begin{algorithm}
@@ -146,25 +98,9 @@ from which it was invoked.
     \STATE compare $An_i$ and $Bn_i$ using Algorithm~\ref{alg:version-comparison-numeric-nonfirst}
   \ENDFOR
   \IF{$Ann>Bnn$}
-    \IFKDEBUILDELSE{
-      \IF{$B$ has any suffixes and no letter, and its first suffix is \t{-scm}}
-        \RETURN $A<B$
-      \ELSE
-        \RETURN $A>B$
-      \ENDIF
-    }{
-      \RETURN $A>B$
-    }
+    \RETURN $A>B$
   \ELSIF{$Ann<Bnn$}
-    \IFKDEBUILDELSE{
-      \IF{$A$ has any suffixes and no letter, and its first suffix is \t{-scm}}
-        \RETURN $A>B$
-      \ELSE
-        \RETURN $A<B$
-      \ENDIF
-    }{
-      \RETURN $A<B$
-    }
+    \RETURN $A<B$
   \ENDIF
 \end{algorithmic}
 \end{algorithm}
@@ -193,8 +129,8 @@ from which it was invoked.
 \begin{algorithm}
 \caption{Version comparison logic for letter components} \label{alg:version-comparison-letter}
 \begin{algorithmic}[1]
-  \STATE let $Al$ be the letter component of $A$ if any, \IFKDEBUILDELSE{otherwise \t{zz} if $A$ has any suffixes and its first suffix is \t{-scm}, }{}otherwise the empty string
-  \STATE let $Bl$ be the letter component of $B$ if any, \IFKDEBUILDELSE{otherwise \t{zz} if $B$ has any suffixes and its first suffix is \t{-scm}, }{}otherwise the empty string
+  \STATE let $Al$ be the letter component of $A$ if any, otherwise the empty string
+  \STATE let $Bl$ be the letter component of $B$ if any, otherwise the empty string
   \IF{$Al>Bl$ using ASCII stringwise comparison}
     \RETURN $A>B$
   \ELSIF{$Al<Bl$ using ASCII stringwise comparison}
@@ -213,13 +149,13 @@ from which it was invoked.
     \STATE compare $As_i$ and $Bs_i$ using Algorithm~\ref{alg:version-comparison-suffix-each}
   \ENDFOR
   \IF{$Asn>Bsn$}
-    \IF{$As_{Bsn}$ is of type \t{\_p} \IFKDEBUILDELSE{or \t{-scm}}{}}
+    \IF{$As_{Bsn}$ is of type \t{\_p}}
       \RETURN $A>B$
     \ELSE
       \RETURN $A<B$
     \ENDIF
   \ELSIF{$Asn<Bsn$}
-    \IF{$Bs_{Asn}$ is of type \t{\_p} \IFKDEBUILDELSE{or \t{-scm}}{}}
+    \IF{$Bs_{Asn}$ is of type \t{\_p}}
       \RETURN $A<B$
     \ELSE
       \RETURN $A>B$
@@ -232,36 +168,20 @@ from which it was invoked.
 \caption{Version comparison logic for each suffix} \label{alg:version-comparison-suffix-each}
 \begin{algorithmic}[1]
   \IF{$As_i$ and $Bs_i$ are of the same type (\t{\_alpha} vs \t{\_beta} etc)}
-    \STATE let $As'_i$ be the integer part of $As_i$ if any, otherwise \IFKDEBUILDELSE{as specified by Algorithm~\ref{alg:version-comparison-suffix-missingint}}{\t{0}}
-    \STATE let $Bs'_i$ be the integer part of $Bs_i$ if any, otherwise \IFKDEBUILDELSE{as specified by Algorithm~\ref{alg:version-comparison-suffix-missingint}}{\t{0}}
-    \IF{$As'_i>Bs'_i$, using integer comparison \IFKDEBUILDELSE{and with $\infty$ greater than any integer}{}}
+    \STATE let $As'_i$ be the integer part of $As_i$ if any, otherwise \t{0}
+    \STATE let $Bs'_i$ be the integer part of $Bs_i$ if any, otherwise \t{0}
+    \IF{$As'_i>Bs'_i$, using integer comparison}
       \RETURN $A>B$
-    \ELSIF{$As'_i<Bs'_i$, using integer comparison \IFKDEBUILDELSE{and with $\infty$ greater than any integer}{}}
+    \ELSIF{$As'_i<Bs'_i$, using integer comparison}
       \RETURN $A<B$
     \ENDIF
-  \ELSIF{the type of $As_i$ is greater than the type of $Bs_i$ using the ordering $\mbox{\t{\_alpha}}<\mbox{\t{\_beta}}<\mbox{\t{\_pre}}<\mbox{\t{\_rc}}<\mbox{\t{\_p}}\IFKDEBUILDELSE{<\mbox{\t{-scm}}}{}$}
+  \ELSIF{the type of $As_i$ is greater than the type of $Bs_i$ using the ordering $\mbox{\t{\_alpha}}<\mbox{\t{\_beta}}<\mbox{\t{\_pre}}<\mbox{\t{\_rc}}<\mbox{\t{\_p}}$}
     \RETURN $A>B$
   \ELSE
     \RETURN $A<B$
   \ENDIF
 \end{algorithmic}
 \end{algorithm}
-
-\IFKDEBUILDELSE
-{
-  \begin{algorithm}
-  \caption{Deciding an unspecified integer part of a suffix component, for comparison purposes} \label{alg:version-comparison-suffix-missingint}
-  \begin{algorithmic}[1]
-    \STATE let $X$ refer to either $A$ or $B$, whichever version contains the suffix under question
-    \IF{$i+1<Xsn$ and $Xs_{i+1}$ is of type \t{-scm}}
-      \STATE let $Xs'_i$ be $\infty$
-    \ELSE
-      \STATE let $Xs'_i$ be \t{0}
-    \ENDIF
-  \end{algorithmic}
-  \end{algorithm}
-}{
-}
 
 \begin{algorithm}
 \caption{Version comparison logic for revision components} \label{alg:version-comparison-revision}

@@ -39,14 +39,6 @@ when set by an eclass. They must be accumulated across eclasses, appending the v
 eclass to the resulting value after the previous one is loaded. Then the eclass-defined value is
 appended to that defined by the ebuild. In the case of \t{RDEPEND}, this is done after the
 implicit \t{RDEPEND} rules in section~\ref{sec:rdepend-depend} are applied.
-\IFKDEBUILDELSE
-{
-    \featurelabel{pdepend-labels} In EAPIs shown in table~\ref{tab:pdepend-labels-table} as
-    supporting \t{PDEPEND} labels, the values of \t{PDEPEND} from the ebuild and each eclass must be
-    wrapped in parentheses, so that the labels only apply within the ebuild/eclass in which they
-    appear.
-}{
-}
 
 \section{EXPORT\_FUNCTIONS}
 

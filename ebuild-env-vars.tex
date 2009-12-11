@@ -180,26 +180,6 @@ variable.
 \end{landscape}
 
 \begin{centertable}{EAPIs supporting various env variables} \label{tab:env-vars-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l l l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{\t{AA}?}} &
-        \multicolumn{1}{c}{\textbf{\t{KV}?}} &
-        \multicolumn{1}{c}{\textbf{\t{REPLACING\_VERSIONS}?}} &
-        \multicolumn{1}{c}{\textbf{\t{REPLACED\_BY\_VERSION}?}} \\
-        \midrule
-    \t{0} & Yes & Yes & No & No \\
-    \t{1} & Yes & Yes & No & No \\
-    \t{kdebuild-1} & Yes & Yes & No & No \\
-    \t{2} & Yes & Yes & No & No \\
-    \t{3} & Yes & Yes & No & No \\
-    \t{4} & No & No & Yes & Yes \\
-    \bottomrule
-    \end{tabular}
-}
-{
     \begin{tabular}{ l l l l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -215,7 +195,6 @@ variable.
     \t{4} & No & No & Yes & Yes \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 Except where otherwise noted, all variables set in the active profiles' \t{make.defaults} files must

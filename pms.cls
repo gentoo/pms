@@ -91,38 +91,6 @@
 \renewcommand{\b}[1]{\textbf{#1}}
 \newcommand{\note}[1]{\paragraph{Note:} #1}
 
-\definecolor{deepblue}{rgb}{0.0, 0.2, 0.7}
-\definecolor{deeppurple}{rgb}{0.7, 0.0, 0.8}
-
-\newboolean{ENABLE-ALL-OPTIONS}
-\newboolean{ENABLE-KDEBUILD}
-
-% Enable the below option if you'd like to see both sides of KDEBUILD
-% conditionals shown in different colours. Disable it to either fully
-% enable or fully disable KDEBUILD.  Not compatible with HTML output.
-\setboolean{ENABLE-ALL-OPTIONS}{false}
-
-% Enable the below if you'd like to see KDEBUILD things.
-\setboolean{ENABLE-KDEBUILD}{false}
-
-\ifthenelse{\boolean{ENABLE-ALL-OPTIONS}\and\not\boolean{TEX4HT-HACKS}}
-{
-    \newcommand{\IFKDEBUILDELSE}[2]{{\def\mycolour{\color{deepblue}}\mycolour #1}{\def\mycolour{\color{deeppurple}}\mycolour #2}}
-    \newcommand{\IFANYKDEBUILDELSE}[2]{#1}
-    \newcommand{\IFKDEBUILDCOLOUR}[1]{{\def\mycolour{\color{deepblue}}\mycolour #1}}
-}{
-    \ifthenelse{\boolean{ENABLE-KDEBUILD}}
-    {
-        \newcommand{\IFKDEBUILDELSE}[2]{#1}
-        \newcommand{\IFANYKDEBUILDELSE}[2]{#1}
-        \newcommand{\IFKDEBUILDCOLOUR}[1]{#1}
-    }{
-        \newcommand{\IFKDEBUILDELSE}[2]{#2}
-        \newcommand{\IFANYKDEBUILDELSE}[2]{#2}
-        \newcommand{\IFKDEBUILDCOLOUR}[1]{#1}
-    }
-}
-
 % Because we are lazy, we define a table environment to fullfil our
 % needs
 \newenvironment{centertable}[1]%

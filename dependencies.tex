@@ -48,35 +48,11 @@ be surrounded on both sides by whitespace, except at the start and end of the st
     of any kind followed by whitespace), followed by a close parenthesis. More formally:
     \t{use-conditional ::= '!'? flag-name '?' whitespace '(' whitespace (item whitespace)* ')'}.
     Permitted in all specification style variables.
-\IFKDEBUILDELSE
-{
-    \item A label, which is a string without whitespace followed by a colon. Permitted in
-    \t{SRC\_URI} in EAPIs shown in table~\ref{tab:uri-labels-table} as supporting \t{SRC\_URI} labels,
-    and in \t{PDEPEND} in EAPIs shown in table~\ref{tab:pdepend-labels-table} as supporting \t{PDEPEND}
-    labels.
-}{
-}
 \end{compactitem}
 
 In particular, note that whitespace is not optional.
 
 \begin{centertable}{EAPIs supporting \t{SRC\_URI} arrows} \label{tab:uri-arrows-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{SRC\_URI} arrows?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{kdebuild-1} & Yes \\
-    \t{2} & Yes \\
-    \t{3} & Yes \\
-    \t{4} & Yes \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -89,44 +65,7 @@ In particular, note that whitespace is not optional.
     \t{4} & Yes \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
-
-\IFKDEBUILDELSE
-{
-    \begin{centertable}{EAPIs supporting \t{SRC\_URI} labels} \label{tab:uri-labels-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{SRC\_URI} labels?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{kdebuild-1} & Yes \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & No \\
-    \bottomrule
-    \end{tabular}
-    \end{centertable}
-
-    \begin{centertable}{EAPIs supporting \t{PDEPEND} labels} \label{tab:pdepend-labels-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{PDEPEND} labels?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{kdebuild-1} & Yes \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & No \\
-    \bottomrule
-    \end{tabular}
-    \end{centertable}
-}{
-}
 
 \subsection{All-of Dependency Specifications}
 
@@ -151,21 +90,6 @@ considered to be matched if its associated package dependency specification is n
 
 An empty any-of group counts as being matched.
 
-\IFKDEBUILDELSE
-{
-    \subsection{Labels}
-    \label{sec:labels}
-
-    A label alters the behaviour of any subsequent items (including those inside subgroups) in the
-    current group. This is demonstrated by code listing~\ref{lst:labels-listing}.
-
-\begin{listing}
-  \caption{How labels are applied}\label{lst:labels-listing}
-  \verbatiminput{labels.listing}
-\end{listing}
-}{
-}
-
 \subsection{Package Dependency Specifications}
 
 A package dependency can be in one of the following base formats. A package manager must warn or
@@ -182,59 +106,14 @@ above formats may additionally be suffixed by a \t{:slot} restriction, as descri
 section~\ref{sec:slot-dep}. A package manager must warn or error if slot dependencies are used with an
 EAPI not supporting \t{SLOT} dependencies.
 
-\IFKDEBUILDELSE
-{
-    In EAPIs shown in table~\ref{tab:range-deps-table} as supporting ranged dependencies, a
-    specification that does not use an operator at the start may additionally be suffixed by one
-    \t{[range]} restriction, as described in section~\ref{sec:range-dep}. A package manager must warn or
-    error if this feature is used with an EAPI not supporting ranged dependencies.
-}{
-}
+\featurelabel{use-deps} In EAPIs shown in table~\ref{tab:use-deps-table} as supporting 2-style
+or 4-style \t{USE} dependencies, a specification may additionally be suffixed by at most one
+2-style or 4-style \t{[use]} restriction, as described in section~\ref{sec:use-dep}. A package
+manager must warn or error if this feature is used with an EAPI not supporting use dependencies.
 
-\IFKDEBUILDELSE
-{
-    \featurelabel{use-deps} In EAPIs shown in table~\ref{tab:use-deps-table} as supporting
-    kdebuild-style \t{USE} dependencies, a specification may additionally be suffixed by one or more
-    kdebuild-style \t{[use]} restrictions, as described in section~\ref{sec:kdebuild-use-dep}. A
-    package manager must warn or error if this feature is used with an EAPI not supporting use
-    dependencies.
-
-    In EAPIs shown in table~\ref{tab:use-deps-table} as supporting 2-style or 4-style \t{USE}
-    dependencies, a specification may additionally be suffixed by at most one 2-style or 4-style
-    \t{[use]} restriction, as described in section~\ref{sec:use-dep}. A package manager must warn or
-    error if this feature is used with an EAPI not supporting use dependencies.
-}{
-    \featurelabel{use-deps} In EAPIs shown in table~\ref{tab:use-deps-table} as supporting 2-style
-    or 4-style \t{USE} dependencies, a specification may additionally be suffixed by at most one
-    2-style or 4-style \t{[use]} restriction, as described in section~\ref{sec:use-dep}. A package
-    manager must warn or error if this feature is used with an EAPI not supporting use dependencies.
-}
-
-\IFKDEBUILDELSE
-{
-    \note Order is important. The slot restriction must come before the range restriction, which
-    must come before use dependencies.
-}{
-    \note Order is important. The slot restriction must come before use dependencies.
-}
+\note Order is important. The slot restriction must come before use dependencies.
 
 \begin{centertable}{EAPIs supporting \t{SLOT} dependencies} \label{tab:slot-deps-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{SLOT} dependencies?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & Named only \\
-    \t{kdebuild-1} & Named and operator \\
-    \t{2} & Named only \\
-    \t{3} & Named only \\
-    \t{4} & Named and operator \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l }
         \toprule
             \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -247,48 +126,9 @@ EAPI not supporting \t{SLOT} dependencies.
     \t{4} & Named and operator \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
-\IFKDEBUILDELSE
-{
-    \begin{centertable}{EAPIs supporting ranged dependencies} \label{tab:range-deps-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports ranged dependencies?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{kdebuild-1} & Yes \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & No \\
-    \bottomrule
-    \end{tabular}
-    \end{centertable}
-}{
-}
-
-\IFKDEBUILDELSE
-{
-    \begin{centertable}{EAPIs supporting \t{USE} dependencies} \label{tab:use-deps-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{USE} dependencies?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{kdebuild-1} & kdebuild-style \\
-    \t{2} & 2-style \\
-    \t{3} & 2-style \\
-    \t{4} & 4-style \\
-    \bottomrule
-    \end{tabular}
-    \end{centertable}
-}{
-    \begin{centertable}{EAPIs supporting \t{USE} dependencies} \label{tab:use-deps-table}
+\begin{centertable}{EAPIs supporting \t{USE} dependencies} \label{tab:use-deps-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -301,8 +141,7 @@ EAPI not supporting \t{SLOT} dependencies.
     \t{4} & 4-style \\
     \bottomrule
     \end{tabular}
-    \end{centertable}
-}
+\end{centertable}
 
 \subsubsection{Operators}
 \label{sec:dep-operator}
@@ -340,23 +179,6 @@ strong block must not be ignored. The mapping from one or two exclamation marks 
 described in table~\ref{tab:bang-strength-table}.
 
 \begin{centertable}{Exclamation mark strengths for EAPIs} \label{tab:bang-strength-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{\t{!}}} &
-            \multicolumn{1}{c}{\textbf{\t{!!}}} \\
-            \midrule
-    \t{0} & Unspecified & Forbidden \\
-    \t{1} & Unspecified & Forbidden \\
-    \t{kdebuild-1} & Unspecified & Forbidden \\
-    \t{2} & Weak & Strong \\
-    \t{3} & Weak & Strong \\
-    \t{4} & Weak & Strong \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l l }
         \toprule
             \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -370,7 +192,6 @@ described in table~\ref{tab:bang-strength-table}.
     \t{4} & Weak & Strong \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \subsubsection{Slot Dependencies}
@@ -397,59 +218,6 @@ To implement the equals slot operator, the package manager will need to store th
 best installed version of the matching package. The package manager may do this by appending
 the appropriate slot after the equals sign when saving the package's dependencies. This syntax
 is only for package manager use and must not be used by ebuilds.
-
-\IFKDEBUILDELSE
-{
-    \subsubsection{Ranged Dependencies}
-    \label{sec:range-dep}
-
-    \featurelabel{ranged-deps} A ranged dependency consists of an open square bracket, followed by
-    zero or more of (a depend operator followed by a version spec followed by a logical operator)
-    followed by a depend operator followed by a version spec followed by a close equare bracket.
-    More formally: \t{ranged-dep ::= '[' (op ver logical-op)* op ver ']' }.
-
-    The following logical operators are supported:
-
-    \begin{description}
-    \item[\&] An 'and' match. All op-ver pairs must match for a successful match.
-    \item[|] An 'or' match. At least one op-ver pair must match for a successful match.
-    \end{description}
-
-    A ranged dependency must not mix logical operators.
-}{
-}
-
-\IFKDEBUILDELSE
-{
-    \subsubsection{kdebuild Style Use Dependencies}
-    \label{sec:kdebuild-use-dep}
-
-    A kdebuild-style use dependency consists of one of the following:
-
-    \begin{description}
-    \item[{[opt]}] The flag must be enabled.
-    \item[{[opt=]}] The flag must be enabled if the flag is enabled for the package with the
-        dependency, or disabled otherwise.
-    \item[{[opt!=]}] The flag must be disabled if the flag is enabled for the package with the
-        dependency, or enabled otherwise.
-    \item[{[opt?]}] The flag must be enabled if the flag is enabled for the package with the
-        dependency.
-    \item[{[opt!?]}] The flag must be enabled if the use flag is disabled for the package with the
-        dependency.
-    \item[{[-opt]}] The flag must be disabled.
-    \item[{[-opt?]}] The flag must be disabled if the flag is enabled for the package with the
-        dependency.
-    \item[{[-opt!?]}] The flag must be disabled if the flag is disabled for the package with the
-        dependency.
-    \end{description}
-
-    When multiple use dependencies are specified, all must match for a successful match.
-
-    It is an error for a use dependency to be applied to an ebuild which does not have the flag in
-    question in \t{IUSE\_REFERENCEABLE}, or for an ebuild to use a conditional use dependency when
-    that ebuild does not have the flag in \t{IUSE\_EFFECTIVE}.
-}{
-}
 
 \subsubsection{2-Style and 4-Style Use Dependencies}
 \label{sec:use-dep}
@@ -488,23 +256,6 @@ would not have to be part of \t{IUSE}.
 
 It is an error for an ebuild to use a conditional use dependency when that ebuild does not have the
 flag in \t{IUSE\_EFFECTIVE}.
-
-\IFKDEBUILDELSE
-{
-    \subsection{Package Dependency Labels}
-
-    In EAPIs supporting \t{PDEPEND} labels, the following labels are legal. See
-    section~\ref{sec:labels} for label behaviour in general.
-
-    \begin{description}
-    \item[required] Indicates a required post dependency.
-    \item[suggested] Indicates a suggested post dependency. The package manager may ignore the
-        suggestion or install it at user option.
-    \end{description}
-
-    The default label is \t{required}.
-}{
-}
 
 \subsection{Restrict}
 \label{sec:restrict}
@@ -551,37 +302,13 @@ details.
 If a simple filename rather than a full URI is provided, the package manager can only use mirrors to
 download the file.
 
-\IFKDEBUILDELSE
-{
-    The \t{RESTRICT} metadata key can be used to impose additional restrictions upon downloading---see
-    section~\ref{sec:restrict} for details. Labels also alter behaviour---see below for details.
-}{
-    The \t{RESTRICT} metadata key can be used to impose additional restrictions upon downloading---see
-    section~\ref{sec:restrict} for details.
-}
+The \t{RESTRICT} metadata key can be used to impose additional restrictions upon downloading---see
+section~\ref{sec:restrict} for details.
 
 \featurelabel{src-uri-arrows} In EAPIs supporting arrows, if an arrow is used, the filename used
 when saving to \t{DISTDIR} shall instead be the name on the right of the arrow. When consulting
 mirrors (except for those explicitly listed on the left of the arrow, if \t{mirror://} is used), the
 filename to the right of the arrow shall be requested instead of the filename in the URI.
-
-\IFKDEBUILDELSE
-{
-    \featurelabel{src-uri-labels} In EAPIs supporting labels, the following labels are legal. See
-    section~\ref{sec:labels} for label behaviour in general.
-
-    \begin{description}
-    \item[mirrors-first] Mirrors shall be consulted before the listed URI.
-    \item[mirrors-only] Only mirrors shall be consulted, and the listed URI shall be ignored.
-    \item[listed-first] The listed URI shall be consulted before mirrors.
-    \item[listed-only] Only the listed URI shall be consulted.
-    \item[manual] No URI shall be consulted. A manual download is required.
-    \end{description}
-
-    The default label is \t{mirrors-first}, unless \t{RESTRICT} contains \t{mirror}, in which case it is
-    \t{listed-only}, unless \t{RESTRICT} contains \t{fetch}, in which case it is \t{manual}.
-}{
-}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 

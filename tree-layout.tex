@@ -62,13 +62,7 @@ Any ebuild in a package directory must be named \t{name-ver.suffix}, where:
 \begin{compactitem}
 \item \t{name} is the (unqualified) package name.
 \item \t{ver} is the package's version.
-\IFKDEBUILDELSE
-{
-    \item \label{file-extension} \featurelabel{file-extension} \t{suffix} is \t{ebuild} or
-    \t{kdebuild-1}.
-}{
-    \item \label{file-extension} \t{suffix} is \t{ebuild}.
-}
+\item \label{file-extension} \t{suffix} is \t{ebuild}.
 \end{compactitem}
 
 Package managers must ignore any ebuild file that does not match these rules.

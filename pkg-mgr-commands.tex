@@ -22,23 +22,6 @@ The following commands affect this behaviour:
 \end{description}
 
 \begin{centertable}{EAPI Command Failure Behaviour} \label{tab:commands-die-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Command failure behaviour}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{nonfatal}?}} \\
-            \midrule
-    \t{0} & Non-zero exit & No \\
-    \t{1} & Non-zero exit & No \\
-    \t{kdebuild-1} & Non-zero exit & No \\
-    \t{2} & Non-zero exit & No \\
-    \t{3} & Non-zero exit & No \\
-    \t{4} & Aborts & Yes \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l l }
         \toprule
             \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -52,7 +35,6 @@ The following commands affect this behaviour:
     \t{4} & Aborts & Yes \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \subsubsection{Banned commands}
@@ -61,29 +43,7 @@ The following commands affect this behaviour:
 \featurelabel{banned-commands} Some commands are banned in some EAPIs. If a banned command is
 called, the package manager must abort the build process indicating an error.
 
-\IFKDEBUILDELSE
-{
-    \begin{centertable}{Banned commands} \label{tab:banned-commands-table}
-    \begin{tabular}{ l l l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{3}{c}{\textbf{Command banned?}} \\
-        \multicolumn{1}{c}{} &
-        \multicolumn{1}{c}{\textbf{\t{dohard}}} &
-        \multicolumn{1}{c}{\textbf{\t{dohtml}}} &
-        \multicolumn{1}{c}{\textbf{\t{dosed}}} \\
-        \midrule
-    \t{0} & No & No & No \\
-    \t{1} & No & No & No \\
-    \t{kdebuild-1} & Yes & Yes & Yes \\
-    \t{2} & No & No & No \\
-    \t{3} & No & No & No \\
-    \t{4} & Yes & No & Yes \\
-    \bottomrule
-    \end{tabular}
-    \end{centertable}
-}{
-    \begin{centertable}{Banned commands} \label{tab:banned-commands-table}
+\begin{centertable}{Banned commands} \label{tab:banned-commands-table}
     \begin{tabular}{ l l l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -99,8 +59,7 @@ called, the package manager must abort the build process indicating an error.
     \t{4} & Yes & Yes \\
     \bottomrule
     \end{tabular}
-    \end{centertable}
-}
+\end{centertable}
 
 \subsubsection{Sandbox commands}
 These commands affect the behaviour of the sandbox. Each command takes a single directory as
@@ -186,22 +145,6 @@ has returned.
     \end{itemize}
 
     \begin{centertable}{Extra \t{econf} arguments for EAPIs} \label{tab:econf-options-table}
-    \IFKDEBUILDELSE
-    {
-        \begin{tabular}{ l l l }
-            \toprule
-                \multicolumn{1}{c}{\textbf{EAPI}} &
-                \multicolumn{1}{c}{\textbf{-{}-disable-dependency-tracking}?} \\
-                \midrule
-        \t{0} & No \\
-        \t{1} & No \\
-        \t{kdebuild-1} & No \\
-        \t{2} & No \\
-        \t{3} & No \\
-        \t{4} & Yes \\
-        \bottomrule
-        \end{tabular}
-    }{
         \begin{tabular}{ l l l }
             \toprule
                 \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -214,7 +157,6 @@ has returned.
         \t{4} & Yes \\
         \bottomrule
         \end{tabular}
-    }
     \end{centertable}
 
     \t{econf} must be implemented internally---that is, as a bash function and not an external
@@ -331,13 +273,6 @@ that can be passed to \t{dohtml} are as follows:
     It is undefined whether a failure shall occur if \t{-r} is not specified and a directory is
     encountered. Ebuilds must not rely upon any particular behaviour.
 
-\IFKDEBUILDELSE
-{
-    In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as
-    per section ~\ref{sec:banned-commands}.
-}{
-}
-
 \item[doinfo] Installs a GNU Info file into the \t{/usr/share/info} area with file mode \t{0644}.
     Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
@@ -402,19 +337,9 @@ that can be passed to \t{dohtml} are as follows:
 
 \item[dosbin] As \t{dobin}, but installs to \t{DESTTREE/sbin}.
 
-\IFKDEBUILDELSE
-{
-    \item[dosym] Creates a symbolic link named as for its second parameter, pointing to the first.
-
-        \featurelabel{dosym-dodir} If the directory containing the new link does not exist, creates
-        it if EAPI is listed in table~\ref{tab:dosym-table} as making the directory, or aborts the
-        build process otherwise.  Failure behaviour is EAPI dependent as per
-        section~\ref{sec:failure-behaviour}.
-}{
-    \item[dosym] Creates a symbolic link named as for its second parameter, pointing to the first. If
-        the directory containing the new link does not exist, creates it. Failure behaviour is EAPI
-        dependent as per section~\ref{sec:failure-behaviour}.
-}
+\item[dosym] Creates a symbolic link named as for its second parameter, pointing to the first. If
+    the directory containing the new link does not exist, creates it. Failure behaviour is EAPI
+    dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[fowners] Acts as for \t{chown}, but takes paths relative to the image directory. Failure
     behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
@@ -453,22 +378,6 @@ that can be passed to \t{dohtml} are as follows:
 \end{description}
 
 \begin{centertable}{EAPIs supporting \t{dodoc -r}} \label{tab:dodoc-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{dodoc -r}?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{kdebuild-1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & Yes \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l }
         \toprule
             \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -481,26 +390,9 @@ that can be passed to \t{dohtml} are as follows:
     \t{4} & Yes \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \begin{centertable}{EAPIs supporting symlinks for \t{doins}} \label{tab:doins-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{\t{doins} supports symlinks?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{kdebuild-1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & Yes \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l }
         \toprule
             \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -513,26 +405,9 @@ that can be passed to \t{dohtml} are as follows:
     \t{4} & Yes \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \begin{centertable}{EAPIs supporting \t{doman} languages} \label{tab:doman-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{doman} languages?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{kdebuild-1} & No \\
-    \t{2} & Yes \\
-    \t{3} & Yes \\
-    \t{4} & Yes \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l }
         \toprule
             \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -545,28 +420,7 @@ that can be passed to \t{dohtml} are as follows:
     \t{4} & Yes \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
-
-\IFKDEBUILDELSE
-{
-    \begin{centertable}{EAPIs where \t{dosym} makes the directory} \label{tab:dosym-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{\t{dosym} makes the directory?}} \\
-        \midrule
-    \t{0} & Yes \\
-    \t{1} & Yes \\
-    \t{kdebuild-1} & No \\
-    \t{2} & Yes \\
-    \t{3} & Yes \\
-    \t{4} & Yes \\
-    \bottomrule
-    \end{tabular}
-    \end{centertable}
-}{
-}
 
 \subsubsection{Commands affecting install destinations}
 The following commands are used to set the various destination trees, all relative to \t{\$\{D\}},
@@ -647,23 +501,6 @@ in table~\ref{tab:compression-table} as supporting \t{docompress}.
 \end{description}
 
 \begin{centertable}{EAPIs supporting controllable compression} \label{tab:compression-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports controllable compression?}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{docompress}?}} \\
-            \midrule
-    \t{0} & No & No \\
-    \t{1} & No & No \\
-    \t{kdebuild-1} & No & No \\
-    \t{2} & No & No \\
-    \t{3} & No & No \\
-    \t{4} & Yes & Yes \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l l }
         \toprule
             \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -677,7 +514,6 @@ in table~\ref{tab:compression-table} as supporting \t{docompress}.
     \t{4} & Yes & Yes \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \subsubsection{Use List Functions}
@@ -705,22 +541,6 @@ instead of \t{-{}-with-} or \t{-{}-without-}.
 \end{description}
 
 \begin{centertable}{EAPI Behaviour for Use Queries not in IUSE\_EFFECTIVE} \label{tab:use-list-strictness}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Behaviour}} \\
-            \midrule
-    \t{0} & Undefined \\
-    \t{1} & Undefined  \\
-    \t{kdebuild-1} & Undefined  \\
-    \t{2} & Undefined \\
-    \t{3} & Undefined \\
-    \t{4} & Error \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l }
         \toprule
             \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -733,7 +553,6 @@ instead of \t{-{}-with-} or \t{-{}-without-}.
     \t{4} & Error \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \subsubsection{Text List Functions}
@@ -800,22 +619,6 @@ has returned.
     being in the system set or via dependencies.
 
 \begin{centertable}{\t{unpack} extensions for EAPIs} \label{tab:unpack-extensions-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{\t{.xz} and \t{.tar.xz}?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{kdebuild-1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & Yes \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l }
         \toprule
             \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -828,7 +631,6 @@ has returned.
     \t{4} & Yes \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \item[inherit] See section~\ref{sec:inherit}.
@@ -841,22 +643,6 @@ has returned.
 \end{description}
 
 \begin{centertable}{EAPIs supporting the \t{default} function} \label{tab:default-function-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{default} function?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{kdebuild-1} & No \\
-    \t{2} & Yes \\
-    \t{3} & Yes \\
-    \t{4} & Yes \\
-    \bottomrule
-    \end{tabular}
-}{
     \begin{tabular}{ l l }
         \toprule
             \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -869,7 +655,6 @@ has returned.
     \t{4} & Yes \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \subsubsection{Debug Commands}

@@ -55,23 +55,6 @@ the package manager's behaviour is undefined; ideally, an error in one ebuild sh
 operations upon other ebuilds or packages.
 
 \begin{centertable}{EAPIs supporting \t{IUSE} defaults} \label{tab:iuse-defaults-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{IUSE} defaults?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & Yes \\
-    \t{kdebuild-1} & Yes \\
-    \t{2} & Yes \\
-    \t{3} & Yes \\
-    \t{4} & Yes \\
-    \bottomrule
-    \end{tabular}
-}
-{
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -84,7 +67,6 @@ operations upon other ebuilds or packages.
     \t{4} & Yes \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \section{Optional Ebuild-defined Variables}
@@ -95,18 +77,9 @@ Ebuilds may define any of the following variables:
 \item[DEPEND] See section~\ref{sec:dependencies}.
 \item[EAPI] The EAPI. See below for defaults.
 \item[PDEPEND] See section~\ref{sec:dependencies}.
-\IFKDEBUILDELSE
-{
-    \item[PROVIDE] \featurelabel{provide} Zero or more qualified package names of any \e{old style}
-        virtuals provided by this package. See section~\ref{sec:dependencies} for full syntax.  In EAPIs
-        listed in table~\ref{tab:provide-table} as not supporting \t{PROVIDE}, ebuilds must not set this
-        variable and the package manager must reject any ebuild that does so.
-        \label{ebuild-var-provide}
-}{
-    \item[PROVIDE] Zero or more qualified package names of any \e{old style}
-        virtuals provided by this package. See section~\ref{sec:dependencies} for full syntax.
-        \label{ebuild-var-provide}
-}
+\item[PROVIDE] Zero or more qualified package names of any \e{old style}
+    virtuals provided by this package. See section~\ref{sec:dependencies} for full syntax.
+    \label{ebuild-var-provide}
 \item[RDEPEND] See section~\ref{sec:dependencies}. For some EAPIs, \t{RDEPEND} has special behaviour
     for its value if unset and when used with an eclass. See section~\ref{sec:rdepend-depend} for
     details.
@@ -120,44 +93,7 @@ Ebuilds may define any of the following variables:
     etc. Defaults to \t{\$\{WORKDIR\}/\$\{P\}}.
 \end{description}
 
-\IFKDEBUILDELSE
-{
-    \begin{centertable}{EAPIs supporting \t{PROVIDE}} \label{tab:provide-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{PROVIDE}?}} \\
-        \midrule
-    \t{0} & Yes \\
-    \t{1} & Yes \\
-    \t{kdebuild-1} & No \\
-    \t{2} & Yes \\
-    \t{3} & Yes \\
-    \t{4} & Yes \\
-    \bottomrule
-    \end{tabular}
-    \end{centertable}
-}{
-}
-
 \begin{centertable}{EAPIs supporting \t{PROPERTIES}} \label{tab:properties-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{PROPERTIES}?}} \\
-        \midrule
-    \t{0} & Optionally \\
-    \t{1} & Optionally \\
-    \t{kdebuild-1} & Optionally \\
-    \t{2} & Optionally \\
-    \t{3} & Optionally \\
-    \t{4} & Yes \\
-    \bottomrule
-    \end{tabular}
-}
-{
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -170,7 +106,6 @@ Ebuilds may define any of the following variables:
     \t{4} & Yes \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \subsection{EAPI}
@@ -183,14 +118,6 @@ The package manager must either pre-set the \t{EAPI} variable to \t{0} or ensure
 before sourcing the ebuild for metadata generation. When using the ebuild for other purposes, the
 package manager must either pre-set \t{EAPI} to the value specified by the ebuild's metadata or
 ensure that it is unset.
-
-\IFKDEBUILDELSE
-{
-    \featurelabel{pre-source-eapi} When sourcing an ebuild with file extension \t{kdebuild-1}, the
-    package manager must pre-set the \t{EAPI} variable to \t{kdebuild-1}; leaving it empty is not
-    allowed. Ebuilds with this extension must not modify the \t{EAPI} variable.
-}{
-}
 
 If any of these variables are set to invalid values, the package manager's behaviour is undefined;
 ideally, an error in one ebuild should not prevent operations upon other ebuilds or packages.
@@ -207,23 +134,6 @@ any \t{DEPEND} or \t{RDEPEND} set in an eclass does not change the implicit \t{R
 the ebuild portion, and any \t{DEPEND} value set in an eclass does not get added to \t{RDEPEND}.
 
 \begin{centertable}{EAPIs with \t{RDEPEND=DEPEND} Default} \label{tab:rdepend-depend-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{\t{RDEPEND=DEPEND}?}} \\
-        \midrule
-    \t{0} & Yes \\
-    \t{1} & Yes \\
-    \t{kdebuild-1} & Yes \\
-    \t{2} & Yes \\
-    \t{3} & Yes \\
-    \t{4} & No \\
-    \bottomrule
-    \end{tabular}
-}
-{
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -236,7 +146,6 @@ the ebuild portion, and any \t{DEPEND} value set in an eclass does not get added
     \t{4} & No \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 \section{Magic Ebuild-defined Variables}
@@ -269,23 +178,6 @@ variable defined, and must treat an empty string as ``this information is not av
 based upon any variant condition.
 
 \begin{centertable}{EAPIs supporting \t{DEFINED\_PHASES}} \label{tab:defined-phases-table}
-\IFKDEBUILDELSE
-{
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{DEFINED\_PHASES}?}} \\
-        \midrule
-    \t{0} & Optionally \\
-    \t{1} & Optionally \\
-    \t{kdebuild-1} & Optionally \\
-    \t{2} & Optionally \\
-    \t{3} & Optionally \\
-    \t{4} & Yes \\
-    \bottomrule
-    \end{tabular}
-}
-{
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
@@ -298,7 +190,6 @@ based upon any variant condition.
     \t{4} & Yes \\
     \bottomrule
     \end{tabular}
-}
 \end{centertable}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
