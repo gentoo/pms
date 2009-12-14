@@ -60,8 +60,47 @@ as follows:
     set*id bit set.
 \end{compactitem}
 
-On SELinux systems, the SELinux context must also be preserved. Other file attributes, including
-modification time, may be discarded.
+On SELinux systems, the SELinux context must also be preserved. Other
+file attributes may be discarded.
+
+\subsection{File modification times}
+
+\featurelabel{mtime-preserve}
+In EAPIs listed in table~\ref{tab:mtime-preserve}, the package manager
+must preserve modification times of regular files. This includes files
+being compressed before merging. Exceptions to this are files newly
+created by the package manager and binary object files being stripped
+of symbols.
+
+When preserving, the seconds part of every regular file's mtime must
+be preserved exactly. The sub-second part must either be set to zero,
+or set to the greatest value supported by the operating system and
+filesystem that is not greater than the sub-second part of the
+original time.
+
+For any given destination filesystem, the package manager must ensure
+that for any two preserved files $a$, $b$ in that filesystem the
+relation $\mbox{mtime}(a) \leq \mbox{mtime}(b)$ still holds, if it
+held under the original image directory.
+
+In other EAPIs, the behaviour with respect to file modification times
+is undefined.
+
+\begin{centertable}{Preservation of file modification times (mtimes)}
+    \label{tab:mtime-preserve}
+    \begin{tabular}{ l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{mtimes preserved?}} \\
+            \midrule
+    \t{0} & Undefined \\
+    \t{1} & Undefined \\
+    \t{2} & Undefined \\
+    \t{3} & Yes \\
+    \t{4} & Yes \\
+    \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \subsection{Configuration File Protection}
 \label{sec:config-protect}
