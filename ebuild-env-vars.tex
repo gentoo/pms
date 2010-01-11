@@ -13,7 +13,7 @@ variable.
 
 \begin{landscape}
 \begin{longtable}{l p{0.15\textwidth} l p{0.5\textwidth}}
-\caption{Defined variables}\\
+\caption{Defined variables\label{tab:defined_vars}}\\
 \toprule
 \multicolumn{1}{c}{\b{Variable}} &
 \multicolumn{1}{c}{\b{Legal in}} &
@@ -104,6 +104,11 @@ variable.
    \t{ROOT}\@. Also of note is that in a cross-compiling environment, binaries inside of \t{ROOT}
    will not be executable on the build machine, so ebuilds must not call them. \t{ROOT} must be
    non-empty and end in a trailing slash. \\
+\t{EROOT} &
+    \t{pkg\_*} &
+    No &
+    Like \t{ROOT}, but with \t{EPREFIX} appended. This is a convenience variable. See also the
+    \t{EPREFIX} variable. \\
 \t{T} &
     All &
     Partially\footnote{Consistent and preserved across a single connected sequence of install or
@@ -120,6 +125,14 @@ variable.
     Ditto &
     The full path to an appropriate temporary directory for use by any programs invoked by the
     ebuild that may read or modify the home directory. \\
+\t{EPREFIX} &
+    All &
+    Yes &
+    The normalised offset-prefix path of an offset installation.  When \t{EPREFIX} is not set in the
+    calling environment, \t{EPREFIX} defaults to the built-in offset-prefix that was set during
+    installation of the package manager. When a different \t{EPREFIX} value than the built-in value is set
+    in the calling environment, a cross-prefix build is performed where using the existing utilities, a
+    package is built for the given \t{EPREFIX}, akin to \t{ROOT}. See also~\ref{sec:offset-vars}. \\
 \t{D} &
     \t{src\_install} &
     No &
@@ -130,6 +143,11 @@ variable.
     Yes &
     Contains the full path to the image that is about to be or has just been merged. Must be
     non-empty and end in a trailing slash. \\
+\t{ED} &
+    \t{src\_install} &
+    See \t{D} &
+    Like \t{D}, but with \t{EPREFIX} appended. This is a convenience variable. See also the
+    \t{EPREFIX} variable. \\
 \t{IMAGE}\footnote{Deprecated in favour of \t{D}.} &
     \t{pkg\_preinst}, \t{pkg\_postinst} &
     Yes &
@@ -194,6 +212,24 @@ variable.
     \t{3} & Yes & Yes & No & No \\
     \t{4} & No & No & Yes & Yes \\
     \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\begin{centertable}{EAPIs supporting offset-prefix env variables}
+    \label{tab:offset-env-vars-table}
+    \begin{tabular}{ l l l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{\t{EPREFIX}?}} &
+        \multicolumn{1}{c}{\textbf{\t{EROOT}?}} &
+        \multicolumn{1}{c}{\textbf{\t{ED}?}} \\
+        \midrule
+        \t{0} & No & No & No \\
+        \t{1} & No & No & No \\
+        \t{2} & No & No & No \\
+        \t{3} & Yes & Yes & Yes \\
+        \t{4} & Yes & Yes & Yes \\
+        \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -289,6 +325,34 @@ installing \t{foo-2:2} to replace \t{foo-2:1} and \t{foo-3:2}.
 
 In EAPIs listed in table~\ref{tab:env-vars-table} as supporting it, the \t{REPLACED\_BY} variable
 shall be defined in \t{pkg\_prerm} and \t{pkg\_postrm}. It shall contain at most one value.
+
+\subsection{Offset-prefix variables \t{EPREFIX}, \t{EROOT} and \t{ED}}
+\label{sec:offset-vars}
+
+\begin{centertable}{EAPIs supporting offset-prefix}
+    \label{tab:offset-support-table}
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports offset-prefix?}}\\
+        \midrule
+        \t{0} & No \\
+        \t{1} & No \\
+        \t{2} & No \\
+        \t{3} & Yes \\
+        \t{4} & Yes \\
+        \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\featurelabel{offset-prefix-vars} Table~\ref{tab:offset-support-table} lists the EAPIs which support
+offset-prefix installations. This support was initially added in EAPI 3, in the form of three extra
+variables.  Two of these, \t{EROOT} and \t{ED}, are convenience variables using the variable
+\t{EPREFIX}. In EAPIs that do not support an offset-prefix, the installation offset is hardwired to
+\t{/usr}. In offset-prefix supporting EAPIs the installation offset is set as \t{\$\{EPREFIX\}/usr}
+and hence can be adjusted using the variable \t{EPREFIX}. Note that the behaviour of offset-prefix
+aware and agnostic is the same when \t{EPREFIX} is set to the empty string in offset-prefix aware
+EAPIs.  The latter do have the variables \t{ED} and \t{EROOT} properly set, though.
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 

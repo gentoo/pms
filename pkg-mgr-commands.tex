@@ -132,12 +132,12 @@ has returned.
 
     \featurelabel{econf-options}
     \begin{itemize}
-    \item -{}-prefix must default to \t{/usr} unless overridden by \t{econf}'s caller.
-    \item -{}-mandir must be \t{/usr/share/man}
-    \item -{}-infodir must be \t{/usr/share/info}
-    \item -{}-datadir must be \t{/usr/share}
-    \item -{}-sysconfdir must be \t{/etc}
-    \item -{}-localstatedir must be \t{/var/lib}
+    \item -{}-prefix must default to \t{\$\{EPREFIX\}/usr} unless overridden by \t{econf}'s caller.
+    \item -{}-mandir must be \t{\$\{EPREFIX\}/usr/share/man}
+    \item -{}-infodir must be \t{\$\{EPREFIX\}/usr/share/info}
+    \item -{}-datadir must be \t{\$\{EPREFIX\}/usr/share}
+    \item -{}-sysconfdir must be \t{\$\{EPREFIX\}/etc}
+    \item -{}-localstatedir must be \t{\$\{EPREFIX\}/var/lib}
     \item -{}-host must be the value of the \t{CHOST} environment variable.
     \item -{}-libdir must be set according to Algorithm~\ref{alg:econf-libdir}.
     \item -{}-disable-dependency-tracking, if the EAPI is listed in
@@ -159,6 +159,12 @@ has returned.
         \end{tabular}
     \end{centertable}
 
+    Note that the \t{\$\{EPREFIX\}} component represents the same offset-prefix as described in
+    Table~\ref{tab:defined_vars}.  It facilitates offset-prefix installations which is supported by EAPIs
+    listed in Table~\ref{tab:offset-prefix-table}. When no offset-prefix installation is in effect,
+    \t{EPREFIX} becomes the empty string, making the behaviour of \t{econf} equal for both offset-prefix
+    supporting and agnostic EAPIs.
+
     \t{econf} must be implemented internally---that is, as a bash function and not an external
     script. Should any portion of it fail, it must abort the build using \t{die}, unless run using
     \t{nonfatal}, in which case it must return non-zero exit status.
@@ -166,7 +172,7 @@ has returned.
 \begin{algorithm}
 \caption{econf -{}-libdir logic} \label{alg:econf-libdir}
 \begin{algorithmic}[1]
-\STATE let prefix=/usr
+\STATE let prefix=\$\{EPREFIX\}/usr
 \IF{the caller specified -{}-prefix=\$p}
     \STATE let prefix=\$p
 \ENDIF
@@ -193,14 +199,19 @@ has returned.
     to \t{einstall} are passed verbatim to \t{emake}, as shown. Failure behaviour is EAPI dependent
     as per section~\ref{sec:failure-behaviour}.
 
+    The variable \t{ED} is defined as in Table~\ref{tab:defined_vars} and depends on the use of an
+    offset-prefix. When such offset-prefix is absent, \t{ED} is equivalent to \t{D}. \t{ED} is always
+    available in EAPIs that support offset-prefix installations as listed in
+    Table~\ref{tab:offset-env-vars-table}, hence EAPIs lacking offset-prefix support should use \t{D}
+    instead of \t{ED} in the command given in Listing~\ref{lst:einstall}.
 \begin{listing}[H]
   \caption{einstall command}\label{lst:einstall}
   \begin{verbatim}
 emake \
-   prefix="${D}"/usr \
-   mandir="${D}"/usr/share/man \
-   infodir="${D}"/usr/share/info \
-   libdir="${D}"/usr/$(get_libdir) \
+   prefix="${ED}"/usr \
+   mandir="${ED}"/usr/share/man \
+   infodir="${ED}"/usr/share/info \
+   libdir="${ED}"/usr/$(get_libdir) \
    "$@" \
    install
   \end{verbatim}
@@ -211,15 +222,21 @@ emake \
 \subsubsection{Installation commands}
 These commands are used to install files into the staging area, in cases where the package's \t{make
 install} target cannot be used or does not install all needed files. Except where otherwise stated,
-all filenames created or modified are relative to the staging directory, given by \t{D}. These
-commands must all be external programs and not bash functions or aliases---that is, they must be
-callable from \t{xargs}. Ebuilds must not run any of these commands once the current phase function
-has returned.
+all filenames created or modified are relative to the staging directory including the offset-prefix
+\t{ED} in offset-prefix aware EAPIs, or just the staging directory \t{D} in offset-prefix agnostic
+EAPIs. These commands must all be external programs and not bash functions or aliases---that is, they
+must be callable from \t{xargs}. Ebuilds must not run any of these commands once the current phase
+function has returned.
 
 \begin{description}
-\item[dobin] Installs the given files into \t{DESTTREE/bin}, where \t{DESTTREE} defaults to
-    \t{/usr}. Gives the files mode \t{0755} and ownership \t{root:root}. Failure behaviour is EAPI
-    dependent as per section~\ref{sec:failure-behaviour}.
+\item[dobin] Installs the given files into \t{DESTTREE/bin}, where
+    \t{DESTTREE} defaults to \t{/usr}. Gives the files mode \t{0755}
+    and transfers file ownership to the superuser or its equivalent on
+    the system or installation at hand. For instance on Gentoo Linux in
+    a non-offset-prefix installation this ownership is \t{root:root},
+    while on an offset-prefix aware installation this may be
+    \t{joe:users}. Failure behaviour is EAPI dependent as per
+    section~\ref{sec:failure-behaviour}.
 
 \item[doconfd] Installs the given config files into \t{/etc/conf.d/}, by default with file mode
     \t{0644}. This can be overridden by setting \t{INSOPTIONS} with the \t{insopts} function.
@@ -257,7 +274,7 @@ variable with the \t{docinto} function. Files to be installed automatically are 
 extension and the default extensions are \t{css}, \t{gif}, \t{htm}, \t{html}, \t{jpeg}, \t{jpg},
 \t{js} and \t{png}. These default extensions can be extended or reduced (see below). The options
 that can be passed to \t{dohtml} are as follows:
-    \begin{description}
+\begin{description}
     \item{\t{-r}} --- enables recursion into directories.
     \item{\t{-V}} --- enables verbosity.
     \item{\t{-A}} --- adds file type extensions to the default list.
@@ -265,8 +282,9 @@ that can be passed to \t{dohtml} are as follows:
     \item{\t{-f}} --- list of files that are able to be installed.
     \item{\t{-x}} --- list of directories that files will not be installed from (only used in
     conjunction with \t{-r}).
-    \item{\t{-p}} --- sets a document prefix for installed files.
-    \end{description}
+    \item{\t{-p}} --- sets a document prefix for installed files, not to be confused with the global
+    offset-prefix.
+\end{description}
 
     Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
@@ -423,16 +441,20 @@ that can be passed to \t{dohtml} are as follows:
 \end{centertable}
 
 \subsubsection{Commands affecting install destinations}
-The following commands are used to set the various destination trees, all relative to \t{\$\{D\}},
-used by the above installation commands. They must be shell functions or aliases, due to the need to
-set variables read by the above commands. Ebuilds must not run any of these commands once the
-current phase function has returned.
+The following commands are used to set the various destination trees, all relative to \t{\$\{ED\}} in
+offset-prefix aware EAPIs and relative to \t{\$\{D\}} in offset-prefix agnostic EAPIs, used by the
+above installation commands. They must be shell functions or aliases, due to the need to set variables
+read by the above commands. Ebuilds must not run any of these commands once the current phase function
+has returned.
 
 \begin{description}
 
-\item[into] Sets the value of \t{DESTTREE} for future invocations of the above utilities.  Creates
-the directory under \t{\$\{D\}}, using \t{install -d} with no additional options, if it does not
-already exist. Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
+\item[into] Sets the value of \t{DESTTREE} for future invocations
+    of the above utilities. Creates the directory under \t{\$\{ED\}}
+    in offset-prefix aware EAPIs or under \t{\$\{D\}} in offset-prefix
+    agnostic EAPIs, using \t{install -d} with no additional options,
+    if it does not already exist. Failure behaviour is EAPI dependent
+    as per section~\ref{sec:failure-behaviour}.
 
 \item[insinto] Sets the value of \t{INSDESTTREE} for future invocations of the above utilities. May
     create the directory, as specified for \t{into}.
@@ -456,9 +478,10 @@ already exist. Failure behaviour is EAPI dependent as per section~\ref{sec:failu
 \subsubsection{Commands affecting install compression}
 
 \featurelabel{controllable-compress} In EAPIs listed in table~\ref{tab:compression-table} as
-supporting controllable compression, the package manager may optionally compress a subset of the
-files under the \t{D} directory. To control which directories may or may not be compressed, the
-package manager shall maintain two lists:
+supporting controllable compression, the package manager may optionally compress a subset of the files
+under the \t{ED} directory in offset-prefix aware EAPIs or the \t{D} directory in offset-prefix
+agnostic EAPIs. To control which directories may or may not be compressed, the package manager shall
+maintain two lists:
 
 \begin{compactitem}
 \item An inclusion list, which initially contains \t{/usr/share/doc}, \t{/usr/share/info} and
@@ -468,7 +491,8 @@ package manager shall maintain two lists:
 
 The optional compression shall be carried out after \t{src\_install} has completed, and before the
 execution of any subsequent phase function. For each item in the inclusion list, pretend it has the
-value of the \t{D} variable prepended, then:
+value of the \t{ED} variable in offset-prefix aware EAPIs or the \t{D}
+variable in offset-prefix agnostic EAPIs prepended, then:
 
 \begin{compactitem}
 \item If it is a directory, act as if every file or directory immediately under this directory
@@ -478,7 +502,8 @@ value of the \t{D} variable prepended, then:
 \end{compactitem}
 
 Whether an item is to be excluded is determined as follows: For each item in the exclusion list,
-pretend it has the value of the \t{D} variable prepended, then:
+pretend it has the value of the \t{ED} variable in offset-prefix aware EAPIs or the \t{D} variable in
+offset-prefix agnostic EAPIs prepended, then:
 
 \begin{compactitem}
 \item If it is a directory, act as if every file or directory immediately under this directory
@@ -572,10 +597,11 @@ has returned.
 
 \begin{description}
 \item[dosed] Takes any number of arguments, which can be files or \t{sed} expressions. For each
-    argument, if it names, relative to \t{D} a file which exists, then \t{sed} is run with the
-    current expression on that file. Otherwise, the current expression is set to the text of the
-    argument. The initial value of the expression is \t{s:\$\{D\}::g}. In EAPIs listed in
-    table~\ref{tab:banned-commands-table}, this command is banned as per
+    argument, if it names, relative to \t{ED} (offset-prefix aware EAPIs) or \t{D} (offset-prefix agnostic
+    EAPIs) a file which exists, then \t{sed} is run with the current expression on that file. Otherwise,
+    the current expression is set to the text of the argument. The initial value of the expression is
+    \t{s:\$\{ED\}::g} in offset-prefix aware EAPIs and \t{s:\$\{D\}::g} in offset-prefix agnostic
+    EAPIs. In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as per
     section~\ref{sec:banned-commands}. Failure behaviour is EAPI dependent as per
     section~\ref{sec:failure-behaviour}.
 
@@ -606,7 +632,10 @@ has returned.
     \item rar files (\t{*.rar, *.RAR}). Ebuilds must ensure that RARLAB's unrar is installed.
     \item LHA archives (\t{*.LHA, *.LHa, *.lha, *.lhz}). Ebuilds must ensure that the lha program is
     installed.
-    \item ar archives (\t{*.a, *.deb}). Ebuilds must ensure that GNU binutils is installed.
+    \item ar archives (\t{*.a}). Ebuilds must ensure that GNU binutils is installed.
+    \item deb packages (\t{*.deb}). Ebuilds must ensure that the deb2targz program is installed on
+    those platforms where the GNU binutils ar program is not available and the installed ar program is
+    incompatible with GNU archives. Otherwise, ebuilds must ensure that GNU binutils is installed.
     \item lzma-compressed files (\t{*.lzma}). Ebuilds must ensure that LZMA Utils is installed.
     \item lzma-compressed tar files (\t{*.tar.lzma}). Ebuilds must ensure that LZMA Utils and
         GNU tar are installed.

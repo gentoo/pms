@@ -106,6 +106,9 @@ Use dependencies & \compactfeatureref{use-deps} &
 \t{REPLACED\_BY\_VERSION} & \compactfeatureref{replace-version-vars} &
     No & No & No & No & Yes \\
 
+\t{EPREFIX}, \t{ED}, \t{EROOT} & \compactfeatureref{offset-prefix-vars} &
+    No & No & No & Yes & Yes \\
+
 Most utilities die & \compactfeatureref{die-on-failure} &
     No & No & No & No & Yes \\
 
@@ -187,8 +190,9 @@ EAPI 2 is EAPI 1 with the following changes:
 
 EAPI 3 is EAPI 2 with the following changes:
 \begin{compactitem}
+\item Offset-prefix support by definition of \t{EPREFIX}, \t{ED} and \t{EROOT},
+     \featureref{offset-prefix-vars}
 \item File modification times are preserved, \featureref{mtime-preserve}.
-\item (to be completed)
 \end{compactitem}
 
 \section*{EAPI 4}
