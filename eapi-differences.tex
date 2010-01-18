@@ -140,7 +140,7 @@ Controllable compression & \compactfeatureref{controllable-compress} &
     No & No & No & No & Yes \\
 
 \t{unpack} support for \t{xz}? & \compactfeatureref{unpack-extensions} &
-    No & No & No & No & Yes \\
+    No & No & No & Yes & Yes \\
 
 \t{default} function & \compactfeatureref{default-func} &
     No & No & Yes & Yes & Yes \\
@@ -191,7 +191,8 @@ EAPI 2 is EAPI 1 with the following changes:
 EAPI 3 is EAPI 2 with the following changes:
 \begin{compactitem}
 \item Offset-prefix support by definition of \t{EPREFIX}, \t{ED} and \t{EROOT},
-     \featureref{offset-prefix-vars}
+    \featureref{offset-prefix-vars}.
+\item \t{unpack} supports \t{.xz} and \t{.tar.xz}, \featureref{unpack-extensions}.
 \item File modification times are preserved, \featureref{mtime-preserve}.
 \end{compactitem}
 
@@ -210,7 +211,6 @@ EAPI 4 is EAPI 3 with the following changes:
 \item \t{dodoc -r} support, \featureref{dodoc}.
 \item \t{doins} supports symlinks, \featureref{doins}.
 \item \t{dohard}, \t{dosed} banned, \featureref{banned-commands}.
-\item \t{unpack} supports \t{.xz} and \t{.tar.xz}, \featureref{unpack-extensions}.
 \item \t{econf} adds \t{-{}-disable-dependency-tracking}, \featureref{econf-options}.
 \item \t{pkg\_info} can run on non-installed packages, \featureref{pkg-info}.
 \item \t{USE} is calculated differently, \featureref{profile-iuse-injection}.
