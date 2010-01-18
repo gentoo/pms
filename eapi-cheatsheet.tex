@@ -138,9 +138,22 @@ nonetheless.
     \featureref{default-func}.
     \item[\code{doman} language support] The \code{doman} installation
     function recognizes lanugage specific man page extensions and
-    behaves accordingly.  See \featureref{doman-langs}
+    behaves accordingly.  See \featureref{doman-langs}.
 \end{description}
 \newpage
+
+\section{EAPI 3 (2010-01-18)}
+\label{sec:cs:eapi3}
+\subsection{Additions/Changes}
+\label{sec:cs:eapi3-additions}
+\begin{description}
+    \item[Support for \code{.xz}] Unpack of \code{.xz} and
+    \code{.tar.xz} files is possible without any custom
+    \code{src\_unpack} functions.  See \featureref{unpack-extensions}.
+    \item[Offset prefix] Supporting installation on Prefix-enabled
+    systems\footnote{\url{http://prefix.gentoo.org/}} will be easier
+    with this EAPI.
+\end{description}
 \section{EAPI 4 (not yet approved)}
 \label{sec:cs:eapi4}
 \subsection{Additions/Changes}
@@ -162,9 +175,6 @@ nonetheless.
     \item[No RDEPEND fall-back] The package manager will not fall back
     to \code{RDEPEND=DEPEND} if RDEPEND is undefined.  See
     \featureref{rdepend-depend}
-    \item[Support for \code{.xz}] Unpack of \code{.xz} and
-    \code{.tar.xz} files is possible.  See
-    \featureref{unpack-extensions}.
     \item[Slot operators] Dependencies that are both DEPEND and
     RDEPEND and that can match multiple slots should specify one of:
     \begin{description}
@@ -222,4 +232,3 @@ nonetheless.
 %%% LaTeX-item-indent: 0
 %%% TeX-brace-indent-level: 4
 %%% End:
-
