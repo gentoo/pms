@@ -14,15 +14,14 @@
 \usepackage[orig,english]{isodate}
 \usepackage[scaled=.90]{helvet}
 \newcommand{\code}[1]{\texttt{#1}}
-\newcommand{\version}{0.2}
+\newcommand{\version}{0.3}
 \newcommand{\featureref}[1]{\textsc{#1} on page~\pageref{feat:#1}}
 \renewcommand{\familydefault}{\sfdefault}
 \urlstyle{sf}
 \externaldocument{pms}
 
 \title{EAPI Cheat Sheet}
-\author{Christian
-    Faulhammer\thanks{\href{mailto:fauli@gentoo.org}{fauli@gentoo.org}}}
+\author{Gentoo PMS team\thanks{\url{http://www.gentoo.org/proj/en/qa/pms.xml}}}
 \ifthenelse{\equal{\VCDateISO}{}}
 {
     \date{Version \version{}, generated on: \\\today}
@@ -51,8 +50,8 @@
 \begin{abstract}
     An overview of the main EAPI changes in Gentoo, for ebuild
     authors.  For full details, consult the Package Manager
-    Specification\footnote{\url{http://www.gentoo.org/proj/en/qa/pms/}};
-    this is an incomplete summary only.
+    Specification found on the project page; this is
+    an incomplete summary only.
 
     Official Gentoo EAPIs are consecutively numbered integers (0, 1,
     2, \dots).  Except where otherwise noted, an EAPI is the same as
