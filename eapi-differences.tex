@@ -133,6 +133,9 @@ Most utilities die & \compactfeatureref{die-on-failure} &
 \t{doman} languages & \compactfeatureref{doman-langs} &
     No & No & Yes & Yes & Yes \\
 
+\t{doman -i18n} precedence & \compactfeatureref{doman-langs} &
+    N/A & N/A & No & No & Yes \\
+
 Controllable compression & \compactfeatureref{controllable-compress} &
     No & No & No & No & Yes \\
 
@@ -182,7 +185,7 @@ EAPI 2 is EAPI 1 with the following changes:
 \item Different \t{src\_compile} implementation, \featureref{src-compile-2}.
 \item \t{default\_} phase functions for phases \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare},
     \t{src\_configure}, \t{src\_compile} and \t{src\_test}; \featureref{default-phase-funcs}.
-\item \t{doman} languages support, \featureref{doman-langs}.
+\item \t{doman} language detection by filename, \featureref{doman-langs}.
 \item \t{default} function, \featureref{default-func}.
 \end{compactitem}
 
@@ -210,6 +213,7 @@ EAPI 4 is EAPI 3 with the following changes:
 \item Controllable compression and \t{docompress}, \featureref{controllable-compress}.
 \item \t{dodoc -r} support, \featureref{dodoc}.
 \item \t{doins} supports symlinks, \featureref{doins}.
+\item \t{doman -i18n} option takes precedence, \featureref{doman-langs}.
 \item \t{dohard}, \t{dosed} banned, \featureref{banned-commands}.
 \item \t{econf} adds \t{-{}-disable-dependency-tracking}, \featureref{econf-options}.
 \item \t{pkg\_info} can run on non-installed packages, \featureref{pkg-info}.
