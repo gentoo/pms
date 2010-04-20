@@ -177,9 +177,9 @@ EAPI 1 is EAPI 0 with the following changes:
 EAPI 2 is EAPI 1 with the following changes:
 
 \begin{compactitem}
-\item \t{SRC\_URI} arrows, \featureref{src-uri-arrows}.
 \item Use dependencies, \featureref{use-deps}.
 \item \t{!} and \t{!!} blockers, \featureref{bang-strength}.
+\item \t{SRC\_URI} arrows, \featureref{src-uri-arrows}.
 \item \t{src\_prepare}, \featureref{src-prepare}.
 \item \t{src\_configure}, \featureref{src-configure}.
 \item Different \t{src\_compile} implementation, \featureref{src-compile-2}.
@@ -204,27 +204,27 @@ EAPI 3 is EAPI 2 with the following changes:
 EAPI 4 is EAPI 3 with the following changes:
 
 \begin{compactitem}
-\item \t{pkg\_pretend}, \featureref{pkg-pretend}.
+\item \t{PROPERTIES} support is mandatory, \featureref{properties}.
+\item \t{RDEPEND=DEPEND} no longer done, \featureref{rdepend-depend}.
+\item \t{DEFINED\_PHASES} support is mandatory, \featureref{defined-phases}.
 \item Slot operator dependencies, \featureref{slot-operator-deps}.
 \item Use dependency defaults, \featureref{use-dep-defaults}.
-\item \t{DEFINED\_PHASES} support is mandatory, \featureref{defined-phases}.
-\item \t{PROPERTIES} support is mandatory, \featureref{properties}.
+\item \t{S} to \t{WORKDIR} fallback restricted, \featureref{s-workdir-fallback}.
+\item \t{pkg\_pretend}, \featureref{pkg-pretend}.
 \item Default \t{src\_install} no longer a no-op, \featureref{src-install-4}.
-\item Controllable compression and \t{docompress}, \featureref{controllable-compress}.
+\item \t{pkg\_info} can run on non-installed packages, \featureref{pkg-info}.
+\item \t{AA} is gone, \featureref{aa}.
+\item \t{KV} is gone, \featureref{kv}.
+\item \t{USE} is calculated differently, \featureref{profile-iuse-injection}.
+\item \t{REPLACING\_VERSIONS} and \t{REPLACED\_BY\_VERSION}, \featureref{replace-version-vars}.
+\item Utilities now die on failure, \featureref{die-on-failure}, unless called under \t{nonfatal},
+    \featureref{nonfatal}
+\item \t{dohard}, \t{dosed} banned, \featureref{banned-commands}.
+\item \t{econf} adds \t{-{}-disable-dependency-tracking}, \featureref{econf-options}.
 \item \t{dodoc -r} support, \featureref{dodoc}.
 \item \t{doins} supports symlinks, \featureref{doins}.
 \item \t{doman -i18n} option takes precedence, \featureref{doman-langs}.
-\item \t{dohard}, \t{dosed} banned, \featureref{banned-commands}.
-\item \t{econf} adds \t{-{}-disable-dependency-tracking}, \featureref{econf-options}.
-\item \t{pkg\_info} can run on non-installed packages, \featureref{pkg-info}.
-\item \t{USE} is calculated differently, \featureref{profile-iuse-injection}.
-\item \t{AA} is gone, \featureref{aa}.
-\item \t{KV} is gone, \featureref{kv}.
-\item \t{REPLACING\_VERSIONS} and \t{REPLACED\_BY\_VERSION}, \featureref{replace-version-vars}.
-\item \t{S} to \t{WORKDIR} fallback restricted, \featureref{s-workdir-fallback}.
-\item \t{RDEPEND=DEPEND} no longer done, \featureref{rdepend-depend}.
-\item Utilities now die on failure, \featureref{die-on-failure}, unless called under \t{nonfatal},
-    \featureref{nonfatal}
+\item Controllable compression and \t{docompress}, \featureref{controllable-compress}.
 \end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
