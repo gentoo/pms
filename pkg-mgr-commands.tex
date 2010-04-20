@@ -160,10 +160,10 @@ has returned.
     \end{centertable}
 
     Note that the \t{\$\{EPREFIX\}} component represents the same offset-prefix as described in
-    Table~\ref{tab:defined_vars}.  It facilitates offset-prefix installations which is supported by EAPIs
-    listed in Table~\ref{tab:offset-prefix-table}. When no offset-prefix installation is in effect,
-    \t{EPREFIX} becomes the empty string, making the behaviour of \t{econf} equal for both offset-prefix
-    supporting and agnostic EAPIs.
+    Table~\ref{tab:defined_vars}.  It facilitates offset-prefix installations which is supported by
+    EAPIs listed in Table~\ref{tab:offset-env-vars-table}. When no offset-prefix installation is in
+    effect, \t{EPREFIX} becomes the empty string, making the behaviour of \t{econf} equal for both
+    offset-prefix supporting and agnostic EAPIs.
 
     \t{econf} must be implemented internally---that is, as a bash function and not an external
     script. Should any portion of it fail, it must abort the build using \t{die}, unless run using
