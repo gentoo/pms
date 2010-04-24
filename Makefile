@@ -17,8 +17,8 @@ pms.pdf: $(SOURCEFILES) pms.bbl vc.tex eapi-cheatsheet.pdf
 
 pms.html: $(SOURCEFILES) pms.bbl
 	@# need to do it twice to make the big env var table work
-	xhlatex pms
-	xhlatex pms
+	mk4ht xhlatex pms
+	mk4ht xhlatex pms
 	@# work around irregularity in how links to longtables are
 	@# formatted in the List of Tables
 	LC_ALL=C sed -i -e '/<span class="lotToc" >&#x00A0;/{N;N;s/\(&#x00A0;<a \nhref="[^"]\+">\)\([0-9A-Z.]\+\)[ \n]/\2\1/}' pms.html
