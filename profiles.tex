@@ -58,8 +58,8 @@ bash syntax, is allowed as follows:
 \item Variables to the right of the equals sign in the form \t{\$\{foo\}} or \t{\$foo} are recognised and
   expanded from variables previously set in this or earlier \t{make.defaults} files.
 \item One logical line may be continued over multiple physical lines by escaping the newline with a
-  backslash. A quoted string may also continue over multiple physical lines in this fashion, so that 
-  the quoted string can begin, continue, and end on two or more separate lines.
+  backslash. A quoted string may be continued over multiple physical lines by either a simple
+  newline or a backslash-escaped newline.
 \item Backslashes, except for line continuations, are not allowed.
 \end{compactitem}
 
