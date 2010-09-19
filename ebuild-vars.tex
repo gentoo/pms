@@ -167,11 +167,11 @@ not be exported to the ebuild environment:
 
 \begin{description}
 \item[DEFINED\_PHASES] \featurelabel{defined-phases} A space separated arbitrarily ordered list of
-phase names (e.g. \t{configure setup unpack}) whose phase functions are defined by the ebuild or an
-eclass inherited by the ebuild. If no phase functions are defined, a single hyphen is used instead
-of an empty string. For EAPIs listed in table~\ref{tab:defined-phases-table} as having optional
-\t{DEFINED\_PHASES} support, package managers may not rely upon the metadata cache having this
-variable defined, and must treat an empty string as ``this information is not available''.
+phase names (e.\,g.\ \t{configure setup unpack}) whose phase functions are defined by the ebuild or
+an eclass inherited by the ebuild. If no phase functions are defined, a single hyphen is used
+instead of an empty string. For EAPIs listed in table~\ref{tab:defined-phases-table} as having
+optional \t{DEFINED\_PHASES} support, package managers may not rely upon the metadata cache having
+this variable defined, and must treat an empty string as ``this information is not available''.
 \end{description}
 
 \note Thus, by extension of section~\ref{sec:metadata-invariance}, phase functions must not be defined

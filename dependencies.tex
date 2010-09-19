@@ -30,7 +30,7 @@ be surrounded on both sides by whitespace, except at the start and end of the st
     followed by whitespace, then \t{->}, then whitespace, then a simple filename when in
     \t{SRC\_URI}.  For \t{SRC\_URI} behaviour, see section~\ref{sec:src-uri-behaviour}.
 \item A flat filename. Permitted in \t{SRC\_URI}.
-\item A license name (e.g. \t{GPL-2}). Permitted in \t{LICENSE}.
+\item A license name (e.\,g.\ \t{GPL-2}). Permitted in \t{LICENSE}.
 \item A simple string. Permitted in \t{RESTRICT} and \t{PROPERTIES}.
 \item An all-of group, which consists of an open parenthesis, followed by whitespace,
     followed by zero or more of (a dependency item of any kind followed by whitespace), followed
@@ -199,8 +199,8 @@ described in table~\ref{tab:bang-strength-table}.
 
 \featurelabel{slot-deps} A named slot dependency consists of a colon followed by a slot name. A
 specification with a named slot dependency matches only if the slot of the matched package is equal
-to the slot specified. If the slot of the package to match cannot be determined (e.g. because it is
-not a supported \t{EAPI}), the match is treated as unsuccessful.
+to the slot specified. If the slot of the package to match cannot be determined (e.\,g.\ because it
+is not a supported \t{EAPI}), the match is treated as unsuccessful.
 
 \featurelabel{slot-operator-deps} An operator slot dependency consists of a colon followed by one of
 the following operators:
@@ -237,7 +237,7 @@ A 2-style or 4-style use dependency consists of one of the following:
 \item[{[-opt]}] The flag must be disabled.
 \end{description}
 
-Multiple requirements may be combined using commas, e.g. \t{[first,-second,third?]}.
+Multiple requirements may be combined using commas, e.\,g.\ \t{[first,-second,third?]}.
 
 When multiple requirements are specified, all must match for a successful match.
 
@@ -289,7 +289,7 @@ Ebuilds may not rely upon any token being supported.
 \subsection{SRC\_URI}
 \label{sec:src-uri-behaviour}
 
-All filename components that are enabled (i.e. not inside a use-conditional block that is not
+All filename components that are enabled (i.\,e.\ not inside a use-conditional block that is not
 matched) in \t{SRC\_URI} must be available in the \t{DISTDIR} directory. In addition, these
 components are used to make the \t{A} and \t{AA} variables.
 
