@@ -447,7 +447,7 @@ The call order for uninstalling a package is:
 \item \t{pkg\_postrm}
 \end{compactitem}
 
-The call order for reinstalling a package is:
+The call order for upgrading, downgrading or reinstalling a package is:
 
 \begin{compactitem}
 \item \t{pkg\_pretend} (only for EAPIs listed in table~\ref{tab:pkg-pretend-table}), which is called
@@ -465,23 +465,9 @@ The call order for reinstalling a package is:
 \item \t{pkg\_postinst}
 \end{compactitem}
 
-The call order for upgrading or downgrading a package is:
-
-\begin{compactitem}
-\item \t{pkg\_pretend} (only for EAPIs listed in table~\ref{tab:pkg-pretend-table}), which is called
-    outside of the normal call order process.
-\item \t{pkg\_setup}
-\item \t{src\_unpack}
-\item \t{src\_prepare} (only for EAPIs listed in table~\ref{tab:src-prepare-table})
-\item \t{src\_configure} (only for EAPIs listed in table~\ref{tab:src-configure-table})
-\item \t{src\_compile}
-\item \t{src\_test} (except if \t{RESTRICT=test})
-\item \t{src\_install}
-\item \t{pkg\_preinst}
-\item \t{pkg\_postinst}
-\item \t{pkg\_prerm} for the package being replaced
-\item \t{pkg\_postrm} for the package being replaced
-\end{compactitem}
+Note: When up- or downgrading a package in EAPI 0 or 1, the last four phase functions can
+alternatively be called in the order \t{pkg\_preinst}, \t{pkg\_postinst}, \t{pkg\_prerm},
+\t{pkg\_postrm}. This behaviour is deprecated.
 
 The \t{pkg\_config}, \t{pkg\_info} and \t{pkg\_nofetch} functions are not called in a normal
 sequence. The \t{pkg\_pretend} function is called some unspecified time before a (possibly
