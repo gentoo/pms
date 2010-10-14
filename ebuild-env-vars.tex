@@ -323,8 +323,8 @@ phases.
 \t{REPLACING\_VERSIONS} is a list, not a single optional value, to handle pathological cases such as
 installing \t{foo-2:2} to replace \t{foo-2:1} and \t{foo-3:2}.
 
-In EAPIs listed in table~\ref{tab:env-vars-table} as supporting it, the \t{REPLACED\_BY} variable
-shall be defined in \t{pkg\_prerm} and \t{pkg\_postrm}. It shall contain at most one value.
+In EAPIs listed in table~\ref{tab:env-vars-table} as supporting it, the \t{REPLACED\_BY\_VERSION}
+variable shall be defined in \t{pkg\_prerm} and \t{pkg\_postrm}. It shall contain at most one value.
 
 \subsection{Offset-prefix variables \t{EPREFIX}, \t{EROOT} and \t{ED}}
 \label{sec:offset-vars}
