@@ -81,6 +81,10 @@
 }
 \bibliographystyle{plainurl}
 
+% Enumerate subsubsections, but don't include them in the toc.
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{2}
+
 % Some shorthands for the lazy ones.
 % tex4ht workaround: this needs to happen after loading hyperref
 \g@addto@macro\@documentclasshook{
