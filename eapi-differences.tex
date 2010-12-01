@@ -100,6 +100,9 @@ Use dependencies & \compactfeatureref{use-deps} &
 \t{KV} & \compactfeatureref{kv} &
     Yes & Yes & Yes & Yes & No \\
 
+\t{MERGE\_TYPE} & \compactfeatureref{merge-type} &
+    No & No & No & No & Yes \\
+
 \t{REPLACING\_VERSIONS} & \compactfeatureref{replace-version-vars} &
     No & No & No & No & Yes \\
 
@@ -216,6 +219,7 @@ EAPI 4 is EAPI 3 with the following changes:
 \item \t{AA} is gone, \featureref{aa}.
 \item \t{KV} is gone, \featureref{kv}.
 \item \t{USE} is calculated differently, \featureref{profile-iuse-injection}.
+\item \t{MERGE\_TYPE}, \featureref{merge-type}.
 \item \t{REPLACING\_VERSIONS} and \t{REPLACED\_BY\_VERSION}, \featureref{replace-version-vars}.
 \item Utilities now die on failure, \featureref{die-on-failure}, unless called under \t{nonfatal},
     \featureref{nonfatal}

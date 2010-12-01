@@ -180,6 +180,13 @@ variable.
     \featurelabel{kv} The version of the running kernel at the time the ebuild was first executed,
     as returned by the \t{uname~-r} command or equivalent.  May be modified by ebuilds.  Only for
     EAPIs listed in table~\ref{tab:env-vars-table} as supporting \t{KV}. \\
+\t{MERGE\_TYPE} &
+    \t{pkg\_*} &
+    No &
+    \featurelabel{merge-type} The type of package that is being merged. Possible values are:
+    \t{source} if building and installing a package from source, \t{binary} if installing a binary
+    package, and \t{buildonly} if building a binary package without installing it. Only for EAPIs
+    listed in table~\ref{tab:env-vars-table} as supporting \t{MERGE\_TYPE}. \\
 \t{REPLACING\_VERSIONS} &
     \t{pkg\_*} (see text) &
     Yes &
@@ -198,19 +205,20 @@ variable.
 \end{landscape}
 
 \begin{centertable}{EAPIs supporting various env variables} \label{tab:env-vars-table}
-    \begin{tabular}{ l l l l l }
+    \begin{tabular}{ l l l l l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{\t{AA}?}} &
         \multicolumn{1}{c}{\textbf{\t{KV}?}} &
+        \multicolumn{1}{c}{\textbf{\t{MERGE\_TYPE}?}} &
         \multicolumn{1}{c}{\textbf{\t{REPLACING\_VERSIONS}?}} &
         \multicolumn{1}{c}{\textbf{\t{REPLACED\_BY\_VERSION}?}} \\
         \midrule
-    \t{0} & Yes & Yes & No & No \\
-    \t{1} & Yes & Yes & No & No \\
-    \t{2} & Yes & Yes & No & No \\
-    \t{3} & Yes & Yes & No & No \\
-    \t{4} & No & No & Yes & Yes \\
+    \t{0} & Yes & Yes & No & No & No \\
+    \t{1} & Yes & Yes & No & No & No \\
+    \t{2} & Yes & Yes & No & No & No \\
+    \t{3} & Yes & Yes & No & No & No \\
+    \t{4} & No & No & Yes & Yes & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
