@@ -58,7 +58,7 @@ Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-injection} &
     No & No & Yes & Yes & Yes \\
 
 Slot dependencies & \compactfeatureref{slot-deps} &
-    No & Named & Named & Named & Named and Operator \\
+    No & Yes & Yes & Yes & Yes \\
 
 Use dependencies & \compactfeatureref{use-deps} &
     No & No & 2-style & 2-style & 4-style \\
@@ -214,7 +214,6 @@ EAPI 4 is EAPI 3 with the following changes:
 \item \t{REQUIRED\_USE}, \featureref{required-use}.
 \item \t{RDEPEND=DEPEND} no longer done, \featureref{rdepend-depend}.
 \item \t{DEFINED\_PHASES} support is mandatory, \featureref{defined-phases}.
-\item Slot operator dependencies, \featureref{slot-operator-deps}.
 \item Use dependency defaults, \featureref{use-dep-defaults}.
 \item \t{S} to \t{WORKDIR} fallback restricted, \featureref{s-workdir-fallback}.
 \item \t{pkg\_pretend}, \featureref{pkg-pretend}.
