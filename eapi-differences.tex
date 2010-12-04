@@ -42,6 +42,9 @@ Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-injection} &
 \t{IUSE} defaults & \compactfeatureref{iuse-defaults} &
     No & Yes & Yes & Yes & Yes \\
 
+\t{REQUIRED\_USE} & \compactfeatureref{required-use} &
+    No & No & No & No & Yes \\
+
 \t{PROPERTIES} & \compactfeatureref{properties} &
     Optionally & Optionally & Optionally & Optionally & Yes \\
 
@@ -208,6 +211,7 @@ EAPI 4 is EAPI 3 with the following changes:
 
 \begin{compactitem}
 \item \t{PROPERTIES} support is mandatory, \featureref{properties}.
+\item \t{REQUIRED\_USE}, \featureref{required-use}.
 \item \t{RDEPEND=DEPEND} no longer done, \featureref{rdepend-depend}.
 \item \t{DEFINED\_PHASES} support is mandatory, \featureref{defined-phases}.
 \item Slot operator dependencies, \featureref{slot-operator-deps}.

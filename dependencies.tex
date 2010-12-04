@@ -13,8 +13,8 @@ There are three classes of dependencies supported by ebuilds:
 \item Post dependencies (\t{PDEPEND}). These must be installed at some point.
 \end{compactitem}
 
-In addition, \t{SRC\_URI}, \t{HOMEPAGE}, \t{PROVIDE}, \t{RESTRICT}, \t{PROPERTIES} and \t{LICENSE}
-use dependency-style specifications to specify their values.
+In addition, \t{SRC\_URI}, \t{HOMEPAGE}, \t{PROVIDE}, \t{RESTRICT}, \t{PROPERTIES}, \t{LICENSE} and
+\t{REQUIRED\_USE} use dependency-style specifications to specify their values.
 
 \section{Dependency Specification Format}
 
@@ -31,6 +31,7 @@ be surrounded on both sides by whitespace, except at the start and end of the st
     \t{SRC\_URI}.  For \t{SRC\_URI} behaviour, see section~\ref{sec:src-uri-behaviour}.
 \item A flat filename. Permitted in \t{SRC\_URI}.
 \item A license name (e.\,g.\ \t{GPL-2}). Permitted in \t{LICENSE}.
+\item A use flag name, optionally preceded by an exclamation mark. Permitted in \t{REQUIRED\_USE}.
 \item A simple string. Permitted in \t{RESTRICT} and \t{PROPERTIES}.
 \item An all-of group, which consists of an open parenthesis, followed by whitespace,
     followed by zero or more of (a dependency item of any kind followed by whitespace), followed
@@ -41,7 +42,13 @@ be surrounded on both sides by whitespace, except at the start and end of the st
     followed by an open parenthesis, followed by whitespace, followed by zero or more
     of (a dependency item of any kind followed by whitespace), followed by a close parenthesis.
     More formally: \t{any-of ::= '||' whitespace '(' whitespace (item whitespace)* ')'}.
-    Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}, \t{LICENSE}.
+    Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}, \t{LICENSE}, \t{REQUIRED\_USE}.
+\item An only-one-of group, which consists of the string \t{\textasciicircum\textasciicircum},
+    followed by whitespace, followed by an open parenthesis, followed by whitespace, followed by
+    zero or more of (a dependency item of any kind followed by whitespace), followed by a close
+    parenthesis. More formally: \t{only-one-of ::= '\textasciicircum\textasciicircum' whitespace
+    '(' whitespace (item whitespace)* ')'}.
+    Permitted in \t{REQUIRED\_USE}.
 \item A use-conditional group, which consists of an optional exclamation mark, followed by
     a use flag name, followed by a question mark, followed by whitespace, followed by
     an open parenthesis, followed by whitespace, followed by zero or more of (a dependency item
@@ -89,6 +96,16 @@ In an any-of group, at least one immediate child element must be matched. A bloc
 considered to be matched if its associated package dependency specification is not matched.
 
 An empty any-of group counts as being matched.
+
+\subsection{Only-one-of Dependency Specifications}
+
+Any use-conditional group that is an immediate child of an only-one-of group, if not enabled
+(disabled for an exclamation mark prefixed use flag name), is not considered a member of the
+only-one-of group for match purposes.
+
+In an only-one-of group, exactly one immediate child element must be matched.
+
+An empty only-one-of group counts as being matched.
 
 \subsection{Package Dependency Specifications}
 
@@ -256,6 +273,17 @@ would not have to be part of \t{IUSE}.
 
 It is an error for an ebuild to use a conditional use dependency when that ebuild does not have the
 flag in \t{IUSE\_EFFECTIVE}.
+
+\subsection{Use State Constraints}
+\label{sec:required-use}
+\t{REQUIRED\_USE} contains a list of assertions that must be met by the configuration of \t{USE}
+flags to be valid for this ebuild. In order to be matched, a \t{USE} flag in a terminal element
+must be enabled (or disabled if it has an exclamation mark prefix).
+
+If the package manager encounters a package version where \t{REQUIRED\_USE} assertions are not met,
+it must treat this package version as if it was masked. No phase functions must be called.
+
+It is an error for a flag to be used if it is not included in \t{IUSE\_EFFECTIVE}.
 
 \subsection{Restrict}
 \label{sec:restrict}

@@ -86,24 +86,31 @@ Ebuilds may define any of the following variables:
 \item[RESTRICT] Zero or more behaviour restrictions for this package. See section~\ref{sec:restrict}
     for value meanings and section~\ref{sec:dependencies} for full syntax.
 \item[PROPERTIES] \featurelabel{properties} Zero or more properties for this package. See
-    section~\ref{sec:properties} for value meanings and section~\ref{sec:dependencies} for full syntax.
-    For EAPIs listed in table~\ref{tab:properties-table} as having optional support, ebuilds must not
-    rely upon the package manager recognising or understanding this variable in any way.
+    section~\ref{sec:properties} for value meanings and section~\ref{sec:dependencies} for full
+    syntax. For EAPIs listed in table~\ref{tab:optional-vars-table} as having optional support,
+    ebuilds must not rely upon the package manager recognising or understanding this variable in
+    any way.
+\item[REQUIRED\_USE] \featurelabel{required-use} Zero or more assertions that must be met by the
+    configuration of \t{USE} flags to be valid for this ebuild. See section~\ref{sec:required-use}
+    for description and section~\ref{sec:dependencies} for full syntax. Only in EAPIs listed in
+    table~\ref{tab:optional-vars-table} as supporting \t{REQUIRED\_USE}.
 \item[S] The path to the temporary build directory, used by \t{src\_compile}, \t{src\_install}
     etc. Defaults to \t{\$\{WORKDIR\}/\$\{P\}}.
 \end{description}
 
-\begin{centertable}{EAPIs supporting \t{PROPERTIES}} \label{tab:properties-table}
-    \begin{tabular}{ l l }
+\begin{centertable}{EAPIs supporting various ebuild-defined variables}
+\label{tab:optional-vars-table}
+    \begin{tabular}{ l l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{Supports \t{PROPERTIES}?}} \\
+        \multicolumn{1}{c}{\textbf{Supports \t{REQUIRED\_USE}?}} \\
         \midrule
-    \t{0} & Optionally \\
-    \t{1} & Optionally \\
-    \t{2} & Optionally \\
-    \t{3} & Optionally \\
-    \t{4} & Yes \\
+    \t{0} & Optionally & No \\
+    \t{1} & Optionally & No \\
+    \t{2} & Optionally & No \\
+    \t{3} & Optionally & No \\
+    \t{4} & Yes & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
