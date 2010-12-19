@@ -14,7 +14,8 @@
 \usepackage[orig,english]{isodate}
 \usepackage[scaled=.90]{helvet}
 \newcommand{\code}[1]{\texttt{#1}}
-\newcommand{\version}{0.3}
+% This should reflect the latest approved EAPI version
+\newcommand{\version}{4.0}
 \newcommand{\featureref}[1]{\textsc{#1} on page~\pageref{feat:#1}}
 \renewcommand{\familydefault}{\sfdefault}
 \urlstyle{sf}
@@ -83,8 +84,8 @@ nonetheless.
     not disabled explicitly by user configuration) with a \code{+}
     sign in front.  See \featureref{iuse-defaults}.
     \item[Named slot dependencies] Dependencies can explicitly request
-    a specific slot by using the \code{dev-libs/foo:\emph{SLOT\_name}} syntax.  See
-    \featureref{slot-deps}.
+    a specific slot by using the \code{dev-libs/foo:\emph{SLOT\_name}}
+    syntax.  See \featureref{slot-deps}.
 \end{description}
 \section{EAPI 2 (2008-09-25)}
 \label{sec:cs:eapi2}
@@ -137,7 +138,8 @@ nonetheless.
     \featureref{default-func}.
     \item[\code{doman} language support] The \code{doman} installation
     function recognizes language specific man page extensions and
-    behaves accordingly.  See \featureref{doman-langs}.
+    behaves accordingly.  This behaviour can be inhibited by the
+    \code{-i18n} switch with EAPI 4.  See \featureref{doman-langs}.
 \end{description}
 \newpage
 
@@ -153,7 +155,8 @@ nonetheless.
     systems\footnote{\url{http://prefix.gentoo.org/}} will be easier
     with this EAPI.
 \end{description}
-\section{EAPI 4 (not yet approved)}
+
+\section{EAPI 4 (2010-12-30)}
 \label{sec:cs:eapi4}
 \subsection{Additions/Changes}
 \label{sec:cs:eapi4-additions}
@@ -161,34 +164,19 @@ nonetheless.
     \item[\code{pkg\_pretend}] Some useful checks (kernel options for
     example) can be placed in this new phase to inform the user early
     (when just pretending to emerge the package).  Most checks should
-    usually be repeated in \code{pkg\_setup}.  See
-    \featureref{pkg-pretend}.
+    usually be repeated in \code{pkg\_setup}.
+    See \featureref{pkg-pretend}.
     \item[\code{src\_install}] The \code{src\_install} phase is no
     longer empty but has a default now.  This comes along with an
-    accompanying \code{default} function.  See
-    \featureref{src-install-4}.
+    accompanying \code{default} function.
+    See \featureref{src-install-4}.
     \item[\code{pkg\_info} on non-installed packages] The
     \code{pkg\_info} phase can be called even for non-installed
     packages.  Be warned that dependencies might not have been
     installed at execution time.  See \featureref{pkg-info}.
-    \item[No RDEPEND fall-back] The package manager will not fall back
-    to \code{RDEPEND=DEPEND} if RDEPEND is undefined.  See
-    \featureref{rdepend-depend}
-    \item[Slot operators] Dependencies that are both DEPEND and
-    RDEPEND and that can match multiple slots should specify one of:
-    \begin{description}
-        \item[\code{:*}] Indicates that any slot value is
-        acceptable. In addition, for runtime dependencies, indicates
-        that the package will not break if the matched package is
-        uninstalled and replaced by a different matching package in a
-        different slot.
-        \item[\code{:=}] Indicates that any slot value is
-        acceptable. In addition, for runtime dependencies, indicates
-        that the package will break unless a matching package with
-        slot equal to the slot of the best installed version at the
-        time the package was installed is available.
-    \end{description}
-    See \featureref{slot-operator-deps}.
+    \item[\code{econf} changes] The helper function now always
+    activates \code{--disable-dependency-tracking}.
+    See \featureref{econf-options}.
     \item[USE dependency defaults] In addition to the features offered
     in EAPI 2 for USE dependencies, a \code{(+)} or \code{(-)} can be
     added after a USE flag (mind the parentheses).  The former
@@ -196,9 +184,9 @@ nonetheless.
     latter, disabled. Cannot be used with USE\_EXPAND flags.  This
     mimics parts of the behaviour of \code{-{}-missing} in
     \code{built\_with\_use}.  See \featureref{use-dep-defaults}.
-    \item[Controllable compression] All items in
-    \code{/usr/share\{doc,info,man\}} may be compressed on-disk after
-    \code{src\_install}, except for
+    \item[Controllable compression] All items in the \code{doc},
+    \code{info}, \code{man} subdirectories of \code{/usr/share/} may
+    be compressed on-disk after \code{src\_install}, except for
     \code{/usr/share/doc/\$\{PF\}/html}.  \code{docompress path \dots}
     adds paths to the inclusion list for compression.
     \code{docompress -x path \dots} adds paths to the exclusion list.
@@ -207,19 +195,55 @@ nonetheless.
     first argument and followed by directories, files from there are
     installed recursively.  See \featureref{dodoc}.
     \item[\code{doins} symlink support] Symbolic links are now
-    properly installed when using recursion (\code{-r} switch).  See
-    \featureref{doins}.
+    properly installed when using recursion (\code{-r} switch).
+    See \featureref{doins}.
     \item[\code{nonfatal} for commands] If you call \code{nonfatal}
     the command given as argument will not abort the build process in
     case of a failure (as is the default) but will return non-zero on
-    failure rather than aborting the build.  See
-    \featureref{nonfatal}.
+    failure rather than aborting the build.
+    See \featureref{nonfatal}.
+    \item[\code{PROPERTIES}] Is mandatory for all package managers now
+    to support interactive installs.
+    \item[\code{REPLACING\_VERSIONS} and \code{REPLACED\_BY\_VERSION}]
+    For corner cases in upgrade paths those variables can be defined
+    in \code{pkg\_*} functions to define a package version that is
+    replaced by or is the replacement for the current one.
+    See \featureref{replace-version-vars}.
+    \item[\code{MERGE\_TYPE}] This variable contains one of three
+    possible values to allow checks if it is normal merge with
+    compilation and installation (\code{source}), installation of a
+    binary package (\code{binary}), or a compilation without
+    installation (\code{buildonly}).  See \featureref{merge-type}.
+    \item[\code{REQUIRED\_USE}] This variable can be used similar to
+    the \code{(R|P)DEPEND} variables and define sets of USE flag
+    combinations that are not allowed.  All elements can be further
+    nested to achieve more functionality.
+    \begin{description}
+        \item[Forbidden combination] To prevent activation of
+        \code{flag1} if \code{flag2} is enabled use
+        "\code{flag2? ( !flag1 )}".
+        \item[OR] If at least one USE flag out of many must be
+        activated on \code{flag1} use
+        "\code{flag1? || ( flag2 flag3 \dots )}".
+        \item[XOR] To allow exactly one USE flag out of many use
+        "\code{^^ ( flag1 flag2 \dots )}".
+    \end{description}
+    See \featureref{required-use}.
 \end{description}
 \subsection{Removals/Bans}
 \label{sec:cs:eapi4-removalsbans}
 \begin{description}
     \item[\code{dohard}, \code{dosed}] Both functions are not allowed
-    anymore.  See \featureref{banned-commands}.
+    any more.  See \featureref{banned-commands}.
+    \item[No \code{RDEPEND} fall-back] The package manager will not
+    fall back to \code{RDEPEND=DEPEND} if \code{RDEPEND} is undefined.
+    See \featureref{rdepend-depend}.
+    \item[\code{S} fallback changes] The value of the variable
+    \code{S} will not automatically be changed to \code{WORKDIR}, if
+    \code{S} is not a directory, but abort.  Virtual packages are the
+    only exception.  See \featureref{s-workdir-fallback}.
+    \item[\code{AA}, \code{KV}] These variables are not defined
+    any more.  See \featureref{aa} and \featureref{kv}.
 \end{description}
 \end{document}
 
