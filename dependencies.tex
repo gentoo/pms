@@ -43,10 +43,10 @@ be surrounded on both sides by whitespace, except at the start and end of the st
     of (a dependency item of any kind followed by whitespace), followed by a close parenthesis.
     More formally: \t{any-of ::= '||' whitespace '(' whitespace (item whitespace)* ')'}.
     Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}, \t{LICENSE}, \t{REQUIRED\_USE}.
-\item An only-one-of group, which consists of the string \t{\textasciicircum\textasciicircum},
+\item An exactly-one-of group, which consists of the string \t{\textasciicircum\textasciicircum},
     followed by whitespace, followed by an open parenthesis, followed by whitespace, followed by
     zero or more of (a dependency item of any kind followed by whitespace), followed by a close
-    parenthesis. More formally: \t{only-one-of ::= '\textasciicircum\textasciicircum' whitespace
+    parenthesis. More formally: \t{exactly-one-of ::= '\textasciicircum\textasciicircum' whitespace
     '(' whitespace (item whitespace)* ')'}.
     Permitted in \t{REQUIRED\_USE}.
 \item A use-conditional group, which consists of an optional exclamation mark, followed by
@@ -97,15 +97,15 @@ considered to be matched if its associated package dependency specification is n
 
 An empty any-of group counts as being matched.
 
-\subsection{Only-one-of Dependency Specifications}
+\subsection{Exactly-one-of Dependency Specifications}
 
-Any use-conditional group that is an immediate child of an only-one-of group, if not enabled
+Any use-conditional group that is an immediate child of an exactly-one-of group, if not enabled
 (disabled for an exclamation mark prefixed use flag name), is not considered a member of the
-only-one-of group for match purposes.
+exactly-one-of group for match purposes.
 
-In an only-one-of group, exactly one immediate child element must be matched.
+In an exactly-one-of group, exactly one immediate child element must be matched.
 
-An empty only-one-of group counts as being matched.
+An empty exactly-one-of group counts as being matched.
 
 \subsection{Package Dependency Specifications}
 
