@@ -175,7 +175,7 @@ nonetheless.
     packages.  Be warned that dependencies might not have been
     installed at execution time.  See \featureref{pkg-info}.
     \item[\code{econf} changes] The helper function now always
-    activates \code{--disable-dependency-tracking}.
+    activates \code{-{}-disable-dependency-tracking}.
     See \featureref{econf-options}.
     \item[USE dependency defaults] In addition to the features offered
     in EAPI 2 for USE dependencies, a \code{(+)} or \code{(-)} can be
@@ -190,7 +190,7 @@ nonetheless.
     \code{/usr/share/doc/\$\{PF\}/html}.  \code{docompress path \dots}
     adds paths to the inclusion list for compression.
     \code{docompress -x path \dots} adds paths to the exclusion list.
-    \featureref{controllable-compress}.
+    See \featureref{controllable-compress}.
     \item[\code{dodoc} recursion] If the \code{-r} switch is given as
     first argument and followed by directories, files from there are
     installed recursively.  See \featureref{dodoc}.
@@ -204,7 +204,7 @@ nonetheless.
     See \featureref{nonfatal}.
     \item[\code{PROPERTIES}] Is mandatory for all package managers now
     to support interactive installs.
-    \item[\code{REPLACING\_VERSIONS} and \code{REPLACED\_BY\_VERSION}]
+    \item[\code{REPLACING\_VERSIONS}, \code{REPLACED\_BY\_VERSION}]
     For corner cases in upgrade paths those variables can be defined
     in \code{pkg\_*} functions to define a package version that is
     replaced by or is the replacement for the current one.
@@ -224,9 +224,9 @@ nonetheless.
         "\code{flag2? ( !flag1 )}".
         \item[OR] If at least one USE flag out of many must be
         activated on \code{flag1} use
-        "\code{flag1? || ( flag2 flag3 \dots )}".
+        "\code{flag1? ( || ( flag2 flag3 \dots\ ) )}".
         \item[XOR] To allow exactly one USE flag out of many use
-        "\code{^^ ( flag1 flag2 \dots )}".
+        "\code{\textasciicircum\textasciicircum ( flag1 flag2 \dots\ )}".
     \end{description}
     See \featureref{required-use}.
 \end{description}
