@@ -141,7 +141,8 @@ has returned.
     \item -{}-host must be the value of the \t{CHOST} environment variable.
     \item -{}-libdir must be set according to Algorithm~\ref{alg:econf-libdir}.
     \item -{}-disable-dependency-tracking, if the EAPI is listed in
-        table~\ref{tab:econf-options-table} as using it.
+        table~\ref{tab:econf-options-table} as using it. This option will only be passed if the
+        string \t{disable-dependency-tracking} occurs in the output of \t{configure -{}-help}.
     \end{itemize}
 
     \begin{centertable}{Extra \t{econf} arguments for EAPIs} \label{tab:econf-options-table}
