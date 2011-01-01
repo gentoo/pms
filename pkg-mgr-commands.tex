@@ -564,11 +564,14 @@ either behaviour is undefined or it is an error as decided by table~\ref{tab:use
 \item[usev] The same as \t{use}, but also prints the flag name if the condition
     is met.
 \item[useq] Deprecated synonym for \t{use}.
-\item[use\_with] Has one-, two-, and three-argument forms. The first argument is a USE flag name,
-    the second a \t{configure} option name (\t{\$\{opt\}}), defaulting to the same as the first argument
-    if not provided, and the third is a string value (\t{\$\{value\}}), defaulting to nothing. If the
-    USE flag is set, outputs \t{-{}-with-\$\{opt\}=\$\{value\}} if the third argument was provided, and
-    \t{-{}-with-\$\{opt\}} otherwise. If the flag is not set, then it outputs \t{-{}-without-\$\{opt\}}.
+\item[use\_with] \featurelabel{use-with} Has one-, two-, and three-argument forms. The first
+    argument is a USE flag name, the second a \t{configure} option name (\t{\$\{opt\}}), defaulting
+    to the same as the first argument if not provided, and the third is a string value
+    (\t{\$\{value\}}). For EAPIs listed in table~\ref{tab:use-with-third-arg} as not supporting it,
+    an empty third argument is treated as if it weren't provided. If the USE flag is set, outputs
+    \t{-{}-with-\$\{opt\}=\$\{value\}} if the third argument was provided, and
+    \t{-{}-with-\$\{opt\}} otherwise. If the flag is not set, then it outputs
+    \t{-{}-without-\$\{opt\}}.
 \item[use\_enable] Works the same as \t{use\_with()}, but outputs \t{-{}-enable-} or \t{-{}-disable-}
 instead of \t{-{}-with-} or \t{-{}-without-}.
 \end{description}
@@ -584,6 +587,22 @@ instead of \t{-{}-with-} or \t{-{}-without-}.
     \t{2} & Undefined \\
     \t{3} & Undefined \\
     \t{4} & Error \\
+    \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\begin{centertable}{EAPIs supporting empty third argument in \t{use\_with} and \t{use\_enable}}
+    \label{tab:use-with-third-arg}
+    \begin{tabular}{ l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{Supports empty third argument?}} \\
+            \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & No \\
+    \t{3} & No \\
+    \t{4} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
