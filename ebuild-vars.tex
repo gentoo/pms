@@ -45,9 +45,9 @@ All ebuilds must define at least the following variables:
 \item[SLOT] The package's slot. Must be a valid slot name, as per section~\ref{sec:slot-names}. May
     be defined by an eclass. Must not be empty.
 \item[SRC\_URI] A list of source URIs for the package. Valid protocols are \t{http://},
-    \t{https://}, \t{ftp://} and \t{mirror://} (see section~\ref{sec:thirdpartymirrors} for mirror behaviour).
-    Fetch restricted packages may include URL parts consisting of just a filename. See
-    section~\ref{sec:dependencies} for full syntax.
+    \t{https://}, \t{ftp://} and \t{mirror://} (see section~\ref{sec:thirdpartymirrors} for mirror
+    behaviour). Fetch restricted packages may include URL parts consisting of just a filename.
+    May be defined by an eclass. See section~\ref{sec:dependencies} for full syntax.
 \end{description}
 
 If any of these variables are undefined, or if any of these variables are set to invalid values,
