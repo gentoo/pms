@@ -3,7 +3,8 @@
 \note This chapter is informative and for convenience only. Refer to the main text for specifics.
 
 \begin{landscape}
-\begin{longtable}{lllllll}
+\newcolumntype{P}[1]{>{\setlength{\rightskip}{0pt plus 1fil}}p{#1}}
+\begin{longtable}{llP{5em}P{5em}P{8em}P{8em}P{8em}}
 \caption{Features in EAPIs}\\
 \toprule
 \multicolumn{1}{c}{\b{Feature}} &
@@ -89,10 +90,10 @@ Use dependencies & \compactfeatureref{use-deps} &
 
 \t{default\_} phase functions & \compactfeatureref{default-phase-funcs} &
     None & None &
-    \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test}} &
-    \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test}} &
-    \parbox[t]{1in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
-        \t{src\_compile}, \t{src\_install}, \t{src\_test}} \\
+    \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test} &
+    \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test} &
+    \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
+        \t{src\_compile}, \t{src\_install}, \t{src\_test} \\
 
 \t{AA} & \compactfeatureref{aa} &
     Yes & Yes & Yes & Yes & No \\
@@ -125,7 +126,7 @@ Most utilities die & \compactfeatureref{die-on-failure} &
     Yes & Yes & Yes & Yes & Banned \\
 
 \t{econf} arguments & \compactfeatureref{econf-options} &
-    &  &  &  & \parbox[t]{1in}{disable dependency tracking} \\
+    &  &  &  & disable dependency tracking \\
 
 \t{dodoc -r} & \compactfeatureref{dodoc} &
     No & No & No & No & Yes \\

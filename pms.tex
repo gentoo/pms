@@ -47,8 +47,14 @@
 
 \bibliography{pms}
 
-\includepdf[pages=-,landscape,turn=false,%
-    addtotoc={1,chapter,0,Desk Reference,cheatsheet}]{eapi-cheatsheet}
+\ifthenelse{\boolean{TEX4HT-HACKS}}{%
+    \chapter{Desk Reference}
+
+    \href{eapi-cheatsheet.pdf}{EAPI Cheat Sheet}
+}{%
+    \includepdf[pages=-,landscape,turn=false,%
+        addtotoc={1,chapter,0,Desk Reference,cheatsheet}]{eapi-cheatsheet}
+}
 
 \end{document}
 

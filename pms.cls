@@ -29,11 +29,11 @@
     graphicx,	% Image support
     ifthen,	% Comfortable conditional routines
     longtable,	% Extend tables over more than one page
+    array,	% Extended tabular environments
     lscape,	% Rotating pages
     marginnote, % Typeset a paragraph in the page margin
     paralist,	% Additional list environments
     parskip,	% Space between paragraps instead of intendation
-    pdfpages,	% Insert whole PDF documents as separate pages
     verbatim	% Extend the print-as-is functionality
 }
 
@@ -56,8 +56,10 @@
 % Make processing with TeX4HT possible
 \newboolean{TEX4HT-HACKS}
 \ifx\HCode\undefined
-    \RequirePackage{mathptmx,
-      courier
+    \RequirePackage{%
+        mathptmx,
+        courier,
+        pdfpages	% Insert whole PDF documents as separate pages
     }
     \RequirePackage[scaled=.90]{helvet}
     \setboolean{TEX4HT-HACKS}{false}
@@ -88,11 +90,11 @@
 % Some shorthands for the lazy ones.
 % tex4ht workaround: this needs to happen after loading hyperref
 \g@addto@macro\@documentclasshook{
+    \renewcommand{\b}[1]{\textbf{#1}}
     \renewcommand{\i}[1]{\textit{#1}}
     \renewcommand{\t}[1]{\texttt{#1}}
 }
 \newcommand{\e}[1]{\emph{#1}}
-\renewcommand{\b}[1]{\textbf{#1}}
 \newcommand{\note}[1]{\paragraph{Note:} #1}
 
 % Because we are lazy, we define a table environment to fullfil our

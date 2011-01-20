@@ -405,19 +405,19 @@ when executing any ebuild phase listed in the table. Ebuilds must not call these
 when in the phase in question.
 
 \begin{centertable}{EAPIs supporting \t{default\_} phase functions} \label{tab:default-phase-function-table}
-    \begin{tabular}{ l l }
+    \begin{tabular}{ l >{\setlength{\rightskip}{0pt plus 1fil}}p{30em} }
         \toprule
             \multicolumn{1}{c}{\textbf{EAPI}} &
             \multicolumn{1}{c}{\textbf{Supports \t{default\_} functions in phases}} \\
             \midrule
     \t{0} & None \\
     \t{1} & None \\
-    \t{2} & \parbox[t]{3in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
-        \t{src\_compile}, \t{src\_test}} \\
-    \t{3} & \parbox[t]{3in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
-        \t{src\_compile}, \t{src\_test}} \\
-    \t{4} & \parbox[t]{3in}{\t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
-        \t{src\_compile}, \t{src\_install}, \t{src\_test}} \\
+    \t{2} & \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
+        \t{src\_compile}, \t{src\_test} \\
+    \t{3} & \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
+        \t{src\_compile}, \t{src\_test} \\
+    \t{4} & \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
+        \t{src\_compile}, \t{src\_install}, \t{src\_test} \\
     \bottomrule
     \end{tabular}
 \end{centertable}
