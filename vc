@@ -7,7 +7,7 @@
 full=0
 mod=0
 while [ -n "$(echo $1 | grep '-')" ]; do
-    case $1 in 
+    case $1 in
        -f ) full=1 ;;
        -m ) mod=1 ;;
        *  ) echo 'usage: vc [-f] [-m]'

@@ -44,7 +44,7 @@
         float,		% More control over float environments
         hyperref,	% Support for hyperlinks
         algorithm,	%
-        algorithmic 	% Set algorithms
+        algorithmic	% Set algorithms
     }
 }
 \ClassInfo{pms}{Capsulation of LaTeX stuff for the Package Manager
