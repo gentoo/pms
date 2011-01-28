@@ -36,7 +36,7 @@ category. Each category directory shall contain:
 \end{compactitem}
 
 Category directories may contain additional files, whose purpose is not covered by this
-specification. Additional directories that are not for a package may \i{not} be present, to avoid
+specification. Additional directories that are not for a package may \e{not} be present, to avoid
 conflicts with package name directories; an exception is made for filesystem components whose name
 starts with a dot, which the package manager must ignore, and for any directory named \t{CVS}.
 
@@ -123,7 +123,7 @@ manager must ignore any files in this directory that it does not recognise.
 \item[desc/] This directory contains files analogous to \t{use.desc} for the various \t{USE\_EXPAND}
     variables. Each file in it is named \t{<varname>.desc}, where \t{<varname>} is the variable
     name, in lowercase, whose possible values the file describes. The format of each file is as for
-    \t{use.desc}, described in section~\ref{sec:use.desc}. The \t{USE\_EXPAND} name is \i{not}
+    \t{use.desc}, described in section~\ref{sec:use.desc}. The \t{USE\_EXPAND} name is \e{not}
     included as a prefix here.
 \item[updates/] This directory is described in section~\ref{sec:updates-dir}.
 \end{description}
