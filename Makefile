@@ -40,6 +40,11 @@ pms.bbl: pms.bib pms.tex vc.tex eapi-cheatsheet.pdf
 eapi-cheatsheet.pdf: vc.tex
 	pdflatex eapi-cheatsheet
 
+eapi-cheatsheet-nocombine.pdf: vc.tex
+	@# cheat sheet with separate pages, for proofreading
+	pdflatex -jobname eapi-cheatsheet-nocombine \
+	  '\PassOptionsToClass{nocombine}{leaflet}\input{eapi-cheatsheet.tex}'
+
 vc.tex: pms.tex vc-git.awk
 	/bin/sh ./vc
 
