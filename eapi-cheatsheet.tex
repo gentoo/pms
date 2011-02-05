@@ -205,9 +205,9 @@ nonetheless.
     \item[\code{PROPERTIES}] Is mandatory for all package managers now
     to support interactive installs.
     \item[\code{REPLACING\_VERSIONS}, \code{REPLACED\_BY\_VERSION}]
-    For corner cases in upgrade paths those variables can be defined
-    in \code{pkg\_*} functions to define a package version that is
-    replaced by or is the replacement for the current one.
+    These variables, valid in \code{pkg\_*}, contain a list of all
+    versions (\code{PVR}) of this package that we are replacing, and
+    the version that is replacing the current one, respectively.
     See \featureref{replace-version-vars}.
     \item[\code{MERGE\_TYPE}] This variable contains one of three
     possible values to allow checks if it is normal merge with
