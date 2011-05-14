@@ -259,7 +259,8 @@ enabled, run \t{make check} if and only if such a target is available, or if not
 if and only such a target is available. In both cases, if make returns non-zero the build must be
 aborted.
 
-The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{sec:restrict}.
+The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{sec:restrict}. It may
+be disabled by user too, using a PM-specific mechanism.
 
 \subsection{src\_install}
 \label{sec:src-install-function}
@@ -434,7 +435,7 @@ The call order for installing a package is:
 \item \t{src\_prepare} (only for EAPIs listed in table~\ref{tab:src-prepare-table})
 \item \t{src\_configure} (only for EAPIs listed in table~\ref{tab:src-configure-table})
 \item \t{src\_compile}
-\item \t{src\_test} (except if \t{RESTRICT=test})
+\item \t{src\_test} (except if \t{RESTRICT=test} or disabled by user)
 \item \t{src\_install}
 \item \t{pkg\_preinst}
 \item \t{pkg\_postinst}
