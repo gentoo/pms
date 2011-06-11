@@ -3,15 +3,33 @@
 
 \section{Dependency Classes}
 
+\begin{centertable}{Dependency classes required to be satisfied for a particular phase function} \label{tab:phase-function-dependency-classes}
+    \begin{tabular}{ p{0.2\textwidth} p{0.7\textwidth} }
+        \toprule
+        \multicolumn{1}{c}{\textbf{Phase function}} &
+        \multicolumn{1}{c}{\textbf{Satisfied dependency classes}} \\
+        \midrule
+	\t{pkg\_pretend}, \t{pkg\_setup}, \t{pkg\_info}, \t{pkg\_nofetch} & None (ebuilds can rely only on the packages in the system set) \\
+    \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test}, \t{src\_install} & \t{DEPEND} \\
+    \t{pkg\_preinst}, \t{pkg\_postinst}, \t{pkg\_prerm}, \t{pkg\_postrm} & \t{RDEPEND} (unless the particular dependency results in a circular dependency, in which case it may be installed later) \\
+	\t{pkg\_config} & \t{RDEPEND}, \t{PDEPEND} \\
+    \bottomrule
+    \end{tabular}
+\end{centertable}
+
 There are three classes of dependencies supported by ebuilds:
 
 \begin{compactitem}
-\item Build dependencies (\t{DEPEND}). These must be installed and usable before the ebuild
-    is installed.
-\item Runtime dependencies (\t{RDEPEND}). These must be installed and usable before the ebuild
-    is treated as usable.
-\item Post dependencies (\t{PDEPEND}). These must be installed at some point.
+\item Build dependencies (\t{DEPEND}). These must be installed and usable before any of
+	the ebuild \t{src\_*} phase functions is executed. These may not be installed at all
+	if a binary package is being merged.
+\item Runtime dependencies (\t{RDEPEND}). These must be installed and usable before
+	the results of an ebuild merging are treated as usable.
+\item Post dependencies (\t{PDEPEND}). These must be installed at some point before
+	the package manager finishes the batch of installs.
 \end{compactitem}
+
+Table~\ref{tab:phase-function-dependency-classes} lists dependencies which must be satisfied before a particular phase function is executed.
 
 In addition, \t{SRC\_URI}, \t{HOMEPAGE}, \t{RESTRICT}, \t{PROPERTIES}, \t{LICENSE} and
 \t{REQUIRED\_USE} use dependency-style specifications to specify their values.
