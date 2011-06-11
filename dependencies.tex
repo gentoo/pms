@@ -13,7 +13,7 @@ There are three classes of dependencies supported by ebuilds:
 \item Post dependencies (\t{PDEPEND}). These must be installed at some point.
 \end{compactitem}
 
-In addition, \t{SRC\_URI}, \t{HOMEPAGE}, \t{PROVIDE}, \t{RESTRICT}, \t{PROPERTIES}, \t{LICENSE} and
+In addition, \t{SRC\_URI}, \t{HOMEPAGE}, \t{RESTRICT}, \t{PROPERTIES}, \t{LICENSE} and
 \t{REQUIRED\_USE} use dependency-style specifications to specify their values.
 
 \section{Dependency Specification Format}
@@ -23,8 +23,6 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 
 \begin{compactitem}
 \item A package dependency specification. Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}.
-\item A simple qualified package name. Permitted in \t{PROVIDE} (and inside \t{DEPEND} etc
-    via the previous item).
 \item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC\_URI} and \t{HOMEPAGE}. In EAPIs
     listed in table~\ref{tab:uri-arrows-table} as supporting \t{SRC\_URI} arrows, may optionally be
     followed by whitespace, then \t{->}, then whitespace, then a simple filename when in

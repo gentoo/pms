@@ -56,6 +56,15 @@ The \t{use.defaults} file in the profile directory was used to implement `autous
 flags on or off depending upon which packages are installed. It was deprecated long ago and finally
 removed in 2009.
 
+\section{Old-style Virtuals}
+
+Historically, virtuals were special packages rather than regular ebuilds. An ebuild could specify in
+the \t{PROVIDE} metadata that it supplied certain virtuals, and the package manager had to bear this
+in mind when handling dependencies.
+
+Old-style virtuals were supported by EAPIs \t{0}, \t{1}, \t{2}, \t{3} and \t{4}, and were phased out
+via GLEP 37.
+
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 
 %%% Local Variables:

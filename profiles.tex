@@ -63,19 +63,6 @@ bash syntax, is allowed as follows:
 \item Backslashes, except for line continuations, are not allowed.
 \end{compactitem}
 
-\subsection{virtuals}
-\label{sec:profiles-virtuals}
-The \t{virtuals} file defines default providers for ``old-style'' virtual packages. It is a simple
-line-based file, with each line containing two whitespace-delimited tokens. The first is a virtual
-package name (for example, \t{virtual/alsa}) and the second is a qualified package name. Blank lines
-and those beginning with a \# character are ignored. When attempting to resolve a virtual name to a
-concrete package, the specification defined in the active profile's \t{virtuals} list should be used if no
-provider is already installed.
-
-The \t{virtuals} file is inherited in the simplest manner: all entries from the parent profile are
-loaded, then entries from the current profile. If a virtual package name appears in both, the entry
-in the parent profile is discarded.
-
 \subsection{Simple line-based files}
 \label{sec:line-stacking}
 These files are a simple one-item-per-line list, which is inherited in the following manner: the
