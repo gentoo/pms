@@ -129,11 +129,13 @@ ideally, an error in one ebuild should not prevent operations upon other ebuilds
 
 \featurelabel{rdepend-depend} In EAPIs listed in table~\ref{tab:rdepend-depend-table} as having
 \t{RDEPEND=DEPEND}, if \t{RDEPEND} is unset (but not if it is set to an empty string) in an ebuild,
-the package manager must set its value to be equal to the value of \t{DEPEND}.
+when generating metadata the package manager must treat its value as being equal to the value of
+\t{DEPEND}.
 
 When dealing with eclasses, only values set in the ebuild itself are considered for this behaviour;
 any \t{DEPEND} or \t{RDEPEND} set in an eclass does not change the implicit \t{RDEPEND=DEPEND} for
-the ebuild portion, and any \t{DEPEND} value set in an eclass does not get added to \t{RDEPEND}.
+the ebuild portion, and any \t{DEPEND} value set in an eclass does not get treated as being part of
+\t{RDEPEND}.
 
 \begin{centertable}{EAPIs with \t{RDEPEND=DEPEND} Default} \label{tab:rdepend-depend-table}
     \begin{tabular}{ l l }
