@@ -7,14 +7,14 @@ name. A package manager should indicate or reject any name that is invalid accor
 
 \subsection{Category Names}
 A category name may contain any of the characters [\t{A-Za-z0-9+\_.-}]. It must not begin with
-a hyphen or a dot.
+a hyphen, a dot or a plus sign.
 
 \note A hyphen is \e{not} required because of the \t{virtual} category. Usually, however, category
 names will contain a hyphen.
 
 \subsection{Package Names}
 A package name may contain any of the characters [\t{A-Za-z0-9+\_-}]. It must not begin with a
-hyphen, and must not end in a hyphen followed by one or more digits.
+hyphen or a plus sign, and must not end in a hyphen followed by one or more digits.
 
 \note A package name does not include the category. The term \i{qualified package name} is used
 where a \t{category/package} pair is meant.
@@ -22,7 +22,7 @@ where a \t{category/package} pair is meant.
 \subsection{Slot Names}
 \label{sec:slot-names}
 A slot name may contain any of the characters [\t{A-Za-z0-9+\_.-}]. It must not begin with a
-hyphen or a dot.
+hyphen, a dot or a plus sign.
 
 \subsection{USE Flag Names}
 A USE flag name may contain any of the characters [\t{A-Za-z0-9+\_@-}]. It must begin with an
