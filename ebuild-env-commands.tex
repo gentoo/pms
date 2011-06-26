@@ -34,16 +34,8 @@ The following commands must always be available in the ebuild environment:
 \subsection{Commands provided by package dependencies}
 
 In some cases a package's build process will require the availability of executables not provided by
-the core system, a common example being autotools. Commands provided by dependencies are available
-in the following cases:
-\begin{compactitem}
-\item In the \t{src} phases, any command provided by a package listed in \t{DEPEND} is available.
-\item In the \t{pkg} phases, at least one of the following conditions must be met:
-    \begin{compactitem}
-    \item Any command provided by a package listed in \t{DEPEND} is available.
-    \item Any command provided by a package listed in \t{RDEPEND} is available.
-    \end{compactitem}
-\end{compactitem}
+the core system, a common example being autotools. The availability of commands provided by the
+particular types of dependencies is explained in section~\ref{sec:dependency-classes}.
 
 \subsection{Ebuild-specific Commands}
 \input{pkg-mgr-commands.tex}
