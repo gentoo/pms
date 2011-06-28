@@ -108,7 +108,8 @@ variable.
     \t{pkg\_*} &
     No &
     Like \t{ROOT}, but with \t{EPREFIX} appended. This is a convenience variable. See also the
-    \t{EPREFIX} variable. \\
+    \t{EPREFIX} variable. Only for EAPIs listed in table~\ref{tab:offset-env-vars-table} as
+    supporting \t{EROOT}. \\
 \t{T} &
     All &
     Partially\footnote{Consistent and preserved across a single connected sequence of install or
@@ -132,7 +133,8 @@ variable.
     calling environment, \t{EPREFIX} defaults to the built-in offset-prefix that was set during
     installation of the package manager. When a different \t{EPREFIX} value than the built-in value is set
     in the calling environment, a cross-prefix build is performed where using the existing utilities, a
-    package is built for the given \t{EPREFIX}, akin to \t{ROOT}. See also~\ref{sec:offset-vars}. \\
+    package is built for the given \t{EPREFIX}, akin to \t{ROOT}. See also~\ref{sec:offset-vars}. Only
+    for EAPIs listed in table~\ref{tab:offset-env-vars-table} as supporting \t{EPREFIX}. \\
 \t{D} &
     \t{src\_install} &
     No &
@@ -147,7 +149,8 @@ variable.
     \t{src\_install}, \t{pkg\_preinst}, \t{pkg\_postinst} &
     See \t{D} &
     Like \t{D}, but with \t{EPREFIX} appended. This is a convenience variable. See also the
-    \t{EPREFIX} variable. \\
+    \t{EPREFIX} variable. Only for EAPIs listed in table~\ref{tab:offset-env-vars-table} as
+    supporting \t{ED}. \\
 \t{IMAGE}\footnote{Deprecated in favour of \t{D}.} &
     \t{pkg\_preinst}, \t{pkg\_postinst} &
     Yes &
