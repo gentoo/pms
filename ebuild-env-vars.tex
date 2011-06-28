@@ -68,9 +68,9 @@ variable.
     \t{SRC\_URI}\@. Does not include any that are disabled because of USE conditionals. The value is
     calculated from the base names of each element of the \t{SRC\_URI} ebuild metadata variable. \\
 \t{AA}\footnote{This variable is generally considered deprecated. However, ebuilds must still
-    assume that the package manager sets it. For example, a few configure scripts use this variable
-    to find the \t{aalib} package; ebuilds calling such configure scripts must thus work around
-    this.} &
+    assume that the package manager sets it in the EAPIs supporting it. For example, a few
+    configure scripts use this variable to find the \t{aalib} package; ebuilds calling such
+    configure scripts must thus work around this.} &
     \t{src\_*} &
     Yes &
     \featurelabel{aa} All source files that could be available for the package, including any that
