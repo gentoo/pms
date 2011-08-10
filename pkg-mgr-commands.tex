@@ -103,8 +103,8 @@ stderr or some other appropriate facility.
     lengthy process, and followed by a call to \t{eend}.
 \item[eend] Indicates that the process begun with an \t{ebegin} message has completed. Takes one
     fixed argument, which is a numeric return code, and an optional message in all subsequent
-    arguments.  If the first argument is 0, print a success indicator; otherwise, print the message
-    followed by a failure indicator.
+    arguments. If the first argument is 0, prints a success indicator; otherwise, prints the
+    message followed by a failure indicator. Returns its first argument as exit status.
 \end{description}
 
 \subsubsection{Error commands}
