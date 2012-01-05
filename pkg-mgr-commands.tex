@@ -306,11 +306,11 @@ that can be passed to \t{dohtml} are as follows:
     for other EAPIs, behaviour is undefined if any symlink is encountered. Failure
     behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
-\item[dolib] For each argument, installs it into the appropriate library directory as determined by
-    Algorithm~\ref{alg:ebuild-libdir}, by default with file mode \t{0644}. This can be overridden by
-    setting \t{LIBOPTIONS} with the \t{libopts} function. Any symlinks are installed into the same
-    directory as relative links to their original target. Failure behaviour is EAPI dependent as per
-    section~\ref{sec:failure-behaviour}.
+\item[dolib] For each argument, installs it into the appropriate library subdirectory under
+    \t{DESTTREE}, as determined by Algorithm~\ref{alg:ebuild-libdir}. The file mode is \t{0644}
+    by default. This can be overridden by setting \t{LIBOPTIONS} with the \t{libopts} function.
+    Any symlinks are installed into the same directory as relative links to their original target.
+    Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[dolib.so] As for dolib except each file is installed with mode \t{0755}.
 
