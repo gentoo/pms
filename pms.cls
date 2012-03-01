@@ -33,7 +33,7 @@
     lscape,	% Rotating pages
     marginnote, % Typeset a paragraph in the page margin
     paralist,	% Additional list environments
-    parskip,	% Space between paragraps instead of intendation
+    parskip,	% Space between paragraphs instead of indentation
     verbatim	% Extend the print-as-is functionality
 }
 
@@ -97,8 +97,7 @@
 \newcommand{\e}[1]{\emph{#1}}
 \newcommand{\note}[1]{\paragraph{Note:} #1}
 
-% Because we are lazy, we define a table environment to fullfil our
-% needs
+% Because we are lazy, we define a table environment to fulfil our needs
 \newenvironment{centertable}[1]%
 {
   \begin{table}
