@@ -48,6 +48,11 @@ assumed that any user accepting keyword \t{\textasciitilde{}foo} will also accep
 
 The exact meaning of any keywords value is beyond the scope of this specification.
 
+\subsection{EAPI Names}
+\label{sec:eapi-names}
+An EAPI name may contain any of the characters [\t{A-Za-z0-9+\_.-}]. It must not begin with a
+hyphen, a dot or a plus sign.
+
 \section{Version Specifications}
 The package manager must not impose fixed limits upon the number of version components. Package
 managers should indicate or reject any version that is invalid according to these rules.
