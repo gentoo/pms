@@ -205,14 +205,20 @@ has returned.
     available in EAPIs that support offset-prefix installations as listed in
     Table~\ref{tab:offset-env-vars-table}, hence EAPIs lacking offset-prefix support should use \t{D}
     instead of \t{ED} in the command given in Listing~\ref{lst:einstall}.
+    Variable \t{libdir} is an auxiliary local variable whose value is determined by
+    Algorithm~\ref{alg:ebuild-libdir}.
 \begin{listing}[H]
   \caption{einstall command}\label{lst:einstall}
   \begin{verbatim}
 emake \
    prefix="${ED}"/usr \
+   datadir="${ED}"/usr/share \
    mandir="${ED}"/usr/share/man \
    infodir="${ED}"/usr/share/info \
-   libdir="${ED}"/usr/$(get_libdir) \
+   libdir="${ED}"/usr/${libdir} \
+   localstatedir="${ED}"/var/lib \
+   sysconfdir="${ED}"/etc \
+   -j1 \
    "$@" \
    install
   \end{verbatim}
