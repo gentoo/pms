@@ -24,9 +24,6 @@
     inputenc,	% Allow input methods apart from ASCII
     booktabs,	% Nicer formatting of tables
     color,	% Support more than black&white
-    enumitem,
-    fullpage,
-    graphicx,	% Image support
     ifthen,	% Comfortable conditional routines
     longtable,	% Extend tables over more than one page
     array,	% Extended tabular environments
