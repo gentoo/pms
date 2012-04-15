@@ -75,7 +75,7 @@ Ebuilds may define any of the following variables:
 
 \begin{description}
 \item[DEPEND] See section~\ref{sec:dependencies}.
-\item[EAPI] The EAPI. See below for defaults.
+\item[EAPI] The EAPI. See below.
 \item[PDEPEND] See section~\ref{sec:dependencies}.
 \item[RDEPEND] See section~\ref{sec:dependencies}. For some EAPIs, \t{RDEPEND} has special behaviour
     for its value if unset and when used with an eclass. See section~\ref{sec:rdepend-depend} for
@@ -123,6 +123,20 @@ ensure that it is unset.
 
 If any of these variables are set to invalid values, the package manager's behaviour is undefined;
 ideally, an error in one ebuild should not prevent operations upon other ebuilds or packages.
+
+If the EAPI is to be specified in an ebuild, the \t{EAPI} variable must be assigned to precisely
+once. The assignment must not be preceded by any lines other than blank lines or those that start
+with optional whitespace (spaces or tabs) followed by a \t{\#} character, and the line containing
+the assignment statement must match the following regular expression:
+\begin{verbatim}
+^[ \t]*EAPI=(['"]?)([A-Za-z0-9+_.-]*)\1[ \t]*(#.*)?$
+\end{verbatim}
+
+The package manager may optionally determine the EAPI of an ebuild by parsing its first non-blank
+and non-comment line, using above regular expression. If a recognised EAPI has been determined
+such, then the package manager must make sure that the \t{EAPI} value obtained by sourcing the
+ebuild with bash is identical to the EAPI obtained by parsing. The ebuild must be treated as
+invalid if these values are different.
 
 \subsection{\t{RDEPEND} value}
 \label{sec:rdepend-depend}
