@@ -20,9 +20,35 @@ variables must be treated in this fashion:
 \item \t{CONFIG\_PROTECT\_MASK}
 \end{compactitem}
 
+If the package manager supports any EAPI listed in table~\ref{tab:profile-iuse-injection-table} as
+using profile-defined \t{IUSE} injection, the following variables must also be treated
+incrementally; otherwise, the following variables may or may not be treated incrementally:
+\begin{compactitem}
+\item \t{IUSE\_IMPLICIT}
+\item \t{USE\_EXPAND\_IMPLICIT}
+\item \t{USE\_EXPAND\_UNPREFIXED}
+\end{compactitem}
+
 Other variables, except where they affect only package-manager-specific functionality (such as
 Portage's \t{FEATURES} variable), must not be treated incrementally---later definitions shall
 completely override those in parent profiles.
+
+\ChangeWhenAddingAnEAPI{5}
+\begin{centertable}{Profile-defined \t{IUSE} injection for EAPIs} \label{tab:profile-iuse-injection-table}
+    \begin{tabular}{ l l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports profile-defined \t{IUSE} injection?}} \\
+        \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & No \\
+    \t{3} & No \\
+    \t{4} & No \\
+    \t{5} & Yes \\
+    \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \subsection{Specific variables and their meanings}
 The following variables have specific meanings when set in profiles.
@@ -37,10 +63,20 @@ The following variables have specific meanings when set in profiles.
 \item[USE\_EXPAND] Defines a list of variables which are to be treated incrementally and whose
     contents are to be expanded into the USE variable as passed to ebuilds. See
     section~\ref{sec:use-iuse-handling} for details.
-\item[USE\_EXPAND\_HIDDEN] Contains a (possibly empty) subset of names from \t{USE\_EXPAND}. The
-    package manager may use this set as a hint to avoid displaying uninteresting or unhelpful
-    information to an end user.
+\item[USE\_EXPAND\_UNPREFIXED] Similar to \t{USE\_EXPAND}, but no prefix is used. If the repository
+    contains any package using an EAPI supporting profile-defined \t{IUSE} injection (see
+    table~\ref{tab:profile-iuse-injection-table}), this list must contain at least \t{ARCH}. See
+    section~\ref{sec:use-iuse-handling} for details.
+\item[USE\_EXPAND\_HIDDEN] Contains a (possibly empty) subset of names from \t{USE\_EXPAND} and
+    \t{USE\_EXPAND\_UNPREFIXED}. The package manager may use this set as a hint to avoid displaying
+    uninteresting or unhelpful information to an end user.
+\item[USE\_EXPAND\_IMPLICIT, IUSE\_IMPLICIT] Used to inject implicit values into \t{IUSE}. See
+    section~\ref{sec:use-iuse-handling} for details.
 \end{description}
+
+In addition, for EAPIs listed in table~\ref{tab:profile-iuse-injection-table} as supporting profile
+defined \t{IUSE} injection, the variables named in \t{USE\_EXPAND} and \t{USE\_EXPAND\_UNPREFIXED}
+have special handling as described in section~\ref{sec:use-iuse-handling}.
 
 Any other variables set in \t{make.defaults} must be passed on into the ebuild environment as-is,
 and are not required to be interpreted by the package manager.

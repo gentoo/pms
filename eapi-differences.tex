@@ -40,6 +40,9 @@
 \bottomrule
 \endlastfoot
 
+Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-injection} &
+    No & No & No & No & No & Yes \\
+
 \t{IUSE} defaults & \compactfeatureref{iuse-defaults} &
     No & Yes & Yes & Yes & Yes & Yes \\
 
@@ -247,6 +250,7 @@ EAPI 5 is EAPI 4 with the following changes:
 \begin{compactitem}
 \item \t{econf} adds \t{-{}-disable-silent-rules}, \featureref{econf-options}.
 \item Slot operator dependencies, \featureref{slot-operator-deps}.
+\item \t{USE} is calculated differently, \featureref{profile-iuse-injection}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{5}
