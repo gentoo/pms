@@ -21,7 +21,7 @@ The following commands affect this behaviour:
     table~\ref{tab:commands-die-table} as supporting \t{nonfatal}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPI Command Failure Behaviour} \label{tab:commands-die-table}
     \begin{tabular}{ l l l }
         \toprule
@@ -34,6 +34,7 @@ The following commands affect this behaviour:
     \t{2} & Non-zero exit & No \\
     \t{3} & Non-zero exit & No \\
     \t{4} & Aborts & Yes \\
+    \t{5} & Aborts & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -44,7 +45,7 @@ The following commands affect this behaviour:
 \featurelabel{banned-commands} Some commands are banned in some EAPIs. If a banned command is
 called, the package manager must abort the build process indicating an error.
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{Banned commands} \label{tab:banned-commands-table}
     \begin{tabular}{ l l l l }
         \toprule
@@ -59,6 +60,7 @@ called, the package manager must abort the build process indicating an error.
     \t{2} & No & No \\
     \t{3} & No & No \\
     \t{4} & Yes & Yes \\
+    \t{5} & Yes & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -147,7 +149,7 @@ has returned.
         string \t{disable-dependency-tracking} occurs in the output of \t{configure -{}-help}.
     \end{itemize}
 
-    \ChangeWhenAddingAnEAPI{4}
+    \ChangeWhenAddingAnEAPI{5}
     \begin{centertable}{Extra \t{econf} arguments for EAPIs} \label{tab:econf-options-table}
         \begin{tabular}{ l l l }
             \toprule
@@ -159,6 +161,7 @@ has returned.
         \t{2} & No \\
         \t{3} & No \\
         \t{4} & Yes \\
+        \t{5} & Yes \\
         \bottomrule
         \end{tabular}
     \end{centertable}
@@ -410,7 +413,7 @@ that can be passed to \t{dohtml} are as follows:
 
 \end{description}
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs supporting \t{dodoc -r}} \label{tab:dodoc-table}
     \begin{tabular}{ l l }
         \toprule
@@ -422,11 +425,12 @@ that can be passed to \t{dohtml} are as follows:
     \t{2} & No \\
     \t{3} & No \\
     \t{4} & Yes \\
+    \t{5} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs supporting symlinks for \t{doins}} \label{tab:doins-table}
     \begin{tabular}{ l l }
         \toprule
@@ -438,11 +442,12 @@ that can be passed to \t{dohtml} are as follows:
     \t{2} & No \\
     \t{3} & No \\
     \t{4} & Yes \\
+    \t{5} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{\t{doman} language support options for EAPIs}
     \label{tab:doman-table}
     \begin{tabular}{ l l l }
@@ -456,6 +461,7 @@ that can be passed to \t{dohtml} are as follows:
     \t{2} & Yes & No \\
     \t{3} & Yes & No \\
     \t{4} & Yes & Yes \\
+    \t{5} & Yes & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -545,7 +551,7 @@ exclusion list. Otherwise, add each argument to the inclusion list. Only availab
 in table~\ref{tab:compression-table} as supporting \t{docompress}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs supporting controllable compression} \label{tab:compression-table}
     \begin{tabular}{ l l l }
         \toprule
@@ -558,6 +564,7 @@ in table~\ref{tab:compression-table} as supporting \t{docompress}.
     \t{2} & No & No \\
     \t{3} & No & No \\
     \t{4} & Yes & Yes \\
+    \t{5} & Yes & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -589,7 +596,7 @@ either behaviour is undefined or it is an error as decided by table~\ref{tab:use
 instead of \t{-{}-with-} or \t{-{}-without-}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPI Behaviour for Use Queries not in IUSE\_EFFECTIVE} \label{tab:use-list-strictness}
     \begin{tabular}{ l l }
         \toprule
@@ -601,11 +608,12 @@ instead of \t{-{}-with-} or \t{-{}-without-}.
     \t{2} & Undefined \\
     \t{3} & Undefined \\
     \t{4} & Error \\
+    \t{5} & Error \\
     \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs supporting empty third argument in \t{use\_with} and \t{use\_enable}}
     \label{tab:use-with-third-arg}
     \begin{tabular}{ l l }
@@ -618,6 +626,7 @@ instead of \t{-{}-with-} or \t{-{}-without-}.
     \t{2} & No \\
     \t{3} & No \\
     \t{4} & Yes \\
+    \t{5} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -688,7 +697,7 @@ has returned.
     It is up to the ebuild to ensure that the relevant external utilities are available, whether by
     being in the system set or via dependencies.
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{\t{unpack} extensions for EAPIs} \label{tab:unpack-extensions-table}
     \begin{tabular}{ l l }
         \toprule
@@ -700,6 +709,7 @@ has returned.
     \t{2} & No \\
     \t{3} & Yes \\
     \t{4} & Yes \\
+    \t{5} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -713,7 +723,7 @@ has returned.
     table~\ref{tab:default-function-table}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs supporting the \t{default} function} \label{tab:default-function-table}
     \begin{tabular}{ l l }
         \toprule
@@ -725,6 +735,7 @@ has returned.
     \t{2} & Yes \\
     \t{3} & Yes \\
     \t{4} & Yes \\
+    \t{5} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}

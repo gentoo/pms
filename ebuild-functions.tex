@@ -44,7 +44,7 @@ fallback to \t{WORKDIR} is used:
     in \t{DEFINED\_PHASES}.
 \end{compactitem}
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs with \t{S} to \t{WORKDIR} fallbacks} \label{tab:s-fallback-table}
     \begin{tabular}{ l l }
         \toprule
@@ -56,6 +56,7 @@ fallback to \t{WORKDIR} is used:
     \t{2} & Always \\
     \t{3} & Always \\
     \t{4} & Conditional error \\
+    \t{5} & Conditional error \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -78,7 +79,7 @@ before the next phase is executed.
 
 \t{pkg\_pretend} must not write to the filesystem.
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs supporting \t{pkg\_pretend}} \label{tab:pkg-pretend-table}
     \begin{tabular}{ l l }
         \toprule
@@ -90,6 +91,7 @@ before the next phase is executed.
     \t{2} & No \\
     \t{3} & No \\
     \t{4} & Yes \\
+    \t{5} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -133,7 +135,7 @@ implementation does nothing.
 The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR} as discussed in
 section~\ref{sec:s-to-workdir-fallback}.
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs supporting \t{src\_prepare}} \label{tab:src-prepare-table}
     \begin{tabular}{ l l }
         \toprule
@@ -145,6 +147,7 @@ section~\ref{sec:s-to-workdir-fallback}.
     \t{2} & Yes \\
     \t{3} & Yes \\
     \t{4} & Yes \\
+    \t{5} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -169,7 +172,7 @@ src_configure() {
 }
 \end{verbatim}
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs supporting \t{src\_configure}} \label{tab:src-configure-table}
     \begin{tabular}{ l l }
         \toprule
@@ -181,6 +184,7 @@ src_configure() {
     \t{2} & Yes \\
     \t{3} & Yes \\
     \t{4} & Yes \\
+    \t{5} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -236,7 +240,7 @@ src_compile() {
 }
 \end{verbatim}
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{\t{src\_compile} behaviour for EAPIs} \label{tab:src-compile-table}
     \begin{tabular}{ l l }
         \toprule
@@ -248,6 +252,7 @@ src_compile() {
     \t{2} & 2 \\
     \t{3} & 2 \\
     \t{4} & 2 \\
+    \t{5} & 2 \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -303,7 +308,7 @@ src_install() {
 For other EAPIs, the default implementation used when the ebuild lacks the \t{src\_install} function
 is a no-op.
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{\t{src\_install} behaviour for EAPIs} \label{tab:src-install-table}
     \begin{tabular}{ l l }
         \toprule
@@ -315,6 +320,7 @@ is a no-op.
     \t{2} & no-op \\
     \t{3} & no-op \\
     \t{4} & 4 \\
+    \t{5} & 4 \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -378,7 +384,7 @@ that dependencies may not be installed.
 
 \t{pkg\_info} must not write to the filesystem.
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs supporting \t{pkg\_info} on non-installed packages} \label{tab:pkg-info-table}
     \begin{tabular}{ l l }
         \toprule
@@ -390,6 +396,7 @@ that dependencies may not be installed.
     \t{2} & No \\
     \t{3} & No \\
     \t{4} & Yes \\
+    \t{5} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -412,7 +419,7 @@ named \t{default\_}(phase) that behaves as the default implementation for that E
 when executing any ebuild phase listed in the table. Ebuilds must not call these functions except
 when in the phase in question.
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs supporting \t{default\_} phase functions} \label{tab:default-phase-function-table}
     \begin{tabular}{ l >{\setlength{\rightskip}{0pt plus 1fil}}p{30em} }
         \toprule
@@ -426,6 +433,8 @@ when in the phase in question.
     \t{3} & \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
         \t{src\_compile}, \t{src\_test} \\
     \t{4} & \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
+        \t{src\_compile}, \t{src\_install}, \t{src\_test} \\
+    \t{5} & \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
         \t{src\_compile}, \t{src\_install}, \t{src\_test} \\
     \bottomrule
     \end{tabular}

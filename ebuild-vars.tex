@@ -54,7 +54,7 @@ If any of these variables are undefined, or if any of these variables are set to
 the package manager's behaviour is undefined; ideally, an error in one ebuild should not prevent
 operations upon other ebuilds or packages.
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs supporting \t{IUSE} defaults} \label{tab:iuse-defaults-table}
     \begin{tabular}{ l l }
         \toprule
@@ -66,6 +66,7 @@ operations upon other ebuilds or packages.
     \t{2} & Yes \\
     \t{3} & Yes \\
     \t{4} & Yes \\
+    \t{5} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -94,7 +95,7 @@ Ebuilds may define any of the following variables:
     table~\ref{tab:optional-vars-table} as supporting \t{REQUIRED\_USE}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs supporting various ebuild-defined variables}
 \label{tab:optional-vars-table}
     \begin{tabular}{ l l l }
@@ -108,6 +109,7 @@ Ebuilds may define any of the following variables:
     \t{2} & Optionally & No \\
     \t{3} & Optionally & No \\
     \t{4} & Yes & Yes \\
+    \t{5} & Yes & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -154,7 +156,7 @@ any \t{DEPEND} or \t{RDEPEND} set in an eclass does not change the implicit \t{R
 the ebuild portion, and any \t{DEPEND} value set in an eclass does not get treated as being part of
 \t{RDEPEND}.
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs with \t{RDEPEND=DEPEND} Default} \label{tab:rdepend-depend-table}
     \begin{tabular}{ l l }
         \toprule
@@ -166,6 +168,7 @@ the ebuild portion, and any \t{DEPEND} value set in an eclass does not get treat
     \t{2} & Yes \\
     \t{3} & Yes \\
     \t{4} & No \\
+    \t{5} & No \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -199,7 +202,7 @@ this variable defined, and must treat an empty string as ``this information is n
 \note Thus, by extension of section~\ref{sec:metadata-invariance}, phase functions must not be defined
 based upon any variant condition.
 
-\ChangeWhenAddingAnEAPI{4}
+\ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs supporting \t{DEFINED\_PHASES}} \label{tab:defined-phases-table}
     \begin{tabular}{ l l }
         \toprule
@@ -211,6 +214,7 @@ based upon any variant condition.
     \t{2} & Optionally \\
     \t{3} & Optionally \\
     \t{4} & Yes \\
+    \t{5} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
