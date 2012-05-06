@@ -154,7 +154,8 @@ variable.
 \t{IMAGE}\footnote{Deprecated in favour of \t{D}.} &
     \t{pkg\_preinst}, \t{pkg\_postinst} &
     Yes &
-    Equal to \t{D}. \\
+    \featurelabel{image} Equal to \t{D}. Only for EAPIs listed in table~\ref{tab:env-vars-table} as
+    supporting \t{IMAGE}. \\
 \t{INSDESTTREE} &
     \t{src\_install} &
     No &
@@ -216,21 +217,22 @@ variable.
 
 \ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs supporting various env variables} \label{tab:env-vars-table}
-    \begin{tabular}{ l l l l l l }
+    \begin{tabular}{ l l l l l l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{\t{AA}?}} &
         \multicolumn{1}{c}{\textbf{\t{KV}?}} &
         \multicolumn{1}{c}{\textbf{\t{MERGE\_TYPE}?}} &
         \multicolumn{1}{c}{\textbf{\t{REPLACING\_VERSIONS}?}} &
-        \multicolumn{1}{c}{\textbf{\t{REPLACED\_BY\_VERSION}?}} \\
+        \multicolumn{1}{c}{\textbf{\t{REPLACED\_BY\_VERSION}?}} &
+        \multicolumn{1}{c}{\textbf{\t{IMAGE}?}} \\
         \midrule
-    \t{0} & Yes & Yes & No & No & No \\
-    \t{1} & Yes & Yes & No & No & No \\
-    \t{2} & Yes & Yes & No & No & No \\
-    \t{3} & Yes & Yes & No & No & No \\
-    \t{4} & No & No & Yes & Yes & Yes \\
-    \t{5} & No & No & Yes & Yes & Yes \\
+    \t{0} & Yes & Yes & No & No & No & Yes \\
+    \t{1} & Yes & Yes & No & No & No & Yes \\
+    \t{2} & Yes & Yes & No & No & No & Yes \\
+    \t{3} & Yes & Yes & No & No & No & Yes \\
+    \t{4} & No & No & Yes & Yes & Yes & Yes \\
+    \t{5} & No & No & Yes & Yes & Yes & No \\
     \bottomrule
     \end{tabular}
 \end{centertable}
