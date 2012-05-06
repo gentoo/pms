@@ -66,6 +66,12 @@ be surrounded on both sides by whitespace, except at the start and end of the st
     parenthesis. More formally: \t{exactly-one-of ::= '\textasciicircum\textasciicircum' whitespace
     '(' whitespace (item whitespace)* ')'}.
     Permitted in \t{REQUIRED\_USE}.
+\item \featurelabel{at-most-one-of} An at-most-one-of group, which consists of the string \t{??},
+    followed by whitespace, followed by an open parenthesis, followed by whitespace, followed by
+    zero or more of (a dependency item of any kind followed by whitespace), followed by a close
+    parenthesis. More formally: \t{exactly-one-of ::= '??' whitespace '(' whitespace (item
+    whitespace)* ')'}. Permitted in \t{REQUIRED\_USE} in EAPIs listed in
+    table~\ref{tab:at-most-one-of-table} as supporting \t{REQUIRED\_USE ??}\ groups.
 \item A use-conditional group, which consists of an optional exclamation mark, followed by
     a use flag name, followed by a question mark, followed by whitespace, followed by
     an open parenthesis, followed by whitespace, followed by zero or more of (a dependency item
@@ -88,6 +94,23 @@ In particular, note that whitespace is not optional.
     \t{2} & Yes \\
     \t{3} & Yes \\
     \t{4} & Yes \\
+    \t{5} & Yes \\
+    \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\ChangeWhenAddingAnEAPI{5}
+\begin{centertable}{EAPIs supporting \t{REQUIRED\_USE ??}\ groups} \label{tab:at-most-one-of-table}
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports \t{REQUIRED\_USE ??}\ groups?}} \\
+        \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & No \\
+    \t{3} & No \\
+    \t{4} & No \\
     \t{5} & Yes \\
     \bottomrule
     \end{tabular}
@@ -125,6 +148,16 @@ exactly-one-of group for match purposes.
 In an exactly-one-of group, exactly one immediate child element must be matched.
 
 An empty exactly-one-of group counts as being matched.
+
+\subsection{At-most-one-of Dependency Specifications}
+
+Any use-conditional group that is an immediate child of an at-most-one-of group, if not enabled
+(disabled for an exclamation mark prefixed use flag name), is not considered a member of the
+at-most-one-of group for match purposes.
+
+In an at-most-one-of group, at most one immediate child element must be matched.
+
+An empty at-most-one-of group counts as being matched.
 
 \subsection{Package Dependency Specifications}
 
