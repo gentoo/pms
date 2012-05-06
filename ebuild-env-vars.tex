@@ -283,9 +283,13 @@ This section discusses the handling of four variables:
 In all cases, the values of \t{IUSE\_REFERENCEABLE} and \t{IUSE\_EFFECTIVE} are undefined during
 metadata generation.
 
-\t{IUSE\_REFERENCEABLE} is equal to the calculated \t{IUSE} value.
+For EAPIs listed in table~\ref{tab:profile-iuse-injection-table} as not supporting profile defined
+\t{IUSE} injection, \t{IUSE\_REFERENCEABLE} is equal to the calculated \t{IUSE} value. For EAPIs
+where profile defined \t{IUSE} injection is supported, \t{IUSE\_REFERENCEABLE} is equal to
+\t{IUSE\_EFFECTIVE}.
 
-\t{IUSE\_EFFECTIVE} contains the following values:
+For EAPIs listed in table~\ref{tab:profile-iuse-injection-table} as not supporting profile defined
+\t{IUSE} injection, \t{IUSE\_EFFECTIVE} contains the following values:
 
 \begin{compactitem}
 \item All values in the calculated \t{IUSE} value.
@@ -294,10 +298,36 @@ metadata generation.
     the profile \t{USE\_EXPAND} variable followed by an underscore.
 \end{compactitem}
 
+\featurelabel{profile-iuse-injection} For EAPIs listed in
+table~\ref{tab:profile-iuse-injection-table} as supporting profile defined \t{IUSE} injection,
+\t{IUSE\_EFFECTIVE} contains the following values:
+
+\begin{compactitem}
+\item All values in the calculated \t{IUSE} value.
+\item All values in the profile \t{IUSE\_IMPLICIT} variable.
+\item All values in the profile variable named \t{USE\_EXPAND\_VALUES\_\$\{v\}}, where \t{\$\{v\}}
+    is any value in the intersection of the profile \t{USE\_EXPAND\_UNPREFIXED} and
+    \t{USE\_EXPAND\_IMPLICIT} variables.
+\item All values for \t{\$\{lower\_v\}\_\$\{x\}}, where \t{\$\{x\}} is all values in the profile
+    variable named \t{USE\_EXPAND\_VALUES\_\$\{v\}}, where \t{\$\{v\}} is any value in the
+    intersection of the profile \t{USE\_EXPAND} and \t{USE\_EXPAND\_IMPLICIT} variables and
+    \t{\$\{lower\_v\}} is the lowercase equivalent of \t{\$\{v\}}.
+\end{compactitem}
+
 The \t{USE} variable is set by the package manager. For each value in \t{IUSE\_EFFECTIVE}, \t{USE}
 shall contain that value if the flag is to be enabled for the ebuild in question, and shall not
-contain that value if it is to be disabled. \t{USE} may contain other flag names that are not
-relevant for the ebuild.
+contain that value if it is to be disabled. In EAPIs listed in
+table~\ref{tab:profile-iuse-injection-table} as not supporting profile defined \t{IUSE} injection,
+\t{USE} may contain other flag names that are not relevant for the ebuild.
+
+For EAPIs listed in table~\ref{tab:profile-iuse-injection-table} as supporting profile defined
+\t{IUSE} injection, the variables named in \t{USE\_EXPAND} and \t{USE\_EXPAND\_UNPREFIXED} shall
+have their profile-provided values reduced to contain only those values that are present in
+\t{IUSE\_EFFECTIVE}.
+
+For EAPIs listed in table~\ref{tab:profile-iuse-injection-table} as supporting profile defined
+\t{IUSE} injection, the package manager must save the calculated value of \t{IUSE\_EFFECTIVE} when
+installing a package. Details are beyond the scope of this specification.
 
 \subsection{\t{REPLACING\_VERSIONS} and \t{REPLACED\_BY\_VERSION}}
 \label{sec:replacing-versions}

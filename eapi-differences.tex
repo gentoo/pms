@@ -109,6 +109,9 @@ Use dependencies & \compactfeatureref{use-deps} &
 \t{MERGE\_TYPE} & \compactfeatureref{merge-type} &
     No & No & No & No & Yes & Yes \\
 
+Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-injection} &
+    No & No & No & No & No & Yes \\
+
 \t{REPLACING\_VERSIONS} & \compactfeatureref{replace-version-vars} &
     No & No & No & No & Yes & Yes \\
 
@@ -246,6 +249,7 @@ EAPI 5 is EAPI 4 with the following changes:
 
 \begin{compactitem}
 \item Slot operator dependencies, \featureref{slot-operator-deps}.
+\item \t{USE} is calculated differently, \featureref{profile-iuse-injection}.
 \item \t{econf} adds \t{-{}-disable-silent-rules}, \featureref{econf-options}.
 \end{compactitem}
 
