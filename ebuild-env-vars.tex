@@ -173,6 +173,16 @@ variable.
     \t{postrm}, \t{info}, \t{pretend} according to the top level ebuild function that was executed
     by the package manager. May be unset or any single word that is not any of the above when the
     ebuild is being sourced for other (e.\,g.\ metadata or QA) purposes. \\
+\t{EBUILD\_PHASE\_FUNC} &
+    All &
+    No &
+    \featurelabel{ebuild-phase-func} Takes one of the values \t{pkg\_config}, \t{pkg\_setup},
+    \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure}, \t{src\_compile},
+    \t{src\_test}, \t{src\_install}, \t{pkg\_preinst}, \t{pkg\_postinst}, \t{pkg\_prerm},
+    \t{pkg\_postrm}, \t{pkg\_info}, \t{pkg\_pretend} according to the top level ebuild function that
+    was executed by the package manager. May be unset or any single word that is not any of the
+    above when the ebuild is being sourced for other (e.\,g.\ metadata or QA) purposes. Only for
+    EAPIs listed in table~\ref{tab:env-vars-table} as supporting \t{EBUILD\_PHASE\_FUNC}. \\
 \t{WORKDIR} &
     \t{src\_*}, global~scope &
     Yes &
@@ -217,7 +227,7 @@ variable.
 
 \ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs supporting various env variables} \label{tab:env-vars-table}
-    \begin{tabular}{ l l l l l l l }
+    \begin{tabular}{ l l l l l l l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
         \multicolumn{1}{c}{\textbf{\t{AA}?}} &
@@ -225,14 +235,15 @@ variable.
         \multicolumn{1}{c}{\textbf{\t{MERGE\_TYPE}?}} &
         \multicolumn{1}{c}{\textbf{\t{REPLACING\_VERSIONS}?}} &
         \multicolumn{1}{c}{\textbf{\t{REPLACED\_BY\_VERSION}?}} &
-        \multicolumn{1}{c}{\textbf{\t{IMAGE}?}} \\
+        \multicolumn{1}{c}{\textbf{\t{IMAGE}?}} &
+        \multicolumn{1}{c}{\textbf{\t{EBUILD\_PHASE\_FUNC}?}} \\
         \midrule
-    \t{0} & Yes & Yes & No & No & No & Yes \\
-    \t{1} & Yes & Yes & No & No & No & Yes \\
-    \t{2} & Yes & Yes & No & No & No & Yes \\
-    \t{3} & Yes & Yes & No & No & No & Yes \\
-    \t{4} & No & No & Yes & Yes & Yes & Yes \\
-    \t{5} & No & No & Yes & Yes & Yes & No \\
+    \t{0} & Yes & Yes & No & No & No & Yes & No \\
+    \t{1} & Yes & Yes & No & No & No & Yes & No \\
+    \t{2} & Yes & Yes & No & No & No & Yes & No \\
+    \t{3} & Yes & Yes & No & No & No & Yes & No \\
+    \t{4} & No & No & Yes & Yes & Yes & Yes & No \\
+    \t{5} & No & No & Yes & Yes & Yes & No & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
