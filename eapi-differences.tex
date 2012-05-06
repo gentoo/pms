@@ -131,7 +131,7 @@ Most utilities die & \compactfeatureref{die-on-failure} &
     Yes & Yes & Yes & Yes & Banned & Banned \\
 
 \t{econf} arguments & \compactfeatureref{econf-options} &
-    &  &  &  & disable dependency tracking & disable dependency tracking \\
+    &  &  &  & disable dependency tracking & disable dependency tracking, disable silent rules \\
 
 \t{dodoc -r} & \compactfeatureref{dodoc} &
     No & No & No & No & Yes & Yes \\
@@ -245,7 +245,7 @@ EAPI 4 is EAPI 3 with the following changes:
 EAPI 5 is EAPI 4 with the following changes:
 
 \begin{compactitem}
-\item None
+\item \t{econf} adds \t{-{}-disable-silent-rules}, \featureref{econf-options}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{5}
