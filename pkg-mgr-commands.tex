@@ -23,6 +23,7 @@ The following commands affect this behaviour:
     table~\ref{tab:commands-die-table} as supporting \t{nonfatal}.
 \end{description}
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPI Command Failure Behaviour} \label{tab:commands-die-table}
     \begin{tabular}{ l l l }
         \toprule
@@ -45,6 +46,7 @@ The following commands affect this behaviour:
 \featurelabel{banned-commands} Some commands are banned in some EAPIs. If a banned command is
 called, the package manager must abort the build process indicating an error.
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{Banned commands} \label{tab:banned-commands-table}
     \begin{tabular}{ l l l l }
         \toprule
@@ -147,6 +149,7 @@ has returned.
         string \t{disable-dependency-tracking} occurs in the output of \t{configure -{}-help}.
     \end{itemize}
 
+    \ChangeWhenAddingAnEAPI{4}
     \begin{centertable}{Extra \t{econf} arguments for EAPIs} \label{tab:econf-options-table}
         \begin{tabular}{ l l l }
             \toprule
@@ -409,6 +412,7 @@ that can be passed to \t{dohtml} are as follows:
 
 \end{description}
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPIs supporting \t{dodoc -r}} \label{tab:dodoc-table}
     \begin{tabular}{ l l }
         \toprule
@@ -424,6 +428,7 @@ that can be passed to \t{dohtml} are as follows:
     \end{tabular}
 \end{centertable}
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPIs supporting symlinks for \t{doins}} \label{tab:doins-table}
     \begin{tabular}{ l l }
         \toprule
@@ -439,6 +444,7 @@ that can be passed to \t{dohtml} are as follows:
     \end{tabular}
 \end{centertable}
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{\t{doman} language support options for EAPIs}
     \label{tab:doman-table}
     \begin{tabular}{ l l l }
@@ -541,6 +547,7 @@ exclusion list. Otherwise, add each argument to the inclusion list. Only availab
 in table~\ref{tab:compression-table} as supporting \t{docompress}.
 \end{description}
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPIs supporting controllable compression} \label{tab:compression-table}
     \begin{tabular}{ l l l }
         \toprule
@@ -584,6 +591,7 @@ either behaviour is undefined or it is an error as decided by table~\ref{tab:use
 instead of \t{-{}-with-} or \t{-{}-without-}.
 \end{description}
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPI Behaviour for Use Queries not in IUSE\_EFFECTIVE} \label{tab:use-list-strictness}
     \begin{tabular}{ l l }
         \toprule
@@ -599,6 +607,7 @@ instead of \t{-{}-with-} or \t{-{}-without-}.
     \end{tabular}
 \end{centertable}
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPIs supporting empty third argument in \t{use\_with} and \t{use\_enable}}
     \label{tab:use-with-third-arg}
     \begin{tabular}{ l l }
@@ -681,6 +690,7 @@ has returned.
     It is up to the ebuild to ensure that the relevant external utilities are available, whether by
     being in the system set or via dependencies.
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{\t{unpack} extensions for EAPIs} \label{tab:unpack-extensions-table}
     \begin{tabular}{ l l }
         \toprule
@@ -705,6 +715,7 @@ has returned.
     table~\ref{tab:default-function-table}.
 \end{description}
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPIs supporting the \t{default} function} \label{tab:default-function-table}
     \begin{tabular}{ l l }
         \toprule

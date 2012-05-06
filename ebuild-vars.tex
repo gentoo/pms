@@ -78,6 +78,7 @@ Ebuilds may define any of the following variables:
 \item[PDEPEND] See section~\ref{sec:dependencies}.
 \end{description}
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPIs supporting \t{IUSE} defaults} \label{tab:iuse-defaults-table}
     \begin{tabular}{ l l }
         \toprule
@@ -93,6 +94,7 @@ Ebuilds may define any of the following variables:
     \end{tabular}
 \end{centertable}
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPIs supporting various ebuild-defined variables}
 \label{tab:optional-vars-table}
     \begin{tabular}{ l l l }
@@ -152,6 +154,7 @@ any \t{DEPEND} or \t{RDEPEND} set in an eclass does not change the implicit \t{R
 the ebuild portion, and any \t{DEPEND} value set in an eclass does not get treated as being part of
 \t{RDEPEND}.
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPIs with \t{RDEPEND=DEPEND} Default} \label{tab:rdepend-depend-table}
     \begin{tabular}{ l l }
         \toprule
@@ -196,6 +199,7 @@ this variable defined, and must treat an empty string as ``this information is n
 \note Thus, by extension of section~\ref{sec:metadata-invariance}, phase functions must not be defined
 based upon any variant condition.
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPIs supporting \t{DEFINED\_PHASES}} \label{tab:defined-phases-table}
     \begin{tabular}{ l l }
         \toprule

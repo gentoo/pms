@@ -76,6 +76,7 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 
 In particular, note that whitespace is not optional.
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPIs supporting \t{SRC\_URI} arrows} \label{tab:uri-arrows-table}
     \begin{tabular}{ l l }
         \toprule
@@ -147,6 +148,7 @@ manager must warn or error if this feature is used with an EAPI not supporting u
 
 \note Order is important. The slot restriction must come before use dependencies.
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPIs supporting \t{SLOT} dependencies} \label{tab:slot-deps-table}
     \begin{tabular}{ l l }
         \toprule
@@ -162,6 +164,7 @@ manager must warn or error if this feature is used with an EAPI not supporting u
     \end{tabular}
 \end{centertable}
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPIs supporting \t{USE} dependencies} \label{tab:use-deps-table}
     \begin{tabular}{ l l }
         \toprule
@@ -212,6 +215,7 @@ ignored by the package manager, so long as any blocked package will be uninstall
 strong block must not be ignored. The mapping from one or two exclamation marks to strength is
 described in table~\ref{tab:bang-strength-table}.
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{Exclamation mark strengths for EAPIs} \label{tab:bang-strength-table}
     \begin{tabular}{ l l l }
         \toprule

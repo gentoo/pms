@@ -44,6 +44,7 @@ fallback to \t{WORKDIR} is used:
     in \t{DEFINED\_PHASES}.
 \end{compactitem}
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPIs with \t{S} to \t{WORKDIR} fallbacks} \label{tab:s-fallback-table}
     \begin{tabular}{ l l }
         \toprule
@@ -77,6 +78,7 @@ before the next phase is executed.
 
 \t{pkg\_pretend} must not write to the filesystem.
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPIs supporting \t{pkg\_pretend}} \label{tab:pkg-pretend-table}
     \begin{tabular}{ l l }
         \toprule
@@ -131,6 +133,7 @@ implementation does nothing.
 The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR} as discussed in
 section~\ref{sec:s-to-workdir-fallback}.
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPIs supporting \t{src\_prepare}} \label{tab:src-prepare-table}
     \begin{tabular}{ l l }
         \toprule
@@ -166,6 +169,7 @@ src_configure() {
 }
 \end{verbatim}
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPIs supporting \t{src\_configure}} \label{tab:src-configure-table}
     \begin{tabular}{ l l }
         \toprule
@@ -232,6 +236,7 @@ src_compile() {
 }
 \end{verbatim}
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{\t{src\_compile} behaviour for EAPIs} \label{tab:src-compile-table}
     \begin{tabular}{ l l }
         \toprule
@@ -298,6 +303,7 @@ src_install() {
 For other EAPIs, the default implementation used when the ebuild lacks the \t{src\_install} function
 is a no-op.
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{\t{src\_install} behaviour for EAPIs} \label{tab:src-install-table}
     \begin{tabular}{ l l }
         \toprule
@@ -372,6 +378,7 @@ that dependencies may not be installed.
 
 \t{pkg\_info} must not write to the filesystem.
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPIs supporting \t{pkg\_info} on non-installed packages} \label{tab:pkg-info-table}
     \begin{tabular}{ l l }
         \toprule
@@ -405,6 +412,7 @@ named \t{default\_}(phase) that behaves as the default implementation for that E
 when executing any ebuild phase listed in the table. Ebuilds must not call these functions except
 when in the phase in question.
 
+\ChangeWhenAddingAnEAPI{4}
 \begin{centertable}{EAPIs supporting \t{default\_} phase functions} \label{tab:default-phase-function-table}
     \begin{tabular}{ l >{\setlength{\rightskip}{0pt plus 1fil}}p{30em} }
         \toprule
