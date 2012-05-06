@@ -127,27 +127,35 @@ src_unpack() {
 \label{sec:src-prepare-function}
 
 \featurelabel{src-prepare} The \t{src\_prepare} function is only called for EAPIs listed in
-table~\ref{tab:src-prepare-table} as supporting it.
+table~\ref{tab:src-prepare-table} as supporting it. For EAPIs whose behaviour is listed as
+\t{no-op}, the default implementation does nothing. For EAPIs listed as using format 5, the default
+implementation shall behave as:
 
-The \t{src\_prepare} function can be used for post-unpack source preparation. The default
-implementation does nothing.
+\begin{verbatim}
+src_prepare() {
+    apply_user_patches
+}
+\end{verbatim}
+
+Furthermore, for these EAPIs, if the function is overridden, it shall be a fatal error if the
+\t{apply\_user\_patches} command has not been called at least once by the end of the phase.
 
 The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR} as discussed in
 section~\ref{sec:s-to-workdir-fallback}.
 
 \ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting \t{src\_prepare}} \label{tab:src-prepare-table}
+\begin{centertable}{\t{src\_prepare} behaviour for EAPIs} \label{tab:src-prepare-table}
     \begin{tabular}{ l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{src\_prepare}?}} \\
+        \multicolumn{1}{c}{\textbf{Format}} \\
         \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & Yes \\
-    \t{3} & Yes \\
-    \t{4} & Yes \\
-    \t{5} & Yes \\
+    \t{0} & Unsupported \\
+    \t{1} & Unsupported \\
+    \t{2} & no-op \\
+    \t{3} & no-op \\
+    \t{4} & no-op \\
+    \t{5} & 5 \\
     \bottomrule
     \end{tabular}
 \end{centertable}

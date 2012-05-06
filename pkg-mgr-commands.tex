@@ -718,6 +718,32 @@ has returned.
     \end{tabular}
 \end{centertable}
 
+\item[apply\_user\_patches]
+    \featurelabel{apply-user-patches} This function is called to indicate to the package manager
+    that now would be a suitable time to apply any user patches to the work directory. This function
+    must return zero if it is possible that any changes were made to the work directory, and may
+    return non-zero if no changes were made. This function must be called at least once in
+    \t{src\_prepare}; if the function is called more than once, it is expected that any effects that
+    it has shall only be executed once, and that its return value shall only be zero once. Only
+    available in EAPIs listed in table~\ref{tab:apply-user-patches-table}.
+
+\ChangeWhenAddingAnEAPI{5}
+\begin{centertable}{\t{apply\_user\_patches} support for EAPIs} \label{tab:apply-user-patches-table}
+    \begin{tabular}{ l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{\t{apply\_user\_patches} support?}} \\
+            \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & No \\
+    \t{3} & No \\
+    \t{4} & No \\
+    \t{5} & Yes \\
+    \bottomrule
+    \end{tabular}
+\end{centertable}
+
 \item[inherit] See section~\ref{sec:inherit}.
 
 \item[default]
