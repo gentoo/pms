@@ -76,7 +76,7 @@ variable.
     \featurelabel{aa} All source files that could be available for the package, including any that
     are disabled in \t{A} because of USE conditionals. The value is calculated from the base names
     of each element of the \t{SRC\_URI} ebuild metadata variable. Only for EAPIs listed in
-    table~\ref{tab:env-vars-table} as supporting \t{AA}. \\
+    table~\ref{tab:removed-env-vars-table} as supporting \t{AA}. \\
 \t{FILESDIR} &
     \t{src\_*}\footnote{Not necessarily present when installing from a binary package} &
     No &
@@ -177,7 +177,7 @@ variable.
     \t{pkg\_postrm}, \t{pkg\_info}, \t{pkg\_pretend} according to the top level ebuild function that
     was executed by the package manager. May be unset or any single word that is not any of the
     above when the ebuild is being sourced for other (e.\,g.\ metadata or QA) purposes. Only for
-    EAPIs listed in table~\ref{tab:env-vars-table} as supporting \t{EBUILD\_PHASE\_FUNC}. \\
+    EAPIs listed in table~\ref{tab:added-env-vars-table} as supporting \t{EBUILD\_PHASE\_FUNC}. \\
 \t{WORKDIR} &
     \t{src\_*}, global~scope &
     Yes &
@@ -195,49 +195,65 @@ variable.
     Yes &
     \featurelabel{kv} The version of the running kernel at the time the ebuild was first executed,
     as returned by the \t{uname~-r} command or equivalent.  May be modified by ebuilds.  Only for
-    EAPIs listed in table~\ref{tab:env-vars-table} as supporting \t{KV}. \\
+    EAPIs listed in table~\ref{tab:removed-env-vars-table} as supporting \t{KV}. \\
 \t{MERGE\_TYPE} &
     \t{pkg\_*} &
     No &
     \featurelabel{merge-type} The type of package that is being merged. Possible values are:
     \t{source} if building and installing a package from source, \t{binary} if installing a binary
     package, and \t{buildonly} if building a binary package without installing it. Only for EAPIs
-    listed in table~\ref{tab:env-vars-table} as supporting \t{MERGE\_TYPE}. \\
+    listed in table~\ref{tab:added-env-vars-table} as supporting \t{MERGE\_TYPE}. \\
 \t{REPLACING\_VERSIONS} &
     \t{pkg\_*} (see text) &
     Yes &
     A whitespace-separated list of versions of this package (including revision, if specified) that
     are being replaced (uninstalled or overwritten) as a result of this install. See
-    section~\ref{sec:replacing-versions}.  Only for EAPIs listed in table~\ref{tab:env-vars-table}
+    section~\ref{sec:replacing-versions}.  Only for EAPIs listed in table~\ref{tab:added-env-vars-table}
     as supporting \t{REPLACING\_VERSIONS}. \\
 \t{REPLACED\_BY\_VERSION} &
     \t{pkg\_prerm}, \t{pkg\_postrm} &
     Yes &
     The single version of this package (including revision, if specified) that is replacing us, if
     we are being uninstalled as part of an install, or an empty string otherwise. See
-    section~\ref{sec:replacing-versions}.  Only for EAPIs listed in table~\ref{tab:env-vars-table}
+    section~\ref{sec:replacing-versions}.  Only for EAPIs listed in table~\ref{tab:added-env-vars-table}
     as supporting \t{REPLACED\_BY\_VERSION}.
 \end{longtable}
 \end{landscape}
 
 \ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting various env variables} \label{tab:env-vars-table}
-    \begin{tabular}{ l l l l l l l }
+\begin{centertable}{EAPIs supporting various added env variables} \label{tab:added-env-vars-table}
+    \begin{tabular}{ l l l l l }
         \toprule
         \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{\t{AA}?}} &
-        \multicolumn{1}{c}{\textbf{\t{KV}?}} &
         \multicolumn{1}{c}{\textbf{\t{MERGE\_TYPE}?}} &
         \multicolumn{1}{c}{\textbf{\t{REPLACING\_VERSIONS}?}} &
         \multicolumn{1}{c}{\textbf{\t{REPLACED\_BY\_VERSION}?}} &
         \multicolumn{1}{c}{\textbf{\t{EBUILD\_PHASE\_FUNC}?}} \\
         \midrule
-    \t{0} & Yes & Yes & No & No & No & No \\
-    \t{1} & Yes & Yes & No & No & No & No \\
-    \t{2} & Yes & Yes & No & No & No & No \\
-    \t{3} & Yes & Yes & No & No & No & No \\
-    \t{4} & No & No & Yes & Yes & Yes & No \\
-    \t{5} & No & No & Yes & Yes & Yes & Yes \\
+    \t{0} & No & No & No & No \\
+    \t{1} & No & No & No & No \\
+    \t{2} & No & No & No & No \\
+    \t{3} & No & No & No & No \\
+    \t{4} & Yes & Yes & Yes & No \\
+    \t{5} & Yes & Yes & Yes & Yes \\
+    \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\ChangeWhenAddingAnEAPI{5}
+\begin{centertable}{EAPIs supporting various removed env variables} \label{tab:removed-env-vars-table}
+    \begin{tabular}{ l l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{\t{AA}?}} &
+        \multicolumn{1}{c}{\textbf{\t{KV}?}} \\
+        \midrule
+    \t{0} & Yes & Yes \\
+    \t{1} & Yes & Yes \\
+    \t{2} & Yes & Yes \\
+    \t{3} & Yes & Yes \\
+    \t{4} & No & No \\
+    \t{5} & No & No \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -343,17 +359,18 @@ installing a package. Details are beyond the scope of this specification.
 \subsection{\t{REPLACING\_VERSIONS} and \t{REPLACED\_BY\_VERSION}}
 \label{sec:replacing-versions}
 
-\featurelabel{replace-version-vars} In EAPIs listed in table~\ref{tab:env-vars-table} as supporting
-it, the \t{REPLACING\_VERSIONS} variable shall be defined in \t{pkg\_preinst} and \t{pkg\_postinst}.
-In addition, it \e{may} be defined in \t{pkg\_pretend} and \t{pkg\_setup}, although ebuild authors
-should take care to handle binary package creation and installation correctly when using it in these
-phases.
+\featurelabel{replace-version-vars} In EAPIs listed in table~\ref{tab:added-env-vars-table} as
+supporting it, the \t{REPLACING\_VERSIONS} variable shall be defined in \t{pkg\_preinst} and
+\t{pkg\_postinst}.  In addition, it \e{may} be defined in \t{pkg\_pretend} and \t{pkg\_setup},
+although ebuild authors should take care to handle binary package creation and installation
+correctly when using it in these phases.
 
 \t{REPLACING\_VERSIONS} is a list, not a single optional value, to handle pathological cases such as
 installing \t{foo-2:2} to replace \t{foo-2:1} and \t{foo-3:2}.
 
-In EAPIs listed in table~\ref{tab:env-vars-table} as supporting it, the \t{REPLACED\_BY\_VERSION}
-variable shall be defined in \t{pkg\_prerm} and \t{pkg\_postrm}. It shall contain at most one value.
+In EAPIs listed in table~\ref{tab:added-env-vars-table} as supporting it, the
+\t{REPLACED\_BY\_VERSION} variable shall be defined in \t{pkg\_prerm} and \t{pkg\_postrm}. It shall
+contain at most one value.
 
 \subsection{Offset-prefix variables \t{EPREFIX}, \t{EROOT} and \t{ED}}
 \label{sec:offset-vars}
