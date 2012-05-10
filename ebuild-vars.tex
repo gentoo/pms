@@ -136,8 +136,8 @@ the assignment statement must match the following regular expression:
 ^[ \t]*EAPI=(['"]?)([A-Za-z0-9+_.-]*)\1[ \t]*([ \t]#.*)?$
 \end{verbatim}
 
-The package manager may optionally determine the EAPI of an ebuild by parsing its first non-blank
-and non-comment line, using the above regular expression. If it matches, the EAPI is the substring
+The package manager must determine the EAPI of an ebuild by parsing its first non-blank and
+non-comment line, using the above regular expression. If it matches, the EAPI is the substring
 matched by the capturing parentheses (\t{0} if empty), otherwise it is \t{0}. For a recognised
 EAPI, the package manager must make sure that the \t{EAPI} value obtained by sourcing the ebuild
 with bash is identical to the EAPI obtained by parsing. The ebuild must be treated as invalid if
