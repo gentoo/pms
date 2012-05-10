@@ -157,6 +157,9 @@ Most utilities die & \compactfeatureref{die-on-failure} &
 \t{doman -i18n} precedence & \compactfeatureref{doman-langs} &
     N/A & N/A & No & No & Yes & Yes \\
 
+\t{new*} support stdin & \compactfeatureref{newfoo-stdin} &
+    No & No & No & No & No & Yes \\
+
 Controllable compression & \compactfeatureref{controllable-compress} &
     No & No & No & No & Yes & Yes \\
 
@@ -263,6 +266,7 @@ EAPI 5 is EAPI 4 with the following changes:
 \item \t{USE} is calculated differently, \featureref{profile-iuse-injection}.
 \item \t{find} is guaranteed to be GNU, \featureref{gnu-find}.
 \item \t{econf} adds \t{-{}-disable-silent-rules}, \featureref{econf-options}.
+\item \t{new*} can read from standard input, \featureref{newfoo-stdin}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{5}
