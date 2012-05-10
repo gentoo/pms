@@ -160,6 +160,9 @@ Most utilities die & \compactfeatureref{die-on-failure} &
 \t{doman -i18n} precedence & \compactfeatureref{doman-langs} &
     N/A & N/A & No & No & Yes & Yes \\
 
+\t{new*} support stdin & \compactfeatureref{newfoo-stdin} &
+    No & No & No & No & No & Yes \\
+
 Controllable compression & \compactfeatureref{controllable-compress} &
     No & No & No & No & Yes & Yes \\
 
@@ -272,6 +275,7 @@ EAPI 5 is EAPI 4 with the following changes:
     \featureref{apply-user-patches}.
 \item \t{EBUILD\_PHASE\_FUNC}, \featureref{ebuild-phase-func}.
 \item \t{find} is guaranteed to be GNU, \featureref{gnu-find}.
+\item \t{new*} can read from standard input, \featureref{newfoo-stdin}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{5}
