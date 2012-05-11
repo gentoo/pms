@@ -255,9 +255,9 @@ provided.
 
 The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
 The default implementation used when the ebuild lacks the \t{src\_test} function must, if tests are
-enabled, run \t{make check} if and only if such a target is available, or if not run \t{make test},
-if and only such a target is available. In both cases, if make returns non-zero the build must be
-aborted.
+enabled, run \t{emake -j1 check} if and only if such a target is available, or if not run
+\t{emake -j1 test} if and only if such a target is available. In both cases, if \t{emake} returns
+non-zero the build must be aborted.
 
 The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{sec:restrict}. It may
 be disabled by user too, using a PM-specific mechanism.
