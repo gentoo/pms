@@ -273,12 +273,32 @@ provided.
 
 The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
 The default implementation used when the ebuild lacks the \t{src\_test} function must, if tests are
-enabled, run \t{emake -j1 check} if and only if such a target is available, or if not run
-\t{emake -j1 test} if and only if such a target is available. In both cases, if \t{emake} returns
+enabled, run \t{emake check} if and only if such a target is available, or if not run
+\t{emake test} if and only if such a target is available. In both cases, if \t{emake} returns
 non-zero the build must be aborted.
+
+\featurelabel{parallel-tests} For EAPIs listed in table~\ref{tab:src-test-table} as not supporting
+parallel tests, the \t{emake} command must be called with option \t{-j1}.
 
 The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{sec:restrict}. It may
 be disabled by user too, using a PM-specific mechanism.
+
+\ChangeWhenAddingAnEAPI{5}
+\begin{centertable}{\t{src\_test} behaviour for EAPIs} \label{tab:src-test-table}
+    \begin{tabular}{ l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports parallel tests?}} \\
+        \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & No \\
+    \t{3} & No \\
+    \t{4} & No \\
+    \t{5} & Yes \\
+    \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \subsection{src\_install}
 \label{sec:src-install-function}
