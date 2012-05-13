@@ -88,6 +88,9 @@ Use dependencies & \compactfeatureref{use-deps} &
 \t{src\_compile} style & \compactfeatureref{src-compile} &
     0 & 1 & 2 & 2 & 2 & 2 \\
 
+Parallel tests & \compactfeatureref{parallel-tests} &
+    No & No & No & No & No & Yes \\
+
 \t{src\_install} style & \compactfeatureref{src-install} &
     no-op & no-op & no-op & no-op & 4 & 4 \\
 
@@ -262,6 +265,7 @@ EAPI 5 is EAPI 4 with the following changes:
 \begin{compactitem}
 \item \t{REQUIRED\_USE} now supports \t{??} groups, \featureref{at-most-one-of}.
 \item Slot operator dependencies, \featureref{slot-operator-deps}.
+\item \t{src\_test} supports parallel tests, \featureref{parallel-tests}.
 \item \t{EBUILD\_PHASE\_FUNC}, \featureref{ebuild-phase-func}.
 \item \t{USE} is calculated differently, \featureref{profile-iuse-injection}.
 \item \t{find} is guaranteed to be GNU, \featureref{gnu-find}.
