@@ -40,6 +40,9 @@
 \bottomrule
 \endlastfoot
 
+Stable use masking/forcing & \compactfeatureref{stablemask} &
+    No & No & No & No & No & Yes \\
+
 Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-injection} &
     No & No & No & No & No & Yes \\
 
@@ -269,6 +272,8 @@ EAPI 4 is EAPI 3 with the following changes:
 EAPI 5 is EAPI 4 with the following changes:
 
 \begin{compactitem}
+\item \t{package.use.stable.mask} and \t{package.use.stable.force} can be used to restrict
+    use flag combinations, \featureref{stablemask}
 \item \t{econf} adds \t{-{}-disable-silent-rules}, \featureref{econf-options}.
 \item Slot operator dependencies, \featureref{slot-operator-deps}.
 \item \t{src\_test} supports parallel tests, \featureref{parallel-tests}.
