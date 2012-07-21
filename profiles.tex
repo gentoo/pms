@@ -108,14 +108,43 @@ the forms defined by the directory's EAPI.
 
 \subsection{USE masking and forcing}
 \label{sec:use-masking}
-This section covers the four files \t{use.mask}, \t{use.force}, \t{package.use.mask} and
-\t{package.use.force}. They are described together because they interact in a non-trivial manner.
+This section covers the eight files \t{use.mask}, \t{use.force}, \t{use.stable.mask},
+\t{use.stable.force}, \t{package.use.mask}, \t{package.use.force}, \t{package.use.stable.mask},
+and \t{package.use.stable.force}. They are described together because they interact in a non-trivial
+manner.
 
 Simply speaking, \t{use.mask} and \t{use.force} are used to say that a given USE flag must never or
 always, respectively, be enabled when using this profile. \t{package.use.mask} and
-\t{package.use.force} do the same thing on a per-package, or per-version, basis. The precise manner
-in which they interact is less simple, and is best described in terms of the algorithm used to
-determine whether a flag is masked for a given package version. This is described in Algorithm~\ref{alg:use-masking}.
+\t{package.use.force} do the same thing on a per-package, or per-version, basis.
+
+\featurelabel{stablemask}
+In profile directories with an EAPI supporting stable masking, as listed in
+table~\ref{tab:profile-stablemask}, the same is true for \t{use.stable.mask}, \t{use.stable.force},
+\t{package.use.stable.mask} and \t{package.use.stable.force}. These files, however, only act on
+packages that are merged due to a stable keyword in the sense of subsection~\ref{sec:keywords}.
+Thus, these files can be used to restrict the feature set deemed stable in a package.
+
+\ChangeWhenAddingAnEAPI{5}
+\begin{centertable}{Profile directory support for masking/forcing use flags in stable
+versions only}\label{tab:profile-stablemask}
+    \begin{tabular}{ l l l }
+        \toprule
+        \multicolumn{1}{c}{\textbf{EAPI}} &
+        \multicolumn{1}{c}{\textbf{Supports masking/forcing use flags in stable versions?}} \\
+        \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & No \\
+    \t{3} & No \\
+    \t{4} & No \\
+    \t{5} & Yes \\
+    \bottomrule
+    \end{tabular}
+\end{centertable}
+
+The precise manner in which the eight files interact is less simple, and is best described in terms
+of the algorithm used to determine whether a flag is masked for a given package version. This is
+described in Algorithm~\ref{alg:use-masking}.
 \begin{algorithm}
 \caption{USE masking logic} \label{alg:use-masking}
 \begin{algorithmic}[1]
@@ -126,6 +155,13 @@ determine whether a flag is masked for a given package version. This is describe
     \ELSIF{\t{use.mask} contains \i{-flag}}
         \STATE let masked = false
     \ENDIF
+    \IF{stable keyword in use}
+        \IF{\t{use.stable.mask} contains \i{flag}}
+            \STATE let masked = true
+        \ELSIF{\t{use.stable.mask} contains \i{-flag}}
+            \STATE let masked = false
+        \ENDIF
+    \ENDIF
     \FOR{each $line$ in package.use.mask, in order, for which the spec matches $package$}
         \IF{$line$ contains \i{flag}}
             \STATE let masked = true
@@ -133,12 +169,27 @@ determine whether a flag is masked for a given package version. This is describe
             \STATE let masked = false
         \ENDIF
     \ENDFOR
+    \IF{stable keyword in use}
+        \FOR{each $line$ in package.use.stable.mask, in order, for which the spec matches $package$}
+            \IF{$line$ contains \i{flag}}
+                \STATE let masked = true
+            \ELSIF{$line$ contains \i{-flag}}
+                \STATE let masked = false
+            \ENDIF
+        \ENDFOR
+    \ENDIF
 \ENDFOR
 \end{algorithmic}
 \end{algorithm}
 
-The logic for \t{use.force} and \t{package.use.force} is identical. If a flag is both masked and
-forced, the mask is considered to take precedence.
+Stable restrictions (``stable keyword in use'' in Algorithm~\ref{alg:use-masking}) are applied
+exactly if replacing in \t{KEYWORDS} all stable keywords by the corresponding tilde prefixed
+keywords (see subsection~\ref{sec:keywords}) would result in the package installation being
+prevented due to the \t{KEYWORDS} setting.
+
+The logic for \t{use.force}, \t{use.stable. force}, \t{package.use.force}, and
+\t{package.use.stable.force} is identical. If a flag is both masked and forced, the mask is
+considered to take precedence.
 
 \t{USE\_EXPAND} values may be forced or masked by using \t{expand\_name\_value}.
 
