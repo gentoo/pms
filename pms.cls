@@ -113,22 +113,11 @@
         colorlinks=true,
         citecolor=black,
         linkcolor=black,
-        pdftitle={Package Manager Specification},
-        pdfauthor={Stephen P. Bennett, Ciaran McCreesh},
-        pdfcreator={pdfLaTeX and hyperref},
-        pdfsubject={Defining a feature set for package managers in the
-            Gentoo world},
         pdflang={en},
-        pdfkeywords={Gentoo, package manager, specification},
+        pdfcreator={pdfLaTeX and hyperref},
         pdfproducer={pdfLaTeX and hyperref},
     }
 }
-% Some metadata needed for the title page generation
-\title{Package Manager Specification}
-\author{Stephen P. Bennett \\
-    \href{mailto:spb@exherbo.org}{spb@exherbo.org} \and Ciaran
-    McCreesh \\
-    \href{mailto:ciaran.mccreesh@googlemail.com}{ciaran.mccreesh@googlemail.com}}
 % Reads the last commit date from the Git repository and even succeeds
 % when none is available
 \ifthenelse{\equal{\VCDateISO}{}}
@@ -139,9 +128,7 @@
 }
 
 % Set page title
-\pagestyle{myheadings}
-\markboth{\scshape Package Manager Specification}{\scshape Package
-    Manager Specification}
+\pagestyle{headings}
 % This is some kind of hack.  We set the proportions of the text area
 % and then move it 30mm to the left to increase the right (outer)
 % margin.

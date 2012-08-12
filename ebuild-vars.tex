@@ -4,6 +4,10 @@
 \note This section describes variables that may or must be defined by ebuilds. For
 variables that are passed from the package manager to the ebuild, see section~\ref{sec:ebuild-env-vars}.
 
+If any of these variables are set to invalid values, or if any of the mandatory variables are
+undefined, the package manager's behaviour is undefined; ideally, an error in one ebuild should not
+prevent operations upon other ebuilds or packages.
+
 \section{Metadata invariance}
 \label{sec:metadata-invariance}
 
@@ -23,10 +27,32 @@ All ebuilds must define at least the following variables:
 \begin{description}
 \item[DESCRIPTION] A short human-readable description of the package's purpose. May be defined by an
     eclass. Must not be empty.
-\item[HOMEPAGE] The URI or URIs for a package's homepage, including protocols. May be defined by an
-    eclass. See section~\ref{sec:dependencies} for full syntax.
-\item[IUSE] The \t{USE} flags used by the ebuild. Any eclass that works with \t{USE} flags
-    must also set \t{IUSE}, listing only the variables used by that eclass. The package manager is
+\item[SLOT] The package's slot. Must be a valid slot name, as per section~\ref{sec:slot-names}.
+    May be defined by an eclass. Must not be empty.
+\end{description}
+
+\section{Optional Ebuild-defined Variables}
+
+Ebuilds may define any of the following variables:
+
+\begin{description}
+\item[EAPI] The EAPI. See below.
+\item[HOMEPAGE] The URI or URIs for a package's homepage, including protocols.
+    See section~\ref{sec:dependencies} for full syntax.
+\item[SRC\_URI] A list of source URIs for the package. Valid protocols are \t{http://},
+    \t{https://}, \t{ftp://} and \t{mirror://} (see section~\ref{sec:thirdpartymirrors} for mirror
+    behaviour). Fetch restricted packages may include URL parts consisting of just a filename.
+    See section~\ref{sec:dependencies} for full syntax.
+\item[LICENSE] The package's license. Each text token must correspond to a tree ``licenses/'' entry
+    (see section~\ref{sec:licenses-dir}). See section~\ref{sec:dependencies} for full syntax.
+    \label{ebuild-var-LICENSE}
+\item[KEYWORDS] A whitespace separated list of keywords for the ebuild. Each token must be a valid
+    keyword name, as per section~\ref{sec:keyword-names}. May include \t{-*}, which indicates that
+    the package will only work on explicitly listed archs. May include \t{-arch}, which indicates
+    that the package will not work on the specified arch. May be empty, which indicates uncertain
+    functionality on any architecture.
+\item[IUSE] The \t{USE} flags used by the ebuild. Any eclass that works with \t{USE} flags must
+    also set \t{IUSE}, listing only the variables used by that eclass. The package manager is
     responsible for merging these values. See section~\ref{sec:use-iuse-handling} for discussion on
     which values must be listed this variable.
 
@@ -34,25 +60,23 @@ All ebuilds must define at least the following variables:
     \t{IUSE} defaults, any use flag name in \t{IUSE} may be prefixed by at most one of a plus or a
     minus sign. If such a prefix is present, the package manager may use it as a suggestion as to
     the default value of the use flag if no other configuration overrides it.
-\item[KEYWORDS] A whitespace separated list of keywords for the ebuild. Each token must be a
-    valid keyword name, as per section~\ref{sec:keyword-names}. May include \t{-*}, which
-    indicates that the package will only work on explicitly listed archs. May include \t{-arch},
-    which indicates that the package will not work on the specified arch. May be empty, which
-    indicates uncertain functionality on any architecture. May be defined in an eclass.
-\item[LICENSE] The package's license. Each text token must correspond to a tree ``licenses/'' entry
-    (see section~\ref{sec:licenses-dir}). See section~\ref{sec:dependencies} for full syntax.
-    May be defined by an eclass. \label{ebuild-var-LICENSE}
-\item[SLOT] The package's slot. Must be a valid slot name, as per section~\ref{sec:slot-names}. May
-    be defined by an eclass. Must not be empty.
-\item[SRC\_URI] A list of source URIs for the package. Valid protocols are \t{http://},
-    \t{https://}, \t{ftp://} and \t{mirror://} (see section~\ref{sec:thirdpartymirrors} for mirror
-    behaviour). Fetch restricted packages may include URL parts consisting of just a filename.
-    May be defined by an eclass. See section~\ref{sec:dependencies} for full syntax.
+\item[REQUIRED\_USE] \featurelabel{required-use} Zero or more assertions that must be met by the
+    configuration of \t{USE} flags to be valid for this ebuild. See section~\ref{sec:required-use}
+    for description and section~\ref{sec:dependencies} for full syntax. Only in EAPIs listed in
+    table~\ref{tab:optional-vars-table} as supporting \t{REQUIRED\_USE}.
+\item[PROPERTIES] \featurelabel{properties} Zero or more properties for this package.
+    See section~\ref{sec:properties} for value meanings and section~\ref{sec:dependencies} for full
+    syntax. For EAPIs listed in table~\ref{tab:optional-vars-table} as having optional support,
+    ebuilds must not rely upon the package manager recognising or understanding this variable in
+    any way.
+\item[RESTRICT] Zero or more behaviour restrictions for this package. See section~\ref{sec:restrict}
+    for value meanings and section~\ref{sec:dependencies} for full syntax.
+\item[DEPEND] See section~\ref{sec:dependencies}.
+\item[RDEPEND] See section~\ref{sec:dependencies}. For some EAPIs, \t{RDEPEND} has special behaviour
+    for its value if unset and when used with an eclass. See section~\ref{sec:rdepend-depend} for
+    details.
+\item[PDEPEND] See section~\ref{sec:dependencies}.
 \end{description}
-
-If any of these variables are undefined, or if any of these variables are set to invalid values,
-the package manager's behaviour is undefined; ideally, an error in one ebuild should not prevent
-operations upon other ebuilds or packages.
 
 \ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs supporting \t{IUSE} defaults} \label{tab:iuse-defaults-table}
@@ -70,30 +94,6 @@ operations upon other ebuilds or packages.
     \bottomrule
     \end{tabular}
 \end{centertable}
-
-\section{Optional Ebuild-defined Variables}
-
-Ebuilds may define any of the following variables:
-
-\begin{description}
-\item[DEPEND] See section~\ref{sec:dependencies}.
-\item[EAPI] The EAPI. See below.
-\item[PDEPEND] See section~\ref{sec:dependencies}.
-\item[RDEPEND] See section~\ref{sec:dependencies}. For some EAPIs, \t{RDEPEND} has special behaviour
-    for its value if unset and when used with an eclass. See section~\ref{sec:rdepend-depend} for
-    details.
-\item[RESTRICT] Zero or more behaviour restrictions for this package. See section~\ref{sec:restrict}
-    for value meanings and section~\ref{sec:dependencies} for full syntax.
-\item[PROPERTIES] \featurelabel{properties} Zero or more properties for this package. See
-    section~\ref{sec:properties} for value meanings and section~\ref{sec:dependencies} for full
-    syntax. For EAPIs listed in table~\ref{tab:optional-vars-table} as having optional support,
-    ebuilds must not rely upon the package manager recognising or understanding this variable in
-    any way.
-\item[REQUIRED\_USE] \featurelabel{required-use} Zero or more assertions that must be met by the
-    configuration of \t{USE} flags to be valid for this ebuild. See section~\ref{sec:required-use}
-    for description and section~\ref{sec:dependencies} for full syntax. Only in EAPIs listed in
-    table~\ref{tab:optional-vars-table} as supporting \t{REQUIRED\_USE}.
-\end{description}
 
 \ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs supporting various ebuild-defined variables}
