@@ -29,6 +29,14 @@ All ebuilds must define at least the following variables:
     eclass. Must not be empty.
 \item[SLOT] The package's slot. Must be a valid slot name, as per section~\ref{sec:slot-names}.
     May be defined by an eclass. Must not be empty.
+
+    In EAPIs shown in table~\ref{tab:slot-deps-table} as supporting sub-slots, the \t{SLOT} variable
+    may contain an optional sub-slot part that follows the regular slot and is delimited by a \t{/}
+    character. The sub-slot must be a valid slot name, as per section~\ref{sec:slot-names}.
+    The sub-slot is used to represent cases in which an upgrade to a new version of a package with
+    a different sub-slot may require dependent packages to be rebuilt. When the sub-slot part is
+    omitted from the \t{SLOT} definition, the package is considered to have an implicit sub-slot
+    which is equal to the regular slot.
 \end{description}
 
 \section{Optional Ebuild-defined Variables}
