@@ -183,18 +183,20 @@ manager must warn or error if this feature is used with an EAPI not supporting u
 \note Order is important. The slot restriction must come before use dependencies.
 
 \ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting \t{SLOT} dependencies} \label{tab:slot-deps-table}
-    \begin{tabular}{ l l }
+\begin{centertable}{Support for \t{SLOT} dependencies and sub-slots in EAPIs}
+    \label{tab:slot-deps-table}
+    \begin{tabular}{ l l l }
         \toprule
             \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{SLOT} dependencies?}} \\
+            \multicolumn{1}{c}{\textbf{Supports \t{SLOT} dependencies?}} &
+            \multicolumn{1}{c}{\textbf{Supports sub-slots?}} \\
             \midrule
-    \t{0} & No \\
-    \t{1} & Named only \\
-    \t{2} & Named only \\
-    \t{3} & Named only \\
-    \t{4} & Named only \\
-    \t{5} & Named and operator \\
+    \t{0} & No & No \\
+    \t{1} & Named only & No \\
+    \t{2} & Named only & No \\
+    \t{3} & Named only & No \\
+    \t{4} & Named only & No \\
+    \t{5} & Named and operator & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -277,6 +279,10 @@ specification with a named slot dependency matches only if the slot of the match
 to the slot specified. If the slot of the package to match cannot be determined (e.\,g.\ because it
 is not a supported \t{EAPI}), the match is treated as unsuccessful.
 
+\featurelabel{sub-slot} In EAPIs shown in table~\ref{tab:slot-deps-table} as supporting sub-slots,
+a slot dependency may contain an optional sub-slot part that follows the regular slot and is
+delimited by a \t{/} character.
+
 \featurelabel{slot-operator-deps} An operator slot dependency consists of a colon followed by one of
 the following operators:
 
@@ -285,14 +291,18 @@ the following operators:
 indicates that the package will not break if the matched package is uninstalled and replaced by
 a different matching package in a different slot.
 \item[=] Indicates that any slot value is acceptable. In addition, for runtime dependencies,
-indicates that the package will break unless a matching package with slot equal to the slot of
-the best installed version at the time the package was installed is available.
+indicates that the package will break unless a matching package with slot and sub-slot equal to the
+slot and sub-slot of the best installed version at the time the package was installed is available.
+\item[slot=] Indicates that only a specific slot value is acceptable, and otherwise behaves
+identically to the plain equals slot operator.
 \end{description}
 
-To implement the equals slot operator, the package manager will need to store the slot of the
-best installed version of the matching package. The package manager may do this by appending
-the appropriate slot after the equals sign when saving the package's dependencies. This syntax
-is only for package manager use and must not be used by ebuilds.
+To implement the equals slot operator, the package manager will need to store the slot/sub-slot
+pair of the best installed version of the matching package. This syntax is only for package manager
+use and must not be used by ebuilds. The package manager may do this by inserting the appropriate
+slot/sub-slot pair between the colon and equals sign when saving the package's dependencies. The
+sub-slot part must not be omitted here (when the SLOT variable omits the sub-slot part, the package
+is considered to have an implicit sub-slot which is equal to the regular slot).
 
 \subsubsection{2-Style and 4-Style Use Dependencies}
 \label{sec:use-dep}
