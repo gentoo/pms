@@ -79,9 +79,13 @@ argument. Ebuilds must not run any of these commands once the current phase func
 \end{description}
 
 \subsubsection{Package manager query commands}
-These commands are used to extract information about the host system. Ebuilds must not run any of
+These commands are used to extract information about the system. Ebuilds must not run any of
 these commands in parallel with any other package manager command. Ebuilds must not run any of
 these commands once the current phase function has returned.
+
+\featurelabel{host-root-option} In EAPIs listed in table~\ref{tab:foo-version-host-root-table} as
+supporting option \t{-{}-host-root}, this flag as the first argument will cause the query to apply
+to the host root instead of \t{ROOT}.
 \begin{description}
 \item[has\_version] Takes exactly one package dependency specification as an argument. Returns
     true if a package matching the atom is installed in \t{ROOT}, and false otherwise.
@@ -480,6 +484,24 @@ that can be passed to \t{dohtml} are as follows:
         \toprule
             \multicolumn{1}{c}{\textbf{EAPI}} &
             \multicolumn{1}{c}{\textbf{\t{new*} can read from stdin?}} \\
+            \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & No \\
+    \t{3} & No \\
+    \t{4} & No \\
+    \t{5} & Yes \\
+    \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\ChangeWhenAddingAnEAPI{5}
+\begin{centertable}{EAPIs supporting \t{-{}-host-root} for \t{*\_version} commands}
+    \label{tab:foo-version-host-root-table}
+    \begin{tabular}{ l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{\t{*\_version} supports \t{-{}-host-root}?}} \\
             \midrule
     \t{0} & No \\
     \t{1} & No \\

@@ -151,6 +151,9 @@ Most utilities die & \compactfeatureref{die-on-failure} &
 \t{dosed} & \compactfeatureref{banned-commands} &
     Yes & Yes & Yes & Yes & Banned & Banned \\
 
+Option \t{-{}-host-root} & \compactfeatureref{host-root-option} &
+    No & No & No & No & No & Yes \\
+
 \t{econf} arguments & \compactfeatureref{econf-options} &
     &  &  &  & disable dependency tracking & disable dependency tracking, disable silent rules \\
 
@@ -278,6 +281,8 @@ EAPI 5 is EAPI 4 with the following changes:
 \item \t{EBUILD\_PHASE\_FUNC}, \featureref{ebuild-phase-func}.
 \item \t{USE} is calculated differently, \featureref{profile-iuse-injection}.
 \item \t{find} is guaranteed to be GNU, \featureref{gnu-find}.
+\item \t{best\_version} and \t{has\_version} support the \t{-{}-host-root} option,
+    \featureref{host-root-option}.
 \item \t{econf} adds \t{-{}-disable-silent-rules}, \featureref{econf-options}.
 \item \t{new*} can read from standard input, \featureref{newfoo-stdin}.
 \end{compactitem}
