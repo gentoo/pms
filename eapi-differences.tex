@@ -160,6 +160,9 @@ Option \t{-{}-host-root} & \compactfeatureref{host-root-option} &
 \t{dodoc -r} & \compactfeatureref{dodoc} &
     No & No & No & No & Yes & Yes \\
 
+\t{doheader} & \compactfeatureref{doheader} &
+    No & No & No & No & No & Yes \\
+
 \t{doins} handles symlinks & \compactfeatureref{doins} &
     No & No & No & No & Yes & Yes \\
 
@@ -289,6 +292,7 @@ EAPI 5 is EAPI 4 with the following changes:
 \item \t{find} is guaranteed to be GNU, \featureref{gnu-find}.
 \item \t{best\_version} and \t{has\_version} support the \t{-{}-host-root} option,
     \featureref{host-root-option}.
+\item \t{doheader} and \t{newheader} support, \featureref{doheader}.
 \item \t{new*} can read from standard input, \featureref{newfoo-stdin}.
 \end{compactitem}
 
