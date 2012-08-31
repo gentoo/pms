@@ -290,6 +290,12 @@ function has returned.
     listed in table~\ref{tab:banned-commands-table}, this command is banned as per
     section~\ref{sec:banned-commands}.
 
+\item[doheader] \featurelabel{doheader} Installs the given header files into \t{/usr/include/},
+    by default with file mode \t{0644}. This can be overridden by setting \t{INSOPTIONS} with the
+    \t{insopts} function.
+    Only available in EAPIs listed in table~\ref{tab:doheader-table} as supporting \t{doheader}.
+    Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
+
 \item[dohtml] Installs the given HTML files into a subdirectory under \t{/usr/share/doc/\$PF/}.
 The subdirectory is \t{html} by default, but this can be overridden by setting the \t{DOCDESTTREE}
 variable with the \t{docinto} function. Files to be installed automatically are determined by
@@ -406,6 +412,8 @@ that can be passed to \t{dohtml} are as follows:
 
 \item[newexe] As above, for \t{doexe}.
 
+\item[newheader] As above, for \t{doheader}.
+
 \item[newinitd] As above, for \t{doinitd}.
 
 \item[newins] As above, for \t{doins}.
@@ -437,6 +445,23 @@ that can be passed to \t{dohtml} are as follows:
     \t{2} & No \\
     \t{3} & No \\
     \t{4} & Yes \\
+    \t{5} & Yes \\
+    \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\ChangeWhenAddingAnEAPI{5}
+\begin{centertable}{EAPIs supporting \t{doheader} and \t{newheader}} \label{tab:doheader-table}
+    \begin{tabular}{ l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{Supports \t{doheader} and \t{newheader}?}} \\
+            \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & No \\
+    \t{3} & No \\
+    \t{4} & No \\
     \t{5} & Yes \\
     \bottomrule
     \end{tabular}
