@@ -664,6 +664,12 @@ either behaviour is undefined or it is an error as decided by table~\ref{tab:use
     \t{-{}-without-\$\{opt\}}.
 \item[use\_enable] Works the same as \t{use\_with()}, but outputs \t{-{}-enable-} or \t{-{}-disable-}
 instead of \t{-{}-with-} or \t{-{}-without-}.
+\item[usex] \featurelabel{usex} Accepts at least one and at most five arguments. The first argument
+    is a USE flag name, any subsequent arguments (\t{\$\{arg2\}} to \t{\$\{arg5\}}) are string
+    values. If not provided, \t{\$\{arg2\}} and \t{\$\{arg3\}} default to \t{yes} and \t{no},
+    respectively; \t{\$\{arg4\}} and \t{\$\{arg5\}} default to the empty string. If the USE flag is
+    set, outputs \t{\$\{arg2\}\$\{arg4\}}. Otherwise, outputs \t{\$\{arg3\}\$\{arg5\}}.
+    Only available in EAPIs listed in table~\ref{tab:usex-table} as supporting \t{usex}.
 \end{description}
 
 \ChangeWhenAddingAnEAPI{5}
@@ -696,6 +702,23 @@ instead of \t{-{}-with-} or \t{-{}-without-}.
     \t{2} & No \\
     \t{3} & No \\
     \t{4} & Yes \\
+    \t{5} & Yes \\
+    \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\ChangeWhenAddingAnEAPI{5}
+\begin{centertable}{EAPIs supporting \t{usex}} \label{tab:usex-table}
+    \begin{tabular}{ l l }
+        \toprule
+            \multicolumn{1}{c}{\textbf{EAPI}} &
+            \multicolumn{1}{c}{\textbf{Supports \t{usex}?}} \\
+            \midrule
+    \t{0} & No \\
+    \t{1} & No \\
+    \t{2} & No \\
+    \t{3} & No \\
+    \t{4} & No \\
     \t{5} & Yes \\
     \bottomrule
     \end{tabular}
