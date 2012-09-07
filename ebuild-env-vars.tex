@@ -107,7 +107,7 @@ variable.
 \t{EROOT} &
     \t{pkg\_*} &
     No &
-    Like \t{ROOT}, but with \t{EPREFIX} appended. This is a convenience variable. See also the
+    Contains the path \t{\$\{ROOT\%/\}\$\{EPREFIX\}/} for convenience. See also the
     \t{EPREFIX} variable. Only for EAPIs listed in table~\ref{tab:offset-env-vars-table} as
     supporting \t{EROOT}. \\
 \t{T} &
@@ -148,7 +148,7 @@ variable.
 \t{ED} &
     \t{src\_install}, \t{pkg\_preinst}, \t{pkg\_postinst} &
     See \t{D} &
-    Like \t{D}, but with \t{EPREFIX} appended. This is a convenience variable. See also the
+    Contains the path \t{\$\{D\%/\}\$\{EPREFIX\}/} for convenience. See also the
     \t{EPREFIX} variable. Only for EAPIs listed in table~\ref{tab:offset-env-vars-table} as
     supporting \t{ED}. \\
 \t{INSDESTTREE} &
