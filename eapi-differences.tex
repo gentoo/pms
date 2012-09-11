@@ -91,9 +91,6 @@ Use dependencies & \compactfeatureref{use-deps} &
 \t{src\_prepare} & \compactfeatureref{src-prepare} &
     No & No & Yes & Yes & Yes & Yes \\
 
-\t{apply\_user\_patches} & \compactfeatureref{apply-user-patches} &
-    No & No & No & No & No & Yes \\
-
 \t{src\_configure} & \compactfeatureref{src-configure} &
     No & No & Yes & Yes & Yes & Yes \\
 
@@ -289,8 +286,6 @@ EAPI 5 is EAPI 4 with the following changes:
 \item \t{USE} is calculated differently, \featureref{profile-iuse-injection}.
 \item \t{REQUIRED\_USE} now supports \t{??} groups, \featureref{at-most-one-of}.
 \item \t{SLOT} now supports an optional sub-slot part, \featureref{sub-slot}.
-\item \t{apply\_user\_patches} function, with \t{src\_prepare} changes,
-    \featureref{apply-user-patches}.
 \item \t{EBUILD\_PHASE\_FUNC}, \featureref{ebuild-phase-func}.
 \item \t{find} is guaranteed to be GNU, \featureref{gnu-find}.
 \item \t{best\_version} and \t{has\_version} support the \t{-{}-host-root} option,
