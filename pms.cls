@@ -105,6 +105,10 @@
   \end{table}
 }
 
+% Prevent numbers in list of tables from overrunning into the table captions
+\renewcommand*{\l@figure}{\@dottedtocline{1}{1.5em}{2.8em}} % was 2.3em
+\let\l@table\l@figure
+
 % Define some PDF meta-data.
 % tex4ht workaround: this needs to happen after loading hyperref
 \g@addto@macro\@documentclasshook{
