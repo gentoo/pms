@@ -124,7 +124,7 @@ Parallel tests & \compactfeatureref{parallel-tests} &
 \t{MERGE\_TYPE} & \compactfeatureref{merge-type} &
     No & No & No & No & Yes & Yes \\
 
-Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-injection} &
+Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-inject} &
     No & No & No & No & No & Yes \\
 
 \t{REPLACING\_VERSIONS} & \compactfeatureref{replace-version-vars} &
@@ -175,10 +175,10 @@ Option \t{-{}-host-root} & \compactfeatureref{host-root-option} &
 \t{new*} support stdin & \compactfeatureref{newfoo-stdin} &
     No & No & No & No & No & Yes \\
 
-Controllable compression & \compactfeatureref{controllable-compress} &
+Controllable compression & \compactfeatureref{docompress} &
     No & No & No & No & Yes & Yes \\
 
-\t{docompress} & \compactfeatureref{controllable-compress} &
+\t{docompress} & \compactfeatureref{docompress} &
     No & No & No & No & Yes & Yes \\
 
 \t{use\_with} empty third arg & \compactfeatureref{use-with} &
@@ -269,7 +269,7 @@ EAPI 4 is EAPI 3 with the following changes:
 \item \t{dodoc -r} support, \featureref{dodoc}.
 \item \t{doins} supports symlinks, \featureref{doins}.
 \item \t{doman -i18n} option takes precedence, \featureref{doman-langs}.
-\item Controllable compression and \t{docompress}, \featureref{controllable-compress}.
+\item Controllable compression and \t{docompress}, \featureref{docompress}.
 \item \t{use\_with} and \t{use\_enable} support empty third argument, \featureref{use-with}.
 \end{compactitem}
 
@@ -284,7 +284,7 @@ EAPI 5 is EAPI 4 with the following changes:
 \item \t{SLOT} now supports an optional sub-slot part, \featureref{sub-slot}.
 \item \t{src\_test} supports parallel tests, \featureref{parallel-tests}.
 \item \t{EBUILD\_PHASE\_FUNC}, \featureref{ebuild-phase-func}.
-\item \t{USE} is calculated differently, \featureref{profile-iuse-injection}.
+\item \t{USE} is calculated differently, \featureref{profile-iuse-inject}.
 \item \t{find} is guaranteed to be GNU, \featureref{gnu-find}.
 \item \t{best\_version} and \t{has\_version} support the \t{-{}-host-root} option,
     \featureref{host-root-option}.

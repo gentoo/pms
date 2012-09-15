@@ -55,7 +55,6 @@
 \ifx\HCode\undefined
     \RequirePackage{%
         mathptmx,
-        courier,
         pdfpages	% Insert whole PDF documents as separate pages
     }
     \RequirePackage[scaled=.90]{helvet}
@@ -94,6 +93,11 @@
 \newcommand{\e}[1]{\emph{#1}}
 \newcommand{\note}[1]{\paragraph{Note:} #1}
 
+% Allow line breaks after underscores (but with a large penalty)
+\newcommand{\origunderscore}{}
+\let\origunderscore\_
+\renewcommand{\_}{\origunderscore\penalty500\hskip0pt}
+
 % Because we are lazy, we define a table environment to fulfil our needs
 \newenvironment{centertable}[1]%
 {
@@ -108,6 +112,11 @@
 % Prevent numbers in list of tables from overrunning into the table captions
 \renewcommand*{\l@figure}{\@dottedtocline{1}{1.5em}{2.8em}} % was 2.3em
 \let\l@table\l@figure
+
+% Be more tolerant when formatting paragraphs, to avoid overfull boxes
+\tolerance=400                   % was 200
+\setlength\hfuzz{0.2pt}          % was 0.1pt
+\setlength\emergencystretch{1em} % was 0
 
 % Define some PDF meta-data.
 % tex4ht workaround: this needs to happen after loading hyperref
@@ -137,6 +146,7 @@
 % and then move it 30mm to the left to increase the right (outer)
 % margin.
 \areaset[-30mm]{400pt}{700pt}
+\setlength{\marginparwidth}{40mm}
 
 % To find everywhere that needs updating when we add an EAPI
 \newcommand{\CurrentEAPIIs}[1]{\def\TheCurrentEAPI{#1}}
