@@ -75,8 +75,8 @@
 % the page margin.
 \newcommand{\featureref}[1]{\textsc{#1} on page~\pageref{feat:#1}}
 \newcommand{\compactfeatureref}[1]{#1~p\pageref{feat:#1}}
-\newcommand{\featurelabel}[1]{\marginnote{%
-        \framebox{\textsc{#1}}}\label{feat:#1}
+\newcommand{\featurelabel}[1]{\label{feat:#1}%
+    \marginnote{\framebox{\textsc{#1}}}%
 }
 \bibliographystyle{plainurl}
 
