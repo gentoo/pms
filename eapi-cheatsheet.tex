@@ -15,7 +15,7 @@
 \usepackage[scaled=.90]{helvet}
 \newcommand{\code}[1]{\texttt{#1}}
 % This should reflect the latest approved EAPI version
-\newcommand{\version}{4.0}
+\newcommand{\version}{5.0}
 \newcommand{\featureref}[1]{\textsc{#1} on page~\pageref{feat:#1}}
 \renewcommand{\familydefault}{\sfdefault}
 \urlstyle{sf}
@@ -244,6 +244,76 @@ If there is no EAPI explicitly specified, EAPI 0 is assumed.
     only exception.  See \featureref{s-workdir-fallback}.
     \item[\code{AA}, \code{KV}] These variables are not defined
     any more.  See \featureref{aa} and \featureref{kv}.
+\end{description}
+
+\section{EAPI 5}
+\label{sec:cs:eapi5}
+\subsection{Additions/Changes}
+\label{sec:cs:eapi5-additions}
+\begin{description}
+    \item[Sub-slots] The \code{SLOT} variable and slot dependencies
+    may contain an optional sub-slot part that follows the regular
+    slot, delimited by a \code{/} character; for example
+    \code{2/2.30}.  The sub-slot is used to represent cases in which
+    an upgrade to a new version of a package with a different sub-slot
+    may require dependent packages to be rebuilt.  If the sub-slot is
+    not specified in \code{SLOT}, it defaults to the regular slot.
+    See \featureref{sub-slot}.
+    \item[Slot operator dependencies] One of the following operators
+    can be specified after package atoms, which will affect updates
+    of runtime dependencies:
+    \begin{description}
+        \item[\code{:*}] Any slot value is acceptable.  The package
+        will not break when its dependency is updated.
+        \item[\code{:=}] Any slot value is acceptable, but the package
+        can break when its dependency is updated to a different slot
+        (or sub-slot).
+    \end{description}
+    See \featureref{slot-operator-deps}.
+    \item[Profile \code{IUSE} injection] Apart from the USE flags
+    explicitly listed in \code{IUSE}, additional flags can be
+    implicitly provided by profiles.
+    See \featureref{profile-iuse-inject}.
+    \item[At-most-one-of groups] In \code{REQUIRED\_USE} you can use
+    "\code{?? ( flag1 flag2 \dots\ )}" to allow zero or one USE flag
+    out of many.
+    See \featureref{at-most-one-of}.
+    \item[Parallel tests] The default for \code{src\_test} runs
+    \code{emake} without \code{-j1} now.
+    See \featureref{parallel-tests}.
+    \item[\code{econf} changes] The \code{econf} function now always
+    passes \code{-{}-disable-silent-rules} to \code{configure}.
+    See \featureref{econf-options}.
+    \item[\code{has\_version} and \code{best\_version} changes]
+    The two helpers support a \code{-{}-host-root} option that causes
+    the query to apply to the host root instead of \code{ROOT}.
+    See~\featureref{host-root-option}.
+    \item[\code{usex}] Usage for this helper function is
+    \code{usex} \emph{<USE flag> [true1] [false1] [true2] [false2]}.
+    If the USE flag is set, outputs \emph{[true1][true2]}
+    (defaults to \code{yes}), otherwise outputs
+    \emph{[false1][false2]} (defaults to \code{no}).
+    See \featureref{usex}.
+    \item[\code{doheader} and \code{newheader}] These new helper
+    functions install the given header file(s) into
+    \code{/usr/include}. The \code{-r} option enables recursion for
+    \code{doheader}, similar to \code{doins}.
+    See \featureref{doheader}.
+    \item[\code{new*} standard input] The \code{newins} etc.\ commands
+    read from standard input if the first argument is \code{-}
+    (a hyphen).
+    See \featureref{newfoo-stdin}.
+    \item[\code{EBUILD\_PHASE\_FUNC}] This variable is very similar to
+    \code{EBUILD\_PHASE}, but contains the name of the current ebuild
+    function.
+    See \featureref{ebuild-phase-func}.
+    \item[Stable use masking/forcing] New files
+    \code{use.stable.\allowbreak\{mask,force\}} and
+    \code{package.use.stable.\allowbreak\{mask,force\}}
+    are supported in profile directories.  They are similar to their
+    non-\code{stable} counterparts, but act only on packages that
+    would be merged due to a stable keyword.
+    See \featureref{stablemask}.
 \end{description}
 \end{document}
 
