@@ -59,9 +59,9 @@
     the previous EAPI.  All labels refer to the PMS document itself,
     built from the same checkout as this overview.
 
-    Please report mistakes in or enhancements to this document via the
-    Gentoo bug tracking system\footnote{\url{http://bugs.gentoo.org/}}
-    to the original author or the PMS team.
+    % Please report mistakes in or enhancements to this document via the
+    % Gentoo bug tracking system\footnote{\url{http://bugs.gentoo.org/}}
+    % to the original author or the PMS team.
 
     This document is released under the Creative Commons
     Attribution-Share Alike 3.0
@@ -70,11 +70,11 @@
 \section{EAPI 0}
 \label{sec:cs:eapi0}
 If there is no EAPI explicitly specified, EAPI 0 is assumed.
-Currently there is no full specification what EAPI 0 includes.
-Portage, official ebuild documentation and existing ebuilds set the
-standard.  If you think you found a bug, you should file a bug report
-nonetheless.
-\newpage
+% Currently there is no full specification what EAPI 0 includes.
+% Portage, official ebuild documentation and existing ebuilds set the
+% standard.  If you think you found a bug, you should file a bug report
+% nonetheless.
+
 \section{EAPI 1}
 \label{sec:cs:eapi1}
 \subsection{Additions/Changes}
@@ -84,33 +84,35 @@ nonetheless.
     not disabled explicitly by user configuration) with a \code{+}
     sign in front.  See \featureref{iuse-defaults}.
     \item[Named slot dependencies] Dependencies can explicitly request
-    a specific slot by using the \code{dev-libs/foo:\emph{SLOT\_name}}
-    syntax.  See \featureref{slot-deps}.
+    a specific slot by using the
+    \code{dev-libs/foo:}\allowbreak\emph{SLOT\_name} syntax.
+    See \featureref{slot-deps}.
 \end{description}
+
 \section{EAPI 2 (2008-09-25)}
 \label{sec:cs:eapi2}
 \subsection{Additions/Changes}
 \label{sec:cs:eapi2-additions}
 \begin{description}
     \item[\code{SRC\_URI} arrows] Allows redirection of upstream file
-    naming scheme.  By using \code{SRC\_URI="http://some/url -> foo"}
-    the file is saved as \code{foo} in DISTDIR.  See
-    \featureref{src-uri-arrows}.
+    naming scheme.  By using
+    \code{SRC\_URI="http:/\slash some\slash url -> foo"} the file is
+    saved as \code{foo} in DISTDIR.
+    See \featureref{src-uri-arrows}.
     \item[USE dependencies] Dependencies can specify USE flag
     requirements on their target, removing the need for
-    \code{built\_with\_use} checks. A more powerful syntax that does
-    not require the flag to be in IUSE is in EAPI 4.
+    \code{built\_with\_use} checks.
     \begin{description}
         \item[{[opt]}] The flag must be enabled.
-        \item[{[opt=]}] The flag must be enabled if the flag is
+        \item[{[opt=]}] The flag must be enabled if it is
         enabled for the package with the dependency, or disabled
         otherwise.
-        \item[{[!opt=]}] The flag must be disabled if the flag is
+        \item[{[!opt=]}] The flag must be disabled if it is
         enabled for the package with the dependency, or enabled
         otherwise.
-        \item[{[opt?]}] The flag must be enabled if the flag is
+        \item[{[opt?]}] The flag must be enabled if it is
         enabled for the package with the dependency.
-        \item[{[!opt?]}] The flag must be disabled if the use flag is
+        \item[{[!opt?]}] The flag must be disabled if it is
         disabled for the package with the dependency.
         \item[{[-opt]}] The flag must be disabled.
     \end{description}
@@ -125,11 +127,11 @@ nonetheless.
     Patching and similar preparation must now be done in
     \code{src\_prepare}, not \code{src\_unpack}.  See
     \featureref{src-prepare} and \featureref{src-configure}.
-    \item[Default phase functions] The default functions for the
+    \item[Default phase functions] The default functions for
     phases \code{pkg\_nofetch}, \code{src\_unpack},
     \code{src\_prepare}, \code{src\_configure}, \code{src\_compile}
     and \code{src\_test} can be called via
-    \code{default\_\emph{phasename}}, so duplicating the standard
+    \code{default\_}\emph{phasename}, so duplicating the standard
     implementation is no longer necessary for small additions.  The
     short-hand \code{default} function calls the current phase's
     \code{default\_} function automatically, so any small additions
@@ -141,7 +143,6 @@ nonetheless.
     behaves accordingly.  This behaviour can be inhibited by the
     \code{-i18n} switch with EAPI 4.  See \featureref{doman-langs}.
 \end{description}
-\newpage
 
 \section{EAPI 3 (2010-01-18)}
 \label{sec:cs:eapi3}
@@ -152,8 +153,7 @@ nonetheless.
     \code{.tar.xz} files is possible without any custom
     \code{src\_unpack} functions.  See \featureref{unpack-extensions}.
     \item[Offset prefix] Supporting installation on Prefix-enabled
-    systems\footnote{\url{http://prefix.gentoo.org/}} will be easier
-    with this EAPI.
+    systems will be easier with this EAPI.
 \end{description}
 
 \section{EAPI 4 (2011-01-17)}
@@ -200,20 +200,10 @@ nonetheless.
     \item[\code{nonfatal} for commands] If you call \code{nonfatal}
     the command given as argument will not abort the build process in
     case of a failure (as is the default) but will return non-zero on
-    failure rather than aborting the build.
+    failure.
     See \featureref{nonfatal}.
     \item[\code{PROPERTIES}] Is mandatory for all package managers now
     to support interactive installs.
-    \item[\code{REPLACING\_VERSIONS}, \code{REPLACED\_BY\_VERSION}]
-    These variables, valid in \code{pkg\_*}, contain a list of all
-    versions (\code{PVR}) of this package that we are replacing, and
-    the version that is replacing the current one, respectively.
-    See \featureref{replace-version-vars}.
-    \item[\code{MERGE\_TYPE}] This variable contains one of three
-    possible values to allow checks if it is normal merge with
-    compilation and installation (\code{source}), installation of a
-    binary package (\code{binary}), or a compilation without
-    installation (\code{buildonly}).  See \featureref{merge-type}.
     \item[\code{REQUIRED\_USE}] This variable can be used similar to
     the \code{(R|P)DEPEND} variables and define sets of USE flag
     combinations that are not allowed.  All elements can be further
@@ -229,6 +219,16 @@ nonetheless.
         "\code{\textasciicircum\textasciicircum ( flag1 flag2 \dots\ )}".
     \end{description}
     See \featureref{required-use}.
+    \item[\code{MERGE\_TYPE}] This variable contains one of three
+    possible values to allow checks if it is normal merge with
+    compilation and installation (\code{source}), installation of a
+    binary package (\code{binary}), or a compilation without
+    installation (\code{buildonly}).  See \featureref{merge-type}.
+    \item[\code{REPLACING\_VERSIONS}, \code{REPLACED\_BY\_VERSION}]
+    These variables, valid in \code{pkg\_*}, contain a list of all
+    versions (\code{PVR}) of this package that we are replacing, and
+    the version that is replacing the current one, respectively.
+    See \featureref{replace-version-vars}.
 \end{description}
 \subsection{Removals/Bans}
 \label{sec:cs:eapi4-removalsbans}
