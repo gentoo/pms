@@ -14,7 +14,8 @@ names will contain a hyphen.
 
 \subsection{Package Names}
 A package name may contain any of the characters [\t{A-Za-z0-9+\_-}]. It must not begin with a
-hyphen or a plus sign, and must not end in a hyphen followed by one or more digits.
+hyphen or a plus sign, and must not end in a hyphen followed by anything matching the version
+syntax described in section~\ref{sec:version-spec}.
 
 \note A package name does not include the category. The term \i{qualified package name} is used
 where a \t{category/package} pair is meant.
@@ -48,6 +49,7 @@ An EAPI name may contain any of the characters [\t{A-Za-z0-9+\_.-}]. It must not
 hyphen, a dot or a plus sign.
 
 \section{Version Specifications}
+\label{sec:version-spec}
 The package manager must not impose fixed limits upon the number of version components. Package
 managers should indicate or reject any version that is invalid according to these rules.
 
