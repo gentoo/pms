@@ -298,11 +298,10 @@ function has returned.
     Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[dohtml] Installs the given HTML files into a subdirectory under \t{/usr/share/doc/\$PF/}.
-The subdirectory is \t{html} by default, but this can be overridden by setting the \t{DOCDESTTREE}
-variable with the \t{docinto} function. Files to be installed automatically are determined by
-extension and the default extensions are \t{css}, \t{gif}, \t{htm}, \t{html}, \t{jpeg}, \t{jpg},
-\t{js} and \t{png}. These default extensions can be extended or reduced (see below). The options
-that can be passed to \t{dohtml} are as follows:
+The subdirectory is \t{html} by default, but this can be overridden with the \t{docinto} function.
+Files to be installed automatically are determined by extension and the default extensions are
+\t{css}, \t{gif}, \t{htm}, \t{html}, \t{jpeg}, \t{jpg}, \t{js} and \t{png}. These default extensions
+can be extended or reduced (see below). The options that can be passed to \t{dohtml} are as follows:
 \begin{description}
     \item{\t{-r}} --- enables recursion into directories.
     \item{\t{-V}} --- enables verbosity.
