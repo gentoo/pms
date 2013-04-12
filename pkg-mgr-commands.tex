@@ -247,9 +247,9 @@ These commands are used to install files into the staging area, in cases where t
 install} target cannot be used or does not install all needed files. Except where otherwise stated,
 all filenames created or modified are relative to the staging directory including the offset-prefix
 \t{ED} in offset-prefix aware EAPIs, or just the staging directory \t{D} in offset-prefix agnostic
-EAPIs. These commands must all be external programs and not bash functions or aliases---that is, they
-must be callable from \t{xargs}. Ebuilds must not run any of these commands once the current phase
-function has returned.
+EAPIs. Existing destination files are overwritten. These commands must all be external programs and
+not bash functions or aliases---that is, they must be callable from \t{xargs}. Ebuilds must not run
+any of these commands once the current phase function has returned.
 
 \begin{description}
 \item[dobin] Installs the given files into \t{DESTTREE/bin}, where
