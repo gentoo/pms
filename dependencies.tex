@@ -362,7 +362,7 @@ The following tokens are permitted inside \t{RESTRICT}:
 \item[mirror] The package's \t{SRC\_URI} entries may not be mirrored, and mirrors should not
     be checked when fetching.
 \item[fetch] The package's \t{SRC\_URI} entries may not be downloaded automatically. If
-    entries are not available, \t{pkg\_nofetch} is called.
+    entries are not available, \t{pkg\_nofetch} is called. Implies \t{mirror}.
 \item[strip] No stripping of debug symbols from files to be installed may be performed.
 \item[userpriv] The package manager may not drop root privileges when building the package.
 \item[test] The \t{src\_test} phase must not be run.
