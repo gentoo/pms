@@ -136,7 +136,8 @@ has returned.
 \begin{description}
 \item[econf] Calls the program's \t{./configure} script. This is designed to work with GNU
     Autoconf-generated scripts. Any additional parameters passed to \t{econf} are passed directly
-    to \t{./configure}. \t{econf} will look in the current working directory for a configure script
+    to \t{./configure}, after the default options below.
+    \t{econf} will look in the current working directory for a configure script
     unless the \t{ECONF\_SOURCE} environment variable is set, in which case it is taken to be the
     directory containing it. \t{econf} must pass the following options to the configure script:
 
