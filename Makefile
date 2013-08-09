@@ -53,8 +53,9 @@ pms.dvi: $(SOURCEFILES) pms.bbl
 	latex pms
 	latex pms
 
-upload: pms.pdf
-	scp pms.pdf dev.gentoo.org:public_html
+upload:
+	scp pms.pdf eapi-cheatsheet.pdf pms*.html pms.css \
+	  dev.gentoo.org:public_html/pms/head/
 
 .default: all
 
