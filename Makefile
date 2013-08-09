@@ -3,7 +3,10 @@ html : pms.html
 
 clean :
 	rm -f *~ *.pdf *.dvi *.log *.aux *.bbl *.blg *.toc *.lol *.loa *.lox \
-	    *.lot *.out *.html *.css *.png *.4ct *.4tc *.idv *.lg *.tmp *.xref vc.tex || true
+	    *.lot *.out *.html *.css *.png *.4ct *.4tc *.idv *.lg *.tmp *.xref
+
+maintainer-clean: clean
+	rm -f vc.tex
 
 LATEXFILES = $(shell find -name  '*.tex') pms.cls
 LISTINGFILES = $(shell ls *.listing)
@@ -53,10 +56,16 @@ pms.dvi: $(SOURCEFILES) pms.bbl
 	latex pms
 	latex pms
 
+dist: $(SOURCEFILES) pms.bib vc vc-git.awk vc.tex Makefile
+	@if test -z $(PV); then \
+	  echo "Usage: $(MAKE) $@ PV=<version>"; false; \
+	fi
+	tar -cJf pms-$(PV).tar.xz --transform='s%^%pms-$(PV)/%' $^
+
 upload:
 	scp pms.pdf eapi-cheatsheet.pdf pms*.html pms.css \
 	  dev.gentoo.org:public_html/pms/head/
 
 .default: all
 
-.phony: clean upload
+.phony: clean maintainer-clean dist upload
