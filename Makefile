@@ -13,6 +13,8 @@ LISTINGFILES = $(shell ls *.listing)
 SOURCEFILES = $(LATEXFILES) $(LISTINGFILES)
 
 pms.pdf: $(SOURCEFILES) pms.bbl vc.tex eapi-cheatsheet.pdf
+	@# latex chokes on aux files produced by tex4ht, so remove them
+	if grep -q rEfLiNK pms.aux 2>/dev/null; then rm -f *.aux; fi
 	pdflatex pms
 	pdflatex pms
 	pdflatex eapi-cheatsheet
