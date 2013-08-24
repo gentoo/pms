@@ -230,9 +230,7 @@ The following operators are available:
     specified has an asterisk immediately following it, a string prefix comparison is
     used instead. When an asterisk is used, the specification must remain valid if the
     asterisk were removed. (An asterisk used with any other operator is illegal.)
-\item[\t{\textasciitilde}] Equal to the specified version, except the revision part of the matching
-    package may be greater than the revision part of the specified version (\t{-r0} is
-    assumed if no revision is explicitly stated).
+\item[\t{\textasciitilde}] Equal to the specified version when revision parts are ignored.
 \item[\t{>=}] Greater than or equal to the specified version.
 \item[\t{>}] Strictly greater than the specified version.
 \end{description}
