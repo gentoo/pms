@@ -37,6 +37,8 @@ pms.html: $(SOURCEFILES) pms.bbl
 	LC_ALL=C sed -i -e 's/span style="width:/span style="display:-moz-inline-box;display:inline-block;height:1px;width:/' pms.html
 	@# align algorithm line numbers properly
 	LC_ALL=C sed -i -e '/<span class="ALCitem">/{N;s/\n\(class="[^"]\+">\)\([0-9]:<\/span>\)/\1\&#x2007;\2/}' pms.html
+	@# fix broken span on title page
+	LC_ALL=C sed -i -e '/<\/span><span $$/{N;s/<\/span><span [^>]*>\(&[a-z]uml;\)/\1/}' pms.html
 
 pms.bbl: pms.bib pms.tex vc.tex eapi-cheatsheet.pdf
 	latex pms
