@@ -31,7 +31,8 @@
     marginnote, % Typeset a paragraph in the page margin
     paralist,	% Additional list environments
     parskip,	% Space between paragraphs instead of indentation
-    verbatim	% Extend the print-as-is functionality
+    verbatim,	% Extend the print-as-is functionality
+    chngcntr	% Redefinition of counters
 }
 
 % tex4ht workaround: hyperref needs to be loaded /after/ tex4ht injects itself
@@ -82,6 +83,9 @@
 % Enumerate subsubsections, but don't include them in the toc.
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{2}
+
+% Don't reset the footnote counter for each chapter
+\counterwithout{footnote}{chapter}
 
 % Some shorthands for the lazy ones.
 % tex4ht workaround: this needs to happen after loading hyperref

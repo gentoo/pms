@@ -22,8 +22,8 @@ pms.pdf: $(SOURCEFILES) pms.bbl vc.tex eapi-cheatsheet.pdf
 
 pms.html: $(SOURCEFILES) pms.bbl
 	@# need to do it twice to make the big env var table work
-	mk4ht xhlatex pms
-	mk4ht xhlatex pms
+	mk4ht xhlatex pms xhtml,fn-in
+	mk4ht xhlatex pms xhtml,fn-in
 	@# some www servers ignore meta tags, resulting in a wrong charset.
 	@# therefore recode the very few non-ascii characters
 	recode -d l1..h3 pms.html
