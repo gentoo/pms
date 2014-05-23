@@ -16,6 +16,7 @@
 \PassOptionsToPackage{position=top}{caption}
 % Enable UTF-8 input encoding
 \PassOptionsToPackage{utf8}{inputenc}
+\PassOptionsToPackage{nottoc,notlot,notlof}{tocbibind}
 % algorithmic and algorithm to be loaded last to avoid failures
 \RequirePackage{%
     fontenc,	% Load extended font sets
@@ -32,7 +33,8 @@
     paralist,	% Additional list environments
     parskip,	% Space between paragraphs instead of indentation
     verbatim,	% Extend the print-as-is functionality
-    chngcntr	% Redefinition of counters
+    chngcntr,	% Redefinition of counters
+    tocbibind	% Add bibliography to table of contents
 }
 
 % tex4ht workaround: hyperref needs to be loaded /after/ tex4ht injects itself
