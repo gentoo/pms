@@ -23,7 +23,7 @@ The following commands affect this behaviour:
     table~\ref{tab:commands-die-table} as supporting \t{nonfatal}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPI Command Failure Behaviour} \label{tab:commands-die-table}
     \begin{tabular}{ l l l }
         \toprule
@@ -37,6 +37,7 @@ The following commands affect this behaviour:
     \t{3} & Non-zero exit & No \\
     \t{4} & Aborts & Yes \\
     \t{5} & Aborts & Yes \\
+    \t{6} & Aborts & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -47,7 +48,7 @@ The following commands affect this behaviour:
 \featurelabel{banned-commands} Some commands are banned in some EAPIs. If a banned command is
 called, the package manager must abort the build process indicating an error.
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{Banned commands} \label{tab:banned-commands-table}
     \begin{tabular}{ l l l }
         \toprule
@@ -63,6 +64,7 @@ called, the package manager must abort the build process indicating an error.
     \t{3} & No & No \\
     \t{4} & Yes & Yes \\
     \t{5} & Yes & Yes \\
+    \t{6} & Yes & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -159,7 +161,7 @@ current phase function has returned.
         in the output of \t{configure -{}-help}.
     \end{itemize}
 
-    \ChangeWhenAddingAnEAPI{5}
+    \ChangeWhenAddingAnEAPI{6}
     \begin{centertable}{Extra \t{econf} arguments for EAPIs} \label{tab:econf-options-table}
         \begin{tabular}{ l l l }
             \toprule
@@ -173,6 +175,7 @@ current phase function has returned.
         \t{3} & No & No \\
         \t{4} & Yes & No \\
         \t{5} & Yes & Yes \\
+        \t{6} & Yes & Yes \\
         \bottomrule
         \end{tabular}
     \end{centertable}
@@ -437,7 +440,7 @@ can be extended or reduced (see below). The options that can be passed to \t{doh
 
 \end{description}
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting \t{dodoc -r}} \label{tab:dodoc-table}
     \begin{tabular}{ l l }
         \toprule
@@ -450,11 +453,12 @@ can be extended or reduced (see below). The options that can be passed to \t{doh
     \t{3} & No \\
     \t{4} & Yes \\
     \t{5} & Yes \\
+    \t{6} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting \t{doheader} and \t{newheader}} \label{tab:doheader-table}
     \begin{tabular}{ l l }
         \toprule
@@ -467,11 +471,12 @@ can be extended or reduced (see below). The options that can be passed to \t{doh
     \t{3} & No \\
     \t{4} & No \\
     \t{5} & Yes \\
+    \t{6} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting symlinks for \t{doins}} \label{tab:doins-table}
     \begin{tabular}{ l l }
         \toprule
@@ -484,11 +489,12 @@ can be extended or reduced (see below). The options that can be passed to \t{doh
     \t{3} & No \\
     \t{4} & Yes \\
     \t{5} & Yes \\
+    \t{6} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{\t{doman} language support options for EAPIs}
     \label{tab:doman-table}
     \begin{tabular}{ l l l }
@@ -503,11 +509,12 @@ can be extended or reduced (see below). The options that can be passed to \t{doh
     \t{3} & Yes & No \\
     \t{4} & Yes & Yes \\
     \t{5} & Yes & Yes \\
+    \t{6} & Yes & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting stdin for \t{new*} commands} \label{tab:newfoo-stdin-table}
     \begin{tabular}{ l l }
         \toprule
@@ -520,11 +527,12 @@ can be extended or reduced (see below). The options that can be passed to \t{doh
     \t{3} & No \\
     \t{4} & No \\
     \t{5} & Yes \\
+    \t{6} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting \t{-{}-host-root} for \t{*\_version} commands}
     \label{tab:foo-version-host-root-table}
     \begin{tabular}{ l l }
@@ -538,6 +546,7 @@ can be extended or reduced (see below). The options that can be passed to \t{doh
     \t{3} & No \\
     \t{4} & No \\
     \t{5} & Yes \\
+    \t{6} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -627,7 +636,7 @@ exclusion list. Otherwise, add each argument to the inclusion list. Only availab
 in table~\ref{tab:compression-table} as supporting \t{docompress}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting controllable compression} \label{tab:compression-table}
     \begin{tabular}{ l l l }
         \toprule
@@ -641,6 +650,7 @@ in table~\ref{tab:compression-table} as supporting \t{docompress}.
     \t{3} & No & No \\
     \t{4} & Yes & Yes \\
     \t{5} & Yes & Yes \\
+    \t{6} & Yes & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -679,7 +689,7 @@ either behaviour is undefined or it is an error as decided by table~\ref{tab:use
     Only available in EAPIs listed in table~\ref{tab:usex-table} as supporting \t{usex}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPI Behaviour for Use Queries not in IUSE\_EFFECTIVE} \label{tab:use-list-strictness}
     \begin{tabular}{ l l }
         \toprule
@@ -692,11 +702,12 @@ either behaviour is undefined or it is an error as decided by table~\ref{tab:use
     \t{3} & Undefined \\
     \t{4} & Error \\
     \t{5} & Error \\
+    \t{6} & Error \\
     \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting empty third argument in \t{use\_with} and \t{use\_enable}}
     \label{tab:use-with-third-arg}
     \begin{tabular}{ l l }
@@ -710,11 +721,12 @@ either behaviour is undefined or it is an error as decided by table~\ref{tab:use
     \t{3} & No \\
     \t{4} & Yes \\
     \t{5} & Yes \\
+    \t{6} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting \t{usex}} \label{tab:usex-table}
     \begin{tabular}{ l l }
         \toprule
@@ -727,6 +739,7 @@ either behaviour is undefined or it is an error as decided by table~\ref{tab:use
     \t{3} & No \\
     \t{4} & No \\
     \t{5} & Yes \\
+    \t{6} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -797,7 +810,7 @@ has returned.
     It is up to the ebuild to ensure that the relevant external utilities are available, whether by
     being in the system set or via dependencies.
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{\t{unpack} extensions for EAPIs} \label{tab:unpack-extensions-table}
     \begin{tabular}{ l l }
         \toprule
@@ -810,6 +823,7 @@ has returned.
     \t{3} & Yes \\
     \t{4} & Yes \\
     \t{5} & Yes \\
+    \t{6} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
@@ -823,7 +837,7 @@ has returned.
     table~\ref{tab:default-function-table}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting the \t{default} function} \label{tab:default-function-table}
     \begin{tabular}{ l l }
         \toprule
@@ -836,6 +850,7 @@ has returned.
     \t{3} & Yes \\
     \t{4} & Yes \\
     \t{5} & Yes \\
+    \t{6} & Yes \\
     \bottomrule
     \end{tabular}
 \end{centertable}
