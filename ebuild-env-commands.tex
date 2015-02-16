@@ -33,16 +33,24 @@ The following commands must always be available in the ebuild environment:
     table~\ref{tab:system-commands-table} as requiring GNU find.
 \end{compactitem}
 
+\subsubsection{Shell options}
+
+\featurelabel{failglob} For EAPIs listed such in table~\ref{tab:system-commands-table}, the
+\t{failglob} option of bash is set in the global scope of ebuilds. If set, failed pattern matches
+during filename expansion result in an error when the ebuild is being sourced.
+
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{\t{find} implementation for EAPIs}
+\begin{centertable}{System commands for EAPIs}
     \label{tab:system-commands-table}
-    \begin{tabular}{ll}
+    \begin{tabular}{lll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{GNU \t{find}?}} \\
+      \multicolumn{1}{c}{\textbf{GNU \t{find}?}} &
+      \multicolumn{1}{c}{\textbf{\t{failglob} in global scope?}} \\
       \midrule
-      0, 1, 2, 3, 4     & Undefined \\
-      5, 6              & Yes       \\
+      0, 1, 2, 3, 4     & Undefined & No  \\
+      5                 & Yes       & No  \\
+      6                 & Yes       & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}

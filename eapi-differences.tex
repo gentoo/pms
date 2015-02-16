@@ -141,6 +141,9 @@ Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-inject} &
 \t{EPREFIX}, \t{ED}, \t{EROOT} & \compactfeatureref{offset-prefix-vars} &
     No & Yes & Yes & Yes & Yes \\
 
+\t{failglob} in global scope & \compactfeatureref{failglob} &
+    No & No & No & No & Yes \\
+
 \t{find} is GNU? & \compactfeatureref{gnu-find} &
     Undefined & Undefined & Undefined & Yes & Yes \\
 
@@ -307,6 +310,7 @@ EAPI 6 is EAPI 5 with the following changes:
 
 \begin{compactitem}
 \item Bash version is 4.2, \featureref{bash-version}.
+\item \t{failglob} is enabled in global scope, \featureref{failglob}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{6}
