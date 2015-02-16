@@ -880,9 +880,10 @@ has returned.
     \item lzma-compressed tar files (\t{*.tar.lzma}). Ebuilds must ensure that LZMA Utils and
         GNU tar are installed.
     \item xz-compressed files (\t{*.xz}). Ebuilds must ensure that XZ Utils is installed. Only for
-        EAPIs listed in table~\ref{tab:unpack-extensions-table} as supporting xz.
-    \item xz-compressed tar files (\t{*.tar.xz}). Ebuilds must ensure that XZ Utils and GNU tar are
-        installed. Only for EAPIs listed in table~\ref{tab:unpack-extensions-table} as supporting xz.
+        EAPIs listed in table~\ref{tab:unpack-extensions-table} as supporting \t{.xz}.
+    \item xz-compressed tar files (\t{*.tar.xz, *.txz}). Ebuilds must ensure that XZ Utils and
+        GNU tar are installed. Only for EAPIs listed in table~\ref{tab:unpack-extensions-table} as
+        supporting \t{.tar.xz} or \t{.txz}.
     \end{itemize}
     It is up to the ebuild to ensure that the relevant external utilities are available, whether by
     being in the system set or via dependencies.
@@ -904,13 +905,16 @@ has returned.
     \ChangeWhenAddingAnEAPI{6}
     \begin{centertable}{\t{unpack} extensions for EAPIs}
         \label{tab:unpack-extensions-table}
-        \begin{tabular}{ll}
+        \begin{tabular}{llll}
           \toprule
           \multicolumn{1}{c}{\textbf{EAPI}} &
-          \multicolumn{1}{c}{\textbf{\t{.xz} and \t{.tar.xz}?}} \\
+          \multicolumn{1}{c}{\textbf{\t{.xz}?}} &
+          \multicolumn{1}{c}{\textbf{\t{.tar.xz}?}} &
+          \multicolumn{1}{c}{\textbf{\t{.txz}?}} \\
           \midrule
-          0, 1, 2           & No  \\
-          3, 4, 5, 6        & Yes \\
+          0, 1, 2           & No  & No  & No  \\
+          3, 4, 5           & Yes & Yes & No  \\
+          6                 & Yes & Yes & Yes \\
           \bottomrule
         \end{tabular}
     \end{centertable}
