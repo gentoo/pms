@@ -159,6 +159,9 @@ Most utilities die & \compactfeatureref{die-on-failure} &
 \t{dosed} & \compactfeatureref{banned-commands} &
     Yes & Yes & Banned & Banned & Banned \\
 
+\t{einstall} & \compactfeatureref{banned-commands} &
+    Yes & Yes & Yes & Yes & Banned \\
+
 Option \t{-{}-host-root} & \compactfeatureref{host-root-option} &
     No & No & No & Yes & Yes \\
 
@@ -311,6 +314,7 @@ EAPI 6 is EAPI 5 with the following changes:
 \begin{compactitem}
 \item Bash version is 4.2, \featureref{bash-version}.
 \item \t{failglob} is enabled in global scope, \featureref{failglob}.
+\item \t{einstall} banned, \featureref{banned-commands}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{6}

@@ -47,16 +47,18 @@ called, the package manager must abort the build process indicating an error.
 \ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{Banned commands}
     \label{tab:banned-commands-table}
-    \begin{tabular}{lll}
+    \begin{tabular}{llll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{2}{c}{\textbf{Command banned?}} \\
+      \multicolumn{3}{c}{\textbf{Command banned?}} \\
       \multicolumn{1}{c}{} &
       \multicolumn{1}{c}{\textbf{\t{dohard}}} &
-      \multicolumn{1}{c}{\textbf{\t{dosed}}} \\
+      \multicolumn{1}{c}{\textbf{\t{dosed}}} &
+      \multicolumn{1}{c}{\textbf{\t{einstall}}} \\
       \midrule
-      0, 1, 2, 3        & No  & No  \\
-      4, 5, 6           & Yes & Yes \\
+      0, 1, 2, 3        & No  & No  & No  \\
+      4, 5              & Yes & Yes & No  \\
+      6                 & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -208,6 +210,8 @@ current phase function has returned.
 \item[einstall] A shortcut for the command given in Listing~\ref{lst:einstall}. Any arguments given
     to \t{einstall} are passed verbatim to \t{emake}, as shown. Failure behaviour is EAPI dependent
     as per section~\ref{sec:failure-behaviour}.
+    In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as per
+    section~\ref{sec:banned-commands}.
 
     The variable \t{ED} is defined as in Table~\ref{tab:defined_vars} and depends on the use of an
     offset-prefix. When such offset-prefix is absent, \t{ED} is equivalent to \t{D}\@. \t{ED} is
