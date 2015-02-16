@@ -129,9 +129,9 @@ completing. Ebuilds must not run any of these commands once the current phase fu
 \end{description}
 
 \subsubsection{Build commands}
-These commands are used during the \t{src\_compile} and \t{src\_install} phases to run the
-package's build commands. Ebuilds must not run any of these commands once the current phase function
-has returned.
+These commands are used during the \t{src\_configure}, \t{src\_compile}, and \t{src\_install}
+phases to run the package's build commands. Ebuilds must not run any of these commands once the
+current phase function has returned.
 
 \begin{description}
 \item[econf] Calls the program's \t{./configure} script. This is designed to work with GNU
