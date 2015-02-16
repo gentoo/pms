@@ -18,9 +18,11 @@ The following commands affect this behaviour:
 \begin{description}
 \item[nonfatal] \featurelabel{nonfatal} Executes the remainder of its arguments as a command,
     preserving the exit status. If this results in a command being called that would normally abort
-    the build process due to a failure (but not due to an explicit \t{die} or \t{assert} call),
-    instead a non-zero exit status shall be returned. Only in EAPIs listed in
-    table~\ref{tab:commands-die-table} as supporting \t{nonfatal}.
+    the build process due to a failure, instead a non-zero exit status shall be returned. Only in
+    EAPIs listed in table~\ref{tab:commands-die-table} as supporting \t{nonfatal}.
+
+    Explicit \t{die} or \t{assert} commands only respect \t{nonfatal} when called with the \t{-n}
+    option and in EAPIs supporting this option, see table~\ref{tab:nonfatal-die}.
 \end{description}
 
 \ChangeWhenAddingAnEAPI{6}
@@ -117,12 +119,29 @@ stderr or some other appropriate facility.
 These commands are used when an error is detected that will prevent the build process from
 completing. Ebuilds must not run any of these commands once the current phase function has returned.
 \begin{description}
-\item[die] Displays a failure message provided in its first and only argument, and then aborts the
-    build process. \t{die} is \e{not} guaranteed to work correctly if called from a subshell
-    environment.
+\item[die] \featurelabel{nonfatal-die} If called under the \t{nonfatal} command (as per
+    section~\ref{sec:failure-behaviour}) and with \t{-n} as its first parameter, displays a failure
+    message provided in its following argument and then returns a non-zero exit status. Only in
+    EAPIs listed in table~\ref{tab:nonfatal-die} as supporting option~\t{-n}. Otherwise, displays
+    a failure message provided in its first and only argument, and then aborts the build process.
+    \t{die} is \e{not} guaranteed to work correctly if called from a subshell environment.
 \item[assert] Checks the value of the shell's pipe status variable, and if any component is non-zero
-    (indicating failure), calls \t{die} with its first argument as a failure message.
+    (indicating failure), calls \t{die}, passing any parameters to it.
 \end{description}
+
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting \t{-n} for \t{die} and \t{assert} commands}
+    \label{tab:nonfatal-die}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{die} and \t{assert} support \t{-n}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5  & No  \\
+      6                 & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \subsubsection{Build commands}
 These commands are used during the \t{src\_configure}, \t{src\_compile}, and \t{src\_install}
