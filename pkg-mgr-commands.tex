@@ -936,6 +936,10 @@ has returned.
     Algorithm~\ref{alg:einstalldocs}. If called using \t{nonfatal} and any of the called commands
     returns a non-zero exit status, returns immediately with the same exit status. Only available
     in EAPIs listed in table~\ref{tab:einstalldocs} as supporting \t{einstalldocs}.
+
+\item[get\_libdir] \featurelabel{get-libdir} Prints the libdir name obtained according to
+    Algorithm~\ref{alg:get-libdir}. Only available in EAPIs listed in table~\ref{tab:get-libdir}
+    as supporting \t{get\_libdir}.
 \end{description}
 
 \begin{algorithm}
@@ -966,6 +970,20 @@ has returned.
 \end{algorithmic}
 \end{algorithm}
 
+\begin{algorithm}
+\caption{get\_libdir logic} \label{alg:get-libdir}
+\begin{algorithmic}[1]
+\STATE let libdir=lib
+\IF{the ABI environment variable is set}
+    \STATE let libvar=LIBDIR\_\$ABI
+    \IF{the environment variable named by libvar is set}
+        \STATE let libdir=the value of the variable named by libvar
+    \ENDIF
+\ENDIF
+\STATE print the value of libdir
+\end{algorithmic}
+\end{algorithm}
+
 \ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting the \t{default} function}
     \label{tab:default-function-table}
@@ -987,6 +1005,19 @@ has returned.
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{Supports \t{einstalldocs}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5  & No  \\
+      6                 & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\begin{centertable}{EAPIs supporting \t{get\_libdir}}
+    \label{tab:get-libdir}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{get\_libdir}?}} \\
       \midrule
       0, 1, 2, 3, 4, 5  & No  \\
       6                 & Yes \\
