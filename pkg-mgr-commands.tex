@@ -238,6 +238,12 @@ current phase function has returned.
     \item -{}-datadir must be \t{\$\{EPREFIX\}/usr/share}
     \item -{}-sysconfdir must be \t{\$\{EPREFIX\}/etc}
     \item -{}-localstatedir must be \t{\$\{EPREFIX\}/var/lib}
+    \item -{}-docdir must be \t{\$\{EPREFIX\}/usr/share/doc/\$\{PF\}}, if the EAPI is listed in
+        table~\ref{tab:econf-options-table} as using it. This option will only be passed if the
+        string \t{-{}-docdir} occurs in the output of \t{configure -{}-help}.
+    \item -{}-htmldir must be \t{\$\{EPREFIX\}/usr/share/doc/\$\{PF\}/html}, if the EAPI is listed
+        in table~\ref{tab:econf-options-table} as using it. This option will only be passed if the
+        string \t{-{}-htmldir} occurs in the output of \t{configure -{}-help}.
     \item -{}-host must be the value of the \t{CHOST} environment variable.
     \item -{}-libdir must be set according to Algorithm~\ref{alg:econf-libdir}.
     \item -{}-disable-dependency-tracking, if the EAPI is listed in
@@ -251,15 +257,18 @@ current phase function has returned.
     \ChangeWhenAddingAnEAPI{6}
     \begin{centertable}{Extra \t{econf} arguments for EAPIs}
         \label{tab:econf-options-table}
-        \begin{tabular}{lll}
+        \begin{tabular}{lllll}
           \toprule
           \multicolumn{1}{c}{\textbf{EAPI}} &
-          \multicolumn{1}{c}{\textbf{-{}-disable-dependency-tracking?}} &
-          \multicolumn{1}{c}{\textbf{-{}-disable-silent-rules?}} \\
+          \multicolumn{1}{c}{\textbf{-{}-disable-dependency-tracking}} &
+          \multicolumn{1}{c}{\textbf{-{}-disable-silent-rules}} &
+          \multicolumn{1}{c}{\textbf{-{}-docdir}} &
+          \multicolumn{1}{c}{\textbf{-{}-htmldir}} \\
           \midrule
-          0, 1, 2, 3        & No  & No  \\
-          4                 & Yes & No  \\
-          5, 6              & Yes & Yes \\
+          0, 1, 2, 3        & No  & No  & No  & No  \\
+          4                 & Yes & No  & No  & No  \\
+          5                 & Yes & Yes & No  & No  \\
+          6                 & Yes & Yes & Yes & Yes \\
           \bottomrule
         \end{tabular}
     \end{centertable}

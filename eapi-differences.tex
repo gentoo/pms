@@ -180,7 +180,7 @@ Option \t{-{}-host-root} & \compactfeatureref{host-root-option} &
 \t{econf} arguments & \compactfeatureref{econf-options} &
     &  & disable dependency tracking &
     disable dependency tracking, disable silent rules &
-    disable dependency tracking, disable silent rules \\
+    disable dependency tracking, disable silent rules, docdir, htmldir \\
 
 \t{dodoc -r} & \compactfeatureref{dodoc} &
     No & No & Yes & Yes & Yes \\
@@ -331,6 +331,7 @@ EAPI 6 is EAPI 5 with the following changes:
 \item \t{die} and \t{assert} called with \t{-n} respect \t{nonfatal}, \featureref{nonfatal-die}.
 \item \t{eapply} support, \featureref{eapply}.
 \item \t{eapply\_user} support, \featureref{eapply-user}.
+\item \t{econf} adds \t{-{}-docdir} and \t{-{}-htmldir}, \featureref{econf-options}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{6}
