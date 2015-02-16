@@ -215,6 +215,9 @@ Controllable compression & \compactfeatureref{docompress} &
 \t{in\_iuse} & \compactfeatureref{in-iuse} &
     No & No & No & No & Yes \\
 
+\t{unpack} absolute paths & \compactfeatureref{unpack-absolute} &
+    No & No & No & No & Yes \\
+
 \t{unpack} support for \t{xz}? & \compactfeatureref{unpack-extensions} &
     No & Yes & Yes & Yes & Yes \\
 
@@ -336,6 +339,7 @@ EAPI 6 is EAPI 5 with the following changes:
 \item \t{eapply\_user} support, \featureref{eapply-user}.
 \item \t{econf} adds \t{-{}-docdir} and \t{-{}-htmldir}, \featureref{econf-options}.
 \item \t{in\_iuse} support, \featureref{in-iuse}.
+\item \t{unpack} supports absolute and relative paths, \featureref{unpack-absolute}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{6}
