@@ -888,16 +888,20 @@ has returned.
     It is up to the ebuild to ensure that the relevant external utilities are available, whether by
     being in the system set or via dependencies.
 
+    \featurelabel{unpack-ignore-case} \t{unpack} matches filename extensions in a case-insensitive
+    manner, for EAPIs listed such in table~\ref{tab:unpack-behaviour}.
+
     \ChangeWhenAddingAnEAPI{6}
     \begin{centertable}{\t{unpack} behaviour for EAPIs}
         \label{tab:unpack-behaviour}
-        \begin{tabular}{ll}
+        \begin{tabular}{lll}
           \toprule
           \multicolumn{1}{c}{\textbf{EAPI}} &
-          \multicolumn{1}{c}{\textbf{Supports absolute and relative paths?}} \\
+          \multicolumn{1}{c}{\textbf{Supports absolute and relative paths?}} &
+          \multicolumn{1}{c}{\textbf{Case-insensitive matching?}} \\
           \midrule
-          0, 1, 2, 3, 4, 5  & No  \\
-          6                 & Yes \\
+          0, 1, 2, 3, 4, 5  & No  & No  \\
+          6                 & Yes & Yes \\
           \bottomrule
         \end{tabular}
     \end{centertable}
