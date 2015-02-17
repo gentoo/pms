@@ -24,21 +24,17 @@ The following commands affect this behaviour:
 \end{description}
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPI Command Failure Behaviour} \label{tab:commands-die-table}
-    \begin{tabular}{ l l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Command failure behaviour}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{nonfatal}?}} \\
-            \midrule
-    \t{0} & Non-zero exit & No \\
-    \t{1} & Non-zero exit & No \\
-    \t{2} & Non-zero exit & No \\
-    \t{3} & Non-zero exit & No \\
-    \t{4} & Aborts & Yes \\
-    \t{5} & Aborts & Yes \\
-    \t{6} & Aborts & Yes \\
-    \bottomrule
+\begin{centertable}{EAPI Command Failure Behaviour}
+    \label{tab:commands-die-table}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Command failure behaviour}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{nonfatal}?}} \\
+      \midrule
+      0, 1, 2, 3        & Non-zero exit & No  \\
+      4, 5, 6           & Aborts        & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -49,23 +45,19 @@ The following commands affect this behaviour:
 called, the package manager must abort the build process indicating an error.
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{Banned commands} \label{tab:banned-commands-table}
-    \begin{tabular}{ l l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{2}{c}{\textbf{Command banned?}} \\
-        \multicolumn{1}{c}{} &
-        \multicolumn{1}{c}{\textbf{\t{dohard}}} &
-        \multicolumn{1}{c}{\textbf{\t{dosed}}} \\
-        \midrule
-    \t{0} & No & No \\
-    \t{1} & No & No \\
-    \t{2} & No & No \\
-    \t{3} & No & No \\
-    \t{4} & Yes & Yes \\
-    \t{5} & Yes & Yes \\
-    \t{6} & Yes & Yes \\
-    \bottomrule
+\begin{centertable}{Banned commands}
+    \label{tab:banned-commands-table}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{2}{c}{\textbf{Command banned?}} \\
+      \multicolumn{1}{c}{} &
+      \multicolumn{1}{c}{\textbf{\t{dohard}}} &
+      \multicolumn{1}{c}{\textbf{\t{dosed}}} \\
+      \midrule
+      0, 1, 2, 3        & No  & No  \\
+      4, 5, 6           & Yes & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -162,21 +154,18 @@ current phase function has returned.
     \end{itemize}
 
     \ChangeWhenAddingAnEAPI{6}
-    \begin{centertable}{Extra \t{econf} arguments for EAPIs} \label{tab:econf-options-table}
-        \begin{tabular}{ l l l }
-            \toprule
-                \multicolumn{1}{c}{\textbf{EAPI}} &
-                \multicolumn{1}{c}{\textbf{-{}-disable-dependency-tracking}?} &
-                \multicolumn{1}{c}{\textbf{-{}-disable-silent-rules}?} \\
-                \midrule
-        \t{0} & No & No \\
-        \t{1} & No & No \\
-        \t{2} & No & No \\
-        \t{3} & No & No \\
-        \t{4} & Yes & No \\
-        \t{5} & Yes & Yes \\
-        \t{6} & Yes & Yes \\
-        \bottomrule
+    \begin{centertable}{Extra \t{econf} arguments for EAPIs}
+        \label{tab:econf-options-table}
+        \begin{tabular}{lll}
+          \toprule
+          \multicolumn{1}{c}{\textbf{EAPI}} &
+          \multicolumn{1}{c}{\textbf{-{}-disable-dependency-tracking?}} &
+          \multicolumn{1}{c}{\textbf{-{}-disable-silent-rules?}} \\
+          \midrule
+          0, 1, 2, 3        & No  & No  \\
+          4                 & Yes & No  \\
+          5, 6              & Yes & Yes \\
+          \bottomrule
         \end{tabular}
     \end{centertable}
 
@@ -441,113 +430,88 @@ can be extended or reduced (see below). The options that can be passed to \t{doh
 \end{description}
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting \t{dodoc -r}} \label{tab:dodoc-table}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{dodoc -r}?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & Yes \\
-    \t{5} & Yes \\
-    \t{6} & Yes \\
-    \bottomrule
+\begin{centertable}{EAPIs supporting \t{dodoc -r}}
+    \label{tab:dodoc-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{dodoc -r}?}} \\
+      \midrule
+      0, 1, 2, 3        & No  \\
+      4, 5, 6           & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting \t{doheader} and \t{newheader}} \label{tab:doheader-table}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{doheader} and \t{newheader}?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & No \\
-    \t{5} & Yes \\
-    \t{6} & Yes \\
-    \bottomrule
+\begin{centertable}{EAPIs supporting \t{doheader} and \t{newheader}}
+    \label{tab:doheader-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{doheader} and \t{newheader}?}} \\
+      \midrule
+      0, 1, 2, 3, 4     & No  \\
+      5, 6              & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting symlinks for \t{doins}} \label{tab:doins-table}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{\t{doins} supports symlinks?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & Yes \\
-    \t{5} & Yes \\
-    \t{6} & Yes \\
-    \bottomrule
+\begin{centertable}{EAPIs supporting symlinks for \t{doins}}
+    \label{tab:doins-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{doins} supports symlinks?}} \\
+      \midrule
+      0, 1, 2, 3        & No  \\
+      4, 5, 6           & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
 \ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{\t{doman} language support options for EAPIs}
     \label{tab:doman-table}
-    \begin{tabular}{ l l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Language detection by filename?}} &
-            \multicolumn{1}{c}{\textbf{Option \t{-i18n} takes precedence?}} \\
-            \midrule
-    \t{0} & No & Not applicable \\
-    \t{1} & No & Not applicable \\
-    \t{2} & Yes & No \\
-    \t{3} & Yes & No \\
-    \t{4} & Yes & Yes \\
-    \t{5} & Yes & Yes \\
-    \t{6} & Yes & Yes \\
-    \bottomrule
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Language detection by filename?}} &
+      \multicolumn{1}{c}{\textbf{Option \t{-i18n} takes precedence?}} \\
+      \midrule
+      0, 1              & No  & Not applicable \\
+      2, 3              & Yes & No             \\
+      4, 5, 6           & Yes & Yes            \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting stdin for \t{new*} commands} \label{tab:newfoo-stdin-table}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{\t{new*} can read from stdin?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & No \\
-    \t{5} & Yes \\
-    \t{6} & Yes \\
-    \bottomrule
+\begin{centertable}{EAPIs supporting stdin for \t{new*} commands}
+    \label{tab:newfoo-stdin-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{new*} can read from stdin?}} \\
+      \midrule
+      0, 1, 2, 3, 4     & No  \\
+      5, 6              & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
 \ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting \t{-{}-host-root} for \t{*\_version} commands}
     \label{tab:foo-version-host-root-table}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{\t{*\_version} supports \t{-{}-host-root}?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & No \\
-    \t{5} & Yes \\
-    \t{6} & Yes \\
-    \bottomrule
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{*\_version} supports \t{-{}-host-root}?}} \\
+      \midrule
+      0, 1, 2, 3, 4     & No  \\
+      5, 6              & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -637,21 +601,17 @@ in table~\ref{tab:compression-table} as supporting \t{docompress}.
 \end{description}
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting controllable compression} \label{tab:compression-table}
-    \begin{tabular}{ l l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports controllable compression?}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{docompress}?}} \\
-            \midrule
-    \t{0} & No & No \\
-    \t{1} & No & No \\
-    \t{2} & No & No \\
-    \t{3} & No & No \\
-    \t{4} & Yes & Yes \\
-    \t{5} & Yes & Yes \\
-    \t{6} & Yes & Yes \\
-    \bottomrule
+\begin{centertable}{EAPIs supporting controllable compression}
+    \label{tab:compression-table}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports controllable compression?}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{docompress}?}} \\
+      \midrule
+      0, 1, 2, 3        & No  & No  \\
+      4, 5, 6           & Yes & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -690,57 +650,44 @@ either behaviour is undefined or it is an error as decided by table~\ref{tab:use
 \end{description}
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPI Behaviour for Use Queries not in IUSE\_EFFECTIVE} \label{tab:use-list-strictness}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Behaviour}} \\
-            \midrule
-    \t{0} & Undefined \\
-    \t{1} & Undefined  \\
-    \t{2} & Undefined \\
-    \t{3} & Undefined \\
-    \t{4} & Error \\
-    \t{5} & Error \\
-    \t{6} & Error \\
-    \bottomrule
+\begin{centertable}{EAPI Behaviour for Use Queries not in IUSE\_EFFECTIVE}
+    \label{tab:use-list-strictness}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Behaviour}} \\
+      \midrule
+      0, 1, 2, 3        & Undefined \\
+      4, 5, 6           & Error     \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
 \ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting empty third argument in \t{use\_with} and \t{use\_enable}}
     \label{tab:use-with-third-arg}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports empty third argument?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & Yes \\
-    \t{5} & Yes \\
-    \t{6} & Yes \\
-    \bottomrule
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports empty third argument?}} \\
+      \midrule
+      0, 1, 2, 3        & No  \\
+      4, 5, 6           & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting \t{usex}} \label{tab:usex-table}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{usex}?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & No \\
-    \t{5} & Yes \\
-    \t{6} & Yes \\
-    \bottomrule
+\begin{centertable}{EAPIs supporting \t{usex}}
+    \label{tab:usex-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{usex}?}} \\
+      \midrule
+      0, 1, 2, 3, 4     & No  \\
+      5, 6              & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -810,23 +757,19 @@ has returned.
     It is up to the ebuild to ensure that the relevant external utilities are available, whether by
     being in the system set or via dependencies.
 
-\ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{\t{unpack} extensions for EAPIs} \label{tab:unpack-extensions-table}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{\t{.xz} and \t{.tar.xz}?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & Yes \\
-    \t{4} & Yes \\
-    \t{5} & Yes \\
-    \t{6} & Yes \\
-    \bottomrule
-    \end{tabular}
-\end{centertable}
+    \ChangeWhenAddingAnEAPI{6}
+    \begin{centertable}{\t{unpack} extensions for EAPIs}
+        \label{tab:unpack-extensions-table}
+        \begin{tabular}{ll}
+          \toprule
+          \multicolumn{1}{c}{\textbf{EAPI}} &
+          \multicolumn{1}{c}{\textbf{\t{.xz} and \t{.tar.xz}?}} \\
+          \midrule
+          0, 1, 2           & No  \\
+          3, 4, 5, 6        & Yes \\
+          \bottomrule
+        \end{tabular}
+    \end{centertable}
 
 \item[inherit] See section~\ref{sec:inherit}.
 
@@ -838,20 +781,16 @@ has returned.
 \end{description}
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting the \t{default} function} \label{tab:default-function-table}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{default} function?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & Yes \\
-    \t{3} & Yes \\
-    \t{4} & Yes \\
-    \t{5} & Yes \\
-    \t{6} & Yes \\
-    \bottomrule
+\begin{centertable}{EAPIs supporting the \t{default} function}
+    \label{tab:default-function-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{default} function?}} \\
+      \midrule
+      0, 1              & No  \\
+      2, 3, 4, 5, 6     & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 

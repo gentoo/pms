@@ -89,19 +89,14 @@ is undefined.
 \ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{Preservation of file modification times (mtimes)}
     \label{tab:mtime-preserve}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{mtimes preserved?}} \\
-            \midrule
-    \t{0} & Undefined \\
-    \t{1} & Undefined \\
-    \t{2} & Undefined \\
-    \t{3} & Yes \\
-    \t{4} & Yes \\
-    \t{5} & Yes \\
-    \t{6} & Yes \\
-    \bottomrule
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{mtimes preserved?}} \\
+      \midrule
+      0, 1, 2           & Undefined \\
+      3, 4, 5, 6        & Yes       \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
