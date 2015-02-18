@@ -4,17 +4,22 @@
 \section{Dependency Classes}
 \label{sec:dependency-classes}
 
-\begin{centertable}{Dependency classes required to be satisfied for a particular phase function} \label{tab:phase-function-dependency-classes}
+\begin{centertable}{Dependency classes required to be satisfied for a particular phase function}
+    \label{tab:phase-function-dependency-classes}
     \begin{tabular}{ p{0.2\textwidth} p{0.7\textwidth} }
-        \toprule
-        \multicolumn{1}{c}{\textbf{Phase function}} &
-        \multicolumn{1}{c}{\textbf{Satisfied dependency classes}} \\
-        \midrule
-        \t{pkg\_pretend}, \t{pkg\_setup}, \t{pkg\_info}, \t{pkg\_nofetch} & None (ebuilds can rely only on the packages in the system set) \\
-        \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test}, \t{src\_install} & \t{DEPEND} \\
-        \t{pkg\_preinst}, \t{pkg\_postinst}, \t{pkg\_prerm}, \t{pkg\_postrm} & \t{RDEPEND} (unless the particular dependency results in a circular dependency, in which case it may be installed later) \\
-        \t{pkg\_config} & \t{RDEPEND}, \t{PDEPEND} \\
-    \bottomrule
+      \toprule
+      \multicolumn{1}{c}{\textbf{Phase function}} &
+      \multicolumn{1}{c}{\textbf{Satisfied dependency classes}} \\
+      \midrule
+      \t{pkg\_pretend}, \t{pkg\_setup}, \t{pkg\_info}, \t{pkg\_nofetch} &
+          None (ebuilds can rely only on the packages in the system set) \\
+      \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test},
+          \t{src\_install} & \t{DEPEND} \\
+      \t{pkg\_preinst}, \t{pkg\_postinst}, \t{pkg\_prerm}, \t{pkg\_postrm} &
+          \t{RDEPEND} (unless the particular dependency results in a circular dependency, in which
+          case it may be installed later) \\
+      \t{pkg\_config} & \t{RDEPEND}, \t{PDEPEND} \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -30,7 +35,8 @@ There are three classes of dependencies supported by ebuilds:
     the package manager finishes the batch of installs.
 \end{compactitem}
 
-Table~\ref{tab:phase-function-dependency-classes} lists dependencies which must be satisfied before a particular phase function is executed.
+Table~\ref{tab:phase-function-dependency-classes} lists dependencies which must be satisfied before
+a particular phase function is executed.
 
 In addition, \t{SRC\_URI}, \t{HOMEPAGE}, \t{RESTRICT}, \t{PROPERTIES}, \t{LICENSE} and
 \t{REQUIRED\_USE} use dependency-style specifications to specify their values.

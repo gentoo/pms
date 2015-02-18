@@ -87,7 +87,8 @@ from which it was invoked.
 \begin{algorithm}
 \caption{Version comparison logic for numeric components} \label{alg:version-comparison-numeric}
 \begin{algorithmic}[1]
-  \STATE define the notations $An_k$ and $Bn_k$ to mean the $k$\textsuperscript{th} numeric component of $A$ and $B$ respectively, using $0$-based indexing
+  \STATE define the notations $An_k$ and $Bn_k$ to mean the $k$\textsuperscript{th} numeric
+      component of $A$ and $B$ respectively, using $0$-based indexing
   \IF{$An_0>Bn_0$ using integer comparison}
     \RETURN $A>B$
   \ELSIF{$An_0<Bn_0$ using integer comparison}
@@ -107,7 +108,8 @@ from which it was invoked.
 \end{algorithm}
 
 \begin{algorithm}
-\caption{Version comparison logic for each numeric component after the first} \label{alg:version-comparison-numeric-nonfirst}
+\caption{Version comparison logic for each numeric component after the first}
+\label{alg:version-comparison-numeric-nonfirst}
 \begin{algorithmic}[1]
   \IF{either $An_i$ or $Bn_i$ has a leading \t{0}}
     \STATE let $An'_i$ be $An_i$ with any trailing \t{0}s removed
@@ -143,7 +145,8 @@ from which it was invoked.
 \begin{algorithm}
 \caption{Version comparison logic for suffixes} \label{alg:version-comparison-suffix}
 \begin{algorithmic}[1]
-  \STATE define the notations $As_k$ and $Bs_k$ to mean the $k$\textsuperscript{th} suffix of $A$ and $B$ respectively, using $0$-based indexing
+  \STATE define the notations $As_k$ and $Bs_k$ to mean the $k$\textsuperscript{th} suffix of $A$
+      and $B$ respectively, using $0$-based indexing
   \STATE let $Asn$ be the number of suffixes of $A$
   \STATE let $Bsn$ be the number of suffixes of $B$
   \FORALL{$i$ such that $i\geq0$ and $i<Asn$ and $i<Bsn$, in ascending order}
@@ -176,7 +179,8 @@ from which it was invoked.
     \ELSIF{$As'_i<Bs'_i$, using integer comparison}
       \RETURN $A<B$
     \ENDIF
-  \ELSIF{the type of $As_i$ is greater than the type of $Bs_i$ using the ordering $\mbox{\t{\_alpha}}<\mbox{\t{\_beta}}<\mbox{\t{\_pre}}<\mbox{\t{\_rc}}<\mbox{\t{\_p}}$}
+  \ELSIF{the type of $As_i$ is greater than the type of $Bs_i$ using the ordering
+      $\mbox{\t{\_alpha}}<\mbox{\t{\_beta}}<\mbox{\t{\_pre}}<\mbox{\t{\_rc}}<\mbox{\t{\_p}}$}
     \RETURN $A>B$
   \ELSE
     \RETURN $A<B$
