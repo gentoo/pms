@@ -930,7 +930,41 @@ has returned.
     section~\ref{sec:default-phase-funcs}). Must not be called if the \t{default\_} function does
     not exist for the current phase in the current EAPI\@. Only available in EAPIs listed in
     table~\ref{tab:default-function-table}.
+
+\item[einstalldocs] \featurelabel{einstalldocs} Takes no arguments. Installs the files specified
+    by the \t{DOCS} and \t{HTML\_DOCS} variables or a default set of files, according to
+    Algorithm~\ref{alg:einstalldocs}. If called using \t{nonfatal} and any of the called commands
+    returns a non-zero exit status, returns immediately with the same exit status. Only available
+    in EAPIs listed in table~\ref{tab:einstalldocs} as supporting \t{einstalldocs}.
 \end{description}
+
+\begin{algorithm}
+\caption{einstalldocs logic} \label{alg:einstalldocs}
+\begin{algorithmic}[1]
+\STATE save the value of the install directory for \t{dodoc}
+\STATE set the install directory for \t{dodoc} to \t{/usr/share/doc/\$\{PF\}}
+\IF{the DOCS variable is a non-empty array}
+    \STATE call \t{dodoc -r "\$\{DOCS[@]\}"}
+\ELSIF{the DOCS variable is a non-empty scalar}
+    \STATE call \t{dodoc -r \$\{DOCS\}}
+\ELSIF{the DOCS variable is unset}
+    \FORALL{$d$ matching the filename expansion of \t{README*} \t{ChangeLog} \t{AUTHORS} \t{NEWS}
+            \t{TODO} \t{CHANGES} \t{THANKS} \t{BUGS} \t{FAQ} \t{CREDITS} \t{CHANGELOG}}
+        \IF{file $d$ exists and has a size greater than zero}
+            \STATE call \t{dodoc} with $d$ as argument
+        \ENDIF
+    \ENDFOR
+\ENDIF
+\STATE set the install directory for \t{dodoc} to \t{/usr/share/doc/\$\{PF\}/html}
+\IF{the HTML\_DOCS variable is a non-empty array}
+    \STATE call \t{dodoc -r "\$\{HTML\_DOCS[@]\}"}
+\ELSIF{the HTML\_DOCS variable is a non-empty scalar}
+    \STATE call \t{dodoc -r \$\{HTML\_DOCS\}}
+\ENDIF
+\STATE restore the value of the install directory for \t{dodoc}
+\RETURN shell true (0)
+\end{algorithmic}
+\end{algorithm}
 
 \ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting the \t{default} function}
@@ -942,6 +976,20 @@ has returned.
       \midrule
       0, 1              & No  \\
       2, 3, 4, 5, 6     & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting \t{einstalldocs}}
+    \label{tab:einstalldocs}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{einstalldocs}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5  & No  \\
+      6                 & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
