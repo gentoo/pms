@@ -91,6 +91,9 @@ Use dependencies & \compactfeatureref{use-deps} &
 \t{src\_prepare} & \compactfeatureref{src-prepare} &
     * & Yes & Yes & Yes & Yes \\
 
+\t{src\_prepare} style & \compactfeatureref{src-prepare} &
+    * & no-op & no-op & no-op & 6 \\
+
 \t{src\_configure} & \compactfeatureref{src-configure} &
     * & Yes & Yes & Yes & Yes \\
 
@@ -322,6 +325,7 @@ EAPI 6 is EAPI 5 with the following changes:
 
 \begin{compactitem}
 \item Bash version is 4.2, \featureref{bash-version}.
+\item Default \t{src\_prepare} no longer a no-op, \featureref{src-prepare-6}.
 \item \t{failglob} is enabled in global scope, \featureref{failglob}.
 \item \t{einstall} banned, \featureref{banned-commands}.
 \item \t{die} and \t{assert} called with \t{-n} respect \t{nonfatal}, \featureref{nonfatal-die}.

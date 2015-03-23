@@ -124,24 +124,45 @@ src_unpack() {
 \label{sec:src-prepare-function}
 
 \featurelabel{src-prepare} The \t{src\_prepare} function is only called for EAPIs listed in
-table~\ref{tab:src-prepare-table} as supporting it.
-
-The \t{src\_prepare} function can be used for post-unpack source preparation. The default
-implementation does nothing.
+table~\ref{tab:src-prepare-table} as supporting it. The \t{src\_prepare} function can be used for
+post-unpack source preparation.
 
 The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR} as discussed in
 section~\ref{sec:s-to-workdir-fallback}.
 
+\featurelabel{src-prepare-6} For EAPIs listed in table~\ref{tab:src-prepare-table} as using format
+6, the default implementation used when the ebuild lacks the \t{src\_prepare} function shall behave
+as:
+
+\begin{listing}[H]
+\caption{src\_prepare, format~6} \label{lst:src-prepare-6}
+\begin{verbatim}
+src_prepare() {
+    if declare -p PATCHES | grep -q "^declare -a "; then
+        [[ -n ${PATCHES[@]} ]] && eapply "${PATCHES[@]}"
+    else
+        [[ -n ${PATCHES} ]] && eapply ${PATCHES}
+    fi
+    eapply_user
+}
+\end{verbatim}
+\end{listing}
+
+For other EAPIs supporting \t{src\_prepare}, the default implementation used when the ebuild lacks
+the \t{src\_prepare} function is a no-op.
+
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting \t{src\_prepare}}
+\begin{centertable}{\t{src\_prepare} support and behaviour for EAPIs}
     \label{tab:src-prepare-table}
-    \begin{tabular}{ll}
+    \begin{tabular}{lll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{src\_prepare}?}} \\
+      \multicolumn{1}{c}{\textbf{Supports \t{src\_prepare}?}} &
+      \multicolumn{1}{c}{\textbf{Format}} \\
       \midrule
-      0, 1              & No  \\
-      2, 3, 4, 5, 6     & Yes \\
+      0, 1              & No  & Not applicable \\
+      2, 3, 4, 5        & Yes & no-op          \\
+      6                 & Yes & 6              \\
       \bottomrule
     \end{tabular}
 \end{centertable}
