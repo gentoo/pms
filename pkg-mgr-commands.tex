@@ -726,8 +726,9 @@ These functions provide behaviour based upon set or unset use flags. Ebuilds mus
 these commands once the current phase function has returned. It is an error if an ebuild calls any
 of these functions in global scope.
 
-If any of these functions is called with a flag value that is not included in \t{IUSE\_EFFECTIVE},
-either behaviour is undefined or it is an error as decided by table~\ref{tab:use-list-strictness}.
+Unless otherwise noted, if any of these functions is called with a flag value that is not included
+in \t{IUSE\_EFFECTIVE}, either behaviour is undefined or it is an error as decided by
+table~\ref{tab:use-list-strictness}.
 
 \begin{description}
 \item[use] Returns shell true (0) if the first argument (a \t{USE} flag name) is enabled, false
@@ -753,6 +754,9 @@ either behaviour is undefined or it is an error as decided by table~\ref{tab:use
     set, outputs \t{\$\{arg2\}\$\{arg4\}}. Otherwise, outputs \t{\$\{arg3\}\$\{arg5\}}.
     The condition is inverted if the flag name is prefixed with~\t{!}.
     Only available in EAPIs listed in table~\ref{tab:usex-table} as supporting \t{usex}.
+\item[in\_iuse] \featurelabel{in-iuse} Returns shell true (0) if the first argument (a \t{USE} flag
+    name) is included in \t{IUSE\_EFFECTIVE}, false otherwise. Only available in EAPIs listed in
+    table~\ref{tab:in-iuse} as supporting \t{in\_iuse}.
 \end{description}
 
 \ChangeWhenAddingAnEAPI{6}
@@ -793,6 +797,20 @@ either behaviour is undefined or it is an error as decided by table~\ref{tab:use
       \midrule
       0, 1, 2, 3, 4     & No  \\
       5, 6              & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting \t{in\_iuse}}
+    \label{tab:in-iuse}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{in\_iuse}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5  & No  \\
+      6                 & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
