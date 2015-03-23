@@ -104,7 +104,7 @@ Parallel tests & \compactfeatureref{parallel-tests} &
     No & No & No & Yes & Yes \\
 
 \t{src\_install} style & \compactfeatureref{src-install} &
-    no-op & no-op & 4 & 4 & 4 \\
+    no-op & no-op & 4 & 4 & 6 \\
 
 \t{pkg\_info} & \compactfeatureref{pkg-info} &
     Installed & Installed & Both & Both & Both \\
@@ -341,6 +341,7 @@ EAPI 6 is EAPI 5 with the following changes:
 \begin{compactitem}
 \item Bash version is 4.2, \featureref{bash-version}.
 \item Default \t{src\_prepare} no longer a no-op, \featureref{src-prepare-6}.
+\item Different \t{src\_install} implementation, \featureref{src-install-6}.
 \item \t{failglob} is enabled in global scope, \featureref{failglob}.
 \item \t{einstall} banned, \featureref{banned-commands}.
 \item \t{die} and \t{assert} called with \t{-n} respect \t{nonfatal}, \featureref{nonfatal-die}.

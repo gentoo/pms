@@ -347,6 +347,22 @@ src_install() {
 \end{verbatim}
 \end{listing}
 
+\featurelabel{src-install-6} For EAPIs listed in table~\ref{tab:src-install-table} as using format
+6, the default implementation used when the ebuild lacks the \t{src\_install} function shall behave
+as:
+
+\begin{listing}[H]
+\caption{src\_install, format~6} \label{lst:src-install-6}
+\begin{verbatim}
+src_install() {
+    if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]]; then
+        emake DESTDIR="${D}" install
+    fi
+    einstalldocs
+}
+\end{verbatim}
+\end{listing}
+
 For other EAPIs, the default implementation used when the ebuild lacks the \t{src\_install} function
 is a no-op.
 
@@ -359,7 +375,8 @@ is a no-op.
       \multicolumn{1}{c}{\textbf{Format}} \\
       \midrule
       0, 1, 2, 3        & no-op \\
-      4, 5, 6           & 4     \\
+      4, 5              & 4     \\
+      6                 & 6     \\
       \bottomrule
     \end{tabular}
 \end{centertable}
