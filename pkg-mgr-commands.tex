@@ -143,6 +143,36 @@ completing. Ebuilds must not run any of these commands once the current phase fu
     \end{tabular}
 \end{centertable}
 
+\subsubsection{Patch commands}
+These commands are used during the \t{src\_prepare} phase to apply patches to the package's sources.
+Ebuilds must not run any of these commands once the current phase function has returned.
+
+\begin{description}
+\item[eapply] \featurelabel{eapply}
+    Only available in EAPIs listed in table~\ref{tab:patch-commands} as supporting \t{eapply}.
+\end{description}
+
+\begin{algorithm}
+\caption{eapply logic} \label{alg:eapply}
+\begin{algorithmic}[1]
+\STATE \COMMENT{WORK IN PROGRESS}
+\end{algorithmic}
+\end{algorithm}
+
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{Patch commands for EAPIs}
+    \label{tab:patch-commands}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{eapply}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5  & No  \\
+      6                 & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
 \subsubsection{Build commands}
 These commands are used during the \t{src\_configure}, \t{src\_compile}, and \t{src\_install}
 phases to run the package's build commands. Ebuilds must not run any of these commands once the

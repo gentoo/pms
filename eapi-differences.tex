@@ -168,6 +168,9 @@ Option \t{-{}-host-root} & \compactfeatureref{host-root-option} &
 \t{die -n} & \compactfeatureref{nonfatal-die} &
     No & No & No & No & Yes \\
 
+\t{eapply} & \compactfeatureref{eapply} &
+    No & No & No & No & Yes \\
+
 \t{econf} arguments & \compactfeatureref{econf-options} &
     &  & disable dependency tracking &
     disable dependency tracking, disable silent rules &
@@ -319,6 +322,7 @@ EAPI 6 is EAPI 5 with the following changes:
 \item \t{failglob} is enabled in global scope, \featureref{failglob}.
 \item \t{einstall} banned, \featureref{banned-commands}.
 \item \t{die} and \t{assert} called with \t{-n} respect \t{nonfatal}, \featureref{nonfatal-die}.
+\item \t{eapply} support, \featureref{eapply}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{6}
