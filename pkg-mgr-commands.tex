@@ -753,10 +753,10 @@ table~\ref{tab:use-list-strictness}.
     respectively; \t{\$\{arg4\}} and \t{\$\{arg5\}} default to the empty string. If the USE flag is
     set, outputs \t{\$\{arg2\}\$\{arg4\}}. Otherwise, outputs \t{\$\{arg3\}\$\{arg5\}}.
     The condition is inverted if the flag name is prefixed with~\t{!}.
-    Only available in EAPIs listed in table~\ref{tab:usex-table} as supporting \t{usex}.
+    Only available in EAPIs listed in table~\ref{tab:use-list-functions} as supporting \t{usex}.
 \item[in\_iuse] \featurelabel{in-iuse} Returns shell true (0) if the first argument (a \t{USE} flag
     name) is included in \t{IUSE\_EFFECTIVE}, false otherwise. Only available in EAPIs listed in
-    table~\ref{tab:in-iuse} as supporting \t{in\_iuse}.
+    table~\ref{tab:use-list-functions} as supporting \t{in\_iuse}.
 \end{description}
 
 \ChangeWhenAddingAnEAPI{6}
@@ -788,29 +788,17 @@ table~\ref{tab:use-list-strictness}.
 \end{centertable}
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting \t{usex}}
-    \label{tab:usex-table}
-    \begin{tabular}{ll}
+\begin{centertable}{EAPIs supporting \t{usex} and \t{in\_iuse}}
+    \label{tab:use-list-functions}
+    \begin{tabular}{lll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{usex}?}} \\
+      \multicolumn{1}{c}{\textbf{\t{usex}?}} &
+      \multicolumn{1}{c}{\textbf{\t{in\_iuse}?}} \\
       \midrule
-      0, 1, 2, 3, 4     & No  \\
-      5, 6              & Yes \\
-      \bottomrule
-    \end{tabular}
-\end{centertable}
-
-\ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting \t{in\_iuse}}
-    \label{tab:in-iuse}
-    \begin{tabular}{ll}
-      \toprule
-      \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{in\_iuse}?}} \\
-      \midrule
-      0, 1, 2, 3, 4, 5  & No  \\
-      6                 & Yes \\
+      0, 1, 2, 3, 4     & No  & No  \\
+      5                 & Yes & No  \\
+      6                 & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -929,16 +917,16 @@ has returned.
     \featurelabel{default-func} Calls the \t{default\_} function for the current phase (see
     section~\ref{sec:default-phase-funcs}). Must not be called if the \t{default\_} function does
     not exist for the current phase in the current EAPI\@. Only available in EAPIs listed in
-    table~\ref{tab:default-function-table}.
+    table~\ref{tab:misc-commands} as supporting \t{default}.
 
 \item[einstalldocs] \featurelabel{einstalldocs} Takes no arguments. Installs the files specified
     by the \t{DOCS} and \t{HTML\_DOCS} variables or a default set of files, according to
     Algorithm~\ref{alg:einstalldocs}. If called using \t{nonfatal} and any of the called commands
     returns a non-zero exit status, returns immediately with the same exit status. Only available
-    in EAPIs listed in table~\ref{tab:einstalldocs} as supporting \t{einstalldocs}.
+    in EAPIs listed in table~\ref{tab:misc-commands} as supporting \t{einstalldocs}.
 
 \item[get\_libdir] \featurelabel{get-libdir} Prints the libdir name obtained according to
-    Algorithm~\ref{alg:get-libdir}. Only available in EAPIs listed in table~\ref{tab:get-libdir}
+    Algorithm~\ref{alg:get-libdir}. Only available in EAPIs listed in table~\ref{tab:misc-commands}
     as supporting \t{get\_libdir}.
 \end{description}
 
@@ -985,42 +973,18 @@ has returned.
 \end{algorithm}
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting the \t{default} function}
-    \label{tab:default-function-table}
-    \begin{tabular}{ll}
+\begin{centertable}{Misc commands for EAPIs}
+    \label{tab:misc-commands}
+    \begin{tabular}{llll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{default} function?}} \\
+      \multicolumn{1}{c}{\textbf{\t{default}?}} &
+      \multicolumn{1}{c}{\textbf{\t{einstalldocs}?}} &
+      \multicolumn{1}{c}{\textbf{\t{get\_libdir}?}} \\
       \midrule
-      0, 1              & No  \\
-      2, 3, 4, 5, 6     & Yes \\
-      \bottomrule
-    \end{tabular}
-\end{centertable}
-
-\ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting \t{einstalldocs}}
-    \label{tab:einstalldocs}
-    \begin{tabular}{ll}
-      \toprule
-      \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{einstalldocs}?}} \\
-      \midrule
-      0, 1, 2, 3, 4, 5  & No  \\
-      6                 & Yes \\
-      \bottomrule
-    \end{tabular}
-\end{centertable}
-
-\begin{centertable}{EAPIs supporting \t{get\_libdir}}
-    \label{tab:get-libdir}
-    \begin{tabular}{ll}
-      \toprule
-      \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{get\_libdir}?}} \\
-      \midrule
-      0, 1, 2, 3, 4, 5  & No  \\
-      6                 & Yes \\
+      0, 1              & No  & No  & No  \\
+      2, 3, 4, 5        & Yes & No  & No  \\
+      6                 & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
