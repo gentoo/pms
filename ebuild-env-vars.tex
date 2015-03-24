@@ -131,10 +131,11 @@ variable.
     Yes &
     The normalised offset-prefix path of an offset installation.  When \t{EPREFIX} is not set in the
     calling environment, \t{EPREFIX} defaults to the built-in offset-prefix that was set during
-    installation of the package manager. When a different \t{EPREFIX} value than the built-in value is set
-    in the calling environment, a cross-prefix build is performed where using the existing utilities, a
-    package is built for the given \t{EPREFIX}, akin to \t{ROOT}. See also~\ref{sec:offset-vars}. Only
-    for EAPIs listed in table~\ref{tab:offset-env-vars-table} as supporting \t{EPREFIX}. \\
+    installation of the package manager. When a different \t{EPREFIX} value than the built-in value
+    is set in the calling environment, a cross-prefix build is performed where using the existing
+    utilities, a package is built for the given \t{EPREFIX}, akin to \t{ROOT}\@.
+    See also~\ref{sec:offset-vars}. Only for EAPIs listed in table~\ref{tab:offset-env-vars-table}
+    as supporting \t{EPREFIX}. \\
 \t{D} &
     \t{src\_install} &
     No &
@@ -396,14 +397,15 @@ contain at most one value.
     \end{tabular}
 \end{centertable}
 
-\featurelabel{offset-prefix-vars} Table~\ref{tab:offset-support-table} lists the EAPIs which support
-offset-prefix installations. This support was initially added in EAPI 3, in the form of three extra
-variables.  Two of these, \t{EROOT} and \t{ED}, are convenience variables using the variable
-\t{EPREFIX}. In EAPIs that do not support an offset-prefix, the installation offset is hardwired to
-\t{/usr}. In offset-prefix supporting EAPIs the installation offset is set as \t{\$\{EPREFIX\}/usr}
-and hence can be adjusted using the variable \t{EPREFIX}. Note that the behaviour of offset-prefix
-aware and agnostic is the same when \t{EPREFIX} is set to the empty string in offset-prefix aware
-EAPIs.  The latter do have the variables \t{ED} and \t{EROOT} properly set, though.
+\featurelabel{offset-prefix-vars} Table~\ref{tab:offset-support-table} lists the EAPIs which
+support offset-prefix installations. This support was initially added in EAPI 3, in the form of
+three extra variables. Two of these, \t{EROOT} and \t{ED}, are convenience variables using the
+variable \t{EPREFIX}\@. In EAPIs that do not support an offset-prefix, the installation offset is
+hardwired to \t{/usr}. In offset-prefix supporting EAPIs the installation offset is set as
+\t{\$\{EPREFIX\}/usr} and hence can be adjusted using the variable \t{EPREFIX}\@. Note that the
+behaviour of offset-prefix aware and agnostic is the same when \t{EPREFIX} is set to the empty
+string in offset-prefix aware EAPIs. The latter do have the variables \t{ED} and \t{EROOT} properly
+set, though.
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 

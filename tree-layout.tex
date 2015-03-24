@@ -53,7 +53,7 @@ A package directory contains the following:
 \item A \t{metadata.xml} file, as described in appendix~\ref{sec:metadata-xml}\@. Optional only for
     legacy support.
 \item A \t{ChangeLog}, in a format determined by the provider of the repository. Optional.
-\item A \t{Manifest} file, whose format is described in \cite{Glep44}.
+\item A \t{Manifest} file, whose format is described in~\cite{Glep44}.
 \item A \t{files} directory, containing any support files needed by the ebuilds. Optional.
 \end{compactitem}
 
@@ -86,9 +86,9 @@ contents of this directory, with the exception of \t{repo\_name}, are
 optional.
 
 The profiles directory may contain an \t{eapi} file. This file, if it exists, must contain a single
-line with the name of an EAPI. This specifies the EAPI to use when handling the profiles directory;
-a package manager must not attempt to use any repository whose profile directory requires an EAPI it
-does not support. If no \t{eapi} file is present, EAPI 0 shall be used.
+line with the name of an EAPI\@. This specifies the EAPI to use when handling the profiles
+directory; a package manager must not attempt to use any repository whose profile directory
+requires an EAPI it does not support. If no \t{eapi} file is present, EAPI 0 shall be used.
 
 If the repository is not intended to be stand-alone, the contents of these files are to be taken
 from or merged with the master repository as necessary.
@@ -195,7 +195,7 @@ differs from that described in \t{use.desc}.
 \subsection{The updates directory}
 \label{sec:updates-dir}
 The \t{updates} directory is used to inform the package manager that a package has moved categories,
-names, or that a version has changed SLOT. It contains one file per quarter year, named
+names, or that a version has changed SLOT\@. It contains one file per quarter year, named
 \t{[1-4]Q-[YYYY]} for the first to fourth quarter of a given year, for example \t{1Q-2004} or
 \t{3Q-2006}. The format of each file is again line-based, with each line having one of the following
 formats:

@@ -29,7 +29,7 @@ initial working directory for any phase is a trusted location that may only be w
 privileged user and group.
 
 \featurelabel{s-workdir-fallback} Some functions are described as having an initial working
-directory of \t{S} with an error or fallback to \t{WORKDIR}. For EAPIs listed in
+directory of \t{S} with an error or fallback to \t{WORKDIR}\@. For EAPIs listed in
 table~\ref{tab:s-fallback-table} as having the fallback, this means that if \t{S} is not a directory
 before the start of the phase function, the initial working directory shall be \t{WORKDIR} instead.
 For EAPIs where it is a conditional error, if \t{S} is not a directory before the start of the phase
@@ -272,7 +272,7 @@ non-zero the build must be aborted.
 \featurelabel{parallel-tests} For EAPIs listed in table~\ref{tab:src-test-table} as not supporting
 parallel tests, the \t{emake} command must be called with option \t{-j1}.
 
-The \t{src\_test} function may be disabled by \t{RESTRICT}. See section~\ref{sec:restrict}. It may
+The \t{src\_test} function may be disabled by \t{RESTRICT}\@. See section~\ref{sec:restrict}. It may
 be disabled by user too, using a PM-specific mechanism.
 
 \ChangeWhenAddingAnEAPI{5}
