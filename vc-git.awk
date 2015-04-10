@@ -36,7 +36,7 @@ END {
 ### Standard encoding is UTF-8.
 				if (Encoding == "") Encoding = "UTF-8"
 ### Extract relevant information from variables.
-				LongDate = substr(AuthorDate, 1, 25)
+				LongDate = substr(CommitterDate, 1, 25)
 				DateRAW = substr(LongDate, 1, 10)
 				DateISO = DateRAW
 				DateTEX = DateISO
