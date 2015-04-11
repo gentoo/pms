@@ -167,4 +167,5 @@ needs to be updated for EAPI \TheCurrentEAPI}}}
 %%% LaTeX-indent-level: 4
 %%% LaTeX-item-indent: 0
 %%% TeX-brace-indent-level: 4
+%%% fill-column: 100
 %%% End:
