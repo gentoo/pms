@@ -32,8 +32,8 @@ This file must not contain comments, blank lines or make use of line continuatio
 A profile directory may contain an \t{eapi} file. This file, if it exists, must contain a single
 line with the name of an EAPI\@. This specifies the EAPI to use when handling the directory in
 question; a package manager must not attempt to use any profile using a directory which requires an
-EAPI it does not support. If no \t{eapi} file is present, EAPI 0 shall be used. The EAPI is not
-inherited via the \t{parent} file.
+EAPI it does not support. If no \t{eapi} file is present, EAPI 0 shall be used. The EAPI is neither
+inherited via the \t{parent} file nor in subdirectories.
 
 \subsection{deprecated}
 If a profile contains a file named \t{deprecated}, it is treated as such. The first line of this
