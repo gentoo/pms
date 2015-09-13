@@ -8,8 +8,8 @@ clean :
 maintainer-clean: clean
 	rm -f vc.tex
 
-LATEXFILES = $(shell find -name  '*.tex') pms.cls
-LISTINGFILES = $(shell ls *.listing)
+LATEXFILES := $(filter-out vc.tex,$(wildcard *.tex)) pms.cls
+LISTINGFILES := $(wildcard *.listing)
 SOURCEFILES = $(LATEXFILES) $(LISTINGFILES)
 
 pms.pdf: $(SOURCEFILES) pms.bbl vc.tex eapi-cheatsheet.pdf
@@ -20,7 +20,7 @@ pms.pdf: $(SOURCEFILES) pms.bbl vc.tex eapi-cheatsheet.pdf
 	pdflatex eapi-cheatsheet
 	pdflatex pms
 
-pms.html: $(SOURCEFILES) pms.bbl
+pms.html: $(SOURCEFILES) pms.bbl vc.tex
 	@# need to do it twice to make the big env var table work
 	mk4ht xhlatex pms xhtml,fn-in
 	mk4ht xhlatex pms xhtml,fn-in
@@ -57,7 +57,7 @@ eapi-cheatsheet-nocombine.pdf: vc.tex
 vc.tex: $(SOURCEFILES) vc-git.awk
 	/bin/sh ./vc
 
-pms.dvi: $(SOURCEFILES) pms.bbl
+pms.dvi: $(SOURCEFILES) pms.bbl vc.tex
 	latex pms
 	latex pms
 	latex pms
