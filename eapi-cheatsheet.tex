@@ -260,9 +260,9 @@ If there is no EAPI explicitly specified, EAPI 0 is assumed.
     may require dependent packages to be rebuilt.  If the sub-slot is
     not specified in \code{SLOT}, it defaults to the regular slot.
     See \featureref{sub-slot}.
-    \item[Slot operator dependencies] One of the following operators
-    can be specified after package atoms, which will affect updates
-    of runtime dependencies:
+    \item[Slot operator dependencies] Package dependencies can specify
+    one of the following operators as a suffix, which will affect
+    updates of runtime dependencies:
     \begin{description}
         \item[\code{:*}] Any slot value is acceptable.  The package
         will not break when its dependency is updated.
