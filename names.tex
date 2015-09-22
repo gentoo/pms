@@ -59,7 +59,8 @@ integer, followed by zero or more dot-prefixed positive integers).
 This may optionally be followed by one of \t{[a-z]} (a lowercase letter).
 
 This may be followed by zero or more of the suffixes \t{\_alpha}, \t{\_beta}, \t{\_pre},
-\t{\_rc} or \t{\_p}, which themselves may be suffixed by an optional integer.
+\t{\_rc} or \t{\_p}, which themselves may be followed by an optional integer. Suffix and integer
+count as separate version components.
 
 This may optionally be followed by the suffix \t{-r} followed immediately by an integer (the
 ``revision number''). If this suffix is not present, it is assumed to be \t{-r0}.

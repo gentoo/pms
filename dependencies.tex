@@ -232,10 +232,11 @@ The following operators are available:
 \begin{description}
 \item[\t{<}] Strictly less than the specified version.
 \item[\t{<=}] Less than or equal to the specified version.
-\item[\t{=}] Exactly equal to the specified version. Special exception: if the version
-    specified has an asterisk immediately following it, a string prefix comparison is
-    used instead. When an asterisk is used, the specification must remain valid if the
-    asterisk were removed. (An asterisk used with any other operator is illegal.)
+\item[\t{=}] Exactly equal to the specified version. Special exception: if the version specified
+    has an asterisk immediately following it, then only the given number of version components
+    is used for comparison, i.\,e.\ the asterisk acts as a wildcard for any further components.
+    When an asterisk is used, the specification must remain valid if the asterisk were removed.
+    (An asterisk used with any other operator is illegal.)
 \item[\t{\textasciitilde}] Equal to the specified version when revision parts are ignored.
 \item[\t{>=}] Greater than or equal to the specified version.
 \item[\t{>}] Strictly greater than the specified version.
