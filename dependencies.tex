@@ -75,14 +75,14 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 \item \featurelabel{at-most-one-of} An at-most-one-of group, which consists of the string \t{??},
     followed by whitespace, followed by an open parenthesis, followed by whitespace, followed by
     zero or more of (a dependency item of any kind followed by whitespace), followed by a close
-    parenthesis. More formally: \t{at-most-one-of ::= '??' whitespace '(' whitespace (item
+    parenthesis. More formally: \t{at-most-one-of ::= '??'\ whitespace '(' whitespace (item
     whitespace)* ')'}. Permitted in \t{REQUIRED\_USE} in EAPIs listed in
     table~\ref{tab:at-most-one-of-table} as supporting \t{REQUIRED\_USE ??}\ groups.
 \item A use-conditional group, which consists of an optional exclamation mark, followed by
     a use flag name, followed by a question mark, followed by whitespace, followed by
     an open parenthesis, followed by whitespace, followed by zero or more of (a dependency item
     of any kind followed by whitespace), followed by a close parenthesis. More formally:
-    \t{use-conditional ::= '!'? flag-name '?' whitespace '(' whitespace (item whitespace)* ')'}.
+    \t{use-conditional ::= '!'?\ flag-name '?'\ whitespace '(' whitespace (item whitespace)* ')'}.
     Permitted in all specification style variables.
 \end{compactitem}
 

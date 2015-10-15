@@ -212,10 +212,10 @@ If there is no EAPI explicitly specified, EAPI 0 is assumed.
     \begin{description}
         \item[Forbidden combination] To prevent activation of
         \code{flag1} if \code{flag2} is enabled use
-        "\code{flag2? ( !flag1 )}".
+        "\code{flag2?\ ( !flag1 )}".
         \item[OR] If at least one USE flag out of many must be
         activated on \code{flag1} use
-        "\code{flag1? ( || ( flag2 flag3 \dots\ ) )}".
+        "\code{flag1?\ ( || ( flag2 flag3 \dots\ ) )}".
         \item[XOR] To allow exactly one USE flag out of many use
         "\code{\textasciicircum\textasciicircum ( flag1 flag2 \dots\ )}".
     \end{description}
@@ -276,7 +276,7 @@ If there is no EAPI explicitly specified, EAPI 0 is assumed.
     implicitly provided by profiles.
     See \featureref{profile-iuse-inject}.
     \item[At-most-one-of groups] In \code{REQUIRED\_USE} you can use
-    "\code{?? ( flag1 flag2 \dots\ )}" to allow zero or one USE flag
+    "\code{??\ ( flag1 flag2 \dots\ )}" to allow zero or one USE flag
     out of many.
     See \featureref{at-most-one-of}.
     \item[Parallel tests] The default for \code{src\_test} runs
