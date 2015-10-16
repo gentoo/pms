@@ -646,8 +646,8 @@ in table~\ref{tab:compression-table} as supporting \t{docompress}.
 
 \subsubsection{Use List Functions}
 These functions provide behaviour based upon set or unset use flags. Ebuilds must not run any of
-these commands once the current phase function has returned. Ebuilds must not run any of these
-functions in global scope.
+these commands once the current phase function has returned. It is an error if an ebuild calls any
+of these functions in global scope.
 
 If any of these functions is called with a flag value that is not included in \t{IUSE\_EFFECTIVE},
 either behaviour is undefined or it is an error as decided by table~\ref{tab:use-list-strictness}.
