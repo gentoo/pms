@@ -21,8 +21,13 @@
 \externaldocument{pms}
 
 \title{EAPI Cheat Sheet}
-\author{Gentoo PMS team\thanks{%
-    \url{https://wiki.gentoo.org/wiki/Project:Package_Manager_Specification}}}
+\author{%
+    Christian Faulhammer \\
+    \href{mailto:fauli@gentoo.org}{fauli@gentoo.org}
+    \and
+    Ulrich Müller \\
+    \href{mailto:ulm@gentoo.org}{ulm@gentoo.org}
+}
 \ifthenelse{\equal{\VCDateISO}{}}
 {
     \date{Version \version{}, generated on: \\\today}
@@ -39,7 +44,7 @@
     citecolor=black,
     linkcolor=black,
     pdftitle={EAPI Desk Reference},
-    pdfauthor={Christian Faulhammer},
+    pdfauthor={Christian Faulhammer, Ulrich Müller},
     pdfsubject={Making look-up faster for EAPI features},
     pdflang={en},
     pdfkeywords={Gentoo, package manager, reference},
@@ -51,8 +56,9 @@
 \begin{abstract}
     An overview of the main EAPI changes in Gentoo, for ebuild
     authors.  For full details, consult the Package Manager
-    Specification found on the project page; this is
-    an incomplete summary only.
+    Specification found on the project page;\footnote{%
+    \url{https://wiki.gentoo.org/wiki/Project:Package_Manager_Specification}}
+    this is an incomplete summary only.
 
     Official Gentoo EAPIs are consecutively numbered integers (0, 1,
     2, \dots).  Except where otherwise noted, an EAPI is the same as
@@ -63,9 +69,9 @@
     % Gentoo bug tracking system\footnote{\url{https://bugs.gentoo.org/}}
     % to the original author or the PMS team.
 
-    This document is released under the Creative Commons
-    Attribution-Share Alike 3.0
-    Licence\footnote{\url{http://creativecommons.org/licenses/by-sa/3.0/}}.
+    This work is released under the Creative Commons
+    Attribution-Share Alike 3.0 Licence.%
+    \footnote{\url{http://creativecommons.org/licenses/by-sa/3.0/}}
 \end{abstract}
 
 \section{EAPIs 0, 1, and 2}
