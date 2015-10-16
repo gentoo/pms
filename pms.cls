@@ -82,6 +82,9 @@
 }
 \bibliographystyle{plainurl}
 
+% Redefine the titlepage environment not to reset the page number
+\renewenvironment{titlepage}{\newpage\thispagestyle{empty}}{\newpage}
+
 % Enumerate subsubsections, but don't include them in the toc.
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{2}
