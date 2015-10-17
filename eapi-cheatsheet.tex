@@ -14,7 +14,7 @@
 \usepackage[scaled=.90]{helvet}
 \newcommand{\code}[1]{\texttt{#1}}
 % This should reflect the latest approved EAPI version
-\newcommand{\version}{5.0}
+\newcommand{\version}{6.0}
 \newcommand{\featureref}[1]{\textsc{#1} on page~\pageref{feat:#1}}
 \renewcommand{\familydefault}{\sfdefault}
 \urlstyle{sf}
@@ -322,6 +322,77 @@ differences between these previous EAPIs.
     non-\code{stable} counterparts, but act only on packages that
     would be merged due to a stable keyword.
     See \featureref{stablemask}.
+\end{description}
+
+\section{EAPI 6}
+\label{sec:cs:eapi6}
+\subsection{Additions/Changes}
+\label{sec:cs:eapi6-additions}
+\begin{description}
+    \item[Bash version] Ebuilds can use features of Bash version 4.2
+    (was 3.2 before).
+    See \featureref{bash-version}.
+    \item[\code{failglob}] The \code{failglob} option of Bash is set
+    in global scope, so that unintentional pattern expansion will be
+    caught as an error.
+    See \featureref{failglob}.
+    \item[\code{src\_prepare}] This phase function has a default now,
+    which applies patches from the \code{PATCHES} variable with the
+    new \code{eapply} command, and user-provided patches with
+    \code{eapply\_user}.
+    See \featureref{src-prepare-6}.
+    \item[\code{src\_install}] The default implementation uses the new
+    \code{einstalldocs} function for installing documentation.
+    See \featureref{src-install-6}.
+    \item[\code{unpack} changes] \code{unpack} has been extended:
+    \begin{description}
+        \item[Pathnames] Both absolute paths and paths relative to the
+        working directory are accepted as arguments.
+        See \featureref{unpack-absolute}.
+        \item[\code{.txz} files] Suffix \code{.txz} for xz compressed
+        tarballs is recognised.
+        See \featureref{unpack-extensions}.
+        \item[Filename case] Character case of filename extensions is
+        ignored.
+        See \featureref{unpack-ignore-case}.
+    \end{description}
+    \item[\code{econf} changes] Options \code{-{}-docdir} and
+    \code{-{}-htmldir} are passed to \code{configure}, in addition to
+    the existing options.
+    See \featureref{econf-options}.
+    \item[\code{nonfatal die}] When \code{die} or \code{assert} are
+    called under the \code{nonfatal} command and with the \code{-n}
+    option, they will not abort the build process but return with an
+    error.
+    See \featureref{nonfatal-die}.
+    \item[\code{eapply}] The \code{eapply} command is a simplified
+    substitute for \code{epatch}, implemented in the package manager.
+    The patches from its file or directory arguments are applied using
+    \code{patch -p1}.
+    See \featureref{eapply}.
+    \item[\code{eapply\_user}] The \code{eapply\_user} command permits
+    the package manager to apply user-provided patches. It must be
+    called from every \code{src\_prepare} function.
+    See \featureref{eapply-user}.
+    \item[\code{einstalldocs}] The \code{einstalldocs} function will
+    install the files specified by the \code{DOCS} variable (or a
+    default set of files if \code{DOCS} is unset) and by the
+    \code{HTML\_DOCS} variable.
+    See \featureref{einstalldocs}.
+    \item[\code{in\_iuse}] The \code{in\_iuse} function returns
+    true if the USE flag given as its argument is available in the
+    ebuild for USE queries.
+    See \featureref{in-iuse}.
+    \item[\code{get\_libdir}] The \code{get\_libdir} command outputs
+    the \code{lib*} directory basename suitable for the current ABI.
+    See \featureref{get-libdir}.
+\end{description}
+\subsection{Removals/Bans}
+\label{sec:cs:eapi6-removalsbans}
+\begin{description}
+    \item[\code{einstall}] No longer allowed. Use \code{emake install}
+    as replacement.
+    See \featureref{banned-commands}.
 \end{description}
 \end{document}
 
