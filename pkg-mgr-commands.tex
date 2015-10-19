@@ -159,7 +159,8 @@ Ebuilds must not run any of these commands once the current phase function has r
     is implementation defined and beyond the scope of this specification. Package managers not
     supporting it must implement the command as a no-op. Only available in EAPIs listed in
     table~\ref{tab:patch-commands} as supporting \t{eapply\_user}. In EAPIs where it is supported,
-    \t{eapply\_user} must be called exactly once in the \t{src\_prepare} phase.
+    \t{eapply\_user} must be called once in the \t{src\_prepare} phase. For any subsequent calls
+    the command will do nothing.
 \end{description}
 
 \begin{algorithm}
