@@ -77,8 +77,13 @@
 % the page margin.
 \newcommand{\featureref}[1]{\textsc{#1} on page~\pageref{feat:#1}}
 \newcommand{\compactfeatureref}[1]{#1~p\pageref{feat:#1}}
-\newcommand{\featurelabel}[1]{\label{feat:#1}%
-    \marginnote{\framebox{\textsc{#1}}}%
+\newcommand{\featurelabel}[1]{\leavevmode\label{feat:#1}%
+    \ifthenelse{\boolean{TEX4HT-HACKS}}{%
+        % tex4ht does not support marginnote
+        \framebox{\textsc{#1}}%
+    }{%
+        \marginnote{\framebox{\textsc{#1}}}\ignorespaces
+    }%
 }
 \bibliographystyle{plainurl}
 
