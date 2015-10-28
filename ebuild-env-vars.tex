@@ -12,7 +12,14 @@ different \t{pkg\_*} phases. Ebuilds must recalculate any variable they derive f
 variable.
 
 \begin{landscape}
-\begin{longtable}{l p{0.175\textwidth} l p{0.5\textwidth}}
+\reversemarginpar
+\addtolength{\marginparsep}{-25mm}
+% Workaround for broken marginnote positioning in lscape environment
+\addtolength{\marginparsep}{-\textwidth} % FIXME
+\setlength{\LTleft}{25mm plus 1fil}
+\setlength{\LTright}{0pt plus 1fil}
+\newcolumntype{P}[1]{>{\setlength{\rightskip}{0pt plus 1fil}}p{#1}}
+\begin{longtable}{!{\extracolsep{\fill}} l P{7.5em} l p{0.5\linewidth}}
 \caption{Defined variables\label{tab:defined_vars}}\\
 \toprule
 \multicolumn{1}{c}{\b{Variable}} &
