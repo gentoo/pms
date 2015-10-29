@@ -16,6 +16,7 @@
 \PassOptionsToPackage{position=top}{caption}
 % Enable UTF-8 input encoding
 \PassOptionsToPackage{utf8}{inputenc}
+\PassOptionsToPackage{quiet}{marginnote}
 \PassOptionsToPackage{nottoc,notlot,notlof}{tocbibind}
 % algorithmic and algorithm to be loaded last to avoid failures
 \RequirePackage{%
