@@ -6,7 +6,7 @@
 
 \begin{centertable}{Dependency classes required to be satisfied for a particular phase function}
     \label{tab:phase-function-dependency-classes}
-    \begin{tabular}{ p{0.2\textwidth} p{0.7\textwidth} }
+    \begin{tabular}{P{7.5em} P{0.7\textwidth}}
       \toprule
       \multicolumn{1}{c}{\textbf{Phase function}} &
       \multicolumn{1}{c}{\textbf{Satisfied dependency classes}} \\
@@ -59,30 +59,31 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 \item An all-of group, which consists of an open parenthesis, followed by whitespace,
     followed by zero or more of (a dependency item of any kind followed by whitespace), followed
     by a close parenthesis. More formally:
-    \t{all-of ::= '(' whitespace (item whitespace)* ')'}. Permitted in all specification style
-    variables.
+    \t{all-of} \t{::=} \t{'(' whitespace (item whitespace)* ')'}. Permitted in all specification
+    style variables.
 \item An any-of group, which consists of the string \t{||}, followed by whitespace,
     followed by an open parenthesis, followed by whitespace, followed by zero or more
     of (a dependency item of any kind followed by whitespace), followed by a close parenthesis.
-    More formally: \t{any-of ::= '||' whitespace '(' whitespace (item whitespace)* ')'}.
+    More formally: \t{any-of} \t{::=} \t{'||' whitespace '(' whitespace (item whitespace)* ')'}.
     Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}, \t{LICENSE}, \t{REQUIRED\_USE}.
 \item An exactly-one-of group, which consists of the string \t{\textasciicircum\textasciicircum},
     followed by whitespace, followed by an open parenthesis, followed by whitespace, followed by
     zero or more of (a dependency item of any kind followed by whitespace), followed by a close
-    parenthesis. More formally: \t{exactly-one-of ::= '\textasciicircum\textasciicircum' whitespace
-    '(' whitespace (item whitespace)* ')'}.
+    parenthesis. More formally: \t{exactly-one-of} \t{::=} \t{'\textasciicircum\textasciicircum'
+    whitespace '(' whitespace (item whitespace)* ')'}.
     Permitted in \t{REQUIRED\_USE}.
 \item \featurelabel{at-most-one-of} An at-most-one-of group, which consists of the string \t{??},
     followed by whitespace, followed by an open parenthesis, followed by whitespace, followed by
     zero or more of (a dependency item of any kind followed by whitespace), followed by a close
-    parenthesis. More formally: \t{at-most-one-of ::= '??'\ whitespace '(' whitespace (item
-    whitespace)* ')'}. Permitted in \t{REQUIRED\_USE} in EAPIs listed in
+    parenthesis. More formally: \t{at-most-one-of} \t{::=} \t{'??'\ whitespace '(' whitespace
+    (item whitespace)* ')'}. Permitted in \t{REQUIRED\_USE} in EAPIs listed in
     table~\ref{tab:at-most-one-of-table} as supporting \t{REQUIRED\_USE ??}\ groups.
 \item A use-conditional group, which consists of an optional exclamation mark, followed by
     a use flag name, followed by a question mark, followed by whitespace, followed by
     an open parenthesis, followed by whitespace, followed by zero or more of (a dependency item
     of any kind followed by whitespace), followed by a close parenthesis. More formally:
-    \t{use-conditional ::= '!'?\ flag-name '?'\ whitespace '(' whitespace (item whitespace)* ')'}.
+    \t{use-conditional} \t{::=} \t{'!'?\ flag-name '?'\ whitespace '(' whitespace (item
+    whitespace)* ')'}.
     Permitted in all specification style variables.
 \end{compactitem}
 
