@@ -123,6 +123,9 @@
   \end{table}
 }
 
+% Define a new column type P for tables, like p but with ragged-right text
+\newcolumntype{P}[1]{>{\setlength\rightskip{0pt plus 1fil}}p{#1}}
+
 % Prevent numbers in list of tables from overrunning into the table captions
 \renewcommand*{\l@figure}{\@dottedtocline{1}{1.5em}{2.8em}} % was 2.3em
 \let\l@table\l@figure
