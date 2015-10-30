@@ -157,10 +157,12 @@ Ebuilds must not run any of these commands once the current phase function has r
 \item[eapply\_user] \featurelabel{eapply-user} Takes no arguments. Package managers supporting it
     apply user-provided patches to the source tree in the current working directory. Exact behaviour
     is implementation defined and beyond the scope of this specification. Package managers not
-    supporting it must implement the command as a no-op. Only available in EAPIs listed in
-    table~\ref{tab:patch-commands} as supporting \t{eapply\_user}. In EAPIs where it is supported,
-    \t{eapply\_user} must be called once in the \t{src\_prepare} phase. For any subsequent calls
-    the command will do nothing.
+    supporting it must implement the command as a no-op. Returns shell true (0) if patches applied
+    successfully, or if no patches were provided. Otherwise, aborts the build process, unless run
+    using \t{nonfatal}, in which case it returns non-zero exit status. Only available in EAPIs
+    listed in table~\ref{tab:patch-commands} as supporting \t{eapply\_user}. In EAPIs where it is
+    supported, \t{eapply\_user} must be called once in the \t{src\_prepare} phase. For any
+    subsequent calls, the command will do nothing and return~0.
 \end{description}
 
 \begin{algorithm}
