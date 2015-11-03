@@ -115,6 +115,8 @@ apply patches and set up the package's build system for further use.
 The initial working directory must be \t{WORKDIR}, and the default implementation used when
 the ebuild lacks the \t{src\_unpack} function shall behave as:
 
+\begin{listing}[H]
+\caption{src\_unpack} \label{lst:src-unpack}
 \begin{verbatim}
 src_unpack() {
     if [[ -n ${A} ]]; then
@@ -122,6 +124,7 @@ src_unpack() {
     fi
 }
 \end{verbatim}
+\end{listing}
 
 \subsection{src\_prepare}
 \label{sec:src-prepare-function}
@@ -164,6 +167,8 @@ section~\ref{sec:s-to-workdir-fallback}.
 The \t{src\_configure} function configures the package's build environment. The default
 implementation used when the ebuild lacks the \t{src\_configure} function shall behave as:
 
+\begin{listing}[H]
+\caption{src\_configure} \label{lst:src-configure}
 \begin{verbatim}
 src_configure() {
     if [[ -x ${ECONF_SOURCE:-.}/configure ]]; then
@@ -171,6 +176,7 @@ src_configure() {
     fi
 }
 \end{verbatim}
+\end{listing}
 
 \ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{EAPIs supporting \t{src\_configure}} \label{tab:src-configure-table}
@@ -202,6 +208,8 @@ section~\ref{sec:s-to-workdir-fallback}.
 0, the default implementation used when the ebuild lacks the \t{src\_compile} function shall behave
 as:
 
+\begin{listing}[H]
+\caption{src\_compile, format~0} \label{lst:src-compile-0}
 \begin{verbatim}
 src_compile() {
     if [[ -x ./configure ]]; then
@@ -212,11 +220,14 @@ src_compile() {
     fi
 }
 \end{verbatim}
+\end{listing}
 
 \featurelabel{src-compile-1} For EAPIs listed in table~\ref{tab:src-compile-table} as using format
 1, the default implementation used when the ebuild lacks the \t{src\_compile} function shall behave
 as:
 
+\begin{listing}[H]
+\caption{src\_compile, format~1} \label{lst:src-compile-1}
 \begin{verbatim}
 src_compile() {
     if [[ -x ${ECONF_SOURCE:-.}/configure ]]; then
@@ -227,11 +238,14 @@ src_compile() {
     fi
 }
 \end{verbatim}
+\end{listing}
 
 \featurelabel{src-compile-2} For EAPIs listed in table~\ref{tab:src-compile-table} as using format
 2, the default implementation used when the ebuild lacks the \t{src\_compile} function shall behave
 as:
 
+\begin{listing}[H]
+\caption{src\_compile, format~2} \label{lst:src-compile-2}
 \begin{verbatim}
 src_compile() {
     if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]]; then
@@ -239,6 +253,7 @@ src_compile() {
     fi
 }
 \end{verbatim}
+\end{listing}
 
 \ChangeWhenAddingAnEAPI{5}
 \begin{centertable}{\t{src\_compile} behaviour for EAPIs} \label{tab:src-compile-table}
@@ -305,6 +320,8 @@ section~\ref{sec:s-to-workdir-fallback}.
 4, the default implementation used when the ebuild lacks the \t{src\_install} function shall behave
 as:
 
+\begin{listing}[H]
+\caption{src\_install, format~4} \label{lst:src-install-4}
 \begin{verbatim}
 src_install() {
     if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]]; then
@@ -324,6 +341,7 @@ src_install() {
     fi
 }
 \end{verbatim}
+\end{listing}
 
 For other EAPIs, the default implementation used when the ebuild lacks the \t{src\_install} function
 is a no-op.
