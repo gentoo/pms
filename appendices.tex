@@ -39,8 +39,16 @@ was met, and the block after the colon would be taken if the condition was not m
 This feature was deprecated and removed from the tree long before the introduction of \t{EAPI}.
 
 \begin{listing}
-  \caption{If-else use blocks}\label{lst:if-else-use-listing}
-  \verbatiminput{if-else-use.listing}
+\caption{If-else use blocks} \label{lst:if-else-use-listing}
+\begin{verbatim}
+DEPEND="
+    flag? (
+        taken/if-true
+    ) : (
+        taken/if-false
+    )
+    "
+\end{verbatim}
 \end{listing}
 
 \section{cvs Versions}

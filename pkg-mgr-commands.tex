@@ -224,9 +224,10 @@ current phase function has returned.
     \t{D} instead of \t{ED} in the command given in Listing~\ref{lst:einstall}.
     Variable \t{libdir} is an auxiliary local variable whose value is determined by
     Algorithm~\ref{alg:ebuild-libdir}.
+
 \begin{listing}[H]
-  \caption{einstall command}\label{lst:einstall}
-  \begin{verbatim}
+\caption{einstall command} \label{lst:einstall}
+\begin{verbatim}
 emake \
    prefix="${ED}"/usr \
    datadir="${ED}"/usr/share \
@@ -238,7 +239,7 @@ emake \
    -j1 \
    "$@" \
    install
-  \end{verbatim}
+\end{verbatim}
 \end{listing}
 
 \end{description}

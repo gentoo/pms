@@ -9,10 +9,8 @@ maintainer-clean: clean
 	rm -f vc.tex
 
 LATEXFILES := $(filter-out vc.tex,$(wildcard *.tex)) pms.cls
-LISTINGFILES := $(wildcard *.listing)
-SOURCEFILES = $(LATEXFILES) $(LISTINGFILES)
 
-pms.pdf: $(SOURCEFILES) pms.bbl vc.tex eapi-cheatsheet.pdf
+pms.pdf: $(LATEXFILES) pms.bbl vc.tex eapi-cheatsheet.pdf
 	@# latex chokes on aux files produced by tex4ht, so remove them
 	if grep -q rEfLiNK pms.aux 2>/dev/null; then rm -f *.aux; fi
 	pdflatex pms
@@ -20,7 +18,7 @@ pms.pdf: $(SOURCEFILES) pms.bbl vc.tex eapi-cheatsheet.pdf
 	pdflatex eapi-cheatsheet
 	pdflatex pms
 
-pms.html: $(SOURCEFILES) pms.bbl vc.tex
+pms.html: $(LATEXFILES) pms.bbl vc.tex
 	@# need to do it twice to make the big env var table work
 	mk4ht xhlatex pms xhtml,fn-in
 	mk4ht xhlatex pms xhtml,fn-in
@@ -54,15 +52,15 @@ eapi-cheatsheet-nocombine.pdf: vc.tex
 	pdflatex -jobname eapi-cheatsheet-nocombine \
 	  '\PassOptionsToClass{nocombine}{leaflet}\input{eapi-cheatsheet.tex}'
 
-vc.tex: $(SOURCEFILES) vc-git.awk
+vc.tex: $(LATEXFILES) vc-git.awk
 	/bin/sh ./vc
 
-pms.dvi: $(SOURCEFILES) pms.bbl vc.tex
+pms.dvi: $(LATEXFILES) pms.bbl vc.tex
 	latex pms
 	latex pms
 	latex pms
 
-dist: $(SOURCEFILES) pms.bib vc vc-git.awk vc.tex Makefile
+dist: $(LATEXFILES) pms.bib vc vc-git.awk vc.tex Makefile
 	@if test -z $(PV); then \
 	  echo "Usage: $(MAKE) $@ PV=<version>"; false; \
 	fi
