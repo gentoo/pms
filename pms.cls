@@ -18,6 +18,7 @@
 \PassOptionsToPackage{utf8}{inputenc}
 \PassOptionsToPackage{quiet}{marginnote}
 \PassOptionsToPackage{nottoc,notlot,notlof}{tocbibind}
+\PassOptionsToPackage{chapter}{algorithm}
 % algorithmic and algorithm to be loaded last to avoid failures
 \RequirePackage{%
     fontenc,	% Load extended font sets
@@ -69,11 +70,12 @@
 
 % tex4ht workaround: these need to happen after loading the float package
 \g@addto@macro\@documentclasshook{
-    \floatstyle{plaintop}
+    \floatstyle{ruled}
     \newfloat{listing}{tbp}{lol}[chapter]
     \floatname{listing}{Listing}
 }
-\newcommand{\listoflistings}{\listof{listing}{Listings}}
+\newcommand{\listoflistings}{\listof{listing}{List of Listings}}
+
 % Define own label and reference commands, that display the label in
 % the page margin.
 \newcommand{\featureref}[1]{\textsc{#1} on page~\pageref{feat:#1}}
