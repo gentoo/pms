@@ -119,7 +119,6 @@
 \newenvironment{centertable}[1]%
 {
   \begin{table}
-    \ifx\mycolour\undefined\else\mycolour\fi
     \centering
     \caption{#1}
   }{
