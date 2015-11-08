@@ -231,61 +231,52 @@ variable.
 \end{longtable}
 \end{landscape}
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting various added env variables} \label{tab:added-env-vars-table}
-    \begin{tabular}{ l l l l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{\t{MERGE\_TYPE}?}} &
-        \multicolumn{1}{c}{\textbf{\t{REPLACING\_VERSIONS}?}} &
-        \multicolumn{1}{c}{\textbf{\t{REPLACED\_BY\_VERSION}?}} &
-        \multicolumn{1}{c}{\textbf{\t{EBUILD\_PHASE\_FUNC}?}} \\
-        \midrule
-    \t{0} & No & No & No & No \\
-    \t{1} & No & No & No & No \\
-    \t{2} & No & No & No & No \\
-    \t{3} & No & No & No & No \\
-    \t{4} & Yes & Yes & Yes & No \\
-    \t{5} & Yes & Yes & Yes & Yes \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting various added env variables}
+    \label{tab:added-env-vars-table}
+    \begin{tabular}{lllll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{MERGE\_TYPE}?}} &
+      \multicolumn{1}{c}{\textbf{\t{REPLACING\_VERSIONS}?}} &
+      \multicolumn{1}{c}{\textbf{\t{REPLACED\_BY\_VERSION}?}} &
+      \multicolumn{1}{c}{\textbf{\t{EBUILD\_PHASE\_FUNC}?}} \\
+      \midrule
+      0, 1, 2, 3        & No  & No  & No  & No  \\
+      4                 & Yes & Yes & Yes & No  \\
+      5, 6              & Yes & Yes & Yes & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting various removed env variables} \label{tab:removed-env-vars-table}
-    \begin{tabular}{ l l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{\t{AA}?}} &
-        \multicolumn{1}{c}{\textbf{\t{KV}?}} \\
-        \midrule
-    \t{0} & Yes & Yes \\
-    \t{1} & Yes & Yes \\
-    \t{2} & Yes & Yes \\
-    \t{3} & Yes & Yes \\
-    \t{4} & No & No \\
-    \t{5} & No & No \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting various removed env variables}
+    \label{tab:removed-env-vars-table}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{AA}?}} &
+      \multicolumn{1}{c}{\textbf{\t{KV}?}} \\
+      \midrule
+      0, 1, 2, 3        & Yes & Yes \\
+      4, 5, 6           & No  & No  \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting offset-prefix env variables}
     \label{tab:offset-env-vars-table}
-    \begin{tabular}{ l l l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{\t{EPREFIX}?}} &
-        \multicolumn{1}{c}{\textbf{\t{EROOT}?}} &
-        \multicolumn{1}{c}{\textbf{\t{ED}?}} \\
-        \midrule
-        \t{0} & No & No & No \\
-        \t{1} & No & No & No \\
-        \t{2} & No & No & No \\
-        \t{3} & Yes & Yes & Yes \\
-        \t{4} & Yes & Yes & Yes \\
-        \t{5} & Yes & Yes & Yes \\
-        \bottomrule
+    \begin{tabular}{llll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{EPREFIX}?}} &
+      \multicolumn{1}{c}{\textbf{\t{EROOT}?}} &
+      \multicolumn{1}{c}{\textbf{\t{ED}?}} \\
+      \midrule
+      0, 1, 2           & No  & No  & No  \\
+      3, 4, 5, 6        & Yes & Yes & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -385,21 +376,17 @@ contain at most one value.
 \subsection{Offset-prefix variables \t{EPREFIX}, \t{EROOT} and \t{ED}}
 \label{sec:offset-vars}
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting offset-prefix}
     \label{tab:offset-support-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports offset-prefix?}}\\
-        \midrule
-        \t{0} & No \\
-        \t{1} & No \\
-        \t{2} & No \\
-        \t{3} & Yes \\
-        \t{4} & Yes \\
-        \t{5} & Yes \\
-        \bottomrule
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports offset-prefix?}}\\
+      \midrule
+      0, 1, 2           & No  \\
+      3, 4, 5, 6        & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 

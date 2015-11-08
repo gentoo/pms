@@ -23,10 +23,8 @@ dependencies must be used to ensure their presence.
 
 The following commands must always be available in the ebuild environment:
 \begin{compactitem}
-\item All builtin commands in GNU bash, version 3.2\footnote{The required bash version was
-    retroactively updated from 3.0 to 3.2 in November 2009
-    (see \url{https://projects.gentoo.org/council/meeting-logs/20091109.txt}).%
-    \label{fn:bash3.2}}.
+\item All builtin commands in GNU bash, version as listed in table~\ref{tab:bash-version} on
+    page~\pageref{tab:bash-version}.
 \item \t{sed} must be available, and must support all forms of invocations valid for GNU sed
     version 4 or later.
 \item \t{patch} must be available, and must support all inputs valid for GNU patch.
@@ -35,20 +33,25 @@ The following commands must always be available in the ebuild environment:
     table~\ref{tab:system-commands-table} as requiring GNU find.
 \end{compactitem}
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{\t{find} implementation for EAPIs} \label{tab:system-commands-table}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{GNU \t{find}?}} \\
-            \midrule
-    \t{0} & Undefined \\
-    \t{1} & Undefined \\
-    \t{2} & Undefined \\
-    \t{3} & Undefined \\
-    \t{4} & Undefined \\
-    \t{5} & Yes \\
-    \bottomrule
+\subsubsection{Shell options}
+
+\featurelabel{failglob} For EAPIs listed such in table~\ref{tab:system-commands-table}, the
+\t{failglob} option of bash is set in the global scope of ebuilds. If set, failed pattern matches
+during filename expansion result in an error when the ebuild is being sourced.
+
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{System commands for EAPIs}
+    \label{tab:system-commands-table}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{GNU \t{find}?}} &
+      \multicolumn{1}{c}{\textbf{\t{failglob} in global scope?}} \\
+      \midrule
+      0, 1, 2, 3, 4     & Undefined & No  \\
+      5                 & Yes       & No  \\
+      6                 & Yes       & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 

@@ -44,20 +44,17 @@ fallback to \t{WORKDIR} is used:
     in \t{DEFINED\_PHASES}.
 \end{compactitem}
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs with \t{S} to \t{WORKDIR} fallbacks} \label{tab:s-fallback-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Fallback to \t{WORKDIR} permitted?}} \\
-        \midrule
-    \t{0} & Always \\
-    \t{1} & Always \\
-    \t{2} & Always \\
-    \t{3} & Always \\
-    \t{4} & Conditional error \\
-    \t{5} & Conditional error \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs with \t{S} to \t{WORKDIR} fallbacks}
+    \label{tab:s-fallback-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Fallback to \t{WORKDIR} permitted?}} \\
+      \midrule
+      0, 1, 2, 3        & Always            \\
+      4, 5, 6           & Conditional error \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -79,20 +76,17 @@ before the next phase is executed.
 
 \t{pkg\_pretend} must not write to the filesystem.
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting \t{pkg\_pretend}} \label{tab:pkg-pretend-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{pkg\_pretend}?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & Yes \\
-    \t{5} & Yes \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting \t{pkg\_pretend}}
+    \label{tab:pkg-pretend-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{pkg\_pretend}?}} \\
+      \midrule
+      0, 1, 2, 3        & No  \\
+      4, 5, 6           & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -130,28 +124,46 @@ src_unpack() {
 \label{sec:src-prepare-function}
 
 \featurelabel{src-prepare} The \t{src\_prepare} function is only called for EAPIs listed in
-table~\ref{tab:src-prepare-table} as supporting it.
-
-The \t{src\_prepare} function can be used for post-unpack source preparation. The default
-implementation does nothing.
+table~\ref{tab:src-prepare-table} as supporting it. The \t{src\_prepare} function can be used for
+post-unpack source preparation.
 
 The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR} as discussed in
 section~\ref{sec:s-to-workdir-fallback}.
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting \t{src\_prepare}} \label{tab:src-prepare-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{src\_prepare}?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & Yes \\
-    \t{3} & Yes \\
-    \t{4} & Yes \\
-    \t{5} & Yes \\
-    \bottomrule
+\featurelabel{src-prepare-6} For EAPIs listed in table~\ref{tab:src-prepare-table} as using format
+6, the default implementation used when the ebuild lacks the \t{src\_prepare} function shall behave
+as:
+
+\begin{listing}[H]
+\caption{src\_prepare, format~6} \label{lst:src-prepare-6}
+\begin{verbatim}
+src_prepare() {
+    if declare -p PATCHES | grep -q "^declare -a "; then
+        [[ -n ${PATCHES[@]} ]] && eapply "${PATCHES[@]}"
+    else
+        [[ -n ${PATCHES} ]] && eapply ${PATCHES}
+    fi
+    eapply_user
+}
+\end{verbatim}
+\end{listing}
+
+For other EAPIs supporting \t{src\_prepare}, the default implementation used when the ebuild lacks
+the \t{src\_prepare} function is a no-op.
+
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{\t{src\_prepare} support and behaviour for EAPIs}
+    \label{tab:src-prepare-table}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{src\_prepare}?}} &
+      \multicolumn{1}{c}{\textbf{Format}} \\
+      \midrule
+      0, 1              & No  & Not applicable \\
+      2, 3, 4, 5        & Yes & no-op          \\
+      6                 & Yes & 6              \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -178,20 +190,17 @@ src_configure() {
 \end{verbatim}
 \end{listing}
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting \t{src\_configure}} \label{tab:src-configure-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{src\_configure}?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & Yes \\
-    \t{3} & Yes \\
-    \t{4} & Yes \\
-    \t{5} & Yes \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting \t{src\_configure}}
+    \label{tab:src-configure-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{src\_configure}?}} \\
+      \midrule
+      0, 1              & No  \\
+      2, 3, 4, 5, 6     & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -255,20 +264,18 @@ src_compile() {
 \end{verbatim}
 \end{listing}
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{\t{src\_compile} behaviour for EAPIs} \label{tab:src-compile-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Format}} \\
-        \midrule
-    \t{0} & 0 \\
-    \t{1} & 1 \\
-    \t{2} & 2 \\
-    \t{3} & 2 \\
-    \t{4} & 2 \\
-    \t{5} & 2 \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{\t{src\_compile} behaviour for EAPIs}
+    \label{tab:src-compile-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Format}} \\
+      \midrule
+      0                 & 0 \\
+      1                 & 1 \\
+      2, 3, 4, 5, 6     & 2 \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -290,20 +297,17 @@ parallel tests, the \t{emake} command must be called with option \t{-j1}.
 The \t{src\_test} function may be disabled by \t{RESTRICT}\@. See section~\ref{sec:restrict}. It may
 be disabled by user too, using a PM-specific mechanism.
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{\t{src\_test} behaviour for EAPIs} \label{tab:src-test-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports parallel tests?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & No \\
-    \t{5} & Yes \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{\t{src\_test} behaviour for EAPIs}
+    \label{tab:src-test-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports parallel tests?}} \\
+      \midrule
+      0, 1, 2, 3, 4     & No  \\
+      5, 6              & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -343,23 +347,37 @@ src_install() {
 \end{verbatim}
 \end{listing}
 
+\featurelabel{src-install-6} For EAPIs listed in table~\ref{tab:src-install-table} as using format
+6, the default implementation used when the ebuild lacks the \t{src\_install} function shall behave
+as:
+
+\begin{listing}[H]
+\caption{src\_install, format~6} \label{lst:src-install-6}
+\begin{verbatim}
+src_install() {
+    if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]]; then
+        emake DESTDIR="${D}" install
+    fi
+    einstalldocs
+}
+\end{verbatim}
+\end{listing}
+
 For other EAPIs, the default implementation used when the ebuild lacks the \t{src\_install} function
 is a no-op.
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{\t{src\_install} behaviour for EAPIs} \label{tab:src-install-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Format}} \\
-        \midrule
-    \t{0} & no-op \\
-    \t{1} & no-op \\
-    \t{2} & no-op \\
-    \t{3} & no-op \\
-    \t{4} & 4 \\
-    \t{5} & 4 \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{\t{src\_install} behaviour for EAPIs}
+    \label{tab:src-install-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Format}} \\
+      \midrule
+      0, 1, 2, 3        & no-op \\
+      4, 5              & 4     \\
+      6                 & 6     \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -422,20 +440,17 @@ that dependencies may not be installed.
 
 \t{pkg\_info} must not write to the filesystem.
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting \t{pkg\_info} on non-installed packages} \label{tab:pkg-info-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{pkg\_info} on non-installed packages?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & Yes \\
-    \t{5} & Yes \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting \t{pkg\_info} on non-installed packages}
+    \label{tab:pkg-info-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{pkg\_info} on non-installed packages?}} \\
+      \midrule
+      0, 1, 2, 3        & No  \\
+      4, 5, 6           & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -457,24 +472,20 @@ named \t{default\_}(phase) that behaves as the default implementation for that E
 when executing any ebuild phase listed in the table. Ebuilds must not call these functions except
 when in the phase in question.
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting \t{default\_} phase functions} \label{tab:default-phase-function-table}
-    \begin{tabular}{ l >{\setlength{\rightskip}{0pt plus 1fil}}p{30em} }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{default\_} functions in phases}} \\
-            \midrule
-    \t{0} & None \\
-    \t{1} & None \\
-    \t{2} & \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
-        \t{src\_compile}, \t{src\_test} \\
-    \t{3} & \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
-        \t{src\_compile}, \t{src\_test} \\
-    \t{4} & \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
-        \t{src\_compile}, \t{src\_install}, \t{src\_test} \\
-    \t{5} & \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
-        \t{src\_compile}, \t{src\_install}, \t{src\_test} \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting \t{default\_} phase functions}
+    \label{tab:default-phase-function-table}
+    \begin{tabular}{l P{26em}}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{default\_} functions in phases}} \\
+      \midrule
+      0, 1              & None \\
+      2, 3              & \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
+                          \t{src\_compile}, \t{src\_test} \\
+      4, 5, 6           & \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
+                          \t{src\_compile}, \t{src\_install}, \t{src\_test} \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 

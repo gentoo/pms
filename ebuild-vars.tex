@@ -84,39 +84,32 @@ Ebuilds may define any of the following variables:
 \item[PDEPEND] See section~\ref{sec:dependencies}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting \t{IUSE} defaults} \label{tab:iuse-defaults-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{IUSE} defaults?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & Yes \\
-    \t{2} & Yes \\
-    \t{3} & Yes \\
-    \t{4} & Yes \\
-    \t{5} & Yes \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting \t{IUSE} defaults}
+    \label{tab:iuse-defaults-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{IUSE} defaults?}} \\
+      \midrule
+      0                 & No  \\
+      1, 2, 3, 4, 5, 6  & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting various ebuild-defined variables}
-\label{tab:optional-vars-table}
-    \begin{tabular}{ l l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{PROPERTIES}?}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{REQUIRED\_USE}?}} \\
-        \midrule
-    \t{0} & Optionally & No \\
-    \t{1} & Optionally & No \\
-    \t{2} & Optionally & No \\
-    \t{3} & Optionally & No \\
-    \t{4} & Yes & Yes \\
-    \t{5} & Yes & Yes \\
-    \bottomrule
+    \label{tab:optional-vars-table}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{PROPERTIES}?}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{REQUIRED\_USE}?}} \\
+      \midrule
+      0, 1, 2, 3        & Optionally & No  \\
+      4, 5, 6           & Yes        & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -183,20 +176,17 @@ any \t{DEPEND} or \t{RDEPEND} set in an eclass does not change the implicit \t{R
 the ebuild portion, and any \t{DEPEND} value set in an eclass does not get treated as being part of
 \t{RDEPEND}.
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs with \t{RDEPEND=DEPEND} Default} \label{tab:rdepend-depend-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{\t{RDEPEND=DEPEND}?}} \\
-        \midrule
-    \t{0} & Yes \\
-    \t{1} & Yes \\
-    \t{2} & Yes \\
-    \t{3} & Yes \\
-    \t{4} & No \\
-    \t{5} & No \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs with \t{RDEPEND=DEPEND} Default}
+    \label{tab:rdepend-depend-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{RDEPEND=DEPEND}?}} \\
+      \midrule
+      0, 1, 2, 3        & Yes \\
+      4, 5, 6           & No  \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -229,20 +219,17 @@ this variable defined, and must treat an empty string as ``this information is n
 \note Thus, by extension of section~\ref{sec:metadata-invariance}, phase functions must not be defined
 based upon any variant condition.
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting \t{DEFINED\_PHASES}} \label{tab:defined-phases-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports \t{DEFINED\_PHASES}?}} \\
-        \midrule
-    \t{0} & Optionally \\
-    \t{1} & Optionally \\
-    \t{2} & Optionally \\
-    \t{3} & Optionally \\
-    \t{4} & Yes \\
-    \t{5} & Yes \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting \t{DEFINED\_PHASES}}
+    \label{tab:defined-phases-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{DEFINED\_PHASES}?}} \\
+      \midrule
+      0, 1, 2, 3        & Optionally \\
+      4, 5, 6           & Yes        \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 

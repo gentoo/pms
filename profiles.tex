@@ -125,21 +125,17 @@ only act on packages that are merged due to a stable keyword in the sense of
 subsection~\ref{sec:keywords}. Thus, these files can be used to restrict the feature set deemed
 stable in a package.
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{Profile directory support for masking/forcing use flags in stable
-versions only}\label{tab:profile-stablemask}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports masking/forcing use flags in stable versions?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & No \\
-    \t{5} & Yes \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{Profile directory support for masking/forcing use flags in stable versions only}
+    \label{tab:profile-stablemask}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports masking/forcing use flags in stable versions?}} \\
+      \midrule
+      0, 1, 2, 3, 4     & No  \\
+      5, 6              & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 

@@ -14,15 +14,20 @@
 \usepackage[scaled=.90]{helvet}
 \newcommand{\code}[1]{\texttt{#1}}
 % This should reflect the latest approved EAPI version
-\newcommand{\version}{5.0}
+\newcommand{\version}{6.0}
 \newcommand{\featureref}[1]{\textsc{#1} on page~\pageref{feat:#1}}
 \renewcommand{\familydefault}{\sfdefault}
 \urlstyle{sf}
 \externaldocument{pms}
 
 \title{EAPI Cheat Sheet}
-\author{Gentoo PMS team\thanks{%
-    \url{https://wiki.gentoo.org/wiki/Project:Package_Manager_Specification}}}
+\author{%
+    Christian Faulhammer \\
+    \href{mailto:fauli@gentoo.org}{fauli@gentoo.org}
+    \and
+    Ulrich Müller \\
+    \href{mailto:ulm@gentoo.org}{ulm@gentoo.org}
+}
 \ifthenelse{\equal{\VCDateISO}{}}
 {
     \date{Version \version{}, generated on: \\\today}
@@ -39,7 +44,7 @@
     citecolor=black,
     linkcolor=black,
     pdftitle={EAPI Desk Reference},
-    pdfauthor={Christian Faulhammer},
+    pdfauthor={Christian Faulhammer, Ulrich Müller},
     pdfsubject={Making look-up faster for EAPI features},
     pdflang={en},
     pdfkeywords={Gentoo, package manager, reference},
@@ -51,8 +56,9 @@
 \begin{abstract}
     An overview of the main EAPI changes in Gentoo, for ebuild
     authors.  For full details, consult the Package Manager
-    Specification found on the project page; this is
-    an incomplete summary only.
+    Specification found on the project page;\footnote{%
+    \url{https://wiki.gentoo.org/wiki/Project:Package_Manager_Specification}}
+    this is an incomplete summary only.
 
     Official Gentoo EAPIs are consecutively numbered integers (0, 1,
     2, \dots).  Except where otherwise noted, an EAPI is the same as
@@ -63,86 +69,88 @@
     % Gentoo bug tracking system\footnote{\url{https://bugs.gentoo.org/}}
     % to the original author or the PMS team.
 
-    This document is released under the Creative Commons
-    Attribution-Share Alike 3.0
-    Licence\footnote{\url{http://creativecommons.org/licenses/by-sa/3.0/}}.
+    This work is released under the Creative Commons
+    Attribution-Share Alike 3.0 Licence.%
+    \footnote{\url{http://creativecommons.org/licenses/by-sa/3.0/}}
 \end{abstract}
-\section{EAPI 0}
-\label{sec:cs:eapi0}
-If there is no EAPI explicitly specified, EAPI 0 is assumed.
-% Currently there is no full specification what EAPI 0 includes.
-% Portage, official ebuild documentation and existing ebuilds set the
-% standard.  If you think you found a bug, you should file a bug report
-% nonetheless.
 
-\section{EAPI 1}
-\label{sec:cs:eapi1}
-\subsection{Additions/Changes}
-\label{sec:cs:eapi1-additions}
-\begin{description}
-    \item[IUSE defaults] A USE flag can be marked as mandatory (if
-    not disabled explicitly by user configuration) with a \code{+}
-    sign in front.  See \featureref{iuse-defaults}.
-    \item[Named slot dependencies] Dependencies can explicitly request
-    a specific slot by using the
-    \code{dev-libs/foo:}\allowbreak\emph{SLOT\_name} syntax.
-    See \featureref{slot-deps}.
-\end{description}
+\section{EAPIs 0, 1, and 2}
+\label{sec:cs:eapi0-2}
+Omitted for lack of space. See version~5.0 of this document for
+differences between these previous EAPIs.
 
-\section{EAPI 2 (2008-09-25)}
-\label{sec:cs:eapi2}
-\subsection{Additions/Changes}
-\label{sec:cs:eapi2-additions}
-\begin{description}
-    \item[\code{SRC\_URI} arrows] Allows redirection of upstream file
-    naming scheme.  By using
-    \code{SRC\_URI="http:/\slash some\slash url -> foo"} the file is
-    saved as \code{foo} in DISTDIR\@.
-    See \featureref{src-uri-arrows}.
-    \item[USE dependencies] Dependencies can specify USE flag
-    requirements on their target, removing the need for
-    \code{built\_with\_use} checks.
-    \begin{description}
-        \item[{[opt]}] The flag must be enabled.
-        \item[{[opt=]}] The flag must be enabled if it is
-        enabled for the package with the dependency, or disabled
-        otherwise.
-        \item[{[!opt=]}] The flag must be disabled if it is
-        enabled for the package with the dependency, or enabled
-        otherwise.
-        \item[{[opt?]}] The flag must be enabled if it is
-        enabled for the package with the dependency.
-        \item[{[!opt?]}] The flag must be disabled if it is
-        disabled for the package with the dependency.
-        \item[{[-opt]}] The flag must be disabled.
-    \end{description}
-    See \featureref{use-deps}.
-    \item[Blocker syntax] A single exclamation mark as a blocker may
-    be ignored by the package manager as long as the stated package is
-    uninstalled later on.  Two exclamation marks are a strong blocker
-    and will always be respected.  See \featureref{bang-strength}.
-    \item[\code{src\_configure, src\_prepare}] Both new phases provide
-    finer granularity in the ebuild's structure.  Configure calls
-    should be moved from \code{src\_compile} to \code{src\_configure}.
-    Patching and similar preparation must now be done in
-    \code{src\_prepare}, not \code{src\_unpack}.  See
-    \featureref{src-prepare} and \featureref{src-configure}.
-    \item[Default phase functions] The default functions for
-    phases \code{pkg\_nofetch}, \code{src\_unpack},
-    \code{src\_prepare}, \code{src\_configure}, \code{src\_compile}
-    and \code{src\_test} can be called via
-    \code{default\_}\emph{phasename}, so duplicating the standard
-    implementation is no longer necessary for small additions.  The
-    short-hand \code{default} function calls the current phase's
-    \code{default\_} function automatically, so any small additions
-    you need will not be accompanied by a complete reimplementation of
-    the phase.  See \featureref{default-phase-funcs} and
-    \featureref{default-func}.
-    \item[\code{doman} language support] The \code{doman} installation
-    function recognizes language specific man page extensions and
-    behaves accordingly.  This behaviour can be inhibited by the
-    \code{-i18n} switch with EAPI 4.  See \featureref{doman-langs}.
-\end{description}
+% \section{EAPI 0}
+% \label{sec:cs:eapi0}
+% If there is no EAPI explicitly specified, EAPI 0 is assumed.
+
+% \section{EAPI 1}
+% \label{sec:cs:eapi1}
+% \subsection{Additions/Changes}
+% \label{sec:cs:eapi1-additions}
+% \begin{description}
+%     \item[IUSE defaults] A USE flag can be marked as mandatory (if
+%     not disabled explicitly by user configuration) with a \code{+}
+%     sign in front.  See \featureref{iuse-defaults}.
+%     \item[Named slot dependencies] Dependencies can explicitly request
+%     a specific slot by using the
+%     \code{dev-libs/foo:}\allowbreak\emph{SLOT\_name} syntax.
+%     See \featureref{slot-deps}.
+% \end{description}
+
+% \section{EAPI 2 (2008-09-25)}
+% \label{sec:cs:eapi2}
+% \subsection{Additions/Changes}
+% \label{sec:cs:eapi2-additions}
+% \begin{description}
+%     \item[\code{SRC\_URI} arrows] Allows redirection of upstream file
+%     naming scheme.  By using
+%     \code{SRC\_URI="http:/\slash some\slash url -> foo"} the file is
+%     saved as \code{foo} in DISTDIR\@.
+%     See \featureref{src-uri-arrows}.
+%     \item[USE dependencies] Dependencies can specify USE flag
+%     requirements on their target, removing the need for
+%     \code{built\_with\_use} checks.
+%     \begin{description}
+%         \item[{[opt]}] The flag must be enabled.
+%         \item[{[opt=]}] The flag must be enabled if it is
+%         enabled for the package with the dependency, or disabled
+%         otherwise.
+%         \item[{[!opt=]}] The flag must be disabled if it is
+%         enabled for the package with the dependency, or enabled
+%         otherwise.
+%         \item[{[opt?]}] The flag must be enabled if it is
+%         enabled for the package with the dependency.
+%         \item[{[!opt?]}] The flag must be disabled if it is
+%         disabled for the package with the dependency.
+%         \item[{[-opt]}] The flag must be disabled.
+%     \end{description}
+%     See \featureref{use-deps}.
+%     \item[Blocker syntax] A single exclamation mark as a blocker may
+%     be ignored by the package manager as long as the stated package is
+%     uninstalled later on.  Two exclamation marks are a strong blocker
+%     and will always be respected.  See \featureref{bang-strength}.
+%     \item[\code{src\_configure, src\_prepare}] Both new phases provide
+%     finer granularity in the ebuild's structure.  Configure calls
+%     should be moved from \code{src\_compile} to \code{src\_configure}.
+%     Patching and similar preparation must now be done in
+%     \code{src\_prepare}, not \code{src\_unpack}.  See
+%     \featureref{src-prepare} and \featureref{src-configure}.
+%     \item[Default phase functions] The default functions for
+%     phases \code{pkg\_nofetch}, \code{src\_unpack},
+%     \code{src\_prepare}, \code{src\_configure}, \code{src\_compile}
+%     and \code{src\_test} can be called via
+%     \code{default\_}\emph{phasename}, so duplicating the standard
+%     implementation is no longer necessary for small additions.  The
+%     short-hand \code{default} function calls the current phase's
+%     \code{default\_} function automatically, so any small additions
+%     you need will not be accompanied by a complete reimplementation of
+%     the phase.  See \featureref{default-phase-funcs} and
+%     \featureref{default-func}.
+%     \item[\code{doman} language support] The \code{doman} installation
+%     function recognizes language specific man page extensions and
+%     behaves accordingly.  This behaviour can be inhibited by the
+%     \code{-i18n} switch with EAPI 4.  See \featureref{doman-langs}.
+% \end{description}
 
 \section{EAPI 3 (2010-01-18)}
 \label{sec:cs:eapi3}
@@ -191,17 +199,17 @@ If there is no EAPI explicitly specified, EAPI 0 is assumed.
     adds paths to the inclusion list for compression.
     \code{docompress -x path \dots} adds paths to the exclusion list.
     See \featureref{docompress}.
+    \item[\code{nonfatal} for commands] If you call \code{nonfatal}
+    the command given as argument will not abort the build process in
+    case of a failure (as is the default) but will return non-zero on
+    failure.
+    See \featureref{nonfatal}.
     \item[\code{dodoc} recursion] If the \code{-r} switch is given as
     first argument and followed by directories, files from there are
     installed recursively.  See \featureref{dodoc}.
     \item[\code{doins} symlink support] Symbolic links are now
     properly installed when using recursion (\code{-r} switch).
     See \featureref{doins}.
-    \item[\code{nonfatal} for commands] If you call \code{nonfatal}
-    the command given as argument will not abort the build process in
-    case of a failure (as is the default) but will return non-zero on
-    failure.
-    See \featureref{nonfatal}.
     \item[\code{PROPERTIES}] Is mandatory for all package managers now
     to support interactive installs.
     \item[\code{REQUIRED\_USE}] This variable can be used similar to
@@ -209,7 +217,7 @@ If there is no EAPI explicitly specified, EAPI 0 is assumed.
     combinations that are not allowed.  All elements can be further
     nested to achieve more functionality.
     \begin{description}
-        \item[Forbidden combination] To prevent activation of
+        \item[Illegal combination] To prevent activation of
         \code{flag1} if \code{flag2} is enabled use
         "\code{flag2?\ ( !flag1 )}".
         \item[OR] If at least one USE flag out of many must be
@@ -314,6 +322,77 @@ If there is no EAPI explicitly specified, EAPI 0 is assumed.
     non-\code{stable} counterparts, but act only on packages that
     would be merged due to a stable keyword.
     See \featureref{stablemask}.
+\end{description}
+
+\section{EAPI 6 (2015-11-08)}
+\label{sec:cs:eapi6}
+\subsection{Additions/Changes}
+\label{sec:cs:eapi6-additions}
+\begin{description}
+    \item[Bash version] Ebuilds can use features of Bash version 4.2
+    (was 3.2 before).
+    See \featureref{bash-version}.
+    \item[\code{failglob}] The \code{failglob} option of Bash is set
+    in global scope, so that unintentional pattern expansion will be
+    caught as an error.
+    See \featureref{failglob}.
+    \item[\code{src\_prepare}] This phase function has a default now,
+    which applies patches from the \code{PATCHES} variable with the
+    new \code{eapply} command, and user-provided patches with
+    \code{eapply\_user}.
+    See \featureref{src-prepare-6}.
+    \item[\code{src\_install}] The default implementation uses the new
+    \code{einstalldocs} function for installing documentation.
+    See \featureref{src-install-6}.
+    \item[\code{unpack} changes] \code{unpack} has been extended:
+    \begin{description}
+        \item[Pathnames] Both absolute paths and paths relative to the
+        working directory are accepted as arguments.
+        See \featureref{unpack-absolute}.
+        \item[\code{.txz} files] Suffix \code{.txz} for xz compressed
+        tarballs is recognised.
+        See \featureref{unpack-extensions}.
+        \item[Filename case] Character case of filename extensions is
+        ignored.
+        See \featureref{unpack-ignore-case}.
+    \end{description}
+    \item[\code{econf} changes] Options \code{-{}-docdir} and
+    \code{-{}-htmldir} are passed to \code{configure}, in addition to
+    the existing options.
+    See \featureref{econf-options}.
+    \item[\code{nonfatal die}] When \code{die} or \code{assert} are
+    called under the \code{nonfatal} command and with the \code{-n}
+    option, they will not abort the build process but return with an
+    error.
+    See \featureref{nonfatal-die}.
+    \item[\code{eapply}] The \code{eapply} command is a simplified
+    substitute for \code{epatch}, implemented in the package manager.
+    The patches from its file or directory arguments are applied using
+    \code{patch -p1}.
+    See \featureref{eapply}.
+    \item[\code{eapply\_user}] The \code{eapply\_user} command permits
+    the package manager to apply user-provided patches. It must be
+    called from every \code{src\_prepare} function.
+    See \featureref{eapply-user}.
+    \item[\code{einstalldocs}] The \code{einstalldocs} function will
+    install the files specified by the \code{DOCS} variable (or a
+    default set of files if \code{DOCS} is unset) and by the
+    \code{HTML\_DOCS} variable.
+    See \featureref{einstalldocs}.
+    \item[\code{in\_iuse}] The \code{in\_iuse} function returns
+    true if the USE flag given as its argument is available in the
+    ebuild for USE queries.
+    See \featureref{in-iuse}.
+    \item[\code{get\_libdir}] The \code{get\_libdir} command outputs
+    the \code{lib*} directory basename suitable for the current ABI.
+    See \featureref{get-libdir}.
+\end{description}
+\subsection{Removals/Bans}
+\label{sec:cs:eapi6-removalsbans}
+\begin{description}
+    \item[\code{einstall}] No longer allowed. Use \code{emake install}
+    as replacement.
+    See \featureref{banned-commands}.
 \end{description}
 \end{document}
 

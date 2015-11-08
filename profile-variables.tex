@@ -33,20 +33,17 @@ Other variables, except where they affect only package-manager-specific function
 Portage's \t{FEATURES} variable), must not be treated incrementally---later definitions shall
 completely override those in parent profiles.
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{Profile-defined \t{IUSE} injection for EAPIs} \label{tab:profile-iuse-injection-table}
-    \begin{tabular}{ l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{1}{c}{\textbf{Supports profile-defined \t{IUSE} injection?}} \\
-        \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & No \\
-    \t{5} & Yes \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{Profile-defined \t{IUSE} injection for EAPIs}
+    \label{tab:profile-iuse-injection-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports profile-defined \t{IUSE} injection?}} \\
+      \midrule
+      0, 1, 2, 3, 4     & No  \\
+      5, 6              & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 

@@ -1,12 +1,30 @@
 \chapter{Ebuild File Format}
 \label{sec:ebuild-format}
 
-The ebuild file format is in its basic form a subset of the format of a bash script. The interpreter
-is assumed to be GNU bash, version 3.2 or later, see footnote~\ref{fn:bash3.2} on
-page~\pageref{fn:bash3.2}. The file encoding must be UTF-8 with Unix-style newlines. When sourced,
-the ebuild must define certain variables and functions (see sections~\ref{sec:ebuild-vars}
-and~\ref{sec:ebuild-functions} for specific information), and must not call any external programs,
-write anything to standard output or standard error, or modify the state of the system in any way.
+\featurelabel{bash-version} The ebuild file format is in its basic form a subset of the format of
+a bash script. The interpreter is assumed to be GNU bash, version as listed in
+table~\ref{tab:bash-version}, or any later version. If possible, the package manager should set
+the shell's compatibility level to the exact version specified. It must ensure that any such
+compatibility settings (e.g. the \t{BASH\_COMPAT} variable) are not exported to external programs.
+
+The file encoding must be UTF-8 with Unix-style newlines. When sourced, the ebuild must define
+certain variables and functions (see sections~\ref{sec:ebuild-vars} and~\ref{sec:ebuild-functions}
+for specific information), and must not call any external programs, write anything to standard
+output or standard error, or modify the state of the system in any way.
+
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{Bash version}
+    \label{tab:bash-version}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Bash version}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5  & 3.2 \\
+      6                 & 4.2 \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 

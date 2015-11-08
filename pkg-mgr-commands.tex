@@ -18,26 +18,25 @@ The following commands affect this behaviour:
 \begin{description}
 \item[nonfatal] \featurelabel{nonfatal} Executes the remainder of its arguments as a command,
     preserving the exit status. If this results in a command being called that would normally abort
-    the build process due to a failure (but not due to an explicit \t{die} or \t{assert} call),
-    instead a non-zero exit status shall be returned. Only in EAPIs listed in
-    table~\ref{tab:commands-die-table} as supporting \t{nonfatal}.
+    the build process due to a failure, instead a non-zero exit status shall be returned. Only in
+    EAPIs listed in table~\ref{tab:commands-die-table} as supporting \t{nonfatal}.
+
+    Explicit \t{die} or \t{assert} commands only respect \t{nonfatal} when called with the \t{-n}
+    option and in EAPIs supporting this option, see table~\ref{tab:nonfatal-die}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPI Command Failure Behaviour} \label{tab:commands-die-table}
-    \begin{tabular}{ l l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Command failure behaviour}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{nonfatal}?}} \\
-            \midrule
-    \t{0} & Non-zero exit & No \\
-    \t{1} & Non-zero exit & No \\
-    \t{2} & Non-zero exit & No \\
-    \t{3} & Non-zero exit & No \\
-    \t{4} & Aborts & Yes \\
-    \t{5} & Aborts & Yes \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPI Command Failure Behaviour}
+    \label{tab:commands-die-table}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Command failure behaviour}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{nonfatal}?}} \\
+      \midrule
+      0, 1, 2, 3        & Non-zero exit & No  \\
+      4, 5, 6           & Aborts        & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -47,23 +46,22 @@ The following commands affect this behaviour:
 \featurelabel{banned-commands} Some commands are banned in some EAPIs. If a banned command is
 called, the package manager must abort the build process indicating an error.
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{Banned commands} \label{tab:banned-commands-table}
-    \begin{tabular}{ l l l }
-        \toprule
-        \multicolumn{1}{c}{\textbf{EAPI}} &
-        \multicolumn{2}{c}{\textbf{Command banned?}} \\
-        \multicolumn{1}{c}{} &
-        \multicolumn{1}{c}{\textbf{\t{dohard}}} &
-        \multicolumn{1}{c}{\textbf{\t{dosed}}} \\
-        \midrule
-    \t{0} & No & No \\
-    \t{1} & No & No \\
-    \t{2} & No & No \\
-    \t{3} & No & No \\
-    \t{4} & Yes & Yes \\
-    \t{5} & Yes & Yes \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{Banned commands}
+    \label{tab:banned-commands-table}
+    \begin{tabular}{llll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{3}{c}{\textbf{Command banned?}} \\
+      \multicolumn{1}{c}{} &
+      \multicolumn{1}{c}{\textbf{\t{dohard}}} &
+      \multicolumn{1}{c}{\textbf{\t{dosed}}} &
+      \multicolumn{1}{c}{\textbf{\t{einstall}}} \\
+      \midrule
+      0, 1, 2, 3        & No  & No  & No  \\
+      4, 5              & Yes & Yes & No  \\
+      6                 & Yes & Yes & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -121,12 +119,103 @@ stderr or some other appropriate facility.
 These commands are used when an error is detected that will prevent the build process from
 completing. Ebuilds must not run any of these commands once the current phase function has returned.
 \begin{description}
-\item[die] Displays a failure message provided in its first and only argument, and then aborts the
-    build process. \t{die} is \e{not} guaranteed to work correctly if called from a subshell
-    environment.
+\item[die] \featurelabel{nonfatal-die} If called under the \t{nonfatal} command (as per
+    section~\ref{sec:failure-behaviour}) and with \t{-n} as its first parameter, displays a failure
+    message provided in its following argument and then returns a non-zero exit status. Only in
+    EAPIs listed in table~\ref{tab:nonfatal-die} as supporting option~\t{-n}. Otherwise, displays
+    a failure message provided in its first and only argument, and then aborts the build process.
+    \t{die} is \e{not} guaranteed to work correctly if called from a subshell environment.
 \item[assert] Checks the value of the shell's pipe status variable, and if any component is non-zero
-    (indicating failure), calls \t{die} with its first argument as a failure message.
+    (indicating failure), calls \t{die}, passing any parameters to it.
 \end{description}
+
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting \t{-n} for \t{die} and \t{assert} commands}
+    \label{tab:nonfatal-die}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{die} and \t{assert} support \t{-n}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5  & No  \\
+      6                 & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\subsubsection{Patch commands}
+These commands are used during the \t{src\_prepare} phase to apply patches to the package's sources.
+Ebuilds must not run any of these commands once the current phase function has returned.
+
+\begin{description}
+\item[eapply] \featurelabel{eapply} Takes zero or more GNU patch options, followed by one or more
+    file or directory paths. Processes options and applies all patches found in specified locations
+    according to Algorithm~\ref{alg:eapply}. If applying the patches fails, it aborts the build
+    using \t{die}, unless run using \t{nonfatal}, in which case it returns non-zero exit status.
+    Only available in EAPIs listed in table~\ref{tab:patch-commands} as supporting \t{eapply}.
+
+\item[eapply\_user] \featurelabel{eapply-user} Takes no arguments. Package managers supporting it
+    apply user-provided patches to the source tree in the current working directory. Exact behaviour
+    is implementation defined and beyond the scope of this specification. Package managers not
+    supporting it must implement the command as a no-op. Returns shell true (0) if patches applied
+    successfully, or if no patches were provided. Otherwise, aborts the build process, unless run
+    using \t{nonfatal}, in which case it returns non-zero exit status. Only available in EAPIs
+    listed in table~\ref{tab:patch-commands} as supporting \t{eapply\_user}. In EAPIs where it is
+    supported, \t{eapply\_user} must be called once in the \t{src\_prepare} phase. For any
+    subsequent calls, the command will do nothing and return~0.
+\end{description}
+
+\begin{algorithm}
+\caption{eapply logic} \label{alg:eapply}
+\begin{algorithmic}[1]
+\IF{any parameter is equal to \t{"-{}-"}}
+    \STATE collect all parameters before the first \t{"-{}-"} in the \t{options} array
+    \STATE collect all parameters after the first \t{"-{}-"} in the \t{files} array
+\ELSIF{any parameter that begins with a hyphen follows one that does not}
+    \STATE abort the build process with an error
+\ELSE
+    \STATE collect all parameters beginning with a hyphen in the \t{options} array
+    \STATE collect all remaining parameters in the \t{files} array
+\ENDIF
+\IF{the \t{files} array is empty}
+    \STATE abort the build process with an error
+\ENDIF
+\FORALL{\t{x} in the \t{files} array}
+    \IF{\t{\$x} is a directory}
+        \IF{\NOT any files match \t{\$x/*.diff} or \t{\$x/*.patch}}
+            \STATE abort the build process with an error
+        \ENDIF
+        \FORALL{files \t{f} matching \t{\$x/*.diff} or \t{\$x/*.patch}, sorted in POSIX locale}
+            \STATE call \t{patch -p1 -f -g0 -{}-no-backup-if-mismatch "\$\{options[@]\}" < "\$f"}
+            \IF{child process returned with non-zero exit status}
+                \RETURN immediately with that status
+            \ENDIF
+        \ENDFOR
+    \ELSE
+        \STATE call \t{patch -p1 -f -g0 -{}-no-backup-if-mismatch "\$\{options[@]\}" < "\$x"}
+        \IF{child process returned with non-zero exit status}
+            \RETURN immediately with that status
+        \ENDIF
+    \ENDIF
+\ENDFOR
+\RETURN shell true (0)
+\end{algorithmic}
+\end{algorithm}
+
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{Patch commands for EAPIs}
+    \label{tab:patch-commands}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{eapply}?}} &
+      \multicolumn{1}{c}{\textbf{\t{eapply\_user}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5  & No  & No  \\
+      6                 & Yes & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \subsubsection{Build commands}
 These commands are used during the \t{src\_configure}, \t{src\_compile}, and \t{src\_install}
@@ -149,6 +238,12 @@ current phase function has returned.
     \item -{}-datadir must be \t{\$\{EPREFIX\}/usr/share}
     \item -{}-sysconfdir must be \t{\$\{EPREFIX\}/etc}
     \item -{}-localstatedir must be \t{\$\{EPREFIX\}/var/lib}
+    \item -{}-docdir must be \t{\$\{EPREFIX\}/usr/share/doc/\$\{PF\}}, if the EAPI is listed in
+        table~\ref{tab:econf-options-table} as using it. This option will only be passed if the
+        string \t{-{}-docdir} occurs in the output of \t{configure -{}-help}.
+    \item -{}-htmldir must be \t{\$\{EPREFIX\}/usr/share/doc/\$\{PF\}/html}, if the EAPI is listed
+        in table~\ref{tab:econf-options-table} as using it. This option will only be passed if the
+        string \t{-{}-htmldir} occurs in the output of \t{configure -{}-help}.
     \item -{}-host must be the value of the \t{CHOST} environment variable.
     \item -{}-libdir must be set according to Algorithm~\ref{alg:econf-libdir}.
     \item -{}-disable-dependency-tracking, if the EAPI is listed in
@@ -159,21 +254,22 @@ current phase function has returned.
         in the output of \t{configure -{}-help}.
     \end{itemize}
 
-    \ChangeWhenAddingAnEAPI{5}
-    \begin{centertable}{Extra \t{econf} arguments for EAPIs} \label{tab:econf-options-table}
-        \begin{tabular}{ l l l }
-            \toprule
-                \multicolumn{1}{c}{\textbf{EAPI}} &
-                \multicolumn{1}{c}{\textbf{-{}-disable-dependency-tracking}?} &
-                \multicolumn{1}{c}{\textbf{-{}-disable-silent-rules}?} \\
-                \midrule
-        \t{0} & No & No \\
-        \t{1} & No & No \\
-        \t{2} & No & No \\
-        \t{3} & No & No \\
-        \t{4} & Yes & No \\
-        \t{5} & Yes & Yes \\
-        \bottomrule
+    \ChangeWhenAddingAnEAPI{6}
+    \begin{centertable}{Extra \t{econf} arguments for EAPIs}
+        \label{tab:econf-options-table}
+        \begin{tabular}{lllll}
+          \toprule
+          \multicolumn{1}{c}{\textbf{EAPI}} &
+          \multicolumn{1}{c}{\textbf{-{}-disable-dependency-tracking}} &
+          \multicolumn{1}{c}{\textbf{-{}-disable-silent-rules}} &
+          \multicolumn{1}{c}{\textbf{-{}-docdir}} &
+          \multicolumn{1}{c}{\textbf{-{}-htmldir}} \\
+          \midrule
+          0, 1, 2, 3        & No  & No  & No  & No  \\
+          4                 & Yes & No  & No  & No  \\
+          5                 & Yes & Yes & No  & No  \\
+          6                 & Yes & Yes & Yes & Yes \\
+          \bottomrule
         \end{tabular}
     \end{centertable}
 
@@ -216,6 +312,8 @@ current phase function has returned.
 \item[einstall] A shortcut for the command given in Listing~\ref{lst:einstall}. Any arguments given
     to \t{einstall} are passed verbatim to \t{emake}, as shown. Failure behaviour is EAPI dependent
     as per section~\ref{sec:failure-behaviour}.
+    In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as per
+    section~\ref{sec:banned-commands}.
 
     The variable \t{ED} is defined as in Table~\ref{tab:defined_vars} and depends on the use of an
     offset-prefix. When such offset-prefix is absent, \t{ED} is equivalent to \t{D}\@. \t{ED} is
@@ -437,108 +535,89 @@ can be extended or reduced (see below). The options that can be passed to \t{doh
 
 \end{description}
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting \t{dodoc -r}} \label{tab:dodoc-table}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{dodoc -r}?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & Yes \\
-    \t{5} & Yes \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting \t{dodoc -r}}
+    \label{tab:dodoc-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{dodoc -r}?}} \\
+      \midrule
+      0, 1, 2, 3        & No  \\
+      4, 5, 6           & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting \t{doheader} and \t{newheader}} \label{tab:doheader-table}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{doheader} and \t{newheader}?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & No \\
-    \t{5} & Yes \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting \t{doheader} and \t{newheader}}
+    \label{tab:doheader-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{doheader} and \t{newheader}?}} \\
+      \midrule
+      0, 1, 2, 3, 4     & No  \\
+      5, 6              & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting symlinks for \t{doins}} \label{tab:doins-table}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{\t{doins} supports symlinks?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & Yes \\
-    \t{5} & Yes \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting symlinks for \t{doins}}
+    \label{tab:doins-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{doins} supports symlinks?}} \\
+      \midrule
+      0, 1, 2, 3        & No  \\
+      4, 5, 6           & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{\t{doman} language support options for EAPIs}
     \label{tab:doman-table}
-    \begin{tabular}{ l l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Language detection by filename?}} &
-            \multicolumn{1}{c}{\textbf{Option \t{-i18n} takes precedence?}} \\
-            \midrule
-    \t{0} & No & Not applicable \\
-    \t{1} & No & Not applicable \\
-    \t{2} & Yes & No \\
-    \t{3} & Yes & No \\
-    \t{4} & Yes & Yes \\
-    \t{5} & Yes & Yes \\
-    \bottomrule
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Language detection by filename?}} &
+      \multicolumn{1}{c}{\textbf{Option \t{-i18n} takes precedence?}} \\
+      \midrule
+      0, 1              & No  & Not applicable \\
+      2, 3              & Yes & No             \\
+      4, 5, 6           & Yes & Yes            \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting stdin for \t{new*} commands} \label{tab:newfoo-stdin-table}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{\t{new*} can read from stdin?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & No \\
-    \t{5} & Yes \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting stdin for \t{new*} commands}
+    \label{tab:newfoo-stdin-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{new*} can read from stdin?}} \\
+      \midrule
+      0, 1, 2, 3, 4     & No  \\
+      5, 6              & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting \t{-{}-host-root} for \t{*\_version} commands}
     \label{tab:foo-version-host-root-table}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{\t{*\_version} supports \t{-{}-host-root}?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & No \\
-    \t{5} & Yes \\
-    \bottomrule
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{*\_version} supports \t{-{}-host-root}?}} \\
+      \midrule
+      0, 1, 2, 3, 4     & No  \\
+      5, 6              & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -627,21 +706,18 @@ exclusion list. Otherwise, add each argument to the inclusion list. Only availab
 in table~\ref{tab:compression-table} as supporting \t{docompress}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting controllable compression} \label{tab:compression-table}
-    \begin{tabular}{ l l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports controllable compression?}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{docompress}?}} \\
-            \midrule
-    \t{0} & No & No \\
-    \t{1} & No & No \\
-    \t{2} & No & No \\
-    \t{3} & No & No \\
-    \t{4} & Yes & Yes \\
-    \t{5} & Yes & Yes \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting controllable compression}
+    \label{tab:compression-table}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports controllable compression?}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{docompress}?}} \\
+      \midrule
+      0, 1, 2, 3        & No  & No  \\
+      4, 5, 6           & Yes & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -650,8 +726,9 @@ These functions provide behaviour based upon set or unset use flags. Ebuilds mus
 these commands once the current phase function has returned. It is an error if an ebuild calls any
 of these functions in global scope.
 
-If any of these functions is called with a flag value that is not included in \t{IUSE\_EFFECTIVE},
-either behaviour is undefined or it is an error as decided by table~\ref{tab:use-list-strictness}.
+Unless otherwise noted, if any of these functions is called with a flag value that is not included
+in \t{IUSE\_EFFECTIVE}, either behaviour is undefined or it is an error as decided by
+table~\ref{tab:use-list-strictness}.
 
 \begin{description}
 \item[use] Returns shell true (0) if the first argument (a \t{USE} flag name) is enabled, false
@@ -676,58 +753,53 @@ either behaviour is undefined or it is an error as decided by table~\ref{tab:use
     respectively; \t{\$\{arg4\}} and \t{\$\{arg5\}} default to the empty string. If the USE flag is
     set, outputs \t{\$\{arg2\}\$\{arg4\}}. Otherwise, outputs \t{\$\{arg3\}\$\{arg5\}}.
     The condition is inverted if the flag name is prefixed with~\t{!}.
-    Only available in EAPIs listed in table~\ref{tab:usex-table} as supporting \t{usex}.
+    Only available in EAPIs listed in table~\ref{tab:use-list-functions} as supporting \t{usex}.
+\item[in\_iuse] \featurelabel{in-iuse} Returns shell true (0) if the first argument (a \t{USE} flag
+    name) is included in \t{IUSE\_EFFECTIVE}, false otherwise. Only available in EAPIs listed in
+    table~\ref{tab:use-list-functions} as supporting \t{in\_iuse}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPI Behaviour for Use Queries not in IUSE\_EFFECTIVE} \label{tab:use-list-strictness}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Behaviour}} \\
-            \midrule
-    \t{0} & Undefined \\
-    \t{1} & Undefined  \\
-    \t{2} & Undefined \\
-    \t{3} & Undefined \\
-    \t{4} & Error \\
-    \t{5} & Error \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPI Behaviour for Use Queries not in IUSE\_EFFECTIVE}
+    \label{tab:use-list-strictness}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Behaviour}} \\
+      \midrule
+      0, 1, 2, 3        & Undefined \\
+      4, 5, 6           & Error     \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{5}
+\ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting empty third argument in \t{use\_with} and \t{use\_enable}}
     \label{tab:use-with-third-arg}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports empty third argument?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & Yes \\
-    \t{5} & Yes \\
-    \bottomrule
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports empty third argument?}} \\
+      \midrule
+      0, 1, 2, 3        & No  \\
+      4, 5, 6           & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting \t{usex}} \label{tab:usex-table}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{usex}?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & No \\
-    \t{4} & No \\
-    \t{5} & Yes \\
-    \bottomrule
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting \t{usex} and \t{in\_iuse}}
+    \label{tab:use-list-functions}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{usex}?}} &
+      \multicolumn{1}{c}{\textbf{\t{in\_iuse}?}} \\
+      \midrule
+      0, 1, 2, 3, 4     & No  & No  \\
+      5                 & Yes & No  \\
+      6                 & Yes & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
@@ -760,9 +832,15 @@ has returned.
     the current working directory itself) have permissions \t{a+r,u+w,go-w} and that all directories
     under the current working directory additionally have permissions \t{a+x}.
 
-    All arguments to \t{unpack} must be either a filename without path, in which case \t{unpack}
-    looks in \t{DISTDIR} for the file, or start with the string \t{./}, in which case \t{unpack}
-    uses the argument as a path relative to the working directory.
+    Arguments to \t{unpack} are interpreted as follows:
+    \begin{itemize}
+    \item A filename without path (i.\,e., not containing any slash) is looked up in \t{DISTDIR}.
+    \item An argument starting with the string \t{./} is a path relative to the working directory.
+    \item \featurelabel{unpack-absolute} Otherwise, for EAPIs listed in
+        table~\ref{tab:unpack-behaviour} as supporting absolute and relative paths, the argument is
+        interpreted as a literal path (absolute, or relative to the working directory); for EAPIs
+        listed as \e{not} supporting such paths, \t{unpack} shall abort the build process.
+    \end{itemize}
 
     Any unrecognised file format shall be skipped silently. If unpacking a supported file format
     fails, \t{unpack} shall abort the build process.
@@ -790,29 +868,48 @@ has returned.
     \item lzma-compressed tar files (\t{*.tar.lzma}). Ebuilds must ensure that LZMA Utils and
         GNU tar are installed.
     \item xz-compressed files (\t{*.xz}). Ebuilds must ensure that XZ Utils is installed. Only for
-        EAPIs listed in table~\ref{tab:unpack-extensions-table} as supporting xz.
-    \item xz-compressed tar files (\t{*.tar.xz}). Ebuilds must ensure that XZ Utils and GNU tar are
-        installed. Only for EAPIs listed in table~\ref{tab:unpack-extensions-table} as supporting xz.
+        EAPIs listed in table~\ref{tab:unpack-extensions-table} as supporting \t{.xz}.
+    \item xz-compressed tar files (\t{*.tar.xz, *.txz}). Ebuilds must ensure that XZ Utils and
+        GNU tar are installed. Only for EAPIs listed in table~\ref{tab:unpack-extensions-table} as
+        supporting \t{.tar.xz} or \t{.txz}.
     \end{itemize}
     It is up to the ebuild to ensure that the relevant external utilities are available, whether by
     being in the system set or via dependencies.
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{\t{unpack} extensions for EAPIs} \label{tab:unpack-extensions-table}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{\t{.xz} and \t{.tar.xz}?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & No \\
-    \t{3} & Yes \\
-    \t{4} & Yes \\
-    \t{5} & Yes \\
-    \bottomrule
-    \end{tabular}
-\end{centertable}
+    \featurelabel{unpack-ignore-case} \t{unpack} matches filename extensions in a case-insensitive
+    manner, for EAPIs listed such in table~\ref{tab:unpack-behaviour}.
+
+    \ChangeWhenAddingAnEAPI{6}
+    \begin{centertable}{\t{unpack} behaviour for EAPIs}
+        \label{tab:unpack-behaviour}
+        \begin{tabular}{lll}
+          \toprule
+          \multicolumn{1}{c}{\textbf{EAPI}} &
+          \multicolumn{1}{c}{\textbf{Supports absolute and relative paths?}} &
+          \multicolumn{1}{c}{\textbf{Case-insensitive matching?}} \\
+          \midrule
+          0, 1, 2, 3, 4, 5  & No  & No  \\
+          6                 & Yes & Yes \\
+          \bottomrule
+        \end{tabular}
+    \end{centertable}
+
+    \ChangeWhenAddingAnEAPI{6}
+    \begin{centertable}{\t{unpack} extensions for EAPIs}
+        \label{tab:unpack-extensions-table}
+        \begin{tabular}{llll}
+          \toprule
+          \multicolumn{1}{c}{\textbf{EAPI}} &
+          \multicolumn{1}{c}{\textbf{\t{.xz}?}} &
+          \multicolumn{1}{c}{\textbf{\t{.tar.xz}?}} &
+          \multicolumn{1}{c}{\textbf{\t{.txz}?}} \\
+          \midrule
+          0, 1, 2           & No  & No  & No  \\
+          3, 4, 5           & Yes & Yes & No  \\
+          6                 & Yes & Yes & Yes \\
+          \bottomrule
+        \end{tabular}
+    \end{centertable}
 
 \item[inherit] See section~\ref{sec:inherit}.
 
@@ -820,23 +917,75 @@ has returned.
     \featurelabel{default-func} Calls the \t{default\_} function for the current phase (see
     section~\ref{sec:default-phase-funcs}). Must not be called if the \t{default\_} function does
     not exist for the current phase in the current EAPI\@. Only available in EAPIs listed in
-    table~\ref{tab:default-function-table}.
+    table~\ref{tab:misc-commands} as supporting \t{default}.
+
+\item[einstalldocs] \featurelabel{einstalldocs} Takes no arguments. Installs the files specified
+    by the \t{DOCS} and \t{HTML\_DOCS} variables or a default set of files, according to
+    Algorithm~\ref{alg:einstalldocs}. If called using \t{nonfatal} and any of the called commands
+    returns a non-zero exit status, returns immediately with the same exit status. Only available
+    in EAPIs listed in table~\ref{tab:misc-commands} as supporting \t{einstalldocs}.
+
+\item[get\_libdir] \featurelabel{get-libdir} Prints the libdir name obtained according to
+    Algorithm~\ref{alg:get-libdir}. Only available in EAPIs listed in table~\ref{tab:misc-commands}
+    as supporting \t{get\_libdir}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{5}
-\begin{centertable}{EAPIs supporting the \t{default} function} \label{tab:default-function-table}
-    \begin{tabular}{ l l }
-        \toprule
-            \multicolumn{1}{c}{\textbf{EAPI}} &
-            \multicolumn{1}{c}{\textbf{Supports \t{default} function?}} \\
-            \midrule
-    \t{0} & No \\
-    \t{1} & No \\
-    \t{2} & Yes \\
-    \t{3} & Yes \\
-    \t{4} & Yes \\
-    \t{5} & Yes \\
-    \bottomrule
+\begin{algorithm}
+\caption{einstalldocs logic} \label{alg:einstalldocs}
+\begin{algorithmic}[1]
+\STATE save the value of the install directory for \t{dodoc}
+\STATE set the install directory for \t{dodoc} to \t{/usr/share/doc/\$\{PF\}}
+\IF{the DOCS variable is a non-empty array}
+    \STATE call \t{dodoc -r "\$\{DOCS[@]\}"}
+\ELSIF{the DOCS variable is a non-empty scalar}
+    \STATE call \t{dodoc -r \$\{DOCS\}}
+\ELSIF{the DOCS variable is unset}
+    \FORALL{$d$ matching the filename expansion of \t{README*} \t{ChangeLog} \t{AUTHORS} \t{NEWS}
+            \t{TODO} \t{CHANGES} \t{THANKS} \t{BUGS} \t{FAQ} \t{CREDITS} \t{CHANGELOG}}
+        \IF{file $d$ exists and has a size greater than zero}
+            \STATE call \t{dodoc} with $d$ as argument
+        \ENDIF
+    \ENDFOR
+\ENDIF
+\STATE set the install directory for \t{dodoc} to \t{/usr/share/doc/\$\{PF\}/html}
+\IF{the HTML\_DOCS variable is a non-empty array}
+    \STATE call \t{dodoc -r "\$\{HTML\_DOCS[@]\}"}
+\ELSIF{the HTML\_DOCS variable is a non-empty scalar}
+    \STATE call \t{dodoc -r \$\{HTML\_DOCS\}}
+\ENDIF
+\STATE restore the value of the install directory for \t{dodoc}
+\RETURN shell true (0)
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{get\_libdir logic} \label{alg:get-libdir}
+\begin{algorithmic}[1]
+\STATE let libdir=lib
+\IF{the ABI environment variable is set}
+    \STATE let libvar=LIBDIR\_\$ABI
+    \IF{the environment variable named by libvar is set}
+        \STATE let libdir=the value of the variable named by libvar
+    \ENDIF
+\ENDIF
+\STATE print the value of libdir
+\end{algorithmic}
+\end{algorithm}
+
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{Misc commands for EAPIs}
+    \label{tab:misc-commands}
+    \begin{tabular}{llll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{default}?}} &
+      \multicolumn{1}{c}{\textbf{\t{einstalldocs}?}} &
+      \multicolumn{1}{c}{\textbf{\t{get\_libdir}?}} \\
+      \midrule
+      0, 1              & No  & No  & No  \\
+      2, 3, 4, 5        & Yes & No  & No  \\
+      6                 & Yes & Yes & Yes \\
+      \bottomrule
     \end{tabular}
 \end{centertable}
 
