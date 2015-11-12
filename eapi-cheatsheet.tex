@@ -336,6 +336,11 @@ differences between these previous EAPIs.
     in global scope, so that unintentional pattern expansion will be
     caught as an error.
     See \featureref{failglob}.
+    \item[Locale settings] It is ensured that the behaviour of case
+    modification and collation order for ASCII characters
+    (\code{LC\_CTYPE} and \code{LC\_COLLATE}) are the same as in the
+    POSIX locale.
+    See \featureref{locale-settings}.
     \item[\code{src\_prepare}] This phase function has a default now,
     which applies patches from the \code{PATCHES} variable with the
     new \code{eapply} command, and user-provided patches with
@@ -344,6 +349,11 @@ differences between these previous EAPIs.
     \item[\code{src\_install}] The default implementation uses the new
     \code{einstalldocs} function for installing documentation.
     See \featureref{src-install-6}.
+    \item[\code{nonfatal die}] When \code{die} or \code{assert} are
+    called under the \code{nonfatal} command and with the \code{-n}
+    option, they will not abort the build process but return with an
+    error.
+    See \featureref{nonfatal-die}.
     \item[\code{unpack} changes] \code{unpack} has been extended:
     \begin{description}
         \item[Pathnames] Both absolute paths and paths relative to the
@@ -360,11 +370,6 @@ differences between these previous EAPIs.
     \code{-{}-htmldir} are passed to \code{configure}, in addition to
     the existing options.
     See \featureref{econf-options}.
-    \item[\code{nonfatal die}] When \code{die} or \code{assert} are
-    called under the \code{nonfatal} command and with the \code{-n}
-    option, they will not abort the build process but return with an
-    error.
-    See \featureref{nonfatal-die}.
     \item[\code{eapply}] The \code{eapply} command is a simplified
     substitute for \code{epatch}, implemented in the package manager.
     The patches from its file or directory arguments are applied using
