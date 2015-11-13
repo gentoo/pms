@@ -292,6 +292,25 @@ package manager specific directories.
 \t{GZIP}, \t{BZIP}, \t{BZIP2}, \t{CDPATH}, \t{GREP\_OPTIONS}, \t{GREP\_COLOR} and \t{GLOBIGNORE}
 must not be set.
 
+\featurelabel{locale-settings} The package manager must ensure that the \t{LC\_CTYPE} and
+\t{LC\_COLLATE} locale categories are equivalent to the POSIX locale, as far as characters in the
+ASCII range (U+0000 to U+007F) are concerned. Only for EAPIs listed in such a manner in
+table~\ref{tab:locale-settings}.
+
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{Locale settings for EAPIs}
+    \label{tab:locale-settings}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Sane \t{LC\_CTYPE} and \t{LC\_COLLATE}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5  & Undefined \\
+      6                 & Yes       \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
 \subsection{USE and IUSE Handling}
 \label{sec:use-iuse-handling}
 
