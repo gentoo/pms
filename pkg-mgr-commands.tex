@@ -26,7 +26,7 @@ The following commands affect this behaviour:
     option and in EAPIs supporting this option, see table~\ref{tab:nonfatal-die}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPI command failure behaviour}
     \label{tab:commands-die-table}
     \begin{tabular}{lll}
@@ -36,7 +36,7 @@ The following commands affect this behaviour:
       \multicolumn{1}{c}{\textbf{Supports \t{nonfatal}?}} \\
       \midrule
       0, 1, 2, 3        & Non-zero exit & No  \\
-      4, 5, 6           & Aborts        & Yes \\
+      4, 5, 6, 7        & Aborts        & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -47,7 +47,7 @@ The following commands affect this behaviour:
 \featurelabel{banned-commands} Some commands are banned in some EAPIs. If a banned command is
 called, the package manager must abort the build process indicating an error.
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{Banned commands}
     \label{tab:banned-commands-table}
     \begin{tabular}{llll}
@@ -61,7 +61,7 @@ called, the package manager must abort the build process indicating an error.
       \midrule
       0, 1, 2, 3        & No  & No  & No  \\
       4, 5              & Yes & Yes & No  \\
-      6                 & Yes & Yes & Yes \\
+      6, 7              & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -93,7 +93,7 @@ to the host root instead of \t{ROOT}.
     matching version; otherwise, prints an empty string. The exit code is unspecified.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{-{}-host-root} for \t{*_version} commands}
     \label{tab:foo-version-host-root-table}
     \begin{tabular}{ll}
@@ -144,7 +144,7 @@ completing. Ebuilds must not run any of these commands once the current phase fu
     (indicating failure), calls \t{die}, passing any parameters to it.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{-n} for \t{die} and \t{assert} commands}
     \label{tab:nonfatal-die}
     \begin{tabular}{ll}
@@ -153,7 +153,7 @@ completing. Ebuilds must not run any of these commands once the current phase fu
       \multicolumn{1}{c}{\textbf{\t{die} and \t{assert} support \t{-n}?}} \\
       \midrule
       0, 1, 2, 3, 4, 5  & No  \\
-      6                 & Yes \\
+      6, 7              & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -217,7 +217,7 @@ Ebuilds must not run any of these commands once the current phase function has r
     subsequent calls, the command will do nothing and return~0.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{Patch commands for EAPIs}
     \label{tab:patch-commands}
     \begin{tabular}{lll}
@@ -227,7 +227,7 @@ Ebuilds must not run any of these commands once the current phase function has r
       \multicolumn{1}{c}{\textbf{\t{eapply_user}?}} \\
       \midrule
       0, 1, 2, 3, 4, 5  & No  & No  \\
-      6                 & Yes & Yes \\
+      6, 7              & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -273,7 +273,7 @@ current phase function has returned.
         occurs in the output of \t{configure -{}-help}.
     \end{itemize}
 
-    \ChangeWhenAddingAnEAPI{6}
+    \ChangeWhenAddingAnEAPI{7}
     \begin{centertable}{Extra \t{econf} arguments for EAPIs}
         \label{tab:econf-options-table}
         \begin{tabular}{lllll}
@@ -287,7 +287,7 @@ current phase function has returned.
           0, 1, 2, 3        & No  & No  & No  & No  \\
           4                 & Yes & No  & No  & No  \\
           5                 & Yes & Yes & No  & No  \\
-          6                 & Yes & Yes & Yes & Yes \\
+          6, 7              & Yes & Yes & Yes & Yes \\
           \bottomrule
         \end{tabular}
     \end{centertable}
@@ -559,7 +559,7 @@ the current phase function has returned.
 
 \end{description}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{dodoc -r}}
     \label{tab:dodoc-table}
     \begin{tabular}{ll}
@@ -568,12 +568,12 @@ the current phase function has returned.
       \multicolumn{1}{c}{\textbf{Supports \t{dodoc -r}?}} \\
       \midrule
       0, 1, 2, 3        & No  \\
-      4, 5, 6           & Yes \\
+      4, 5, 6, 7        & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{doheader} and \t{newheader}}
     \label{tab:doheader-table}
     \begin{tabular}{ll}
@@ -582,12 +582,12 @@ the current phase function has returned.
       \multicolumn{1}{c}{\textbf{Supports \t{doheader} and \t{newheader}?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  \\
-      5, 6              & Yes \\
+      5, 6, 7           & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting symlinks for \t{doins}}
     \label{tab:doins-table}
     \begin{tabular}{ll}
@@ -596,12 +596,12 @@ the current phase function has returned.
       \multicolumn{1}{c}{\textbf{\t{doins} supports symlinks?}} \\
       \midrule
       0, 1, 2, 3        & No  \\
-      4, 5, 6           & Yes \\
+      4, 5, 6, 7        & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{\t{doman} language support options for EAPIs}
     \label{tab:doman-table}
     \begin{tabular}{lll}
@@ -612,12 +612,12 @@ the current phase function has returned.
       \midrule
       0, 1              & No  & Not applicable \\
       2, 3              & Yes & No             \\
-      4, 5, 6           & Yes & Yes            \\
+      4, 5, 6, 7        & Yes & Yes            \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting stdin for \t{new*} commands}
     \label{tab:newfoo-stdin-table}
     \begin{tabular}{ll}
@@ -626,7 +626,7 @@ the current phase function has returned.
       \multicolumn{1}{c}{\textbf{\t{new*} can read from stdin?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  \\
-      5, 6              & Yes \\
+      5, 6, 7           & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -713,7 +713,7 @@ exclusion list. Otherwise, add each argument to the inclusion list. Only availab
 in table~\ref{tab:compression-table} as supporting \t{docompress}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting controllable compression}
     \label{tab:compression-table}
     \begin{tabular}{lll}
@@ -723,7 +723,7 @@ in table~\ref{tab:compression-table} as supporting \t{docompress}.
       \multicolumn{1}{c}{\textbf{Supports \t{docompress}?}} \\
       \midrule
       0, 1, 2, 3        & No  & No  \\
-      4, 5, 6           & Yes & Yes \\
+      4, 5, 6, 7        & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -766,7 +766,7 @@ table~\ref{tab:use-list-strictness}.
     table~\ref{tab:use-list-functions} as supporting \t{in_iuse}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPI behaviour for use queries not in \t{IUSE_EFFECTIVE}}
     \label{tab:use-list-strictness}
     \begin{tabular}{ll}
@@ -775,12 +775,12 @@ table~\ref{tab:use-list-strictness}.
       \multicolumn{1}{c}{\textbf{Behaviour}} \\
       \midrule
       0, 1, 2, 3        & Undefined \\
-      4, 5, 6           & Error     \\
+      4, 5, 6, 7        & Error     \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting empty third argument in \t{use_with} and \t{use_enable}}
     \label{tab:use-with-third-arg}
     \begin{tabular}{ll}
@@ -789,12 +789,12 @@ table~\ref{tab:use-list-strictness}.
       \multicolumn{1}{c}{\textbf{Supports empty third argument?}} \\
       \midrule
       0, 1, 2, 3        & No  \\
-      4, 5, 6           & Yes \\
+      4, 5, 6, 7        & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{usex} and \t{in_iuse}}
     \label{tab:use-list-functions}
     \begin{tabular}{lll}
@@ -805,7 +805,7 @@ table~\ref{tab:use-list-strictness}.
       \midrule
       0, 1, 2, 3, 4     & No  & No  \\
       5                 & Yes & No  \\
-      6                 & Yes & Yes \\
+      6, 7              & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -888,7 +888,7 @@ has returned.
     \featurelabel{unpack-ignore-case} \t{unpack} matches filename extensions in a case-insensitive
     manner, for EAPIs listed such in table~\ref{tab:unpack-behaviour}.
 
-    \ChangeWhenAddingAnEAPI{6}
+    \ChangeWhenAddingAnEAPI{7}
     \begin{centertable}{\t{unpack} behaviour for EAPIs}
         \label{tab:unpack-behaviour}
         \begin{tabular}{lll}
@@ -898,12 +898,12 @@ has returned.
           \multicolumn{1}{c}{\textbf{Case-insensitive matching?}} \\
           \midrule
           0, 1, 2, 3, 4, 5  & No  & No  \\
-          6                 & Yes & Yes \\
+          6, 7              & Yes & Yes \\
           \bottomrule
         \end{tabular}
     \end{centertable}
 
-    \ChangeWhenAddingAnEAPI{6}
+    \ChangeWhenAddingAnEAPI{7}
     \begin{centertable}{\t{unpack} extensions for EAPIs}
         \label{tab:unpack-extensions-table}
         \begin{tabular}{llll}
@@ -915,7 +915,7 @@ has returned.
           \midrule
           0, 1, 2           & No  & No  & No  \\
           3, 4, 5           & Yes & Yes & No  \\
-          6                 & Yes & Yes & Yes \\
+          6, 7              & Yes & Yes & Yes \\
           \bottomrule
         \end{tabular}
     \end{centertable}
@@ -982,7 +982,7 @@ has returned.
 
 \end{description}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{Misc commands for EAPIs}
     \label{tab:misc-commands}
     \begin{tabular}{llll}
@@ -994,7 +994,7 @@ has returned.
       \midrule
       0, 1              & No  & No  & No  \\
       2, 3, 4, 5        & Yes & No  & No  \\
-      6                 & Yes & Yes & Yes \\
+      6, 7              & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}

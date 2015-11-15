@@ -232,7 +232,7 @@ variable.
 \end{longtable}
 \end{landscape}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting various added env variables}
     \label{tab:added-env-vars-table}
     \begin{tabular}{lllll}
@@ -245,12 +245,12 @@ variable.
       \midrule
       0, 1, 2, 3        & No  & No  & No  & No  \\
       4                 & Yes & Yes & Yes & No  \\
-      5, 6              & Yes & Yes & Yes & Yes \\
+      5, 6, 7           & Yes & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting various removed env variables}
     \label{tab:removed-env-vars-table}
     \begin{tabular}{lll}
@@ -260,12 +260,12 @@ variable.
       \multicolumn{1}{c}{\textbf{\t{KV}?}} \\
       \midrule
       0, 1, 2, 3        & Yes & Yes \\
-      4, 5, 6           & No  & No  \\
+      4, 5, 6, 7        & No  & No  \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting offset-prefix env variables}
     \label{tab:offset-env-vars-table}
     \begin{tabular}{llll}
@@ -276,7 +276,7 @@ variable.
       \multicolumn{1}{c}{\textbf{\t{ED}?}} \\
       \midrule
       0, 1, 2           & No  & No  & No  \\
-      3, 4, 5, 6        & Yes & Yes & Yes \\
+      3, 4, 5, 6, 7     & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -298,7 +298,7 @@ must not be set.
 ASCII range (U+0000 to U+007F) are concerned. Only for EAPIs listed in such a manner in
 table~\ref{tab:locale-settings}.
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{Locale settings for EAPIs}
     \label{tab:locale-settings}
     \begin{tabular}{ll}
@@ -307,7 +307,7 @@ table~\ref{tab:locale-settings}.
       \multicolumn{1}{c}{\textbf{Sane \t{LC_CTYPE} and \t{LC_COLLATE}?}} \\
       \midrule
       0, 1, 2, 3, 4, 5  & Undefined \\
-      6                 & Yes       \\
+      6, 7              & Yes       \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -396,7 +396,7 @@ contain at most one value.
 \subsection{Offset-prefix variables}
 \label{sec:offset-vars}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting offset-prefix}
     \label{tab:offset-support-table}
     \begin{tabular}{ll}
@@ -405,7 +405,7 @@ contain at most one value.
       \multicolumn{1}{c}{\textbf{Supports offset-prefix?}}\\
       \midrule
       0, 1, 2           & No  \\
-      3, 4, 5, 6        & Yes \\
+      3, 4, 5, 6, 7     & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}

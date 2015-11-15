@@ -86,7 +86,7 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 
 In particular, note that whitespace is not optional.
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{SRC_URI} arrows}
     \label{tab:uri-arrows-table}
     \begin{tabular}{ll}
@@ -95,12 +95,12 @@ In particular, note that whitespace is not optional.
       \multicolumn{1}{c}{\textbf{Supports \t{SRC_URI} arrows?}} \\
       \midrule
       0, 1              & No  \\
-      2, 3, 4, 5, 6     & Yes \\
+      2, 3, 4, 5, 6, 7  & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{REQUIRED_USE ??}\ groups}
     \label{tab:at-most-one-of-table}
     \begin{tabular}{ll}
@@ -109,7 +109,7 @@ In particular, note that whitespace is not optional.
       \multicolumn{1}{c}{\textbf{Supports \t{REQUIRED_USE ??}\ groups?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  \\
-      5, 6              & Yes \\
+      5, 6, 7           & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -178,7 +178,7 @@ manager must warn or error if this feature is used with an EAPI not supporting u
 
 \note{Order is important. The slot restriction must come before use dependencies.}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{Support for \t{SLOT} dependencies and sub-slots in EAPIs}
     \label{tab:slot-deps-table}
     \begin{tabular}{lll}
@@ -189,12 +189,12 @@ manager must warn or error if this feature is used with an EAPI not supporting u
       \midrule
       0                 & No                 & No  \\
       1, 2, 3, 4        & Named only         & No  \\
-      5, 6              & Named and operator & Yes \\
+      5, 6, 7           & Named and operator & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{USE} dependencies}
     \label{tab:use-deps-table}
     \begin{tabular}{ll}
@@ -204,7 +204,7 @@ manager must warn or error if this feature is used with an EAPI not supporting u
       \midrule
       0, 1              & No      \\
       2, 3              & 2-style \\
-      4, 5, 6           & 4-style \\
+      4, 5, 6, 7        & 4-style \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -243,7 +243,7 @@ ignored by the package manager, so long as any blocked package will be uninstall
 strong block must not be ignored. The mapping from one or two exclamation marks to strength is
 described in table~\ref{tab:bang-strength-table}.
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{Exclamation mark strengths for EAPIs}
     \label{tab:bang-strength-table}
     \begin{tabular}{lll}
@@ -253,7 +253,7 @@ described in table~\ref{tab:bang-strength-table}.
       \multicolumn{1}{c}{\textbf{\t{!!}}} \\
       \midrule
       0, 1              & Unspecified & Forbidden \\
-      2, 3, 4, 5, 6     & Weak        & Strong    \\
+      2, 3, 4, 5, 6, 7  & Weak        & Strong    \\
       \bottomrule
     \end{tabular}
 \end{centertable}
