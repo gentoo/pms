@@ -363,12 +363,12 @@ the current phase function has returned.
     section~\ref{sec:failure-behaviour}.
 
 \item[doconfd] Installs the given config files into \t{/etc/conf.d/}, by default with file mode
-    \t{0644}. This can be overridden by setting \t{INSOPTIONS} with the \t{insopts} function.
+    \t{0644}, or with the \t{install} options set by the most recent \t{insopts} call.
     Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
-\item[dodir] Creates the given directories, by default with file mode \t{0755}. This can be overridden
-    by setting \t{DIROPTIONS} with the \t{diropts} function. Failure behaviour is EAPI dependent as
-    per section~\ref{sec:failure-behaviour}.
+\item[dodir] Creates the given directories, by default with file mode \t{0755}, or with the
+    \t{install} options set by the most recent \t{diropts} call. Failure behaviour is EAPI
+    dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[dodoc] \featurelabel{dodoc} Installs the given files into a subdirectory under
     \t{/usr/share/doc/\$\{PF\}/} with file mode \t{0644}. The subdirectory is set by the most recent
@@ -379,12 +379,13 @@ the current phase function has returned.
     specified. Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[doenvd] Installs the given environment files into \t{/etc/env.d/}, by default with file mode
-    \t{0644}. This can be overridden by setting \t{INSOPTIONS} with the \t{insopts} function.
+    \t{0644}, or with the \t{install} options set by the most recent \t{insopts} call.
     Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[doexe] Installs the given files into the directory specified by the most recent \t{exeinto}
-    call, by default with file mode \t{0755}. This can be overridden by setting \t{EXEOPTIONS} with
-    the \t{exeopts} function. If \t{exeinto} has not yet been called, behaviour is undefined.
+    call. If \t{exeinto} has not yet been called, behaviour is undefined. Files are installed by
+    default with file mode \t{0755}, or with the \t{install} options set by the most recent
+    \t{exeopts} call.
     Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[dohard] Takes two parameters. Creates a hardlink from the second to the first. In EAPIs
@@ -392,8 +393,8 @@ the current phase function has returned.
     section~\ref{sec:banned-commands}.
 
 \item[doheader] \featurelabel{doheader} Installs the given header files into \t{/usr/include/},
-    by default with file mode \t{0644}. This can be overridden by setting \t{INSOPTIONS} with the
-    \t{insopts} function. If the first argument is \t{-r}, then operates recursively, descending
+    by default with file mode \t{0644}, or with the \t{install} options set by the most recent
+    \t{insopts} call. If the first argument is \t{-r}, then operates recursively, descending
     into any directories given.
     Only available in EAPIs listed in table~\ref{tab:doheader-table} as supporting \t{doheader}.
     Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
@@ -424,22 +425,22 @@ can be extended or reduced (see below). The options that can be passed to \t{doh
     \t{0644}. Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[doinitd] Installs the given initscript files into \t{/etc/init.d}, by default with file mode
-    \t{0755}. This can be overridden by setting \t{EXEOPTIONS} with the \t{exeopts} function.
+    \t{0755}, or with the \t{install} options set by the most recent \t{exeopts} call.
     Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[doins] \featurelabel{doins} Takes one or more files as arguments and installs them into
-    \t{INSDESTTREE}, by default with file mode \t{0644}. This can be overridden by setting
-    \t{INSOPTIONS} with the \t{insopts} function. If the first argument is \t{-r}, then operates
-    recursively, descending into any directories given. For EAPIs listed in
-    table~\ref{tab:doins-table}, \t{doins} must install symlinks as symlinks;
-    for other EAPIs, behaviour is undefined if any symlink is encountered. Failure
-    behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
+    \t{INSDESTTREE}, by default with file mode \t{0644}, or with the \t{install} options set by
+    the most recent \t{insopts} call. If the first argument is \t{-r}, then operates recursively,
+    descending into any directories given. For EAPIs listed in table~\ref{tab:doins-table},
+    \t{doins} must install symlinks as symlinks; for other EAPIs, behaviour is undefined if any
+    symlink is encountered. Failure behaviour is EAPI dependent as per
+    section~\ref{sec:failure-behaviour}.
 
 \item[dolib] For each argument, installs it into the appropriate library subdirectory under
-    \t{DESTTREE}, as determined by Algorithm~\ref{alg:ebuild-libdir}. The file mode is \t{0644}
-    by default. This can be overridden by setting \t{LIBOPTIONS} with the \t{libopts} function.
-    Any symlinks are installed into the same directory as relative links to their original target.
-    Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
+    \t{DESTTREE}, as determined by Algorithm~\ref{alg:ebuild-libdir}. Files are installed by default
+    with file mode \t{0644}, or with the \t{install} options set by the most recent \t{libopts}
+    call. Any symlinks are installed into the same directory as relative links to their original
+    target. Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[dolib.so] As for \t{dolib} except each file is installed with mode \t{0755}.
 
