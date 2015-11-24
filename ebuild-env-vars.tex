@@ -217,10 +217,10 @@ variable.
 \t{REPLACING\_VERSIONS} &
     \t{pkg\_*} (see text) &
     Yes &
-    A whitespace-separated list of versions of this package (including revision, if specified) that
-    are being replaced (uninstalled or overwritten) as a result of this install. See
-    section~\ref{sec:replacing-versions}.  Only for EAPIs listed in table~\ref{tab:added-env-vars-table}
-    as supporting \t{REPLACING\_VERSIONS}. \\
+    A list of all versions of this package (including revision, if specified), whitespace separated
+    with no leading or trailing whitespace, that are being replaced (uninstalled or overwritten)
+    as a result of this install. See section~\ref{sec:replacing-versions}. Only for EAPIs listed
+    in table~\ref{tab:added-env-vars-table} as supporting \t{REPLACING\_VERSIONS}. \\
 \t{REPLACED\_BY\_VERSION} &
     \t{pkg\_prerm}, \t{pkg\_postrm} &
     Yes &
