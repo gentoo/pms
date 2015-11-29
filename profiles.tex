@@ -64,10 +64,32 @@ bash syntax, is allowed as follows:
 \end{compactitem}
 
 \subsection{Simple line-based files}
+\label{sec:line-stacking}
 These files are a simple one-item-per-line list, which is inherited in the following manner: the
 parent profile's list is taken, and the current profile's list appended. If any line begins with a
 hyphen, then any lines previous to it whose contents are equal to the remainder of that line are
 removed from the list. Once again, blank lines and those beginning with a \# are discarded.
+
+\featurelabel{profile-file-dirs} In EAPIs listed in table~\ref{tab:profile-file-dirs} as supporting
+directories for profile files, any of the files \t{package.mask}, \t{package.use}, \t{use.*} and
+\t{package.use.*} mentioned below can be a directory instead of a regular file. Files contained
+in that directory, unless their name begins with a dot, will be concatenated in order of their
+filename in the POSIX locale and the result will be processed as if it were a single file.
+Any subdirectories will be ignored.
+
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{EAPIs supporting directories for profile files}
+    \label{tab:profile-file-dirs}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports directories for profile files?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6 & No  \\
+      7                   & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \subsection{packages}
 The \t{packages} file is used to define the `system set' for this profile.
@@ -84,7 +106,8 @@ but is mentioned here for completeness.
 \subsection{package.mask}
 \t{package.mask} is used to prevent packages from being installed on a given profile. Each line
 contains one package dependency specification; anything matching this specification will not be
-installed unless unmasked by the user's configuration.
+installed unless unmasked by the user's configuration. In some EAPIs, \t{package.mask} can be a
+directory instead of a regular file as per section~\ref{sec:line-stacking}.
 
 Note that the \t{-spec} syntax can be used to remove a mask in a parent profile, but not
 necessarily a global mask (from \t{profiles/package.mask}, section~\ref{profiles-package.mask}).
@@ -99,18 +122,20 @@ has severe adverse effects on USE-based and slot-based dependencies, its use is 
 and package manager support must be regarded as purely optional.
 
 \subsection{package.use}
-The \t{package.use} file may be used by the package manager to override the default USE flags specified
-by \t{make.defaults} on a per package basis.  The format is to have a package dependency specification,
-and then a space delimited list of USE flags to enable.  A USE flag in the form of \t{-flag} indicates
-that the package should have the USE flag disabled.  The package dependency specification is limited to
-the forms defined by the directory's EAPI.
+The \t{package.use} file may be used by the package manager to override the default USE flags
+specified by \t{make.defaults} on a per package basis. The format is to have a package dependency
+specification, and then a space delimited list of USE flags to enable. A USE flag in the form of
+\t{-flag} indicates that the package should have the USE flag disabled. The package dependency
+specification is limited to the forms defined by the directory's EAPI\@. In some EAPIs,
+\t{package.use} can be a directory instead of a regular file as per section~\ref{sec:line-stacking}.
 
 \subsection{USE masking and forcing}
 \label{sec:use-masking}
 This section covers the eight files \t{use.mask}, \t{use.force}, \t{use.stable.mask},
 \t{use.stable.force}, \t{package.use.mask}, \t{package.use.force}, \t{package.use.stable.mask},
 and \t{package.use.\allowbreak stable.force}. They are described together because they interact in
-a non-trivial manner.
+a non-trivial manner. In some EAPIs, these files can be directories instead of regular files as per
+section~\ref{sec:line-stacking}.
 
 Simply speaking, \t{use.mask} and \t{use.force} are used to say that a given USE flag must never or
 always, respectively, be enabled when using this profile. \t{package.use.mask} and

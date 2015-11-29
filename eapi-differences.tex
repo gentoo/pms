@@ -44,6 +44,9 @@ of this document for a complete table of previous EAPIs.}
 \t{package.mask} directory & \compactfeatureref{package-mask-dir} &
     No & No & No & No & Yes \\
 
+Profile files as directories & \compactfeatureref{profile-file-dirs} &
+    No & No & No & No & Yes \\
+
 Stable use masking/forcing & \compactfeatureref{stablemask} &
     No & No & Yes & Yes & Yes \\
 
@@ -374,6 +377,8 @@ EAPI 7 is EAPI 6 with the following changes:
 
 \begin{compactitem}
 \item \t{profiles/package.mask} can be a directory, \featureref{package-mask-dir}.
+\item \t{package.mask}, \t{package.use}, \t{use.*} and \t{package.use.*} in a profile can be
+    directories, \featureref{profile-file-dirs}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{7}
