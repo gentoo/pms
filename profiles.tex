@@ -116,10 +116,25 @@ necessarily a global mask (from \t{profiles/package.mask}, section~\ref{profiles
 inherit tree when it comes to \t{-lines}. This behaviour may not be relied upon.}
 
 \subsection{package.provided}
-\t{package.provided} is used to tell the package manager that a certain package version should be
-considered to be provided by the system regardless of whether it is actually installed. Because it
-has severe adverse effects on USE-based and slot-based dependencies, its use is strongly deprecated
-and package manager support must be regarded as purely optional.
+\featurelabel{package-provided} \t{package.provided} is used to tell the package manager that
+a certain package version should be considered to be provided by the system regardless of whether
+it is actually installed. Because it has severe adverse effects on USE-based and slot-based
+dependencies, its use is strongly deprecated and package manager support must be regarded as purely
+optional. Supported in EAPIs as per table~\ref{tab:package-provided}.
+
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{EAPIs supporting \t{package.provided} in profiles}
+    \label{tab:package-provided}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{package.provided}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6 & Optionally \\
+      7                   & No         \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \subsection{package.use}
 The \t{package.use} file may be used by the package manager to override the default USE flags
