@@ -227,10 +227,9 @@ current phase function has returned.
     Autoconf-generated scripts. Any additional parameters passed to \t{econf} are passed directly
     to \t{./configure}, after the default options below. \t{econf} will look in the current working
     directory for a configure script unless the \t{ECONF\_SOURCE} environment variable is set,
-    in which case it is taken to be the directory containing it. \t{econf} must pass the following
-    options to the configure script:
+    in which case it is taken to be the directory containing it.
 
-    \featurelabel{econf-options}
+    \featurelabel{econf-options} \t{econf} must pass the following options to the configure script:
     \begin{itemize}
     \item -{}-prefix must default to \t{\$\{EPREFIX\}/usr} unless overridden by \t{econf}'s caller.
     \item -{}-mandir must be \t{\$\{EPREFIX\}/usr/share/man}
