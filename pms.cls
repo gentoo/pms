@@ -169,8 +169,11 @@
 
 % To find everywhere that needs updating when we add an EAPI
 \newcommand{\CurrentEAPIIs}[1]{\def\TheCurrentEAPI{#1}}
-\newcommand{\ChangeWhenAddingAnEAPI}[1]{\ifthenelse{\equal{\TheCurrentEAPI}{#1}}{}{\errmessage{This
-needs to be updated for EAPI \TheCurrentEAPI}}}
+\newcommand{\ChangeWhenAddingAnEAPI}[1]{%
+    \ifthenelse{\equal{\TheCurrentEAPI}{#1}}{}{%
+        \errmessage{This needs to be updated for EAPI \TheCurrentEAPI}%
+    }%
+}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 
