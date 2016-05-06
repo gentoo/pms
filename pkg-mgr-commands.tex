@@ -834,14 +834,14 @@ has returned.
     under the current working directory additionally have permissions \t{a+x}.
 
     Arguments to \t{unpack} are interpreted as follows:
-    \begin{itemize}
+    \begin{compactitem}
     \item A filename without path (i.\,e., not containing any slash) is looked up in \t{DISTDIR}.
     \item An argument starting with the string \t{./} is a path relative to the working directory.
     \item \featurelabel{unpack-absolute} Otherwise, for EAPIs listed in
         table~\ref{tab:unpack-behaviour} as supporting absolute and relative paths, the argument is
         interpreted as a literal path (absolute, or relative to the working directory); for EAPIs
         listed as \e{not} supporting such paths, \t{unpack} shall abort the build process.
-    \end{itemize}
+    \end{compactitem}
 
     Any unrecognised file format shall be skipped silently. If unpacking a supported file format
     fails, \t{unpack} shall abort the build process.
