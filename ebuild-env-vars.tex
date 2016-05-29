@@ -84,12 +84,14 @@ variable.
     of each element of the \t{SRC\_URI} ebuild metadata variable. Only for EAPIs listed in
     table~\ref{tab:removed-env-vars-table} as supporting \t{AA}. \\
 \t{FILESDIR} &
-    \t{src\_*}\footnote{Not necessarily present when installing from a binary package} &
+    \t{src\_*}, global~scope%
+    \footnote{Not necessarily present when installing from a binary package} &
     No &
-    The full path to the package's files directory, used for small support files or
-    patches. See section~\ref{sec:package-dirs}. May or may not exist; if a repository provides no
-    support files for the package in question then an ebuild must be prepared for the situation
-    where \t{FILESDIR} points to a non-existent directory. \\
+    The full path to the package's files directory, used for small support files or patches.
+    See section~\ref{sec:package-dirs}. Ebuilds must not access the directory in global scope.
+    May or may not exist; if a repository provides no support files for the package in question
+    then an ebuild must be prepared for the situation where \t{FILESDIR} points to a non-existent
+    directory. \\
 \t{PORTDIR} &
     Ditto &
     No &
