@@ -51,7 +51,8 @@ Ebuilds may define any of the following variables:
     \t{https://}, \t{ftp://} and \t{mirror://} (see section~\ref{sec:thirdpartymirrors} for mirror
     behaviour). Fetch restricted packages may include URL parts consisting of just a filename.
     See section~\ref{sec:dependencies} for full syntax.
-\item[LICENSE] The package's license. Each text token must correspond to a tree ``licenses/'' entry
+\item[LICENSE] The package's license. Each text token must be a valid license name, as per
+    section~\ref{sec:license-names}, and must correspond to a tree ``licenses/'' entry
     (see section~\ref{sec:licenses-dir}). See section~\ref{sec:dependencies} for full syntax.
     \label{ebuild-var-LICENSE}
 \item[KEYWORDS] A whitespace separated list of keywords for the ebuild. Each token must be a valid
