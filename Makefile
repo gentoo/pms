@@ -19,7 +19,9 @@ pms.pdf: $(LATEXFILES) pms.bbl vc.tex eapi-cheatsheet.pdf
 	pdflatex pms
 
 pms.html: $(LATEXFILES) pms.bbl vc.tex
-	@# need to do it twice to make the big env var table work
+	@# need to do it twice to make the big env var table work ...
+	@# ... and a third time for the eapi features table
+	mk4ht xhlatex pms xhtml,fn-in
 	mk4ht xhlatex pms xhtml,fn-in
 	mk4ht xhlatex pms xhtml,fn-in
 	@# some www servers ignore meta tags, resulting in a wrong charset.
@@ -30,8 +32,6 @@ pms.html: $(LATEXFILES) pms.bbl vc.tex
 	@# work around irregularity in how links to longtables are
 	@# formatted in the List of Tables
 	LC_ALL=C sed -i -e '/<span class="lotToc" >&#x00A0;/{N;N;s/\(&#x00A0;<a \nhref="[^"]\+">\)\([0-9A-Z.]\+\)[ \n]/\2\1/}' pms.html
-	@# fix xhtml syntax in longtable captions
-	LC_ALL=C sed -i -e 's%</td>\( *<div class="multicolumn"\)%\1%;tx;b;:x;s%</tr>%</td>&%;t;n;bx' pms.html
 	@# indent algorithms properly, and avoid adding extra vertical
 	@# space in Konqueror
 	LC_ALL=C sed -i -e 's/span style="width:/span style="display:-moz-inline-box;display:inline-block;height:1px;width:/' pms.html
