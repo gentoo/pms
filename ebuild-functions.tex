@@ -2,7 +2,6 @@
 \label{sec:ebuild-functions}
 
 \section{List of Functions}
-\label{sec:functions}
 
 The following is a list of functions that an ebuild, or eclass, may define, and which will be called
 by the package manager as part of the build and/or install process. In all cases the package manager
@@ -59,7 +58,6 @@ fallback to \t{WORKDIR} is used:
 \end{centertable}
 
 \subsection{pkg\_pretend}
-\label{sec:pkg-pretend-function}
 
 \featurelabel{pkg-pretend} The \t{pkg\_pretend} function is only called for EAPIs listed in
 table~\ref{tab:pkg-pretend-table} as supporting it.
@@ -91,7 +89,7 @@ before the next phase is executed.
 \end{centertable}
 
 \subsection{pkg\_setup}
-\label{sec:pkg-setup-function}
+
 The \t{pkg\_setup} function sets up the ebuild's environment for all following functions, before
 the build process starts. Further, it checks whether any necessary prerequisites not covered
 by the package manager, e.\,g.\ that certain kernel configuration options are fulfilled.
@@ -100,17 +98,15 @@ by the package manager, e.\,g.\ that certain kernel configuration options are fu
 and/or groups to the system.
 
 \subsection{src\_unpack}
-\label{sec:src-unpack-function}
 
-\featurelabel{src-unpack} The \t{src\_unpack} function extracts all of
-the package's sources. In EAPIs lacking \t{src\_prepare}, it may also
-apply patches and set up the package's build system for further use.
+The \t{src\_unpack} function extracts all of the package's sources. In EAPIs lacking
+\t{src\_prepare}, it may also apply patches and set up the package's build system for further use.
 
 The initial working directory must be \t{WORKDIR}, and the default implementation used when
 the ebuild lacks the \t{src\_unpack} function shall behave as:
 
 \begin{listing}[H]
-\caption{src\_unpack} \label{lst:src-unpack}
+\caption{src\_unpack}
 \begin{verbatim}
 src_unpack() {
     if [[ -n ${A} ]]; then
@@ -121,7 +117,6 @@ src_unpack() {
 \end{listing}
 
 \subsection{src\_prepare}
-\label{sec:src-prepare-function}
 
 \featurelabel{src-prepare} The \t{src\_prepare} function is only called for EAPIs listed in
 table~\ref{tab:src-prepare-table} as supporting it. The \t{src\_prepare} function can be used for
@@ -135,7 +130,7 @@ section~\ref{sec:s-to-workdir-fallback}.
 as:
 
 \begin{listing}[H]
-\caption{src\_prepare, format~6} \label{lst:src-prepare-6}
+\caption{src\_prepare, format~6}
 \begin{verbatim}
 src_prepare() {
     if declare -p PATCHES | grep -q "^declare -a "; then
@@ -168,7 +163,6 @@ the \t{src\_prepare} function is a no-op.
 \end{centertable}
 
 \subsection{src\_configure}
-\label{sec:src-configure-function}
 
 \featurelabel{src-configure} The \t{src\_configure} function is only called for EAPIs listed in
 table~\ref{tab:src-configure-table} as supporting it.
@@ -180,7 +174,7 @@ The \t{src\_configure} function configures the package's build environment. The 
 implementation used when the ebuild lacks the \t{src\_configure} function shall behave as:
 
 \begin{listing}[H]
-\caption{src\_configure} \label{lst:src-configure}
+\caption{src\_configure}
 \begin{verbatim}
 src_configure() {
     if [[ -x ${ECONF_SOURCE:-.}/configure ]]; then
@@ -205,7 +199,6 @@ src_configure() {
 \end{centertable}
 
 \subsection{src\_compile}
-\label{sec:src-compile-function}
 
 \featurelabel{src-compile} The \t{src\_compile} function configures the package's build environment
 in EAPIs lacking \t{src\_configure}, and builds the package in all EAPIs.
@@ -218,7 +211,7 @@ section~\ref{sec:s-to-workdir-fallback}.
 as:
 
 \begin{listing}[H]
-\caption{src\_compile, format~0} \label{lst:src-compile-0}
+\caption{src\_compile, format~0}
 \begin{verbatim}
 src_compile() {
     if [[ -x ./configure ]]; then
@@ -236,7 +229,7 @@ src_compile() {
 as:
 
 \begin{listing}[H]
-\caption{src\_compile, format~1} \label{lst:src-compile-1}
+\caption{src\_compile, format~1}
 \begin{verbatim}
 src_compile() {
     if [[ -x ${ECONF_SOURCE:-.}/configure ]]; then
@@ -254,7 +247,7 @@ src_compile() {
 as:
 
 \begin{listing}[H]
-\caption{src\_compile, format~2} \label{lst:src-compile-2}
+\caption{src\_compile, format~2}
 \begin{verbatim}
 src_compile() {
     if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]]; then
@@ -280,7 +273,6 @@ src_compile() {
 \end{centertable}
 
 \subsection{src\_test}
-\label{sec:src-test-function}
 
 The \t{src\_test} function runs unit tests for the newly built but not yet installed package as
 provided.
@@ -312,7 +304,6 @@ be disabled by user too, using a PM-specific mechanism.
 \end{centertable}
 
 \subsection{src\_install}
-\label{sec:src-install-function}
 
 \featurelabel{src-install} The \t{src\_install} function installs the package's content to a
 directory specified in \t{D}.
@@ -325,7 +316,7 @@ section~\ref{sec:s-to-workdir-fallback}.
 as:
 
 \begin{listing}[H]
-\caption{src\_install, format~4} \label{lst:src-install-4}
+\caption{src\_install, format~4}
 \begin{verbatim}
 src_install() {
     if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]]; then
@@ -352,7 +343,7 @@ src_install() {
 as:
 
 \begin{listing}[H]
-\caption{src\_install, format~6} \label{lst:src-install-6}
+\caption{src\_install, format~6}
 \begin{verbatim}
 src_install() {
     if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]]; then
@@ -382,7 +373,6 @@ is a no-op.
 \end{centertable}
 
 \subsection{pkg\_preinst}
-\label{sec:pkg-preinst-function}
 
 The \t{pkg\_preinst} function performs any special tasks that are required immediately before
 merging the package to the live filesystem. It must not write outside of the directories specified
@@ -392,7 +382,6 @@ by the \t{ROOT} and \t{D} environment variables.
 the \t{ROOT} and \t{D} environment variables.
 
 \subsection{pkg\_postinst}
-\label{sec:pkg-postinst-function}
 
 The \t{pkg\_postinst} function performs any special tasks that are required immediately after
 merging the package to the live filesystem. It must not write outside of the directory specified
@@ -402,7 +391,6 @@ in the \t{ROOT} environment variable.
 below that specified by the \t{ROOT} environment variable.
 
 \subsection{pkg\_prerm}
-\label{sec:pkg-prerm-function}
 
 The \t{pkg\_prerm} function performs any special tasks that are required immediately before
 unmerging the package from the live filesystem. It must not write outside of the directory specified
@@ -412,7 +400,6 @@ by the \t{ROOT} environment variable.
 the \t{ROOT} environment variable.
 
 \subsection{pkg\_postrm}
-\label{sec:pkg-postrm-function}
 
 The \t{pkg\_postrm} function performs any special tasks that are required immediately after
 unmerging the package from the live filesystem. It must not write outside of the directory specified
@@ -422,7 +409,6 @@ by the \t{ROOT} environment variable.
 the \t{ROOT} environment variable.
 
 \subsection{pkg\_config}
-\label{sec:pkg-config-function}
 
 The \t{pkg\_config} function performs any custom steps required to configure a package after it has been
 fully installed. It is the only ebuild function which may be interactive and prompt for user input.
@@ -430,7 +416,6 @@ fully installed. It is the only ebuild function which may be interactive and pro
 \t{pkg\_config} must be run with full access to all files and directories inside of \t{ROOT}.
 
 \subsection{pkg\_info}
-\label{sec:pkg-info-function}
 
 \featurelabel{pkg-info} The \t{pkg\_info} function may be called by the package manager when
 displaying information about an installed package. In EAPIs listed in table~\ref{tab:pkg-info-table}
@@ -455,7 +440,6 @@ that dependencies may not be installed.
 \end{centertable}
 
 \subsection{pkg\_nofetch}
-\label{sec:pkg-nofetch-function}
 
 The \t{pkg\_nofetch} function is run when the fetch phase of an fetch-restricted ebuild is run, and
 the relevant source files are not available. It should direct the user to download all relevant

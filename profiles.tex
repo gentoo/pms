@@ -64,7 +64,6 @@ bash syntax, is allowed as follows:
 \end{compactitem}
 
 \subsection{Simple line-based files}
-\label{sec:line-stacking}
 These files are a simple one-item-per-line list, which is inherited in the following manner: the
 parent profile's list is taken, and the current profile's list appended. If any line begins with a
 hyphen, then any lines previous to it whose contents are equal to the remainder of that line are
@@ -107,7 +106,6 @@ that the package should have the USE flag disabled.  The package dependency spec
 the forms defined by the directory's EAPI.
 
 \subsection{USE masking and forcing}
-\label{sec:use-masking}
 This section covers the eight files \t{use.mask}, \t{use.force}, \t{use.stable.mask},
 \t{use.stable.force}, \t{package.use.mask}, \t{package.use.force}, \t{package.use.stable.mask},
 and \t{package.use.\allowbreak stable.force}. They are described together because they interact in
