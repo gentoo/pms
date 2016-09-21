@@ -24,9 +24,9 @@ script=="log" && /^Committer Date:/ { CommitterDate = substr($0, 2+match($0, ":"
 
 ### Process output of "git status".
 ### Changed index?
-script=="status" && /^# Changes to be committed:/ { modified = 1 }
+script=="status" && /^[MADRC]/ { if (modified == 0) modified = 1 }
 ### Unstaged modifications?
-script=="status" && /^# Changed but not updated:/ { modified = 2 }
+script=="status" && /^.[MD]/ { modified = 2 }
 
 
 
