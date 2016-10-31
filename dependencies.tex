@@ -296,6 +296,10 @@ slot/sub-slot pair between the colon and equals sign when saving the package's d
 sub-slot part must not be omitted here (when the SLOT variable omits the sub-slot part, the package
 is considered to have an implicit sub-slot which is equal to the regular slot).
 
+Whenever the equals slot operator is used in an enabled dependency group, the dependencies
+(\t{DEPEND}) must ensure that a matching package is installed at build time. It is invalid to use
+the equals slot operator inside \t{PDEPEND} or inside any-of dependency specifications.
+
 \subsubsection{2-Style and 4-Style Use Dependencies}
 \label{sec:use-dep}
 
