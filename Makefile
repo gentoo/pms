@@ -32,11 +32,6 @@ pms.html: $(LATEXFILES) pms.bbl vc.tex
 	@# work around irregularity in how links to longtables are
 	@# formatted in the List of Tables
 	LC_ALL=C sed -i -e '/<span class="lotToc" >&#x00A0;/{N;N;s/\(&#x00A0;<a \nhref="[^"]\+">\)\([0-9A-Z.]\+\)[ \n]/\2\1/}' pms.html
-	@# indent algorithms properly, and avoid adding extra vertical
-	@# space in Konqueror
-	LC_ALL=C sed -i -e 's/span style="width:/span style="display:-moz-inline-box;display:inline-block;height:1px;width:/' pms.html
-	@# align algorithm line numbers properly
-	LC_ALL=C sed -i -e '/<span class="ALCitem">/{N;s/\n\(class="[^"]\+">\)\([0-9]:<\/span>\)/\1\&#x2007;\2/}' pms.html
 	@# fix broken span on title page
 	LC_ALL=C sed -i -e '/<\/span><span $$/{N;s/<\/span><span [^>]*>\(&[a-z]uml;\)/\1/}' pms.html
 
