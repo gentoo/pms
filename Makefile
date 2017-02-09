@@ -26,14 +26,14 @@ pms.html: $(LATEXFILES) pms.bbl vc.tex
 	mk4ht xhlatex pms xhtml,fn-in
 	@# some www servers ignore meta tags, resulting in a wrong charset.
 	@# therefore recode the very few non-ascii characters
-	recode -d l1..h3 pms.html
+	recode -d l1..h3 $@
 	@# declare encoding as utf-8, although it is pure ascii
-	LC_ALL=C sed -i -e '/<?xml\|<meta/s/iso-8859-1/utf-8/' pms.html
+	LC_ALL=C sed -i -e '/<?xml\|<meta/s/iso-8859-1/utf-8/' $@
 	@# work around irregularity in how links to longtables are
 	@# formatted in the List of Tables
-	LC_ALL=C sed -i -e '/<span class="lotToc" >&#x00A0;/{N;N;s/\(&#x00A0;<a \nhref="[^"]\+">\)\([0-9A-Z.]\+\)[ \n]/\2\1/}' pms.html
+	LC_ALL=C sed -i -e '/<span class="lotToc" >&#x00A0;/{N;N;s/\(&#x00A0;<a \nhref="[^"]\+">\)\([0-9A-Z.]\+\)[ \n]/\2\1/}' $@
 	@# fix broken span on title page
-	LC_ALL=C sed -i -e '/<\/span><span $$/{N;s/<\/span><span [^>]*>\(&[a-z]uml;\)/\1/}' pms.html
+	LC_ALL=C sed -i -e '/<\/span><span $$/{N;s/<\/span><span [^>]*>\(&[a-z]uml;\)/\1/}' $@
 
 pms.bbl: pms.bib pms.tex vc.tex eapi-cheatsheet.pdf
 	latex pms
