@@ -32,8 +32,8 @@ pms.html: $(LATEXFILES) pms.bbl vc.tex
 	@# work around irregularity in how links to longtables are
 	@# formatted in the List of Tables
 	LC_ALL=C sed -i -e '/<span class="lotToc" >&#x00A0;/{N;N;s/\(&#x00A0;<a \nhref="[^"]\+">\)\([0-9A-Z.]\+\)[ \n]/\2\1/}' $@
-	@# fix broken span on title page
-	LC_ALL=C sed -i -e '/<\/span><span $$/{N;s/<\/span><span [^>]*>\(&[a-z]uml;\)/\1/}' $@
+	@# remove redundant span elements
+	LC_ALL=C sed -i -e ':x;/<span\(\s\+[^>]*\)\?$$/{N;bx;};:y;s/\(<span\s\+[^>]*>\)\([^<]*\)<\/span>\1/\1\2/;ty' $@
 
 pms.bbl: pms.bib pms.tex vc.tex eapi-cheatsheet.pdf
 	latex pms
