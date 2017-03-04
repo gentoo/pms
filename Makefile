@@ -47,7 +47,7 @@ eapi-cheatsheet-nocombine.pdf: vc.tex
 	pdflatex -jobname eapi-cheatsheet-nocombine \
 	  '\PassOptionsToClass{nocombine}{leaflet}\input{eapi-cheatsheet.tex}'
 
-vc.tex: $(LATEXFILES) vc-git.awk
+vc.tex: $(LATEXFILES) vc vc-git.awk
 	/bin/sh ./vc
 
 pms.dvi: $(LATEXFILES) pms.bbl vc.tex
