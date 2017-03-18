@@ -95,6 +95,18 @@ variable.
     Ditto &
     Yes &
     The full path to the directory in which the files in the \t{A} variable are stored. \\
+\t{WORKDIR} &
+    Ditto &
+    Yes &
+    The full path to the ebuild's working directory, where all build data should be contained.%
+    \label{env-var-WORKDIR} \\
+\t{S} &
+    \t{src\_*} &
+    Yes &
+    The full path to the temporary build directory, used by \t{src\_compile}, \t{src\_install} etc.
+    Defaults to \t{\$\{WORKDIR\}/\$\{P\}}. May be modified by ebuilds. If \t{S} is assigned in the
+    global scope of an ebuild, then the restrictions of section~\ref{sec:ebuild-env-state} for
+    global variables apply. \\
 \t{PORTDIR} &
     \t{src\_*} &
     No &
@@ -190,18 +202,6 @@ variable.
     was executed by the package manager. May be unset or any single word that is not any of the
     above when the ebuild is being sourced for other (e.\,g.\ metadata or QA) purposes. Only for
     EAPIs listed in table~\ref{tab:added-env-vars-table} as supporting \t{EBUILD\_PHASE\_FUNC}. \\
-\t{WORKDIR} &
-    \t{src\_*}, global~scope &
-    Yes &
-    The full path to the ebuild's working directory, in which all build data should be
-    contained. \label{env-var-WORKDIR} \\
-\t{S} &
-    \t{src\_*} &
-    Yes &
-    The full path to the temporary build directory, used by \t{src\_compile}, \t{src\_install} etc.
-    Defaults to \t{\$\{WORKDIR\}/\$\{P\}}. May be modified by ebuilds. If \t{S} is assigned in the
-    global scope of an ebuild, then the restrictions of section~\ref{sec:ebuild-env-state} for
-    global variables apply. \\
 \t{KV} &
     All &
     Yes &
