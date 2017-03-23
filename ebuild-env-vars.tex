@@ -67,7 +67,7 @@ variable.
     Yes &
     Package version and revision (if any), for example \t{7.0.174} or \t{7.0.174-r1}. \\
 \t{A} &
-    \t{src\_*} &
+    \t{src\_*}, \t{pkg\_nofetch} &
     Yes &
     All source files available for the package, whitespace separated with no leading or trailing
     whitespace, and in the order in which the item first appears in a matched component of
@@ -77,7 +77,7 @@ variable.
     assume that the package manager sets it in the EAPIs supporting it. For example, a few
     configure scripts use this variable to find the \t{aalib} package; ebuilds calling such
     configure scripts must thus work around this.} &
-    \t{src\_*} &
+    Ditto &
     Yes &
     \featurelabel{aa} All source files that could be available for the package, including any that
     are disabled in \t{A} because of USE conditionals. The value is calculated from the base names
