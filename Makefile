@@ -8,11 +8,13 @@ clean :
 maintainer-clean: clean
 	rm -f vc.tex
 
-LATEXFILES := $(filter-out vc.tex,$(wildcard *.tex)) pms.cls
-
-pms.pdf: $(LATEXFILES) pms.bbl vc.tex eapi-cheatsheet.pdf
+aux-clean:
 	@# latex chokes on aux files produced by tex4ht, so remove them
 	if grep -q rEfLiNK pms.aux 2>/dev/null; then rm -f *.aux; fi
+
+LATEXFILES := $(filter-out vc.tex,$(wildcard *.tex)) pms.cls
+
+pms.pdf: $(LATEXFILES) pms.bbl vc.tex eapi-cheatsheet.pdf aux-clean
 	pdflatex pms
 	pdflatex pms
 	pdflatex eapi-cheatsheet
@@ -39,10 +41,10 @@ pms.bbl: pms.bib pms.tex vc.tex eapi-cheatsheet.pdf
 	latex pms
 	bibtex pms
 
-eapi-cheatsheet.pdf: vc.tex
+eapi-cheatsheet.pdf: vc.tex aux-clean
 	pdflatex eapi-cheatsheet
 
-eapi-cheatsheet-nocombine.pdf: vc.tex
+eapi-cheatsheet-nocombine.pdf: vc.tex aux-clean
 	@# cheat sheet with separate pages, for proofreading
 	pdflatex -jobname eapi-cheatsheet-nocombine \
 	  '\PassOptionsToClass{nocombine}{leaflet}\input{eapi-cheatsheet.tex}'
@@ -50,7 +52,7 @@ eapi-cheatsheet-nocombine.pdf: vc.tex
 vc.tex: $(LATEXFILES) vc vc-git.awk
 	/bin/sh ./vc
 
-pms.dvi: $(LATEXFILES) pms.bbl vc.tex
+pms.dvi: $(LATEXFILES) pms.bbl vc.tex aux-clean
 	latex pms
 	latex pms
 	latex pms
@@ -67,4 +69,4 @@ upload:
 
 .default: all
 
-.phony: clean maintainer-clean dist upload
+.phony: clean maintainer-clean aux-clean dist upload
