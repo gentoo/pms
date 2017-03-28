@@ -26,17 +26,15 @@ been abused in the past.
 
 \chapter{Historical Curiosities}
 
-The items described in this chapter are included for information only. They were deprecated or
-abandoned long before \t{EAPI} was introduced. Ebuilds must not use these features, and package
-managers should not be changed to support them.
+The items described in this chapter are included for information only. Unless otherwise noted,
+they were deprecated or abandoned long before \t{EAPI} was introduced. Ebuilds must not use these
+features, and package managers should not be changed to support them.
 
 \section{If-else use blocks}
 
 Historically, Portage supported if-else use conditionals, as shown by
 listing~\ref{lst:if-else-use-listing}. The block before the colon would be taken if the condition
 was met, and the block after the colon would be taken if the condition was not met.
-
-This feature was deprecated and removed from the tree long before the introduction of \t{EAPI}.
 
 \begin{listing}
 \caption{If-else use blocks} \label{lst:if-else-use-listing}
