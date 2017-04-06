@@ -660,9 +660,8 @@ has returned.
 
 \featurelabel{docompress} In EAPIs listed in table~\ref{tab:compression-table} as supporting
 controllable compression, the package manager may optionally compress a subset of the files under
-the \t{ED} directory in offset-prefix aware EAPIs or the \t{D} directory in offset-prefix agnostic
-EAPIs. To control which directories may or may not be compressed, the package manager shall
-maintain two lists:
+the \t{ED} directory. To control which directories may or may not be compressed, the package manager
+shall maintain two lists:
 
 \begin{compactitem}
 \item An inclusion list, which initially contains \t{/usr/share/doc}, \t{/usr/share/info} and
@@ -672,8 +671,7 @@ maintain two lists:
 
 The optional compression shall be carried out after \t{src\_install} has completed, and before the
 execution of any subsequent phase function. For each item in the inclusion list, pretend it has the
-value of the \t{ED} variable in offset-prefix aware EAPIs or the \t{D}
-variable in offset-prefix agnostic EAPIs prepended, then:
+value of the \t{ED} variable prepended, then:
 
 \begin{compactitem}
 \item If it is a directory, act as if every file or directory immediately under this directory
@@ -683,8 +681,7 @@ variable in offset-prefix agnostic EAPIs prepended, then:
 \end{compactitem}
 
 Whether an item is to be excluded is determined as follows: For each item in the exclusion list,
-pretend it has the value of the \t{ED} variable in offset-prefix aware EAPIs or the \t{D} variable in
-offset-prefix agnostic EAPIs prepended, then:
+pretend it has the value of the \t{ED} variable prepended, then:
 
 \begin{compactitem}
 \item If it is a directory, act as if every file or directory immediately under this directory
