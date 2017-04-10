@@ -92,6 +92,20 @@ to the host root instead of \t{ROOT}.
     matching version; otherwise, prints an empty string. The exit code is unspecified.
 \end{description}
 
+\ChangeWhenAddingAnEAPI{6}
+\begin{centertable}{EAPIs supporting \t{-{}-host-root} for \t{*\_version} commands}
+    \label{tab:foo-version-host-root-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{*\_version} supports \t{-{}-host-root}?}} \\
+      \midrule
+      0, 1, 2, 3, 4     & No  \\
+      5, 6              & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
 \subsubsection{Output commands}
 These commands display messages to the user. Unless otherwise stated, the entire argument list is
 used as a message, with backslash-escaped characters interpreted as for the \t{echo -e} command of
@@ -154,17 +168,6 @@ Ebuilds must not run any of these commands once the current phase function has r
     using \t{die}, unless run using \t{nonfatal}, in which case it returns non-zero exit status.
     Only available in EAPIs listed in table~\ref{tab:patch-commands} as supporting \t{eapply}.
 
-\item[eapply\_user] \featurelabel{eapply-user} Takes no arguments. Package managers supporting it
-    apply user-provided patches to the source tree in the current working directory. Exact behaviour
-    is implementation defined and beyond the scope of this specification. Package managers not
-    supporting it must implement the command as a no-op. Returns shell true (0) if patches applied
-    successfully, or if no patches were provided. Otherwise, aborts the build process, unless run
-    using \t{nonfatal}, in which case it returns non-zero exit status. Only available in EAPIs
-    listed in table~\ref{tab:patch-commands} as supporting \t{eapply\_user}. In EAPIs where it is
-    supported, \t{eapply\_user} must be called once in the \t{src\_prepare} phase. For any
-    subsequent calls, the command will do nothing and return~0.
-\end{description}
-
 \begin{algorithm}
 \caption{\t{eapply} logic} \label{alg:eapply}
 \begin{algorithmic}[1]
@@ -201,6 +204,17 @@ Ebuilds must not run any of these commands once the current phase function has r
 \RETURN shell true (0)
 \end{algorithmic}
 \end{algorithm}
+
+\item[eapply\_user] \featurelabel{eapply-user} Takes no arguments. Package managers supporting it
+    apply user-provided patches to the source tree in the current working directory. Exact behaviour
+    is implementation defined and beyond the scope of this specification. Package managers not
+    supporting it must implement the command as a no-op. Returns shell true (0) if patches applied
+    successfully, or if no patches were provided. Otherwise, aborts the build process, unless run
+    using \t{nonfatal}, in which case it returns non-zero exit status. Only available in EAPIs
+    listed in table~\ref{tab:patch-commands} as supporting \t{eapply\_user}. In EAPIs where it is
+    supported, \t{eapply\_user} must be called once in the \t{src\_prepare} phase. For any
+    subsequent calls, the command will do nothing and return~0.
+\end{description}
 
 \ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{Patch commands for EAPIs}
@@ -607,20 +621,6 @@ can be extended or reduced (see below). The options that can be passed to \t{doh
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting \t{-{}-host-root} for \t{*\_version} commands}
-    \label{tab:foo-version-host-root-table}
-    \begin{tabular}{ll}
-      \toprule
-      \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{\t{*\_version} supports \t{-{}-host-root}?}} \\
-      \midrule
-      0, 1, 2, 3, 4     & No  \\
-      5, 6              & Yes \\
-      \bottomrule
-    \end{tabular}
-\end{centertable}
-
 \subsubsection{Commands affecting install destinations}
 The following commands are used to set the various destination trees, all relative to \t{\$\{ED\}} in
 offset-prefix aware EAPIs and relative to \t{\$\{D\}} in offset-prefix agnostic EAPIs, used by the
@@ -922,11 +922,6 @@ has returned.
     returns a non-zero exit status, returns immediately with the same exit status. Only available
     in EAPIs listed in table~\ref{tab:misc-commands} as supporting \t{einstalldocs}.
 
-\item[get\_libdir] \featurelabel{get-libdir} Prints the libdir name obtained according to
-    Algorithm~\ref{alg:get-libdir}. Only available in EAPIs listed in table~\ref{tab:misc-commands}
-    as supporting \t{get\_libdir}.
-\end{description}
-
 \begin{algorithm}
 \caption{\t{einstalldocs} logic} \label{alg:einstalldocs}
 \begin{algorithmic}[1]
@@ -955,6 +950,10 @@ has returned.
 \end{algorithmic}
 \end{algorithm}
 
+\item[get\_libdir] \featurelabel{get-libdir} Prints the libdir name obtained according to
+    Algorithm~\ref{alg:get-libdir}. Only available in EAPIs listed in table~\ref{tab:misc-commands}
+    as supporting \t{get\_libdir}.
+
 \begin{algorithm}
 \caption{\t{get\_libdir} logic} \label{alg:get-libdir}
 \begin{algorithmic}[1]
@@ -968,6 +967,8 @@ has returned.
 \STATE print the value of libdir
 \end{algorithmic}
 \end{algorithm}
+
+\end{description}
 
 \ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{Misc commands for EAPIs}

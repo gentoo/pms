@@ -78,7 +78,7 @@ If a sub-algorithm returns a decision, then that is the result of the whole comp
 if it terminates without returning a decision, the process continues from the point
 from which it was invoked.
 
-\begin{algorithm}
+\begin{algorithm}[p]
 \caption{Version comparison top-level logic} \label{alg:version-comparison}
 \begin{algorithmic}[1]
     \STATE let $A$ and $B$ be the versions to be compared
@@ -90,7 +90,7 @@ from which it was invoked.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}
+\begin{algorithm}[p]
 \caption{Version comparison logic for numeric components} \label{alg:version-comparison-numeric}
 \begin{algorithmic}[1]
   \STATE define the notations $An_k$ and $Bn_k$ to mean the $k$\textsuperscript{th} numeric
@@ -113,7 +113,7 @@ from which it was invoked.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}
+\begin{algorithm}[p]
 \caption{Version comparison logic for each numeric component after the first}
 \label{alg:version-comparison-numeric-nonfirst}
 \begin{algorithmic}[1]
@@ -135,7 +135,7 @@ from which it was invoked.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}
+\begin{algorithm}[p]
 \caption{Version comparison logic for letter components} \label{alg:version-comparison-letter}
 \begin{algorithmic}[1]
   \STATE let $Al$ be the letter component of $A$ if any, otherwise the empty string
@@ -148,7 +148,7 @@ from which it was invoked.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}
+\begin{algorithm}[p]
 \caption{Version comparison logic for suffixes} \label{alg:version-comparison-suffix}
 \begin{algorithmic}[1]
   \STATE define the notations $As_k$ and $Bs_k$ to mean the $k$\textsuperscript{th} suffix of $A$
@@ -174,7 +174,7 @@ from which it was invoked.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}
+\begin{algorithm}[p]
 \caption{Version comparison logic for each suffix} \label{alg:version-comparison-suffix-each}
 \begin{algorithmic}[1]
   \IF{$As_i$ and $Bs_i$ are of the same type (\t{\_alpha} vs \t{\_beta} etc)}
@@ -194,7 +194,7 @@ from which it was invoked.
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}
+\begin{algorithm}[p]
 \caption{Version comparison logic for revision components} \label{alg:version-comparison-revision}
 \begin{algorithmic}[1]
   \STATE let $Ar$ be the integer part of the revision component of $A$ if any, otherwise $\t{0}$
