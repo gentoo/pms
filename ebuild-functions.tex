@@ -106,7 +106,7 @@ The initial working directory must be \t{WORKDIR}, and the default implementatio
 the ebuild lacks the \t{src\_unpack} function shall behave as:
 
 \begin{listing}[H]
-\caption{src\_unpack}
+\caption{\t{src\_unpack}}
 \begin{verbatim}
 src_unpack() {
     if [[ -n ${A} ]]; then
@@ -130,7 +130,7 @@ section~\ref{sec:s-to-workdir-fallback}.
 as:
 
 \begin{listing}[H]
-\caption{src\_prepare, format~6}
+\caption{\t{src\_prepare}, format~6}
 \begin{verbatim}
 src_prepare() {
     if declare -p PATCHES | grep -q "^declare -a "; then
@@ -174,7 +174,7 @@ The \t{src\_configure} function configures the package's build environment. The 
 implementation used when the ebuild lacks the \t{src\_configure} function shall behave as:
 
 \begin{listing}[H]
-\caption{src\_configure}
+\caption{\t{src\_configure}}
 \begin{verbatim}
 src_configure() {
     if [[ -x ${ECONF_SOURCE:-.}/configure ]]; then
@@ -211,7 +211,7 @@ section~\ref{sec:s-to-workdir-fallback}.
 as:
 
 \begin{listing}[H]
-\caption{src\_compile, format~0}
+\caption{\t{src\_compile}, format~0}
 \begin{verbatim}
 src_compile() {
     if [[ -x ./configure ]]; then
@@ -229,7 +229,7 @@ src_compile() {
 as:
 
 \begin{listing}[H]
-\caption{src\_compile, format~1}
+\caption{\t{src\_compile}, format~1}
 \begin{verbatim}
 src_compile() {
     if [[ -x ${ECONF_SOURCE:-.}/configure ]]; then
@@ -247,7 +247,7 @@ src_compile() {
 as:
 
 \begin{listing}[H]
-\caption{src\_compile, format~2}
+\caption{\t{src\_compile}, format~2}
 \begin{verbatim}
 src_compile() {
     if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]]; then
@@ -316,7 +316,7 @@ section~\ref{sec:s-to-workdir-fallback}.
 as:
 
 \begin{listing}[H]
-\caption{src\_install, format~4}
+\caption{\t{src\_install}, format~4}
 \begin{verbatim}
 src_install() {
     if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]]; then
@@ -343,7 +343,7 @@ src_install() {
 as:
 
 \begin{listing}[H]
-\caption{src\_install, format~6}
+\caption{\t{src\_install}, format~6}
 \begin{verbatim}
 src_install() {
     if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]]; then

@@ -26,7 +26,7 @@ The following commands affect this behaviour:
 \end{description}
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPI Command Failure Behaviour}
+\begin{centertable}{EAPI command failure behaviour}
     \label{tab:commands-die-table}
     \begin{tabular}{lll}
       \toprule
@@ -166,7 +166,7 @@ Ebuilds must not run any of these commands once the current phase function has r
 \end{description}
 
 \begin{algorithm}
-\caption{eapply logic} \label{alg:eapply}
+\caption{\t{eapply} logic} \label{alg:eapply}
 \begin{algorithmic}[1]
 \IF{any parameter is equal to \t{"-{}-"}}
     \STATE collect all parameters before the first \t{"-{}-"} in the \t{options} array
@@ -283,7 +283,7 @@ current phase function has returned.
     \t{nonfatal}, in which case it must return non-zero exit status.
 
 \begin{algorithm}
-\caption{econf -{}-libdir logic} \label{alg:econf-libdir}
+\caption{\t{econf -{}-libdir} logic} \label{alg:econf-libdir}
 \begin{algorithmic}[1]
 \STATE let prefix=\$\{EPREFIX\}/usr
 \IF{the caller specified -{}-prefix=\$p}
@@ -323,7 +323,7 @@ current phase function has returned.
     Algorithm~\ref{alg:ebuild-libdir}.
 
 \begin{listing}[H]
-\caption{einstall command} \label{lst:einstall}
+\caption{\t{einstall} command} \label{lst:einstall}
 \begin{verbatim}
 emake \
    prefix="${ED}"/usr \
@@ -757,7 +757,7 @@ table~\ref{tab:use-list-strictness}.
 \end{description}
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPI Behaviour for Use Queries not in IUSE\_EFFECTIVE}
+\begin{centertable}{EAPI behaviour for use queries not in \t{IUSE\_EFFECTIVE}}
     \label{tab:use-list-strictness}
     \begin{tabular}{ll}
       \toprule
@@ -928,7 +928,7 @@ has returned.
 \end{description}
 
 \begin{algorithm}
-\caption{einstalldocs logic} \label{alg:einstalldocs}
+\caption{\t{einstalldocs} logic} \label{alg:einstalldocs}
 \begin{algorithmic}[1]
 \STATE save the value of the install directory for \t{dodoc}
 \STATE set the install directory for \t{dodoc} to \t{/usr/share/doc/\$\{PF\}}
@@ -956,7 +956,7 @@ has returned.
 \end{algorithm}
 
 \begin{algorithm}
-\caption{get\_libdir logic} \label{alg:get-libdir}
+\caption{\t{get\_libdir} logic} \label{alg:get-libdir}
 \begin{algorithmic}[1]
 \STATE let libdir=lib
 \IF{the ABI environment variable is set}
