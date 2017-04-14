@@ -5,14 +5,14 @@
 No name may be empty. Package managers must not impose fixed upper boundaries upon the length of any
 name. A package manager should indicate or reject any name that is invalid according to these rules.
 
-\subsection{Category Names}
+\subsection{Category names}
 A category name may contain any of the characters [\t{A-Za-z0-9+\_.-}]. It must not begin with
 a hyphen, a dot or a plus sign.
 
 \note A hyphen is \e{not} required because of the \t{virtual} category. Usually, however, category
 names will contain a hyphen.
 
-\subsection{Package Names}
+\subsection{Package names}
 A package name may contain any of the characters [\t{A-Za-z0-9+\_-}]. It must not begin with a
 hyphen or a plus sign, and must not end in a hyphen followed by anything matching the version
 syntax described in section~\ref{sec:version-spec}.
@@ -20,35 +20,35 @@ syntax described in section~\ref{sec:version-spec}.
 \note A package name does not include the category. The term \i{qualified package name} is used
 where a \t{category/package} pair is meant.
 
-\subsection{Slot Names}
+\subsection{Slot names}
 \label{sec:slot-names}
 A slot name may contain any of the characters [\t{A-Za-z0-9+\_.-}]. It must not begin with a
 hyphen, a dot or a plus sign.
 
-\subsection{USE Flag Names}
+\subsection{USE flag names}
 A USE flag name may contain any of the characters [\t{A-Za-z0-9+\_@-}]. It must begin with an
 alphanumeric character. Underscores should be considered reserved for \t{USE\_EXPAND}, as
 described in section~\ref{sec:use-iuse-handling}.
 
 \note The at-sign is required for \t{LINGUAS}.
 
-\subsection{Repository Names}
+\subsection{Repository names}
 \label{sec:repository-names}
 A repository name may contain any of the characters [\t{A-Za-z0-9\_-}]. It must not begin with a
 hyphen. In addition, every repository name must also be a valid package name.
 
-\subsection{License Names}
+\subsection{License names}
 \label{sec:license-names}
 A license name may contain any of the characters [\t{A-Za-z0-9+\_.-}]. It must not begin with a
 hyphen, a dot or a plus sign.
 
-\subsection{Keyword Names}
+\subsection{Keyword names}
 \label{sec:keyword-names}
 A keyword name may contain any of the characters [\t{A-Za-z0-9\_-}]. It must not begin with a
 hyphen. In contexts where it makes sense to do so, a keyword name may be prefixed by
 a tilde or a hyphen. In \t{KEYWORDS}, \t{-*} is also acceptable as a keyword.
 
-\subsection{EAPI Names}
+\subsection{EAPI names}
 \label{sec:eapi-names}
 An EAPI name may contain any of the characters [\t{A-Za-z0-9+\_.-}]. It must not begin with a
 hyphen, a dot or a plus sign.
@@ -207,7 +207,7 @@ from which it was invoked.
 \end{algorithmic}
 \end{algorithm}
 
-\section{Uniqueness of versions}
+\section{Uniqueness of Versions}
 
 No two packages in a given repository may have the same qualified package name and equal versions.
 For example, a repository may not contain more than one of \t{foo-bar/baz-1.0.2},

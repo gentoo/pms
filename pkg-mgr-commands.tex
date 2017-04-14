@@ -720,7 +720,7 @@ in table~\ref{tab:compression-table} as supporting \t{docompress}.
     \end{tabular}
 \end{centertable}
 
-\subsubsection{Use List Functions}
+\subsubsection{USE list functions}
 These functions provide behaviour based upon set or unset use flags. Ebuilds must not run any of
 these commands once the current phase function has returned. It is an error if an ebuild calls any
 of these functions in global scope.
@@ -802,7 +802,7 @@ table~\ref{tab:use-list-strictness}.
     \end{tabular}
 \end{centertable}
 
-\subsubsection{Text List Functions}
+\subsubsection{Text list functions}
 These functions check whitespace-separated lists for a particular value.
 
 \begin{description}
@@ -812,7 +812,7 @@ These functions check whitespace-separated lists for a particular value.
 \item[hasq] Deprecated synonym for \t{has}.
 \end{description}
 
-\subsubsection{Misc Commands}
+\subsubsection{Misc commands}
 The following commands are always available in the ebuild environment, but don't really fit in any
 of the above categories. Ebuilds must not run any of these commands once the current phase function
 has returned.
@@ -989,7 +989,7 @@ has returned.
     \end{tabular}
 \end{centertable}
 
-\subsubsection{Debug Commands}
+\subsubsection{Debug commands}
 The following commands are available for debugging. Normally all of these commands should be no ops;
 a package manager may provide a special debug mode where these commands instead do something.
 Ebuilds must not run any of these commands once the current phase function has returned.
@@ -1002,7 +1002,7 @@ Ebuilds must not run any of these commands once the current phase function has r
 \item[debug-print-section] Calls \t{debug-print} with \t{now in section \$*}.
 \end{description}
 
-\subsubsection{Reserved Commands and Variables}
+\subsubsection{Reserved commands and variables}
 
 Except where documented otherwise, all functions and variables that contain any of the following
 strings (ignoring case) are reserved for package manager use and may not be used or relied upon by

@@ -1,10 +1,10 @@
-\section{Profile variables}
+\section{Profile Variables}
 \label{sec:profile-variables}
 
 This section documents variables that have special meaning, or special behaviour, when defined in a
 profile's \t{make.defaults} file.
 
-\subsection{Incremental Variables}
+\subsection{Incremental variables}
 \i{Incremental} variables must stack between parent and child profiles in the following manner:
 Beginning with the highest parent profile, tokenise the variable's value based on whitespace and
 concatenate the lists. Then, for any token $T$ beginning with a hyphen, remove it and any previous

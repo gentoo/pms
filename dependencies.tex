@@ -117,11 +117,11 @@ In particular, note that whitespace is not optional.
     \end{tabular}
 \end{centertable}
 
-\subsection{All-of Dependency Specifications}
+\subsection{All-of dependency specifications}
 
 In an all-of group, all of the child elements must be matched.
 
-\subsection{Use-conditional Dependency Specifications}
+\subsection{USE-conditional dependency specifications}
 
 In a use-conditional group, if the associated use flag is enabled (or disabled if it has an
 exclamation mark prefix), all of the child elements must be matched.
@@ -129,7 +129,7 @@ exclamation mark prefix), all of the child elements must be matched.
 It is an error for a flag to be used if it is not included in \t{IUSE\_EFFECTIVE} as described in
 section~\ref{sec:use-iuse-handling}.
 
-\subsection{Any-of Dependency Specifications}
+\subsection{Any-of dependency specifications}
 
 Any use-conditional group that is an immediate child of an any-of group, if not enabled (disabled
 for an exclamation mark prefixed use flag name), is not considered a member of the any-of group
@@ -140,7 +140,7 @@ considered to be matched if its associated package dependency specification is n
 
 An empty any-of group counts as being matched.
 
-\subsection{Exactly-one-of Dependency Specifications}
+\subsection{Exactly-one-of dependency specifications}
 
 Any use-conditional group that is an immediate child of an exactly-one-of group, if not enabled
 (disabled for an exclamation mark prefixed use flag name), is not considered a member of the
@@ -150,7 +150,7 @@ In an exactly-one-of group, exactly one immediate child element must be matched.
 
 An empty exactly-one-of group counts as being matched.
 
-\subsection{At-most-one-of Dependency Specifications}
+\subsection{At-most-one-of dependency specifications}
 
 Any use-conditional group that is an immediate child of an at-most-one-of group, if not enabled
 (disabled for an exclamation mark prefixed use flag name), is not considered a member of the
@@ -160,7 +160,7 @@ In an at-most-one-of group, at most one immediate child element must be matched.
 
 An empty at-most-one-of group counts as being matched.
 
-\subsection{Package Dependency Specifications}
+\subsection{Package dependency specifications}
 
 A package dependency can be in one of the following base formats. A package manager must warn or
 error on non-compliant input.
@@ -232,7 +232,7 @@ The following operators are available:
 \item[\t{>}] Strictly greater than the specified version.
 \end{description}
 
-\subsubsection{Block Operator}
+\subsubsection{Block operator}
 
 If the specification is prefixed with one or two exclamation marks, the named dependency is a block
 rather than a requirement---that is to say, the specified package must not be installed, with the
@@ -263,7 +263,7 @@ described in table~\ref{tab:bang-strength-table}.
     \end{tabular}
 \end{centertable}
 
-\subsubsection{Slot Dependencies}
+\subsubsection{Slot dependencies}
 \label{sec:slot-dep}
 
 \featurelabel{slot-deps} A named slot dependency consists of a colon followed by a slot name. A
@@ -300,7 +300,7 @@ Whenever the equals slot operator is used in an enabled dependency group, the de
 (\t{DEPEND}) must ensure that a matching package is installed at build time. It is invalid to use
 the equals slot operator inside \t{PDEPEND} or inside any-of dependency specifications.
 
-\subsubsection{2-Style and 4-Style Use Dependencies}
+\subsubsection{2-style and 4-style USE dependencies}
 \label{sec:use-dep}
 
 A 2-style or 4-style use dependency consists of one of the following:
@@ -338,7 +338,7 @@ would not have to be part of \t{IUSE}.
 It is an error for an ebuild to use a conditional use dependency when that ebuild does not have the
 flag in \t{IUSE\_EFFECTIVE}.
 
-\subsection{Use State Constraints}
+\subsection{USE state constraints}
 \label{sec:required-use}
 \t{REQUIRED\_USE} contains a list of assertions that must be met by the configuration of \t{USE}
 flags to be valid for this ebuild. In order to be matched, a \t{USE} flag in a terminal element

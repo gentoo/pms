@@ -33,7 +33,7 @@ except as follows:
 On SELinux systems, the SELinux context must also be preserved. Other directory attributes, including
 modification time, may be discarded.
 
-\subsection{Empty Directories}
+\subsection{Empty directories}
 
 Behaviour upon encountering an empty directory is undefined. Ebuilds must not attempt to install an
 empty directory.
@@ -100,7 +100,7 @@ is undefined.
     \end{tabular}
 \end{centertable}
 
-\subsection{Configuration File Protection}
+\subsection{Configuration file protection}
 \label{sec:config-protect}
 
 The package manager must provide a means to prevent user configuration files from being
@@ -141,7 +141,7 @@ Ebuilds must not attempt to merge a symlink on top of a directory.
 Any absolute symlink whose link starts with \t{D} must be rewritten with the leading \t{D} removed.
 The package manager should issue a notice when doing this.
 
-\section{Hard links}
+\section{Hard Links}
 
 A hard link may be merged either as a single file with links or as multiple independent files.
 
