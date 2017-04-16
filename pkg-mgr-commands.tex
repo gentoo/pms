@@ -401,8 +401,10 @@ the current phase function has returned.
     \t{exeopts} call.
     Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
-\item[dohard] Takes two parameters. Creates a hardlink from the second to the first. In EAPIs
-    listed in table~\ref{tab:banned-commands-table}, this command is banned as per
+\item[dohard] Takes two parameters. Creates a hardlink from the second to the first. Both paths are
+    relative to the staging directory including the offset-prefix \t{ED} in offset-prefix aware
+    EAPIs, or just the staging directory \t{D} in offset-prefix agnostic EAPIs. In EAPIs listed
+    in table~\ref{tab:banned-commands-table}, this command is banned as per
     section~\ref{sec:banned-commands}.
 
 \item[doheader] \featurelabel{doheader} Installs the given header files into \t{/usr/include/},
