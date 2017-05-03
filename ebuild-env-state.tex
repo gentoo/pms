@@ -9,9 +9,8 @@ functions executed as part of a later uninstall.
 environment saving.
 
 Variables that were exported must remain exported in later functions; variables with default
-visibility may retain default visibility or be exported.
-
-Variables with special meanings to the package manager are excluded from this rule.
+visibility may retain default visibility or be exported. Variables with special meanings to the
+package manager are excluded from this rule.
 
 Global variables must only contain invariant values (see~\ref{sec:metadata-invariance}). If a global
 variable's value is invariant, it may have the value that would be generated at any given point
