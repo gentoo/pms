@@ -63,11 +63,20 @@ eapi-cheatsheet-nocombine.pdf: pms.pdf
 	  grep -q 'Warning.*Rerun' eapi-cheatsheet-nocombine.log || break; \
 	done
 
-dist: $(SOURCES) vc.tex
-	@if test -z $(PV); then \
-	  echo "Usage: $(MAKE) $@ PV=<version>"; false; \
-	fi
-	tar -cJf pms-$(PV).tar.xz --transform='s%^%pms-$(PV)/%' $^
+dist: $(SOURCES) vc.tex pms.pdf pms.html
+	PV='$(PV)'; \
+	if test -z "$${PV}"; then \
+	  current_eapi=$$(sed -n 's/.*CurrentEAPIIs{\(.*\)}.*/\1/p' pms.tex); \
+	  vc_date=$$(sed -n \
+	    's/.*VCDateISO{\([0-9]*\)-\([0-9]*\)-\([0-9]*\)}.*/\1\2\3/p' \
+	    vc.tex); \
+	  PV=$${current_eapi}_p$${vc_date}; \
+	fi; \
+	echo "PV = $${PV}"; \
+	tar -cJf pms-"$${PV}".tar.xz --transform="s%^%pms-$${PV}/%" \
+	  $(SOURCES) vc.tex && \
+	tar -cJf pms-"$${PV}"-prebuilt.tar.xz --transform="s%^%pms-$${PV}/%" \
+	  pms.pdf eapi-cheatsheet.pdf pms*.html pms.css
 
 upload: pms.pdf pms.html
 	scp pms.pdf eapi-cheatsheet.pdf pms*.html pms.css \
