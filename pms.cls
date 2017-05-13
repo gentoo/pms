@@ -17,6 +17,7 @@
 % Enable UTF-8 input encoding
 \PassOptionsToPackage{utf8}{inputenc}
 \PassOptionsToPackage{quiet}{marginnote}
+\PassOptionsToPackage{nohyphen}{underscore}
 \PassOptionsToPackage{nottoc,notlot,notlof}{tocbibind}
 \PassOptionsToPackage{chapter}{algorithm}
 % algorithmic and algorithm to be loaded last to avoid failures
@@ -33,6 +34,7 @@
     marginnote, % Typeset a paragraph in the page margin
     paralist,	% Additional list environments
     parskip,	% Space between paragraphs instead of indentation
+    underscore, % Allow simple _ instead of \_
     verbatim,	% Extend the print-as-is functionality
     chngcntr,	% Redefinition of counters
     tocbibind	% Add bibliography to table of contents
@@ -108,11 +110,6 @@
 }
 \newcommand{\e}[1]{\emph{#1}}
 \newcommand{\note}[1]{\paragraph{Note:} #1}
-
-% Allow line breaks after underscores (but with a large penalty)
-\newcommand{\origunderscore}{}
-\let\origunderscore\_
-\renewcommand{\_}{\origunderscore\penalty500\hskip0pt}
 
 % Because we are lazy, we define a table environment to fulfil our needs
 \newenvironment{centertable}[1]%
