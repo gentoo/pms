@@ -6,14 +6,14 @@ No name may be empty. Package managers must not impose fixed upper boundaries up
 name. A package manager should indicate or reject any name that is invalid according to these rules.
 
 \subsection{Category names}
-A category name may contain any of the characters [\t{A-Za-z0-9+\_.-}]. It must not begin with
+A category name may contain any of the characters [\t{A-Za-z0-9+_.-}]. It must not begin with
 a hyphen, a dot or a plus sign.
 
 \note A hyphen is \e{not} required because of the \t{virtual} category. Usually, however, category
 names will contain a hyphen.
 
 \subsection{Package names}
-A package name may contain any of the characters [\t{A-Za-z0-9+\_-}]. It must not begin with a
+A package name may contain any of the characters [\t{A-Za-z0-9+_-}]. It must not begin with a
 hyphen or a plus sign, and must not end in a hyphen followed by anything matching the version
 syntax described in section~\ref{sec:version-spec}.
 
@@ -22,35 +22,35 @@ where a \t{category/package} pair is meant.
 
 \subsection{Slot names}
 \label{sec:slot-names}
-A slot name may contain any of the characters [\t{A-Za-z0-9+\_.-}]. It must not begin with a
+A slot name may contain any of the characters [\t{A-Za-z0-9+_.-}]. It must not begin with a
 hyphen, a dot or a plus sign.
 
 \subsection{USE flag names}
-A USE flag name may contain any of the characters [\t{A-Za-z0-9+\_@-}]. It must begin with an
-alphanumeric character. Underscores should be considered reserved for \t{USE\_EXPAND}, as
+A USE flag name may contain any of the characters [\t{A-Za-z0-9+_@-}]. It must begin with an
+alphanumeric character. Underscores should be considered reserved for \t{USE_EXPAND}, as
 described in section~\ref{sec:use-iuse-handling}.
 
 \note The at-sign is required for \t{LINGUAS}.
 
 \subsection{Repository names}
 \label{sec:repository-names}
-A repository name may contain any of the characters [\t{A-Za-z0-9\_-}]. It must not begin with a
+A repository name may contain any of the characters [\t{A-Za-z0-9_-}]. It must not begin with a
 hyphen. In addition, every repository name must also be a valid package name.
 
 \subsection{License names}
 \label{sec:license-names}
-A license name may contain any of the characters [\t{A-Za-z0-9+\_.-}]. It must not begin with a
+A license name may contain any of the characters [\t{A-Za-z0-9+_.-}]. It must not begin with a
 hyphen, a dot or a plus sign.
 
 \subsection{Keyword names}
 \label{sec:keyword-names}
-A keyword name may contain any of the characters [\t{A-Za-z0-9\_-}]. It must not begin with a
+A keyword name may contain any of the characters [\t{A-Za-z0-9_-}]. It must not begin with a
 hyphen. In contexts where it makes sense to do so, a keyword name may be prefixed by
 a tilde or a hyphen. In \t{KEYWORDS}, \t{-*} is also acceptable as a keyword.
 
 \subsection{EAPI names}
 \label{sec:eapi-names}
-An EAPI name may contain any of the characters [\t{A-Za-z0-9+\_.-}]. It must not begin with a
+An EAPI name may contain any of the characters [\t{A-Za-z0-9+_.-}]. It must not begin with a
 hyphen, a dot or a plus sign.
 
 \section{Version Specifications}
@@ -63,8 +63,8 @@ A version starts with the number part, which is in the form \t{[0-9]+(\textbacks
 
 This may optionally be followed by one of \t{[a-z]} (a lowercase letter).
 
-This may be followed by zero or more of the suffixes \t{\_alpha}, \t{\_beta}, \t{\_pre},
-\t{\_rc} or \t{\_p}, which themselves may be followed by an optional integer. Suffix and integer
+This may be followed by zero or more of the suffixes \t{_alpha}, \t{_beta}, \t{_pre},
+\t{_rc} or \t{_p}, which themselves may be followed by an optional integer. Suffix and integer
 count as separate version components.
 
 This may optionally be followed by the suffix \t{-r} followed immediately by an integer (the
@@ -159,13 +159,13 @@ from which it was invoked.
     \STATE compare $As_i$ and $Bs_i$ using Algorithm~\ref{alg:version-comparison-suffix-each}
   \ENDFOR
   \IF{$Asn>Bsn$}
-    \IF{$As_{Bsn}$ is of type \t{\_p}}
+    \IF{$As_{Bsn}$ is of type \t{_p}}
       \RETURN $A>B$
     \ELSE
       \RETURN $A<B$
     \ENDIF
   \ELSIF{$Asn<Bsn$}
-    \IF{$Bs_{Asn}$ is of type \t{\_p}}
+    \IF{$Bs_{Asn}$ is of type \t{_p}}
       \RETURN $A<B$
     \ELSE
       \RETURN $A>B$
@@ -177,7 +177,7 @@ from which it was invoked.
 \begin{algorithm}[p]
 \caption{Version comparison logic for each suffix} \label{alg:version-comparison-suffix-each}
 \begin{algorithmic}[1]
-  \IF{$As_i$ and $Bs_i$ are of the same type (\t{\_alpha} vs \t{\_beta} etc)}
+  \IF{$As_i$ and $Bs_i$ are of the same type (\t{_alpha} vs \t{_beta} etc)}
     \STATE let $As'_i$ be the integer part of $As_i$ if any, otherwise \t{0}
     \STATE let $Bs'_i$ be the integer part of $Bs_i$ if any, otherwise \t{0}
     \IF{$As'_i>Bs'_i$, using integer comparison}
@@ -186,7 +186,7 @@ from which it was invoked.
       \RETURN $A<B$
     \ENDIF
   \ELSIF{the type of $As_i$ is greater than the type of $Bs_i$ using the ordering
-      $\mbox{\t{\_alpha}}<\mbox{\t{\_beta}}<\mbox{\t{\_pre}}<\mbox{\t{\_rc}}<\mbox{\t{\_p}}$}
+      $\mbox{\t{_alpha}}<\mbox{\t{_beta}}<\mbox{\t{_pre}}<\mbox{\t{_rc}}<\mbox{\t{_p}}$}
     \RETURN $A>B$
   \ELSE
     \RETURN $A<B$

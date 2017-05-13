@@ -104,25 +104,25 @@ is undefined.
 \label{sec:config-protect}
 
 The package manager must provide a means to prevent user configuration files from being
-overwritten by any package updates. The profile variables \t{CONFIG\_PROTECT} and
-\t{CONFIG\_PROTECT\_MASK} (section~\ref{sec:profile-variables}) control the paths for which this
+overwritten by any package updates. The profile variables \t{CONFIG_PROTECT} and
+\t{CONFIG_PROTECT_MASK} (section~\ref{sec:profile-variables}) control the paths for which this
 must be enforced.
 
 In order to ensure interoperability with configuration update tools, the following scheme must be
 used by all package managers when merging any regular file:
 
 \begin{compactenum}
-\item If the directory containing the file to be merged is not listed in \t{CONFIG\_PROTECT}, and
-     is not a subdirectory of any such directory, and if the file is not listed in \t{CONFIG\_PROTECT},
+\item If the directory containing the file to be merged is not listed in \t{CONFIG_PROTECT}, and
+     is not a subdirectory of any such directory, and if the file is not listed in \t{CONFIG_PROTECT},
      the file is merged normally.
-\item If the directory containing the file to be merged is listed in \t{CONFIG\_PROTECT\_MASK}, or
-    is a subdirectory of such a directory, or if the file is listed in \t{CONFIG\_PROTECT\_MASK},
+\item If the directory containing the file to be merged is listed in \t{CONFIG_PROTECT_MASK}, or
+    is a subdirectory of such a directory, or if the file is listed in \t{CONFIG_PROTECT_MASK},
     the file is merged normally.
 \item If no existing file with the intended filename exists, or the existing file has identical
     content to the one being merged, the file is installed normally.
-\item Otherwise, prepend the filename with \t{.\_cfg0000\_}. If no file with the new name exists,
+\item Otherwise, prepend the filename with \t{._cfg0000_}. If no file with the new name exists,
     then the file is merged with this name.
-\item Otherwise, increment the number portion (to form \t{.\_cfg0001\_<name>}) and repeat step 4.
+\item Otherwise, increment the number portion (to form \t{._cfg0001_<name>}) and repeat step 4.
     Continue this process until a usable filename is found.
 \item If 9999 is reached in this way, behaviour is undefined.
 \end{compactenum}

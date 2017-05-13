@@ -14,19 +14,19 @@ arbitrary, not necessarily related to the order of tokens in any given profile. 
 variables must be treated in this fashion:
 \begin{compactitem}
 \item \t{USE}
-\item \t{USE\_EXPAND}
-\item \t{USE\_EXPAND\_HIDDEN}
-\item \t{CONFIG\_PROTECT}
-\item \t{CONFIG\_PROTECT\_MASK}
+\item \t{USE_EXPAND}
+\item \t{USE_EXPAND_HIDDEN}
+\item \t{CONFIG_PROTECT}
+\item \t{CONFIG_PROTECT_MASK}
 \end{compactitem}
 
 If the package manager supports any EAPI listed in table~\ref{tab:profile-iuse-injection-table} as
 using profile-defined \t{IUSE} injection, the following variables must also be treated
 incrementally; otherwise, the following variables may or may not be treated incrementally:
 \begin{compactitem}
-\item \t{IUSE\_IMPLICIT}
-\item \t{USE\_EXPAND\_IMPLICIT}
-\item \t{USE\_EXPAND\_UNPREFIXED}
+\item \t{IUSE_IMPLICIT}
+\item \t{USE_EXPAND_IMPLICIT}
+\item \t{USE_EXPAND_UNPREFIXED}
 \end{compactitem}
 
 Other variables, except where they affect only package-manager-specific functionality (such as
@@ -53,26 +53,26 @@ The following variables have specific meanings when set in profiles.
 \item[ARCH] The system's architecture. Must be a value listed in \t{profiles/arch.list}; see
     section~\ref{arch.list} for more information. Must be equal to the primary \t{KEYWORD} for this
     profile.
-\item[CONFIG\_PROTECT, CONFIG\_PROTECT\_MASK] Contain whitespace-delimited lists used to control the
+\item[CONFIG_PROTECT, CONFIG_PROTECT_MASK] Contain whitespace-delimited lists used to control the
     configuration file protection. Described more fully in chapter~\ref{sec:config-protect}.
 \item[USE] Defines the list of default USE flags for this profile. Flags may be added or removed by
-    the user's configuration. \t{USE\_EXPAND} values must not be specified in this way.
-\item[USE\_EXPAND] Defines a list of variables which are to be treated incrementally and whose
+    the user's configuration. \t{USE_EXPAND} values must not be specified in this way.
+\item[USE_EXPAND] Defines a list of variables which are to be treated incrementally and whose
     contents are to be expanded into the USE variable as passed to ebuilds. See
     section~\ref{sec:use-iuse-handling} for details.
-\item[USE\_EXPAND\_UNPREFIXED] Similar to \t{USE\_EXPAND}, but no prefix is used. If the repository
+\item[USE_EXPAND_UNPREFIXED] Similar to \t{USE_EXPAND}, but no prefix is used. If the repository
     contains any package using an EAPI supporting profile-defined \t{IUSE} injection (see
     table~\ref{tab:profile-iuse-injection-table}), this list must contain at least \t{ARCH}\@.
     See section~\ref{sec:use-iuse-handling} for details.
-\item[USE\_EXPAND\_HIDDEN] Contains a (possibly empty) subset of names from \t{USE\_EXPAND} and
-    \t{USE\_EXPAND\_UNPREFIXED}\@. The package manager may use this set as a hint to avoid
+\item[USE_EXPAND_HIDDEN] Contains a (possibly empty) subset of names from \t{USE_EXPAND} and
+    \t{USE_EXPAND_UNPREFIXED}\@. The package manager may use this set as a hint to avoid
     displaying uninteresting or unhelpful information to an end user.
-\item[USE\_EXPAND\_IMPLICIT, IUSE\_IMPLICIT] Used to inject implicit values into \t{IUSE}\@. See
+\item[USE_EXPAND_IMPLICIT, IUSE_IMPLICIT] Used to inject implicit values into \t{IUSE}\@. See
     section~\ref{sec:use-iuse-handling} for details.
 \end{description}
 
 In addition, for EAPIs listed in table~\ref{tab:profile-iuse-injection-table} as supporting profile
-defined \t{IUSE} injection, the variables named in \t{USE\_EXPAND} and \t{USE\_EXPAND\_UNPREFIXED}
+defined \t{IUSE} injection, the variables named in \t{USE_EXPAND} and \t{USE_EXPAND_UNPREFIXED}
 have special handling as described in section~\ref{sec:use-iuse-handling}.
 
 Any other variables set in \t{make.defaults} must be passed on into the ebuild environment as-is,

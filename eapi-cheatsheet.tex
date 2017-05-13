@@ -94,7 +94,7 @@ differences between these previous EAPIs.
 %     sign in front.  See \featureref{iuse-defaults}.
 %     \item[Named slot dependencies] Dependencies can explicitly request
 %     a specific slot by using the
-%     \code{dev-libs/foo:}\allowbreak\emph{SLOT\_name} syntax.
+%     \code{dev-libs/foo:}\allowbreak\emph{SLOT_name} syntax.
 %     See \featureref{slot-deps}.
 % \end{description}
 
@@ -103,14 +103,14 @@ differences between these previous EAPIs.
 % \subsection{Additions/Changes}
 % \label{sec:cs:eapi2-additions}
 % \begin{description}
-%     \item[\code{SRC\_URI} arrows] Allows redirection of upstream file
+%     \item[\code{SRC_URI} arrows] Allows redirection of upstream file
 %     naming scheme.  By using
-%     \code{SRC\_URI="http:/\slash some\slash url -> foo"} the file is
+%     \code{SRC_URI="http:/\slash some\slash url -> foo"} the file is
 %     saved as \code{foo} in DISTDIR\@.
 %     See \featureref{src-uri-arrows}.
 %     \item[USE dependencies] Dependencies can specify USE flag
 %     requirements on their target, removing the need for
-%     \code{built\_with\_use} checks.
+%     \code{built_with_use} checks.
 %     \begin{description}
 %         \item[{[opt]}] The flag must be enabled.
 %         \item[{[opt=]}] The flag must be enabled if it is
@@ -130,20 +130,20 @@ differences between these previous EAPIs.
 %     be ignored by the package manager as long as the stated package is
 %     uninstalled later on.  Two exclamation marks are a strong blocker
 %     and will always be respected.  See \featureref{bang-strength}.
-%     \item[\code{src\_configure, src\_prepare}] Both new phases provide
+%     \item[\code{src_configure, src_prepare}] Both new phases provide
 %     finer granularity in the ebuild's structure.  Configure calls
-%     should be moved from \code{src\_compile} to \code{src\_configure}.
+%     should be moved from \code{src_compile} to \code{src_configure}.
 %     Patching and similar preparation must now be done in
-%     \code{src\_prepare}, not \code{src\_unpack}.  See
+%     \code{src_prepare}, not \code{src_unpack}.  See
 %     \featureref{src-prepare} and \featureref{src-configure}.
 %     \item[Default phase functions] The default functions for
-%     phases \code{pkg\_nofetch}, \code{src\_unpack},
-%     \code{src\_prepare}, \code{src\_configure}, \code{src\_compile}
-%     and \code{src\_test} can be called via
-%     \code{default\_}\emph{phasename}, so duplicating the standard
+%     phases \code{pkg_nofetch}, \code{src_unpack},
+%     \code{src_prepare}, \code{src_configure}, \code{src_compile}
+%     and \code{src_test} can be called via
+%     \code{default_}\emph{phasename}, so duplicating the standard
 %     implementation is no longer necessary for small additions.  The
 %     short-hand \code{default} function calls the current phase's
-%     \code{default\_} function automatically, so any small additions
+%     \code{default_} function automatically, so any small additions
 %     you need will not be accompanied by a complete reimplementation of
 %     the phase.  See \featureref{default-phase-funcs} and
 %     \featureref{default-func}.
@@ -160,7 +160,7 @@ differences between these previous EAPIs.
 \begin{description}
     \item[Support for \code{.xz}] Unpack of \code{.xz} and
     \code{.tar.xz} files is possible without any custom
-    \code{src\_unpack} functions.  See \featureref{unpack-extensions}.
+    \code{src_unpack} functions.  See \featureref{unpack-extensions}.
     \item[Offset prefix] Supporting installation on Prefix-enabled
     systems will be easier with this EAPI.
 \end{description}
@@ -170,17 +170,17 @@ differences between these previous EAPIs.
 \subsection{Additions/Changes}
 \label{sec:cs:eapi4-additions}
 \begin{description}
-    \item[\code{pkg\_pretend}] Some useful checks (kernel options for
+    \item[\code{pkg_pretend}] Some useful checks (kernel options for
     example) can be placed in this new phase to inform the user early
     (when just pretending to emerge the package).  Most checks should
-    usually be repeated in \code{pkg\_setup}.
+    usually be repeated in \code{pkg_setup}.
     See \featureref{pkg-pretend}.
-    \item[\code{src\_install}] The \code{src\_install} phase is no
+    \item[\code{src_install}] The \code{src_install} phase is no
     longer empty but has a default now.  This comes along with an
     accompanying \code{default} function.
     See \featureref{src-install-4}.
-    \item[\code{pkg\_info} on non-installed packages] The
-    \code{pkg\_info} phase can be called even for non-installed
+    \item[\code{pkg_info} on non-installed packages] The
+    \code{pkg_info} phase can be called even for non-installed
     packages.  Be warned that dependencies might not have been
     installed at execution time.  See \featureref{pkg-info}.
     \item[\code{econf} changes] The helper function now always
@@ -190,12 +190,12 @@ differences between these previous EAPIs.
     in EAPI 2 for USE dependencies, a \code{(+)} or \code{(-)} can be
     added after a USE flag (mind the parentheses).  The former
     specifies that flags not in IUSE should be treated as enabled; the
-    latter, disabled. Cannot be used with USE\_EXPAND flags.  This
+    latter, disabled. Cannot be used with USE_EXPAND flags.  This
     mimics parts of the behaviour of \code{-{}-missing} in
-    \code{built\_with\_use}.  See \featureref{use-dep-defaults}.
+    \code{built_with_use}.  See \featureref{use-dep-defaults}.
     \item[Controllable compression] All items in the \code{doc},
     \code{info}, \code{man} subdirectories of \code{/usr/share/} may
-    be compressed on-disk after \code{src\_install}, except for
+    be compressed on-disk after \code{src_install}, except for
     \code{/usr/share/doc/\$\{PF\}/html}.  \code{docompress path \dots}
     adds paths to the inclusion list for compression.
     \code{docompress -x path \dots} adds paths to the exclusion list.
@@ -213,7 +213,7 @@ differences between these previous EAPIs.
     See \featureref{doins}.
     \item[\code{PROPERTIES}] Is mandatory for all package managers now
     to support interactive installs.
-    \item[\code{REQUIRED\_USE}] This variable can be used similar to
+    \item[\code{REQUIRED_USE}] This variable can be used similar to
     the \code{(R|P)DEPEND} variables and define sets of USE flag
     combinations that are not allowed.  All elements can be further
     nested to achieve more functionality.
@@ -228,13 +228,13 @@ differences between these previous EAPIs.
         "\code{\textasciicircum\textasciicircum ( flag1 flag2 \dots\ )}".
     \end{description}
     See \featureref{required-use}.
-    \item[\code{MERGE\_TYPE}] This variable contains one of three
+    \item[\code{MERGE_TYPE}] This variable contains one of three
     possible values to allow checks if it is normal merge with
     compilation and installation (\code{source}), installation of a
     binary package (\code{binary}), or a compilation without
     installation (\code{buildonly}).  See \featureref{merge-type}.
-    \item[\code{REPLACING\_VERSIONS}, \code{REPLACED\_BY\_VERSION}]
-    These variables, valid in \code{pkg\_*}, contain a list of all
+    \item[\code{REPLACING_VERSIONS}, \code{REPLACED_BY_VERSION}]
+    These variables, valid in \code{pkg_*}, contain a list of all
     versions (\code{PVR}) of this package that we are replacing, and
     the version that is replacing the current one, respectively.
     See \featureref{replace-version-vars}.
@@ -283,17 +283,17 @@ differences between these previous EAPIs.
     explicitly listed in \code{IUSE}, additional flags can be
     implicitly provided by profiles.
     See \featureref{profile-iuse-inject}.
-    \item[At-most-one-of groups] In \code{REQUIRED\_USE} you can use
+    \item[At-most-one-of groups] In \code{REQUIRED_USE} you can use
     "\code{??\ ( flag1 flag2 \dots\ )}" to allow zero or one USE flag
     out of many.
     See \featureref{at-most-one-of}.
-    \item[Parallel tests] The default for \code{src\_test} runs
+    \item[Parallel tests] The default for \code{src_test} runs
     \code{emake} without \code{-j1} now.
     See \featureref{parallel-tests}.
     \item[\code{econf} changes] The \code{econf} function now always
     passes \code{-{}-disable-silent-rules} to \code{configure}.
     See \featureref{econf-options}.
-    \item[\code{has\_version} and \code{best\_version} changes]
+    \item[\code{has_version} and \code{best_version} changes]
     The two helpers support a \code{-{}-host-root} option that causes
     the query to apply to the host root instead of \code{ROOT}.
     See~\featureref{host-root-option}.
@@ -312,8 +312,8 @@ differences between these previous EAPIs.
     read from standard input if the first argument is \code{-}
     (a hyphen).
     See \featureref{newfoo-stdin}.
-    \item[\code{EBUILD\_PHASE\_FUNC}] This variable is very similar to
-    \code{EBUILD\_PHASE}, but contains the name of the current ebuild
+    \item[\code{EBUILD_PHASE_FUNC}] This variable is very similar to
+    \code{EBUILD_PHASE}, but contains the name of the current ebuild
     function.
     See \featureref{ebuild-phase-func}.
     \item[Stable use masking/forcing] New files
@@ -339,15 +339,15 @@ differences between these previous EAPIs.
     See \featureref{failglob}.
     \item[Locale settings] It is ensured that the behaviour of case
     modification and collation order for ASCII characters
-    (\code{LC\_CTYPE} and \code{LC\_COLLATE}) are the same as in the
+    (\code{LC_CTYPE} and \code{LC_COLLATE}) are the same as in the
     POSIX locale.
     See \featureref{locale-settings}.
-    \item[\code{src\_prepare}] This phase function has a default now,
+    \item[\code{src_prepare}] This phase function has a default now,
     which applies patches from the \code{PATCHES} variable with the
     new \code{eapply} command, and user-provided patches with
-    \code{eapply\_user}.
+    \code{eapply_user}.
     See \featureref{src-prepare-6}.
-    \item[\code{src\_install}] The default implementation uses the new
+    \item[\code{src_install}] The default implementation uses the new
     \code{einstalldocs} function for installing documentation.
     See \featureref{src-install-6}.
     \item[\code{nonfatal die}] When \code{die} or \code{assert} are
@@ -376,20 +376,20 @@ differences between these previous EAPIs.
     The patches from its file or directory arguments are applied using
     \code{patch -p1}.
     See \featureref{eapply}.
-    \item[\code{eapply\_user}] The \code{eapply\_user} command permits
+    \item[\code{eapply_user}] The \code{eapply_user} command permits
     the package manager to apply user-provided patches. It must be
-    called from every \code{src\_prepare} function.
+    called from every \code{src_prepare} function.
     See \featureref{eapply-user}.
     \item[\code{einstalldocs}] The \code{einstalldocs} function will
     install the files specified by the \code{DOCS} variable (or a
     default set of files if \code{DOCS} is unset) and by the
-    \code{HTML\_DOCS} variable.
+    \code{HTML_DOCS} variable.
     See \featureref{einstalldocs}.
-    \item[\code{in\_iuse}] The \code{in\_iuse} function returns
+    \item[\code{in_iuse}] The \code{in_iuse} function returns
     true if the USE flag given as its argument is available in the
     ebuild for USE queries.
     See \featureref{in-iuse}.
-    \item[\code{get\_libdir}] The \code{get\_libdir} command outputs
+    \item[\code{get_libdir}] The \code{get_libdir} command outputs
     the \code{lib*} directory basename suitable for the current ABI.
     See \featureref{get-libdir}.
 \end{description}

@@ -77,7 +77,7 @@ The profiles directory shall contain zero or more profile directories
 as described in section~\ref{sec:profiles}, as well as the following files
 and directories. In any line-based file, lines beginning with a \#
 character are treated as comments, whilst blank lines are ignored. All
-contents of this directory, with the exception of \t{repo\_name}, are
+contents of this directory, with the exception of \t{repo_name}, are
 optional.
 
 The profiles directory may contain an \t{eapi} file. This file, if it exists, must contain a single
@@ -97,10 +97,10 @@ manager must ignore any files in this directory that it does not recognise.
 \item[categories] \label{profiles-categories} Contains a list, one entry per line, of categories
     provided by this repository.
 \item[eapi] See above.
-\item[info\_pkgs] Contains a list, one entry per line, of qualified package names. Any package
+\item[info_pkgs] Contains a list, one entry per line, of qualified package names. Any package
     matching one of these is to be listed when a package manager displays a `system information'
     listing.
-\item[info\_vars] Contains a list, one entry per line, of profile, configuration, and environment
+\item[info_vars] Contains a list, one entry per line, of profile, configuration, and environment
     variables which are considered to be of interest. The value of each of these variables may be
     shown when the package manager displays a `system information' listing.
 \item[package.mask] \label{profiles-package.mask}
@@ -108,17 +108,17 @@ manager must ignore any files in this directory that it does not recognise.
     EAPI). Any package version matching one of these is considered to be masked, and will not be
     installed regardless of profile unless it is unmasked by the user configuration.
 \item[profiles.desc] Described below in section~\ref{sec:profiles.desc}.
-\item[repo\_name] Contains, on a single line, the name of this repository. The repository name must
+\item[repo_name] Contains, on a single line, the name of this repository. The repository name must
     conform to section~\ref{sec:repository-names}.
 \item[thirdpartymirrors] Described below in section~\ref{sec:thirdpartymirrors}.
 \item[use.desc] Contains descriptions of valid global USE flags for this repository. The format is
     described in section~\ref{sec:use.desc}.
 \item[use.local.desc] Contains descriptions of valid local USE flags for this repository, along with
     the packages to which they apply. The format is as described in section~\ref{sec:use.desc}.
-\item[desc/] This directory contains files analogous to \t{use.desc} for the various \t{USE\_EXPAND}
+\item[desc/] This directory contains files analogous to \t{use.desc} for the various \t{USE_EXPAND}
     variables. Each file in it is named \t{<varname>.desc}, where \t{<varname>} is the variable
     name, in lowercase, whose possible values the file describes. The format of each file is as for
-    \t{use.desc}, described in section~\ref{sec:use.desc}. The \t{USE\_EXPAND} name is \e{not}
+    \t{use.desc}, described in section~\ref{sec:use.desc}. The \t{USE_EXPAND} name is \e{not}
     included as a prefix here.
 \item[updates/] This directory is described in section~\ref{sec:updates-dir}.
 \end{description}

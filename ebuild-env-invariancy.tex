@@ -6,10 +6,10 @@ For the sake of this section:
 \item Variancy is any package manager action that modifies either
     \t{ROOT} or \t{/} in any way that isn't merely a simple addition of
     something that doesn't alter other packages. This includes any
-    non-default call to any \t{pkg} phase function except \t{pkg\_setup},
+    non-default call to any \t{pkg} phase function except \t{pkg_setup},
     a merge of any package or an unmerge of any package.
 \item As an exception, changes to \t{DISTDIR} do not count as variancy.
-\item The \t{pkg\_setup} function may be assumed not to introduce variancy.
+\item The \t{pkg_setup} function may be assumed not to introduce variancy.
     Thus, ebuilds must not perform variant actions in this phase.
 \end{compactitem}
 
@@ -17,10 +17,10 @@ The following exclusivity and invariancy requirements are mandated:
 
 \begin{compactitem}
 \item No variancy shall be introduced at any point between a package's
-    \t{pkg\_setup} being started up to the point that that package is
+    \t{pkg_setup} being started up to the point that that package is
     merged, except for any variancy introduced by that package.
-\item There must be no variancy between a package's \t{pkg\_setup} and
-    a package's \t{pkg\_postinst}, except for any variancy introduced
+\item There must be no variancy between a package's \t{pkg_setup} and
+    a package's \t{pkg_postinst}, except for any variancy introduced
     by that package.
 \item Any non-default \t{pkg} phase function must be run exclusively.
 \item Each phase function must be called at most once during the build

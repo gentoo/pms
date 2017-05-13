@@ -49,7 +49,7 @@ Bash version & \compactfeatureref{bash-version} &
 \t{IUSE} defaults & \compactfeatureref{iuse-defaults} &
     * & Yes & Yes & Yes & Yes \\
 
-\t{REQUIRED\_USE} & \compactfeatureref{required-use} &
+\t{REQUIRED_USE} & \compactfeatureref{required-use} &
     No & No & Yes & Yes & Yes \\
 
 \t{PROPERTIES} & \compactfeatureref{properties} &
@@ -58,13 +58,13 @@ Bash version & \compactfeatureref{bash-version} &
 \t{RDEPEND=DEPEND} & \compactfeatureref{rdepend-depend} &
     Yes & Yes & No & No & No \\
 
-\t{DEFINED\_PHASES} & \compactfeatureref{defined-phases} &
+\t{DEFINED_PHASES} & \compactfeatureref{defined-phases} &
     Optionally & Optionally & Yes & Yes & Yes \\
 
 \t{??\ ( )} groups & \compactfeatureref{at-most-one-of} &
     No & No & No & Yes & Yes \\
 
-\t{SRC\_URI} arrows & \compactfeatureref{src-uri-arrows} &
+\t{SRC_URI} arrows & \compactfeatureref{src-uri-arrows} &
     * & Yes & Yes & Yes & Yes \\
 
 Slot dependencies & \compactfeatureref{slot-deps} &
@@ -85,40 +85,40 @@ Use dependencies & \compactfeatureref{use-deps} &
 \t{S} to \t{WORKDIR} fallback & \compactfeatureref{s-workdir-fallback} &
     Always & Always & Conditional & Conditional & Conditional \\
 
-\t{pkg\_pretend} & \compactfeatureref{pkg-pretend} &
+\t{pkg_pretend} & \compactfeatureref{pkg-pretend} &
     No & No & Yes & Yes & Yes \\
 
-\t{src\_prepare} & \compactfeatureref{src-prepare} &
+\t{src_prepare} & \compactfeatureref{src-prepare} &
     * & Yes & Yes & Yes & Yes \\
 
-\t{src\_prepare} style & \compactfeatureref{src-prepare} &
+\t{src_prepare} style & \compactfeatureref{src-prepare} &
     * & no-op & no-op & no-op & 6 \\
 
-\t{src\_configure} & \compactfeatureref{src-configure} &
+\t{src_configure} & \compactfeatureref{src-configure} &
     * & Yes & Yes & Yes & Yes \\
 
-\t{src\_compile} style & \compactfeatureref{src-compile} &
+\t{src_compile} style & \compactfeatureref{src-compile} &
     * & 2 & 2 & 2 & 2 \\
 
 Parallel tests & \compactfeatureref{parallel-tests} &
     No & No & No & Yes & Yes \\
 
-\t{src\_install} style & \compactfeatureref{src-install} &
+\t{src_install} style & \compactfeatureref{src-install} &
     no-op & no-op & 4 & 4 & 6 \\
 
-\t{pkg\_info} & \compactfeatureref{pkg-info} &
+\t{pkg_info} & \compactfeatureref{pkg-info} &
     Installed & Installed & Both & Both & Both \\
 
-\t{default\_} phase functions & \compactfeatureref{default-phase-funcs} &
+\t{default_} phase functions & \compactfeatureref{default-phase-funcs} &
     * &
-    \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
-        \t{src\_compile}, \t{src\_test} &
-    \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
-        \t{src\_compile}, \t{src\_install}, \t{src\_test} &
-    \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
-        \t{src\_compile}, \t{src\_install}, \t{src\_test} &
-    \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure},
-        \t{src\_compile}, \t{src\_install}, \t{src\_test} \\
+    \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure},
+        \t{src_compile}, \t{src_test} &
+    \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure},
+        \t{src_compile}, \t{src_install}, \t{src_test} &
+    \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure},
+        \t{src_compile}, \t{src_install}, \t{src_test} &
+    \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure},
+        \t{src_compile}, \t{src_install}, \t{src_test} \\
 
 \t{AA} & \compactfeatureref{aa} &
     Yes & Yes & No & No & No \\
@@ -126,10 +126,10 @@ Parallel tests & \compactfeatureref{parallel-tests} &
 \t{KV} & \compactfeatureref{kv} &
     Yes & Yes & No & No & No \\
 
-\t{EBUILD\_PHASE\_FUNC} & \compactfeatureref{ebuild-phase-func} &
+\t{EBUILD_PHASE_FUNC} & \compactfeatureref{ebuild-phase-func} &
     No & No & No & Yes & Yes \\
 
-\t{MERGE\_TYPE} & \compactfeatureref{merge-type} &
+\t{MERGE_TYPE} & \compactfeatureref{merge-type} &
     No & No & Yes & Yes & Yes \\
 
 Sane locale settings & \compactfeatureref{locale-settings} &
@@ -138,10 +138,10 @@ Sane locale settings & \compactfeatureref{locale-settings} &
 Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-inject} &
     No & No & No & Yes & Yes \\
 
-\t{REPLACING\_VERSIONS} & \compactfeatureref{replace-version-vars} &
+\t{REPLACING_VERSIONS} & \compactfeatureref{replace-version-vars} &
     No & No & Yes & Yes & Yes \\
 
-\t{REPLACED\_BY\_VERSION} & \compactfeatureref{replace-version-vars} &
+\t{REPLACED_BY_VERSION} & \compactfeatureref{replace-version-vars} &
     No & No & Yes & Yes & Yes \\
 
 \t{EPREFIX}, \t{ED}, \t{EROOT} & \compactfeatureref{offset-prefix-vars} &
@@ -177,7 +177,7 @@ Option \t{-{}-host-root} & \compactfeatureref{host-root-option} &
 \t{eapply} & \compactfeatureref{eapply} &
     No & No & No & No & Yes \\
 
-\t{eapply\_user} & \compactfeatureref{eapply-user} &
+\t{eapply_user} & \compactfeatureref{eapply-user} &
     No & No & No & No & Yes \\
 
 \t{econf} arguments & \compactfeatureref{econf-options} &
@@ -209,13 +209,13 @@ Controllable compression & \compactfeatureref{docompress} &
 \t{docompress} & \compactfeatureref{docompress} &
     No & No & Yes & Yes & Yes \\
 
-\t{use\_with} empty third arg & \compactfeatureref{use-with} &
+\t{use_with} empty third arg & \compactfeatureref{use-with} &
     No & No & Yes & Yes & Yes \\
 
 \t{usex} & \compactfeatureref{usex} &
     No & No & No & Yes & Yes \\
 
-\t{in\_iuse} & \compactfeatureref{in-iuse} &
+\t{in_iuse} & \compactfeatureref{in-iuse} &
     No & No & No & No & Yes \\
 
 \t{unpack} absolute paths & \compactfeatureref{unpack-absolute} &
@@ -236,7 +236,7 @@ Controllable compression & \compactfeatureref{docompress} &
 \t{einstalldocs} & \compactfeatureref{einstalldocs} &
     No & No & No & No & Yes \\
 
-\t{get\_libdir} & \compactfeatureref{get-libdir} &
+\t{get_libdir} & \compactfeatureref{get-libdir} &
     No & No & No & No & Yes \\
 
 File mtimes preserved & \compactfeatureref{mtime-preserve} &
@@ -260,7 +260,7 @@ EAPI 1 is EAPI 0 with the following changes:
 \begin{compactitem}
 \item \t{IUSE} defaults, \featureref{iuse-defaults}.
 \item Slot dependencies, \featureref{slot-deps}.
-\item Different \t{src\_compile} implementation, \featureref{src-compile-1}.
+\item Different \t{src_compile} implementation, \featureref{src-compile-1}.
 \end{compactitem}
 
 \section{EAPI 2}
@@ -270,12 +270,12 @@ EAPI 2 is EAPI 1 with the following changes:
 \begin{compactitem}
 \item Use dependencies, \featureref{use-deps}.
 \item \t{!}\ and \t{!!}\ blockers, \featureref{bang-strength}.
-\item \t{SRC\_URI} arrows, \featureref{src-uri-arrows}.
-\item \t{src\_prepare}, \featureref{src-prepare}.
-\item \t{src\_configure}, \featureref{src-configure}.
-\item Different \t{src\_compile} implementation, \featureref{src-compile-2}.
-\item \t{default\_} phase functions for phases \t{pkg\_nofetch}, \t{src\_unpack}, \t{src\_prepare},
-    \t{src\_configure}, \t{src\_compile} and \t{src\_test}; \featureref{default-phase-funcs}.
+\item \t{SRC_URI} arrows, \featureref{src-uri-arrows}.
+\item \t{src_prepare}, \featureref{src-prepare}.
+\item \t{src_configure}, \featureref{src-configure}.
+\item Different \t{src_compile} implementation, \featureref{src-compile-2}.
+\item \t{default_} phase functions for phases \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare},
+    \t{src_configure}, \t{src_compile} and \t{src_test}; \featureref{default-phase-funcs}.
 \item \t{doman} language detection by filename, \featureref{doman-langs}.
 \item \t{default} function, \featureref{default-func}.
 \end{compactitem}
@@ -296,18 +296,18 @@ EAPI 4 is EAPI 3 with the following changes:
 
 \begin{compactitem}
 \item \t{PROPERTIES} support is mandatory, \featureref{properties}.
-\item \t{REQUIRED\_USE}, \featureref{required-use}.
+\item \t{REQUIRED_USE}, \featureref{required-use}.
 \item \t{RDEPEND=DEPEND} no longer done, \featureref{rdepend-depend}.
-\item \t{DEFINED\_PHASES} support is mandatory, \featureref{defined-phases}.
+\item \t{DEFINED_PHASES} support is mandatory, \featureref{defined-phases}.
 \item Use dependency defaults, \featureref{use-dep-defaults}.
 \item \t{S} to \t{WORKDIR} fallback restricted, \featureref{s-workdir-fallback}.
-\item \t{pkg\_pretend}, \featureref{pkg-pretend}.
-\item Default \t{src\_install} no longer a no-op, \featureref{src-install-4}.
-\item \t{pkg\_info} can run on non-installed packages, \featureref{pkg-info}.
+\item \t{pkg_pretend}, \featureref{pkg-pretend}.
+\item Default \t{src_install} no longer a no-op, \featureref{src-install-4}.
+\item \t{pkg_info} can run on non-installed packages, \featureref{pkg-info}.
 \item \t{AA} is gone, \featureref{aa}.
 \item \t{KV} is gone, \featureref{kv}.
-\item \t{MERGE\_TYPE}, \featureref{merge-type}.
-\item \t{REPLACING\_VERSIONS} and \t{REPLACED\_BY\_VERSION}, \featureref{replace-version-vars}.
+\item \t{MERGE_TYPE}, \featureref{merge-type}.
+\item \t{REPLACING_VERSIONS} and \t{REPLACED_BY_VERSION}, \featureref{replace-version-vars}.
 \item Utilities now die on failure, \featureref{die-on-failure}, unless called under \t{nonfatal},
     \featureref{nonfatal}
 \item \t{dohard}, \t{dosed} banned, \featureref{banned-commands}.
@@ -316,7 +316,7 @@ EAPI 4 is EAPI 3 with the following changes:
 \item \t{doins} supports symlinks, \featureref{doins}.
 \item \t{doman -i18n} option takes precedence, \featureref{doman-langs}.
 \item Controllable compression and \t{docompress}, \featureref{docompress}.
-\item \t{use\_with} and \t{use\_enable} support empty third argument, \featureref{use-with}.
+\item \t{use_with} and \t{use_enable} support empty third argument, \featureref{use-with}.
 \end{compactitem}
 
 \section{EAPI 5}
@@ -325,14 +325,14 @@ EAPI 5 is EAPI 4 with the following changes:
 
 \begin{compactitem}
 \item Stable use masking and forcing, \featureref{stablemask}.
-\item \t{REQUIRED\_USE} now supports \t{??}\ groups, \featureref{at-most-one-of}.
+\item \t{REQUIRED_USE} now supports \t{??}\ groups, \featureref{at-most-one-of}.
 \item Slot operator dependencies, \featureref{slot-operator-deps}.
 \item \t{SLOT} now supports an optional sub-slot part, \featureref{sub-slot}.
-\item \t{src\_test} supports parallel tests, \featureref{parallel-tests}.
-\item \t{EBUILD\_PHASE\_FUNC}, \featureref{ebuild-phase-func}.
+\item \t{src_test} supports parallel tests, \featureref{parallel-tests}.
+\item \t{EBUILD_PHASE_FUNC}, \featureref{ebuild-phase-func}.
 \item \t{USE} is calculated differently, \featureref{profile-iuse-inject}.
 \item \t{find} is guaranteed to be GNU, \featureref{gnu-find}.
-\item \t{best\_version} and \t{has\_version} support the \t{-{}-host-root} option,
+\item \t{best_version} and \t{has_version} support the \t{-{}-host-root} option,
     \featureref{host-root-option}.
 \item \t{econf} adds \t{-{}-disable-silent-rules}, \featureref{econf-options}.
 \item \t{doheader} and \t{newheader} support, \featureref{doheader}.
@@ -346,21 +346,21 @@ EAPI 6 is EAPI 5 with the following changes:
 
 \begin{compactitem}
 \item Bash version is 4.2, \featureref{bash-version}.
-\item Default \t{src\_prepare} no longer a no-op, \featureref{src-prepare-6}.
-\item Different \t{src\_install} implementation, \featureref{src-install-6}.
-\item \t{LC\_CTYPE} and \t{LC\_COLLATE} compatible with POSIX locale, \featureref{locale-settings}.
+\item Default \t{src_prepare} no longer a no-op, \featureref{src-prepare-6}.
+\item Different \t{src_install} implementation, \featureref{src-install-6}.
+\item \t{LC_CTYPE} and \t{LC_COLLATE} compatible with POSIX locale, \featureref{locale-settings}.
 \item \t{failglob} is enabled in global scope, \featureref{failglob}.
 \item \t{einstall} banned, \featureref{banned-commands}.
 \item \t{die} and \t{assert} called with \t{-n} respect \t{nonfatal}, \featureref{nonfatal-die}.
 \item \t{eapply} support, \featureref{eapply}.
-\item \t{eapply\_user} support, \featureref{eapply-user}.
+\item \t{eapply_user} support, \featureref{eapply-user}.
 \item \t{econf} adds \t{-{}-docdir} and \t{-{}-htmldir}, \featureref{econf-options}.
-\item \t{in\_iuse} support, \featureref{in-iuse}.
+\item \t{in_iuse} support, \featureref{in-iuse}.
 \item \t{unpack} supports absolute and relative paths, \featureref{unpack-absolute}.
 \item \t{unpack} supports \t{.txz}, \featureref{unpack-extensions}.
 \item \t{unpack} matches filename extensions case-insensitively, \featureref{unpack-ignore-case}.
 \item \t{einstalldocs} support, \featureref{einstalldocs}.
-\item \t{get\_libdir} support, \featureref{get-libdir}.
+\item \t{get_libdir} support, \featureref{get-libdir}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{6}

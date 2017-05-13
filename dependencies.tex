@@ -11,14 +11,14 @@
       \multicolumn{1}{c}{\textbf{Phase function}} &
       \multicolumn{1}{c}{\textbf{Satisfied dependency classes}} \\
       \midrule
-      \t{pkg\_pretend}, \t{pkg\_setup}, \t{pkg\_info}, \t{pkg\_nofetch} &
+      \t{pkg_pretend}, \t{pkg_setup}, \t{pkg_info}, \t{pkg_nofetch} &
           None (ebuilds can rely only on the packages in the system set) \\
-      \t{src\_unpack}, \t{src\_prepare}, \t{src\_configure}, \t{src\_compile}, \t{src\_test},
-          \t{src\_install} & \t{DEPEND} \\
-      \t{pkg\_preinst}, \t{pkg\_postinst}, \t{pkg\_prerm}, \t{pkg\_postrm} &
+      \t{src_unpack}, \t{src_prepare}, \t{src_configure}, \t{src_compile}, \t{src_test},
+          \t{src_install} & \t{DEPEND} \\
+      \t{pkg_preinst}, \t{pkg_postinst}, \t{pkg_prerm}, \t{pkg_postrm} &
           \t{RDEPEND} (unless the particular dependency results in a circular dependency, in which
           case it may be installed later) \\
-      \t{pkg\_config} & \t{RDEPEND}, \t{PDEPEND} \\
+      \t{pkg_config} & \t{RDEPEND}, \t{PDEPEND} \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -27,7 +27,7 @@ There are three classes of dependencies supported by ebuilds:
 
 \begin{compactitem}
 \item Build dependencies (\t{DEPEND}). These must be installed and usable before any of
-    the ebuild \t{src\_*} phase functions is executed. These may not be installed at all
+    the ebuild \t{src_*} phase functions is executed. These may not be installed at all
     if a binary package is being merged.
 \item Runtime dependencies (\t{RDEPEND}). These must be installed and usable before
     the results of an ebuild merging are treated as usable.
@@ -38,8 +38,8 @@ There are three classes of dependencies supported by ebuilds:
 Table~\ref{tab:phase-function-dependency-classes} lists dependencies which must be satisfied before
 a particular phase function is executed.
 
-In addition, \t{SRC\_URI}, \t{HOMEPAGE}, \t{RESTRICT}, \t{PROPERTIES}, \t{LICENSE} and
-\t{REQUIRED\_USE} use dependency-style specifications to specify their values.
+In addition, \t{SRC_URI}, \t{HOMEPAGE}, \t{RESTRICT}, \t{PROPERTIES}, \t{LICENSE} and
+\t{REQUIRED_USE} use dependency-style specifications to specify their values.
 
 \section{Dependency Specification Format}
 
@@ -48,13 +48,13 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 
 \begin{compactitem}
 \item A package dependency specification. Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}.
-\item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC\_URI} and \t{HOMEPAGE}\@.
-    In EAPIs listed in table~\ref{tab:uri-arrows-table} as supporting \t{SRC\_URI} arrows, may
+\item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC_URI} and \t{HOMEPAGE}\@.
+    In EAPIs listed in table~\ref{tab:uri-arrows-table} as supporting \t{SRC_URI} arrows, may
     optionally be followed by whitespace, then \t{->}, then whitespace, then a simple filename when
-    in \t{SRC\_URI}\@. For \t{SRC\_URI} behaviour, see section~\ref{sec:src-uri-behaviour}.
-\item A flat filename. Permitted in \t{SRC\_URI}.
+    in \t{SRC_URI}\@. For \t{SRC_URI} behaviour, see section~\ref{sec:src-uri-behaviour}.
+\item A flat filename. Permitted in \t{SRC_URI}.
 \item A license name (e.\,g.\ \t{GPL-2}). Permitted in \t{LICENSE}.
-\item A use flag name, optionally preceded by an exclamation mark. Permitted in \t{REQUIRED\_USE}.
+\item A use flag name, optionally preceded by an exclamation mark. Permitted in \t{REQUIRED_USE}.
 \item A simple string. Permitted in \t{RESTRICT} and \t{PROPERTIES}.
 \item An all-of group, which consists of an open parenthesis, followed by whitespace,
     followed by zero or more of (a dependency item of any kind followed by whitespace), followed
@@ -65,19 +65,19 @@ be surrounded on both sides by whitespace, except at the start and end of the st
     followed by an open parenthesis, followed by whitespace, followed by zero or more
     of (a dependency item of any kind followed by whitespace), followed by a close parenthesis.
     More formally: \t{any-of} \t{::=} \t{'||' whitespace '(' whitespace (item whitespace)* ')'}.
-    Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}, \t{LICENSE}, \t{REQUIRED\_USE}.
+    Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}, \t{LICENSE}, \t{REQUIRED_USE}.
 \item An exactly-one-of group, which consists of the string \t{\textasciicircum\textasciicircum},
     followed by whitespace, followed by an open parenthesis, followed by whitespace, followed by
     zero or more of (a dependency item of any kind followed by whitespace), followed by a close
     parenthesis. More formally: \t{exactly-one-of} \t{::=} \t{'\textasciicircum\textasciicircum'
     whitespace '(' whitespace (item whitespace)* ')'}.
-    Permitted in \t{REQUIRED\_USE}.
+    Permitted in \t{REQUIRED_USE}.
 \item \featurelabel{at-most-one-of} An at-most-one-of group, which consists of the string \t{??},
     followed by whitespace, followed by an open parenthesis, followed by whitespace, followed by
     zero or more of (a dependency item of any kind followed by whitespace), followed by a close
     parenthesis. More formally: \t{at-most-one-of} \t{::=} \t{'??'\ whitespace '(' whitespace
-    (item whitespace)* ')'}. Permitted in \t{REQUIRED\_USE} in EAPIs listed in
-    table~\ref{tab:at-most-one-of-table} as supporting \t{REQUIRED\_USE ??}\ groups.
+    (item whitespace)* ')'}. Permitted in \t{REQUIRED_USE} in EAPIs listed in
+    table~\ref{tab:at-most-one-of-table} as supporting \t{REQUIRED_USE ??}\ groups.
 \item A use-conditional group, which consists of an optional exclamation mark, followed by
     a use flag name, followed by a question mark, followed by whitespace, followed by
     an open parenthesis, followed by whitespace, followed by zero or more of (a dependency item
@@ -90,12 +90,12 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 In particular, note that whitespace is not optional.
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting \t{SRC\_URI} arrows}
+\begin{centertable}{EAPIs supporting \t{SRC_URI} arrows}
     \label{tab:uri-arrows-table}
     \begin{tabular}{ll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{SRC\_URI} arrows?}} \\
+      \multicolumn{1}{c}{\textbf{Supports \t{SRC_URI} arrows?}} \\
       \midrule
       0, 1              & No  \\
       2, 3, 4, 5, 6     & Yes \\
@@ -104,12 +104,12 @@ In particular, note that whitespace is not optional.
 \end{centertable}
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting \t{REQUIRED\_USE ??}\ groups}
+\begin{centertable}{EAPIs supporting \t{REQUIRED_USE ??}\ groups}
     \label{tab:at-most-one-of-table}
     \begin{tabular}{ll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{REQUIRED\_USE ??}\ groups?}} \\
+      \multicolumn{1}{c}{\textbf{Supports \t{REQUIRED_USE ??}\ groups?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  \\
       5, 6              & Yes \\
@@ -126,7 +126,7 @@ In an all-of group, all of the child elements must be matched.
 In a use-conditional group, if the associated use flag is enabled (or disabled if it has an
 exclamation mark prefix), all of the child elements must be matched.
 
-It is an error for a flag to be used if it is not included in \t{IUSE\_EFFECTIVE} as described in
+It is an error for a flag to be used if it is not included in \t{IUSE_EFFECTIVE} as described in
 section~\ref{sec:use-iuse-handling}.
 
 \subsection{Any-of dependency specifications}
@@ -325,29 +325,29 @@ When multiple requirements are specified, all must match for a successful match.
 \featurelabel{use-dep-defaults} In a 4-style use dependency, the flag name may immediately be
 followed by a \e{default} specified by either \t{(+)} or \t{(-)}. The former indicates that, when
 applying the use dependency to a package that does not have the flag in question in
-\t{IUSE\_REFERENCEABLE}, the package manager shall behave as if the flag were present and enabled;
+\t{IUSE_REFERENCEABLE}, the package manager shall behave as if the flag were present and enabled;
 the latter, present and disabled.
 
 Unless a 4-style default is specified, it is an error for a use dependency to be applied to an
-ebuild which does not have the flag in question in \t{IUSE\_REFERENCEABLE}.
+ebuild which does not have the flag in question in \t{IUSE_REFERENCEABLE}.
 
 \note By extension of the above, a default that could reference an ebuild using an EAPI not
 supporting profile \t{IUSE} injections cannot rely upon any particular behaviour for flags that
 would not have to be part of \t{IUSE}.
 
 It is an error for an ebuild to use a conditional use dependency when that ebuild does not have the
-flag in \t{IUSE\_EFFECTIVE}.
+flag in \t{IUSE_EFFECTIVE}.
 
 \subsection{USE state constraints}
 \label{sec:required-use}
-\t{REQUIRED\_USE} contains a list of assertions that must be met by the configuration of \t{USE}
+\t{REQUIRED_USE} contains a list of assertions that must be met by the configuration of \t{USE}
 flags to be valid for this ebuild. In order to be matched, a \t{USE} flag in a terminal element
 must be enabled (or disabled if it has an exclamation mark prefix).
 
-If the package manager encounters a package version where \t{REQUIRED\_USE} assertions are not met,
+If the package manager encounters a package version where \t{REQUIRED_USE} assertions are not met,
 it must treat this package version as if it was masked. No phase functions must be called.
 
-It is an error for a flag to be used if it is not included in \t{IUSE\_EFFECTIVE}.
+It is an error for a flag to be used if it is not included in \t{IUSE_EFFECTIVE}.
 
 \subsection{Restrict}
 \label{sec:restrict}
@@ -355,13 +355,13 @@ It is an error for a flag to be used if it is not included in \t{IUSE\_EFFECTIVE
 The following tokens are permitted inside \t{RESTRICT}:
 
 \begin{description}
-\item[mirror] The package's \t{SRC\_URI} entries may not be mirrored, and mirrors should not
+\item[mirror] The package's \t{SRC_URI} entries may not be mirrored, and mirrors should not
     be checked when fetching.
-\item[fetch] The package's \t{SRC\_URI} entries may not be downloaded automatically. If
-    entries are not available, \t{pkg\_nofetch} is called. Implies \t{mirror}.
+\item[fetch] The package's \t{SRC_URI} entries may not be downloaded automatically. If
+    entries are not available, \t{pkg_nofetch} is called. Implies \t{mirror}.
 \item[strip] No stripping of debug symbols from files to be installed may be performed.
 \item[userpriv] The package manager may not drop root privileges when building the package.
-\item[test] The \t{src\_test} phase must not be run.
+\item[test] The \t{src_test} phase must not be run.
 \end{description}
 
 Package managers may recognise other tokens, but ebuilds may not rely upon them being supported.
@@ -377,11 +377,11 @@ The following tokens are permitted inside \t{PROPERTIES}:
 
 Ebuilds may not rely upon any token being supported.
 
-\subsection{SRC\_URI}
+\subsection{SRC_URI}
 \label{sec:src-uri-behaviour}
 
 All filename components that are enabled (i.\,e.\ not inside a use-conditional block that is not
-matched) in \t{SRC\_URI} must be available in the \t{DISTDIR} directory. In addition, these
+matched) in \t{SRC_URI} must be available in the \t{DISTDIR} directory. In addition, these
 components are used to make the \t{A} and \t{AA} variables.
 
 If a component contains a full URI with protocol, that download location must be used. Package

@@ -86,20 +86,20 @@ these commands once the current phase function has returned.
 supporting option \t{-{}-host-root}, this flag as the first argument will cause the query to apply
 to the host root instead of \t{ROOT}.
 \begin{description}
-\item[has\_version] Takes exactly one package dependency specification as an argument. Returns
+\item[has_version] Takes exactly one package dependency specification as an argument. Returns
     true if a package matching the specification is installed in \t{ROOT}, and false otherwise.
-\item[best\_version] Takes exactly one package dependency specification as an argument. If a
+\item[best_version] Takes exactly one package dependency specification as an argument. If a
     matching package is installed, prints the category, package name and version of the highest
     matching version; otherwise, prints an empty string. The exit code is unspecified.
 \end{description}
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting \t{-{}-host-root} for \t{*\_version} commands}
+\begin{centertable}{EAPIs supporting \t{-{}-host-root} for \t{*_version} commands}
     \label{tab:foo-version-host-root-table}
     \begin{tabular}{ll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{\t{*\_version} supports \t{-{}-host-root}?}} \\
+      \multicolumn{1}{c}{\textbf{\t{*_version} supports \t{-{}-host-root}?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  \\
       5, 6              & Yes \\
@@ -159,7 +159,7 @@ completing. Ebuilds must not run any of these commands once the current phase fu
 \end{centertable}
 
 \subsubsection{Patch commands}
-These commands are used during the \t{src\_prepare} phase to apply patches to the package's sources.
+These commands are used during the \t{src_prepare} phase to apply patches to the package's sources.
 Ebuilds must not run any of these commands once the current phase function has returned.
 
 \begin{description}
@@ -206,14 +206,14 @@ Ebuilds must not run any of these commands once the current phase function has r
 \end{algorithmic}
 \end{algorithm}
 
-\item[eapply\_user] \featurelabel{eapply-user} Takes no arguments. Package managers supporting it
+\item[eapply_user] \featurelabel{eapply-user} Takes no arguments. Package managers supporting it
     apply user-provided patches to the source tree in the current working directory. Exact behaviour
     is implementation defined and beyond the scope of this specification. Package managers not
     supporting it must implement the command as a no-op. Returns shell true (0) if patches applied
     successfully, or if no patches were provided. Otherwise, aborts the build process, unless run
     using \t{nonfatal}, in which case it returns non-zero exit status. Only available in EAPIs
-    listed in table~\ref{tab:patch-commands} as supporting \t{eapply\_user}. In EAPIs where it is
-    supported, \t{eapply\_user} must be called once in the \t{src\_prepare} phase. For any
+    listed in table~\ref{tab:patch-commands} as supporting \t{eapply_user}. In EAPIs where it is
+    supported, \t{eapply_user} must be called once in the \t{src_prepare} phase. For any
     subsequent calls, the command will do nothing and return~0.
 \end{description}
 
@@ -224,7 +224,7 @@ Ebuilds must not run any of these commands once the current phase function has r
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{\t{eapply}?}} &
-      \multicolumn{1}{c}{\textbf{\t{eapply\_user}?}} \\
+      \multicolumn{1}{c}{\textbf{\t{eapply_user}?}} \\
       \midrule
       0, 1, 2, 3, 4, 5  & No  & No  \\
       6                 & Yes & Yes \\
@@ -233,7 +233,7 @@ Ebuilds must not run any of these commands once the current phase function has r
 \end{centertable}
 
 \subsubsection{Build commands}
-These commands are used during the \t{src\_configure}, \t{src\_compile}, and \t{src\_install}
+These commands are used during the \t{src_configure}, \t{src_compile}, and \t{src_install}
 phases to run the package's build commands. Ebuilds must not run any of these commands once the
 current phase function has returned.
 
@@ -241,7 +241,7 @@ current phase function has returned.
 \item[econf] Calls the program's \t{./configure} script. This is designed to work with GNU
     Autoconf-generated scripts. Any additional parameters passed to \t{econf} are passed directly
     to \t{./configure}, after the default options below. \t{econf} will look in the current working
-    directory for a configure script unless the \t{ECONF\_SOURCE} environment variable is set,
+    directory for a configure script unless the \t{ECONF_SOURCE} environment variable is set,
     in which case it is taken to be the directory containing it.
 
     \featurelabel{econf-options} \t{econf} must pass the following options to the configure script:
@@ -306,7 +306,7 @@ current phase function has returned.
 \ENDIF
 \STATE let libdir=
 \IF{the ABI environment variable is set}
-    \STATE let libvar=LIBDIR\_\$ABI
+    \STATE let libvar=LIBDIR_\$ABI
     \IF{the environment variable named by libvar is set}
         \STATE let libdir=the value of the variable named by libvar
     \ENDIF
@@ -465,22 +465,22 @@ can be extended or reduced (see below). The options that can be passed to \t{doh
 \begin{algorithm}
 \caption{Determining the library directory} \label{alg:ebuild-libdir}
 \begin{algorithmic}[1]
-\IF{CONF\_LIBDIR\_OVERRIDE is set in the environment}
-    \STATE return CONF\_LIBDIR\_OVERRIDE
+\IF{CONF_LIBDIR_OVERRIDE is set in the environment}
+    \STATE return CONF_LIBDIR_OVERRIDE
 \ENDIF
-\IF{CONF\_LIBDIR is set in the environment}
-    \STATE let LIBDIR\_default=CONF\_LIBDIR
+\IF{CONF_LIBDIR is set in the environment}
+    \STATE let LIBDIR_default=CONF_LIBDIR
 \ELSE
-    \STATE let LIBDIR\_default=``lib''
+    \STATE let LIBDIR_default=``lib''
 \ENDIF
 \IF{ABI is set in the environment}
     \STATE let abi=ABI
-\ELSIF{DEFAULT\_ABI is set in the environment}
-    \STATE let abi=DEFAULT\_ABI
+\ELSIF{DEFAULT_ABI is set in the environment}
+    \STATE let abi=DEFAULT_ABI
 \ELSE
     \STATE let abi=``default''
 \ENDIF
-\STATE return the value of LIBDIR\_\$abi
+\STATE return the value of LIBDIR_\$abi
 \end{algorithmic}
 \end{algorithm}
 
@@ -502,7 +502,7 @@ can be extended or reduced (see below). The options that can be passed to \t{doh
 
 \item[domo] Installs the given \t{.mo} files with file mode \t{0644} into the appropriate
     subdirectory of \t{DESTTREE\slash share\slash locale}, generated by taking the basename of the
-    file, removing the \t{.*} suffix, and appending \t{/LC\_MESSAGES}\@. The name of the installed
+    file, removing the \t{.*} suffix, and appending \t{/LC_MESSAGES}\@. The name of the installed
     files is the package name with \t{.mo} appended. Failure behaviour is EAPI dependent as per
     section~\ref{sec:failure-behaviour}.
 
@@ -672,7 +672,7 @@ shall maintain two lists:
 \item An exclusion list, which initially contains \t{/usr/share/doc/\$\{PF\}/html}.
 \end{compactitem}
 
-The optional compression shall be carried out after \t{src\_install} has completed, and before the
+The optional compression shall be carried out after \t{src_install} has completed, and before the
 execution of any subsequent phase function. For each item in the inclusion list, pretend it has the
 value of the \t{ED} variable prepended, then:
 
@@ -697,7 +697,7 @@ The package manager shall take appropriate steps to ensure that its compression 
 sensibly even if an item is listed in the inclusion list multiple times, if an item is a symlink,
 or if a file is already compressed.
 
-The following commands may be used in \t{src\_install} to alter these lists. It is an error to call
+The following commands may be used in \t{src_install} to alter these lists. It is an error to call
 any of these functions from any other phase.
 
 \begin{description}
@@ -727,7 +727,7 @@ these commands once the current phase function has returned. It is an error if a
 of these functions in global scope.
 
 Unless otherwise noted, if any of these functions is called with a flag value that is not included
-in \t{IUSE\_EFFECTIVE}, either behaviour is undefined or it is an error as decided by
+in \t{IUSE_EFFECTIVE}, either behaviour is undefined or it is an error as decided by
 table~\ref{tab:use-list-strictness}.
 
 \begin{description}
@@ -737,7 +737,7 @@ table~\ref{tab:use-list-strictness}.
 \item[usev] The same as \t{use}, but also prints the flag name if the condition
     is met.
 \item[useq] Deprecated synonym for \t{use}.
-\item[use\_with] \featurelabel{use-with} Has one-, two-, and three-argument forms. The first
+\item[use_with] \featurelabel{use-with} Has one-, two-, and three-argument forms. The first
     argument is a USE flag name, the second a \t{configure} option name (\t{\$\{opt\}}), defaulting
     to the same as the first argument if not provided, and the third is a string value
     (\t{\$\{value\}}). For EAPIs listed in table~\ref{tab:use-with-third-arg} as not supporting it,
@@ -745,7 +745,7 @@ table~\ref{tab:use-list-strictness}.
     \t{-{}-with-\$\{opt\}=\$\{value\}} if the third argument was provided, and
     \t{-{}-with-\$\{opt\}} otherwise. If the flag is not set, then it outputs
     \t{-{}-without-\$\{opt\}}.
-\item[use\_enable] Works the same as \t{use\_with()}, but outputs \t{-{}-enable-} or
+\item[use_enable] Works the same as \t{use_with()}, but outputs \t{-{}-enable-} or
     \t{-{}-disable-} instead of \t{-{}-with-} or \t{-{}-without-}.
 \item[usex] \featurelabel{usex} Accepts at least one and at most five arguments. The first argument
     is a USE flag name, any subsequent arguments (\t{\$\{arg2\}} to \t{\$\{arg5\}}) are string
@@ -754,13 +754,13 @@ table~\ref{tab:use-list-strictness}.
     set, outputs \t{\$\{arg2\}\$\{arg4\}}. Otherwise, outputs \t{\$\{arg3\}\$\{arg5\}}.
     The condition is inverted if the flag name is prefixed with~\t{!}.
     Only available in EAPIs listed in table~\ref{tab:use-list-functions} as supporting \t{usex}.
-\item[in\_iuse] \featurelabel{in-iuse} Returns shell true (0) if the first argument (a \t{USE} flag
-    name) is included in \t{IUSE\_EFFECTIVE}, false otherwise. Only available in EAPIs listed in
-    table~\ref{tab:use-list-functions} as supporting \t{in\_iuse}.
+\item[in_iuse] \featurelabel{in-iuse} Returns shell true (0) if the first argument (a \t{USE} flag
+    name) is included in \t{IUSE_EFFECTIVE}, false otherwise. Only available in EAPIs listed in
+    table~\ref{tab:use-list-functions} as supporting \t{in_iuse}.
 \end{description}
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPI behaviour for use queries not in \t{IUSE\_EFFECTIVE}}
+\begin{centertable}{EAPI behaviour for use queries not in \t{IUSE_EFFECTIVE}}
     \label{tab:use-list-strictness}
     \begin{tabular}{ll}
       \toprule
@@ -774,7 +774,7 @@ table~\ref{tab:use-list-strictness}.
 \end{centertable}
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting empty third argument in \t{use\_with} and \t{use\_enable}}
+\begin{centertable}{EAPIs supporting empty third argument in \t{use_with} and \t{use_enable}}
     \label{tab:use-with-third-arg}
     \begin{tabular}{ll}
       \toprule
@@ -788,13 +788,13 @@ table~\ref{tab:use-list-strictness}.
 \end{centertable}
 
 \ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting \t{usex} and \t{in\_iuse}}
+\begin{centertable}{EAPIs supporting \t{usex} and \t{in_iuse}}
     \label{tab:use-list-functions}
     \begin{tabular}{lll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{\t{usex}?}} &
-      \multicolumn{1}{c}{\textbf{\t{in\_iuse}?}} \\
+      \multicolumn{1}{c}{\textbf{\t{in_iuse}?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  & No  \\
       5                 & Yes & No  \\
@@ -914,13 +914,13 @@ has returned.
 \item[inherit] See section~\ref{sec:inherit}.
 
 \item[default]
-    \featurelabel{default-func} Calls the \t{default\_} function for the current phase (see
-    section~\ref{sec:default-phase-funcs}). Must not be called if the \t{default\_} function does
+    \featurelabel{default-func} Calls the \t{default_} function for the current phase (see
+    section~\ref{sec:default-phase-funcs}). Must not be called if the \t{default_} function does
     not exist for the current phase in the current EAPI\@. Only available in EAPIs listed in
     table~\ref{tab:misc-commands} as supporting \t{default}.
 
 \item[einstalldocs] \featurelabel{einstalldocs} Takes no arguments. Installs the files specified
-    by the \t{DOCS} and \t{HTML\_DOCS} variables or a default set of files, according to
+    by the \t{DOCS} and \t{HTML_DOCS} variables or a default set of files, according to
     Algorithm~\ref{alg:einstalldocs}. If called using \t{nonfatal} and any of the called commands
     returns a non-zero exit status, returns immediately with the same exit status. Only available
     in EAPIs listed in table~\ref{tab:misc-commands} as supporting \t{einstalldocs}.
@@ -943,26 +943,26 @@ has returned.
     \ENDFOR
 \ENDIF
 \STATE set the install directory for \t{dodoc} to \t{/usr/share/doc/\$\{PF\}/html}
-\IF{the HTML\_DOCS variable is a non-empty array}
-    \STATE call \t{dodoc -r "\$\{HTML\_DOCS[@]\}"}
-\ELSIF{the HTML\_DOCS variable is a non-empty scalar}
-    \STATE call \t{dodoc -r \$\{HTML\_DOCS\}}
+\IF{the HTML_DOCS variable is a non-empty array}
+    \STATE call \t{dodoc -r "\$\{HTML_DOCS[@]\}"}
+\ELSIF{the HTML_DOCS variable is a non-empty scalar}
+    \STATE call \t{dodoc -r \$\{HTML_DOCS\}}
 \ENDIF
 \STATE restore the value of the install directory for \t{dodoc}
 \RETURN shell true (0)
 \end{algorithmic}
 \end{algorithm}
 
-\item[get\_libdir] \featurelabel{get-libdir} Prints the libdir name obtained according to
+\item[get_libdir] \featurelabel{get-libdir} Prints the libdir name obtained according to
     Algorithm~\ref{alg:get-libdir}. Only available in EAPIs listed in table~\ref{tab:misc-commands}
-    as supporting \t{get\_libdir}.
+    as supporting \t{get_libdir}.
 
 \begin{algorithm}
-\caption{\t{get\_libdir} logic} \label{alg:get-libdir}
+\caption{\t{get_libdir} logic} \label{alg:get-libdir}
 \begin{algorithmic}[1]
 \STATE let libdir=lib
 \IF{the ABI environment variable is set}
-    \STATE let libvar=LIBDIR\_\$ABI
+    \STATE let libvar=LIBDIR_\$ABI
     \IF{the environment variable named by libvar is set}
         \STATE let libdir=the value of the variable named by libvar
     \ENDIF
@@ -981,7 +981,7 @@ has returned.
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{\t{default}?}} &
       \multicolumn{1}{c}{\textbf{\t{einstalldocs}?}} &
-      \multicolumn{1}{c}{\textbf{\t{get\_libdir}?}} \\
+      \multicolumn{1}{c}{\textbf{\t{get_libdir}?}} \\
       \midrule
       0, 1              & No  & No  & No  \\
       2, 3, 4, 5        & Yes & No  & No  \\
@@ -1010,7 +1010,7 @@ strings (ignoring case) are reserved for package manager use and may not be used
 ebuilds:
 
 \begin{compactitem}
-\item \t{\_\_} (two underscores) at beginning of string
+\item \t{__} (two underscores) at beginning of string
 \item \t{abort}
 \item \t{dyn}
 \item \t{ebuild}

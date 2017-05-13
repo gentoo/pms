@@ -13,15 +13,15 @@ been abused in the past.
 
 \begin{compactitem}
 \item The \t{FEATURES} variable. This is Portage specific.
-\item Similarly, any \t{EMERGE\_} variable and any \t{PORTAGE\_} variable not explicitly listed.
+\item Similarly, any \t{EMERGE_} variable and any \t{PORTAGE_} variable not explicitly listed.
 \item Any Portage configuration file.
 \item The VDB (\t{/var/db/pkg}). Ebuilds must not access this or rely upon it existing or being
     in any particular format.
-\item The \t{portageq} command. The \t{has\_version} and \t{best\_version} commands are
+\item The \t{portageq} command. The \t{has_version} and \t{best_version} commands are
     available as functions.
 \item The \t{emerge} command.
 \item Binary packages.
-\item The \t{PORTDIR\_OVERLAY} variable, and overlay behaviour in general.
+\item The \t{PORTDIR_OVERLAY} variable, and overlay behaviour in general.
 \end{compactitem}
 
 \chapter{Historical Curiosities}
