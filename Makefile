@@ -43,7 +43,7 @@ pms.html: $(LATEXFILES) pms.bbl vc.tex
 	@# remove redundant span elements
 	LC_ALL=C sed -i -e ':x;/<span\(\s\+[^>]*\)\?$$/{N;bx;};:y;s/\(<span\s\+[^>]*>\)\([^<]*\)<\/span>\1/\1\2/;ty' $@
 
-pms.bbl: $(LATEXFILES) pms.bib
+pms.bbl: pms.bib $(LATEXFILES) vc.tex
 	$(aux-clean)
 	latex pms
 	bibtex pms

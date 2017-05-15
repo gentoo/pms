@@ -52,7 +52,7 @@
     Specification, loaded baseclass: \ClassToLoad\MessageBreak}
 % Contains information over the source control system, generated
 % through Makefile
-\input{vc}
+\input{vc.tex}
 
 % Make processing with TeX4HT possible
 \newboolean{TEX4HT-HACKS}
