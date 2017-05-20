@@ -13,7 +13,7 @@
 \PassOptionsToPackage{T1}{fontenc}
 \PassOptionsToPackage{orig,english}{isodate}
 % Position caption of float environments at the top
-\PassOptionsToPackage{position=top}{caption}
+\PassOptionsToPackage{position=top,labelfont=bf}{caption}
 % Enable UTF-8 input encoding
 \PassOptionsToPackage{utf8}{inputenc}
 \PassOptionsToPackage{quiet}{marginnote}
@@ -72,6 +72,7 @@
 % tex4ht workaround: these need to happen after loading the float package
 \g@addto@macro\@documentclasshook{
     \floatstyle{ruled}
+    \captionsetup[ruled]{labelsep=default,labelfont=bf}
     \newfloat{listing}{tbp}{lol}[chapter]
     \floatname{listing}{Listing}
 }
