@@ -12,6 +12,11 @@
 \LoadClass{\ClassToLoad}
 \PassOptionsToPackage{T1}{fontenc}
 \PassOptionsToPackage{orig,english}{isodate}
+% Dimensions of the text area. Define a narrow left margin to make
+% room for margin notes in the right (outer) margin
+\PassOptionsToPackage{textwidth=400pt,textheight=700pt,
+    left=20mm,marginparsep=10pt,marginparwidth=40mm,
+    vmarginratio=1:2,includehead}{geometry}
 % Position caption of float environments at the top
 \PassOptionsToPackage{position=top,labelfont=bf}{caption}
 % Enable UTF-8 input encoding
@@ -24,7 +29,7 @@
 \RequirePackage{%
     fontenc,	% Load extended font sets
     isodate,	% Date formatting and conversions
-    typearea,	% Set page layout
+    geometry,   % Set page layout
     inputenc,	% Allow input methods apart from ASCII
     booktabs,	% Nicer formatting of tables
     ifthen,	% Comfortable conditional routines
@@ -158,11 +163,6 @@
 
 % Set page title
 \pagestyle{headings}
-% This is some kind of hack.  We set the proportions of the text area
-% and then move it 30mm to the left to increase the right (outer)
-% margin.
-\areaset[-30mm]{400pt}{700pt}
-\setlength{\marginparwidth}{40mm}
 
 % To find everywhere that needs updating when we add an EAPI
 \newcommand{\CurrentEAPIIs}[1]{\def\TheCurrentEAPI{#1}}
