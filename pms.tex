@@ -76,6 +76,8 @@
 
     \href{eapi-cheatsheet.pdf}{EAPI Cheat Sheet}
 }{%
+    % Make sure that the cheat sheet starts on an odd page
+    \clearpage\ifthenelse{\isodd{\thepage}}{}{\null\newpage}%
     \includepdf[pages=-,landscape,turn=false,%
         addtotoc={1,chapter,0,Desk Reference,cheatsheet}]{eapi-cheatsheet}
 }
