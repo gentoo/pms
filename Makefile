@@ -39,7 +39,7 @@ pms.html: $(LATEXFILES) pms.bbl vc.tex
 	LC_ALL=C sed -i -e '/<?xml\|<meta/s/iso-8859-1/utf-8/' $@
 	@# work around irregularity in how links to longtables are
 	@# formatted in the List of Tables
-	LC_ALL=C sed -i -e '/<span class="lotToc" >&#x00A0;/{N;N;s/\(&#x00A0;<a \nhref="[^"]\+">\)\([0-9A-Z.]\+\)[ \n]/\2\1/}' $@
+	LC_ALL=C sed -i -e '/<span class="lotToc" >&#x00A0;/{N;N;s/\(&#x00A0;<a \nhref="[^"]\+">\)\([0-9A-Z.]\+\)[ \n]\+/\2\1/}' $@
 	@# remove redundant span elements
 	LC_ALL=C sed -i -e ':x;/<span\(\s\+[^>]*\)\?$$/{N;bx;};:y;s/\(<span\s\+[^>]*>\)\([^<]*\)<\/span>\1/\1\2/;ty' $@
 
