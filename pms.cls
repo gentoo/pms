@@ -95,6 +95,11 @@
         \marginnote{\framebox{\textsc{#1}}}\ignorespaces
     }%
 }
+% Change marginnote test to pretend that landscape pages are odd numbered
+\g@addto@macro\@mn@margintest{%
+    \ifdim\columnwidth>\textheight\@tempswatrue\fi
+}
+
 \bibliographystyle{plainurl}
 
 % Redefine the titlepage environment not to reset the page number
