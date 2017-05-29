@@ -1,6 +1,8 @@
 LATEXFILES := $(filter-out vc.tex,$(wildcard *.tex)) pms.cls
 SOURCES = $(LATEXFILES) pms.bib vc vc-git.awk Makefile
 
+TWOSIDE =
+
 # latex chokes on aux files produced by tex4ht, so remove them
 aux-clean = if grep -q rEfLiNK pms.aux 2>/dev/null; then rm -f *.aux; fi
 
@@ -13,7 +15,11 @@ pms.pdf: $(LATEXFILES) pms.bbl vc.tex
 	set -e; \
 	while true; do \
 	  pdflatex eapi-cheatsheet; \
-	  pdflatex pms; \
+	  if test -z '$(TWOSIDE)'; then \
+	    pdflatex pms; \
+	  else \
+	    pdflatex '\PassOptionsToClass{twoside}{pms}\input{pms}'; \
+	  fi; \
 	  grep -q 'Warning.*Rerun' eapi-cheatsheet.log pms.log || break; \
 	done
 
