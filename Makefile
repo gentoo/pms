@@ -98,3 +98,4 @@ maintainer-clean: clean
 .PHONY: all html dist upload clean maintainer-clean
 
 .DELETE_ON_ERROR:
+.NOTPARALLEL:
