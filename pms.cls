@@ -162,8 +162,13 @@
 \ifthenelse{\equal{\VCDateISO}{}}
 {
     \date{Generated on: \today}
+    \newcommand{\commitinfo}{}
 }{
     \date{\printdate{\VCDateISO}}
+    \newcommand{\commitinfo}{%
+        This version corresponds to commit \VCRevision
+        \ifthenelse{\VCModified=0}{}{ with local changes}.
+    }
 }
 
 % Set page title

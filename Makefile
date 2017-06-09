@@ -55,7 +55,7 @@ pms.bbl: pms.bib $(LATEXFILES) vc.tex
 	bibtex pms
 
 vc.tex: $(SOURCES)
-	/bin/sh ./vc
+	/bin/sh ./vc -m
 
 eapi-cheatsheet.pdf: pms.pdf
 	@# nothing to do here, since this is also part of the main document
