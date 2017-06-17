@@ -827,10 +827,12 @@ has returned.
     EAPIs. In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as per
     section~\ref{sec:banned-commands}.
 
-\item[unpack] Unpacks one or more source archives, in order, into the current directory. After
-    unpacking, must ensure that all filesystem objects inside the current working directory (but not
-    the current working directory itself) have permissions \t{a+r,u+w,go-w} and that all directories
-    under the current working directory additionally have permissions \t{a+x}.
+\item[unpack] Unpacks one or more source archives, in order, into the current directory.
+    For compressed files, creates the target file in the current directory, with the compression
+    suffix removed from its name. After unpacking, must ensure that all filesystem objects inside
+    the current working directory (but not the current working directory itself) have permissions
+    \t{a+r,u+w,go-w} and that all directories under the current working directory additionally have
+    permissions \t{a+x}.
 
     Arguments to \t{unpack} are interpreted as follows:
     \begin{compactitem}
