@@ -27,32 +27,32 @@
 \PassOptionsToPackage{chapter}{algorithm}
 % algorithmic and algorithm to be loaded last to avoid failures
 \RequirePackage{%
-    fontenc,	% Load extended font sets
-    isodate,	% Date formatting and conversions
+    fontenc,    % Load extended font sets
+    isodate,    % Date formatting and conversions
     geometry,   % Set page layout
-    inputenc,	% Allow input methods apart from ASCII
-    booktabs,	% Nicer formatting of tables
-    ifthen,	% Comfortable conditional routines
-    longtable,	% Extend tables over more than one page
-    array,	% Extended tabular environments
-    lscape,	% Rotating pages
+    inputenc,   % Allow input methods apart from ASCII
+    booktabs,   % Nicer formatting of tables
+    ifthen,     % Comfortable conditional routines
+    longtable,  % Extend tables over more than one page
+    array,      % Extended tabular environments
+    lscape,     % Rotating pages
     marginnote, % Typeset a paragraph in the page margin
-    paralist,	% Additional list environments
-    parskip,	% Space between paragraphs instead of indentation
+    paralist,   % Additional list environments
+    parskip,    % Space between paragraphs instead of indentation
     underscore, % Allow simple _ instead of \_
-    verbatim,	% Extend the print-as-is functionality
-    chngcntr,	% Redefinition of counters
-    tocbibind	% Add bibliography to table of contents
+    verbatim,   % Extend the print-as-is functionality
+    chngcntr,   % Redefinition of counters
+    tocbibind   % Add bibliography to table of contents
 }
 
 % tex4ht workaround: hyperref needs to be loaded /after/ tex4ht injects itself
 \g@addto@macro\@documentclasshook{
     \RequirePackage{
-        caption,	% Extended float environment formatting
-        float,		% More control over float environments
-        hyperref,	% Support for hyperlinks
-        algorithm,	%
-        algorithmic	% Set algorithms
+        caption,        % Extended float environment formatting
+        float,          % More control over float environments
+        hyperref,       % Support for hyperlinks
+        algorithm,      %
+        algorithmic     % Set algorithms
     }
 }
 \ClassInfo{pms}{Capsulation of LaTeX stuff for the Package Manager
@@ -66,7 +66,7 @@
 \ifx\HCode\undefined
     \RequirePackage{%
         mathptmx,
-        pdfpages	% Insert whole PDF documents as separate pages
+        pdfpages        % Insert whole PDF documents as separate pages
     }
     \RequirePackage[scaled=.90]{helvet}
     \setboolean{TEX4HT-HACKS}{false}
