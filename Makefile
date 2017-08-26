@@ -10,7 +10,7 @@ all: pms.pdf
 
 html: pms.html
 
-pms.pdf: $(LATEXFILES) pms.bbl vc.tex
+pms.pdf eapi-cheatsheet.pdf: $(LATEXFILES) pms.bbl vc.tex
 	$(aux-clean)
 	set -e; \
 	while true; do \
@@ -21,6 +21,15 @@ pms.pdf: $(LATEXFILES) pms.bbl vc.tex
 	    pdflatex '\PassOptionsToClass{twoside}{pms}\input{pms}'; \
 	  fi; \
 	  grep -q 'Warning.*Rerun' eapi-cheatsheet.log pms.log || break; \
+	done
+
+eapi-cheatsheet-nocombine.pdf: pms.pdf
+	@# cheat sheet with separate pages, for proofreading
+	set -e; \
+	while true; do \
+	  pdflatex -jobname eapi-cheatsheet-nocombine \
+	    '\PassOptionsToClass{nocombine}{leaflet}\input{eapi-cheatsheet}'; \
+	  grep -q 'Warning.*Rerun' eapi-cheatsheet-nocombine.log || break; \
 	done
 
 pms.dvi: $(LATEXFILES) pms.bbl vc.tex
@@ -56,18 +65,6 @@ pms.bbl: pms.bib $(LATEXFILES) vc.tex
 
 vc.tex: $(SOURCES)
 	/bin/sh ./vc -m
-
-eapi-cheatsheet.pdf: pms.pdf
-	@# nothing to do here, since this is also part of the main document
-
-eapi-cheatsheet-nocombine.pdf: pms.pdf
-	@# cheat sheet with separate pages, for proofreading
-	set -e; \
-	while true; do \
-	  pdflatex -jobname eapi-cheatsheet-nocombine \
-	    '\PassOptionsToClass{nocombine}{leaflet}\input{eapi-cheatsheet}'; \
-	  grep -q 'Warning.*Rerun' eapi-cheatsheet-nocombine.log || break; \
-	done
 
 dist: $(SOURCES) vc.tex pms.pdf pms.html
 	PV='$(PV)'; \
