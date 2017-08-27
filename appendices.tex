@@ -66,6 +66,10 @@ removed in 2009.
 In some exceptional cases, changes to the specification have been approved by the Gentoo Council
 without introducing a new EAPI. This section lists such retroactive changes.
 
+\subsection{Bash version}
+EAPIs \t{0}, \t{1} and \t{2} originally specified GNU Bash version 3.0. This was retroactively
+updated to version 3.2 (see table~\ref{tab:bash-version}) in November 2009.
+
 \subsection{Old-style virtuals}
 Historically, virtuals were special packages rather than regular ebuilds. An ebuild could specify in
 the \t{PROVIDE} metadata that it supplied certain virtuals, and the package manager had to bear this
@@ -73,6 +77,32 @@ in mind when handling dependencies.
 
 Old-style virtuals were supported by EAPIs \t{0}, \t{1}, \t{2}, \t{3} and \t{4}. They were phased
 out via GLEP 37~\cite{Glep37} and finally removed in 2011.
+
+\subsection{EAPI parsing}
+The method to specify the EAPI of an ebuild used to be a shell variable assignment, and the
+package manager had to source the ebuild in order to determine the EAPI. Therefore any ebuild using
+a future EAPI would still have to be sourceable by old package managers, which imposed restrictions
+e.\,g.\ on updating the Bash version or on possible changes of global scope functions. Several
+approaches to overcome this limitation were discussed, notably GLEP 55~\cite{Glep55}, which was
+rejected though.
+
+The current syntax of the \t{EAPI} assignment statement (see section~\ref{sec:eapi}), allowing
+the package manager to obtain the EAPI from the ebuild by a regular expression match and without
+sourcing it, was introduced in May 2012.
+
+\subsection{Package names}
+Previously, package names were only required not to end in a hyphen followed by one or more digits.
+In October 2012 this was tightened to the specification in section~\ref{sec:package-names}, namely
+that they must not end in a hyphen followed by anything resembling a package version.
+
+\subsection{Asterisk in dependency specification}
+In the \t{=} dependency operator specified in section~\ref{sec:dep-operator}, an asterisk used to
+induce string prefix comparison instead of the normal version comparison logic. That could lead to
+surprising results, e.\,g.\ \t{=dev-lang/perl-5.2*} matching \t{dev-lang/perl-5.22.0}. Moreover,
+implementation in package managers deviated from what was specified.
+
+String prefix matching was effective in EAPIs \t{0}, \t{1}, \t{2}, \t{3}, \t{4} and \t{5}. It was
+retroactively dropped in favour of the current behaviour in October 2015.
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 
