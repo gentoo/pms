@@ -132,6 +132,18 @@ variable.
     for convenience. See also the \t{EPREFIX} variable. Only for EAPIs listed in
     table~\ref{tab:offset-env-vars-table} as supporting \t{EROOT}\@. The presence of a trailing
     slash is EAPI dependent as listed in table~\ref{tab:trailing-slash}. \\
+\t{SYSROOT} &
+    \t{src_*} &
+    No &
+    \featurelabel{sysroot} The absolute path to the root directory containing build dependencies
+    satisfied by \t{DEPEND}\@. Only for EAPIs listed in table~\ref{tab:added-env-vars-table}
+    as supporting \t{SYSROOT}. \\
+\t{ESYSROOT} &
+    \t{src_*} &
+    No &
+    Contains the concatenation of the paths in the \t{SYSROOT} and \t{EPREFIX} variables,
+    for convenience. See also the \t{EPREFIX} variable. Only for EAPIs listed
+    in table~\ref{tab:offset-env-vars-table} as supporting \t{ESYSROOT}. \\
 \t{T} &
     All &
     Partially\footnote{Consistent and preserved across a single connected sequence of install or
@@ -246,17 +258,19 @@ variable.
 \ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting various added env variables}
     \label{tab:added-env-vars-table}
-    \begin{tabular}{lllll}
+    \begin{tabular}{llllll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{\t{MERGE_TYPE}?}} &
       \multicolumn{1}{P{6em}}{\textbf{\t{REPLACING_VERSIONS}?}} &
       \multicolumn{1}{P{6em}}{\textbf{\t{REPLACED_BY_VERSION}?}} &
-      \multicolumn{1}{P{6em}}{\textbf{\t{EBUILD_PHASE_FUNC}?}} \\
+      \multicolumn{1}{P{6em}}{\textbf{\t{EBUILD_PHASE_FUNC}?}} &
+      \multicolumn{1}{c}{\textbf{\t{SYSROOT}?}} \\
       \midrule
-      0, 1, 2, 3        & No  & No  & No  & No  \\
-      4                 & Yes & Yes & Yes & No  \\
-      5, 6, 7           & Yes & Yes & Yes & Yes \\
+      0, 1, 2, 3        & No  & No  & No  & No  & No  \\
+      4                 & Yes & Yes & Yes & No  & No  \\
+      5, 6              & Yes & Yes & Yes & Yes & No  \\
+      7                 & Yes & Yes & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -284,15 +298,17 @@ variable.
 \ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting offset-prefix env variables}
     \label{tab:offset-env-vars-table}
-    \begin{tabular}{llll}
+    \begin{tabular}{lllll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{\t{EPREFIX}?}} &
       \multicolumn{1}{c}{\textbf{\t{EROOT}?}} &
-      \multicolumn{1}{c}{\textbf{\t{ED}?}} \\
+      \multicolumn{1}{c}{\textbf{\t{ED}?}} &
+      \multicolumn{1}{c}{\textbf{\t{ESYSROOT}?}} \\
       \midrule
-      0, 1, 2           & No  & No  & No  \\
-      3, 4, 5, 6, 7     & Yes & Yes & Yes \\
+      0, 1, 2           & No  & No  & No  & No  \\
+      3, 4, 5, 6        & Yes & Yes & Yes & No  \\
+      7                 & Yes & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
