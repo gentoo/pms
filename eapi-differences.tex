@@ -216,7 +216,7 @@ Option \t{-{}-host-root} & \compactfeatureref{host-root-option} &
     None & disable dependency tracking &
     disable dependency tracking, disable silent rules &
     disable dependency tracking, disable silent rules, docdir, htmldir &
-    disable dependency tracking, disable silent rules, docdir, htmldir \\
+    disable dependency tracking, disable silent rules, docdir, htmldir, with sysroot \\
 
 \t{dodoc -r} & \compactfeatureref{dodoc} &
     No & Yes & Yes & Yes & Yes \\
@@ -414,6 +414,7 @@ EAPI 7 is EAPI 6 with the following changes:
 \item \t{ROOT}, \t{EROOT}, \t{D}, \t{ED} no longer end with a trailing slash,
     \featureref{trailing-slash}.
 \item \t{SYSROOT} and \t{ESYSROOT}, \featureref{sysroot}.
+\item \t{econf} adds \t{-{}-with-sysroot}, \featureref{econf-options}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{7}

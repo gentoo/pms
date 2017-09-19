@@ -259,6 +259,9 @@ current phase function has returned.
     \item \t{-{}-htmldir} must be \t{\$\{EPREFIX\}/usr/share/doc/\$\{PF\}/html}, if the EAPI is
         listed in table~\ref{tab:econf-options-table} as using it. This option will only be passed
         if the string \t{-{}-htmldir} occurs in the output of \t{configure -{}-help}.
+    \item \t{-{}-with-sysroot} must be \t{\$\{ESYSROOT\}}, if the EAPI is listed in
+        table~\ref{tab:econf-options-table} as using it. This option will only be passed if the
+        string \t{-{}-with-sysroot} occurs in the output of \t{configure -{}-help}.
     \item \t{-{}-build} must be the value of the \t{CBUILD} environment variable. This option will
         only be passed if \t{CBUILD} is non-empty.
     \item \t{-{}-host} must be the value of the \t{CHOST} environment variable.
@@ -276,18 +279,20 @@ current phase function has returned.
     \ChangeWhenAddingAnEAPI{7}
     \begin{centertable}{Extra \t{econf} arguments for EAPIs}
         \label{tab:econf-options-table}
-        \begin{tabular}{lllll}
+        \begin{tabular}{llllll}
           \toprule
           \multicolumn{1}{c}{\textbf{EAPI}} &
           \multicolumn{1}{c}{\textbf{-{}-disable-dependency-tracking}} &
           \multicolumn{1}{c}{\textbf{-{}-disable-silent-rules}} &
           \multicolumn{1}{c}{\textbf{-{}-docdir}} &
-          \multicolumn{1}{c}{\textbf{-{}-htmldir}} \\
+          \multicolumn{1}{c}{\textbf{-{}-htmldir}} &
+          \multicolumn{1}{c}{\textbf{-{}-with-sysroot}} \\
           \midrule
-          0, 1, 2, 3        & No  & No  & No  & No  \\
-          4                 & Yes & No  & No  & No  \\
-          5                 & Yes & Yes & No  & No  \\
-          6, 7              & Yes & Yes & Yes & Yes \\
+          0, 1, 2, 3        & No  & No  & No  & No  & No  \\
+          4                 & Yes & No  & No  & No  & No  \\
+          5                 & Yes & Yes & No  & No  & No  \\
+          6                 & Yes & Yes & Yes & Yes & No  \\
+          7                 & Yes & Yes & Yes & Yes & Yes \\
           \bottomrule
         \end{tabular}
     \end{centertable}
