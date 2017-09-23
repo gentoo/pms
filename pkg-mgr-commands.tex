@@ -82,27 +82,37 @@ These commands are used to extract information about the system. Ebuilds must no
 these commands in parallel with any other package manager command. Ebuilds must not run any of
 these commands once the current phase function has returned.
 
-\featurelabel{host-root-option} In EAPIs listed in table~\ref{tab:foo-version-host-root-table} as
-supporting option \t{-{}-host-root}, this flag as the first argument will cause the query to apply
-to the host root instead of \t{ROOT}.
+\featurelabel{pm-query-options} In EAPIs listed in table~\ref{tab:pm-query-options} as supporting
+option \t{-{}-host-root}, this flag as the first argument will cause the query to apply to the
+host root. Otherwise, it applies to \t{ROOT}.
+
+In EAPIs listed in table~\ref{tab:pm-query-options} as supporting options \t{-b}, \t{-d} and \t{-r},
+these mutually exclusive flags as the first argument will cause the query to apply to locations
+targetted by \t{BDEPEND}, \t{DEPEND} and \t{RDEPEND}, respectively. When none of these options
+are given, \t{-r} is assumed.
+
 \begin{description}
 \item[has_version] Takes exactly one package dependency specification as an argument. Returns
-    true if a package matching the specification is installed in \t{ROOT}, and false otherwise.
+    true if a package matching the specification is installed, and false otherwise.
 \item[best_version] Takes exactly one package dependency specification as an argument. If a
     matching package is installed, prints the category, package name and version of the highest
     matching version; otherwise, prints an empty string. The exit code is unspecified.
 \end{description}
 
 \ChangeWhenAddingAnEAPI{7}
-\begin{centertable}{EAPIs supporting \t{-{}-host-root} for \t{*_version} commands}
-    \label{tab:foo-version-host-root-table}
-    \begin{tabular}{ll}
+\begin{centertable}{Package manager query command options supported by EAPIs}
+    \label{tab:pm-query-options}
+    \begin{tabular}{lllll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{\t{*_version} supports \t{-{}-host-root}?}} \\
+      \multicolumn{1}{c}{\textbf{\t{-{}-host-root}?}} &
+      \multicolumn{1}{c}{\textbf{\t{-b}?}} &
+      \multicolumn{1}{c}{\textbf{\t{-d}?}} &
+      \multicolumn{1}{c}{\textbf{\t{-r}?}} \\
       \midrule
-      0, 1, 2, 3, 4     & No  \\
-      5, 6              & Yes \\
+      0, 1, 2, 3, 4     & No  & No  & No  & No  \\
+      5, 6              & Yes & No  & No  & No  \\
+      7                 & No  & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
