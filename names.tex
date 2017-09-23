@@ -55,8 +55,9 @@ hyphen, a dot or a plus sign.
 
 \section{Version Specifications}
 \label{sec:version-spec}
-The package manager must not impose fixed limits upon the number of version components. Package
-managers should indicate or reject any version that is invalid according to these rules.
+The package manager must neither impose fixed limits upon the number of version components, nor
+upon the length of any component. Package managers should indicate or reject any version that is
+invalid according to the rules below.
 
 A version starts with the number part, which is in the form \t{[0-9]+(\textbackslash.[0-9]+)*}
 (a positive integer, followed by zero or more dot-prefixed positive integers).
