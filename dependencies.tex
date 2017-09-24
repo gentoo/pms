@@ -13,11 +13,14 @@
       \midrule
       \t{pkg_pretend}, \t{pkg_setup}, \t{pkg_info}, \t{pkg_nofetch} &
           None (ebuilds can rely only on the packages in the system set) \\
+      \addlinespace
       \t{src_unpack}, \t{src_prepare}, \t{src_configure}, \t{src_compile}, \t{src_test},
           \t{src_install} & \t{DEPEND} \\
+      \addlinespace
       \t{pkg_preinst}, \t{pkg_postinst}, \t{pkg_prerm}, \t{pkg_postrm} &
           \t{RDEPEND} (unless the particular dependency results in a circular dependency, in which
           case it may be installed later) \\
+      \addlinespace
       \t{pkg_config} & \t{RDEPEND}, \t{PDEPEND} \\
       \bottomrule
     \end{tabular}
