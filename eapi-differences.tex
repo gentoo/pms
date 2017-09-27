@@ -290,6 +290,9 @@ Controllable stripping & \compactfeatureref{dostrip} &
 \t{in_iuse} & \compactfeatureref{in-iuse} &
     No & No & No & Yes & Yes \\
 
+\t{ver_*} commands & \compactfeatureref{ver-commands} &
+    No & No & No & No & Yes \\
+
 \t{unpack} absolute paths & \compactfeatureref{unpack-absolute} &
     No & No & No & Yes & Yes \\
 
@@ -468,6 +471,7 @@ EAPI 7 is EAPI 6 with the following changes:
 \item \t{die} is guaranteed to work in a subshell, \featureref{subshell-die}.
 \item \t{domo} installs to \t{/usr}, \featureref{domo-path}.
 \item Controllable stripping and \t{dostrip}, \featureref{dostrip}.
+\item Version manipulation and comparison commands, \featureref{ver-commands}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{7}
