@@ -132,8 +132,12 @@ These commands display messages to the user. Unless otherwise stated, the entire
 used as a message, with backslash-escaped characters interpreted as for the \t{echo -e} command of
 bash, notably \t{\textbackslash t} for a horizontal tab, \t{\textbackslash n} for a new line, and
 \t{\textbackslash\textbackslash} for a literal backslash. Ebuilds must not run any of these commands
-once the current phase function has returned. Unless otherwise noted, output may be sent to stdout,
-stderr or some other appropriate facility.
+once the current phase function has returned.
+
+\featurelabel{output-no-stdout} Unless otherwise noted, output may be sent to stderr or some other
+appropriate facility. In EAPIs listed in table~\ref{tab:output-commands} as not allowing stdout
+output, using stdout as an output facility is forbidden.
+
 \begin{description}
 \item[einfo] Displays an informational message.
 \item[einfon] Displays an informational message without a trailing newline.
@@ -149,6 +153,20 @@ stderr or some other appropriate facility.
     arguments. If the first argument is 0, prints a success indicator; otherwise, prints the
     message followed by a failure indicator. Returns its first argument as exit status.
 \end{description}
+
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{Output commands for EAPIs}
+    \label{tab:output-commands}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Commands can output to stdout?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6 & Yes \\
+      7                   & No  \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \subsection{Error commands}
 These commands are used when an error is detected that will prevent the build process from
