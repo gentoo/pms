@@ -227,6 +227,9 @@ Query command options & \compactfeatureref{pm-query-options} &
 Output commands use stdout & \compactfeatureref{output-no-stdout} &
     Yes & Yes & Yes & Yes & No \\
 
+\t{eqawarn} & \compactfeatureref{eqawarn} &
+    No & No & No & No & Yes \\
+
 \t{die -n} & \compactfeatureref{nonfatal-die} &
     No & No & No & Yes & Yes \\
 
@@ -449,6 +452,7 @@ EAPI 7 is EAPI 6 with the following changes:
 \item \t{dohtml} banned, \featureref{banned-commands}.
 \item \t{dolib} and \t{libopts} banned, \featureref{banned-commands}.
 \item Output commands no longer use stdout, \featureref{output-no-stdout}.
+\item \t{eqawarn}, \featureref{eqawarn}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{7}

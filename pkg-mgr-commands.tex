@@ -145,6 +145,10 @@ output, using stdout as an output facility is forbidden.
     manager may choose to log \t{elog} messages by default where \t{einfo} messages are not, for
     example.
 \item[ewarn] Displays a warning message. Must not go to stdout.
+\item[eqawarn] \featurelabel{eqawarn} Display a QA warning message intended for ebuild developers.
+    The package manager may provide appropriate mechanisms to skip those messages for normal users.
+    Must not go to stdout. Only available in EAPIs listed in table~\ref{tab:output-commands} as
+    supporting \t{eqawarn}.
 \item[eerror] Displays an error message. Must not go to stdout.
 \item[ebegin] Displays an informational message. Should be used when beginning a possibly
     lengthy process, and followed by a call to \t{eend}.
@@ -157,13 +161,14 @@ output, using stdout as an output facility is forbidden.
 \ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{Output commands for EAPIs}
     \label{tab:output-commands}
-    \begin{tabular}{ll}
+    \begin{tabular}{lll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Commands can output to stdout?}} \\
+      \multicolumn{1}{c}{\textbf{Commands can output to stdout?}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{eqawarn}?}} \\
       \midrule
-      0, 1, 2, 3, 4, 5, 6 & Yes \\
-      7                   & No  \\
+      0, 1, 2, 3, 4, 5, 6 & Yes & No  \\
+      7                   & No  & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
