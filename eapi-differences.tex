@@ -176,6 +176,9 @@ Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-inject} &
 \t{EPREFIX}, \t{ED}, \t{EROOT} & \compactfeatureref{offset-prefix-vars} &
     * & Yes & Yes & Yes & Yes \\
 
+Trailing slash in \t{D} etc. & \compactfeatureref{trailing-slash} &
+    Yes & Yes & Yes & Yes & No \\
+
 \t{find} is GNU? & \compactfeatureref{gnu-find} &
     Undefined & Undefined & Yes & Yes & Yes \\
 
@@ -405,6 +408,8 @@ EAPI 7 is EAPI 6 with the following changes:
 \item \t{ECLASSDIR} is gone, \featureref{eclassdir}.
 \item \t{DESTTREE} is gone, \featureref{desttree}.
 \item \t{INSDESTTREE} is gone, \featureref{insdesttree}.
+\item \t{ROOT}, \t{EROOT}, \t{D}, \t{ED} no longer end with a trailing slash,
+    \featureref{trailing-slash}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{7}

@@ -123,14 +123,15 @@ variable.
    The absolute path to the root directory into which the package is to be merged.  Phases which run
    with full filesystem access must not touch any files outside of the directory given in
    \t{ROOT}\@. Also of note is that in a cross-compiling environment, binaries inside of \t{ROOT}
-   will not be executable on the build machine, so ebuilds must not call them. \t{ROOT} must be
-   non-empty and end in a trailing slash. \\
+   will not be executable on the build machine, so ebuilds must not call them. The presence of
+   a trailing slash is EAPI dependent as listed in table~\ref{tab:trailing-slash}. \\
 \t{EROOT} &
     \t{pkg_*} &
     No &
-    Contains the path \t{\$\{ROOT\%/\}\$\{EPREFIX\}/} for convenience. See also the
-    \t{EPREFIX} variable. Only for EAPIs listed in table~\ref{tab:offset-env-vars-table} as
-    supporting \t{EROOT}. \\
+    Contains the concatenation of the paths in the \t{ROOT} and \t{EPREFIX} variables,
+    for convenience. See also the \t{EPREFIX} variable. Only for EAPIs listed in
+    table~\ref{tab:offset-env-vars-table} as supporting \t{EROOT}\@. The presence of a trailing
+    slash is EAPI dependent as listed in table~\ref{tab:trailing-slash}. \\
 \t{T} &
     All &
     Partially\footnote{Consistent and preserved across a single connected sequence of install or
@@ -161,18 +162,21 @@ variable.
     \t{src_install} &
     No &
     Contains the full path to the image directory into which the package should be installed.
-    Must be non-empty and end in a trailing slash. \\
+    The presence of a trailing slash is EAPI dependent as listed in table~\ref{tab:trailing-slash}.
+    \\
 \t{D} (continued) &
     \t{pkg_preinst}, \t{pkg_postinst} &
     Yes &
-    Contains the full path to the image that is about to be or has just been merged. Must be
-    non-empty and end in a trailing slash. \\
+    Contains the full path to the image that is about to be or has just been merged.
+    The presence of a trailing slash is EAPI dependent as listed in table~\ref{tab:trailing-slash}.
+    \\
 \t{ED} &
     \t{src_install}, \t{pkg_preinst}, \t{pkg_postinst} &
     See \t{D} &
-    Contains the path \t{\$\{D\%/\}\$\{EPREFIX\}/} for convenience. See also the
-    \t{EPREFIX} variable. Only for EAPIs listed in table~\ref{tab:offset-env-vars-table} as
-    supporting \t{ED}. \\
+    Contains the concatenation of the paths in the \t{D} and \t{EPREFIX} variables,
+    for convenience. See also the \t{EPREFIX} variable. Only for EAPIs listed in
+    table~\ref{tab:offset-env-vars-table} as supporting \t{ED}\@. The presence of a trailing slash
+    is EAPI dependent as listed in table~\ref{tab:trailing-slash}. \\
 \t{DESTTREE} &
     \t{src_install} &
     No &
@@ -431,6 +435,38 @@ hardwired to \t{/usr}. In offset-prefix supporting EAPIs the installation offset
 behaviour of offset-prefix aware and agnostic is the same when \t{EPREFIX} is set to the empty
 string in offset-prefix aware EAPIs. The latter do have the variables \t{ED} and \t{EROOT} properly
 set, though.
+
+\subsection{Path variables and trailing slash}
+\label{sec:trailing-slash}
+
+Unless specified otherwise, the paths provided through package manager variables do not end with
+a trailing slash and cannot be empty. A few exceptions to that rule are listed
+in table~\ref{tab:trailing-slash} along with applicable EAPIs.
+
+For EAPIs where those variables are defined to always end with a trailing slash, the package manager
+guarantees that a trailing slash will always be appended to the path in question. If the path
+specifies the system root directory, it will consist of a single slash (\t{/}).
+
+\featurelabel{trailing-slash} For EAPIs where those variables are defined to never end with
+a trailing slash, the package manager guarantees that a trailing slash will never be present.
+If the path specifies the system root directory, it will be empty.
+
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{Variables that always or never end with a trailing slash}
+    \label{tab:trailing-slash}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{2}{c}{\textbf{Ends with a trailing slash?}} \\
+      &
+      \t{ROOT}, \t{EROOT} &
+      \t{D}, \t{ED} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6 & always & always \\
+      7                   & never  & never  \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 
