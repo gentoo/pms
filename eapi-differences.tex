@@ -191,6 +191,9 @@ Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-inject} &
 Trailing slash in \t{D} etc. & \compactfeatureref{trailing-slash} &
     Yes & Yes & Yes & Yes & No \\
 
+GNU \t{patch} version & \compactfeatureref{gnu-patch} &
+    Any & Any & Any & Any & 2.7 \\
+
 \t{find} is GNU? & \compactfeatureref{gnu-find} &
     Undefined & Undefined & Yes & Yes & Yes \\
 
@@ -429,6 +432,7 @@ EAPI 7 is EAPI 6 with the following changes:
 \item \t{best_version} and \t{has_version} support \t{-b}, \t{-d} and \t{-r} options instead of
     \t{-{}-host-root}, \featureref{pm-query-options}.
 \item \t{ENV_UNSET}, \featureref{env-unset}.
+\item \t{patch} is compatible with GNU patch 2.7, \featureref{gnu-patch}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{7}
