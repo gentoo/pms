@@ -56,20 +56,22 @@ called, the package manager must abort the build process indicating an error.
 \ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{Banned commands}
     \label{tab:banned-commands-table}
-    \begin{tabular}{lllll}
+    \begin{tabular}{lllllll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{4}{c}{\textbf{Command banned?}} \\
+      \multicolumn{6}{c}{\textbf{Command banned?}} \\
       \multicolumn{1}{c}{} &
       \multicolumn{1}{c}{\textbf{\t{dohard}}} &
       \multicolumn{1}{c}{\textbf{\t{dosed}}} &
       \multicolumn{1}{c}{\textbf{\t{einstall}}} &
-      \multicolumn{1}{c}{\textbf{\t{dohtml}}} \\
+      \multicolumn{1}{c}{\textbf{\t{dohtml}}} &
+      \multicolumn{1}{c}{\textbf{\t{dolib}}} &
+      \multicolumn{1}{c}{\textbf{\t{libopts}}} \\
       \midrule
-      0, 1, 2, 3        & No  & No  & No  & No  \\
-      4, 5              & Yes & Yes & No  & No  \\
-      6                 & Yes & Yes & Yes & No  \\
-      7                 & Yes & Yes & Yes & Yes \\
+      0, 1, 2, 3        & No  & No  & No  & No  & No  & No  \\
+      4, 5              & Yes & Yes & No  & No  & No  & No  \\
+      6                 & Yes & Yes & Yes & No  & No  & No  \\
+      7                 & Yes & Yes & Yes & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -492,7 +494,9 @@ the current phase function has returned.
 \item[dolib.so] As for \t{dolib.a} except each file is installed with mode \t{0755}.
 
 \item[dolib] As for \t{dolib.a} except that the default install mode can be overriden with
-    the \t{install} options set by the most recent \t{libopts} call.
+    the \t{install} options set by the most recent \t{libopts} call. In EAPIs listed
+    in table~\ref{tab:banned-commands-table}, this command is banned as per
+    section~\ref{sec:banned-commands}.
 
 \begin{algorithm}
 \caption{Determining the library directory} \label{alg:ebuild-libdir}
@@ -688,6 +692,8 @@ has returned.
 \item[exeopts] Sets the options passed by \t{doexe} et al.\ to the \t{install} command.
 
 \item[libopts] Sets the options passed by \t{dolib} et al.\ to the \t{install} command.
+    In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as
+    per section~\ref{sec:banned-commands}.
 
 \end{description}
 
