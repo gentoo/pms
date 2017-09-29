@@ -176,11 +176,14 @@ variable.
 \t{DESTTREE} &
     \t{src_install} &
     No &
-    Controls the location where \t{dobin}, \t{dolib}, \t{domo}, and \t{dosbin} install things. \\
+    \featurelabel{desttree} Controls the location where \t{dobin}, \t{dolib}, \t{domo},
+    and \t{dosbin} install things. Only for EAPIs listed in table~\ref{tab:removed-env-vars-table}
+    as supporting \t{DESTTREE}. \\
 \t{INSDESTTREE} &
     \t{src_install} &
     No &
-    Controls the location where \t{doins} installs things. \\
+    \featurelabel{insdesttree} Controls the location where \t{doins} installs things. Only for EAPIs
+    listed in table~\ref{tab:removed-env-vars-table} as supporting \t{INSDESTTREE}. \\
 \t{USE} &
     All &
     Yes &
@@ -255,17 +258,19 @@ variable.
 \ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting various removed env variables}
     \label{tab:removed-env-vars-table}
-    \begin{tabular}{lllll}
+    \begin{tabular}{lllllll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{\t{AA}?}} &
       \multicolumn{1}{c}{\textbf{\t{KV}?}} &
       \multicolumn{1}{c}{\textbf{\t{PORTDIR}?}} &
-      \multicolumn{1}{c}{\textbf{\t{ECLASSDIR}?}} \\
+      \multicolumn{1}{c}{\textbf{\t{ECLASSDIR}?}} &
+      \multicolumn{1}{c}{\textbf{\t{DESTTREE}?}} &
+      \multicolumn{1}{c}{\textbf{\t{INSDESTTREE}?}} \\
       \midrule
-      0, 1, 2, 3        & Yes & Yes & Yes & Yes \\
-      4, 5, 6           & No  & No  & Yes & Yes \\
-      7                 & No  & No  & No  & No  \\
+      0, 1, 2, 3        & Yes & Yes & Yes & Yes & Yes & Yes \\
+      4, 5, 6           & No  & No  & Yes & Yes & Yes & Yes \\
+      7                 & No  & No  & No  & No  & No  & No  \\
       \bottomrule
     \end{tabular}
 \end{centertable}
