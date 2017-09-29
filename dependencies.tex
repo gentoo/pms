@@ -6,13 +6,13 @@
 
 \begin{centertable}{Dependency classes required to be satisfied for a particular phase function}
     \label{tab:phase-function-dependency-classes}
-    \begin{tabular}{P{7.5em} P{0.7\textwidth}}
+    \begin{tabular}{P{13.5em} P{0.6\textwidth}}
       \toprule
       \multicolumn{1}{c}{\textbf{Phase function}} &
       \multicolumn{1}{c}{\textbf{Satisfied dependency classes}} \\
       \midrule
       \t{pkg_pretend}, \t{pkg_setup}, \t{pkg_info}, \t{pkg_nofetch} &
-          None (ebuilds can rely only on the packages in the system set) \\
+          None (ebuilds can rely only on the packages in the system~set) \\
       \addlinespace
       \t{src_unpack}, \t{src_prepare}, \t{src_configure}, \t{src_compile}, \t{src_test},
           \t{src_install} & \t{DEPEND} \\
