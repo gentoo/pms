@@ -27,7 +27,7 @@ The following commands affect this behaviour:
     implementations to account for calling directly in ebuild scope or through \t{xargs}.
 
     Explicit \t{die} or \t{assert} commands only respect \t{nonfatal} when called with the \t{-n}
-    option and in EAPIs supporting this option, see table~\ref{tab:nonfatal-die}.
+    option and in EAPIs supporting this option, see table~\ref{tab:die-properties}.
 \end{description}
 
 \ChangeWhenAddingAnEAPI{7}
@@ -180,23 +180,30 @@ completing. Ebuilds must not run any of these commands once the current phase fu
 \item[die] \featurelabel{nonfatal-die} If called under the \t{nonfatal} command (as per
     section~\ref{sec:failure-behaviour}) and with \t{-n} as its first parameter, displays a failure
     message provided in its following argument and then returns a non-zero exit status. Only in
-    EAPIs listed in table~\ref{tab:nonfatal-die} as supporting option~\t{-n}. Otherwise, displays
+    EAPIs listed in table~\ref{tab:die-properties} as supporting option~\t{-n}. Otherwise, displays
     a failure message provided in its first and only argument, and then aborts the build process.
-    \t{die} is \e{not} guaranteed to work correctly if called from a subshell environment.
+
+    \featurelabel{subshell-die} In EAPIs listed in table~\ref{tab:die-properties} as not providing
+    subshell support, \t{die} is \e{not} guaranteed to work correctly if called from a subshell
+    environment.
 \item[assert] Checks the value of the shell's pipe status variable, and if any component is non-zero
     (indicating failure), calls \t{die}, passing any parameters to it.
 \end{description}
 
 \ChangeWhenAddingAnEAPI{7}
-\begin{centertable}{EAPIs supporting \t{-n} for \t{die} and \t{assert} commands}
-    \label{tab:nonfatal-die}
-    \begin{tabular}{ll}
+\begin{centertable}{Properties of \t{die} and \t{assert} commands in EAPIs}
+    \label{tab:die-properties}
+    \begin{tabular}{lll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{\t{die} and \t{assert} support \t{-n}?}} \\
+      \multicolumn{2}{c}{\textbf{\t{die} and \t{assert}}} \\
+      &
+      \multicolumn{1}{c}{\textbf{support \t{-n}?}} &
+      \multicolumn{1}{c}{\textbf{work in subshell?}} \\
       \midrule
-      0, 1, 2, 3, 4, 5  & No  \\
-      6, 7              & Yes \\
+      0, 1, 2, 3, 4, 5  & No  & No  \\
+      6                 & Yes & No  \\
+      7                 & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
