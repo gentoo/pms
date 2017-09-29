@@ -46,6 +46,9 @@ Stable use masking/forcing & \compactfeatureref{stablemask} &
 Bash version & \compactfeatureref{bash-version} &
     3.2 & 3.2 & 3.2 & 3.2 & 4.2 \\
 
+\t{failglob} in global scope & \compactfeatureref{failglob} &
+    No & No & No & No & Yes \\
+
 \t{IUSE} defaults & \compactfeatureref{iuse-defaults} &
     * & Yes & Yes & Yes & Yes \\
 
@@ -146,9 +149,6 @@ Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-inject} &
 
 \t{EPREFIX}, \t{ED}, \t{EROOT} & \compactfeatureref{offset-prefix-vars} &
     No & Yes & Yes & Yes & Yes \\
-
-\t{failglob} in global scope & \compactfeatureref{failglob} &
-    No & No & No & No & Yes \\
 
 \t{find} is GNU? & \compactfeatureref{gnu-find} &
     Undefined & Undefined & Undefined & Yes & Yes \\
@@ -346,10 +346,10 @@ EAPI 6 is EAPI 5 with the following changes:
 
 \begin{compactitem}
 \item Bash version is 4.2, \featureref{bash-version}.
+\item \t{failglob} is enabled in global scope, \featureref{failglob}.
 \item Default \t{src_prepare} no longer a no-op, \featureref{src-prepare-6}.
 \item Different \t{src_install} implementation, \featureref{src-install-6}.
 \item \t{LC_CTYPE} and \t{LC_COLLATE} compatible with POSIX locale, \featureref{locale-settings}.
-\item \t{failglob} is enabled in global scope, \featureref{failglob}.
 \item \t{einstall} banned, \featureref{banned-commands}.
 \item \t{die} and \t{assert} called with \t{-n} respect \t{nonfatal}, \featureref{nonfatal-die}.
 \item \t{eapply} support, \featureref{eapply}.
