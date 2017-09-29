@@ -201,7 +201,7 @@ Most utilities die & \compactfeatureref{die-on-failure} &
     No & Yes & Yes & Yes & Yes \\
 
 \t{nonfatal} & \compactfeatureref{nonfatal} &
-    No & Yes & Yes & Yes & Yes \\
+    No & Yes & Yes & Yes & Function / external \\
 
 \t{dohard} & \compactfeatureref{banned-commands} &
     Yes & Banned & Banned & Banned & Banned \\
@@ -433,6 +433,7 @@ EAPI 7 is EAPI 6 with the following changes:
     \t{-{}-host-root}, \featureref{pm-query-options}.
 \item \t{ENV_UNSET}, \featureref{env-unset}.
 \item \t{patch} is compatible with GNU patch 2.7, \featureref{gnu-patch}.
+\item \t{nonfatal} is both a shell function and an external command, \featureref{nonfatal}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{7}

@@ -22,6 +22,10 @@ The following commands affect this behaviour:
     the build process due to a failure, instead a non-zero exit status shall be returned. Only in
     EAPIs listed in table~\ref{tab:commands-die-table} as supporting \t{nonfatal}.
 
+    In EAPIs listed in table~\ref{tab:commands-die-table} as having \t{nonfatal} defined both
+    as a shell function and as an external command, the package manager must provide both
+    implementations to account for calling directly in ebuild scope or through \t{xargs}.
+
     Explicit \t{die} or \t{assert} commands only respect \t{nonfatal} when called with the \t{-n}
     option and in EAPIs supporting this option, see table~\ref{tab:nonfatal-die}.
 \end{description}
@@ -29,14 +33,16 @@ The following commands affect this behaviour:
 \ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPI command failure behaviour}
     \label{tab:commands-die-table}
-    \begin{tabular}{lll}
+    \begin{tabular}{llll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Command failure behaviour}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{nonfatal}?}} \\
+      \multicolumn{1}{P{8em}}{\textbf{Command failure behaviour}} &
+      \multicolumn{1}{P{5em}}{\textbf{Supports \t{nonfatal}?}} &
+      \multicolumn{1}{P{12em}}{\textbf{\t{nonfatal} is both a function and an external command?}} \\
       \midrule
-      0, 1, 2, 3        & Non-zero exit & No  \\
-      4, 5, 6, 7        & Aborts        & Yes \\
+      0, 1, 2, 3        & Non-zero exit & No  & n/a \\
+      4, 5, 6           & Aborts        & Yes & No  \\
+      7                 & Aborts        & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
