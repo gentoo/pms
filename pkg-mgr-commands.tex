@@ -484,15 +484,15 @@ the current phase function has returned.
     symlink is encountered. Failure behaviour is EAPI dependent as per
     section~\ref{sec:failure-behaviour}.
 
-\item[dolib] For each argument, installs it into the appropriate library subdirectory under
-    \t{DESTTREE}, as determined by algorithm~\ref{alg:ebuild-libdir}. Files are installed by default
-    with file mode \t{0644}, or with the \t{install} options set by the most recent \t{libopts}
-    call. Any symlinks are installed into the same directory as relative links to their original
-    target. Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
+\item[dolib.a] For each argument, installs it into the appropriate library subdirectory under
+    \t{DESTTREE}, as determined by algorithm~\ref{alg:ebuild-libdir}. Files are installed with file
+    mode \t{0644}. Any symlinks are installed into the same directory as relative links to their
+    original target. Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
-\item[dolib.a] As for \t{dolib} except each file is installed with mode \t{0644}.
+\item[dolib.so] As for \t{dolib.a} except each file is installed with mode \t{0755}.
 
-\item[dolib.so] As for \t{dolib} except each file is installed with mode \t{0755}.
+\item[dolib] As for \t{dolib.a} except that the default install mode can be overriden with
+    the \t{install} options set by the most recent \t{libopts} call.
 
 \begin{algorithm}
 \caption{Determining the library directory} \label{alg:ebuild-libdir}
