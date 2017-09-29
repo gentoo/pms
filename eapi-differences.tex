@@ -140,6 +140,12 @@ Parallel tests & \compactfeatureref{parallel-tests} &
 \t{AA} & \compactfeatureref{aa} &
     Yes & No & No & No & No \\
 
+\t{PORTDIR} & \compactfeatureref{portdir} &
+    Yes & Yes & Yes & Yes & No \\
+
+\t{ECLASSDIR} & \compactfeatureref{eclassdir} &
+    Yes & Yes & Yes & Yes & No \\
+
 \t{KV} & \compactfeatureref{kv} &
     Yes & No & No & No & No \\
 
@@ -389,6 +395,8 @@ EAPI 7 is EAPI 6 with the following changes:
 \item \t{package.provided} in profiles banned, \featureref{package-provided}.
 \item Empty \t{||} and \t{\textasciicircum\textasciicircum} dependency groups no longer count as
     being matched, \featureref{empty-dep-groups}.
+\item \t{PORTDIR} is gone, \featureref{portdir}.
+\item \t{ECLASSDIR} is gone, \featureref{eclassdir}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{7}

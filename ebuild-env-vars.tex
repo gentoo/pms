@@ -110,11 +110,13 @@ variable.
 \t{PORTDIR} &
     \t{src_*} &
     No &
-    The full path to the master repository's base directory. \\
+    \featurelabel{portdir} The full path to the master repository's base directory. Only for EAPIs
+    listed in table~\ref{tab:removed-env-vars-table} as supporting \t{PORTDIR}. \\
 \t{ECLASSDIR} &
     \t{src_*} &
     No &
-    The full path to the master repository's eclass directory. \\
+    \featurelabel{eclassdir} The full path to the master repository's eclass directory. Only for
+    EAPIs listed in table~\ref{tab:removed-env-vars-table} as supporting \t{ECLASSDIR}. \\
 \t{ROOT} &
    \t{pkg_*} &
    No &
@@ -253,14 +255,17 @@ variable.
 \ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting various removed env variables}
     \label{tab:removed-env-vars-table}
-    \begin{tabular}{lll}
+    \begin{tabular}{lllll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{\t{AA}?}} &
-      \multicolumn{1}{c}{\textbf{\t{KV}?}} \\
+      \multicolumn{1}{c}{\textbf{\t{KV}?}} &
+      \multicolumn{1}{c}{\textbf{\t{PORTDIR}?}} &
+      \multicolumn{1}{c}{\textbf{\t{ECLASSDIR}?}} \\
       \midrule
-      0, 1, 2, 3        & Yes & Yes \\
-      4, 5, 6, 7        & No  & No  \\
+      0, 1, 2, 3        & Yes & Yes & Yes & Yes \\
+      4, 5, 6           & No  & No  & Yes & Yes \\
+      7                 & No  & No  & No  & No  \\
       \bottomrule
     \end{tabular}
 \end{centertable}
