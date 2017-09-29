@@ -1,13 +1,13 @@
-\section{Available Commands}
+\chapter{Available Commands}
 
-This section documents the commands available to an ebuild. Unless otherwise specified, they may be
+This chapter documents the commands available to an ebuild. Unless otherwise specified, they may be
 aliases, shell functions, or executables in the ebuild's \t{PATH}.
 
 When an ebuild is being sourced for metadata querying rather than for a build (that is to say,
 when none of the \t{src_} or \t{pkg_} functions are to be called), no external command may
 be executed. The package manager may take steps to enforce this.
 
-\subsection{System commands}
+\section{System Commands}
 
 Any ebuild not listed in the system set for the active profile(s) may assume the presence of every
 command that is always provided by the system set for that profile. However, it must target the
@@ -17,7 +17,7 @@ equivalent, which is inherited by all available profiles. If an ebuild requires 
 provided by the system profile, or that are provided conditionally based on USE flags, appropriate
 dependencies must be used to ensure their presence.
 
-\subsubsection{Guaranteed system commands}
+\subsection{Guaranteed system commands}
 \label{sec:guaranteed-system-commands}
 
 The following commands must always be available in the ebuild environment:
@@ -46,7 +46,7 @@ The following commands must always be available in the ebuild environment:
     \end{tabular}
 \end{centertable}
 
-\subsection{Commands provided by package dependencies}
+\section{Commands Provided by Package Dependencies}
 
 In some cases a package's build process will require the availability of executables not provided by
 the core system, a common example being autotools. The availability of commands provided by the

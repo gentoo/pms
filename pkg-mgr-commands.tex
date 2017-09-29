@@ -1,4 +1,4 @@
-\subsection{Ebuild-specific commands}
+\section{Ebuild-specific Commands}
 \label{sec:pkg-mgr-commands}
 
 The following commands will always be available in the ebuild environment, provided by the package
@@ -8,7 +8,7 @@ behaviour.
 
 Unless otherwise noted, any output of these commands ends with a newline.
 
-\subsubsection{Failure behaviour and related commands}
+\subsection{Failure behaviour and related commands}
 \label{sec:failure-behaviour}
 
 \featurelabel{die-on-failure} Where a command is listed as having EAPI dependent failure behaviour,
@@ -41,7 +41,7 @@ The following commands affect this behaviour:
     \end{tabular}
 \end{centertable}
 
-\subsubsection{Banned commands}
+\subsection{Banned commands}
 \label{sec:banned-commands}
 
 \featurelabel{banned-commands} Some commands are banned in some EAPIs. If a banned command is
@@ -66,7 +66,7 @@ called, the package manager must abort the build process indicating an error.
     \end{tabular}
 \end{centertable}
 
-\subsubsection{Sandbox commands}
+\subsection{Sandbox commands}
 These commands affect the behaviour of the sandbox. Each command takes a single directory as
 argument. Ebuilds must not run any of these commands once the current phase function has returned.
 \begin{description}
@@ -77,7 +77,7 @@ argument. Ebuilds must not run any of these commands once the current phase func
 \item[adddeny] Add a directory to the deny list.
 \end{description}
 
-\subsubsection{Package manager query commands}
+\subsection{Package manager query commands}
 These commands are used to extract information about the system. Ebuilds must not run any of
 these commands in parallel with any other package manager command. Ebuilds must not run any of
 these commands once the current phase function has returned.
@@ -107,7 +107,7 @@ to the host root instead of \t{ROOT}.
     \end{tabular}
 \end{centertable}
 
-\subsubsection{Output commands}
+\subsection{Output commands}
 These commands display messages to the user. Unless otherwise stated, the entire argument list is
 used as a message, with backslash-escaped characters interpreted as for the \t{echo -e} command of
 bash, notably \t{\textbackslash t} for a horizontal tab, \t{\textbackslash n} for a new line, and
@@ -130,7 +130,7 @@ stderr or some other appropriate facility.
     message followed by a failure indicator. Returns its first argument as exit status.
 \end{description}
 
-\subsubsection{Error commands}
+\subsection{Error commands}
 These commands are used when an error is detected that will prevent the build process from
 completing. Ebuilds must not run any of these commands once the current phase function has returned.
 \begin{description}
@@ -158,7 +158,7 @@ completing. Ebuilds must not run any of these commands once the current phase fu
     \end{tabular}
 \end{centertable}
 
-\subsubsection{Patch commands}
+\subsection{Patch commands}
 These commands are used during the \t{src_prepare} phase to apply patches to the package's sources.
 Ebuilds must not run any of these commands once the current phase function has returned.
 
@@ -232,7 +232,7 @@ Ebuilds must not run any of these commands once the current phase function has r
     \end{tabular}
 \end{centertable}
 
-\subsubsection{Build commands}
+\subsection{Build commands}
 These commands are used during the \t{src_configure}, \t{src_compile}, and \t{src_install}
 phases to run the package's build commands. Ebuilds must not run any of these commands once the
 current phase function has returned.
@@ -356,7 +356,7 @@ emake \
 
 \end{description}
 
-\subsubsection{Installation commands}
+\subsection{Installation commands}
 These commands are used to install files into the staging area, in cases where the package's \t{make
 install} target cannot be used or does not install all needed files. Except where otherwise stated,
 all filenames created or modified are relative to the staging directory including the offset-prefix
@@ -624,7 +624,7 @@ can be extended or reduced (see below). The options that can be passed to \t{doh
     \end{tabular}
 \end{centertable}
 
-\subsubsection{Commands affecting install destinations}
+\subsection{Commands affecting install destinations}
 The following commands are used to set the various destination trees, all relative to \t{\$\{ED\}} in
 offset-prefix aware EAPIs and relative to \t{\$\{D\}} in offset-prefix agnostic EAPIs, used by the
 above installation commands. They must be shell functions or aliases, due to the need to set variables
@@ -659,7 +659,7 @@ has returned.
 
 \end{description}
 
-\subsubsection{Commands affecting install compression}
+\subsection{Commands affecting install compression}
 
 \featurelabel{docompress} In EAPIs listed in table~\ref{tab:compression-table} as supporting
 controllable compression, the package manager may optionally compress a subset of the files under
@@ -721,7 +721,7 @@ in table~\ref{tab:compression-table} as supporting \t{docompress}.
     \end{tabular}
 \end{centertable}
 
-\subsubsection{USE list functions}
+\subsection{USE list functions}
 These functions provide behaviour based upon set or unset use flags. Ebuilds must not run any of
 these commands once the current phase function has returned. It is an error if an ebuild calls any
 of these functions in global scope.
@@ -803,7 +803,7 @@ table~\ref{tab:use-list-strictness}.
     \end{tabular}
 \end{centertable}
 
-\subsubsection{Text list functions}
+\subsection{Text list functions}
 These functions check whitespace-separated lists for a particular value.
 
 \begin{description}
@@ -813,7 +813,7 @@ These functions check whitespace-separated lists for a particular value.
 \item[hasq] Deprecated synonym for \t{has}.
 \end{description}
 
-\subsubsection{Misc commands}
+\subsection{Misc commands}
 The following commands are always available in the ebuild environment, but don't really fit in any
 of the above categories. Ebuilds must not run any of these commands once the current phase function
 has returned.
@@ -992,7 +992,7 @@ has returned.
     \end{tabular}
 \end{centertable}
 
-\subsubsection{Debug commands}
+\subsection{Debug commands}
 The following commands are available for debugging. Normally all of these commands should be no ops;
 a package manager may provide a special debug mode where these commands instead do something.
 Ebuilds must not run any of these commands once the current phase function has returned.
@@ -1005,7 +1005,7 @@ Ebuilds must not run any of these commands once the current phase function has r
 \item[debug-print-section] Calls \t{debug-print} with \t{now in section \$*}.
 \end{description}
 
-\subsubsection{Reserved commands and variables}
+\subsection{Reserved commands and variables}
 
 Except where documented otherwise, all functions and variables that contain any of the following
 strings (ignoring case) are reserved for package manager use and may not be used or relied upon by
