@@ -367,9 +367,74 @@ flags to be valid for this ebuild. In order to be matched, a \t{USE} flag in a t
 must be enabled (or disabled if it has an exclamation mark prefix).
 
 If the package manager encounters a package version where \t{REQUIRED_USE} assertions are not met,
-it must treat this package version as if it was masked. No phase functions must be called.
+it should attempt to automatically enforce the necessary flags as detailed
+in section~\ref{sec:enforce-required-use}. If this feature is not supported or it fails to resolve
+the problem, the package manager must treat this package version as if it was masked. No phase
+functions must be called in that case.
 
 It is an error for a flag to be used if it is not included in \t{IUSE_EFFECTIVE}.
+
+\subsubsection{Automatic enforcing of REQUIRED_USE}
+\label{sec:enforce-required-use}
+
+\featurelabel{auto-req-use} In EAPIs listed in table~\ref{tab:enforce-required-use} as supporting
+enforcing of \t{REQUIRED_USE}, the package manager can attempt to resolve unmet USE state
+constraints through automatically adjusting the effective USE flags for the package being built,
+according to the algorithm specified below. Any adjustments done this way must not affect
+the package version permanently. The package manager must reevaluate the flags using the original
+user configuration every time the package is being built.
+
+The package flags that are either masked or forced according to section~\ref{sec:use-masking} are
+considered immutable. The enforcing process must not alter the values of immutable flags. If the
+\t{REQUIRED_USE} constraint can not be satisfied without altering immutable flags, automatic
+enforcing fails.
+
+In order to enforce \t{REQUIRED_USE}, the package manager should process every USE constraint,
+in order of listing, according to the following rules:
+
+\begin{compactitem}
+\item For an unmatched use flag, the package manager should negate the state of the specified flag
+    in order to make the constraint match.
+\item For an unmatched all-of group, the package manager should recursively enforce all constraints
+    inside the group, in order of listing.
+\item For an unmatched use-conditional group, the package manager should recursively enforce all
+    constraints inside the group, in order of listing. The associated condition flag is not altered.
+\item For an unmatched any-of group, the package manager should recursively enforce the first item
+    inside the group that can be enforced without altering immutable flags, in order of listing.
+\item For an unmatched at-most-one-of group:
+    \begin{compactitem}
+    \item If two or more items match due to immutable flags, the package manager must report
+        failure.
+    \item If exactly one of the items match due to immutable flags, the package manager should
+        enforce all other items not to match, according to the rule specified below.
+    \item If none of the items match due to immutable flags, the package manager should enforce all
+        items not to match but the first item in order of listing that matches currently.
+    \end{compactitem}
+\item For an unmatched exactly-one-of group:
+    \begin{compactitem}
+    \item If none of the items match, the package manager should behave as for unmatched any-of
+        group.
+    \item If more than one item matches, the package manager should behave as for unmatched
+        at-most-one-of group.
+    \end{compactitem}
+\end{compactitem}
+
+In order to enforce a matched use flag item not to match, the package manager should negate
+the state of the flag. The method of enforcing any other item type not to match is undefined.
+
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{EAPIs supporting automatic enforcing of \t{REQUIRED_USE}}
+    \label{tab:enforce-required-use}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports enforcing \t{REQUIRED_USE}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6 & No  \\
+      7                   & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \subsection{Restrict}
 \label{sec:restrict}
