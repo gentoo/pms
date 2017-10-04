@@ -77,6 +77,35 @@ argument. Ebuilds must not run any of these commands once the current phase func
 \item[adddeny] Add a directory to the deny list.
 \end{description}
 
+\featurelabel{sandbox-rm} Additionally, in EAPIs listed in table~\ref{tab:sandbox-command-table}
+as supporting the respective commands, the following commands are available:
+\begin{description}
+\item[rmread] Remove a directory from the permitted read list.
+\item[rmwrite] Remove a directory from the permitted write list.
+\item[rmpredict] Remove a directory from the predict list.
+\item[rmdeny] Remove a directory from the deny list.
+\end{description}
+
+All of these commands match paths exactly. Removing a directory that is not present on the list
+is silently ignored.
+
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{Additional sandbox commands in EAPIs}
+    \label{tab:sandbox-command-table}
+    \begin{tabular}{lllll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{rmread}?}} &
+      \multicolumn{1}{c}{\textbf{\t{rmwrite}?}} &
+      \multicolumn{1}{c}{\textbf{\t{rmpredict}?}} &
+      \multicolumn{1}{c}{\textbf{\t{rmdeny}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6 & No  & No  & No  & No  \\
+      7                   & Yes & Yes & Yes & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
 \subsection{Package manager query commands}
 These commands are used to extract information about the system. Ebuilds must not run any of
 these commands in parallel with any other package manager command. Ebuilds must not run any of

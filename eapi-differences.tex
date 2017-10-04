@@ -175,6 +175,9 @@ Most utilities die & \compactfeatureref{die-on-failure} &
 \t{einstall} & \compactfeatureref{banned-commands} &
     Yes & Yes & Yes & Banned & Banned \\
 
+Sandbox \t{rm*} commands & \compactfeatureref{sandbox-rm} &
+    No & No & No & No & Yes \\
+
 Option \t{-{}-host-root} & \compactfeatureref{host-root-option} &
     No & No & Yes & Yes & Yes \\
 
@@ -380,6 +383,7 @@ EAPI 7 is EAPI 6 with the following changes:
 \item Runtime-modifiable USE flags (\t{IUSE_RUNTIME}), \featureref{iuse-runtime}.
 \item \t{||=} dependency groups, \featureref{binding-any-of}.
 \item Automatic enforcing of \t{REQUIRED_USE}, \featureref{auto-req-use}.
+\item Sandbox path removal commands, \featureref{sandbox-rm}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{7}
