@@ -70,11 +70,14 @@ be surrounded on both sides by whitespace, except at the start and end of the st
     of (a dependency item of any kind followed by whitespace), followed by a close parenthesis.
     More formally: \t{any-of} \t{::=} \t{'||' whitespace '(' whitespace (item whitespace)+ ')'}.
     Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}, \t{LICENSE}, \t{REQUIRED_USE}.
+\item \featurelabel{binding-any-of} A binding-any-of group, which has the same format as the
+    any-of group, but begins with the string \t{||=} instead. Permitted in \t{DEPEND}, \t{RDEPEND}
+    in EAPIs listed in table~\ref{tab:dep-groups} as supporting \t{||=} groups.
 \item An exactly-one-of group, which has the same format as the any-of group, but begins with the
     string \t{\textasciicircum\textasciicircum} instead. Permitted in \t{REQUIRED_USE}.
 \item \featurelabel{at-most-one-of} An at-most-one-of group, which has the same format as the
     any-of group, but begins with the string \t{??}\ instead. Permitted in \t{REQUIRED_USE} in
-    EAPIs listed in table~\ref{tab:at-most-one-of-table} as supporting \t{REQUIRED_USE ??}\ groups.
+    EAPIs listed in table~\ref{tab:dep-groups} as supporting \t{REQUIRED_USE ??}\ groups.
 \item A use-conditional group, which consists of an optional exclamation mark, followed by
     a use flag name, followed by a question mark, followed by whitespace, followed by
     an open parenthesis, followed by whitespace, followed by one or more of (a dependency item
@@ -101,15 +104,17 @@ In particular, note that whitespace is not optional.
 \end{centertable}
 
 \ChangeWhenAddingAnEAPI{7}
-\begin{centertable}{EAPIs supporting \t{REQUIRED_USE ??}\ groups}
-    \label{tab:at-most-one-of-table}
-    \begin{tabular}{ll}
+\begin{centertable}{EAPIs supporting additional dependency group types}
+    \label{tab:dep-groups}
+    \begin{tabular}{lll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{REQUIRED_USE ??}\ groups?}} \\
+      \multicolumn{1}{c}{\textbf{Supports \t{REQUIRED_USE ??}\ groups?}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{||=}\ groups?}} \\
       \midrule
-      0, 1, 2, 3, 4     & No  \\
-      5, 6, 7           & Yes \\
+      0, 1, 2, 3, 4     & No  & No  \\
+      5, 6              & Yes & No  \\
+      7                 & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -137,6 +142,26 @@ In an any-of group, at least one immediate child element must be matched. A bloc
 considered to be matched if its associated package dependency specification is not matched.
 
 An empty any-of group counts as being matched.
+
+\subsection{Binding-any-of dependency specifications}
+
+Any use-conditional group that is an immediate child of a binding-any-of group, if not enabled
+(disabled for an exclamation mark prefixed use flag name), is not considered a member of the
+binding-any-of group for match purposes.
+
+In a binding-any-of group, at least one immediate child element must be matched. A blocker is
+considered to be matched if its associated package dependency specification is not matched.
+In addition, for runtime dependencies, indicates that the package will break unless a matching
+package corresponding to the first immediate child element (in order of listing) installed as
+a build-time (\t{DEPEND}) dependency is available.
+
+To implement the binding-any-of operator, the package manager will need to store which of the
+immediate child elements were matched. This syntax is only for package manager use and must not
+be used by ebuilds. Only the first matched child element needs to be indicated.
+
+Whenever the binding-any-of group is used in an enabled dependency group, the dependencies
+(\t{DEPEND}) must ensure that at least one of the immediate child elements is also matched at build
+time. It is invalid to use the binding-any-of group inside an any-of dependency specification.
 
 \subsection{Exactly-one-of dependency specifications}
 
