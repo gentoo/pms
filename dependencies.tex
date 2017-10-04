@@ -15,7 +15,7 @@
           None (ebuilds can rely only on the packages in the system~set) \\
       \addlinespace
       \t{src_unpack}, \t{src_prepare}, \t{src_configure}, \t{src_compile}, \t{src_test},
-          \t{src_install} & \t{DEPEND} \\
+          \t{src_install} & \t{DEPEND}, \t{BDEPEND} \\
       \addlinespace
       \t{pkg_preinst}, \t{pkg_postinst}, \t{pkg_prerm}, \t{pkg_postrm} &
           \t{RDEPEND} (unless the particular dependency results in a circular dependency, in which
@@ -38,6 +38,32 @@ There are three classes of dependencies supported by ebuilds:
     the package manager finishes the batch of installs.
 \end{compactitem}
 
+\featurelabel{bdepend} Additionally, in EAPIs listed in table~\ref{tab:depend-table}
+as supporting \t{BDEPEND}, the build dependencies are split into two subclasses:
+
+\begin{compactitem}
+\item \t{BDEPEND} build dependencies that are binary compatible with the native build system
+    (\t{CBUILD}). The ebuild is allowed to call binary executables installed by this kind of
+    dependency.
+    \item \t{DEPEND} build dependencies that are binary compatible with the system being built
+    (\t{CHOST}). The ebuild must not execute binary executables installed by this kind of
+    dependency.
+\end{compactitem}
+
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{EAPIs supporting additional dependency types}
+    \label{tab:depend-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{BDEPEND}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6 & No  \\
+      7                   & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
 Table~\ref{tab:phase-function-dependency-classes} lists dependencies which must be satisfied before
 a particular phase function is executed.
 
@@ -51,7 +77,8 @@ The following elements are recognised in at least one class of specification. Al
 be surrounded on both sides by whitespace, except at the start and end of the string.
 
 \begin{compactitem}
-\item A package dependency specification. Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}.
+\item A package dependency specification. Permitted in \t{DEPEND}, \t{BDEPEND}, \t{RDEPEND},
+    \t{PDEPEND}.
 \item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC_URI} and \t{HOMEPAGE}\@.
     In EAPIs listed in table~\ref{tab:uri-arrows-table} as supporting \t{SRC_URI} arrows, may
     optionally be followed by whitespace, then \t{->}, then whitespace, then a simple filename when
@@ -69,7 +96,7 @@ be surrounded on both sides by whitespace, except at the start and end of the st
     followed by an open parenthesis, followed by whitespace, followed by one or more
     of (a dependency item of any kind followed by whitespace), followed by a close parenthesis.
     More formally: \t{any-of} \t{::=} \t{'||' whitespace '(' whitespace (item whitespace)+ ')'}.
-    Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}, \t{LICENSE}, \t{REQUIRED_USE}.
+    Permitted in \t{DEPEND}, \t{BDEPEND}, \t{RDEPEND}, \t{PDEPEND}, \t{LICENSE}, \t{REQUIRED_USE}.
 \item An exactly-one-of group, which has the same format as the any-of group, but begins with the
     string \t{\textasciicircum\textasciicircum} instead. Permitted in \t{REQUIRED_USE}.
 \item \featurelabel{at-most-one-of} An at-most-one-of group, which has the same format as the

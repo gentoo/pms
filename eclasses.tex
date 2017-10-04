@@ -34,11 +34,11 @@ The \t{inherit} command must also ensure that:
 
 \section{Eclass-defined Metadata Keys}
 
-The \t{IUSE}, \t{REQUIRED_USE}, \t{DEPEND}, \t{RDEPEND} and \t{PDEPEND} variables are handled
-specially when set by an eclass. They must be accumulated across eclasses, appending the value set
-by each eclass to the resulting value after the previous one is loaded. Then the eclass-defined
-value is appended to that defined by the ebuild. In the case of \t{RDEPEND}, this is done after the
-implicit \t{RDEPEND} rules in section~\ref{sec:rdepend-depend} are applied.
+The \t{IUSE}, \t{REQUIRED_USE}, \t{DEPEND}, \t{BDEPEND}, \t{RDEPEND} and \t{PDEPEND} variables
+are handled specially when set by an eclass. They must be accumulated across eclasses, appending
+the value set by each eclass to the resulting value after the previous one is loaded. Then the
+eclass-defined value is appended to that defined by the ebuild. In the case of \t{RDEPEND}, this
+is done after the implicit \t{RDEPEND} rules in section~\ref{sec:rdepend-depend} are applied.
 
 \section{EXPORT_FUNCTIONS}
 

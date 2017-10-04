@@ -29,7 +29,8 @@ order. Other lines may be present following these; their meanings are not define
 \item Use flags that this package requires (\t{REQUIRED_USE}).
     Blank in some EAPIs; see table~\ref{tab:optional-vars-table}.
 \item Post dependencies (\t{PDEPEND})
-\item Unused; previously used for old-style virtual \t{PROVIDE}.
+\item Build-time dependencies for \t{CBUILD} host (\t{BDEPEND}).
+    Blank in some EAPIs; see table~\ref{tab:depend-table}.
 \item The ebuild API version to which this package conforms (\t{EAPI})
 \item Properties (\t{PROPERTIES}). In some EAPIs, may optionally be blank, regardless of ebuild
     metadata; see table~\ref{tab:optional-vars-table}.
