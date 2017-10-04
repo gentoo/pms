@@ -315,10 +315,12 @@ table~\ref{tab:locale-settings}.
 \subsection{USE and IUSE handling}
 \label{sec:use-iuse-handling}
 
-This section discusses the handling of four variables:
+This section discusses the handling of five variables:
 
 \begin{description}
 \item[IUSE] is the variable calculated from the \t{IUSE} values defined in ebuilds and eclasses.
+\item[IUSE_RUNTIME] is the variable calculated from the \t{IUSE_RUNTIME} values defined in ebuilds
+    and eclasses.
 \item[IUSE_REFERENCEABLE] is a variable calculated from \t{IUSE} and a variety of other sources
     described below. It is purely a conceptual variable; it is not exported to the ebuild
     environment. Values in \t{IUSE_REFERENCEABLE} may legally be used in queries from other
@@ -352,6 +354,7 @@ as supporting profile defined \t{IUSE} injection, \t{IUSE_EFFECTIVE} contains th
 
 \begin{compactitem}
 \item All values in the calculated \t{IUSE} value.
+\item All values in the calculated \t{IUSE_RUNTIME} value, in EAPIs where this variable is defined.
 \item All values in the profile \t{IUSE_IMPLICIT} variable.
 \item All values in the profile variable named \t{USE_EXPAND_VALUES_\$\{v\}}, where \t{\$\{v\}}
     is any value in the intersection of the profile \t{USE_EXPAND_UNPREFIXED} and

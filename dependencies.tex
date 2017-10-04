@@ -124,7 +124,8 @@ In a use-conditional group, if the associated use flag is enabled (or disabled i
 exclamation mark prefix), all of the child elements must be matched.
 
 It is an error for a flag to be used if it is not included in \t{IUSE_EFFECTIVE} as described in
-section~\ref{sec:use-iuse-handling}.
+section~\ref{sec:use-iuse-handling}. Flags listed in \t{IUSE_RUNTIME} can be used only
+in \t{RDEPEND}, \t{PDEPEND} and \t{REQUIRED_USE}.
 
 \subsection{Any-of dependency specifications}
 

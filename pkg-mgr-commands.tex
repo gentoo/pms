@@ -737,6 +737,10 @@ Unless otherwise noted, if any of these functions is called with a flag value th
 in \t{IUSE_EFFECTIVE}, either behaviour is undefined or it is an error as decided by
 table~\ref{tab:use-list-strictness}.
 
+In EAPIs listed in table~\ref{tab:optional-vars-table} as supporting \t{IUSE_RUNTIME}, the flags
+listed in \t{IUSE_RUNTIME} can only be referenced in \t{pkg_*} phases. Passing any of those flags
+to one of the following functions during any other phase is an error.
+
 \begin{description}
 \item[use] Returns shell true (0) if the first argument (a \t{USE} flag name) is enabled, false
     otherwise.  If the flag name is prefixed with \t{!}, returns true if the flag is disabled, and

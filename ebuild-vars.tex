@@ -68,6 +68,12 @@ Ebuilds may define any of the following variables:
     \t{IUSE} defaults, any use flag name in \t{IUSE} may be prefixed by at most one of a plus or a
     minus sign. If such a prefix is present, the package manager may use it as a suggestion as to
     the default value of the use flag if no other configuration overrides it.
+\item[IUSE_RUNTIME] \featurelabel{iuse-runtime} Additional \t{USE} flags used by the ebuild whose
+    values can be altered in place without rebuilding from source. The flags listed in
+    \t{IUSE_RUNTIME} must not alter the package built. They must not be referenced at build time,
+    except for informational purposes. A single flag cannot be listed in both \t{IUSE_RUNTIME}
+    and \t{IUSE} simultaneously. Uses the same syntax as \t{IUSE}\@. Only in EAPIs listed
+    in table~\ref{tab:optional-vars-table} as supporting \t{IUSE_RUNTIME}.
 \item[REQUIRED_USE] \featurelabel{required-use} Zero or more assertions that must be met by the
     configuration of \t{USE} flags to be valid for this ebuild. See section~\ref{sec:required-use}
     for description and section~\ref{sec:dependencies} for full syntax. Only in EAPIs listed in
@@ -103,14 +109,17 @@ Ebuilds may define any of the following variables:
 \ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting various ebuild-defined variables}
     \label{tab:optional-vars-table}
-    \begin{tabular}{lll}
+    \addtolength{\tabcolsep}{-0.1pt} % table is very slightly too wide
+    \begin{tabular}{llll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{Supports \t{PROPERTIES}?}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{REQUIRED_USE}?}} \\
+      \multicolumn{1}{c}{\textbf{Supports \t{REQUIRED_USE}?}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{IUSE_RUNTIME}?}} \\
       \midrule
-      0, 1, 2, 3        & Optionally & No  \\
-      4, 5, 6, 7        & Yes        & Yes \\
+      0, 1, 2, 3        & Optionally & No  & No  \\
+      4, 5, 6           & Yes        & Yes & No  \\
+      7                 & Yes        & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
