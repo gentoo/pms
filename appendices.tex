@@ -104,6 +104,12 @@ implementation in package managers deviated from what was specified.
 String prefix matching was effective in EAPIs \t{0}, \t{1}, \t{2}, \t{3}, \t{4} and \t{5}. It was
 retroactively dropped in favour of the current behaviour in October 2015.
 
+\subsection{Empty dependency groups}
+The dependency specification format (see section~\ref{sec:dependency-spec}) originally permitted
+all-of, any-of, exactly-one-of, at-most-one-of and use-conditional groups with zero sub-elements.
+However, such empty groups were neither supported by all package managers nor used in ebuilds.
+They were dropped from the specification in October 2017.
+
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 
 %%% Local Variables:
