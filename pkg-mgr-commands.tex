@@ -804,6 +804,68 @@ in table~\ref{tab:compression-table} as supporting \t{docompress}.
     \end{tabular}
 \end{centertable}
 
+\subsection{Commands affecting stripping of symbols}
+
+\featurelabel{dostrip} In EAPIs listed in table~\ref{tab:dostrip} as supporting controllable
+stripping of symbols, the package manager may strip a subset of the files under the \t{ED}
+directory. To control which files may or may not be stripped, the package manager shall maintain
+two lists:
+
+\begin{compactitem}
+\item An inclusion list. If the \t{RESTRICT} variable described in section~\ref{sec:restrict}
+    enables a \t{strip} token, this list is initially empty; otherwise it initially contains \t{/}
+    (the root path).
+\item An exclusion list, which initially is empty.
+\end{compactitem}
+
+Stripping of symbols shall be carried out after \t{src_install} has completed, and before the
+execution of any subsequent phase function. For each item in the inclusion list, pretend it has the
+value of the \t{ED} variable prepended, then:
+
+\begin{compactitem}
+\item If it is a directory, act as if every file or directory immediately under this directory
+    were in the inclusion list.
+\item If the item is a file, it may be stripped unless it has been excluded as described below.
+\item If the item does not exist, it is ignored.
+\end{compactitem}
+
+Whether an item is to be excluded is determined as follows: For each item in the exclusion list,
+pretend it has the value of the \t{ED} variable prepended, then:
+
+\begin{compactitem}
+\item If it is a directory, act as if every file or directory immediately under this directory
+    were in the exclusion list.
+\item If the item is a file, it shall not be stripped.
+\item If the item does not exist, it is ignored.
+\end{compactitem}
+
+The package manager shall take appropriate steps to ensure that its stripping mechanisms behave
+sensibly even if an item is listed in the inclusion list multiple times or if an item is a symlink.
+
+The following command may be used in \t{src_install} to alter these lists. It is an error to call
+this function from any other phase.
+
+\begin{description}
+\item[dostrip] If the first argument is \t{-x}, add each of its subsequent arguments to the
+    exclusion list. Otherwise, add each argument to the inclusion list. Only available in EAPIs
+    listed in table~\ref{tab:dostrip} as supporting \t{dostrip}.
+\end{description}
+
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{EAPIs supporting controllable stripping}
+    \label{tab:dostrip}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports controllable stripping?}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{dostrip}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6 & No  & No  \\
+      7                   & Yes & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
 \subsection{USE list functions}
 These functions provide behaviour based upon set or unset use flags. Ebuilds must not run any of
 these commands once the current phase function has returned. It is an error if an ebuild calls any
