@@ -24,6 +24,7 @@
 \PassOptionsToPackage{quiet}{marginnote}
 \PassOptionsToPackage{nohyphen}{underscore}
 \PassOptionsToPackage{nottoc,notlot,notlof}{tocbibind}
+\PassOptionsToPackage{hyphens}{url} % url.sty implicitly loaded by hyperref
 \PassOptionsToPackage{chapter}{algorithm}
 % algorithmic and algorithm to be loaded last to avoid failures
 \RequirePackage{%
