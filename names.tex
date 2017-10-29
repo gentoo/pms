@@ -61,16 +61,16 @@ upon the length of any component. Package managers should indicate or reject any
 invalid according to the rules below.
 
 A version starts with the number part, which is in the form \t{[0-9]+(\textbackslash.[0-9]+)*}
-(a positive integer, followed by zero or more dot-prefixed positive integers).
+(an unsigned integer, followed by zero or more dot-prefixed unsigned integers).
 
 This may optionally be followed by one of \t{[a-z]} (a lowercase letter).
 
-This may be followed by zero or more of the suffixes \t{_alpha}, \t{_beta}, \t{_pre},
-\t{_rc} or \t{_p}, which themselves may be followed by an optional integer. Suffix and integer
+This may be followed by zero or more of the suffixes \t{_alpha}, \t{_beta}, \t{_pre}, \t{_rc}
+or \t{_p}, each of which may optionally be followed by an unsigned integer. Suffix and integer
 count as separate version components.
 
-This may optionally be followed by the suffix \t{-r} followed immediately by an integer (the
-``revision number''). If this suffix is not present, it is assumed to be \t{-r0}.
+This may optionally be followed by the suffix \t{-r} followed immediately by an unsigned integer
+(the ``revision number''). If this suffix is not present, it is assumed to be \t{-r0}.
 
 \section{Version Comparison}
 
