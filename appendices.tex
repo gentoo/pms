@@ -64,7 +64,7 @@ removed in 2009.
 \section{Retroactive Changes}
 
 In some exceptional cases, changes to the specification have been approved by the Gentoo Council
-without introducing a new EAPI. This section lists such retroactive changes.
+without introducing a new EAPI\@. This section lists such retroactive changes.
 
 \subsection{Bash version}
 EAPIs \t{0}, \t{1} and \t{2} originally specified GNU Bash version 3.0. This was retroactively
@@ -79,8 +79,8 @@ Old-style virtuals were supported by EAPIs \t{0}, \t{1}, \t{2}, \t{3} and \t{4}.
 out via GLEP 37~\cite{Glep37} and finally removed in 2011.
 
 \subsection{EAPI parsing}
-The method to specify the EAPI of an ebuild used to be a shell variable assignment, and the
-package manager had to source the ebuild in order to determine the EAPI. Therefore any ebuild using
+The method to specify the EAPI of an ebuild used to be a shell variable assignment, and the package
+manager had to source the ebuild in order to determine the EAPI\@. Therefore any ebuild using
 a future EAPI would still have to be sourceable by old package managers, which imposed restrictions
 e.\,g.\ on updating the Bash version or on possible changes of global scope functions. Several
 approaches to overcome this limitation were discussed, notably GLEP 55~\cite{Glep55}, which was
