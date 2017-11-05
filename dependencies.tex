@@ -416,8 +416,8 @@ The following tokens are permitted inside \t{RESTRICT}:
 \item[fetch] The package's \t{SRC_URI} entries may not be downloaded automatically. If
     entries are not available, \t{pkg_nofetch} is called. Implies \t{mirror}.
 \item[strip] No stripping of debug symbols from files to be installed may be performed. In EAPIs
-    listed in table~\ref{tab:dostrip} as supporting controllable stripping, this behaviour may be
-    altered by the \t{dostrip} command.
+    listed in table~\ref{tab:staging-area-commands} as supporting controllable stripping, this
+    behaviour may be altered by the \t{dostrip} command.
 \item[userpriv] The package manager may not drop root privileges when building the package.
 \item[test] The \t{src_test} phase must not be run.
 \end{description}
