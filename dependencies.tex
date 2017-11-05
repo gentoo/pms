@@ -135,7 +135,8 @@ for match purposes.
 In an any-of group, at least one immediate child element must be matched. A blocker is
 considered to be matched if its associated package dependency specification is not matched.
 
-An empty any-of group counts as being matched.
+\featurelabel{empty-dep-groups} In EAPIs specified in table~\ref{tab:empty-dep-groups}, an empty
+any-of group counts as being matched.
 
 \subsection{Exactly-one-of dependency specifications}
 
@@ -145,7 +146,23 @@ exactly-one-of group for match purposes.
 
 In an exactly-one-of group, exactly one immediate child element must be matched.
 
-An empty exactly-one-of group counts as being matched.
+In EAPIs specified in table~\ref{tab:empty-dep-groups}, an empty exactly-one-of group counts as
+being matched.
+
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{Matching of empty dependency groups in EAPIs}
+    \label{tab:empty-dep-groups}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Empty \t{||} and \t{\textasciicircum\textasciicircum} groups
+        are matched?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6 & Yes \\
+      7                   & No  \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \subsection{At-most-one-of dependency specifications}
 
