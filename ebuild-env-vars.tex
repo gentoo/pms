@@ -332,6 +332,8 @@ package manager specific directories.
 
 \t{GZIP}, \t{BZIP}, \t{BZIP2}, \t{CDPATH}, \t{GREP_OPTIONS}, \t{GREP_COLOR} and \t{GLOBIGNORE}
 must not be set.
+\featurelabel{env-unset} In addition, any variable whose name appears in the \t{ENV_UNSET} variable
+must be unset, for EAPIs listed in table~\ref{tab:profile-env-unset} as supporting \t{ENV_UNSET}.
 
 \featurelabel{locale-settings} The package manager must ensure that the \t{LC_CTYPE} and
 \t{LC_COLLATE} locale categories are equivalent to the POSIX locale, as far as characters in the

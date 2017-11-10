@@ -170,6 +170,9 @@ Parallel tests & \compactfeatureref{parallel-tests} &
 \t{MERGE_TYPE} & \compactfeatureref{merge-type} &
     No & Yes & Yes & Yes & Yes \\
 
+\t{ENV_UNSET} & \compactfeatureref{env-unset} &
+    No & No & No & No & Yes \\
+
 Sane locale settings & \compactfeatureref{locale-settings} &
     Undefined & Undefined & Undefined & Yes & Yes \\
 
@@ -425,6 +428,7 @@ EAPI 7 is EAPI 6 with the following changes:
 \item \t{BROOT}, \featureref{broot}.
 \item \t{best_version} and \t{has_version} support \t{-b}, \t{-d} and \t{-r} options instead of
     \t{-{}-host-root}, \featureref{pm-query-options}.
+\item \t{ENV_UNSET}, \featureref{env-unset}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{7}
