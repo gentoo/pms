@@ -518,10 +518,10 @@ can be extended or reduced (see below). The options that can be passed to \t{doh
 \item[fperms] Acts as for \t{chmod}, but takes paths relative to the image directory. Failure
     behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
-\item[keepdir] Creates a directory as for \t{dodir}, and an empty file whose name starts with
-    \t{.keep} in that directory to ensure that the directory does not get removed by the
-    package manager should it be empty at any point. Failure behaviour is EAPI dependent as per
-    section~\ref{sec:failure-behaviour}.
+\item[keepdir] For each argument, creates a directory as for \t{dodir}, and an empty file whose
+    name starts with \t{.keep} in that directory to ensure that the directory does not get removed
+    by the package manager should it be empty at any point. Failure behaviour is EAPI dependent
+    as per section~\ref{sec:failure-behaviour}.
 
 \item[newbin] \featurelabel{newfoo-stdin} As for \t{dobin}, but takes two parameters. The first is
     the file to install; the second is the new filename under which it will be installed. In EAPIs
