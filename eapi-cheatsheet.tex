@@ -12,6 +12,7 @@
 \usepackage[orig,english]{isodate}
 \usepackage[scaled=.90]{helvet}
 \usepackage[nohyphen]{underscore}
+\usepackage[local]{gitinfo2}
 \newcommand{\code}[1]{\texttt{#1}}
 % This should reflect the latest approved EAPI version
 \newcommand{\version}{7.0}
@@ -28,12 +29,11 @@
     Ulrich Müller \\
     \href{mailto:ulm@gentoo.org}{ulm@gentoo.org}
 }
-\input{vc.tex}
-\ifthenelse{\equal{\VCDateISO}{}}
-{
-    \date{Version \version{}, generated on: \\\today}
-}{
-    \date{Version \version\\\printdate{\VCDateISO}}
+\date{%
+    Version \version \\
+    \ifthenelse{\equal{\gitCommitterDate}{(None)}}
+    {Generated on: \today}
+    {\printdate{\gitCommitterDate}}%
 }
 \CutLine*{1}
 \CutLine*{3}

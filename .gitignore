@@ -5,6 +5,7 @@
 *.blg
 *.css
 *.dvi
+*.gin
 *.html
 *.idv
 *.lg
@@ -18,7 +19,6 @@
 *.tmp
 *.toc
 *.xref
-vc.tex
 
 # Emacs backup files and locks
 *~

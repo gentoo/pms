@@ -25,6 +25,7 @@
 \PassOptionsToPackage{nohyphen}{underscore}
 \PassOptionsToPackage{nottoc,notlot,notlof}{tocbibind}
 \PassOptionsToPackage{hyphens}{url} % url.sty implicitly loaded by hyperref
+\PassOptionsToPackage{local}{gitinfo2}
 \PassOptionsToPackage{chapter}{algorithm}
 % algorithmic and algorithm to be loaded last to avoid failures
 \RequirePackage{%
@@ -52,15 +53,13 @@
         caption,        % Extended float environment formatting
         float,          % More control over float environments
         hyperref,       % Support for hyperlinks
+        gitinfo2,       % Metadata from git
         algorithm,      %
         algorithmic     % Set algorithms
     }
 }
 \ClassInfo{pms}{Capsulation of LaTeX stuff for the Package Manager
     Specification, loaded baseclass: \ClassToLoad\MessageBreak}
-% Contains information over the source control system, generated
-% through Makefile
-\input{vc.tex}
 
 % Make processing with TeX4HT possible
 \newboolean{TEX4HT-HACKS}
@@ -160,16 +159,16 @@
 }
 % Reads the last commit date from the Git repository and even succeeds
 % when none is available
-\ifthenelse{\equal{\VCDateISO}{}}
-{
-    \date{Generated on: \today}
-    \newcommand{\commitinfo}{}
-}{
-    \date{\printdate{\VCDateISO}}
-    \newcommand{\commitinfo}{%
-        This version corresponds to commit \VCRevision
-        \ifthenelse{\VCModified=0}{}{ with local changes}.
-    }
+\date{%
+    \ifthenelse{\equal{\gitCommitterDate}{(None)}}
+    {Generated on: \today}
+    {\printdate{\gitCommitterDate}}%
+}
+\newcommand{\commitinfo}{%
+    \ifthenelse{\equal{\gitCommitterDate}{(None)}}{}{%
+        This version corresponds to commit \gitAbbrevHash
+        \ifthenelse{\equal{\gitDirty}{}}{}{ with local changes}.%
+    }%
 }
 
 % Set page title

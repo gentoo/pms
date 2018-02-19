@@ -1,5 +1,6 @@
-LATEXFILES := $(filter-out vc.tex,$(wildcard *.tex)) pms.cls
-SOURCES = $(LATEXFILES) pms.bib vc vc-git.awk Makefile
+LATEXFILES := $(wildcard *.tex) pms.cls
+SOURCES = $(LATEXFILES) pms.bib Makefile
+COMMITINFO = gitHeadLocal.gin
 
 TWOSIDE =
 
@@ -10,7 +11,7 @@ all: pms.pdf
 
 html: pms.html
 
-pms.pdf eapi-cheatsheet.pdf: $(LATEXFILES) pms.bbl vc.tex
+pms.pdf eapi-cheatsheet.pdf: $(LATEXFILES) pms.bbl $(COMMITINFO)
 	$(aux-clean)
 	set -e; \
 	while true; do \
@@ -32,7 +33,7 @@ eapi-cheatsheet-nocombine.pdf: pms.pdf
 	  grep -q 'Warning.*Rerun' eapi-cheatsheet-nocombine.log || break; \
 	done
 
-pms.dvi: $(LATEXFILES) pms.bbl vc.tex
+pms.dvi: $(LATEXFILES) pms.bbl $(COMMITINFO)
 	$(aux-clean)
 	set -e; \
 	while true; do \
@@ -40,7 +41,7 @@ pms.dvi: $(LATEXFILES) pms.bbl vc.tex
 	  grep -q 'Warning.*Rerun' pms.log || break; \
 	done
 
-pms.html: $(LATEXFILES) pms.bbl vc.tex
+pms.html: $(LATEXFILES) pms.bbl $(COMMITINFO)
 	set -e; sum=''; \
 	while true; do \
 	  mk4ht xhlatex pms xhtml,fn-in; \
@@ -58,26 +59,37 @@ pms.html: $(LATEXFILES) pms.bbl vc.tex
 	@# remove redundant span elements
 	LC_ALL=C sed -i -e ':x;/<span\(\s\+[^>]*\)\?$$/{N;bx;};:y;s/\(<span\s\+[^>]*>\)\([^<]*\)<\/span>\1/\1\2/;ty' $@
 
-pms.bbl: pms.bib $(LATEXFILES) vc.tex
+pms.bbl: pms.bib $(LATEXFILES) $(COMMITINFO)
 	$(aux-clean)
 	latex pms
 	bibtex pms
 
-vc.tex: $(SOURCES)
-	/bin/sh ./vc -m
+$(COMMITINFO): $(SOURCES)
+	@# see gitinfo2 documentation
+	reltag=$$(git describe --tags --long --always --dirty='-*' \
+	  --match='eapi-*-approved*' 2>/dev/null); \
+	if test -n "$${reltag}"; then \
+	  TZ=UTC git log -1 --date=short-local --decorate=short \
+	    --pretty="format:\usepackage[%%%n  shash={%h},%n\
+	  lhash={%H},%n  authname={%an},%n  authemail={%ae},%n\
+	  authsdate={%ad},%n  authidate={%ai},%n  authudate={%at},%n\
+	  commname={%cn},%n  commemail={%ce},%n  commsdate={%cd},%n\
+	  commidate={%ci},%n  commudate={%ct},%n  refnames={%d},%n\
+	  reltag={$${reltag}}%n]{gitexinfo}%n" > $@; \
+	fi
 
-dist: $(SOURCES) vc.tex pms.pdf pms.html
+dist: $(SOURCES) $(COMMITINFO) pms.pdf pms.html
 	PV='$(PV)'; \
 	if test -z "$${PV}"; then \
 	  current_eapi=$$(sed -n 's/.*CurrentEAPIIs{\(.*\)}.*/\1/p' pms.tex); \
-	  vc_date=$$(sed -n \
-	    's/.*VCDateISO{\([0-9]*\)-\([0-9]*\)-\([0-9]*\)}.*/\1\2\3/p' \
-	    vc.tex); \
-	  PV=$${current_eapi}_p$${vc_date}; \
+	  commit_date=$$(sed -n \
+	    's/.*commsdate={\([0-9]*\)-\([0-9]*\)-\([0-9]*\)}.*/\1\2\3/p' \
+	    $(COMMITINFO)); \
+	  PV=$${current_eapi}_p$${commit_date}; \
 	fi; \
 	echo "PV = $${PV}"; \
 	tar -cJf pms-"$${PV}".tar.xz --transform="s%^%pms-$${PV}/%" \
-	  $(SOURCES) vc.tex && \
+	  $(SOURCES) $(COMMITINFO) && \
 	tar -cJf pms-"$${PV}"-prebuilt.tar.xz --transform="s%^%pms-$${PV}/%" \
 	  pms.pdf eapi-cheatsheet.pdf pms*.html pms.css
 
@@ -90,7 +102,7 @@ clean:
 	  *.lot *.out *.html *.css *.png *.4ct *.4tc *.idv *.lg *.tmp *.xref
 
 maintainer-clean: clean
-	rm -f vc.tex
+	rm -f $(COMMITINFO)
 
 .PHONY: all html dist upload clean maintainer-clean
 
