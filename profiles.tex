@@ -140,7 +140,7 @@ stable in a package.
 
 The precise manner in which the eight files interact is less simple, and is best described in terms
 of the algorithm used to determine whether a flag is masked for a given package version. This is
-described in Algorithm~\ref{alg:use-masking}.
+described in algorithm~\ref{alg:use-masking}.
 \begin{algorithm}
 \caption{\t{USE} masking logic} \label{alg:use-masking}
 \begin{algorithmic}[1]
@@ -178,7 +178,7 @@ described in Algorithm~\ref{alg:use-masking}.
 \end{algorithmic}
 \end{algorithm}
 
-Stable restrictions (``stable keyword in use'' in Algorithm~\ref{alg:use-masking}) are applied
+Stable restrictions (``stable keyword in use'' in algorithm~\ref{alg:use-masking}) are applied
 exactly if replacing in \t{KEYWORDS} all stable keywords by the corresponding tilde prefixed
 keywords (see subsection~\ref{sec:keywords}) would result in the package installation being
 prevented due to the \t{KEYWORDS} setting.

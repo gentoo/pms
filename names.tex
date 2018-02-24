@@ -75,7 +75,7 @@ This may optionally be followed by the suffix \t{-r} followed immediately by an 
 \section{Version Comparison}
 
 Version specifications are compared component by component, moving from left to right,
-as detailed in Algorithm~\ref{alg:version-comparison} and sub-algorithms.
+as detailed in algorithm~\ref{alg:version-comparison} and sub-algorithms.
 If a sub-algorithm returns a decision, then that is the result of the whole comparison;
 if it terminates without returning a decision, the process continues from the point
 from which it was invoked.
@@ -84,10 +84,10 @@ from which it was invoked.
 \caption{Version comparison top-level logic} \label{alg:version-comparison}
 \begin{algorithmic}[1]
     \STATE let $A$ and $B$ be the versions to be compared
-    \STATE compare numeric components using Algorithm~\ref{alg:version-comparison-numeric}
-    \STATE compare letter components using Algorithm~\ref{alg:version-comparison-letter}
-    \STATE compare suffixes using Algorithm~\ref{alg:version-comparison-suffix}
-    \STATE compare revision components using Algorithm~\ref{alg:version-comparison-revision}
+    \STATE compare numeric components using algorithm~\ref{alg:version-comparison-numeric}
+    \STATE compare letter components using algorithm~\ref{alg:version-comparison-letter}
+    \STATE compare suffixes using algorithm~\ref{alg:version-comparison-suffix}
+    \STATE compare revision components using algorithm~\ref{alg:version-comparison-revision}
     \RETURN $A=B$
 \end{algorithmic}
 \end{algorithm}
@@ -105,7 +105,7 @@ from which it was invoked.
   \STATE let $Ann$ be the number of numeric components of $A$
   \STATE let $Bnn$ be the number of numeric components of $B$
   \FORALL{$i$ such that $i\geq1$ and $i<Ann$ and $i<Bnn$, in ascending order}
-    \STATE compare $An_i$ and $Bn_i$ using Algorithm~\ref{alg:version-comparison-numeric-nonfirst}
+    \STATE compare $An_i$ and $Bn_i$ using algorithm~\ref{alg:version-comparison-numeric-nonfirst}
   \ENDFOR
   \IF{$Ann>Bnn$}
     \RETURN $A>B$
@@ -158,7 +158,7 @@ from which it was invoked.
   \STATE let $Asn$ be the number of suffixes of $A$
   \STATE let $Bsn$ be the number of suffixes of $B$
   \FORALL{$i$ such that $i\geq0$ and $i<Asn$ and $i<Bsn$, in ascending order}
-    \STATE compare $As_i$ and $Bs_i$ using Algorithm~\ref{alg:version-comparison-suffix-each}
+    \STATE compare $As_i$ and $Bs_i$ using algorithm~\ref{alg:version-comparison-suffix-each}
   \ENDFOR
   \IF{$Asn>Bsn$}
     \IF{$As_{Bsn}$ is of type \t{_p}}

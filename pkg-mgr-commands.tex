@@ -165,7 +165,7 @@ Ebuilds must not run any of these commands once the current phase function has r
 \begin{description}
 \item[eapply] \featurelabel{eapply} Takes zero or more GNU patch options, followed by one or more
     file or directory paths. Processes options and applies all patches found in specified locations
-    according to Algorithm~\ref{alg:eapply}. If applying the patches fails, it aborts the build
+    according to algorithm~\ref{alg:eapply}. If applying the patches fails, it aborts the build
     using \t{die}, unless run using \t{nonfatal}, in which case it returns non-zero exit status.
     Only available in EAPIs listed in table~\ref{tab:patch-commands} as supporting \t{eapply}.
 
@@ -263,7 +263,7 @@ current phase function has returned.
     \item -{}-host must be the value of the \t{CHOST} environment variable.
     \item -{}-target must be the value of the \t{CTARGET} environment variable. This option will
         only be passed if \t{CTARGET} is non-empty.
-    \item -{}-libdir must be set according to Algorithm~\ref{alg:econf-libdir}.
+    \item -{}-libdir must be set according to algorithm~\ref{alg:econf-libdir}.
     \item -{}-disable-dependency-tracking, if the EAPI is listed in
         table~\ref{tab:econf-options-table} as using it. This option will only be passed if the
         string \t{-{}-disable-dependency-tracking} occurs in the output of \t{configure -{}-help}.
@@ -292,8 +292,8 @@ current phase function has returned.
     \end{centertable}
 
     Note that the \t{\$\{EPREFIX\}} component represents the same offset-prefix as described in
-    Table~\ref{tab:defined-vars}. It facilitates offset-prefix installations which is supported by
-    EAPIs listed in Table~\ref{tab:offset-env-vars-table}. When no offset-prefix installation is in
+    table~\ref{tab:defined-vars}. It facilitates offset-prefix installations which is supported by
+    EAPIs listed in table~\ref{tab:offset-env-vars-table}. When no offset-prefix installation is in
     effect, \t{EPREFIX} becomes the empty string, making the behaviour of \t{econf} equal for both
     offset-prefix supporting and agnostic EAPIs.
 
@@ -327,19 +327,19 @@ current phase function has returned.
     section~\ref{sec:guaranteed-system-commands}. \t{emake} must be an external program and cannot
     be a function or alias---it must be callable from e.\,g.\ \t{xargs}. Failure behaviour is EAPI
     dependent as per section~\ref{sec:failure-behaviour}.
-\item[einstall] A shortcut for the command given in Listing~\ref{lst:einstall}. Any arguments given
+\item[einstall] A shortcut for the command given in listing~\ref{lst:einstall}. Any arguments given
     to \t{einstall} are passed verbatim to \t{emake}, as shown. Failure behaviour is EAPI dependent
     as per section~\ref{sec:failure-behaviour}.
     In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as per
     section~\ref{sec:banned-commands}.
 
-    The variable \t{ED} is defined as in Table~\ref{tab:defined-vars} and depends on the use of an
+    The variable \t{ED} is defined as in table~\ref{tab:defined-vars} and depends on the use of an
     offset-prefix. When such offset-prefix is absent, \t{ED} is equivalent to \t{D}\@. \t{ED} is
     always available in EAPIs that support offset-prefix installations as listed in
-    Table~\ref{tab:offset-env-vars-table}, hence EAPIs lacking offset-prefix support should use
-    \t{D} instead of \t{ED} in the command given in Listing~\ref{lst:einstall}.
+    table~\ref{tab:offset-env-vars-table}, hence EAPIs lacking offset-prefix support should use
+    \t{D} instead of \t{ED} in the command given in listing~\ref{lst:einstall}.
     Variable \t{libdir} is an auxiliary local variable whose value is determined by
-    Algorithm~\ref{alg:ebuild-libdir}.
+    algorithm~\ref{alg:ebuild-libdir}.
 
 \begin{listing}[H]
 \caption{\t{einstall} command} \label{lst:einstall}
@@ -457,7 +457,7 @@ can be extended or reduced (see below). The options that can be passed to \t{doh
     section~\ref{sec:failure-behaviour}.
 
 \item[dolib] For each argument, installs it into the appropriate library subdirectory under
-    \t{DESTTREE}, as determined by Algorithm~\ref{alg:ebuild-libdir}. Files are installed by default
+    \t{DESTTREE}, as determined by algorithm~\ref{alg:ebuild-libdir}. Files are installed by default
     with file mode \t{0644}, or with the \t{install} options set by the most recent \t{libopts}
     call. Any symlinks are installed into the same directory as relative links to their original
     target. Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
@@ -927,7 +927,7 @@ has returned.
 
 \item[einstalldocs] \featurelabel{einstalldocs} Takes no arguments. Installs the files specified
     by the \t{DOCS} and \t{HTML_DOCS} variables or a default set of files, according to
-    Algorithm~\ref{alg:einstalldocs}. If called using \t{nonfatal} and any of the called commands
+    algorithm~\ref{alg:einstalldocs}. If called using \t{nonfatal} and any of the called commands
     returns a non-zero exit status, returns immediately with the same exit status. Only available
     in EAPIs listed in table~\ref{tab:misc-commands} as supporting \t{einstalldocs}.
 
@@ -960,7 +960,7 @@ has returned.
 \end{algorithm}
 
 \item[get_libdir] \featurelabel{get-libdir} Prints the libdir name obtained according to
-    Algorithm~\ref{alg:get-libdir}. Only available in EAPIs listed in table~\ref{tab:misc-commands}
+    algorithm~\ref{alg:get-libdir}. Only available in EAPIs listed in table~\ref{tab:misc-commands}
     as supporting \t{get_libdir}.
 
 \begin{algorithm}
