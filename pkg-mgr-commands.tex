@@ -246,30 +246,31 @@ current phase function has returned.
 
     \featurelabel{econf-options} \t{econf} must pass the following options to the configure script:
     \begin{itemize}
-    \item -{}-prefix must default to \t{\$\{EPREFIX\}/usr} unless overridden by \t{econf}'s caller.
-    \item -{}-mandir must be \t{\$\{EPREFIX\}/usr/share/man}
-    \item -{}-infodir must be \t{\$\{EPREFIX\}/usr/share/info}
-    \item -{}-datadir must be \t{\$\{EPREFIX\}/usr/share}
-    \item -{}-sysconfdir must be \t{\$\{EPREFIX\}/etc}
-    \item -{}-localstatedir must be \t{\$\{EPREFIX\}/var/lib}
-    \item -{}-docdir must be \t{\$\{EPREFIX\}/usr/share/doc/\$\{PF\}}, if the EAPI is listed in
+    \item \t{-{}-prefix} must default to \t{\$\{EPREFIX\}/usr} unless overridden by \t{econf}'s
+        caller.
+    \item \t{-{}-mandir} must be \t{\$\{EPREFIX\}/usr/share/man}
+    \item \t{-{}-infodir} must be \t{\$\{EPREFIX\}/usr/share/info}
+    \item \t{-{}-datadir} must be \t{\$\{EPREFIX\}/usr/share}
+    \item \t{-{}-sysconfdir} must be \t{\$\{EPREFIX\}/etc}
+    \item \t{-{}-localstatedir} must be \t{\$\{EPREFIX\}/var/lib}
+    \item \t{-{}-docdir} must be \t{\$\{EPREFIX\}/usr/share/doc/\$\{PF\}}, if the EAPI is listed in
         table~\ref{tab:econf-options-table} as using it. This option will only be passed if the
         string \t{-{}-docdir} occurs in the output of \t{configure -{}-help}.
-    \item -{}-htmldir must be \t{\$\{EPREFIX\}/usr/share/doc/\$\{PF\}/html}, if the EAPI is listed
-        in table~\ref{tab:econf-options-table} as using it. This option will only be passed if the
-        string \t{-{}-htmldir} occurs in the output of \t{configure -{}-help}.
-    \item -{}-build must be the value of the \t{CBUILD} environment variable. This option will only
-        be passed if \t{CBUILD} is non-empty.
-    \item -{}-host must be the value of the \t{CHOST} environment variable.
-    \item -{}-target must be the value of the \t{CTARGET} environment variable. This option will
+    \item \t{-{}-htmldir} must be \t{\$\{EPREFIX\}/usr/share/doc/\$\{PF\}/html}, if the EAPI is
+        listed in table~\ref{tab:econf-options-table} as using it. This option will only be passed
+        if the string \t{-{}-htmldir} occurs in the output of \t{configure -{}-help}.
+    \item \t{-{}-build} must be the value of the \t{CBUILD} environment variable. This option will
+        only be passed if \t{CBUILD} is non-empty.
+    \item \t{-{}-host} must be the value of the \t{CHOST} environment variable.
+    \item \t{-{}-target} must be the value of the \t{CTARGET} environment variable. This option will
         only be passed if \t{CTARGET} is non-empty.
-    \item -{}-libdir must be set according to algorithm~\ref{alg:econf-libdir}.
-    \item -{}-disable-dependency-tracking, if the EAPI is listed in
+    \item \t{-{}-libdir} must be set according to algorithm~\ref{alg:econf-libdir}.
+    \item \t{-{}-disable-dependency-tracking}, if the EAPI is listed in
         table~\ref{tab:econf-options-table} as using it. This option will only be passed if the
         string \t{-{}-disable-dependency-tracking} occurs in the output of \t{configure -{}-help}.
-    \item -{}-disable-silent-rules, if the EAPI is listed in table~\ref{tab:econf-options-table} as
-        using it. This option will only be passed if the string \t{-{}-disable-silent-rules} occurs
-        in the output of \t{configure -{}-help}.
+    \item \t{-{}-disable-silent-rules}, if the EAPI is listed in table~\ref{tab:econf-options-table}
+        as using it. This option will only be passed if the string \t{-{}-disable-silent-rules}
+        occurs in the output of \t{configure -{}-help}.
     \end{itemize}
 
     \ChangeWhenAddingAnEAPI{6}
@@ -327,6 +328,7 @@ current phase function has returned.
     section~\ref{sec:guaranteed-system-commands}. \t{emake} must be an external program and cannot
     be a function or alias---it must be callable from e.\,g.\ \t{xargs}. Failure behaviour is EAPI
     dependent as per section~\ref{sec:failure-behaviour}.
+
 \item[einstall] A shortcut for the command given in listing~\ref{lst:einstall}. Any arguments given
     to \t{einstall} are passed verbatim to \t{emake}, as shown. Failure behaviour is EAPI dependent
     as per section~\ref{sec:failure-behaviour}.
@@ -420,21 +422,22 @@ the current phase function has returned.
     Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[dohtml] Installs the given HTML files into a subdirectory under \t{/usr/share/doc/\$PF/}.
-The subdirectory is \t{html} by default, but this can be overridden with the \t{docinto} function.
-Files to be installed automatically are determined by extension and the default extensions are
-\t{css}, \t{gif}, \t{htm}, \t{html}, \t{jpeg}, \t{jpg}, \t{js} and \t{png}. These default extensions
-can be extended or reduced (see below). The options that can be passed to \t{dohtml} are as follows:
-\begin{description}
-    \item{\t{-r}} --- enables recursion into directories.
-    \item{\t{-V}} --- enables verbosity.
-    \item{\t{-A}} --- adds file type extensions to the default list.
-    \item{\t{-a}} --- sets file type extensions to only those specified.
-    \item{\t{-f}} --- list of files that are able to be installed.
-    \item{\t{-x}} --- list of directories that files will not be installed from (only used in
-    conjunction with \t{-r}).
-    \item{\t{-p}} --- sets a document prefix for installed files, not to be confused with the global
-    offset-prefix.
-\end{description}
+    The subdirectory is \t{html} by default, but this can be overridden with the \t{docinto}
+    function. Files to be installed automatically are determined by extension and the default
+    extensions are \t{css}, \t{gif}, \t{htm}, \t{html}, \t{jpeg}, \t{jpg}, \t{js} and \t{png}.
+    These default extensions can be extended or reduced (see below). The options that can be passed
+    to \t{dohtml} are as follows:
+    \begin{description}
+    \item[\t{-r}] enables recursion into directories.
+    \item[\t{-V}] enables verbosity.
+    \item[\t{-A}] adds file type extensions to the default list.
+    \item[\t{-a}] sets file type extensions to only those specified.
+    \item[\t{-f}] list of files that are able to be installed.
+    \item[\t{-x}] list of directories that files will not be installed from (only used in
+        conjunction with \t{-r}).
+    \item[\t{-p}] sets a document prefix for installed files, not to be confused with the global
+        offset-prefix.
+    \end{description}
 
     Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
