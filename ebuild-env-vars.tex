@@ -178,12 +178,14 @@ variable.
     No &
     \featurelabel{desttree} Controls the location where \t{dobin}, \t{dolib}, \t{domo},
     and \t{dosbin} install things. Only for EAPIs listed in table~\ref{tab:removed-env-vars-table}
-    as supporting \t{DESTTREE}. \\
+    as supporting \t{DESTTREE}. In all other EAPIs, this is retained as a conceptual variable not
+    exported to the ebuild environment. \\
 \t{INSDESTTREE} &
     \t{src_install} &
     No &
     \featurelabel{insdesttree} Controls the location where \t{doins} installs things. Only for EAPIs
-    listed in table~\ref{tab:removed-env-vars-table} as supporting \t{INSDESTTREE}. \\
+    listed in table~\ref{tab:removed-env-vars-table} as supporting \t{INSDESTTREE}. In all other
+    EAPIs, this is retained as a conceptual variable not exported to the ebuild environment. \\
 \t{USE} &
     All &
     Yes &
