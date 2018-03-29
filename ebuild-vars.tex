@@ -1,8 +1,8 @@
 \chapter{Ebuild-defined Variables}
 \label{sec:ebuild-vars}
 
-\note This section describes variables that may or must be defined by ebuilds. For
-variables that are passed from the package manager to the ebuild, see section~\ref{sec:ebuild-env-vars}.
+\note{This section describes variables that may or must be defined by ebuilds. For variables that
+are passed from the package manager to the ebuild, see section~\ref{sec:ebuild-env-vars}.}
 
 If any of these variables are set to invalid values, or if any of the mandatory variables are
 undefined, the package manager's behaviour is undefined; ideally, an error in one ebuild should not
@@ -203,8 +203,8 @@ considered to be part of the ebuild's metadata:
 \item[INHERITED] List of inherited eclass names. Again, this is handled magically by \t{inherit}.
 \end{description}
 
-\note Thus, by extension of section~\ref{sec:metadata-invariance}, \t{inherit} may not be used
-    conditionally, except upon constant conditions.
+\note{Thus, by extension of section~\ref{sec:metadata-invariance}, \t{inherit} may not be used
+conditionally, except upon constant conditions.}
 
 The following are special variables defined by the package manager for internal use and may or may
 not be exported to the ebuild environment:
@@ -218,8 +218,8 @@ optional \t{DEFINED_PHASES} support, package managers may not rely upon the meta
 this variable defined, and must treat an empty string as ``this information is not available''.
 \end{description}
 
-\note Thus, by extension of section~\ref{sec:metadata-invariance}, phase functions must not be defined
-based upon any variant condition.
+\note{Thus, by extension of section~\ref{sec:metadata-invariance}, phase functions must not be
+defined based upon any variant condition.}
 
 \ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{EAPIs supporting \t{DEFINED_PHASES}}

@@ -121,7 +121,7 @@
     \renewcommand{\t}[1]{\texttt{#1}}
 }
 \newcommand{\e}[1]{\emph{#1}}
-\newcommand{\note}[1]{\paragraph{Note:} #1}
+\newcommand{\note}[1]{\begin{trivlist}\item\textbf{Note:} #1\end{trivlist}}
 
 % Because we are lazy, we define a table environment to fulfil our needs
 \newenvironment{centertable}[1]%

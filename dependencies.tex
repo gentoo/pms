@@ -176,7 +176,7 @@ or 4-style \t{USE} dependencies, a specification may additionally be suffixed by
 2-style or 4-style \t{[use]} restriction, as described in section~\ref{sec:use-dep}. A package
 manager must warn or error if this feature is used with an EAPI not supporting use dependencies.
 
-\note Order is important. The slot restriction must come before use dependencies.
+\note{Order is important. The slot restriction must come before use dependencies.}
 
 \ChangeWhenAddingAnEAPI{6}
 \begin{centertable}{Support for \t{SLOT} dependencies and sub-slots in EAPIs}
@@ -327,9 +327,9 @@ the latter, present and disabled.
 Unless a 4-style default is specified, it is an error for a use dependency to be applied to an
 ebuild which does not have the flag in question in \t{IUSE_REFERENCEABLE}.
 
-\note By extension of the above, a default that could reference an ebuild using an EAPI not
+\note{By extension of the above, a default that could reference an ebuild using an EAPI not
 supporting profile \t{IUSE} injections cannot rely upon any particular behaviour for flags that
-would not have to be part of \t{IUSE}.
+would not have to be part of \t{IUSE}.}
 
 It is an error for an ebuild to use a conditional use dependency when that ebuild does not have the
 flag in \t{IUSE_EFFECTIVE}.

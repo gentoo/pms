@@ -516,9 +516,9 @@ The call order for upgrading, downgrading or reinstalling a package is:
 \item \t{pkg_postinst}
 \end{compactitem}
 
-Note: When up- or downgrading a package in EAPI 0 or 1, the last four phase functions can
+\note{When up- or downgrading a package in EAPI 0 or 1, the last four phase functions can
 alternatively be called in the order \t{pkg_preinst}, \t{pkg_postinst}, \t{pkg_prerm},
-\t{pkg_postrm}. This behaviour is deprecated.
+\t{pkg_postrm}. This behaviour is deprecated.}
 
 The \t{pkg_config}, \t{pkg_info} and \t{pkg_nofetch} functions are not called in a normal
 sequence. The \t{pkg_pretend} function is called some unspecified time before a (possibly
