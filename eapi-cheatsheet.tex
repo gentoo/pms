@@ -14,7 +14,7 @@
 \usepackage[nohyphen]{underscore}
 \newcommand{\code}[1]{\texttt{#1}}
 % This should reflect the latest approved EAPI version
-\newcommand{\version}{6.0}
+\newcommand{\version}{7.0}
 \newcommand{\featureref}[1]{\textsc{#1} on page~\pageref{feat:#1}}
 \renewcommand{\familydefault}{\sfdefault}
 \urlstyle{sf}
@@ -399,6 +399,122 @@ differences between these previous EAPIs.
 \begin{description}
     \item[\code{einstall}] No longer allowed. Use \code{emake install}
     as replacement.
+    See \featureref{banned-commands}.
+\end{description}
+
+\section{EAPI 7}
+\label{sec:cs:eapi7}
+\subsection{Additions/Changes}
+\label{sec:cs:eapi7-additions}
+\begin{description}
+    \item[\code{package.*} and \code{use.*}] These profile files can
+    be directories instead of regular files. This is intended to be
+    used in overlays only.
+    See \featureref{package-mask-dir} and \featureref{profile-file-dirs}.
+    \item[\code{||} and \code{\textasciicircum\textasciicircum}
+    dependency groups] These groups now evaluate to false when they
+    are empty (for example, if there are only unmatched use
+    dependencies inside of them).
+    See \featureref{empty-dep-groups}.
+    \item[No trailing slash] The paths specified by \code{ROOT},
+    \code{EROOT}, \code{D}, and \code{ED} no longer end with a slash.
+    Thus, default \code{ROOT} is empty now.
+    See \featureref{trailing-slash}.
+    \item[Cross compilation support] Several variables have been added
+    and some commands have been extended for better cross compilation
+    support:
+    \begin{description}
+        \item[\code{BDEPEND}] Build dependencies are divided into two
+        classes: \code{BDEPEND} for native build tools (\code{CBUILD});
+        \code{DEPEND} for dependencies compatible with the system
+        being built (\code{CHOST}).
+        See \featureref{bdepend}.
+        \item[\code{SYSROOT}] The path to the root directory for
+        \code{DEPEND} type dependencies.
+        See \featureref{sysroot}.
+        \item[\code{ESYSROOT}] The concatenation of the \code{SYSROOT}
+        and \code{EPREFIX} paths, for convenience.
+        \item[\code{BROOT}] The prefixed root directory path for
+        \code{BDEPEND} type dependencies, typically executable build
+        tools.
+        See \featureref{broot}.
+        \item[\code{econf}]
+        Option \code{-{}-with-sysroot=\$\{ESYSROOT\}} is passed to
+        configure, if this option is supported.
+        See \featureref{econf-options}.
+        \item[\code{has_version} and \code{best_version}] These
+        helpers support \code{-b}, \code{-d} or \code{-r} options,
+        causing the query to apply to \code{BDEPEND}, \code{DEPEND}
+        or \code{RDEPEND} (the default). This replaces the
+        \code{-{}-host-root} option.
+        See \featureref{pm-query-options}.
+    \end{description}
+    \item[Environment blacklist] Any environment variable listed in
+    the profile-defined \code{ENV_UNSET} variable will be unset by the
+    package manager.
+    See \featureref{env-unset}.
+    \item[\code{patch}] All inputs valid for GNU patch version 2.7
+    are supported. Especially, this includes support for git-formatted
+    patches.
+    See \featureref{gnu-patch}.
+    \item[\code{nonfatal}] In addition to its definition as a shell
+    function, the \code{nonfatal} wrapper has now a fallback
+    implementation as an external command. Thus, it can be called
+    from other commands.
+    See \featureref{nonfatal}.
+    \item[Output commands] \code{einfo} and friends no longer use
+    stdout, so inside of command substitution their output won't be
+    caught.
+    See \featureref{output-no-stdout}.
+    \item[\code{eqawarn}] The \code{eqawarn} output command is
+    supported in the package manager itself.
+    See \featureref{eqawarn}.
+    \item[\code{die} in subshell] The \code{die} command is guaranteed
+    to work in a subshell context.
+    See \featureref{subshell-die}.
+    \item[\code{domo} destination] \code{domo} installs the specified
+    files under \code{/usr/share/locale} instead of
+    \code{\$\{DESTTREE\}/\allowbreak share/locale}.
+    See \featureref{domo-path}.
+    \item[Controllable stripping] The \code{dostrip -x} command can be
+    used to add paths to an exclusion list for stripping of debug
+    symbols, to allow more fine-grained control than with
+    \code{RESTRICT="strip"}.
+    See \featureref{dostrip}.
+    \item[Version manipulation and comparison commands] \mbox{}
+    \begin{description}
+        \item[\code{ver_cut} \emph{range} {[\emph{version}]}]
+        Print the version substring specified by \emph{range}.
+        \emph{version} defaults to \code{PV}.
+        \item[\code{ver_rs} \emph{range repl} \dots\ {[\emph{version}]}]
+        Replace all version separators in \emph{range} by string
+        \emph{repl}. Multiple \emph{range repl} pairs are allowed.
+        \emph{version} defaults to \code{PV}.
+        \item[\code{ver_test} {[\emph{v1}]} \emph{op  v2}]
+        Check if the relation \emph{v1 op v2} is true.
+        \emph{v1} defaults to \code{PVR}; \emph{op} can be \code{-eq},
+        \code{-ne}, \code{-gt}, \code{-ge}, \code{-lt} or \code{-le}.
+    \end{description}
+    See \featureref{ver-commands}.
+\end{description}
+\subsection{Removals/Bans}
+\label{sec:cs:eapi7-removalsbans}
+\begin{description}
+    \item[\code{package.provided}] Deprecated since a long time and
+    finally dropped.
+    See \featureref{package-provided}.
+    \item[\code{PORTDIR} and \code{ECLASSDIR}] No longer defined,
+    because ebuilds should not directly access files in the repository.
+    See \featureref{portdir} and \featureref{eclassdir}.
+    \item[\code{DESTTREE} and \code{INSDESTTREE}] Not defined any
+    more. Use the \code{into} and \code{insinto} commands instead.
+    See \featureref{desttree} and \featureref{insdesttree}.
+    \item[\code{dohtml}] No longer allowed. \code{doins -r} can be
+    used as a replacement.
+    See \featureref{banned-commands}.
+    \item[\code{dolib} and \code{libopts}] No longer allowed.
+    The specific \code{dolib.a} or \code{dolib.so} commands should be
+    used as replacement.
     See \featureref{banned-commands}.
 \end{description}
 \end{document}
