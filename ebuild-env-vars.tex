@@ -110,25 +110,47 @@ variable.
 \t{PORTDIR} &
     \t{src_*} &
     No &
-    The full path to the master repository's base directory. \\
+    \featurelabel{portdir} The full path to the master repository's base directory. Only for EAPIs
+    listed in table~\ref{tab:removed-env-vars-table} as supporting \t{PORTDIR}. \\
 \t{ECLASSDIR} &
     \t{src_*} &
     No &
-    The full path to the master repository's eclass directory. \\
+    \featurelabel{eclassdir} The full path to the master repository's eclass directory. Only for
+    EAPIs listed in table~\ref{tab:removed-env-vars-table} as supporting \t{ECLASSDIR}. \\
 \t{ROOT} &
    \t{pkg_*} &
    No &
    The absolute path to the root directory into which the package is to be merged.  Phases which run
    with full filesystem access must not touch any files outside of the directory given in
    \t{ROOT}\@. Also of note is that in a cross-compiling environment, binaries inside of \t{ROOT}
-   will not be executable on the build machine, so ebuilds must not call them. \t{ROOT} must be
-   non-empty and end in a trailing slash. \\
+   will not be executable on the build machine, so ebuilds must not call them. The presence of
+   a trailing slash is EAPI dependent as listed in table~\ref{tab:trailing-slash}. \\
 \t{EROOT} &
     \t{pkg_*} &
     No &
-    Contains the path \t{\$\{ROOT\%/\}\$\{EPREFIX\}/} for convenience. See also the
-    \t{EPREFIX} variable. Only for EAPIs listed in table~\ref{tab:offset-env-vars-table} as
-    supporting \t{EROOT}. \\
+    Contains the concatenation of the paths in the \t{ROOT} and \t{EPREFIX} variables,
+    for convenience. See also the \t{EPREFIX} variable. Only for EAPIs listed in
+    table~\ref{tab:offset-env-vars-table} as supporting \t{EROOT}\@. The presence of a trailing
+    slash is EAPI dependent as listed in table~\ref{tab:trailing-slash}. \\
+\t{SYSROOT} &
+    \t{src_*} &
+    No &
+    \featurelabel{sysroot} The absolute path to the root directory containing build dependencies
+    satisfied by \t{DEPEND}\@. Only for EAPIs listed in table~\ref{tab:added-env-vars-table}
+    as supporting \t{SYSROOT}. \\
+\t{ESYSROOT} &
+    \t{src_*} &
+    No &
+    Contains the concatenation of the paths in the \t{SYSROOT} and \t{EPREFIX} variables,
+    for convenience. See also the \t{EPREFIX} variable. Only for EAPIs listed
+    in table~\ref{tab:offset-env-vars-table} as supporting \t{ESYSROOT}. \\
+\t{BROOT} &
+    \t{src_*} &
+    No &
+    \featurelabel{broot} The absolute path to the root directory containing build dependencies
+    satisfied by \t{BDEPEND}, typically executable build tools. This includes any applicable offset
+    prefix. Only for EAPIs listed in table~\ref{tab:offset-env-vars-table} as supporting \t{BROOT}.
+    \\
 \t{T} &
     All &
     Partially\footnote{Consistent and preserved across a single connected sequence of install or
@@ -159,26 +181,34 @@ variable.
     \t{src_install} &
     No &
     Contains the full path to the image directory into which the package should be installed.
-    Must be non-empty and end in a trailing slash. \\
+    The presence of a trailing slash is EAPI dependent as listed in table~\ref{tab:trailing-slash}.
+    \\
 \t{D} (continued) &
     \t{pkg_preinst}, \t{pkg_postinst} &
     Yes &
-    Contains the full path to the image that is about to be or has just been merged. Must be
-    non-empty and end in a trailing slash. \\
+    Contains the full path to the image that is about to be or has just been merged.
+    The presence of a trailing slash is EAPI dependent as listed in table~\ref{tab:trailing-slash}.
+    \\
 \t{ED} &
     \t{src_install}, \t{pkg_preinst}, \t{pkg_postinst} &
     See \t{D} &
-    Contains the path \t{\$\{D\%/\}\$\{EPREFIX\}/} for convenience. See also the
-    \t{EPREFIX} variable. Only for EAPIs listed in table~\ref{tab:offset-env-vars-table} as
-    supporting \t{ED}. \\
+    Contains the concatenation of the paths in the \t{D} and \t{EPREFIX} variables,
+    for convenience. See also the \t{EPREFIX} variable. Only for EAPIs listed in
+    table~\ref{tab:offset-env-vars-table} as supporting \t{ED}\@. The presence of a trailing slash
+    is EAPI dependent as listed in table~\ref{tab:trailing-slash}. \\
 \t{DESTTREE} &
     \t{src_install} &
     No &
-    Controls the location where \t{dobin}, \t{dolib}, \t{domo}, and \t{dosbin} install things. \\
+    \featurelabel{desttree} Controls the location where \t{dobin}, \t{dolib}, \t{domo},
+    and \t{dosbin} install things. Only for EAPIs listed in table~\ref{tab:removed-env-vars-table}
+    as supporting \t{DESTTREE}. In all other EAPIs, this is retained as a conceptual variable not
+    exported to the ebuild environment. \\
 \t{INSDESTTREE} &
     \t{src_install} &
     No &
-    Controls the location where \t{doins} installs things. \\
+    \featurelabel{insdesttree} Controls the location where \t{doins} installs things. Only for EAPIs
+    listed in table~\ref{tab:removed-env-vars-table} as supporting \t{INSDESTTREE}. In all other
+    EAPIs, this is retained as a conceptual variable not exported to the ebuild environment. \\
 \t{USE} &
     All &
     Yes &
@@ -232,51 +262,61 @@ variable.
 \end{longtable}
 \end{landscape}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting various added env variables}
     \label{tab:added-env-vars-table}
-    \begin{tabular}{lllll}
+    \begin{tabular}{lllllll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{\t{MERGE_TYPE}?}} &
-      \multicolumn{1}{P{6em}}{\textbf{\t{REPLACING_VERSIONS}?}} &
-      \multicolumn{1}{P{6em}}{\textbf{\t{REPLACED_BY_VERSION}?}} &
-      \multicolumn{1}{P{6em}}{\textbf{\t{EBUILD_PHASE_FUNC}?}} \\
+      \multicolumn{1}{P{3.25em}}{\textbf{\t{MERGE_TYPE}?}} &
+      \multicolumn{1}{P{5.25em}}{\textbf{\t{REPLACING_VERSIONS}?}} &
+      \multicolumn{1}{P{5.75em}}{\textbf{\t{REPLACED_BY_VERSION}?}} &
+      \multicolumn{1}{P{5.75em}}{\textbf{\t{EBUILD_PHASE_FUNC}?}} &
+      \multicolumn{1}{c}{\textbf{\t{SYSROOT}?}} &
+      \multicolumn{1}{c}{\textbf{\t{BROOT}?}} \\
       \midrule
-      0, 1, 2, 3        & No  & No  & No  & No  \\
-      4                 & Yes & Yes & Yes & No  \\
-      5, 6              & Yes & Yes & Yes & Yes \\
+      0, 1, 2, 3        & No  & No  & No  & No  & No  & No  \\
+      4                 & Yes & Yes & Yes & No  & No  & No  \\
+      5, 6              & Yes & Yes & Yes & Yes & No  & No  \\
+      7                 & Yes & Yes & Yes & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting various removed env variables}
     \label{tab:removed-env-vars-table}
-    \begin{tabular}{lll}
+    \begin{tabular}{lllllll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{\t{AA}?}} &
-      \multicolumn{1}{c}{\textbf{\t{KV}?}} \\
+      \multicolumn{1}{c}{\textbf{\t{KV}?}} &
+      \multicolumn{1}{c}{\textbf{\t{PORTDIR}?}} &
+      \multicolumn{1}{c}{\textbf{\t{ECLASSDIR}?}} &
+      \multicolumn{1}{c}{\textbf{\t{DESTTREE}?}} &
+      \multicolumn{1}{c}{\textbf{\t{INSDESTTREE}?}} \\
       \midrule
-      0, 1, 2, 3        & Yes & Yes \\
-      4, 5, 6           & No  & No  \\
+      0, 1, 2, 3        & Yes & Yes & Yes & Yes & Yes & Yes \\
+      4, 5, 6           & No  & No  & Yes & Yes & Yes & Yes \\
+      7                 & No  & No  & No  & No  & No  & No  \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting offset-prefix env variables}
     \label{tab:offset-env-vars-table}
-    \begin{tabular}{llll}
+    \begin{tabular}{lllll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{\t{EPREFIX}?}} &
       \multicolumn{1}{c}{\textbf{\t{EROOT}?}} &
-      \multicolumn{1}{c}{\textbf{\t{ED}?}} \\
+      \multicolumn{1}{c}{\textbf{\t{ED}?}} &
+      \multicolumn{1}{c}{\textbf{\t{ESYSROOT}?}} \\
       \midrule
-      0, 1, 2           & No  & No  & No  \\
-      3, 4, 5, 6        & Yes & Yes & Yes \\
+      0, 1, 2           & No  & No  & No  & No  \\
+      3, 4, 5, 6        & Yes & Yes & Yes & No  \\
+      7                 & Yes & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -292,13 +332,15 @@ package manager specific directories.
 
 \t{GZIP}, \t{BZIP}, \t{BZIP2}, \t{CDPATH}, \t{GREP_OPTIONS}, \t{GREP_COLOR} and \t{GLOBIGNORE}
 must not be set.
+\featurelabel{env-unset} In addition, any variable whose name appears in the \t{ENV_UNSET} variable
+must be unset, for EAPIs listed in table~\ref{tab:profile-env-unset} as supporting \t{ENV_UNSET}.
 
 \featurelabel{locale-settings} The package manager must ensure that the \t{LC_CTYPE} and
 \t{LC_COLLATE} locale categories are equivalent to the POSIX locale, as far as characters in the
 ASCII range (U+0000 to U+007F) are concerned. Only for EAPIs listed in such a manner in
 table~\ref{tab:locale-settings}.
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{Locale settings for EAPIs}
     \label{tab:locale-settings}
     \begin{tabular}{ll}
@@ -307,7 +349,7 @@ table~\ref{tab:locale-settings}.
       \multicolumn{1}{c}{\textbf{Sane \t{LC_CTYPE} and \t{LC_COLLATE}?}} \\
       \midrule
       0, 1, 2, 3, 4, 5  & Undefined \\
-      6                 & Yes       \\
+      6, 7              & Yes       \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -396,7 +438,7 @@ contain at most one value.
 \subsection{Offset-prefix variables}
 \label{sec:offset-vars}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting offset-prefix}
     \label{tab:offset-support-table}
     \begin{tabular}{ll}
@@ -405,7 +447,7 @@ contain at most one value.
       \multicolumn{1}{c}{\textbf{Supports offset-prefix?}}\\
       \midrule
       0, 1, 2           & No  \\
-      3, 4, 5, 6        & Yes \\
+      3, 4, 5, 6, 7     & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -419,6 +461,38 @@ hardwired to \t{/usr}. In offset-prefix supporting EAPIs the installation offset
 behaviour of offset-prefix aware and agnostic is the same when \t{EPREFIX} is set to the empty
 string in offset-prefix aware EAPIs. The latter do have the variables \t{ED} and \t{EROOT} properly
 set, though.
+
+\subsection{Path variables and trailing slash}
+\label{sec:trailing-slash}
+
+Unless specified otherwise, the paths provided through package manager variables do not end with
+a trailing slash and cannot be empty. A few exceptions to that rule are listed
+in table~\ref{tab:trailing-slash} along with applicable EAPIs.
+
+For EAPIs where those variables are defined to always end with a trailing slash, the package manager
+guarantees that a trailing slash will always be appended to the path in question. If the path
+specifies the system root directory, it will consist of a single slash (\t{/}).
+
+\featurelabel{trailing-slash} For EAPIs where those variables are defined to never end with
+a trailing slash, the package manager guarantees that a trailing slash will never be present.
+If the path specifies the system root directory, it will be empty.
+
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{Variables that always or never end with a trailing slash}
+    \label{tab:trailing-slash}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{2}{c}{\textbf{Ends with a trailing slash?}} \\
+      &
+      \t{ROOT}, \t{EROOT} &
+      \t{D}, \t{ED} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6 & always & always \\
+      7                   & never  & never  \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 

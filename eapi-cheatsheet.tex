@@ -14,7 +14,7 @@
 \usepackage[nohyphen]{underscore}
 \newcommand{\code}[1]{\texttt{#1}}
 % This should reflect the latest approved EAPI version
-\newcommand{\version}{6.0}
+\newcommand{\version}{7.0}
 \newcommand{\featureref}[1]{\textsc{#1} on page~\pageref{feat:#1}}
 \renewcommand{\familydefault}{\sfdefault}
 \urlstyle{sf}
@@ -76,7 +76,7 @@
     \footnote{\url{http://creativecommons.org/licenses/by-sa/3.0/}}
 \end{abstract}
 
-\section{EAPIs 0, 1, and 2}
+\section{EAPIs 0, 1, 2, 3, and 4}
 \label{sec:cs:eapi0-2}
 Omitted for lack of space. See version~5.0 of this document for
 differences between these previous EAPIs.
@@ -154,107 +154,107 @@ differences between these previous EAPIs.
 %     \code{-i18n} switch with EAPI 4.  See \featureref{doman-langs}.
 % \end{description}
 
-\section{EAPI 3 (2010-01-18)}
-\label{sec:cs:eapi3}
-\subsection{Additions/Changes}
-\label{sec:cs:eapi3-additions}
-\begin{description}
-    \item[Support for \code{.xz}] Unpack of \code{.xz} and
-    \code{.tar.xz} files is possible without any custom
-    \code{src_unpack} functions.  See \featureref{unpack-extensions}.
-    \item[Offset prefix] Supporting installation on Prefix-enabled
-    systems will be easier with this EAPI.
-\end{description}
+% \section{EAPI 3 (2010-01-18)}
+% \label{sec:cs:eapi3}
+% \subsection{Additions/Changes}
+% \label{sec:cs:eapi3-additions}
+% \begin{description}
+%     \item[Support for \code{.xz}] Unpack of \code{.xz} and
+%     \code{.tar.xz} files is possible without any custom
+%     \code{src_unpack} functions.  See \featureref{unpack-extensions}.
+%     \item[Offset prefix] Supporting installation on Prefix-enabled
+%     systems will be easier with this EAPI.
+% \end{description}
 
-\section{EAPI 4 (2011-01-17)}
-\label{sec:cs:eapi4}
-\subsection{Additions/Changes}
-\label{sec:cs:eapi4-additions}
-\begin{description}
-    \item[\code{pkg_pretend}] Some useful checks (kernel options for
-    example) can be placed in this new phase to inform the user early
-    (when just pretending to emerge the package).  Most checks should
-    usually be repeated in \code{pkg_setup}.
-    See \featureref{pkg-pretend}.
-    \item[\code{src_install}] The \code{src_install} phase is no
-    longer empty but has a default now.  This comes along with an
-    accompanying \code{default} function.
-    See \featureref{src-install-4}.
-    \item[\code{pkg_info} on non-installed packages] The
-    \code{pkg_info} phase can be called even for non-installed
-    packages.  Be warned that dependencies might not have been
-    installed at execution time.  See \featureref{pkg-info}.
-    \item[\code{econf} changes] The helper function now always
-    activates \code{-{}-disable-dependency-tracking}.
-    See \featureref{econf-options}.
-    \item[USE dependency defaults] In addition to the features offered
-    in EAPI 2 for USE dependencies, a \code{(+)} or \code{(-)} can be
-    added after a USE flag (mind the parentheses).  The former
-    specifies that flags not in IUSE should be treated as enabled; the
-    latter, disabled. Cannot be used with USE_EXPAND flags.  This
-    mimics parts of the behaviour of \code{-{}-missing} in
-    \code{built_with_use}.  See \featureref{use-dep-defaults}.
-    \item[Controllable compression] All items in the \code{doc},
-    \code{info}, \code{man} subdirectories of \code{/usr/share/} may
-    be compressed on-disk after \code{src_install}, except for
-    \code{/usr/share/doc/\$\{PF\}/html}.  \code{docompress path \dots}
-    adds paths to the inclusion list for compression.
-    \code{docompress -x path \dots} adds paths to the exclusion list.
-    See \featureref{docompress}.
-    \item[\code{nonfatal} for commands] If you call \code{nonfatal}
-    the command given as argument will not abort the build process in
-    case of a failure (as is the default) but will return non-zero on
-    failure.
-    See \featureref{nonfatal}.
-    \item[\code{dodoc} recursion] If the \code{-r} switch is given as
-    first argument and followed by directories, files from there are
-    installed recursively.  See \featureref{dodoc}.
-    \item[\code{doins} symlink support] Symbolic links are now
-    properly installed when using recursion (\code{-r} switch).
-    See \featureref{doins}.
-    \item[\code{PROPERTIES}] Is mandatory for all package managers now
-    to support interactive installs.
-    \item[\code{REQUIRED_USE}] This variable can be used similar to
-    the \code{(R|P)DEPEND} variables and define sets of USE flag
-    combinations that are not allowed.  All elements can be further
-    nested to achieve more functionality.
-    \begin{description}
-        \item[Illegal combination] To prevent activation of
-        \code{flag1} if \code{flag2} is enabled use
-        "\code{flag2?\ ( !flag1 )}".
-        \item[OR] If at least one USE flag out of many must be
-        activated on \code{flag1} use
-        "\code{flag1?\ ( || ( flag2 flag3 \dots\ ) )}".
-        \item[XOR] To allow exactly one USE flag out of many use
-        "\code{\textasciicircum\textasciicircum ( flag1 flag2 \dots\ )}".
-    \end{description}
-    See \featureref{required-use}.
-    \item[\code{MERGE_TYPE}] This variable contains one of three
-    possible values to allow checks if it is normal merge with
-    compilation and installation (\code{source}), installation of a
-    binary package (\code{binary}), or a compilation without
-    installation (\code{buildonly}).  See \featureref{merge-type}.
-    \item[\code{REPLACING_VERSIONS}, \code{REPLACED_BY_VERSION}]
-    These variables, valid in \code{pkg_*}, contain a list of all
-    versions (\code{PVR}) of this package that we are replacing, and
-    the version that is replacing the current one, respectively.
-    See \featureref{replace-version-vars}.
-\end{description}
-\subsection{Removals/Bans}
-\label{sec:cs:eapi4-removalsbans}
-\begin{description}
-    \item[\code{dohard}, \code{dosed}] Both functions are not allowed
-    any more.  See \featureref{banned-commands}.
-    \item[No \code{RDEPEND} fall-back] The package manager will not
-    fall back to \code{RDEPEND=DEPEND} if \code{RDEPEND} is undefined.
-    See \featureref{rdepend-depend}.
-    \item[\code{S} fallback changes] The value of the variable
-    \code{S} will not automatically be changed to \code{WORKDIR}, if
-    \code{S} is not a directory, but abort.  Virtual packages are the
-    only exception.  See \featureref{s-workdir-fallback}.
-    \item[\code{AA}, \code{KV}] These variables are not defined
-    any more.  See \featureref{aa} and \featureref{kv}.
-\end{description}
+% \section{EAPI 4 (2011-01-17)}
+% \label{sec:cs:eapi4}
+% \subsection{Additions/Changes}
+% \label{sec:cs:eapi4-additions}
+% \begin{description}
+%     \item[\code{pkg_pretend}] Some useful checks (kernel options for
+%     example) can be placed in this new phase to inform the user early
+%     (when just pretending to emerge the package).  Most checks should
+%     usually be repeated in \code{pkg_setup}.
+%     See \featureref{pkg-pretend}.
+%     \item[\code{src_install}] The \code{src_install} phase is no
+%     longer empty but has a default now.  This comes along with an
+%     accompanying \code{default} function.
+%     See \featureref{src-install-4}.
+%     \item[\code{pkg_info} on non-installed packages] The
+%     \code{pkg_info} phase can be called even for non-installed
+%     packages.  Be warned that dependencies might not have been
+%     installed at execution time.  See \featureref{pkg-info}.
+%     \item[\code{econf} changes] The helper function now always
+%     activates \code{-{}-disable-dependency-tracking}.
+%     See \featureref{econf-options}.
+%     \item[USE dependency defaults] In addition to the features offered
+%     in EAPI 2 for USE dependencies, a \code{(+)} or \code{(-)} can be
+%     added after a USE flag (mind the parentheses).  The former
+%     specifies that flags not in IUSE should be treated as enabled; the
+%     latter, disabled. Cannot be used with USE_EXPAND flags.  This
+%     mimics parts of the behaviour of \code{-{}-missing} in
+%     \code{built_with_use}.  See \featureref{use-dep-defaults}.
+%     \item[Controllable compression] All items in the \code{doc},
+%     \code{info}, \code{man} subdirectories of \code{/usr/share/} may
+%     be compressed on-disk after \code{src_install}, except for
+%     \code{/usr/share/doc/\$\{PF\}/html}.  \code{docompress path \dots}
+%     adds paths to the inclusion list for compression.
+%     \code{docompress -x path \dots} adds paths to the exclusion list.
+%     See \featureref{docompress}.
+%     \item[\code{nonfatal} for commands] If you call \code{nonfatal}
+%     the command given as argument will not abort the build process in
+%     case of a failure (as is the default) but will return non-zero on
+%     failure.
+%     See \featureref{nonfatal}.
+%     \item[\code{dodoc} recursion] If the \code{-r} switch is given as
+%     first argument and followed by directories, files from there are
+%     installed recursively.  See \featureref{dodoc}.
+%     \item[\code{doins} symlink support] Symbolic links are now
+%     properly installed when using recursion (\code{-r} switch).
+%     See \featureref{doins}.
+%     \item[\code{PROPERTIES}] Is mandatory for all package managers now
+%     to support interactive installs.
+%     \item[\code{REQUIRED_USE}] This variable can be used similar to
+%     the \code{(R|P)DEPEND} variables and define sets of USE flag
+%     combinations that are not allowed.  All elements can be further
+%     nested to achieve more functionality.
+%     \begin{description}
+%         \item[Illegal combination] To prevent activation of
+%         \code{flag1} if \code{flag2} is enabled use
+%         "\code{flag2?\ ( !flag1 )}".
+%         \item[OR] If at least one USE flag out of many must be
+%         activated on \code{flag1} use
+%         "\code{flag1?\ ( || ( flag2 flag3 \dots\ ) )}".
+%         \item[XOR] To allow exactly one USE flag out of many use
+%         "\code{\textasciicircum\textasciicircum ( flag1 flag2 \dots\ )}".
+%     \end{description}
+%     See \featureref{required-use}.
+%     \item[\code{MERGE_TYPE}] This variable contains one of three
+%     possible values to allow checks if it is normal merge with
+%     compilation and installation (\code{source}), installation of a
+%     binary package (\code{binary}), or a compilation without
+%     installation (\code{buildonly}).  See \featureref{merge-type}.
+%     \item[\code{REPLACING_VERSIONS}, \code{REPLACED_BY_VERSION}]
+%     These variables, valid in \code{pkg_*}, contain a list of all
+%     versions (\code{PVR}) of this package that we are replacing, and
+%     the version that is replacing the current one, respectively.
+%     See \featureref{replace-version-vars}.
+% \end{description}
+% \subsection{Removals/Bans}
+% \label{sec:cs:eapi4-removalsbans}
+% \begin{description}
+%     \item[\code{dohard}, \code{dosed}] Both functions are not allowed
+%     any more.  See \featureref{banned-commands}.
+%     \item[No \code{RDEPEND} fall-back] The package manager will not
+%     fall back to \code{RDEPEND=DEPEND} if \code{RDEPEND} is undefined.
+%     See \featureref{rdepend-depend}.
+%     \item[\code{S} fallback changes] The value of the variable
+%     \code{S} will not automatically be changed to \code{WORKDIR}, if
+%     \code{S} is not a directory, but abort.  Virtual packages are the
+%     only exception.  See \featureref{s-workdir-fallback}.
+%     \item[\code{AA}, \code{KV}] These variables are not defined
+%     any more.  See \featureref{aa} and \featureref{kv}.
+% \end{description}
 
 \section{EAPI 5 (2012-09-20)}
 \label{sec:cs:eapi5}
@@ -297,7 +297,7 @@ differences between these previous EAPIs.
     \item[\code{has_version} and \code{best_version} changes]
     The two helpers support a \code{-{}-host-root} option that causes
     the query to apply to the host root instead of \code{ROOT}.
-    See~\featureref{host-root-option}.
+    See~\featureref{pm-query-options}.
     \item[\code{usex}] Usage for this helper function is
     \code{usex} \emph{<USE flag> [true1] [false1] [true2] [false2]}.
     If the USE flag is set, outputs \emph{[true1][true2]}
@@ -399,6 +399,122 @@ differences between these previous EAPIs.
 \begin{description}
     \item[\code{einstall}] No longer allowed. Use \code{emake install}
     as replacement.
+    See \featureref{banned-commands}.
+\end{description}
+
+\section{EAPI 7 (2018-04-30)}
+\label{sec:cs:eapi7}
+\subsection{Additions/Changes}
+\label{sec:cs:eapi7-additions}
+\begin{description}
+    \item[\code{package.*} and \code{use.*}] These profile files can
+    be directories instead of regular files. This is intended to be
+    used in overlays only.
+    See \featureref{package-mask-dir} and \featureref{profile-file-dirs}.
+    \item[\code{||} and \code{\textasciicircum\textasciicircum}
+    dependency groups] These groups now evaluate to false when they
+    are empty (for example, if there are only unmatched use
+    dependencies inside of them).
+    See \featureref{empty-dep-groups}.
+    \item[No trailing slash] The paths specified by \code{ROOT},
+    \code{EROOT}, \code{D}, and \code{ED} no longer end with a slash.
+    Thus, default \code{ROOT} is empty now.
+    See \featureref{trailing-slash}.
+    \item[Cross compilation support] Several variables have been added
+    and some commands have been extended for better cross compilation
+    support:
+    \begin{description}
+        \item[\code{BDEPEND}] Build dependencies are divided into two
+        classes: \code{BDEPEND} for native build tools (\code{CBUILD});
+        \code{DEPEND} for dependencies compatible with the system
+        being built (\code{CHOST}).
+        See \featureref{bdepend}.
+        \item[\code{SYSROOT}] The path to the root directory for
+        \code{DEPEND} type dependencies.
+        See \featureref{sysroot}.
+        \item[\code{ESYSROOT}] The concatenation of the \code{SYSROOT}
+        and \code{EPREFIX} paths, for convenience.
+        \item[\code{BROOT}] The prefixed root directory path for
+        \code{BDEPEND} type dependencies, typically executable build
+        tools.
+        See \featureref{broot}.
+        \item[\code{econf}]
+        Option \code{-{}-with-sysroot=\$\{ESYSROOT\}} is passed to
+        configure, if this option is supported.
+        See \featureref{econf-options}.
+        \item[\code{has_version} and \code{best_version}] These
+        helpers support \code{-b}, \code{-d} or \code{-r} options,
+        causing the query to apply to \code{BDEPEND}, \code{DEPEND}
+        or \code{RDEPEND} (the default). This replaces the
+        \code{-{}-host-root} option.
+        See \featureref{pm-query-options}.
+    \end{description}
+    \item[Environment blacklist] Any environment variable listed in
+    the profile-defined \code{ENV_UNSET} variable will be unset by the
+    package manager.
+    See \featureref{env-unset}.
+    \item[\code{patch}] All inputs valid for GNU patch version 2.7
+    are supported. Especially, this includes support for git-formatted
+    patches.
+    See \featureref{gnu-patch}.
+    \item[\code{nonfatal}] In addition to its definition as a shell
+    function, the \code{nonfatal} wrapper has now a fallback
+    implementation as an external command. Thus, it can be called
+    from other commands.
+    See \featureref{nonfatal}.
+    \item[Output commands] \code{einfo} and friends no longer use
+    stdout, so inside of command substitution their output won't be
+    caught.
+    See \featureref{output-no-stdout}.
+    \item[\code{eqawarn}] The \code{eqawarn} output command is
+    supported in the package manager itself.
+    See \featureref{eqawarn}.
+    \item[\code{die} in subshell] The \code{die} command is guaranteed
+    to work in a subshell context.
+    See \featureref{subshell-die}.
+    \item[\code{domo} destination] \code{domo} installs the specified
+    files under \code{/usr/share/locale} instead of
+    \code{\$\{DESTTREE\}/\allowbreak share/locale}.
+    See \featureref{domo-path}.
+    \item[Controllable stripping] The \code{dostrip -x} command can be
+    used to add paths to an exclusion list for stripping of debug
+    symbols, to allow more fine-grained control than with
+    \code{RESTRICT="strip"}.
+    See \featureref{dostrip}.
+    \item[Version manipulation and comparison commands] \mbox{}
+    \begin{description}
+        \item[\code{ver_cut} \emph{range} {[\emph{version}]}]
+        Print the version substring specified by \emph{range}.
+        \emph{version} defaults to \code{PV}.
+        \item[\code{ver_rs} \emph{range repl} \dots\ {[\emph{version}]}]
+        Replace all version separators in \emph{range} by string
+        \emph{repl}. Multiple \emph{range repl} pairs are allowed.
+        \emph{version} defaults to \code{PV}.
+        \item[\code{ver_test} {[\emph{v1}]} \emph{op  v2}]
+        Check if the relation \emph{v1 op v2} is true.
+        \emph{v1} defaults to \code{PVR}; \emph{op} can be \code{-eq},
+        \code{-ne}, \code{-gt}, \code{-ge}, \code{-lt} or \code{-le}.
+    \end{description}
+    See \featureref{ver-commands}.
+\end{description}
+\subsection{Removals/Bans}
+\label{sec:cs:eapi7-removalsbans}
+\begin{description}
+    \item[\code{package.provided}] Deprecated since a long time and
+    finally dropped.
+    See \featureref{package-provided}.
+    \item[\code{PORTDIR} and \code{ECLASSDIR}] No longer defined,
+    because ebuilds should not directly access files in the repository.
+    See \featureref{portdir} and \featureref{eclassdir}.
+    \item[\code{DESTTREE} and \code{INSDESTTREE}] Not defined any
+    more. Use the \code{into} and \code{insinto} commands instead.
+    See \featureref{desttree} and \featureref{insdesttree}.
+    \item[\code{dohtml}] No longer allowed. \code{doins -r} can be
+    used as a replacement.
+    See \featureref{banned-commands}.
+    \item[\code{dolib} and \code{libopts}] No longer allowed.
+    The specific \code{dolib.a} or \code{dolib.so} commands should be
+    used as replacement.
     See \featureref{banned-commands}.
 \end{description}
 \end{document}

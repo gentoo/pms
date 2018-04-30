@@ -22,21 +22,27 @@ The following commands affect this behaviour:
     the build process due to a failure, instead a non-zero exit status shall be returned. Only in
     EAPIs listed in table~\ref{tab:commands-die-table} as supporting \t{nonfatal}.
 
+    In EAPIs listed in table~\ref{tab:commands-die-table} as having \t{nonfatal} defined both
+    as a shell function and as an external command, the package manager must provide both
+    implementations to account for calling directly in ebuild scope or through \t{xargs}.
+
     Explicit \t{die} or \t{assert} commands only respect \t{nonfatal} when called with the \t{-n}
-    option and in EAPIs supporting this option, see table~\ref{tab:nonfatal-die}.
+    option and in EAPIs supporting this option, see table~\ref{tab:die-properties}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPI command failure behaviour}
     \label{tab:commands-die-table}
-    \begin{tabular}{lll}
+    \begin{tabular}{llll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Command failure behaviour}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{nonfatal}?}} \\
+      \multicolumn{1}{P{8em}}{\textbf{Command failure behaviour}} &
+      \multicolumn{1}{P{5em}}{\textbf{Supports \t{nonfatal}?}} &
+      \multicolumn{1}{P{12em}}{\textbf{\t{nonfatal} is both a function and an external command?}} \\
       \midrule
-      0, 1, 2, 3        & Non-zero exit & No  \\
-      4, 5, 6           & Aborts        & Yes \\
+      0, 1, 2, 3        & Non-zero exit & No  & n/a \\
+      4, 5, 6           & Aborts        & Yes & No  \\
+      7                 & Aborts        & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -47,21 +53,25 @@ The following commands affect this behaviour:
 \featurelabel{banned-commands} Some commands are banned in some EAPIs. If a banned command is
 called, the package manager must abort the build process indicating an error.
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{Banned commands}
     \label{tab:banned-commands-table}
-    \begin{tabular}{llll}
+    \begin{tabular}{lllllll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{3}{c}{\textbf{Command banned?}} \\
+      \multicolumn{6}{c}{\textbf{Command banned?}} \\
       \multicolumn{1}{c}{} &
       \multicolumn{1}{c}{\textbf{\t{dohard}}} &
       \multicolumn{1}{c}{\textbf{\t{dosed}}} &
-      \multicolumn{1}{c}{\textbf{\t{einstall}}} \\
+      \multicolumn{1}{c}{\textbf{\t{einstall}}} &
+      \multicolumn{1}{c}{\textbf{\t{dohtml}}} &
+      \multicolumn{1}{c}{\textbf{\t{dolib}}} &
+      \multicolumn{1}{c}{\textbf{\t{libopts}}} \\
       \midrule
-      0, 1, 2, 3        & No  & No  & No  \\
-      4, 5              & Yes & Yes & No  \\
-      6                 & Yes & Yes & Yes \\
+      0, 1, 2, 3        & No  & No  & No  & No  & No  & No  \\
+      4, 5              & Yes & Yes & No  & No  & No  & No  \\
+      6                 & Yes & Yes & Yes & No  & No  & No  \\
+      7                 & Yes & Yes & Yes & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -82,27 +92,37 @@ These commands are used to extract information about the system. Ebuilds must no
 these commands in parallel with any other package manager command. Ebuilds must not run any of
 these commands once the current phase function has returned.
 
-\featurelabel{host-root-option} In EAPIs listed in table~\ref{tab:foo-version-host-root-table} as
-supporting option \t{-{}-host-root}, this flag as the first argument will cause the query to apply
-to the host root instead of \t{ROOT}.
+\featurelabel{pm-query-options} In EAPIs listed in table~\ref{tab:pm-query-options} as supporting
+option \t{-{}-host-root}, this flag as the first argument will cause the query to apply to the
+host root. Otherwise, it applies to \t{ROOT}.
+
+In EAPIs listed in table~\ref{tab:pm-query-options} as supporting options \t{-b}, \t{-d} and \t{-r},
+these mutually exclusive flags as the first argument will cause the query to apply to locations
+targetted by \t{BDEPEND}, \t{DEPEND} and \t{RDEPEND}, respectively. When none of these options
+are given, \t{-r} is assumed.
+
 \begin{description}
 \item[has_version] Takes exactly one package dependency specification as an argument. Returns
-    true if a package matching the specification is installed in \t{ROOT}, and false otherwise.
+    true if a package matching the specification is installed, and false otherwise.
 \item[best_version] Takes exactly one package dependency specification as an argument. If a
     matching package is installed, prints the category, package name and version of the highest
     matching version; otherwise, prints an empty string. The exit code is unspecified.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting \t{-{}-host-root} for \t{*_version} commands}
-    \label{tab:foo-version-host-root-table}
-    \begin{tabular}{ll}
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{Package manager query command options supported by EAPIs}
+    \label{tab:pm-query-options}
+    \begin{tabular}{lllll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{\t{*_version} supports \t{-{}-host-root}?}} \\
+      \multicolumn{1}{c}{\textbf{\t{-{}-host-root}?}} &
+      \multicolumn{1}{c}{\textbf{\t{-b}?}} &
+      \multicolumn{1}{c}{\textbf{\t{-d}?}} &
+      \multicolumn{1}{c}{\textbf{\t{-r}?}} \\
       \midrule
-      0, 1, 2, 3, 4     & No  \\
-      5, 6              & Yes \\
+      0, 1, 2, 3, 4     & No  & No  & No  & No  \\
+      5, 6              & Yes & No  & No  & No  \\
+      7                 & No  & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -112,8 +132,12 @@ These commands display messages to the user. Unless otherwise stated, the entire
 used as a message, with backslash-escaped characters interpreted as for the \t{echo -e} command of
 bash, notably \t{\textbackslash t} for a horizontal tab, \t{\textbackslash n} for a new line, and
 \t{\textbackslash\textbackslash} for a literal backslash. Ebuilds must not run any of these commands
-once the current phase function has returned. Unless otherwise noted, output may be sent to stdout,
-stderr or some other appropriate facility.
+once the current phase function has returned.
+
+\featurelabel{output-no-stdout} Unless otherwise noted, output may be sent to stderr or some other
+appropriate facility. In EAPIs listed in table~\ref{tab:output-commands} as not allowing stdout
+output, using stdout as an output facility is forbidden.
+
 \begin{description}
 \item[einfo] Displays an informational message.
 \item[einfon] Displays an informational message without a trailing newline.
@@ -121,6 +145,10 @@ stderr or some other appropriate facility.
     manager may choose to log \t{elog} messages by default where \t{einfo} messages are not, for
     example.
 \item[ewarn] Displays a warning message. Must not go to stdout.
+\item[eqawarn] \featurelabel{eqawarn} Display a QA warning message intended for ebuild developers.
+    The package manager may provide appropriate mechanisms to skip those messages for normal users.
+    Must not go to stdout. Only available in EAPIs listed in table~\ref{tab:output-commands} as
+    supporting \t{eqawarn}.
 \item[eerror] Displays an error message. Must not go to stdout.
 \item[ebegin] Displays an informational message. Should be used when beginning a possibly
     lengthy process, and followed by a call to \t{eend}.
@@ -130,6 +158,21 @@ stderr or some other appropriate facility.
     message followed by a failure indicator. Returns its first argument as exit status.
 \end{description}
 
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{Output commands for EAPIs}
+    \label{tab:output-commands}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Commands can output to stdout?}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{eqawarn}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6 & Yes & No  \\
+      7                   & No  & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
 \subsection{Error commands}
 These commands are used when an error is detected that will prevent the build process from
 completing. Ebuilds must not run any of these commands once the current phase function has returned.
@@ -137,23 +180,30 @@ completing. Ebuilds must not run any of these commands once the current phase fu
 \item[die] \featurelabel{nonfatal-die} If called under the \t{nonfatal} command (as per
     section~\ref{sec:failure-behaviour}) and with \t{-n} as its first parameter, displays a failure
     message provided in its following argument and then returns a non-zero exit status. Only in
-    EAPIs listed in table~\ref{tab:nonfatal-die} as supporting option~\t{-n}. Otherwise, displays
+    EAPIs listed in table~\ref{tab:die-properties} as supporting option~\t{-n}. Otherwise, displays
     a failure message provided in its first and only argument, and then aborts the build process.
-    \t{die} is \e{not} guaranteed to work correctly if called from a subshell environment.
+
+    \featurelabel{subshell-die} In EAPIs listed in table~\ref{tab:die-properties} as not providing
+    subshell support, \t{die} is \e{not} guaranteed to work correctly if called from a subshell
+    environment.
 \item[assert] Checks the value of the shell's pipe status variable, and if any component is non-zero
     (indicating failure), calls \t{die}, passing any parameters to it.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting \t{-n} for \t{die} and \t{assert} commands}
-    \label{tab:nonfatal-die}
-    \begin{tabular}{ll}
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{Properties of \t{die} and \t{assert} commands in EAPIs}
+    \label{tab:die-properties}
+    \begin{tabular}{lll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{\t{die} and \t{assert} support \t{-n}?}} \\
+      \multicolumn{2}{c}{\textbf{\t{die} and \t{assert}}} \\
+      &
+      \multicolumn{1}{c}{\textbf{support \t{-n}?}} &
+      \multicolumn{1}{c}{\textbf{work in subshell?}} \\
       \midrule
-      0, 1, 2, 3, 4, 5  & No  \\
-      6                 & Yes \\
+      0, 1, 2, 3, 4, 5  & No  & No  \\
+      6                 & Yes & No  \\
+      7                 & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -217,7 +267,7 @@ Ebuilds must not run any of these commands once the current phase function has r
     subsequent calls, the command will do nothing and return~0.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{Patch commands for EAPIs}
     \label{tab:patch-commands}
     \begin{tabular}{lll}
@@ -227,7 +277,7 @@ Ebuilds must not run any of these commands once the current phase function has r
       \multicolumn{1}{c}{\textbf{\t{eapply_user}?}} \\
       \midrule
       0, 1, 2, 3, 4, 5  & No  & No  \\
-      6                 & Yes & Yes \\
+      6, 7              & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -259,6 +309,9 @@ current phase function has returned.
     \item \t{-{}-htmldir} must be \t{\$\{EPREFIX\}/usr/share/doc/\$\{PF\}/html}, if the EAPI is
         listed in table~\ref{tab:econf-options-table} as using it. This option will only be passed
         if the string \t{-{}-htmldir} occurs in the output of \t{configure -{}-help}.
+    \item \t{-{}-with-sysroot} must be \t{\$\{ESYSROOT\}}, if the EAPI is listed in
+        table~\ref{tab:econf-options-table} as using it. This option will only be passed if the
+        string \t{-{}-with-sysroot} occurs in the output of \t{configure -{}-help}.
     \item \t{-{}-build} must be the value of the \t{CBUILD} environment variable. This option will
         only be passed if \t{CBUILD} is non-empty.
     \item \t{-{}-host} must be the value of the \t{CHOST} environment variable.
@@ -273,21 +326,23 @@ current phase function has returned.
         occurs in the output of \t{configure -{}-help}.
     \end{itemize}
 
-    \ChangeWhenAddingAnEAPI{6}
+    \ChangeWhenAddingAnEAPI{7}
     \begin{centertable}{Extra \t{econf} arguments for EAPIs}
         \label{tab:econf-options-table}
-        \begin{tabular}{lllll}
+        \begin{tabular}{llllll}
           \toprule
           \multicolumn{1}{c}{\textbf{EAPI}} &
-          \multicolumn{1}{c}{\textbf{-{}-disable-dependency-tracking}} &
-          \multicolumn{1}{c}{\textbf{-{}-disable-silent-rules}} &
+          \multicolumn{1}{P{9em}}{\textbf{-{}-disable-dependency-tracking}} &
+          \multicolumn{1}{P{5em}}{\textbf{-{}-disable-silent-rules}} &
           \multicolumn{1}{c}{\textbf{-{}-docdir}} &
-          \multicolumn{1}{c}{\textbf{-{}-htmldir}} \\
+          \multicolumn{1}{c}{\textbf{-{}-htmldir}} &
+          \multicolumn{1}{c}{\textbf{-{}-with-sysroot}} \\
           \midrule
-          0, 1, 2, 3        & No  & No  & No  & No  \\
-          4                 & Yes & No  & No  & No  \\
-          5                 & Yes & Yes & No  & No  \\
-          6                 & Yes & Yes & Yes & Yes \\
+          0, 1, 2, 3        & No  & No  & No  & No  & No  \\
+          4                 & Yes & No  & No  & No  & No  \\
+          5                 & Yes & Yes & No  & No  & No  \\
+          6                 & Yes & Yes & Yes & Yes & No  \\
+          7                 & Yes & Yes & Yes & Yes & Yes \\
           \bottomrule
         \end{tabular}
     \end{centertable}
@@ -427,7 +482,7 @@ the current phase function has returned.
     extensions are \t{css}, \t{gif}, \t{htm}, \t{html}, \t{jpeg}, \t{jpg}, \t{js} and \t{png}.
     These default extensions can be extended or reduced (see below). The options that can be passed
     to \t{dohtml} are as follows:
-    \begin{description}
+    \begin{compactdesc}
     \item[\t{-r}] enables recursion into directories.
     \item[\t{-V}] enables verbosity.
     \item[\t{-A}] adds file type extensions to the default list.
@@ -437,8 +492,10 @@ the current phase function has returned.
         conjunction with \t{-r}).
     \item[\t{-p}] sets a document prefix for installed files, not to be confused with the global
         offset-prefix.
-    \end{description}
+    \end{compactdesc}
 
+    In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as per
+    section~\ref{sec:banned-commands}.
     Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
     It is undefined whether a failure shall occur if \t{-r} is not specified and a directory is
@@ -459,15 +516,17 @@ the current phase function has returned.
     symlink is encountered. Failure behaviour is EAPI dependent as per
     section~\ref{sec:failure-behaviour}.
 
-\item[dolib] For each argument, installs it into the appropriate library subdirectory under
-    \t{DESTTREE}, as determined by algorithm~\ref{alg:ebuild-libdir}. Files are installed by default
-    with file mode \t{0644}, or with the \t{install} options set by the most recent \t{libopts}
-    call. Any symlinks are installed into the same directory as relative links to their original
-    target. Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
+\item[dolib.a] For each argument, installs it into the appropriate library subdirectory under
+    \t{DESTTREE}, as determined by algorithm~\ref{alg:ebuild-libdir}. Files are installed with file
+    mode \t{0644}. Any symlinks are installed into the same directory as relative links to their
+    original target. Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
-\item[dolib.a] As for \t{dolib} except each file is installed with mode \t{0644}.
+\item[dolib.so] As for \t{dolib.a} except each file is installed with mode \t{0755}.
 
-\item[dolib.so] As for \t{dolib} except each file is installed with mode \t{0755}.
+\item[dolib] As for \t{dolib.a} except that the default install mode can be overriden with
+    the \t{install} options set by the most recent \t{libopts} call. In EAPIs listed
+    in table~\ref{tab:banned-commands-table}, this command is banned as per
+    section~\ref{sec:banned-commands}.
 
 \begin{algorithm}
 \caption{Determining the library directory} \label{alg:ebuild-libdir}
@@ -507,11 +566,12 @@ the current phase function has returned.
     the empty string. In EAPIs specified by table~\ref{tab:doman-table}, the \t{-i18n} option takes
     precedence over the language code in the filename.
 
-\item[domo] Installs the given \t{.mo} files with file mode \t{0644} into the appropriate
-    subdirectory of \t{DESTTREE\slash share\slash locale}, generated by taking the basename of the
-    file, removing the \t{.*} suffix, and appending \t{/LC_MESSAGES}\@. The name of the installed
-    files is the package name with \t{.mo} appended. Failure behaviour is EAPI dependent as per
-    section~\ref{sec:failure-behaviour}.
+\item[domo] \featurelabel{domo-path} Installs the given \t{.mo} files with file mode \t{0644} into
+    the appropriate subdirectory of the locale tree, generated by taking the basename of the file,
+    removing the \t{.*} suffix, and appending \t{/LC_MESSAGES}\@. The name of the installed files
+    is the package name with \t{.mo} appended. Failure behaviour is EAPI dependent as per
+    section~\ref{sec:failure-behaviour}. The locale tree location is EAPI dependent as per
+    table~\ref{tab:domo-path}.
 
 \item[dosbin] As \t{dobin}, but installs to \t{DESTTREE/sbin}.
 
@@ -559,7 +619,7 @@ the current phase function has returned.
 
 \end{description}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{dodoc -r}}
     \label{tab:dodoc-table}
     \begin{tabular}{ll}
@@ -568,12 +628,12 @@ the current phase function has returned.
       \multicolumn{1}{c}{\textbf{Supports \t{dodoc -r}?}} \\
       \midrule
       0, 1, 2, 3        & No  \\
-      4, 5, 6           & Yes \\
+      4, 5, 6, 7        & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{doheader} and \t{newheader}}
     \label{tab:doheader-table}
     \begin{tabular}{ll}
@@ -582,12 +642,12 @@ the current phase function has returned.
       \multicolumn{1}{c}{\textbf{Supports \t{doheader} and \t{newheader}?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  \\
-      5, 6              & Yes \\
+      5, 6, 7           & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting symlinks for \t{doins}}
     \label{tab:doins-table}
     \begin{tabular}{ll}
@@ -596,12 +656,12 @@ the current phase function has returned.
       \multicolumn{1}{c}{\textbf{\t{doins} supports symlinks?}} \\
       \midrule
       0, 1, 2, 3        & No  \\
-      4, 5, 6           & Yes \\
+      4, 5, 6, 7        & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{\t{doman} language support options for EAPIs}
     \label{tab:doman-table}
     \begin{tabular}{lll}
@@ -612,12 +672,12 @@ the current phase function has returned.
       \midrule
       0, 1              & No  & Not applicable \\
       2, 3              & Yes & No             \\
-      4, 5, 6           & Yes & Yes            \\
+      4, 5, 6, 7        & Yes & Yes            \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting stdin for \t{new*} commands}
     \label{tab:newfoo-stdin-table}
     \begin{tabular}{ll}
@@ -626,7 +686,21 @@ the current phase function has returned.
       \multicolumn{1}{c}{\textbf{\t{new*} can read from stdin?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  \\
-      5, 6              & Yes \\
+      5, 6, 7           & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{\t{domo} destination path in EAPIs}
+    \label{tab:domo-path}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Destination path}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6 & \t{\$\{DESTTREE\}/share/locale} \\
+      7                   & \t{/usr/share/locale} \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -663,30 +737,30 @@ has returned.
 \item[exeopts] Sets the options passed by \t{doexe} et al.\ to the \t{install} command.
 
 \item[libopts] Sets the options passed by \t{dolib} et al.\ to the \t{install} command.
+    In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as
+    per section~\ref{sec:banned-commands}.
 
 \end{description}
 
-\subsection{Commands affecting install compression}
+\subsection{Commands controlling manipulation of files in the staging area}
+These commands are used to control optional manipulations that the package manager may perform on
+files in the staging directory \t{ED}, like compressing files or stripping symbols from object
+files.
 
-\featurelabel{docompress} In EAPIs listed in table~\ref{tab:compression-table} as supporting
-controllable compression, the package manager may optionally compress a subset of the files under
-the \t{ED} directory. To control which directories may or may not be compressed, the package manager
-shall maintain two lists:
+For each of the operations mentioned below, the package manager shall maintain an inclusion list
+and an exclusion list, in order to control which directories and files the operation may or may not
+be performed upon. The initial contents of the two lists is specified below for each of the
+commands, respectively.
 
-\begin{compactitem}
-\item An inclusion list, which initially contains \t{/usr/share/doc}, \t{/usr/share/info} and
-    \t{/usr/share/man}.
-\item An exclusion list, which initially contains \t{/usr/share/doc/\$\{PF\}/html}.
-\end{compactitem}
-
-The optional compression shall be carried out after \t{src_install} has completed, and before the
-execution of any subsequent phase function. For each item in the inclusion list, pretend it has the
-value of the \t{ED} variable prepended, then:
+Any of these operations shall be carried out after \t{src_install} has completed, and before the
+execution of any subsequent phase function. For each item in the inclusion list, pretend it has
+the value of the \t{ED} variable prepended, then:
 
 \begin{compactitem}
 \item If it is a directory, act as if every file or directory immediately under this directory
     were in the inclusion list.
-\item If the item is a file, it may be compressed unless it has been excluded as described below.
+\item If the item is a file, the operation may be performed on it, unless it has been excluded as
+    described below.
 \item If the item does not exist, it is ignored.
 \end{compactitem}
 
@@ -696,34 +770,62 @@ pretend it has the value of the \t{ED} variable prepended, then:
 \begin{compactitem}
 \item If it is a directory, act as if every file or directory immediately under this directory
     were in the exclusion list.
-\item If the item is a file, it shall not be compressed.
+\item If the item is a file, the operation shall not be performed on it.
 \item If the item does not exist, it is ignored.
 \end{compactitem}
 
-The package manager shall take appropriate steps to ensure that its compression mechanisms behave
-sensibly even if an item is listed in the inclusion list multiple times, if an item is a symlink,
-or if a file is already compressed.
+The package manager shall take appropriate steps to ensure that any operations that it performs on
+files in the staging area behave sensibly even if an item is listed in the inclusion list multiple
+times or if an item is a symlink.
+
+\featurelabel{docompress} In EAPIs listed in table~\ref{tab:staging-area-commands} as supporting
+controllable compression, the package manager may optionally compress a subset of the files under
+the \t{ED} directory. The package manager shall ensure that its compression mechanisms behave
+sensibly even if a file is already compressed. For compression, the initial values of the two lists
+are as follows:
+
+\begin{compactitem}
+\item The inclusion list contains \t{/usr/share/doc}, \t{/usr/share/info} and \t{/usr/share/man}.
+\item The exclusion list contains \t{/usr/share/doc/\$\{PF\}/html}.
+\end{compactitem}
+
+\featurelabel{dostrip} In EAPIs listed in table~\ref{tab:staging-area-commands} as supporting
+controllable stripping of symbols, the package manager may strip a subset of the files under the
+\t{ED} directory. For stripping of symbols, the initial values of the two lists are as follows:
+
+\begin{compactitem}
+\item If the \t{RESTRICT} variable described in section~\ref{sec:restrict} enables a \t{strip}
+    token, the inclusion list is empty; otherwise it contains \t{/} (the root path).
+\item The exclusion list is empty.
+\end{compactitem}
 
 The following commands may be used in \t{src_install} to alter these lists. It is an error to call
 any of these functions from any other phase.
 
 \begin{description}
 \item[docompress] If the first argument is \t{-x}, add each of its subsequent arguments to the
-exclusion list. Otherwise, add each argument to the inclusion list. Only available in EAPIs listed
-in table~\ref{tab:compression-table} as supporting \t{docompress}.
+    exclusion list for compression. Otherwise, add each argument to the respective inclusion list.
+    Only available in EAPIs listed in table~\ref{tab:staging-area-commands} as supporting
+    \t{docompress}.
+
+\item[dostrip] If the first argument is \t{-x}, add each of its subsequent arguments to the
+    exclusion list for stripping of symbols. Otherwise, add each argument to the respective
+    inclusion list. Only available in EAPIs listed in table~\ref{tab:staging-area-commands} as
+    supporting \t{dostrip}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{6}
-\begin{centertable}{EAPIs supporting controllable compression}
-    \label{tab:compression-table}
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{Commands controlling manipulation of files in the staging area in EAPIs}
+    \label{tab:staging-area-commands}
     \begin{tabular}{lll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Supports controllable compression?}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{docompress}?}} \\
+      \multicolumn{1}{P{13.5em}}{\textbf{Supports controllable compression and \t{docompress}?}} &
+      \multicolumn{1}{P{10.5em}}{\textbf{Supports controllable stripping and \t{dostrip}?}} \\
       \midrule
       0, 1, 2, 3        & No  & No  \\
-      4, 5, 6           & Yes & Yes \\
+      4, 5, 6           & Yes & No  \\
+      7                 & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -766,7 +868,7 @@ table~\ref{tab:use-list-strictness}.
     table~\ref{tab:use-list-functions} as supporting \t{in_iuse}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPI behaviour for use queries not in \t{IUSE_EFFECTIVE}}
     \label{tab:use-list-strictness}
     \begin{tabular}{ll}
@@ -775,12 +877,12 @@ table~\ref{tab:use-list-strictness}.
       \multicolumn{1}{c}{\textbf{Behaviour}} \\
       \midrule
       0, 1, 2, 3        & Undefined \\
-      4, 5, 6           & Error     \\
+      4, 5, 6, 7        & Error     \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting empty third argument in \t{use_with} and \t{use_enable}}
     \label{tab:use-with-third-arg}
     \begin{tabular}{ll}
@@ -789,12 +891,12 @@ table~\ref{tab:use-list-strictness}.
       \multicolumn{1}{c}{\textbf{Supports empty third argument?}} \\
       \midrule
       0, 1, 2, 3        & No  \\
-      4, 5, 6           & Yes \\
+      4, 5, 6, 7        & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{usex} and \t{in_iuse}}
     \label{tab:use-list-functions}
     \begin{tabular}{lll}
@@ -805,7 +907,7 @@ table~\ref{tab:use-list-strictness}.
       \midrule
       0, 1, 2, 3, 4     & No  & No  \\
       5                 & Yes & No  \\
-      6                 & Yes & Yes \\
+      6, 7              & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -819,6 +921,86 @@ These functions check whitespace-separated lists for a particular value.
 \item[hasv] The same as \t{has}, but also prints the first argument if found.
 \item[hasq] Deprecated synonym for \t{has}.
 \end{description}
+
+\subsection{Version manipulation and comparison commands}
+\featurelabel{ver-commands}
+These commands provide utilities for working with version strings. Their availability per EAPI is
+listed in table~\ref{tab:version-commands}.
+
+For the purpose of version manipulation commands, the specification provides a method for splitting
+an arbitrary version string (not necessarily conforming to section~\ref{sec:version-spec}) into
+a series of version components and version separators.
+
+A version component consists either purely of digits (\t{[0-9]+}) or purely of uppercase and
+lowercase ASCII letters (\t{[A-Za-z]+}). A version separator is either a string of any other
+characters (\t{[\textasciicircum A-Za-z0-9]}) or it occurs at the transition between a sequence
+of digits and a sequence of letters, or vice versa. In the latter case, the version separator is
+an empty string.
+
+The version string is processed left-to-right, with the successive version components being assigned
+successive indices starting with 1. The separator following a version component is assigned
+the index of the preceding version component. If the first version component is preceded by
+a non-empty string of version separator characters, this separator is assigned the index 0.
+
+The version components are presumed present if not empty. The version separators between version
+components are always presumed present, even if they are empty. The version separators preceding
+the first version component and following the last are only presumed present if they are not empty.
+
+Whenever the commands support ranges, the range is specified as an unsigned integer, optionally
+followed by a hyphen (\t{-}), which in turn is optionally followed by another unsigned integer.
+
+A single integer specifies a single component or separator index. An integer followed by a hyphen
+specifies all components or separators starting with the one at the specified index. Two integers
+separated by a hyphen specify a range of versions starting at the index specified by the first
+and ending at the second, inclusively.
+
+\begin{description}
+\item[ver_cut] Takes a range as the first argument, and optionally a version string as the second.
+    Prints a substring of the version string starting at the version component specified as start
+    of the range and ending at the version component specified as end of the range. If the version
+    string is not specified, \t{\$\{PVR\}} is used.
+
+    If the range spans outside the present version components, the missing components and separators
+    are presumed empty. In particular, the range starting at zero includes the zeroth version
+    separator if present, and the range spanning past the last version component includes the suffix
+    following it if present. A range that does not intersect with any present version components
+    yields an empty string.
+
+\item[ver_rs] Takes one or more pairs of arguments, optionally followed by a version string.
+    Every argument pair specifies a range and a replacement string. Prints a version string after
+    performing the specified separator substitutions. If the version string is not specified,
+    \t{\$\{PVR\}} is used.
+
+    For every argument pair specified, each of the version separators present at indices specified
+    by the range is replaced with the replacement string, in order. If the range spans outside
+    the range of present version separators, it is silently truncated.
+
+\item[ver_test] Takes two or three arguments. In the 3-argument form, takes an LHS version string,
+    followed by an operator, followed by an RHS version string. In the 2-argument form, the first
+    version string is omitted and \t{\$\{PVR\}} is used as LHS version string. The operator can be
+    \t{-eq} (equal to), \t{-ne} (not equal to), \t{-gt} (greater than), \t{-ge} (greater than or
+    equal to), \t{-lt} (less than) or \t{-le} (less than or equal to). Returns shell true (0) if
+    the specified relation between the LHS and RHS version strings is fulfilled.
+
+    Both version strings must conform to the version specification in
+    section~\ref{sec:version-spec}. Comparison is done using algorithm~\ref{alg:version-comparison}.
+\end{description}
+
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{EAPIs supporting version manipulation commands}
+    \label{tab:version-commands}
+    \begin{tabular}{llll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{ver_cut}?}} &
+      \multicolumn{1}{c}{\textbf{\t{ver_rs}?}} &
+      \multicolumn{1}{c}{\textbf{\t{ver_test}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6 & No  & No  & No  \\
+      7                   & Yes & Yes & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \subsection{Misc commands}
 The following commands are always available in the ebuild environment, but don't really fit in any
@@ -888,7 +1070,7 @@ has returned.
     \featurelabel{unpack-ignore-case} \t{unpack} matches filename extensions in a case-insensitive
     manner, for EAPIs listed such in table~\ref{tab:unpack-behaviour}.
 
-    \ChangeWhenAddingAnEAPI{6}
+    \ChangeWhenAddingAnEAPI{7}
     \begin{centertable}{\t{unpack} behaviour for EAPIs}
         \label{tab:unpack-behaviour}
         \begin{tabular}{lll}
@@ -898,12 +1080,12 @@ has returned.
           \multicolumn{1}{c}{\textbf{Case-insensitive matching?}} \\
           \midrule
           0, 1, 2, 3, 4, 5  & No  & No  \\
-          6                 & Yes & Yes \\
+          6, 7              & Yes & Yes \\
           \bottomrule
         \end{tabular}
     \end{centertable}
 
-    \ChangeWhenAddingAnEAPI{6}
+    \ChangeWhenAddingAnEAPI{7}
     \begin{centertable}{\t{unpack} extensions for EAPIs}
         \label{tab:unpack-extensions-table}
         \begin{tabular}{llll}
@@ -915,7 +1097,7 @@ has returned.
           \midrule
           0, 1, 2           & No  & No  & No  \\
           3, 4, 5           & Yes & Yes & No  \\
-          6                 & Yes & Yes & Yes \\
+          6, 7              & Yes & Yes & Yes \\
           \bottomrule
         \end{tabular}
     \end{centertable}
@@ -982,7 +1164,7 @@ has returned.
 
 \end{description}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{Misc commands for EAPIs}
     \label{tab:misc-commands}
     \begin{tabular}{llll}
@@ -994,7 +1176,7 @@ has returned.
       \midrule
       0, 1              & No  & No  & No  \\
       2, 3, 4, 5        & Yes & No  & No  \\
-      6                 & Yes & Yes & Yes \\
+      6, 7              & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}

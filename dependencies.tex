@@ -15,13 +15,28 @@
           None (ebuilds can rely only on the packages in the system~set) \\
       \addlinespace
       \t{src_unpack}, \t{src_prepare}, \t{src_configure}, \t{src_compile}, \t{src_test},
-          \t{src_install} & \t{DEPEND} \\
+          \t{src_install} & \t{DEPEND}, \t{BDEPEND} \\
       \addlinespace
       \t{pkg_preinst}, \t{pkg_postinst}, \t{pkg_prerm}, \t{pkg_postrm} &
           \t{RDEPEND} (unless the particular dependency results in a circular dependency, in which
           case it may be installed later) \\
       \addlinespace
       \t{pkg_config} & \t{RDEPEND}, \t{PDEPEND} \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\begin{centertable}{Summary of other interfaces related to dependency classes}
+    \label{tab:dep-class-api}
+    \begin{tabular}{llll}
+      \toprule
+                                & \t{BDEPEND}     & \t{DEPEND}         & \t{RDEPEND}, \t{PDEPEND} \\
+      \midrule
+      Binary compatible with    & \t{CBUILD}      & \t{CHOST}          & \t{CHOST}         \\
+      Base unprefixed path      & \t{/}           & \t{\$\{SYSROOT\}}  & \t{\$\{ROOT\}}    \\
+      Relevant offset-prefix    & \t{\$\{BROOT\}} & \t{\$\{EPREFIX\}}  & \t{\$\{EPREFIX\}} \\
+      Path combined with prefix & \t{\$\{BROOT\}} & \t{\$\{ESYSROOT\}} & \t{\$\{EROOT\}}   \\
+      PM query command option   & \t{-b}          & \t{-d}             & \t{-r}            \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -38,8 +53,35 @@ There are three classes of dependencies supported by ebuilds:
     the package manager finishes the batch of installs.
 \end{compactitem}
 
+\featurelabel{bdepend} Additionally, in EAPIs listed in table~\ref{tab:depend-table}
+as supporting \t{BDEPEND}, the build dependencies are split into two subclasses:
+
+\begin{compactitem}
+\item \t{BDEPEND} build dependencies that are binary compatible with the native build system
+    (\t{CBUILD}). The ebuild is allowed to call binary executables installed by this kind of
+    dependency.
+    \item \t{DEPEND} build dependencies that are binary compatible with the system being built
+    (\t{CHOST}). The ebuild must not execute binary executables installed by this kind of
+    dependency.
+\end{compactitem}
+
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{EAPIs supporting additional dependency types}
+    \label{tab:depend-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{BDEPEND}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6 & No  \\
+      7                   & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
 Table~\ref{tab:phase-function-dependency-classes} lists dependencies which must be satisfied before
-a particular phase function is executed.
+a particular phase function is executed. Table~\ref{tab:dep-class-api} summarises additional
+interfaces related to the dependency classes.
 
 In addition, \t{SRC_URI}, \t{HOMEPAGE}, \t{RESTRICT}, \t{PROPERTIES}, \t{LICENSE} and
 \t{REQUIRED_USE} use dependency-style specifications to specify their values.
@@ -51,7 +93,8 @@ The following elements are recognised in at least one class of specification. Al
 be surrounded on both sides by whitespace, except at the start and end of the string.
 
 \begin{compactitem}
-\item A package dependency specification. Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}.
+\item A package dependency specification. Permitted in \t{DEPEND}, \t{BDEPEND}, \t{RDEPEND},
+    \t{PDEPEND}.
 \item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC_URI} and \t{HOMEPAGE}\@.
     In EAPIs listed in table~\ref{tab:uri-arrows-table} as supporting \t{SRC_URI} arrows, may
     optionally be followed by whitespace, then \t{->}, then whitespace, then a simple filename when
@@ -69,7 +112,7 @@ be surrounded on both sides by whitespace, except at the start and end of the st
     followed by an open parenthesis, followed by whitespace, followed by one or more
     of (a dependency item of any kind followed by whitespace), followed by a close parenthesis.
     More formally: \t{any-of} \t{::=} \t{'||' whitespace '(' whitespace (item whitespace)+ ')'}.
-    Permitted in \t{DEPEND}, \t{RDEPEND}, \t{PDEPEND}, \t{LICENSE}, \t{REQUIRED_USE}.
+    Permitted in \t{DEPEND}, \t{BDEPEND}, \t{RDEPEND}, \t{PDEPEND}, \t{LICENSE}, \t{REQUIRED_USE}.
 \item An exactly-one-of group, which has the same format as the any-of group, but begins with the
     string \t{\textasciicircum\textasciicircum} instead. Permitted in \t{REQUIRED_USE}.
 \item \featurelabel{at-most-one-of} An at-most-one-of group, which has the same format as the
@@ -86,7 +129,7 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 
 In particular, note that whitespace is not optional.
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{SRC_URI} arrows}
     \label{tab:uri-arrows-table}
     \begin{tabular}{ll}
@@ -95,12 +138,12 @@ In particular, note that whitespace is not optional.
       \multicolumn{1}{c}{\textbf{Supports \t{SRC_URI} arrows?}} \\
       \midrule
       0, 1              & No  \\
-      2, 3, 4, 5, 6     & Yes \\
+      2, 3, 4, 5, 6, 7  & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{REQUIRED_USE ??}\ groups}
     \label{tab:at-most-one-of-table}
     \begin{tabular}{ll}
@@ -109,7 +152,7 @@ In particular, note that whitespace is not optional.
       \multicolumn{1}{c}{\textbf{Supports \t{REQUIRED_USE ??}\ groups?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  \\
-      5, 6              & Yes \\
+      5, 6, 7           & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -135,7 +178,8 @@ for match purposes.
 In an any-of group, at least one immediate child element must be matched. A blocker is
 considered to be matched if its associated package dependency specification is not matched.
 
-An empty any-of group counts as being matched.
+\featurelabel{empty-dep-groups} In EAPIs specified in table~\ref{tab:empty-dep-groups}, an empty
+any-of group counts as being matched.
 
 \subsection{Exactly-one-of dependency specifications}
 
@@ -145,7 +189,23 @@ exactly-one-of group for match purposes.
 
 In an exactly-one-of group, exactly one immediate child element must be matched.
 
-An empty exactly-one-of group counts as being matched.
+In EAPIs specified in table~\ref{tab:empty-dep-groups}, an empty exactly-one-of group counts as
+being matched.
+
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{Matching of empty dependency groups in EAPIs}
+    \label{tab:empty-dep-groups}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Empty \t{||} and \t{\textasciicircum\textasciicircum} groups
+        are matched?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6 & Yes \\
+      7                   & No  \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \subsection{At-most-one-of dependency specifications}
 
@@ -178,7 +238,7 @@ manager must warn or error if this feature is used with an EAPI not supporting u
 
 \note{Order is important. The slot restriction must come before use dependencies.}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{Support for \t{SLOT} dependencies and sub-slots in EAPIs}
     \label{tab:slot-deps-table}
     \begin{tabular}{lll}
@@ -189,12 +249,12 @@ manager must warn or error if this feature is used with an EAPI not supporting u
       \midrule
       0                 & No                 & No  \\
       1, 2, 3, 4        & Named only         & No  \\
-      5, 6              & Named and operator & Yes \\
+      5, 6, 7           & Named and operator & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{USE} dependencies}
     \label{tab:use-deps-table}
     \begin{tabular}{ll}
@@ -204,7 +264,7 @@ manager must warn or error if this feature is used with an EAPI not supporting u
       \midrule
       0, 1              & No      \\
       2, 3              & 2-style \\
-      4, 5, 6           & 4-style \\
+      4, 5, 6, 7        & 4-style \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -243,7 +303,7 @@ ignored by the package manager, so long as any blocked package will be uninstall
 strong block must not be ignored. The mapping from one or two exclamation marks to strength is
 described in table~\ref{tab:bang-strength-table}.
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{Exclamation mark strengths for EAPIs}
     \label{tab:bang-strength-table}
     \begin{tabular}{lll}
@@ -253,7 +313,7 @@ described in table~\ref{tab:bang-strength-table}.
       \multicolumn{1}{c}{\textbf{\t{!!}}} \\
       \midrule
       0, 1              & Unspecified & Forbidden \\
-      2, 3, 4, 5, 6     & Weak        & Strong    \\
+      2, 3, 4, 5, 6, 7  & Weak        & Strong    \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -355,7 +415,9 @@ The following tokens are permitted inside \t{RESTRICT}:
     be checked when fetching.
 \item[fetch] The package's \t{SRC_URI} entries may not be downloaded automatically. If
     entries are not available, \t{pkg_nofetch} is called. Implies \t{mirror}.
-\item[strip] No stripping of debug symbols from files to be installed may be performed.
+\item[strip] No stripping of debug symbols from files to be installed may be performed. In EAPIs
+    listed in table~\ref{tab:staging-area-commands} as supporting controllable stripping, this
+    behaviour may be altered by the \t{dostrip} command.
 \item[userpriv] The package manager may not drop root privileges when building the package.
 \item[test] The \t{src_test} phase must not be run.
 \end{description}

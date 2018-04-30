@@ -107,6 +107,12 @@ manager must ignore any files in this directory that it does not recognise.
     Contains a list, one entry per line, of package dependency specifications (using the directory's
     EAPI). Any package version matching one of these is considered to be masked, and will not be
     installed regardless of profile unless it is unmasked by the user configuration.
+
+    \featurelabel{package-mask-dir} For EAPIs listed in table~\ref{tab:package-mask-dir} as
+    supporting it, \t{package.mask} can be a directory instead of a regular file. Files contained
+    in that directory, unless their name begins with a dot, will be concatenated in order of their
+    filename in the POSIX locale and the result will be processed as if it were a single file.
+    Any subdirectories will be ignored.
 \item[profiles.desc] Described below in section~\ref{sec:profiles.desc}.
 \item[repo_name] Contains, on a single line, the name of this repository. The repository name must
     conform to section~\ref{sec:repository-names}.
@@ -122,6 +128,20 @@ manager must ignore any files in this directory that it does not recognise.
     included as a prefix here.
 \item[updates/] This directory is described in section~\ref{sec:updates-dir}.
 \end{description}
+
+\ChangeWhenAddingAnEAPI{7}
+\begin{centertable}{EAPIs supporting a directory for \t{package.mask}}
+    \label{tab:package-mask-dir}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{package.mask} can be a directory?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6 & No  \\
+      7                   & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \subsection{The profiles.desc file}
 \label{sec:profiles.desc}

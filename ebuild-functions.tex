@@ -43,7 +43,7 @@ fallback to \t{WORKDIR} is used:
     in \t{DEFINED_PHASES}.
 \end{compactitem}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs with \t{S} to \t{WORKDIR} fallbacks}
     \label{tab:s-fallback-table}
     \begin{tabular}{ll}
@@ -52,7 +52,7 @@ fallback to \t{WORKDIR} is used:
       \multicolumn{1}{c}{\textbf{Fallback to \t{WORKDIR} permitted?}} \\
       \midrule
       0, 1, 2, 3        & Always            \\
-      4, 5, 6           & Conditional error \\
+      4, 5, 6, 7        & Conditional error \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -74,7 +74,7 @@ before the next phase is executed.
 
 \t{pkg_pretend} must not write to the filesystem.
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{pkg_pretend}}
     \label{tab:pkg-pretend-table}
     \begin{tabular}{ll}
@@ -83,7 +83,7 @@ before the next phase is executed.
       \multicolumn{1}{c}{\textbf{Supports \t{pkg_pretend}?}} \\
       \midrule
       0, 1, 2, 3        & No  \\
-      4, 5, 6           & Yes \\
+      4, 5, 6, 7        & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -146,7 +146,7 @@ src_prepare() {
 For other EAPIs supporting \t{src_prepare}, the default implementation used when the ebuild lacks
 the \t{src_prepare} function is a no-op.
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{\t{src_prepare} support and behaviour for EAPIs}
     \label{tab:src-prepare-table}
     \begin{tabular}{lll}
@@ -157,7 +157,7 @@ the \t{src_prepare} function is a no-op.
       \midrule
       0, 1              & No  & Not applicable \\
       2, 3, 4, 5        & Yes & no-op          \\
-      6                 & Yes & 6              \\
+      6, 7              & Yes & 6              \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -184,7 +184,7 @@ src_configure() {
 \end{verbatim}
 \end{listing}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{src_configure}}
     \label{tab:src-configure-table}
     \begin{tabular}{ll}
@@ -193,7 +193,7 @@ src_configure() {
       \multicolumn{1}{c}{\textbf{Supports \t{src_configure}?}} \\
       \midrule
       0, 1              & No  \\
-      2, 3, 4, 5, 6     & Yes \\
+      2, 3, 4, 5, 6, 7  & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -257,7 +257,7 @@ src_compile() {
 \end{verbatim}
 \end{listing}
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{\t{src_compile} behaviour for EAPIs}
     \label{tab:src-compile-table}
     \begin{tabular}{ll}
@@ -267,7 +267,7 @@ src_compile() {
       \midrule
       0                 & 0 \\
       1                 & 1 \\
-      2, 3, 4, 5, 6     & 2 \\
+      2, 3, 4, 5, 6, 7  & 2 \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -289,7 +289,7 @@ parallel tests, the \t{emake} command must be called with option \t{-j1}.
 The \t{src_test} function may be disabled by \t{RESTRICT}\@. See section~\ref{sec:restrict}. It may
 be disabled by user too, using a PM-specific mechanism.
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{\t{src_test} behaviour for EAPIs}
     \label{tab:src-test-table}
     \begin{tabular}{ll}
@@ -298,7 +298,7 @@ be disabled by user too, using a PM-specific mechanism.
       \multicolumn{1}{c}{\textbf{Supports parallel tests?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  \\
-      5, 6              & Yes \\
+      5, 6, 7           & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -357,7 +357,7 @@ src_install() {
 For other EAPIs, the default implementation used when the ebuild lacks the \t{src_install} function
 is a no-op.
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{\t{src_install} behaviour for EAPIs}
     \label{tab:src-install-table}
     \begin{tabular}{ll}
@@ -367,7 +367,7 @@ is a no-op.
       \midrule
       0, 1, 2, 3        & no-op \\
       4, 5              & 4     \\
-      6                 & 6     \\
+      6, 7              & 6     \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -425,7 +425,7 @@ that dependencies may not be installed.
 
 \t{pkg_info} must not write to the filesystem.
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{pkg_info} on non-installed packages}
     \label{tab:pkg-info-table}
     \begin{tabular}{ll}
@@ -434,7 +434,7 @@ that dependencies may not be installed.
       \multicolumn{1}{c}{\textbf{Supports \t{pkg_info} on non-installed packages?}} \\
       \midrule
       0, 1, 2, 3        & No  \\
-      4, 5, 6           & Yes \\
+      4, 5, 6, 7        & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -456,7 +456,7 @@ named \t{default_}(phase) that behaves as the default implementation for that EA
 when executing any ebuild phase listed in the table. Ebuilds must not call these functions except
 when in the phase in question.
 
-\ChangeWhenAddingAnEAPI{6}
+\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{default_} phase functions}
     \label{tab:default-phase-function-table}
     \begin{tabular}{l P{26em}}
@@ -467,7 +467,7 @@ when in the phase in question.
       0, 1              & None \\
       2, 3              & \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure},
                           \t{src_compile}, \t{src_test} \\
-      4, 5, 6           & \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure},
+      4, 5, 6, 7        & \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure},
                           \t{src_compile}, \t{src_install}, \t{src_test} \\
       \bottomrule
     \end{tabular}
