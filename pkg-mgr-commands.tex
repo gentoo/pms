@@ -714,12 +714,11 @@ has returned.
 
 \begin{description}
 
-\item[into] Sets the value of \t{DESTTREE} for future invocations
-    of the above utilities. Creates the directory under \t{\$\{ED\}}
-    in offset-prefix aware EAPIs or under \t{\$\{D\}} in offset-prefix
-    agnostic EAPIs, using \t{install -d} with no additional options,
-    if it does not already exist. Failure behaviour is EAPI dependent
-    as per section~\ref{sec:failure-behaviour}.
+\item[into] Takes exactly one argument, and sets the value of \t{DESTTREE} for future invocations
+    of the above utilities to it. Creates the directory under \t{\$\{ED\}} in offset-prefix aware
+    EAPIs or under \t{\$\{D\}} in offset-prefix agnostic EAPIs, using \t{install -d} with no
+    additional options, if it does not already exist. Failure behaviour is EAPI dependent as per
+    section~\ref{sec:failure-behaviour}.
 
 \item[insinto] As \t{into}, for \t{INSDESTTREE}.
 
@@ -727,7 +726,9 @@ has returned.
 
 \item[docinto] As \t{into}, for install subdirectory of \t{dodoc} et al.
 
-\item[insopts] Sets the options passed by \t{doins} et al.\ to the \t{install} command.
+\item[insopts] Takes zero or more arguments, and sets the options passed by \t{doins} et al.\
+    to the \t{install} command to them. When called with no arguments, resets the option list
+    to empty.
 
 \item[diropts] As \t{insopts}, for \t{dodir} et al.
 
