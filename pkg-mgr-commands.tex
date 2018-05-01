@@ -721,22 +721,19 @@ has returned.
     if it does not already exist. Failure behaviour is EAPI dependent
     as per section~\ref{sec:failure-behaviour}.
 
-\item[insinto] Sets the value of \t{INSDESTTREE} for future invocations of the above utilities. May
-    create the directory, as specified for \t{into}.
+\item[insinto] As \t{into}, for \t{INSDESTTREE}.
 
-\item[exeinto] Sets the install path for \t{doexe} and \t{newexe}. May create the directory, as specified
-    for \t{into}.
+\item[exeinto] As \t{into}, for install path of \t{doexe} and \t{newexe}.
 
-\item[docinto] Sets the install subdirectory for \t{dodoc} et al. May create the directory, as specified
-    for \t{into}.
+\item[docinto] As \t{into}, for install subdirectory of \t{dodoc} et al.
 
 \item[insopts] Sets the options passed by \t{doins} et al.\ to the \t{install} command.
 
-\item[diropts] Sets the options passed by \t{dodir} et al.\ to the \t{install} command.
+\item[diropts] As \t{insopts}, for \t{dodir} et al.
 
-\item[exeopts] Sets the options passed by \t{doexe} et al.\ to the \t{install} command.
+\item[exeopts] As \t{insopts}, for \t{doexe} et al.
 
-\item[libopts] Sets the options passed by \t{dolib} et al.\ to the \t{install} command.
+\item[libopts] As \t{insopts}, for \t{dolib} et al.
     In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as
     per section~\ref{sec:banned-commands}.
 
