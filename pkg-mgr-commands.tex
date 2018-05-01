@@ -104,9 +104,9 @@ are given, \t{-r} is assumed.
 \begin{description}
 \item[has_version] Takes exactly one package dependency specification as an argument. Returns
     true if a package matching the specification is installed, and false otherwise.
-\item[best_version] Takes exactly one package dependency specification as an argument. If a
-    matching package is installed, prints the category, package name and version of the highest
-    matching version; otherwise, prints an empty string. The exit code is unspecified.
+\item[best_version] Takes exactly one package dependency specification as an argument. If a matching
+    package is installed, prints \t{category/package-version} of the highest matching version;
+    otherwise, prints an empty string. The exit code is unspecified.
 \end{description}
 
 \ChangeWhenAddingAnEAPI{7}
