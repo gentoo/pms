@@ -706,11 +706,10 @@ the current phase function has returned.
 \end{centertable}
 
 \subsection{Commands affecting install destinations}
-The following commands are used to set the various destination trees, all relative to \t{\$\{ED\}} in
-offset-prefix aware EAPIs and relative to \t{\$\{D\}} in offset-prefix agnostic EAPIs, used by the
-above installation commands. They must be shell functions or aliases, due to the need to set variables
-read by the above commands. Ebuilds must not run any of these commands once the current phase function
-has returned.
+The following commands are used to set the various destination trees and options used by the above
+installation commands. They must be shell functions or aliases, due to the need to set variables
+read by the above commands. Ebuilds must not run any of these commands once the current phase
+function has returned.
 
 \begin{description}
 
