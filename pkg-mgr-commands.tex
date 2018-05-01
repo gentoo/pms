@@ -283,9 +283,9 @@ Ebuilds must not run any of these commands once the current phase function has r
 \end{centertable}
 
 \subsection{Build commands}
-These commands are used during the \t{src_configure}, \t{src_compile}, and \t{src_install}
-phases to run the package's build commands. Ebuilds must not run any of these commands once the
-current phase function has returned.
+These commands are used during the \t{src_configure}, \t{src_compile}, \t{src_test},
+and \t{src_install} phases to run the package's build commands. Ebuilds must not run any of these
+commands once the current phase function has returned.
 
 \begin{description}
 \item[econf] Calls the program's \t{./configure} script. This is designed to work with GNU
