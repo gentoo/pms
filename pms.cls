@@ -71,6 +71,8 @@
     \RequirePackage[scaled=.90]{helvet}
     \setboolean{TEX4HT-HACKS}{false}
 \else
+    % Prevent implicit loading of eso-pic (by gitinfo2)
+    \@namedef{ver@eso-pic.sty}{9999/12/31}
     \setboolean{TEX4HT-HACKS}{true}
 \fi
 
