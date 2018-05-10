@@ -117,7 +117,6 @@
 % Some shorthands for the lazy ones.
 % tex4ht workaround: this needs to happen after loading hyperref
 \g@addto@macro\@documentclasshook{
-    \renewcommand{\b}[1]{\textbf{#1}}
     \renewcommand{\i}[1]{\textit{#1}}
     \renewcommand{\t}[1]{\texttt{#1}}
 }
