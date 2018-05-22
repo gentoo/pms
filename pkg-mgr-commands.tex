@@ -930,7 +930,7 @@ a series of version components and version separators.
 
 A version component consists either purely of digits (\t{[0-9]+}) or purely of uppercase and
 lowercase ASCII letters (\t{[A-Za-z]+}). A version separator is either a string of any other
-characters (\t{[\textasciicircum A-Za-z0-9]}) or it occurs at the transition between a sequence
+characters (\t{[\textasciicircum A-Za-z0-9]+}), or it occurs at the transition between a sequence
 of digits and a sequence of letters, or vice versa. In the latter case, the version separator is
 an empty string.
 
@@ -948,8 +948,8 @@ followed by a hyphen (\t{-}), which in turn is optionally followed by another un
 
 A single integer specifies a single component or separator index. An integer followed by a hyphen
 specifies all components or separators starting with the one at the specified index. Two integers
-separated by a hyphen specify a range of versions starting at the index specified by the first
-and ending at the second, inclusively.
+separated by a hyphen specify a range starting at the index specified by the first and ending at
+the second, inclusively.
 
 \begin{description}
 \item[ver_cut] Takes a range as the first argument, and optionally a version string as the second.
