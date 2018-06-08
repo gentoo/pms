@@ -725,9 +725,8 @@ function has returned.
 
 \item[docinto] As \t{into}, for install subdirectory of \t{dodoc} et al.
 
-\item[insopts] Takes zero or more arguments, and sets the options passed by \t{doins} et al.\
-    to the \t{install} command to them. When called with no arguments, resets the option list
-    to empty.
+\item[insopts] Takes one or more arguments, and sets the options passed by \t{doins} et al.\
+    to the \t{install} command to them. Behaviour upon encountering empty arguments is undefined.
 
 \item[diropts] As \t{insopts}, for \t{dodir} et al.
 
