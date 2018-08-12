@@ -112,9 +112,9 @@ In order to ensure interoperability with configuration update tools, the followi
 used by all package managers when merging any regular file:
 
 \begin{compactenum}
-\item If the directory containing the file to be merged is not listed in \t{CONFIG_PROTECT}, and
-     is not a subdirectory of any such directory, and if the file is not listed in \t{CONFIG_PROTECT},
-     the file is merged normally.
+\item If the directory containing the file to be merged is not listed in \t{CONFIG_PROTECT}, and is
+    not a subdirectory of any such directory, and if the file is not listed in \t{CONFIG_PROTECT},
+    the file is merged normally.
 \item If the directory containing the file to be merged is listed in \t{CONFIG_PROTECT_MASK}, or
     is a subdirectory of such a directory, or if the file is listed in \t{CONFIG_PROTECT_MASK},
     the file is merged normally.

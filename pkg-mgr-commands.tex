@@ -443,12 +443,13 @@ the current phase function has returned.
     dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[dodoc] \featurelabel{dodoc} Installs the given files into a subdirectory under
-    \t{/usr/share/doc/\$\{PF\}/} with file mode \t{0644}. The subdirectory is set by the most recent
-    call to \t{docinto}. If \t{docinto} has not yet been called, instead installs to the directory
-    \t{/usr/share/doc/\$\{PF\}/}. For EAPIs listed in table~\ref{tab:dodoc-table} as supporting \t{-r},
-    if the first argument is \t{-r}, any subsequent arguments that are directories are installed
-    recursively to the appropriate location; in any other case, it is an error for a directory to be
-    specified. Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
+    \t{/usr/share/doc/\$\{PF\}/} with file mode \t{0644}. The subdirectory is set by the most
+    recent call to \t{docinto}. If \t{docinto} has not yet been called, instead installs to the
+    directory \t{/usr/share/doc/\$\{PF\}/}. For EAPIs listed in table~\ref{tab:dodoc-table}
+    as supporting \t{-r}, if the first argument is \t{-r}, any subsequent arguments that are
+    directories are installed recursively to the appropriate location; in any other case, it is
+    an error for a directory to be specified. Failure behaviour is EAPI dependent as per
+    section~\ref{sec:failure-behaviour}.
 
 \item[doenvd] Installs the given environment files into \t{/etc/env.d/}, by default with file mode
     \t{0644}, or with the \t{install} options set by the most recent \t{insopts} call.
@@ -1003,12 +1004,12 @@ has returned.
 
 \begin{description}
 \item[dosed] Takes any number of arguments, which can be files or \t{sed} expressions. For each
-    argument, if it names, relative to \t{ED} (offset-prefix aware EAPIs) or \t{D} (offset-prefix agnostic
-    EAPIs) a file which exists, then \t{sed} is run with the current expression on that file. Otherwise,
-    the current expression is set to the text of the argument. The initial value of the expression is
-    \t{s:\$\{ED\}::g} in offset-prefix aware EAPIs and \t{s:\$\{D\}::g} in offset-prefix agnostic
-    EAPIs. In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as per
-    section~\ref{sec:banned-commands}.
+    argument, if it names, relative to \t{ED} (offset-prefix aware EAPIs) or \t{D} (offset-prefix
+    agnostic EAPIs) a file which exists, then \t{sed} is run with the current expression on that
+    file. Otherwise, the current expression is set to the text of the argument. The initial value
+    of the expression is \t{s:\$\{ED\}::g} in offset-prefix aware EAPIs and \t{s:\$\{D\}::g} in
+    offset-prefix agnostic EAPIs. In EAPIs listed in table~\ref{tab:banned-commands-table}, this
+    command is banned as per section~\ref{sec:banned-commands}.
 
 \item[unpack] Unpacks one or more source archives, in order, into the current directory.
     For compressed files, creates the target file in the current directory, with the compression
@@ -1036,19 +1037,20 @@ has returned.
     \item tar files (\t{*.tar}). Ebuilds must ensure that GNU tar is installed.
     \item gzip-compressed files (\t{*.gz, *.Z}). Ebuilds must ensure that GNU gzip is installed.
     \item gzip-compressed tar files (\t{*.tar.gz, *.tgz, *.tar.Z}). Ebuilds must ensure that
-    GNU gzip and GNU tar are installed.
+        GNU gzip and GNU tar are installed.
     \item bzip2-compressed files (\t{*.bz2, *.bz}). Ebuilds must ensure that bzip2 is installed.
     \item bzip2-compressed tar files (\t{*.tar.bz2, *.tbz2, *.tar.bz, *.tbz}). Ebuilds must ensure
-    that bzip2 and GNU tar are installed.
+        that bzip2 and GNU tar are installed.
     \item zip files (\t{*.zip, *.ZIP, *.jar}). Ebuilds must ensure that Info-ZIP Unzip is installed.
     \item 7zip files (\t{*.7z, *.7Z}). Ebuilds must ensure that P7ZIP is installed.
     \item rar files (\t{*.rar, *.RAR}). Ebuilds must ensure that RARLAB's unrar is installed.
     \item LHA archives (\t{*.LHA, *.LHa, *.lha, *.lzh}). Ebuilds must ensure that the lha program is
-    installed.
+        installed.
     \item ar archives (\t{*.a}). Ebuilds must ensure that GNU binutils is installed.
     \item deb packages (\t{*.deb}). Ebuilds must ensure that the deb2targz program is installed on
-    those platforms where the GNU binutils ar program is not available and the installed ar program is
-    incompatible with GNU archives. Otherwise, ebuilds must ensure that GNU binutils is installed.
+        those platforms where the GNU binutils ar program is not available and the installed ar
+        program is incompatible with GNU archives. Otherwise, ebuilds must ensure that GNU binutils
+        is installed.
     \item lzma-compressed files (\t{*.lzma}). Ebuilds must ensure that XZ Utils is installed.
     \item lzma-compressed tar files (\t{*.tar.lzma}). Ebuilds must ensure that XZ Utils and GNU tar
         are installed.

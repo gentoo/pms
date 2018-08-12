@@ -60,7 +60,7 @@ as supporting \t{BDEPEND}, the build dependencies are split into two subclasses:
 \item \t{BDEPEND} build dependencies that are binary compatible with the native build system
     (\t{CBUILD}). The ebuild is allowed to call binary executables installed by this kind of
     dependency.
-    \item \t{DEPEND} build dependencies that are binary compatible with the system being built
+\item \t{DEPEND} build dependencies that are binary compatible with the system being built
     (\t{CHOST}). The ebuild must not execute binary executables installed by this kind of
     dependency.
 \end{compactitem}
@@ -335,14 +335,14 @@ the following operators:
 
 \begin{description}
 \item[*] Indicates that any slot value is acceptable. In addition, for runtime dependencies,
-indicates that the package will not break if the matched package is uninstalled and replaced by
-a different matching package in a different slot.
+    indicates that the package will not break if the matched package is uninstalled and replaced by
+    a different matching package in a different slot.
 \item[=] Indicates that any slot value is acceptable. In addition, for runtime dependencies,
-indicates that the package will break unless a matching package with slot and sub-slot equal to the
-slot and sub-slot of the best version installed as a build-time (\t{DEPEND}) dependency is
-available.
+    indicates that the package will break unless a matching package with slot and sub-slot equal to
+    the slot and sub-slot of the best version installed as a build-time (\t{DEPEND}) dependency is
+    available.
 \item[slot=] Indicates that only a specific slot value is acceptable, and otherwise behaves
-identically to the plain equals slot operator.
+    identically to the plain equals slot operator.
 \end{description}
 
 To implement the equals slot operator, the package manager will need to store the slot/sub-slot
