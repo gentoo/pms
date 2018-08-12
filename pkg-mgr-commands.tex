@@ -846,7 +846,8 @@ table~\ref{tab:use-list-strictness}.
     an empty third argument is treated as if it weren't provided. If the USE flag is set, outputs
     \t{-{}-with-\$\{opt\}=\$\{value\}} if the third argument was provided, and
     \t{-{}-with-\$\{opt\}} otherwise. If the flag is not set, then it outputs
-    \t{-{}-without-\$\{opt\}}.
+    \t{-{}-without-\$\{opt\}}. The condition is inverted if the flag name is prefixed with~\t{!};
+    this is valid only for the two- and three-argument forms.
 \item[use_enable] Works the same as \t{use_with()}, but outputs \t{-{}-enable-} or
     \t{-{}-disable-} instead of \t{-{}-with-} or \t{-{}-without-}.
 \item[usex] \featurelabel{usex} Accepts at least one and at most five arguments. The first argument
