@@ -774,9 +774,9 @@ times or if an item is a symlink.
 
 \featurelabel{docompress} In EAPIs listed in table~\ref{tab:staging-area-commands} as supporting
 controllable compression, the package manager may optionally compress a subset of the files under
-the \t{ED} directory. The package manager shall ensure that its compression mechanisms behave
-sensibly even if a file is already compressed. For compression, the initial values of the two lists
-are as follows:
+the \t{ED} directory. The package manager shall ensure that its compression mechanisms do not
+compress a file twice if it is already compressed using the same compressed file format.
+For compression, the initial values of the two lists are as follows:
 
 \begin{compactitem}
 \item The inclusion list contains \t{/usr/share/doc}, \t{/usr/share/info} and \t{/usr/share/man}.
