@@ -11,8 +11,11 @@
       \multicolumn{1}{c}{\textbf{Phase function}} &
       \multicolumn{1}{c}{\textbf{Satisfied dependency classes}} \\
       \midrule
-      \t{pkg_pretend}, \t{pkg_setup}, \t{pkg_info}, \t{pkg_nofetch} &
+      \t{pkg_pretend}, \t{pkg_info}, \t{pkg_nofetch} &
           None (ebuilds can rely only on the packages in the system~set) \\
+      \addlinespace
+      \t{pkg_setup} & Same as \t{src_unpack} if executed as part of source build,
+          same as \t{pkg_pretend} otherwise \\
       \addlinespace
       \t{src_unpack}, \t{src_prepare}, \t{src_configure}, \t{src_compile}, \t{src_test},
           \t{src_install} & \t{DEPEND}, \t{BDEPEND} \\
@@ -44,9 +47,10 @@
 There are three classes of dependencies supported by ebuilds:
 
 \begin{compactitem}
-\item Build dependencies (\t{DEPEND}). These must be installed and usable before any of
-    the ebuild \t{src_*} phase functions is executed. These may not be installed at all
-    if a binary package is being merged.
+\item Build dependencies (\t{DEPEND}). These must be installed and usable before the \t{pkg_setup}
+    phase function is executed as a part of source build and throughout all \t{src_*} phase
+    functions executed as part of that build. These may not be installed at all if a binary package
+    is being merged.
 \item Runtime dependencies (\t{RDEPEND}). These must be installed and usable before
     the results of an ebuild merging are treated as usable.
 \item Post dependencies (\t{PDEPEND}). These must be installed at some point before
