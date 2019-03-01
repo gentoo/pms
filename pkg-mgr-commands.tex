@@ -919,8 +919,9 @@ These functions check whitespace-separated lists for a particular value.
 
 \subsection{Version manipulation and comparison commands}
 \featurelabel{ver-commands}
-These commands provide utilities for working with version strings. Their availability per EAPI is
-listed in table~\ref{tab:version-commands}.
+These commands provide utilities for working with version strings. They must all be implemented
+internally as shell functions, i.\,e., they are callable in global scope. Availability of these
+commands per EAPI is listed in table~\ref{tab:version-commands}.
 
 For the purpose of version manipulation commands, the specification provides a method for splitting
 an arbitrary version string (not necessarily conforming to section~\ref{sec:version-spec}) into
