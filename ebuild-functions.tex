@@ -38,9 +38,9 @@ fallback to \t{WORKDIR} is used:
 \begin{compactitem}
 \item The \t{A} variable contains no items.
 \item The phase function in question is not in \t{DEFINED_PHASES}.
-\item None of the phase functions \t{unpack}, \t{prepare}, \t{configure}, \t{compile} or \t{install},
-    if supported by the EAPI in question and occurring prior to the phase about to be executed, are
-    in \t{DEFINED_PHASES}.
+\item None of the phase functions \t{unpack}, \t{prepare}, \t{configure}, \t{compile}, \t{test} or
+    \t{install}, if supported by the EAPI in question and occurring prior to the phase about to be
+    executed, are in \t{DEFINED_PHASES}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{7}
@@ -277,7 +277,9 @@ src_compile() {
 The \t{src_test} function runs unit tests for the newly built but not yet installed package as
 provided.
 
-The initial working directory must be \t{S} if that exists, falling back to \t{WORKDIR} otherwise.
+The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR} as discussed in
+section~\ref{sec:s-to-workdir-fallback}.
+
 The default implementation used when the ebuild lacks the \t{src_test} function must, if tests are
 enabled, run \t{emake check} if and only if such a target is available, or if not run
 \t{emake test} if and only if such a target is available. In both cases, if \t{emake} returns
