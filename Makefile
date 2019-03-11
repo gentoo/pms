@@ -44,20 +44,20 @@ pms.dvi: $(LATEXFILES) pms.bbl $(COMMITINFO)
 pms.html: $(LATEXFILES) pms.bbl $(COMMITINFO)
 	set -e; sum=''; \
 	while true; do \
-	  mk4ht xhlatex pms xhtml,fn-in; \
+	  mk4ht xhlatex pms 'xhtml,fn-in,charset=utf-8' ' -cunihtf -utf8'; \
 	  oldsum=$${sum}; sum=$$(cksum $@); \
 	  test "$${sum}" != "$${oldsum}" || break; \
 	done
-	@# some www servers ignore meta tags, resulting in a wrong charset.
-	@# therefore recode the very few non-ascii characters
-	recode -d l1..h3 $@
-	@# declare encoding as utf-8, although it is pure ascii
-	LC_ALL=C sed -i -e '/<?xml\|<meta/s/iso-8859-1/utf-8/' $@
+	@# replace ligatures by their component letters
+	LC_ALL=C sed -i "$$(printf 's/\\xef\\xac\\x8%s/%s/g;' \
+	  0 ff 1 fi 2 fl 3 ffi 4 ffl)" $@
 	@# work around irregularity in how links to longtables are
 	@# formatted in the List of Tables
-	LC_ALL=C sed -i -e '/<span class="lotToc" >&#x00A0;/{N;N;s/\(&#x00A0;<a \nhref="[^"]\+">\)\([0-9A-Z.]\+\)[ \n]\+/\2\1/}' $@
+	LC_ALL=C sed -Ei '/<span class="lotToc" *>\B/{N;N;'\
+	's/([^>]*<a\s+href="[^"]+">)([0-9A-Z.]+)\s+/\2\1/;}' $@
 	@# remove redundant span elements
-	LC_ALL=C sed -i -e ':x;/<span\(\s\+[^>]*\)\?$$/{N;bx;};:y;s/\(<span\s\+[^>]*>\)\([^<]*\)<\/span>\1/\1\2/;ty' $@
+	LC_ALL=C sed -Ei ':x;/<span(\s+[^>]*)?$$/{N;bx;};'\
+	':y;s,(<span\s+[^>]*>)([^<]*)</span>\1,\1\2,;ty' $@
 
 pms.bbl: pms.bib $(LATEXFILES) $(COMMITINFO)
 	$(aux-clean)
