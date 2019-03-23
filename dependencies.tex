@@ -204,7 +204,7 @@ at-most-one-of group for match purposes.
 
 In an at-most-one-of group, at most one immediate child element must be matched.
 
-\subsection{Package dependency specifications}
+\section{Package Dependency Specifications}
 
 A package dependency can be in one of the following base formats. A package manager must warn or
 error on non-compliant input.
@@ -258,7 +258,7 @@ manager must warn or error if this feature is used with an EAPI not supporting u
     \end{tabular}
 \end{centertable}
 
-\subsubsection{Operators}
+\subsection{Operators}
 \label{sec:dep-operator}
 
 The following operators are available:
@@ -276,7 +276,7 @@ The following operators are available:
 \item[\t{>}] Strictly greater than the specified version.
 \end{description}
 
-\subsubsection{Block operator}
+\subsection{Block operator}
 
 If the specification is prefixed with one or two exclamation marks, the named dependency is a block
 rather than a requirement---that is to say, the specified package must not be installed, with the
@@ -307,7 +307,7 @@ described in table~\ref{tab:bang-strength-table}.
     \end{tabular}
 \end{centertable}
 
-\subsubsection{Slot dependencies}
+\subsection{Slot dependencies}
 \label{sec:slot-dep}
 
 \featurelabel{slot-deps} A named slot dependency consists of a colon followed by a slot name. A
@@ -345,7 +345,7 @@ Whenever the equals slot operator is used in an enabled dependency group, the de
 (\t{DEPEND}) must ensure that a matching package is installed at build time. It is invalid to use
 the equals slot operator inside \t{PDEPEND} or inside any-of dependency specifications.
 
-\subsubsection{2-style and 4-style USE dependencies}
+\subsection{2-style and 4-style USE dependencies}
 \label{sec:use-dep}
 
 A 2-style or 4-style use dependency consists of one of the following:
