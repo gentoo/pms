@@ -45,16 +45,17 @@ All ebuilds must define at least the following variables:
 Ebuilds may define any of the following variables:
 
 \begin{description}
-\item[EAPI] The EAPI\@. See below.
+\item[EAPI] The EAPI\@. See below in section~\ref{sec:eapi}.
 \item[HOMEPAGE] The URI or URIs for a package's homepage, including protocols.
-    See section~\ref{sec:dependencies} for full syntax.
+    See section~\ref{sec:dependency-spec} for full syntax.
 \item[SRC_URI] A list of source URIs for the package. Valid protocols are \t{http://},
     \t{https://}, \t{ftp://} and \t{mirror://} (see section~\ref{sec:thirdpartymirrors} for mirror
     behaviour). Fetch restricted packages may include URL parts consisting of just a filename.
-    See section~\ref{sec:dependencies} for full syntax.
+    See section~\ref{sec:src-uri-behaviour} for description and section~\ref{sec:dependency-spec}
+    for full syntax.
 \item[LICENSE] The package's license. Each text token must be a valid license name, as per
     section~\ref{sec:license-names}, and must correspond to a tree ``licenses/'' entry
-    (see section~\ref{sec:licenses-dir}). See section~\ref{sec:dependencies} for full syntax.
+    (see section~\ref{sec:licenses-dir}). See section~\ref{sec:dependency-spec} for full syntax.
     \label{ebuild-var-LICENSE}
 \item[KEYWORDS] A whitespace separated list of keywords for the ebuild. Each token must be a valid
     keyword name, as per section~\ref{sec:keyword-names}. See section~\ref{sec:keywords} for full
@@ -70,15 +71,15 @@ Ebuilds may define any of the following variables:
     the default value of the use flag if no other configuration overrides it.
 \item[REQUIRED_USE] \featurelabel{required-use} Zero or more assertions that must be met by the
     configuration of \t{USE} flags to be valid for this ebuild. See section~\ref{sec:required-use}
-    for description and section~\ref{sec:dependencies} for full syntax. Only in EAPIs listed in
+    for description and section~\ref{sec:dependency-spec} for full syntax. Only in EAPIs listed in
     table~\ref{tab:optional-vars-table} as supporting \t{REQUIRED_USE}.
 \item[PROPERTIES] \featurelabel{properties} Zero or more properties for this package.
-    See section~\ref{sec:properties} for value meanings and section~\ref{sec:dependencies} for full
-    syntax. For EAPIs listed in table~\ref{tab:optional-vars-table} as having optional support,
+    See section~\ref{sec:properties} for value meanings and section~\ref{sec:dependency-spec} for
+    full syntax. For EAPIs listed in table~\ref{tab:optional-vars-table} as having optional support,
     ebuilds must not rely upon the package manager recognising or understanding this variable in
     any way.
 \item[RESTRICT] Zero or more behaviour restrictions for this package. See section~\ref{sec:restrict}
-    for value meanings and section~\ref{sec:dependencies} for full syntax.
+    for value meanings and section~\ref{sec:dependency-spec} for full syntax.
 \item[DEPEND] See section~\ref{sec:dependencies}.
 \item[RDEPEND] See section~\ref{sec:dependencies}. For some EAPIs, \t{RDEPEND} has special behaviour
     for its value if unset and when used with an eclass. See section~\ref{sec:rdepend-depend} for
