@@ -24,12 +24,11 @@ An ebuild repository shall occupy one directory on disk, with the following subd
 \section{Category Directories}
 \label{sec:category-dirs}
 
-Each category provided by the repository (see also: the
-\t{profiles/categories} file, section~\ref{profiles-categories}) shall
-be contained in one directory, whose name shall be that of the
-category. Each category directory shall contain:
+Each category provided by the repository (see also: the \t{profiles/categories} file,
+section~\ref{sec:profiles-dir}) shall be contained in one directory, whose name shall be that of
+the category. Each category directory shall contain:
 \begin{compactitem}
-\item A \t{metadata.xml} file, as described in appendix~\ref{sec:metadata-xml}\@. Optional.
+\item A \t{metadata.xml} file, as described in appendix~\ref{ch:metadata-xml}\@. Optional.
 \item Zero or more package directories, one for each package in the category, as described in
     section~\ref{sec:package-dirs}. The name of the package directory shall be the corresponding
     package name.
@@ -49,8 +48,8 @@ a package manager may treat an empty category as a category that does not exist)
 
 A package directory contains the following:
 \begin{compactitem}
-\item Zero or more ebuilds. These are as described in section~\ref{sec:ebuild-format} and others.
-\item A \t{metadata.xml} file, as described in appendix~\ref{sec:metadata-xml}\@. Optional only for
+\item Zero or more ebuilds. These are as described in chapter~\ref{ch:ebuild-format} and others.
+\item A \t{metadata.xml} file, as described in appendix~\ref{ch:metadata-xml}\@. Optional only for
     legacy support.
 \item A \t{ChangeLog}, in a format determined by the provider of the repository. Optional.
 \item A \t{Manifest} file, whose format is described in~\cite{Glep44}. Can be omitted if the file
@@ -73,12 +72,10 @@ this specification.
 \section{The Profiles Directory}
 \label{sec:profiles-dir}
 
-The profiles directory shall contain zero or more profile directories
-as described in section~\ref{sec:profiles}, as well as the following files
-and directories. In any line-based file, lines beginning with a \#
-character are treated as comments, whilst blank lines are ignored. All
-contents of this directory, with the exception of \t{repo_name}, are
-optional.
+The profiles directory shall contain zero or more profile directories as described in
+chapter~\ref{ch:profiles}, as well as the following files and directories. In any line-based file,
+lines beginning with a \# character are treated as comments, whilst blank lines are ignored.
+All contents of this directory, with the exception of \t{repo_name}, are optional.
 
 The profiles directory may contain an \t{eapi} file. This file, if it exists, must contain a single
 line with the name of an EAPI\@. This specifies the EAPI to use when handling the profiles
@@ -92,10 +89,9 @@ Other files not described by this specification may exist, but may not be relied
 manager must ignore any files in this directory that it does not recognise.
 
 \begin{description}
-\item[arch.list] \label{arch.list} Contains a list, one entry per line, of permissible values for
-    the \t{ARCH} variable, and hence permissible keywords for packages in this repository.
-\item[categories] \label{profiles-categories} Contains a list, one entry per line, of categories
-    provided by this repository.
+\item[arch.list] Contains a list, one entry per line, of permissible values for the \t{ARCH}
+    variable, and hence permissible keywords for packages in this repository.
+\item[categories] Contains a list, one entry per line, of categories provided by this repository.
 \item[eapi] See above.
 \item[info_pkgs] Contains a list, one entry per line, of qualified package names. Any package
     matching one of these is to be listed when a package manager displays a `system information'
@@ -103,7 +99,7 @@ manager must ignore any files in this directory that it does not recognise.
 \item[info_vars] Contains a list, one entry per line, of profile, configuration, and environment
     variables which are considered to be of interest. The value of each of these variables may be
     shown when the package manager displays a `system information' listing.
-\item[package.mask] \label{profiles-package.mask}
+\item[package.mask]
     Contains a list, one entry per line, of package dependency specifications (using the directory's
     EAPI). Any package version matching one of these is considered to be masked, and will not be
     installed regardless of profile unless it is unmasked by the user configuration.
@@ -234,14 +230,14 @@ that slot move in the future.
 
 The \t{licenses} directory shall contain copies of the licenses used by packages in the
 repository. Each file will be named according to the name used in the \t{LICENSE} variable as
-described in section~\ref{ebuild-var-LICENSE}, and will contain the complete text of the license in
+described in section~\ref{sec:optional-vars}, and will contain the complete text of the license in
 human-readable form. Plain text format is strongly preferred but not required.
 
 \section{The Eclass Directory}
 \label{sec:eclass-dir}
 
 The \t{eclass} directory shall contain copies of the eclasses provided by this repository. The
-format of these files is described in section~\ref{sec:eclasses}. It may also contain, in their own
+format of these files is described in chapter~\ref{ch:eclasses}. It may also contain, in their own
 directory, support files needed by these eclasses.
 
 \section{The Metadata Directory}
@@ -255,7 +251,7 @@ various XML files used in the repository, and repository timestamps.
 \subsection{The metadata cache}
 
 The \t{metadata/cache} directory may contain a cached form of all important ebuild metadata
-variables. The contents of this directory are described in chapter~\ref{sec:metadata-cache}.
+variables. The contents of this directory are described in chapter~\ref{ch:metadata-cache}.
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 

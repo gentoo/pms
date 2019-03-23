@@ -1,7 +1,7 @@
 \chapter{Ebuild-defined Variables}
-\label{sec:ebuild-vars}
+\label{ch:ebuild-vars}
 
-\note{This section describes variables that may or must be defined by ebuilds. For variables that
+\note{This chapter describes variables that may or must be defined by ebuilds. For variables that
 are passed from the package manager to the ebuild, see section~\ref{sec:ebuild-env-vars}.}
 
 If any of these variables are set to invalid values, or if any of the mandatory variables are
@@ -41,6 +41,7 @@ All ebuilds must define at least the following variables:
 \end{description}
 
 \section{Optional Ebuild-defined Variables}
+\label{sec:optional-vars}
 
 Ebuilds may define any of the following variables:
 
@@ -56,7 +57,6 @@ Ebuilds may define any of the following variables:
 \item[LICENSE] The package's license. Each text token must be a valid license name, as per
     section~\ref{sec:license-names}, and must correspond to a tree ``licenses/'' entry
     (see section~\ref{sec:licenses-dir}). See section~\ref{sec:dependency-spec} for full syntax.
-    \label{ebuild-var-LICENSE}
 \item[KEYWORDS] A whitespace separated list of keywords for the ebuild. Each token must be a valid
     keyword name, as per section~\ref{sec:keyword-names}. See section~\ref{sec:keywords} for full
     syntax.
@@ -80,12 +80,12 @@ Ebuilds may define any of the following variables:
     any way.
 \item[RESTRICT] Zero or more behaviour restrictions for this package. See section~\ref{sec:restrict}
     for value meanings and section~\ref{sec:dependency-spec} for full syntax.
-\item[DEPEND] See section~\ref{sec:dependencies}.
-\item[RDEPEND] See section~\ref{sec:dependencies}. For some EAPIs, \t{RDEPEND} has special behaviour
+\item[DEPEND] See chapter~\ref{ch:dependencies}.
+\item[RDEPEND] See chapter~\ref{ch:dependencies}. For some EAPIs, \t{RDEPEND} has special behaviour
     for its value if unset and when used with an eclass. See section~\ref{sec:rdepend-depend} for
     details.
-\item[PDEPEND] See section~\ref{sec:dependencies}.
-\item[BDEPEND] See section~\ref{sec:dependencies}.
+\item[PDEPEND] See chapter~\ref{ch:dependencies}.
+\item[BDEPEND] See chapter~\ref{ch:dependencies}.
 \end{description}
 
 \ChangeWhenAddingAnEAPI{7}

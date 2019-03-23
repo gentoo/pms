@@ -1,5 +1,5 @@
 \chapter{Profiles}
-\label{sec:profiles}
+\label{ch:profiles}
 
 \section{General Principles}
 Generally, a profile defines information specific to a certain `type' of system---it lies somewhere
@@ -111,7 +111,7 @@ installed unless unmasked by the user's configuration. In some EAPIs, \t{package
 directory instead of a regular file as per section~\ref{sec:line-stacking}.
 
 Note that the \t{-spec} syntax can be used to remove a mask in a parent profile, but not
-necessarily a global mask (from \t{profiles/package.mask}, section~\ref{profiles-package.mask}).
+necessarily a global mask (from \t{profiles/package.mask}, section~\ref{sec:profiles-dir}).
 
 \note{Portage currently treats \t{profiles/package.mask} as being on the leftmost branch of the
 inherit tree when it comes to \t{-lines}. This behaviour may not be relied upon.}
