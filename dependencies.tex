@@ -133,20 +133,6 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 In particular, note that whitespace is not optional.
 
 \ChangeWhenAddingAnEAPI{7}
-\begin{centertable}{EAPIs supporting \t{SRC_URI} arrows}
-    \label{tab:uri-arrows-table}
-    \begin{tabular}{ll}
-      \toprule
-      \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{SRC_URI} arrows?}} \\
-      \midrule
-      0, 1              & No  \\
-      2, 3, 4, 5, 6, 7  & Yes \\
-      \bottomrule
-    \end{tabular}
-\end{centertable}
-
-\ChangeWhenAddingAnEAPI{7}
 \begin{centertable}{EAPIs supporting \t{REQUIRED_USE ??}\ groups}
     \label{tab:at-most-one-of-table}
     \begin{tabular}{ll}
@@ -396,71 +382,6 @@ would not have to be part of \t{IUSE}.}
 
 It is an error for an ebuild to use a conditional use dependency when that ebuild does not have the
 flag in \t{IUSE_EFFECTIVE}.
-
-\subsection{USE state constraints}
-\label{sec:required-use}
-\t{REQUIRED_USE} contains a list of assertions that must be met by the configuration of \t{USE}
-flags to be valid for this ebuild. In order to be matched, a \t{USE} flag in a terminal element
-must be enabled (or disabled if it has an exclamation mark prefix).
-
-If the package manager encounters a package version where \t{REQUIRED_USE} assertions are not met,
-it must treat this package version as if it was masked. No phase functions must be called.
-
-It is an error for a flag to be used if it is not included in \t{IUSE_EFFECTIVE}.
-
-\subsection{Restrict}
-\label{sec:restrict}
-
-The following tokens are permitted inside \t{RESTRICT}:
-
-\begin{description}
-\item[mirror] The package's \t{SRC_URI} entries may not be mirrored, and mirrors should not
-    be checked when fetching.
-\item[fetch] The package's \t{SRC_URI} entries may not be downloaded automatically. If
-    entries are not available, \t{pkg_nofetch} is called. Implies \t{mirror}.
-\item[strip] No stripping of debug symbols from files to be installed may be performed. In EAPIs
-    listed in table~\ref{tab:staging-area-commands} as supporting controllable stripping, this
-    behaviour may be altered by the \t{dostrip} command.
-\item[userpriv] The package manager may not drop root privileges when building the package.
-\item[test] The \t{src_test} phase must not be run.
-\end{description}
-
-Package managers may recognise other tokens, but ebuilds may not rely upon them being supported.
-
-\subsection{Properties}
-\label{sec:properties}
-
-The following tokens are permitted inside \t{PROPERTIES}:
-
-\begin{description}
-\item[interactive] The package may require interaction with the user via the tty.
-\end{description}
-
-Ebuilds may not rely upon any token being supported.
-
-\subsection{SRC_URI}
-\label{sec:src-uri-behaviour}
-
-All filename components that are enabled (i.\,e.\ not inside a use-conditional block that is not
-matched) in \t{SRC_URI} must be available in the \t{DISTDIR} directory. In addition, these
-components are used to make the \t{A} and \t{AA} variables.
-
-If a component contains a full URI with protocol, that download location must be used. Package
-managers may also consult mirrors for their files.
-
-The special \t{mirror://} protocol must be supported. See section~\ref{sec:thirdpartymirrors} for mirror
-details.
-
-If a simple filename rather than a full URI is provided, the package manager can only use mirrors to
-download the file.
-
-The \t{RESTRICT} metadata key can be used to impose additional restrictions upon downloading---see
-section~\ref{sec:restrict} for details.
-
-\featurelabel{src-uri-arrows} In EAPIs supporting arrows, if an arrow is used, the filename used
-when saving to \t{DISTDIR} shall instead be the name on the right of the arrow. When consulting
-mirrors (except for those explicitly listed on the left of the arrow, if \t{mirror://} is used), the
-filename to the right of the arrow shall be requested instead of the filename in the URI.
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 

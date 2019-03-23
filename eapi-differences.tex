@@ -68,6 +68,9 @@ Bash version & \compactfeatureref{bash-version} &
 \t{PROPERTIES} & \compactfeatureref{properties} &
     Optionally & Yes & Yes & Yes & Yes \\
 
+\t{SRC_URI} arrows & \compactfeatureref{src-uri-arrows} &
+    * & Yes & Yes & Yes & Yes \\
+
 \t{RDEPEND=DEPEND} & \compactfeatureref{rdepend-depend} &
     Yes & No & No & No & No \\
 
@@ -83,9 +86,6 @@ Bash version & \compactfeatureref{bash-version} &
 Empty \t{||}, \t{\textasciicircum\textasciicircum} groups match &
     \compactfeatureref{empty-dep-groups} &
     Yes & Yes & Yes & Yes & No \\
-
-\t{SRC_URI} arrows & \compactfeatureref{src-uri-arrows} &
-    * & Yes & Yes & Yes & Yes \\
 
 Slot dependencies & \compactfeatureref{slot-deps} &
     * & Named & Named and Operator & Named and Operator & Named and Operator \\
@@ -343,9 +343,9 @@ EAPI 1 is EAPI 0 with the following changes:
 EAPI 2 is EAPI 1 with the following changes:
 
 \begin{compactitem}
+\item \t{SRC_URI} arrows, \featureref{src-uri-arrows}.
 \item Use dependencies, \featureref{use-deps}.
 \item \t{!}\ and \t{!!}\ blockers, \featureref{bang-strength}.
-\item \t{SRC_URI} arrows, \featureref{src-uri-arrows}.
 \item \t{src_prepare}, \featureref{src-prepare}.
 \item \t{src_configure}, \featureref{src-configure}.
 \item Different \t{src_compile} implementation, \featureref{src-compile-2}.
@@ -370,8 +370,8 @@ EAPI 3 is EAPI 2 with the following changes:
 EAPI 4 is EAPI 3 with the following changes:
 
 \begin{compactitem}
-\item \t{PROPERTIES} support is mandatory, \featureref{properties}.
 \item \t{REQUIRED_USE}, \featureref{required-use}.
+\item \t{PROPERTIES} support is mandatory, \featureref{properties}.
 \item \t{RDEPEND=DEPEND} no longer done, \featureref{rdepend-depend}.
 \item \t{DEFINED_PHASES} support is mandatory, \featureref{defined-phases}.
 \item Use dependency defaults, \featureref{use-dep-defaults}.
