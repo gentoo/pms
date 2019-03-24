@@ -86,8 +86,8 @@ Table~\ref{tab:phase-function-dependency-classes} lists dependencies which must 
 a particular phase function is executed. Table~\ref{tab:dep-class-api} summarises additional
 interfaces related to the dependency classes.
 
-In addition, \t{SRC_URI}, \t{HOMEPAGE}, \t{RESTRICT}, \t{PROPERTIES}, \t{LICENSE} and
-\t{REQUIRED_USE} use dependency-style specifications to specify their values.
+In addition, \t{HOMEPAGE}, \t{SRC_URI}, \t{LICENSE}, \t{REQUIRED_USE}, \t{PROPERTIES} and
+\t{RESTRICT} use dependency-style specifications to specify their values.
 
 \section{Dependency Specification Format}
 \label{sec:dependency-spec}
@@ -98,14 +98,14 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 \begin{compactitem}
 \item A package dependency specification. Permitted in \t{DEPEND}, \t{BDEPEND}, \t{RDEPEND},
     \t{PDEPEND}.
-\item A URI, in the form \t{proto://host/path}. Permitted in \t{SRC_URI} and \t{HOMEPAGE}\@.
+\item A URI, in the form \t{proto://host/path}. Permitted in \t{HOMEPAGE} and \t{SRC_URI}\@.
     In EAPIs listed in table~\ref{tab:uri-arrows-table} as supporting \t{SRC_URI} arrows, may
     optionally be followed by whitespace, then \t{->}, then whitespace, then a simple filename when
     in \t{SRC_URI}\@. For \t{SRC_URI} behaviour, see section~\ref{sec:src-uri-behaviour}.
 \item A flat filename. Permitted in \t{SRC_URI}.
 \item A license name (e.\,g.\ \t{GPL-2}). Permitted in \t{LICENSE}.
 \item A use flag name, optionally preceded by an exclamation mark. Permitted in \t{REQUIRED_USE}.
-\item A simple string. Permitted in \t{RESTRICT} and \t{PROPERTIES}.
+\item A simple string. Permitted in \t{PROPERTIES} and \t{RESTRICT}.
 \item An all-of group, which consists of an open parenthesis, followed by whitespace,
     followed by one or more of (a dependency item of any kind followed by whitespace), followed
     by a close parenthesis. More formally:
