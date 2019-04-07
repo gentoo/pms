@@ -102,7 +102,8 @@
     \ifdim\columnwidth>\textheight\@tempswatrue\fi
 }
 
-\bibliographystyle{plainurl}
+% Support url fields in bibliography entries
+\bibliographystyle{unsrturl}
 
 % Redefine the titlepage environment not to reset the page number
 \renewenvironment{titlepage}{\newpage\thispagestyle{empty}}{\newpage}
