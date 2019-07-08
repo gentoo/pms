@@ -954,7 +954,7 @@ the second, inclusively.
 \item[ver_cut] Takes a range as the first argument, and optionally a version string as the second.
     Prints a substring of the version string starting at the version component specified as start
     of the range and ending at the version component specified as end of the range. If the version
-    string is not specified, \t{\$\{PVR\}} is used.
+    string is not specified, \t{\$\{PV\}} is used.
 
     If the range spans outside the present version components, the missing components and separators
     are presumed empty. In particular, the range starting at zero includes the zeroth version
@@ -965,7 +965,7 @@ the second, inclusively.
 \item[ver_rs] Takes one or more pairs of arguments, optionally followed by a version string.
     Every argument pair specifies a range and a replacement string. Prints a version string after
     performing the specified separator substitutions. If the version string is not specified,
-    \t{\$\{PVR\}} is used.
+    \t{\$\{PV\}} is used.
 
     For every argument pair specified, each of the version separators present at indices specified
     by the range is replaced with the replacement string, in order. If the range spans outside
