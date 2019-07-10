@@ -42,7 +42,6 @@
     paralist,   % Additional list environments
     parskip,    % Space between paragraphs instead of indentation
     underscore, % Allow simple _ instead of \_
-    verbatim,   % Extend the print-as-is functionality
     chngcntr,   % Redefinition of counters
     tocbibind   % Add bibliography to table of contents
 }
