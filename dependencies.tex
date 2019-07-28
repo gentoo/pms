@@ -36,9 +36,23 @@
       \midrule
       Binary compatible with    & \t{CBUILD}      & \t{CHOST}          & \t{CHOST}         \\
       Base unprefixed path      & \t{/}           & \t{\$\{SYSROOT\}}  & \t{\$\{ROOT\}}    \\
-      Relevant offset-prefix    & \t{\$\{BROOT\}} & \t{\$\{EPREFIX\}}  & \t{\$\{EPREFIX\}} \\
+      Relevant offset-prefix    & \t{\$\{BROOT\}} & See table~\ref{tab:depend-prefix}
+                                                                       & \t{\$\{EPREFIX\}} \\
       Path combined with prefix & \t{\$\{BROOT\}} & \t{\$\{ESYSROOT\}} & \t{\$\{EROOT\}}   \\
       PM query command option   & \t{-b}          & \t{-d}             & \t{-r}            \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\begin{centertable}{Prefix values for \t{DEPEND}}
+    \label{tab:depend-prefix}
+    \begin{tabular}{llll}
+      \toprule
+      If \t{SYSROOT} is:     & \t{\$\{ROOT\}}    & Empty, and \t{ROOT} is non-empty
+                                                                   & Other             \\
+      \midrule
+      Then offset-prefix is: & \t{\$\{EPREFIX\}} & \t{\$\{BROOT\}} & Empty             \\
+      And \t{ESYSROOT} is:   & \t{\$\{EROOT\}}   & \t{\$\{BROOT\}} & \t{\$\{SYSROOT\}} \\
       \bottomrule
     \end{tabular}
 \end{centertable}
