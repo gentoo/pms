@@ -466,8 +466,9 @@ set, though.
 \label{sec:trailing-slash}
 
 Unless specified otherwise, the paths provided through package manager variables do not end with
-a trailing slash and cannot be empty. A few exceptions to that rule are listed
-in table~\ref{tab:trailing-slash} along with applicable EAPIs.
+a trailing slash. Consequently, the system root directory will be represented by the empty string.
+A few exceptions to this rule are listed in table~\ref{tab:trailing-slash} along with applicable
+EAPIs.
 
 For EAPIs where those variables are defined to always end with a trailing slash, the package manager
 guarantees that a trailing slash will always be appended to the path in question. If the path
