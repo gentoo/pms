@@ -439,9 +439,8 @@ differences between these previous EAPIs.
         \code{BDEPEND} type dependencies, typically executable build
         tools.
         See \featureref{broot}.
-        \item[\code{econf}]
-        Option \code{-{}-with-sysroot=\$\{ESYSROOT\}} is passed to
-        configure, if this option is supported.
+        \item[\code{econf}] If supported, configure will be called
+        with the \code{-{}-with-sysroot=\$\{ESYSROOT:-/\}} option.
         See \featureref{econf-options}.
         \item[\code{has_version} and \code{best_version}] These
         helpers support \code{-b}, \code{-d} or \code{-r} options,
