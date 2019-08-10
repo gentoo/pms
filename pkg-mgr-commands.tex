@@ -402,16 +402,16 @@ commands once the current phase function has returned.
 \caption{\t{einstall} command} \label{lst:einstall}
 \begin{verbatim}
 emake \
-   prefix="${ED}"/usr \
-   datadir="${ED}"/usr/share \
-   mandir="${ED}"/usr/share/man \
-   infodir="${ED}"/usr/share/info \
-   libdir="${ED}"/usr/${libdir} \
-   localstatedir="${ED}"/var/lib \
-   sysconfdir="${ED}"/etc \
-   -j1 \
-   "$@" \
-   install
+    prefix="${ED}"/usr \
+    datadir="${ED}"/usr/share \
+    mandir="${ED}"/usr/share/man \
+    infodir="${ED}"/usr/share/info \
+    libdir="${ED}"/usr/${libdir} \
+    localstatedir="${ED}"/var/lib \
+    sysconfdir="${ED}"/etc \
+    -j1 \
+    "$@" \
+    install
 \end{verbatim}
 \end{listing}
 
