@@ -69,7 +69,7 @@ bash syntax, is allowed as follows:
 These files are a simple one-item-per-line list, which is inherited in the following manner: the
 parent profile's list is taken, and the current profile's list appended. If any line begins with a
 hyphen, then any lines previous to it whose contents are equal to the remainder of that line are
-removed from the list. Once again, blank lines and those beginning with a \# are discarded.
+removed from the list. Blank lines and those beginning with a \t{\#} are discarded.
 
 \featurelabel{profile-file-dirs} In EAPIs listed in table~\ref{tab:profile-file-dirs} as supporting
 directories for profile files, any of the files \t{package.mask}, \t{package.use}, \t{use.*} and
