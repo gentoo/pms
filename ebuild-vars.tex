@@ -169,16 +169,24 @@ on the right of the arrow. When consulting mirrors (except for those explicitly 
 of the arrow, if \t{mirror://} is used), the filename to the right of the arrow shall be requested
 instead of the filename in the URI.
 
+\featurelabel{uri-restrict} In EAPIs listed in table~\ref{tab:uri-arrows-table} as supporting
+selective URI restrictions, the URI protocol can be prefixed by an additional \t{fetch+} or
+\t{mirror+} term. If the ebuild is fetch restricted, the \t{fetch+} prefix undoes the fetch
+restriction for the URI (but not the implied mirror restriction). If the ebuild is fetch or mirror
+restricted, the \t{mirror+} prefix undoes both fetch and mirror restrictions for the URI.
+
 \ChangeWhenAddingAnEAPI{8}
-\begin{centertable}{EAPIs supporting \t{SRC_URI} arrows}
+\begin{centertable}{EAPIs supporting \t{SRC_URI} arrows and selective URI restrictions}
     \label{tab:uri-arrows-table}
-    \begin{tabular}{ll}
+    \begin{tabular}{lll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{SRC_URI} arrows?}} \\
+      \multicolumn{1}{c}{\textbf{Supports \t{SRC_URI} arrows?}} &
+      \multicolumn{1}{c}{\textbf{Supports selective URI restrictions?}} \\
       \midrule
-      0, 1                & No  \\
-      2, 3, 4, 5, 6, 7, 8 & Yes \\
+      0, 1              & No  & No  \\
+      2, 3, 4, 5, 6, 7  & Yes & No  \\
+      8                 & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}

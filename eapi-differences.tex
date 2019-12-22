@@ -74,6 +74,9 @@ Bash version & \compactfeatureref{bash-version} &
 \t{SRC_URI} arrows & \compactfeatureref{src-uri-arrows} &
     * & Yes & Yes & Yes & Yes \\
 
+Selective URI restrictions & \compactfeatureref{uri-restrict} &
+    No & No & No & No & Yes \\
+
 \t{RDEPEND=DEPEND} & \compactfeatureref{rdepend-depend} &
     * & No & No & No & No \\
 
@@ -486,6 +489,7 @@ EAPI 8 is EAPI 7 with the following changes:
 \begin{compactitem}
 \item Less strict naming rules for files in \t{updates} directory, \featureref{updates-filenames}.
 \item Bash version is 5.0, \featureref{bash-version}.
+\item Selective fetch/mirror restriction, \featureref{uri-restrict}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{8}
