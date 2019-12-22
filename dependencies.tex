@@ -21,7 +21,7 @@
           \t{src_install} & \t{DEPEND}, \t{BDEPEND} \\
       \addlinespace
       \t{pkg_preinst}, \t{pkg_postinst}, \t{pkg_prerm}, \t{pkg_postrm} &
-          \t{RDEPEND} \\
+          \t{RDEPEND}, \t{IDEPEND} \\
       \addlinespace
       \t{pkg_config} & \t{RDEPEND}, \t{PDEPEND} \\
       \bottomrule
@@ -32,7 +32,7 @@
     \label{tab:dep-class-api}
     \begin{tabular}{llll}
       \toprule
-                                & \t{BDEPEND}     & \t{DEPEND}         & \t{RDEPEND}, \t{PDEPEND} \\
+                       & \t{BDEPEND}, \t{IDEPEND} & \t{DEPEND}         & \t{RDEPEND}, \t{PDEPEND} \\
       \midrule
       Binary compatible with    & \t{CBUILD}      & \t{CHOST}          & \t{CHOST}         \\
       Base unprefixed path      & \t{/}           & \t{\$\{SYSROOT\}}  & \t{\$\{ROOT\}}    \\
@@ -82,16 +82,24 @@ as supporting \t{BDEPEND}, the build dependencies are split into two subclasses:
     dependency.
 \end{compactitem}
 
+\featurelabel{idepend} Additionally, in EAPIs listed in table~\ref{tab:depend-table} as supporting
+\t{IDEPEND}, install-time dependencies can be specified. These dependencies are binary compatible
+with the native build system (\t{CBUILD}). Ebuilds are allowed to call them in \t{pkg_preinst} and
+\t{pkg_postinst}. Ebuilds may also call them in \t{pkg_prerm} and \t{pkg_postrm} but must not rely
+on them being available.
+
 \ChangeWhenAddingAnEAPI{8}
 \begin{centertable}{EAPIs supporting additional dependency types}
     \label{tab:depend-table}
-    \begin{tabular}{ll}
+    \begin{tabular}{lll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{BDEPEND}?}} \\
+      \multicolumn{1}{c}{\textbf{Supports \t{BDEPEND}?}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{IDEPEND}?}} \\
       \midrule
-      0, 1, 2, 3, 4, 5, 6 & No  \\
-      7, 8                & Yes \\
+      0, 1, 2, 3, 4, 5, 6 & No  & No  \\
+      7                   & Yes & No  \\
+      8                   & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -111,7 +119,7 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 
 \begin{compactitem}
 \item A package dependency specification. Permitted in \t{DEPEND}, \t{BDEPEND}, \t{RDEPEND},
-    \t{PDEPEND}.
+    \t{PDEPEND}, \t{IDEPEND}.
 \item A URI, in the form \t{proto://host/path}. Permitted in \t{HOMEPAGE} and \t{SRC_URI}\@.
     In EAPIs listed in table~\ref{tab:uri-arrows-table} as supporting \t{SRC_URI} arrows, may
     optionally be followed by whitespace, then \t{->}, then whitespace, then a simple filename when
@@ -129,7 +137,8 @@ be surrounded on both sides by whitespace, except at the start and end of the st
     followed by an open parenthesis, followed by whitespace, followed by one or more
     of (a dependency item of any kind followed by whitespace), followed by a close parenthesis.
     More formally: \t{any-of} \t{::=} \t{'||' whitespace '(' whitespace (item whitespace)+ ')'}.
-    Permitted in \t{DEPEND}, \t{BDEPEND}, \t{RDEPEND}, \t{PDEPEND}, \t{LICENSE}, \t{REQUIRED_USE}.
+    Permitted in \t{DEPEND}, \t{BDEPEND}, \t{RDEPEND}, \t{PDEPEND}, \t{IDEPEND}, \t{LICENSE},
+    \t{REQUIRED_USE}.
 \item An exactly-one-of group, which has the same format as the any-of group, but begins with the
     string \t{\textasciicircum\textasciicircum} instead. Permitted in \t{REQUIRED_USE}.
 \item \featurelabel{at-most-one-of} An at-most-one-of group, which has the same format as the
