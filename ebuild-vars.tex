@@ -159,11 +159,9 @@ managers may also consult mirrors for their files.
 The special \t{mirror://} protocol must be supported. See section~\ref{sec:thirdpartymirrors} for
 mirror details.
 
-If a simple filename rather than a full URI is provided, the package manager can only use mirrors
-to download the file.
-
 The \t{RESTRICT} metadata key can be used to impose additional restrictions upon downloading---see
-section~\ref{sec:restrict} for details.
+section~\ref{sec:restrict} for details. Fetch restricted packages may use a simple filename instead
+of a full URI.
 
 \featurelabel{src-uri-arrows} In EAPIs listed in table~\ref{tab:uri-arrows-table} as supporting
 arrows, if an arrow is used, the filename used when saving to \t{DISTDIR} shall instead be the name
