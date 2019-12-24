@@ -1153,10 +1153,13 @@ has returned.
     \item bzip2-compressed tar files (\t{*.tar.bz2, *.tbz2, *.tar.bz, *.tbz}). Ebuilds must ensure
         that bzip2 and GNU tar are installed.
     \item zip files (\t{*.zip, *.ZIP, *.jar}). Ebuilds must ensure that Info-ZIP Unzip is installed.
-    \item 7zip files (\t{*.7z, *.7Z}). Ebuilds must ensure that P7ZIP is installed.
+    \item 7zip files (\t{*.7z, *.7Z}). Ebuilds must ensure that P7ZIP is installed. Only for EAPIs
+        listed in table~\ref{tab:unpack-extensions-table} as supporting \t{.7z}.
     \item rar files (\t{*.rar, *.RAR}). Ebuilds must ensure that RARLAB's unrar is installed.
+        Only for EAPIs listed in table~\ref{tab:unpack-extensions-table} as supporting \t{.rar}.
     \item LHA archives (\t{*.LHA, *.LHa, *.lha, *.lzh}). Ebuilds must ensure that the lha program is
-        installed.
+        installed. Only for EAPIs listed in table~\ref{tab:unpack-extensions-table} as supporting
+        \t{.lha}.
     \item ar archives (\t{*.a}). Ebuilds must ensure that GNU binutils is installed.
     \item deb packages (\t{*.deb}). Ebuilds must ensure that the deb2targz program is installed on
         those platforms where the GNU binutils ar program is not available and the installed ar
@@ -1195,16 +1198,20 @@ has returned.
     \ChangeWhenAddingAnEAPI{8}
     \begin{centertable}{\t{unpack} extensions for EAPIs}
         \label{tab:unpack-extensions-table}
-        \begin{tabular}{llll}
+        \begin{tabular}{llllllll}
           \toprule
           \multicolumn{1}{c}{\textbf{EAPI}} &
           \multicolumn{1}{c}{\textbf{\t{.xz}?}} &
           \multicolumn{1}{c}{\textbf{\t{.tar.xz}?}} &
-          \multicolumn{1}{c}{\textbf{\t{.txz}?}} \\
+          \multicolumn{1}{c}{\textbf{\t{.txz}?}} &
+          \multicolumn{1}{c}{\textbf{\t{.7z}?}} &
+          \multicolumn{1}{c}{\textbf{\t{.rar}?}} &
+          \multicolumn{1}{c}{\textbf{\t{.lha}?}} \\
           \midrule
-          0, 1, 2           & No  & No  & No  \\
-          3, 4, 5           & Yes & Yes & No  \\
-          6, 7, 8           & Yes & Yes & Yes \\
+          0, 1, 2           & No  & No  & No  & Yes & Yes & Yes \\
+          3, 4, 5           & Yes & Yes & No  & Yes & Yes & Yes \\
+          6, 7              & Yes & Yes & Yes & Yes & Yes & Yes \\
+          8                 & Yes & Yes & Yes & No  & No  & No  \\
           \bottomrule
         \end{tabular}
     \end{centertable}

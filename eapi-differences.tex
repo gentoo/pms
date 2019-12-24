@@ -341,6 +341,15 @@ Controllable stripping & \compactfeatureref{dostrip} &
 \t{unpack} support for \t{txz} & \compactfeatureref{unpack-extensions} &
     No & No & Yes & Yes & Yes \\
 
+\t{unpack} support for \t{7z} & \compactfeatureref{unpack-extensions} &
+    Yes & Yes & Yes & Yes & No \\
+
+\t{unpack} support for \t{lha} & \compactfeatureref{unpack-extensions} &
+    Yes & Yes & Yes & Yes & No \\
+
+\t{unpack} support for \t{rar} & \compactfeatureref{unpack-extensions} &
+    Yes & Yes & Yes & Yes & No \\
+
 \t{unpack} case-insensitive & \compactfeatureref{unpack-ignore-case} &
     No & No & Yes & Yes & Yes \\
 
@@ -533,6 +542,7 @@ EAPI 8 is EAPI 7 with the following changes:
 \item \t{insopts} no longer affects \t{doconfd}, \t{doenvd} and \t{doheader}, \featureref{insopts}.
 \item \t{exeopts} no longer affects \t{doinitd}, \featureref{exeopts}.
 \item \t{usev} supports an optional second argument, \featureref{usev}.
+\item \t{unpack} no longer supports \t{.7z}, \t{.rar}, \t{.lha}, \featureref{unpack-extensions}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{8}
