@@ -279,13 +279,8 @@ The following operators are available:
 \subsection{Block operator}
 
 If the specification is prefixed with one or two exclamation marks, the named dependency is a block
-rather than a requirement---that is to say, the specified package must not be installed, with the
-following exceptions:
-
-\begin{compactitem}
-\item Blocks on a package provided exclusively by the ebuild do not count.
-\item Weak blocks on the package version of the ebuild itself do not count.
-\end{compactitem}
+rather than a requirement---that is to say, the specified package must not be installed. As an
+exception, weak blocks on the package version of the ebuild itself do not count.
 
 \featurelabel{bang-strength} There are two strengths of block: weak and strong. A weak block may be
 ignored by the package manager, so long as any blocked package will be uninstalled later on. A
