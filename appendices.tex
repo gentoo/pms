@@ -78,6 +78,10 @@ in mind when handling dependencies.
 Old-style virtuals were supported by EAPIs \t{0}, \t{1}, \t{2}, \t{3} and \t{4}. They were phased
 out via GLEP 37~\cite{Glep37} and finally removed in 2011.
 
+\note{A `new-style virtual' is a normal package that installs no files and uses its dependency
+requirements to pull in a `provider'. This does not require any special handling from the package
+manager.}
+
 \subsection{EAPI parsing}
 The method to specify the EAPI of an ebuild used to be a shell variable assignment, and the package
 manager had to source the ebuild in order to determine the EAPI\@. Therefore any ebuild using
