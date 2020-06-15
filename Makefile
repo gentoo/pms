@@ -51,10 +51,6 @@ pms.html: $(LATEXFILES) pms.bbl $(COMMITINFO)
 	@# replace ligatures by their component letters
 	LC_ALL=C sed -i "$$(printf 's/\\xef\\xac\\x8%s/%s/g;' \
 	  0 ff 1 fi 2 fl 3 ffi 4 ffl)" $@
-	@# work around irregularity in how links to longtables are
-	@# formatted in the List of Tables
-	LC_ALL=C sed -Ei '/<span class="lotToc" *>\B/{N;N;'\
-	's/([^>]*<a\s+href="[^"]+">)([0-9A-Z.]+)\s+/\2\1/;}' $@
 	@# remove redundant span elements
 	LC_ALL=C sed -Ei ':x;/<span(\s+[^>]*)?$$/{N;bx;};'\
 	':y;s,(<span\s+[^>]*>)([^<]*)</span>\1,\1\2,;ty' $@
