@@ -17,8 +17,6 @@
 \PassOptionsToPackage{textwidth=400pt,textheight=700pt,
     left=20mm,marginparsep=10pt,marginparwidth=40mm,
     vmarginratio=1:2,includehead}{geometry}
-% Position caption of float environments at the top
-\PassOptionsToPackage{position=top,labelfont=bf}{caption}
 % Enable UTF-8 input encoding
 \PassOptionsToPackage{utf8}{inputenc}
 \PassOptionsToPackage{quiet}{marginnote}
@@ -43,20 +41,14 @@
     parskip,    % Space between paragraphs instead of indentation
     underscore, % Allow simple _ instead of \_
     chngcntr,   % Redefinition of counters
-    tocbibind   % Add bibliography to table of contents
+    tocbibind,  % Add bibliography to table of contents
+    float,      % More control over float environments
+    hyperref,   % Support for hyperlinks
+    gitinfo2,   % Metadata from git
+    algorithm,  %
+    algorithmic % Set algorithms
 }
 
-% tex4ht workaround: hyperref needs to be loaded /after/ tex4ht injects itself
-\g@addto@macro\@documentclasshook{
-    \RequirePackage{
-        caption,        % Extended float environment formatting
-        float,          % More control over float environments
-        hyperref,       % Support for hyperlinks
-        gitinfo2,       % Metadata from git
-        algorithm,      %
-        algorithmic     % Set algorithms
-    }
-}
 \ClassInfo{pms}{Capsulation of LaTeX stuff for the Package Manager
     Specification, loaded baseclass: \ClassToLoad\MessageBreak}
 
@@ -74,15 +66,6 @@
     \@namedef{ver@eso-pic.sty}{9999/12/31}
     \setboolean{TEX4HT-HACKS}{true}
 \fi
-
-% tex4ht workaround: these need to happen after loading the float package
-\g@addto@macro\@documentclasshook{
-    \floatstyle{ruled}
-    \captionsetup[ruled]{labelsep=default,labelfont=bf}
-    \newfloat{listing}{tbp}{lol}[chapter]
-    \floatname{listing}{Listing}
-}
-\newcommand{\listoflistings}{\listof{listing}{List of Listings}}
 
 % Define own label and reference commands, that display the label in
 % the page margin.
@@ -117,11 +100,8 @@
 \counterwithout{footnote}{chapter}
 
 % Some shorthands for the lazy ones.
-% tex4ht workaround: this needs to happen after loading hyperref
-\g@addto@macro\@documentclasshook{
-    \renewcommand{\i}[1]{\textit{#1}}
-    \renewcommand{\t}[1]{\texttt{#1}}
-}
+\renewcommand{\i}[1]{\textit{#1}}
+\renewcommand{\t}[1]{\texttt{#1}}
 \newcommand{\e}[1]{\emph{#1}}
 \newcommand{\note}[1]{\begin{trivlist}\item\textbf{Note:} #1\end{trivlist}}
 
@@ -138,6 +118,17 @@
 % Define a new column type P for tables, like p but with ragged-right text
 \newcolumntype{P}[1]{>{\setlength\rightskip{0pt plus 1fil}}p{#1}}
 
+% Define a float environment for listings
+\floatstyle{ruled}
+\newfloat{listing}{tbp}{lol}[chapter]
+\floatname{listing}{Listing}
+\newcommand{\listoflistings}{\listof{listing}{List of Listings}}
+
+% We always place captions above floats, so redefine vertical spacings
+% Don't use the "caption" package because it interferes with TeX4ht
+\setlength\belowcaptionskip{\abovecaptionskip}
+\setlength\abovecaptionskip{0pt}
+
 % Prevent numbers in list of tables from overrunning into the table captions
 \renewcommand*{\l@figure}{\@dottedtocline{1}{1.5em}{2.8em}} % was 2.3em
 \let\l@table\l@figure
@@ -148,18 +139,16 @@
 \setlength\emergencystretch{1em} % was 0
 
 % Define some PDF meta-data.
-% tex4ht workaround: this needs to happen after loading hyperref
-\g@addto@macro\@documentclasshook{
-    \hypersetup{%
-        urlcolor=black,
-        colorlinks=true,
-        citecolor=black,
-        linkcolor=black,
-        pdflang={en},
-        pdfcreator={pdfLaTeX and hyperref},
-        pdfproducer={pdfLaTeX and hyperref},
-    }
+\hypersetup{%
+    urlcolor=black,
+    colorlinks=true,
+    citecolor=black,
+    linkcolor=black,
+    pdflang={en},
+    pdfcreator={pdfLaTeX and hyperref},
+    pdfproducer={pdfLaTeX and hyperref},
 }
+
 % Reads the last commit date from the Git repository and even succeeds
 % when none is available
 \date{%
