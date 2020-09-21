@@ -175,7 +175,7 @@
     }%
 }
 
-% vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
+% vim: set filetype=tex fileencoding=utf8 et tw=80 spell spelllang=en :
 
 %%% Local Variables:
 %%% mode: latex
@@ -183,5 +183,5 @@
 %%% LaTeX-indent-level: 4
 %%% LaTeX-item-indent: 0
 %%% TeX-brace-indent-level: 4
-%%% fill-column: 100
+%%% fill-column: 80
 %%% End:
