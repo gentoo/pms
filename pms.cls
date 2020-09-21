@@ -11,6 +11,7 @@
 \ProcessOptions\relax
 \LoadClass{\ClassToLoad}
 \PassOptionsToPackage{T1}{fontenc}
+\PassOptionsToPackage{scaled=0.92}{helvet}
 \PassOptionsToPackage{orig,english}{isodate}
 % Dimensions of the text area. Define a narrow left margin to make
 % room for margin notes in the right (outer) margin
@@ -28,6 +29,8 @@
 % algorithmic and algorithm to be loaded last to avoid failures
 \RequirePackage{%
     fontenc,    % Load extended font sets
+    mathptmx,   % Use Postscript fonts: Times ...
+    helvet,     % ... and Helvetica
     isodate,    % Date formatting and conversions
     geometry,   % Set page layout
     inputenc,   % Allow input methods apart from ASCII
@@ -56,10 +59,8 @@
 \newboolean{TEX4HT-HACKS}
 \ifx\HCode\undefined
     \RequirePackage{%
-        mathptmx,
         pdfpages        % Insert whole PDF documents as separate pages
     }
-    \RequirePackage[scaled=.90]{helvet}
     \setboolean{TEX4HT-HACKS}{false}
 \else
     \setboolean{TEX4HT-HACKS}{true}
