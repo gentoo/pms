@@ -123,6 +123,10 @@
 \floatname{listing}{Listing}
 \newcommand{\listoflistings}{\listof{listing}{List of Listings}}
 
+% Silence hyperref messages (see hint 11.3 in the hyperref manual)
+\providecommand*{\toclevel@algorithm}{0}
+\providecommand*{\toclevel@listing}{0}
+
 % We always place captions above floats, so redefine vertical spacings
 % Don't use the "caption" package because it interferes with TeX4ht
 \setlength\belowcaptionskip{\abovecaptionskip}
