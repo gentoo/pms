@@ -375,12 +375,8 @@ In all cases, the values of \t{IUSE_REFERENCEABLE} and \t{IUSE_EFFECTIVE} are un
 metadata generation.
 
 For EAPIs listed in table~\ref{tab:profile-iuse-injection-table} as not supporting profile defined
-\t{IUSE} injection, \t{IUSE_REFERENCEABLE} is equal to the calculated \t{IUSE} value. For EAPIs
-where profile defined \t{IUSE} injection is supported, \t{IUSE_REFERENCEABLE} is equal to
-\t{IUSE_EFFECTIVE}.
-
-For EAPIs listed in table~\ref{tab:profile-iuse-injection-table} as not supporting profile defined
-\t{IUSE} injection, \t{IUSE_EFFECTIVE} contains the following values:
+\t{IUSE} injection, \t{IUSE_REFERENCEABLE} is equal to the calculated \t{IUSE} value, and
+\t{IUSE_EFFECTIVE} contains the following values:
 
 \begin{compactitem}
 \item All values in the calculated \t{IUSE} value.
@@ -390,7 +386,8 @@ For EAPIs listed in table~\ref{tab:profile-iuse-injection-table} as not supporti
 \end{compactitem}
 
 \featurelabel{profile-iuse-inject} For EAPIs listed in table~\ref{tab:profile-iuse-injection-table}
-as supporting profile defined \t{IUSE} injection, \t{IUSE_EFFECTIVE} contains the following values:
+as supporting profile defined \t{IUSE} injection, \t{IUSE_REFERENCEABLE} and \t{IUSE_EFFECTIVE}
+are equal and contain the following values:
 
 \begin{compactitem}
 \item All values in the calculated \t{IUSE} value.
