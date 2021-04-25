@@ -44,10 +44,16 @@
     chngcntr,   % Redefinition of counters
     tocbibind,  % Add bibliography to table of contents
     float,      % More control over float environments
-    hyperref,   % Support for hyperlinks
-    gitinfo2,   % Metadata from git
-    algorithm,  %
-    algorithmic % Set algorithms
+    gitinfo2    % Metadata from git
+}
+
+% tex4ht workaround: hyperref needs to be loaded /after/ tex4ht injects itself
+\g@addto@macro\@documentclasshook{
+    \RequirePackage{%
+        hyperref,       % Support for hyperlinks
+        algorithm,      %
+        algorithmic     % Set algorithms
+    }
 }
 
 \ClassInfo{pms}{Capsulation of LaTeX stuff for the Package Manager
@@ -99,8 +105,11 @@
 \counterwithout{footnote}{chapter}
 
 % Some shorthands for the lazy ones.
-\renewcommand{\i}[1]{\textit{#1}}
-\renewcommand{\t}[1]{\texttt{#1}}
+% tex4ht workaround: this needs to happen after loading hyperref
+\g@addto@macro\@documentclasshook{
+    \renewcommand{\i}[1]{\textit{#1}}
+    \renewcommand{\t}[1]{\texttt{#1}}
+}
 \newcommand{\e}[1]{\emph{#1}}
 \newcommand{\note}[1]{\begin{trivlist}\item\textbf{Note:} #1\end{trivlist}}
 
@@ -142,14 +151,17 @@
 \setlength\emergencystretch{1em} % was 0
 
 % Define some PDF meta-data.
-\hypersetup{%
-    urlcolor=black,
-    colorlinks=true,
-    citecolor=black,
-    linkcolor=black,
-    pdflang={en},
-    pdfcreator={pdfLaTeX and hyperref},
-    pdfproducer={pdfLaTeX and hyperref},
+% tex4ht workaround: this needs to happen after loading hyperref
+\g@addto@macro\@documentclasshook{
+    \hypersetup{%
+        urlcolor=black,
+        colorlinks=true,
+        citecolor=black,
+        linkcolor=black,
+        pdflang={en},
+        pdfcreator={pdfLaTeX and hyperref},
+        pdfproducer={pdfLaTeX and hyperref},
+    }
 }
 
 % Reads the last commit date from the Git repository and even succeeds
