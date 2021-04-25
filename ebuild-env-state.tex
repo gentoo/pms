@@ -5,7 +5,7 @@ Exported and default scope variables are saved between functions. A non-local va
 function earlier in the call sequence must have its value preserved for later functions, including
 functions executed as part of a later uninstall.
 
-\note{\t{pkg_pretend} is \e{not} part of the normal call sequence, and does not take part in
+\note{\t{pkg_pretend} is \emph{not} part of the normal call sequence, and does not take part in
 environment saving.}
 
 Variables that were exported must remain exported in later functions; variables with default

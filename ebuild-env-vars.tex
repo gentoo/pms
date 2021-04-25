@@ -421,7 +421,7 @@ installing a package. Details are beyond the scope of this specification.
 
 \featurelabel{replace-version-vars} In EAPIs listed in table~\ref{tab:added-env-vars-table} as
 supporting it, the \t{REPLACING_VERSIONS} variable shall be defined in \t{pkg_preinst} and
-\t{pkg_postinst}.  In addition, it \e{may} be defined in \t{pkg_pretend} and \t{pkg_setup},
+\t{pkg_postinst}. In addition, it \emph{may} be defined in \t{pkg_pretend} and \t{pkg_setup},
 although ebuild authors should take care to handle binary package creation and installation
 correctly when using it in these phases.
 

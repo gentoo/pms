@@ -184,7 +184,7 @@ completing. Ebuilds must not run any of these commands once the current phase fu
     a failure message provided in its first and only argument, and then aborts the build process.
 
     \featurelabel{subshell-die} In EAPIs listed in table~\ref{tab:die-properties} as not providing
-    subshell support, \t{die} is \e{not} guaranteed to work correctly if called from a subshell
+    subshell support, \t{die} is \emph{not} guaranteed to work correctly if called from a subshell
     environment.
 \item[assert] Checks the value of the shell's pipe status variable, and if any component is non-zero
     (indicating failure), calls \t{die}, passing any parameters to it.
@@ -1027,7 +1027,7 @@ has returned.
     \item \featurelabel{unpack-absolute} Otherwise, for EAPIs listed in
         table~\ref{tab:unpack-behaviour} as supporting absolute and relative paths, the argument is
         interpreted as a literal path (absolute, or relative to the working directory); for EAPIs
-        listed as \e{not} supporting such paths, \t{unpack} shall abort the build process.
+        listed as \emph{not} supporting such paths, \t{unpack} shall abort the build process.
     \end{compactitem}
 
     Any unrecognised file format shall be skipped silently. If unpacking a supported file format
