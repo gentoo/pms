@@ -1,0 +1,17 @@
+certificate version 0.1
+pusher 5188335088415E2E! 1620906138 +0200
+pushee git+ssh://git.gentoo.org/proj/pms.git
+nonce 1620906138-c03db84ce1cf8c11f4d3ec049d848f082b0f09cd
+
+7f22926a8d79c02169a185cf3f648d17a18b8f9c d720b146647fdbe65a5acfb2c658b059578d68de refs/heads/eapi-8
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCAAdFiEEtDnZ1O9xIP68rzDbUYgzUIhBXi4FAmCdEJoACgkQUYgzUIhB
+Xi5jJQgAsXVc1MRAbr7Bcv0G5uuzinlei0DAVNCLdxEw55msFAYv8i7umrX88LlE
+WZwNbhKlqsWV21wN0BocMoVRGwGceODCiC1+ok9gDlQwBvy6tcxnOH48rm40zTro
+iAUIuSS8kgNQ/wfFP+78JwLvbZRJv4QjS2Ciy22DHOSPpKHmnjSNozkbya4HxWy+
+bcU1f7tsMmpZiUGDbnrECovkoDDDZC2ve4p+AY58P8u0WpszfxVa3QWZOTJsfZGE
+3QNbS0iw7TX0QvPsoEUj5wO+J1VSXzUX/+WLlsfPkzAuGNj1d5lTIoabCUKOhve1
+KzyJBq1ZL8Z2Xv+mwgrrWyLTNi+4Ow==
+=jun8
+-----END PGP SIGNATURE-----
