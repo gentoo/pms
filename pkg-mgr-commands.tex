@@ -936,15 +936,17 @@ table~\ref{tab:use-list-strictness}.
 \item[use] Returns shell true (0) if the first argument (a \t{USE} flag name) is enabled, false
     otherwise.  If the flag name is prefixed with \t{!}, returns true if the flag is disabled, and
     false if it is enabled. It is guaranteed that this command is quiet.
-\item[usev] The same as \t{use}, but also prints the flag name if the condition
-    is met.
+\item[usev] \featurelabel{usev} The same as \t{use}, but also prints the flag name if the condition
+    is met. In EAPIs listed in table~\ref{tab:use-list-args} as supporting an optional second
+    argument for \t{usev}, prints the second argument instead, if it is specified and if the
+    condition is met.
 \item[useq] Deprecated synonym for \t{use}.
     In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as per
     section~\ref{sec:banned-commands}.
 \item[use_with] \featurelabel{use-with} Has one-, two-, and three-argument forms. The first
     argument is a USE flag name, the second a \t{configure} option name (\t{\$\{opt\}}), defaulting
     to the same as the first argument if not provided, and the third is a string value
-    (\t{\$\{value\}}). For EAPIs listed in table~\ref{tab:use-with-third-arg} as not supporting it,
+    (\t{\$\{value\}}). For EAPIs listed in table~\ref{tab:use-list-args} as not supporting it,
     an empty third argument is treated as if it weren't provided. If the USE flag is set, outputs
     \t{-{}-with-\$\{opt\}=\$\{value\}} if the third argument was provided, and
     \t{-{}-with-\$\{opt\}} otherwise. If the flag is not set, then it outputs
@@ -979,15 +981,18 @@ table~\ref{tab:use-list-strictness}.
 \end{centertable}
 
 \ChangeWhenAddingAnEAPI{8}
-\begin{centertable}{EAPIs supporting empty third argument in \t{use_with} and \t{use_enable}}
-    \label{tab:use-with-third-arg}
-    \begin{tabular}{ll}
+\begin{centertable}{\t{usev}, \t{use_with} and \t{use_enable} arguments for EAPIs}
+    \label{tab:use-list-args}
+    \begin{tabular}{lll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Supports empty third argument?}} \\
+      \multicolumn{1}{P{8em}}{\textbf{\t{usev} has optional second argument?}} &
+      \multicolumn{1}{P{14em}}{\textbf{\t{use_with} and \t{use_enable} support empty third
+        argument?}} \\
       \midrule
-      0, 1, 2, 3        & No  \\
-      4, 5, 6, 7, 8     & Yes \\
+      0, 1, 2, 3        & No  & No  \\
+      4, 5, 6, 7        & No  & Yes \\
+      8                 & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}

@@ -317,6 +317,9 @@ Controllable stripping & \compactfeatureref{dostrip} &
 \t{dostrip} & \compactfeatureref{dostrip} &
     No & No & No & Yes & Yes \\
 
+\t{usev} second arg & \compactfeatureref{usev} &
+    No & No & No & No & Yes \\
+
 \t{use_with} empty third arg & \compactfeatureref{use-with} &
     * & Yes & Yes & Yes & Yes \\
 
@@ -529,6 +532,7 @@ EAPI 8 is EAPI 7 with the following changes:
 \item \t{dosym} can create relative paths, \featureref{dosym-relative}.
 \item \t{insopts} no longer affects \t{doconfd}, \t{doenvd} and \t{doheader}, \featureref{insopts}.
 \item \t{exeopts} no longer affects \t{doinitd}, \featureref{exeopts}.
+\item \t{usev} supports an optional second argument, \featureref{usev}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{8}
