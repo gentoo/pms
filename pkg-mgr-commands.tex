@@ -599,9 +599,28 @@ the current phase function has returned.
 
 \item[dosbin] As \t{dobin}, but installs to \t{DESTTREE/sbin}.
 
-\item[dosym] Creates a symbolic link named as for its second parameter, pointing to the first. If
-    the directory containing the new link does not exist, creates it. Failure behaviour is EAPI
-    dependent as per section~\ref{sec:failure-behaviour}.
+\item[dosym] Creates a symbolic link named as for its second parameter, pointing to the first.
+    If the directory containing the new link does not exist, creates it.
+
+    \featurelabel{dosym-relative} In EAPIs listed in table~\ref{tab:dosym-r} as supporting creation
+    of relative paths, when called with option \t{-r}, the first parameter (the link target) is
+    converted from an absolute path to a path relative to the the second parameter (the link name).
+    The  algorithm must return a result identical to the one returned by the function in
+    listing~\ref{lst:dosym-r}, with \t{realpath} and \t{dirname} from GNU coreutils version~8.32.
+    Specifying option \t{-r} together with a relative path as first (target) parameter is an error.
+
+    Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
+
+\begin{listing}[h]
+\caption{Create a relative path for \t{dosym -r}} \label{lst:dosym-r}
+\begin{verbatim}
+dosym_relative_path() {
+    local link=$(realpath -m -s "/${2#/}")
+    local linkdir=$(dirname "${link}")
+    realpath -m -s --relative-to="${linkdir}" "$1"
+}
+\end{verbatim}
+\end{listing}
 
 \item[fowners] Acts as for \t{chown}, but takes paths relative to the image directory. Failure
     behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
@@ -725,6 +744,20 @@ the current phase function has returned.
       \midrule
       0, 1, 2, 3, 4, 5, 6 & \t{\$\{DESTTREE\}/share/locale} \\
       7, 8                & \t{/usr/share/locale} \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\ChangeWhenAddingAnEAPI{8}
+\begin{centertable}{EAPIs supporting \t{dosym -r}}
+    \label{tab:dosym-r}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{\t{dosym} supports creation of relative paths?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6, 7  & No  \\
+      8                       & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
