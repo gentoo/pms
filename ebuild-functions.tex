@@ -142,9 +142,9 @@ post-unpack source preparation.
 The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR} as discussed in
 section~\ref{sec:s-to-workdir-fallback}.
 
-For EAPIs listed in table~\ref{tab:src-prepare-table} as using format~6, the default
+For EAPIs listed in table~\ref{tab:src-prepare-table} as using format 6 or~8, the default
 implementation used when the ebuild lacks the \t{src_prepare} function shall behave as in
-listing~\ref{lst:src-prepare-6}.
+listing~\ref{lst:src-prepare-6} or listing~\ref{lst:src-prepare-8}, respectively.
 
 For other EAPIs supporting \t{src_prepare}, the default implementation used when the ebuild lacks
 the \t{src_prepare} function is a no-op.
@@ -160,7 +160,8 @@ the \t{src_prepare} function is a no-op.
       \midrule
       0, 1              & No  & Not applicable \\
       2, 3, 4, 5        & Yes & no-op          \\
-      6, 7, 8           & Yes & 6              \\
+      6, 7              & Yes & 6              \\
+      8                 & Yes & 8              \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -173,6 +174,20 @@ src_prepare() {
         [[ -n ${PATCHES[@]} ]] && eapply "${PATCHES[@]}"
     else
         [[ -n ${PATCHES} ]] && eapply ${PATCHES}
+    fi
+    eapply_user
+}
+\end{verbatim}
+\end{listing}
+
+\begin{listing}[H]
+\caption{\t{src_prepare}, format~8} \label{lst:src-prepare-8}
+\begin{verbatim}
+src_prepare() {
+    if [[ ${PATCHES@a} == *a* ]]; then
+        [[ -n ${PATCHES[@]} ]] && eapply -- "${PATCHES[@]}"
+    else
+        [[ -n ${PATCHES} ]] && eapply -- ${PATCHES}
     fi
     eapply_user
 }

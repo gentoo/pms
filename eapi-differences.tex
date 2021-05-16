@@ -124,7 +124,7 @@ Working directory in \t{pkg_*} phases & \compactfeatureref{phase-function-dir} &
     * & Yes & Yes & Yes & Yes \\
 
 \t{src_prepare} style & \compactfeatureref{src-prepare} &
-    * & no-op & 6 & 6 & 6 \\
+    * & no-op & 6 & 6 & 8 \\
 
 \t{src_configure} & \compactfeatureref{src-configure} &
     * & Yes & Yes & Yes & Yes \\
@@ -498,6 +498,7 @@ EAPI 8 is EAPI 7 with the following changes:
 \item Selective fetch/mirror restriction, \featureref{uri-restrict}.
 \item \t{IDEPEND}, \featureref{idepend}.
 \item Empty working directory in \t{pkg_*} phase functions, \featureref{phase-function-dir}.
+\item Different \t{src_prepare} implementation, \featureref{src-prepare}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{8}
