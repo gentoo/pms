@@ -73,6 +73,16 @@ called, the package manager must abort the build process indicating an error.
       4, 5              & Yes & Yes & No  & No  & No  & No  \\
       6                 & Yes & Yes & Yes & No  & No  & No  \\
       7, 8              & Yes & Yes & Yes & Yes & Yes & Yes \\
+      \midrule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{6}{c}{\textbf{Command banned?}} \\
+      \multicolumn{1}{c}{} &
+      \multicolumn{1}{c}{\textbf{\t{useq}}} &
+      \multicolumn{1}{c}{\textbf{\t{hasv}}} &
+      \multicolumn{1}{c}{\textbf{\t{hasq}}} & & & \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6, 7  & No  & No  & No  & & & \\
+      8                       & Yes & Yes & Yes & & & \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -842,6 +852,8 @@ table~\ref{tab:use-list-strictness}.
 \item[usev] The same as \t{use}, but also prints the flag name if the condition
     is met.
 \item[useq] Deprecated synonym for \t{use}.
+    In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as per
+    section~\ref{sec:banned-commands}.
 \item[use_with] \featurelabel{use-with} Has one-, two-, and three-argument forms. The first
     argument is a USE flag name, the second a \t{configure} option name (\t{\$\{opt\}}), defaulting
     to the same as the first argument if not provided, and the third is a string value
@@ -916,7 +928,11 @@ These functions check whitespace-separated lists for a particular value.
 \item[has] Returns shell true (0) if the first argument (a word) is found in the list of subsequent
     arguments, false otherwise. Guaranteed quiet.
 \item[hasv] The same as \t{has}, but also prints the first argument if found.
+    In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as per
+    section~\ref{sec:banned-commands}.
 \item[hasq] Deprecated synonym for \t{has}.
+    In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as per
+    section~\ref{sec:banned-commands}.
 \end{description}
 
 \subsection{Version manipulation and comparison commands}

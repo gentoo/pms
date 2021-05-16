@@ -236,6 +236,15 @@ Most utilities die & \compactfeatureref{die-on-failure} &
 \t{libopts} & \compactfeatureref{banned-commands} &
     Yes & Yes & Yes & Banned & Banned \\
 
+\t{useq} & \compactfeatureref{banned-commands} &
+    Yes & Yes & Yes & Yes & Banned \\
+
+\t{hasv} & \compactfeatureref{banned-commands} &
+    Yes & Yes & Yes & Yes & Banned \\
+
+\t{hasq} & \compactfeatureref{banned-commands} &
+    Yes & Yes & Yes & Yes & Banned \\
+
 Query command options & \compactfeatureref{pm-query-options} &
     None & \t{-{}-host-root} & \t{-{}-host-root} & \t{-b}, \t{-d}, \t{-r} &
     \t{-b}, \t{-d}, \t{-r} \\
@@ -503,6 +512,8 @@ EAPI 8 is EAPI 7 with the following changes:
 \item Empty working directory in \t{pkg_*} phase functions, \featureref{phase-function-dir}.
 \item Different \t{src_prepare} implementation, \featureref{src-prepare}.
 \item \t{PROPERTIES} and \t{RESTRICT} accumulated across eclasses, \featureref{accumulate-vars}.
+\item \t{useq} banned, \featureref{banned-commands}.
+\item \t{hasv} and \t{hasq} banned, \featureref{banned-commands}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{8}
