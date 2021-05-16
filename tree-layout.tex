@@ -207,11 +207,14 @@ differs from that described in \t{use.desc}.
 
 \subsection{The updates directory}
 \label{sec:updates-dir}
-The \t{updates} directory is used to inform the package manager that a package has moved categories,
-names, or that a version has changed SLOT\@. It contains one file per quarter year, named
+\featurelabel{updates-filenames} The \t{updates} directory is used to inform the package manager
+that a package has moved categories, names, or that a version has changed SLOT\@. For EAPIs
+so specified by table~\ref{tab:updates-filenames}, it contains one file per quarter year, named
 \t{[1-4]Q-[YYYY]} for the first to fourth quarter of a given year, for example \t{1Q-2004} or
-\t{3Q-2006}. The format of each file is again line-based, with each line having one of the following
-formats:
+\t{3Q-2006}. For other EAPIs, all regular files in this directory will be processed, unless their
+name begins with a dot.
+
+The format of each file is again line-based, with each line having one of the following formats:
 \begin{verbatim}
 move <qpn1> <qpn2>
 slotmove <spec> <slot1> <slot2>
@@ -229,6 +232,20 @@ each file are processed in ascending order.
 Any name that has appeared as the origin of a move must not be reused in the future. Any slot
 that has appeared as the origin of a slot move may not be used by packages matching the spec of
 that slot move in the future.
+
+\ChangeWhenAddingAnEAPI{8}
+\begin{centertable}{Naming rules for files in \t{updates} directory for EAPIs}
+    \label{tab:updates-filenames}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Files per quarter year?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6, 7  & Yes \\
+      8                       & No  \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \section{The Licenses Directory}
 \label{sec:licenses-dir}
