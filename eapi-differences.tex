@@ -299,6 +299,12 @@ Output commands use stdout & \compactfeatureref{output-no-stdout} &
 \t{new*} support stdin & \compactfeatureref{newfoo-stdin} &
     No & Yes & Yes & Yes & Yes \\
 
+\t{insopts} affects misc.\ commands & \compactfeatureref{insopts} &
+    Yes & Yes & Yes & Yes & No \\
+
+\t{exeopts} affects \t{doinitd} & \compactfeatureref{exeopts} &
+    Yes & Yes & Yes & Yes & No \\
+
 Controllable compression & \compactfeatureref{docompress} &
     * & Yes & Yes & Yes & Yes \\
 
@@ -521,6 +527,8 @@ EAPI 8 is EAPI 7 with the following changes:
 \item \t{econf} adds \t{-{}-datarootdir}, \featureref{econf-options}.
 \item \t{econf} adds \t{-{}-disable-static}, \featureref{econf-options}.
 \item \t{dosym} can create relative paths, \featureref{dosym-relative}.
+\item \t{insopts} no longer affects \t{doconfd}, \t{doenvd} and \t{doheader}, \featureref{insopts}.
+\item \t{exeopts} no longer affects \t{doinitd}, \featureref{exeopts}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{8}
