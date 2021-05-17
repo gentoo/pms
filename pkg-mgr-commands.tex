@@ -338,27 +338,31 @@ commands once the current phase function has returned.
     \item \t{-{}-disable-silent-rules}, if the EAPI is listed in table~\ref{tab:econf-options-table}
         as using it. This option will only be passed if the string \t{-{}-disable-silent-rules}
         occurs in the output of \t{configure -{}-help}.
+    \item \t{-{}-disable-static}, if the EAPI is listed in table~\ref{tab:econf-options-table}
+        as using it. This option will only be passed if the string \t{-{}-disable-static} occurs
+        in the output of \t{configure -{}-help}.
     \end{itemize}
 
     \ChangeWhenAddingAnEAPI{8}
     \begin{centertable}{Extra \t{econf} arguments for EAPIs}
         \label{tab:econf-options-table}
-        \begin{tabular}{lllllll}
+        \begin{tabular}{llllllll}
           \toprule
           \multicolumn{1}{c}{\textbf{EAPI}} &
           \multicolumn{1}{P{9em}}{\textbf{-{}-disable-dependency-tracking}} &
           \multicolumn{1}{P{5em}}{\textbf{-{}-disable-silent-rules}} &
+          \multicolumn{1}{c}{\textbf{-{}-disable-static}} &
           \multicolumn{1}{c}{\textbf{-{}-datarootdir}} &
           \multicolumn{1}{c}{\textbf{-{}-docdir}} &
           \multicolumn{1}{c}{\textbf{-{}-htmldir}} &
           \multicolumn{1}{c}{\textbf{-{}-with-sysroot}} \\
           \midrule
-          0, 1, 2, 3        & No  & No  & No  & No  & No  & No  \\
-          4                 & Yes & No  & No  & No  & No  & No  \\
-          5                 & Yes & Yes & No  & No  & No  & No  \\
-          6                 & Yes & Yes & No  & Yes & Yes & No  \\
-          7                 & Yes & Yes & No  & Yes & Yes & Yes \\
-          8                 & Yes & Yes & Yes & Yes & Yes & Yes \\
+          0, 1, 2, 3        & No  & No  & No  & No  & No  & No  & No  \\
+          4                 & Yes & No  & No  & No  & No  & No  & No  \\
+          5                 & Yes & Yes & No  & No  & No  & No  & No  \\
+          6                 & Yes & Yes & No  & No  & Yes & Yes & No  \\
+          7                 & Yes & Yes & No  & No  & Yes & Yes & Yes \\
+          8                 & Yes & Yes & Yes & Yes & Yes & Yes & Yes \\
           \bottomrule
         \end{tabular}
     \end{centertable}

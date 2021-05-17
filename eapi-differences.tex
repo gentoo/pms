@@ -272,7 +272,8 @@ Output commands use stdout & \compactfeatureref{output-no-stdout} &
     disable dependency tracking, disable silent rules &
     disable dependency tracking, disable silent rules, docdir, htmldir &
     disable dependency tracking, disable silent rules, docdir, htmldir, with sysroot &
-    disable dependency tracking, disable silent rules, datarootdir, docdir, htmldir, with sysroot \\
+    disable dependency tracking, disable silent rules, disable static,
+    datarootdir, docdir, htmldir, with sysroot \\
 
 \t{dodoc -r} & \compactfeatureref{dodoc} &
     * & Yes & Yes & Yes & Yes \\
@@ -515,6 +516,7 @@ EAPI 8 is EAPI 7 with the following changes:
 \item \t{useq} banned, \featureref{banned-commands}.
 \item \t{hasv} and \t{hasq} banned, \featureref{banned-commands}.
 \item \t{econf} adds \t{-{}-datarootdir}, \featureref{econf-options}.
+\item \t{econf} adds \t{-{}-disable-static}, \featureref{econf-options}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{8}
