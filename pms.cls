@@ -27,6 +27,7 @@
 \PassOptionsToPackage{local}{gitinfo2}
 \PassOptionsToPackage{chapter}{algorithm}
 % algorithmic and algorithm to be loaded last to avoid failures
+\RequirePackage{parskip}[=v1] % Space between paragraphs instead of indentation
 \RequirePackage{%
     fontenc,    % Load extended font sets
     isodate,    % Date formatting and conversions
@@ -39,7 +40,6 @@
     lscape,     % Rotating pages
     marginnote, % Typeset a paragraph in the page margin
     paralist,   % Additional list environments
-    parskip,    % Space between paragraphs instead of indentation
     underscore, % Allow simple _ instead of \_
     chngcntr,   % Redefinition of counters
     tocbibind,  % Add bibliography to table of contents
