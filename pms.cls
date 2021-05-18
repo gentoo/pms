@@ -131,6 +131,9 @@
 \floatname{listing}{Listing}
 \newcommand{\listoflistings}{\listof{listing}{List of Listings}}
 
+% Prevent page break before a list
+\newcommand{\nobreakpar}{\par\nobreak\@afterheading}
+
 % Silence hyperref messages (see hint 11.3 in the hyperref manual)
 \providecommand*{\toclevel@algorithm}{0}
 \providecommand*{\toclevel@listing}{0}

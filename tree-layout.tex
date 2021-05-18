@@ -8,6 +8,7 @@ differently from normal.
 \section{Top Level}
 
 An ebuild repository shall occupy one directory on disk, with the following subdirectories:
+\nobreakpar
 \begin{compactitem}
 \item One directory per category, whose name shall be the name of the category. The layout of
     these directories shall be as described in section~\ref{sec:category-dirs}.
@@ -47,6 +48,7 @@ a package manager may treat an empty category as a category that does not exist)
 \label{sec:package-dirs}
 
 A package directory contains the following:
+\nobreakpar
 \begin{compactitem}
 \item Zero or more ebuilds. These are as described in chapter~\ref{ch:ebuild-format} and others.
 \item A \t{metadata.xml} file, as described in appendix~\ref{ch:metadata-xml}\@. Optional only for
@@ -151,7 +153,7 @@ status. Each line has the format:
 \end{verbatim}
 
 Where:
-
+\nobreakpar
 \begin{compactitem}
 \item \t{<keyword>} is the default keyword for the profile and the \t{ARCH} for which the profile is
     valid.

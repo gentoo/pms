@@ -24,7 +24,7 @@ variable data.
 \label{sec:mandatory-vars}
 
 All ebuilds must define at least the following variables:
-
+\nobreakpar
 \begin{description}
 \item[DESCRIPTION] A short human-readable description of the package's purpose. May be defined by an
     eclass. Must not be empty.
@@ -44,7 +44,7 @@ All ebuilds must define at least the following variables:
 \label{sec:optional-vars}
 
 Ebuilds may define any of the following variables:
-
+\nobreakpar
 \begin{description}
 \item[EAPI] The EAPI\@. See below in section~\ref{sec:eapi}.
 \item[HOMEPAGE] The URI or URIs for a package's homepage, including protocols.
@@ -220,7 +220,7 @@ It is an error for a flag to be used if it is not included in \t{IUSE_EFFECTIVE}
 \label{sec:properties}
 
 The following tokens are permitted inside \t{PROPERTIES}:
-
+\nobreakpar
 \begin{description}
 \item[interactive] The package may require interaction with the user via the tty.
 \item[live] The package uses ``live'' source code that may vary each time that the package is
@@ -233,7 +233,7 @@ Package managers may recognise other tokens. Ebuilds may not rely upon any token
 \label{sec:restrict}
 
 The following tokens are permitted inside \t{RESTRICT}:
-
+\nobreakpar
 \begin{description}
 \item[mirror] The package's \t{SRC_URI} entries may not be mirrored, and mirrors should not be
     checked when fetching.

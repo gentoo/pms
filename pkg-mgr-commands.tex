@@ -16,6 +16,7 @@ a failure shall either result in a non-zero exit status or abort the build proce
 table~\ref{tab:commands-die-table}.
 
 The following commands affect this behaviour:
+\nobreakpar
 \begin{description}
 \item[nonfatal] \featurelabel{nonfatal} Takes one or more arguments and executes them as a command,
     preserving the exit status. If this results in a command being called that would normally abort
@@ -910,7 +911,7 @@ table~\ref{tab:use-list-strictness}.
 
 \subsection{Text list functions}
 These functions check whitespace-separated lists for a particular value.
-
+\nobreakpar
 \begin{description}
 \item[has] Returns shell true (0) if the first argument (a word) is found in the list of subsequent
     arguments, false otherwise. Guaranteed quiet.
