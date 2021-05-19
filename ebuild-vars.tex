@@ -225,6 +225,8 @@ The following tokens are permitted inside \t{PROPERTIES}:
 \item[interactive] The package may require interaction with the user via the tty.
 \item[live] The package uses ``live'' source code that may vary each time that the package is
     installed.
+\item[test_network] The package manager may run tests that require an internet connection, even if
+    the ebuild has \t{RESTRICT=test}.
 \end{description}
 
 Package managers may recognise other tokens. Ebuilds may not rely upon any token being supported.
