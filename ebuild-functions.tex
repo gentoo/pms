@@ -22,11 +22,13 @@ Ebuilds must not call nor assume the existence of any phase functions.
 \subsection{Initial working directories}
 \label{sec:s-to-workdir-fallback}
 
-Some functions may assume that their initial working directory is set to a particular location;
-these are noted below. If no initial working directory is mandated, it may be set to anything and
-the ebuild must not rely upon a particular location for it. The ebuild \emph{may} assume that the
-initial working directory for any phase is a trusted location that may only be written to by a
-privileged user and group.
+\featurelabel{phase-function-dir} Some functions may assume that their initial working directory is
+set to a particular location; these are noted below. If no initial working directory is mandated,
+then for EAPIs listed in table~\ref{tab:function-dirs} as having an empty directory, it must be set
+to a dedicated directory that is empty at the start of the function and may be read-only. For other
+EAPIs, it may be set to anything. The ebuild must not rely upon a particular location for it.
+The ebuild \emph{may} assume that the initial working directory for any phase is a trusted location
+that may only be written to by a privileged user and group.
 
 \featurelabel{s-workdir-fallback} Some functions are described as having an initial working
 directory of \t{S} with an error or fallback to \t{WORKDIR}\@. For EAPIs listed in
@@ -43,6 +45,20 @@ fallback to \t{WORKDIR} is used:
     \t{install}, if supported by the EAPI in question and occurring prior to the phase about to be
     executed, are in \t{DEFINED_PHASES}.
 \end{compactitem}
+
+\ChangeWhenAddingAnEAPI{8}
+\begin{centertable}{Initial working directory in \t{pkg_*} phase functions for EAPIs}
+    \label{tab:function-dirs}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Initial working directory?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6, 7  & Any   \\
+      8                       & Empty \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \ChangeWhenAddingAnEAPI{8}
 \begin{centertable}{EAPIs with \t{S} to \t{WORKDIR} fallbacks}
