@@ -11,6 +11,8 @@ compatibility settings (e.\,g.\ the \t{BASH_COMPAT} variable) are not exported t
 option of bash is set in the global scope of ebuilds. If set, failed pattern matches during
 filename expansion result in an error when the ebuild is being sourced.
 
+Name reference variables (introduced in bash version~4.3) must not be used, except in local scope.
+
 The file encoding must be UTF-8 with Unix-style newlines. When sourced, the ebuild must define
 certain variables and functions (see chapters~\ref{ch:ebuild-vars} and~\ref{ch:ebuild-functions}
 for specific information), and must not call any external programs, write anything to standard
