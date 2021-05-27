@@ -15,7 +15,7 @@
 \usepackage[local]{gitinfo2}
 \newcommand{\code}[1]{\texttt{#1}}
 % This should reflect the latest approved EAPI version
-\newcommand{\version}{7.0}
+\newcommand{\version}{8.0}
 \newcommand{\featureref}[1]{\textsc{#1} on page~\pageref{feat:#1}}
 \renewcommand{\familydefault}{\sfdefault}
 \urlstyle{sf}
@@ -517,6 +517,66 @@ differences between these previous EAPIs.
     used as replacement.
     See \featureref{banned-commands}.
 \end{description}
+
+\section{EAPI 8}
+\label{sec:cs:eapi8}
+\subsection{Additions/Changes}
+\label{sec:cs:eapi8-additions}
+\begin{description}
+    \item[\code{profiles/updates} directory] Arbitrary filenames
+    are now allowed, instead of strict naming by quarters
+    (like \code{2Q-2021}). See \featureref{updates-filenames}.
+    \item[Bash version] Ebuilds can use features of Bash version 5.0
+    (was 4.2 before). See \featureref{bash-version}.
+    \item[Selective fetch/mirror restriction] In \code{SRC_URI},
+    adding a \code{fetch+} or \code{mirror+} prefix to an individual
+    URI means that the file may be fetched or mirrored. This overrides
+    the corresponding global settings in the \code{RESTRICT} variable.
+    See \featureref{uri-restrict}.
+    \item[\code{IDEPEND}] This variable specifies install-time
+    dependencies on packages used in (e.\,g.) \code{pkg_postinst}.
+    In a cross-compilation environment, these are dependencies for
+    native tools (\code{CBUILD}). See \featureref{idepend}.
+    \item[\code{pkg_*} phases] The initial working directory is
+    guaranteed to be empty. See \featureref{phase-function-dir}.
+    \item[\code{src_prepare}] Items in the \code{PATCHES} variable are
+    interpreted as files, even if their name begins with a hyphen.
+    See \featureref{src-prepare}.
+    \item[\code{PROPERTIES} and \code{RESTRICT}] These variables are
+    accumulated across the ebuild and inherited eclasses, like
+    \code{IUSE}, \code{REQUIRED\_USE}, and \code{*DEPEND} were before.
+    See \featureref{accumulate-vars}.
+    \item[\code{econf}] If supported, options
+    \code{-{}-disable-static} and
+    \code{-{}-datarootdir=\$\{EPREFIX\}/usr/share} are passed
+    to configure, respectively. See \featureref{econf-options}.
+    \item[\code{dosym}] With the new option \code{-r}, an absolute
+    path specified for the link target will be converted to a path
+    relative to the link location. See \featureref{dosym-relative}. 
+    \item[\code{insopts}] Commands \code{doconfd}, \code{doenvd},
+    \code{doheader} install files with fixed mode 0644, i.\,e.,
+    they are no longer affected by \code{insopts}.
+    See \featureref{insopts}.
+    \item[\code{exeopts}] Command \code{doinitd} installs files
+    with fixed mode 0755, i.\,e., it is no longer affected by
+    \code{exeopts}. See \featureref{exeopts}.
+    \item[\code{usev}] This helper has an optional second argument
+    now: \code{usev} \emph{<flag> [true]}. If the flag is set,
+    outputs \emph{[true]}, or the flag's name if called with only one
+    argument. Otherwise outputs nothing. See \featureref{usev}.
+\end{description}
+\subsection{Removals/Bans}
+\label{sec:cs:eapi8-removalsbans}
+\begin{description}
+    \item[\code{useq}] No longer allowed. Use regular \code{use} as
+    a drop-in replacement. See \featureref{banned-commands}.
+    \item[\code{hasv} and \code{hasq}] No longer allowed. Regular
+    \code{has} should be used instead.
+    See \featureref{banned-commands}.
+    \item[\code{unpack}] No longer supports unpacking of 7-Zip, RAR,
+    and LHA archives. See \featureref{unpack-extensions}.
+\end{description}
+
 \end{document}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=70 spell spelllang=en :
