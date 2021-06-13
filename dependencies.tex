@@ -21,7 +21,7 @@
           \t{src_install} & \t{DEPEND}, \t{BDEPEND} \\
       \addlinespace
       \t{pkg_preinst}, \t{pkg_postinst}, \t{pkg_prerm}, \t{pkg_postrm} &
-          \t{RDEPEND} \\
+          \t{RDEPEND}, \t{IDEPEND} \\
       \addlinespace
       \t{pkg_config} & \t{RDEPEND}, \t{PDEPEND} \\
       \bottomrule
@@ -32,7 +32,7 @@
     \label{tab:dep-class-api}
     \begin{tabular}{llll}
       \toprule
-                                & \t{BDEPEND}     & \t{DEPEND}         & \t{RDEPEND}, \t{PDEPEND} \\
+                       & \t{BDEPEND}, \t{IDEPEND} & \t{DEPEND}         & \t{RDEPEND}, \t{PDEPEND} \\
       \midrule
       Binary compatible with    & \t{CBUILD}      & \t{CHOST}          & \t{CHOST}         \\
       Base unprefixed path      & \t{/}           & \t{\$\{SYSROOT\}}  & \t{\$\{ROOT\}}    \\
@@ -82,16 +82,24 @@ as supporting \t{BDEPEND}, the build dependencies are split into two subclasses:
     dependency.
 \end{compactitem}
 
-\ChangeWhenAddingAnEAPI{7}
+\featurelabel{idepend} Additionally, in EAPIs listed in table~\ref{tab:depend-table} as supporting
+\t{IDEPEND}, install-time dependencies can be specified. These dependencies are binary compatible
+with the native build system (\t{CBUILD}). Ebuilds are allowed to call them in \t{pkg_preinst} and
+\t{pkg_postinst}. Ebuilds may also call them in \t{pkg_prerm} and \t{pkg_postrm} but must not rely
+on them being available.
+
+\ChangeWhenAddingAnEAPI{8}
 \begin{centertable}{EAPIs supporting additional dependency types}
     \label{tab:depend-table}
-    \begin{tabular}{ll}
+    \begin{tabular}{lll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{BDEPEND}?}} \\
+      \multicolumn{1}{c}{\textbf{Supports \t{BDEPEND}?}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{IDEPEND}?}} \\
       \midrule
-      0, 1, 2, 3, 4, 5, 6 & No  \\
-      7                   & Yes \\
+      0, 1, 2, 3, 4, 5, 6 & No  & No  \\
+      7                   & Yes & No  \\
+      8                   & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -111,7 +119,7 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 
 \begin{compactitem}
 \item A package dependency specification. Permitted in \t{DEPEND}, \t{BDEPEND}, \t{RDEPEND},
-    \t{PDEPEND}.
+    \t{PDEPEND}, \t{IDEPEND}.
 \item A URI, in the form \t{proto://host/path}. Permitted in \t{HOMEPAGE} and \t{SRC_URI}\@.
     In EAPIs listed in table~\ref{tab:uri-arrows-table} as supporting \t{SRC_URI} arrows, may
     optionally be followed by whitespace, then \t{->}, then whitespace, then a simple filename when
@@ -129,7 +137,8 @@ be surrounded on both sides by whitespace, except at the start and end of the st
     followed by an open parenthesis, followed by whitespace, followed by one or more
     of (a dependency item of any kind followed by whitespace), followed by a close parenthesis.
     More formally: \t{any-of} \t{::=} \t{'||' whitespace '(' whitespace (item whitespace)+ ')'}.
-    Permitted in \t{DEPEND}, \t{BDEPEND}, \t{RDEPEND}, \t{PDEPEND}, \t{LICENSE}, \t{REQUIRED_USE}.
+    Permitted in \t{DEPEND}, \t{BDEPEND}, \t{RDEPEND}, \t{PDEPEND}, \t{IDEPEND}, \t{LICENSE},
+    \t{REQUIRED_USE}.
 \item An exactly-one-of group, which has the same format as the any-of group, but begins with the
     string \t{\textasciicircum\textasciicircum} instead. Permitted in \t{REQUIRED_USE}.
 \item \featurelabel{at-most-one-of} An at-most-one-of group, which has the same format as the
@@ -146,7 +155,7 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 
 In particular, note that whitespace is not optional.
 
-\ChangeWhenAddingAnEAPI{7}
+\ChangeWhenAddingAnEAPI{8}
 \begin{centertable}{EAPIs supporting \t{REQUIRED_USE ??}\ groups}
     \label{tab:at-most-one-of-table}
     \begin{tabular}{ll}
@@ -155,7 +164,7 @@ In particular, note that whitespace is not optional.
       \multicolumn{1}{c}{\textbf{Supports \t{REQUIRED_USE ??}\ groups?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  \\
-      5, 6, 7           & Yes \\
+      5, 6, 7, 8        & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -195,7 +204,7 @@ In an exactly-one-of group, exactly one immediate child element must be matched.
 In EAPIs specified in table~\ref{tab:empty-dep-groups}, an empty exactly-one-of group counts as
 being matched.
 
-\ChangeWhenAddingAnEAPI{7}
+\ChangeWhenAddingAnEAPI{8}
 \begin{centertable}{Matching of empty dependency groups in EAPIs}
     \label{tab:empty-dep-groups}
     \begin{tabular}{ll}
@@ -205,7 +214,7 @@ being matched.
         are matched?}} \\
       \midrule
       0, 1, 2, 3, 4, 5, 6 & Yes \\
-      7                   & No  \\
+      7, 8                & No  \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -241,7 +250,7 @@ manager must warn or error if this feature is used with an EAPI not supporting u
 
 \note{Order is important. The slot restriction must come before use dependencies.}
 
-\ChangeWhenAddingAnEAPI{7}
+\ChangeWhenAddingAnEAPI{8}
 \begin{centertable}{Support for \t{SLOT} dependencies and sub-slots in EAPIs}
     \label{tab:slot-deps-table}
     \begin{tabular}{lll}
@@ -252,12 +261,12 @@ manager must warn or error if this feature is used with an EAPI not supporting u
       \midrule
       0                 & No                 & No  \\
       1, 2, 3, 4        & Named only         & No  \\
-      5, 6, 7           & Named and operator & Yes \\
+      5, 6, 7, 8        & Named and operator & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{7}
+\ChangeWhenAddingAnEAPI{8}
 \begin{centertable}{EAPIs supporting \t{USE} dependencies}
     \label{tab:use-deps-table}
     \begin{tabular}{ll}
@@ -267,7 +276,7 @@ manager must warn or error if this feature is used with an EAPI not supporting u
       \midrule
       0, 1              & No      \\
       2, 3              & 2-style \\
-      4, 5, 6, 7        & 4-style \\
+      4, 5, 6, 7, 8     & 4-style \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -301,7 +310,7 @@ ignored by the package manager, so long as any blocked package will be uninstall
 strong block must not be ignored. The mapping from one or two exclamation marks to strength is
 described in table~\ref{tab:bang-strength-table}.
 
-\ChangeWhenAddingAnEAPI{7}
+\ChangeWhenAddingAnEAPI{8}
 \begin{centertable}{Exclamation mark strengths for EAPIs}
     \label{tab:bang-strength-table}
     \begin{tabular}{lll}
@@ -310,8 +319,8 @@ described in table~\ref{tab:bang-strength-table}.
       \multicolumn{1}{c}{\textbf{\t{!}}} &
       \multicolumn{1}{c}{\textbf{\t{!!}}} \\
       \midrule
-      0, 1              & Unspecified & Forbidden \\
-      2, 3, 4, 5, 6, 7  & Weak        & Strong    \\
+      0, 1                & Unspecified & Forbidden \\
+      2, 3, 4, 5, 6, 7, 8 & Weak        & Strong    \\
       \bottomrule
     \end{tabular}
 \end{centertable}

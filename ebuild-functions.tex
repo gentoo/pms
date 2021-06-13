@@ -22,11 +22,13 @@ Ebuilds must not call nor assume the existence of any phase functions.
 \subsection{Initial working directories}
 \label{sec:s-to-workdir-fallback}
 
-Some functions may assume that their initial working directory is set to a particular location;
-these are noted below. If no initial working directory is mandated, it may be set to anything and
-the ebuild must not rely upon a particular location for it. The ebuild \emph{may} assume that the
-initial working directory for any phase is a trusted location that may only be written to by a
-privileged user and group.
+\featurelabel{phase-function-dir} Some functions may assume that their initial working directory is
+set to a particular location; these are noted below. If no initial working directory is mandated,
+then for EAPIs listed in table~\ref{tab:function-dirs} as having an empty directory, it must be set
+to a dedicated directory that is empty at the start of the function and may be read-only. For other
+EAPIs, it may be set to anything. The ebuild must not rely upon a particular location for it.
+The ebuild \emph{may} assume that the initial working directory for any phase is a trusted location
+that may only be written to by a privileged user and group.
 
 \featurelabel{s-workdir-fallback} Some functions are described as having an initial working
 directory of \t{S} with an error or fallback to \t{WORKDIR}\@. For EAPIs listed in
@@ -44,7 +46,21 @@ fallback to \t{WORKDIR} is used:
     executed, are in \t{DEFINED_PHASES}.
 \end{compactitem}
 
-\ChangeWhenAddingAnEAPI{7}
+\ChangeWhenAddingAnEAPI{8}
+\begin{centertable}{Initial working directory in \t{pkg_*} phase functions for EAPIs}
+    \label{tab:function-dirs}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Initial working directory?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6, 7  & Any   \\
+      8                       & Empty \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\ChangeWhenAddingAnEAPI{8}
 \begin{centertable}{EAPIs with \t{S} to \t{WORKDIR} fallbacks}
     \label{tab:s-fallback-table}
     \begin{tabular}{ll}
@@ -53,7 +69,7 @@ fallback to \t{WORKDIR} is used:
       \multicolumn{1}{c}{\textbf{Fallback to \t{WORKDIR} permitted?}} \\
       \midrule
       0, 1, 2, 3        & Always            \\
-      4, 5, 6, 7        & Conditional error \\
+      4, 5, 6, 7, 8     & Conditional error \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -75,7 +91,7 @@ before the next phase is executed.
 
 \t{pkg_pretend} must not write to the filesystem.
 
-\ChangeWhenAddingAnEAPI{7}
+\ChangeWhenAddingAnEAPI{8}
 \begin{centertable}{EAPIs supporting \t{pkg_pretend}}
     \label{tab:pkg-pretend-table}
     \begin{tabular}{ll}
@@ -84,7 +100,7 @@ before the next phase is executed.
       \multicolumn{1}{c}{\textbf{Supports \t{pkg_pretend}?}} \\
       \midrule
       0, 1, 2, 3        & No  \\
-      4, 5, 6, 7        & Yes \\
+      4, 5, 6, 7, 8     & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -104,10 +120,10 @@ The \t{src_unpack} function extracts all of the package's sources. In EAPIs lack
 \t{src_prepare}, it may also apply patches and set up the package's build system for further use.
 
 The initial working directory must be \t{WORKDIR}, and the default implementation used when
-the ebuild lacks the \t{src_unpack} function shall behave as:
+the ebuild lacks the \t{src_unpack} function shall behave as in listing~\ref{lst:src-unpack-0}.
 
 \begin{listing}[H]
-\caption{\t{src_unpack}}
+\caption{\t{src_unpack}} \label{lst:src-unpack-0}
 \begin{verbatim}
 src_unpack() {
     if [[ -n ${A} ]]; then
@@ -126,12 +142,32 @@ post-unpack source preparation.
 The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR} as discussed in
 section~\ref{sec:s-to-workdir-fallback}.
 
-\featurelabel{src-prepare-6} For EAPIs listed in table~\ref{tab:src-prepare-table} as using format
-6, the default implementation used when the ebuild lacks the \t{src_prepare} function shall behave
-as:
+For EAPIs listed in table~\ref{tab:src-prepare-table} as using format 6 or~8, the default
+implementation used when the ebuild lacks the \t{src_prepare} function shall behave as in
+listing~\ref{lst:src-prepare-6} or listing~\ref{lst:src-prepare-8}, respectively.
+
+For other EAPIs supporting \t{src_prepare}, the default implementation used when the ebuild lacks
+the \t{src_prepare} function is a no-op.
+
+\ChangeWhenAddingAnEAPI{8}
+\begin{centertable}{\t{src_prepare} support and behaviour for EAPIs}
+    \label{tab:src-prepare-table}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{src_prepare}?}} &
+      \multicolumn{1}{c}{\textbf{Format}} \\
+      \midrule
+      0, 1              & No  & Not applicable \\
+      2, 3, 4, 5        & Yes & no-op          \\
+      6, 7              & Yes & 6              \\
+      8                 & Yes & 8              \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \begin{listing}[H]
-\caption{\t{src_prepare}, format~6}
+\caption{\t{src_prepare}, format~6} \label{lst:src-prepare-6}
 \begin{verbatim}
 src_prepare() {
     if [[ $(declare -p PATCHES 2>/dev/null) == "declare -a"* ]]; then
@@ -144,24 +180,19 @@ src_prepare() {
 \end{verbatim}
 \end{listing}
 
-For other EAPIs supporting \t{src_prepare}, the default implementation used when the ebuild lacks
-the \t{src_prepare} function is a no-op.
-
-\ChangeWhenAddingAnEAPI{7}
-\begin{centertable}{\t{src_prepare} support and behaviour for EAPIs}
-    \label{tab:src-prepare-table}
-    \begin{tabular}{lll}
-      \toprule
-      \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{src_prepare}?}} &
-      \multicolumn{1}{c}{\textbf{Format}} \\
-      \midrule
-      0, 1              & No  & Not applicable \\
-      2, 3, 4, 5        & Yes & no-op          \\
-      6, 7              & Yes & 6              \\
-      \bottomrule
-    \end{tabular}
-\end{centertable}
+\begin{listing}[H]
+\caption{\t{src_prepare}, format~8} \label{lst:src-prepare-8}
+\begin{verbatim}
+src_prepare() {
+    if [[ ${PATCHES@a} == *a* ]]; then
+        [[ -n ${PATCHES[@]} ]] && eapply -- "${PATCHES[@]}"
+    else
+        [[ -n ${PATCHES} ]] && eapply -- ${PATCHES}
+    fi
+    eapply_user
+}
+\end{verbatim}
+\end{listing}
 
 \subsection{src_configure}
 
@@ -172,10 +203,25 @@ The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR}
 section~\ref{sec:s-to-workdir-fallback}.
 
 The \t{src_configure} function configures the package's build environment. The default
-implementation used when the ebuild lacks the \t{src_configure} function shall behave as:
+implementation used when the ebuild lacks the \t{src_configure} function shall behave as in
+listing~\ref{lst:src-configure-2}.
+
+\ChangeWhenAddingAnEAPI{8}
+\begin{centertable}{EAPIs supporting \t{src_configure}}
+    \label{tab:src-configure-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{src_configure}?}} \\
+      \midrule
+      0, 1                & No  \\
+      2, 3, 4, 5, 6, 7, 8 & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \begin{listing}[H]
-\caption{\t{src_configure}}
+\caption{\t{src_configure}} \label{lst:src-configure-2}
 \begin{verbatim}
 src_configure() {
     if [[ -x ${ECONF_SOURCE:-.}/configure ]]; then
@@ -185,20 +231,6 @@ src_configure() {
 \end{verbatim}
 \end{listing}
 
-\ChangeWhenAddingAnEAPI{7}
-\begin{centertable}{EAPIs supporting \t{src_configure}}
-    \label{tab:src-configure-table}
-    \begin{tabular}{ll}
-      \toprule
-      \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Supports \t{src_configure}?}} \\
-      \midrule
-      0, 1              & No  \\
-      2, 3, 4, 5, 6, 7  & Yes \\
-      \bottomrule
-    \end{tabular}
-\end{centertable}
-
 \subsection{src_compile}
 
 \featurelabel{src-compile} The \t{src_compile} function configures the package's build environment
@@ -207,12 +239,28 @@ in EAPIs lacking \t{src_configure}, and builds the package in all EAPIs.
 The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR} as discussed in
 section~\ref{sec:s-to-workdir-fallback}.
 
-\featurelabel{src-compile-0} For EAPIs listed in table~\ref{tab:src-compile-table} as using format
-0, the default implementation used when the ebuild lacks the \t{src_compile} function shall behave
-as:
+For EAPIs listed in table~\ref{tab:src-compile-table} as using format 0, 1 or~2, the default
+implementation used when the ebuild lacks the \t{src_prepare} function shall behave as in
+listing~\ref{lst:src-compile-0}, listing~\ref{lst:src-compile-1} or listing~\ref{lst:src-compile-2},
+respectively.
+
+\ChangeWhenAddingAnEAPI{8}
+\begin{centertable}{\t{src_compile} behaviour for EAPIs}
+    \label{tab:src-compile-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Format}} \\
+      \midrule
+      0                   & 0 \\
+      1                   & 1 \\
+      2, 3, 4, 5, 6, 7, 8 & 2 \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \begin{listing}[H]
-\caption{\t{src_compile}, format~0}
+\caption{\t{src_compile}, format~0} \label{lst:src-compile-0}
 \begin{verbatim}
 src_compile() {
     if [[ -x ./configure ]]; then
@@ -225,12 +273,8 @@ src_compile() {
 \end{verbatim}
 \end{listing}
 
-\featurelabel{src-compile-1} For EAPIs listed in table~\ref{tab:src-compile-table} as using format
-1, the default implementation used when the ebuild lacks the \t{src_compile} function shall behave
-as:
-
 \begin{listing}[H]
-\caption{\t{src_compile}, format~1}
+\caption{\t{src_compile}, format~1} \label{lst:src-compile-1}
 \begin{verbatim}
 src_compile() {
     if [[ -x ${ECONF_SOURCE:-.}/configure ]]; then
@@ -243,12 +287,8 @@ src_compile() {
 \end{verbatim}
 \end{listing}
 
-\featurelabel{src-compile-2} For EAPIs listed in table~\ref{tab:src-compile-table} as using format
-2, the default implementation used when the ebuild lacks the \t{src_compile} function shall behave
-as:
-
 \begin{listing}[H]
-\caption{\t{src_compile}, format~2}
+\caption{\t{src_compile}, format~2} \label{lst:src-compile-2}
 \begin{verbatim}
 src_compile() {
     if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]]; then
@@ -257,21 +297,6 @@ src_compile() {
 }
 \end{verbatim}
 \end{listing}
-
-\ChangeWhenAddingAnEAPI{7}
-\begin{centertable}{\t{src_compile} behaviour for EAPIs}
-    \label{tab:src-compile-table}
-    \begin{tabular}{ll}
-      \toprule
-      \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Format}} \\
-      \midrule
-      0                 & 0 \\
-      1                 & 1 \\
-      2, 3, 4, 5, 6, 7  & 2 \\
-      \bottomrule
-    \end{tabular}
-\end{centertable}
 
 \subsection{src_test}
 
@@ -292,7 +317,7 @@ parallel tests, the \t{emake} command must be called with option \t{-j1}.
 The \t{src_test} function may be disabled by \t{RESTRICT}\@. See section~\ref{sec:restrict}. It may
 be disabled by user too, using a PM-specific mechanism.
 
-\ChangeWhenAddingAnEAPI{7}
+\ChangeWhenAddingAnEAPI{8}
 \begin{centertable}{\t{src_test} behaviour for EAPIs}
     \label{tab:src-test-table}
     \begin{tabular}{ll}
@@ -301,7 +326,7 @@ be disabled by user too, using a PM-specific mechanism.
       \multicolumn{1}{c}{\textbf{Supports parallel tests?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  \\
-      5, 6, 7           & Yes \\
+      5, 6, 7, 8        & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -314,12 +339,30 @@ directory specified in \t{D}.
 The initial working directory is \t{S}, with an error or fallback to \t{WORKDIR} as discussed in
 section~\ref{sec:s-to-workdir-fallback}.
 
-\featurelabel{src-install-4} For EAPIs listed in table~\ref{tab:src-install-table} as using format
-4, the default implementation used when the ebuild lacks the \t{src_install} function shall behave
-as:
+For EAPIs listed in table~\ref{tab:src-install-table} as using format 4 or~6, the default
+implementation used when the ebuild lacks the \t{src_prepare} function shall behave as in
+listing~\ref{lst:src-install-4} or listing~\ref{lst:src-install-6}, respectively.
+
+For other EAPIs, the default implementation used when the ebuild lacks the \t{src_install} function
+is a no-op.
+
+\ChangeWhenAddingAnEAPI{8}
+\begin{centertable}{\t{src_install} behaviour for EAPIs}
+    \label{tab:src-install-table}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Format}} \\
+      \midrule
+      0, 1, 2, 3        & no-op \\
+      4, 5              & 4     \\
+      6, 7, 8           & 6     \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \begin{listing}[H]
-\caption{\t{src_install}, format~4}
+\caption{\t{src_install}, format~4} \label{lst:src-install-4}
 \begin{verbatim}
 src_install() {
     if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]]; then
@@ -341,12 +384,8 @@ src_install() {
 \end{verbatim}
 \end{listing}
 
-\featurelabel{src-install-6} For EAPIs listed in table~\ref{tab:src-install-table} as using format
-6, the default implementation used when the ebuild lacks the \t{src_install} function shall behave
-as:
-
 \begin{listing}[H]
-\caption{\t{src_install}, format~6}
+\caption{\t{src_install}, format~6} \label{lst:src-install-6}
 \begin{verbatim}
 src_install() {
     if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]]; then
@@ -356,24 +395,6 @@ src_install() {
 }
 \end{verbatim}
 \end{listing}
-
-For other EAPIs, the default implementation used when the ebuild lacks the \t{src_install} function
-is a no-op.
-
-\ChangeWhenAddingAnEAPI{7}
-\begin{centertable}{\t{src_install} behaviour for EAPIs}
-    \label{tab:src-install-table}
-    \begin{tabular}{ll}
-      \toprule
-      \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{1}{c}{\textbf{Format}} \\
-      \midrule
-      0, 1, 2, 3        & no-op \\
-      4, 5              & 4     \\
-      6, 7              & 6     \\
-      \bottomrule
-    \end{tabular}
-\end{centertable}
 
 \subsection{pkg_preinst}
 
@@ -428,7 +449,7 @@ that dependencies may not be installed.
 
 \t{pkg_info} must not write to the filesystem.
 
-\ChangeWhenAddingAnEAPI{7}
+\ChangeWhenAddingAnEAPI{8}
 \begin{centertable}{EAPIs supporting \t{pkg_info} on non-installed packages}
     \label{tab:pkg-info-table}
     \begin{tabular}{ll}
@@ -437,7 +458,7 @@ that dependencies may not be installed.
       \multicolumn{1}{c}{\textbf{Supports \t{pkg_info} on non-installed packages?}} \\
       \midrule
       0, 1, 2, 3        & No  \\
-      4, 5, 6, 7        & Yes \\
+      4, 5, 6, 7, 8     & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -459,7 +480,7 @@ named \t{default_}(phase) that behaves as the default implementation for that EA
 when executing any ebuild phase listed in the table. Ebuilds must not call these functions except
 when in the phase in question.
 
-\ChangeWhenAddingAnEAPI{7}
+\ChangeWhenAddingAnEAPI{8}
 \begin{centertable}{EAPIs supporting \t{default_} phase functions}
     \label{tab:default-phase-function-table}
     \begin{tabular}{l P{26em}}
@@ -470,7 +491,7 @@ when in the phase in question.
       0, 1              & None \\
       2, 3              & \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure},
                           \t{src_compile}, \t{src_test} \\
-      4, 5, 6, 7        & \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure},
+      4, 5, 6, 7, 8     & \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure},
                           \t{src_compile}, \t{src_test}, \t{src_install} \\
       \bottomrule
     \end{tabular}

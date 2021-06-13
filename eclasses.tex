@@ -34,11 +34,28 @@ The \t{inherit} command must also ensure that:
 
 \section{Eclass-defined Metadata Keys}
 
-The \t{IUSE}, \t{REQUIRED_USE}, \t{DEPEND}, \t{BDEPEND}, \t{RDEPEND} and \t{PDEPEND} variables
-are handled specially when set by an eclass. They must be accumulated across eclasses, appending
-the value set by each eclass to the resulting value after the previous one is loaded. Then the
-eclass-defined value is appended to that defined by the ebuild. In the case of \t{RDEPEND}, this
-is done after the implicit \t{RDEPEND} rules in section~\ref{sec:rdepend-depend} are applied.
+\featurelabel{accumulate-vars} The \t{IUSE}, \t{REQUIRED_USE}, \t{DEPEND}, \t{BDEPEND}, \t{RDEPEND},
+\t{PDEPEND} and \t{IDEPEND} variables are handled specially when set by an eclass. They must be
+accumulated across eclasses, appending the value set by each eclass to the resulting value after
+the previous one is loaded. For EAPIs listed in table~\ref{tab:accumulate-vars} as accumulating
+\t{PROPERTIES} and \t{RESTRICT}, the same is true for these variables. Then the eclass-defined
+value is appended to that defined by the ebuild. In the case of \t{RDEPEND}, this is done after
+the implicit \t{RDEPEND} rules in section~\ref{sec:rdepend-depend} are applied.
+
+\ChangeWhenAddingAnEAPI{8}
+\begin{centertable}{EAPIs accumulating \t{PROPERTIES} and \t{RESTRICT} across eclasses}
+    \label{tab:accumulate-vars}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Accumulates \t{PROPERTIES}?}} &
+      \multicolumn{1}{c}{\textbf{Accumulates \t{RESTRICT}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6, 7  & No  & No  \\
+      8                       & Yes & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \section{EXPORT_FUNCTIONS}
 
