@@ -1030,7 +1030,7 @@ These functions check whitespace-separated lists for a particular value.
 \subsection{Version manipulation and comparison commands}
 \featurelabel{ver-commands}
 These commands provide utilities for working with version strings. They must all be implemented
-internally as shell functions, i.\,e., they are callable in global scope. Availability of these
+internally as shell functions, i.\,e.\ they are callable in global scope. Availability of these
 commands per EAPI is listed in table~\ref{tab:version-commands}.
 
 For the purpose of version manipulation commands, the specification provides a method for splitting
@@ -1131,7 +1131,7 @@ has returned.
 
     Arguments to \t{unpack} are interpreted as follows:
     \begin{compactitem}
-    \item A filename without path (i.\,e., not containing any slash) is looked up in \t{DISTDIR}.
+    \item A filename without path (i.\,e.\ not containing any slash) is looked up in \t{DISTDIR}.
     \item An argument starting with the string \t{./} is a path relative to the working directory.
     \item \featurelabel{unpack-absolute} Otherwise, for EAPIs listed in
         table~\ref{tab:unpack-behaviour} as supporting absolute and relative paths, the argument is
