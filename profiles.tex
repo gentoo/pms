@@ -79,7 +79,7 @@ in that directory, unless their name begins with a dot, will be concatenated in 
 filename in the POSIX locale and the result will be processed as if it were a single file.
 Any subdirectories will be ignored.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting directories for profile files}
     \label{tab:profile-file-dirs}
     \begin{tabular}{ll}
@@ -88,7 +88,7 @@ Any subdirectories will be ignored.
       \multicolumn{1}{c}{\textbf{Supports directories for profile files?}} \\
       \midrule
       0, 1, 2, 3, 4, 5, 6 & No  \\
-      7, 8                & Yes \\
+      7, 8, 9             & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -124,7 +124,7 @@ it is actually installed. Because it has severe adverse effects on USE-based and
 dependencies, its use is strongly deprecated and package manager support must be regarded as purely
 optional. Supported in EAPIs as per table~\ref{tab:package-provided}.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting \t{package.provided} in profiles}
     \label{tab:package-provided}
     \begin{tabular}{ll}
@@ -133,7 +133,7 @@ optional. Supported in EAPIs as per table~\ref{tab:package-provided}.
       \multicolumn{1}{c}{\textbf{Supports \t{package.provided}?}} \\
       \midrule
       0, 1, 2, 3, 4, 5, 6 & Optionally \\
-      7, 8                & No         \\
+      7, 8, 9             & No         \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -166,7 +166,7 @@ only act on packages that are merged due to a stable keyword in the sense of
 section~\ref{sec:keywords}. Thus, these files can be used to restrict the feature set deemed
 stable in a package.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Profile directory support for masking/forcing use flags in stable versions only}
     \label{tab:profile-stablemask}
     \begin{tabular}{ll}
@@ -175,7 +175,7 @@ stable in a package.
       \multicolumn{1}{c}{\textbf{Supports masking/forcing use flags in stable versions?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  \\
-      5, 6, 7, 8        & Yes \\
+      5, 6, 7, 8, 9     & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
