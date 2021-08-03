@@ -88,7 +88,7 @@ with the native build system (\t{CBUILD}). Ebuilds are allowed to call them in \
 \t{pkg_postinst}. Ebuilds may also call them in \t{pkg_prerm} and \t{pkg_postrm} but must not rely
 on them being available.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting additional dependency types}
     \label{tab:depend-table}
     \begin{tabular}{lll}
@@ -99,7 +99,7 @@ on them being available.
       \midrule
       0, 1, 2, 3, 4, 5, 6 & No  & No  \\
       7                   & Yes & No  \\
-      8                   & Yes & Yes \\
+      8, 9                & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -155,7 +155,7 @@ be surrounded on both sides by whitespace, except at the start and end of the st
 
 In particular, note that whitespace is not optional.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting \t{REQUIRED_USE ??}\ groups}
     \label{tab:at-most-one-of-table}
     \begin{tabular}{ll}
@@ -164,7 +164,7 @@ In particular, note that whitespace is not optional.
       \multicolumn{1}{c}{\textbf{Supports \t{REQUIRED_USE ??}\ groups?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  \\
-      5, 6, 7, 8        & Yes \\
+      5, 6, 7, 8, 9     & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -204,7 +204,7 @@ In an exactly-one-of group, exactly one immediate child element must be matched.
 In EAPIs specified in table~\ref{tab:empty-dep-groups}, an empty exactly-one-of group counts as
 being matched.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Matching of empty dependency groups in EAPIs}
     \label{tab:empty-dep-groups}
     \begin{tabular}{ll}
@@ -214,7 +214,7 @@ being matched.
         are matched?}} \\
       \midrule
       0, 1, 2, 3, 4, 5, 6 & Yes \\
-      7, 8                & No  \\
+      7, 8, 9             & No  \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -250,7 +250,7 @@ manager must warn or error if this feature is used with an EAPI not supporting u
 
 \note{Order is important. The slot restriction must come before use dependencies.}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Support for \t{SLOT} dependencies and sub-slots in EAPIs}
     \label{tab:slot-deps-table}
     \begin{tabular}{lll}
@@ -261,12 +261,12 @@ manager must warn or error if this feature is used with an EAPI not supporting u
       \midrule
       0                 & No                 & No  \\
       1, 2, 3, 4        & Named only         & No  \\
-      5, 6, 7, 8        & Named and operator & Yes \\
+      5, 6, 7, 8, 9     & Named and operator & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting \t{USE} dependencies}
     \label{tab:use-deps-table}
     \begin{tabular}{ll}
@@ -276,7 +276,7 @@ manager must warn or error if this feature is used with an EAPI not supporting u
       \midrule
       0, 1              & No      \\
       2, 3              & 2-style \\
-      4, 5, 6, 7, 8     & 4-style \\
+      4, 5, 6, 7, 8, 9  & 4-style \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -310,7 +310,7 @@ ignored by the package manager, so long as any blocked package will be uninstall
 strong block must not be ignored. The mapping from one or two exclamation marks to strength is
 described in table~\ref{tab:bang-strength-table}.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Exclamation mark strengths for EAPIs}
     \label{tab:bang-strength-table}
     \begin{tabular}{lll}
@@ -319,8 +319,8 @@ described in table~\ref{tab:bang-strength-table}.
       \multicolumn{1}{c}{\textbf{\t{!}}} &
       \multicolumn{1}{c}{\textbf{\t{!!}}} \\
       \midrule
-      0, 1                & Unspecified & Forbidden \\
-      2, 3, 4, 5, 6, 7, 8 & Weak        & Strong    \\
+      0, 1                    & Unspecified & Forbidden \\
+      2, 3, 4, 5, 6, 7, 8, 9  & Weak        & Strong    \\
       \bottomrule
     \end{tabular}
 \end{centertable}

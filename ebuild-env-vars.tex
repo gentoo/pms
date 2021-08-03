@@ -273,7 +273,7 @@ inconsistent variable.
 \end{longtable}
 \end{landscape}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting various added env variables}
     \label{tab:added-env-vars-table}
     \begin{tabular}{lllllll}
@@ -289,12 +289,12 @@ inconsistent variable.
       0, 1, 2, 3        & No  & No  & No  & No  & No  & No  \\
       4                 & Yes & Yes & Yes & No  & No  & No  \\
       5, 6              & Yes & Yes & Yes & Yes & No  & No  \\
-      7, 8              & Yes & Yes & Yes & Yes & Yes & Yes \\
+      7, 8, 9           & Yes & Yes & Yes & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting various removed env variables}
     \label{tab:removed-env-vars-table}
     \begin{tabular}{lllllll}
@@ -309,12 +309,12 @@ inconsistent variable.
       \midrule
       0, 1, 2, 3        & Yes & Yes & Yes & Yes & Yes & Yes \\
       4, 5, 6           & No  & No  & Yes & Yes & Yes & Yes \\
-      7, 8              & No  & No  & No  & No  & No  & No  \\
+      7, 8, 9           & No  & No  & No  & No  & No  & No  \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting offset-prefix env variables}
     \label{tab:offset-env-vars-table}
     \begin{tabular}{lllll}
@@ -327,7 +327,7 @@ inconsistent variable.
       \midrule
       0, 1, 2           & No  & No  & No  & No  \\
       3, 4, 5, 6        & Yes & Yes & Yes & No  \\
-      7, 8              & Yes & Yes & Yes & Yes \\
+      7, 8, 9           & Yes & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -351,7 +351,7 @@ must be unset, for EAPIs listed in table~\ref{tab:profile-env-unset} as supporti
 ASCII range (U+0000 to U+007F) are concerned. Only for EAPIs listed in such a manner in
 table~\ref{tab:locale-settings}.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Locale settings for EAPIs}
     \label{tab:locale-settings}
     \begin{tabular}{ll}
@@ -360,7 +360,7 @@ table~\ref{tab:locale-settings}.
       \multicolumn{1}{c}{\textbf{Sane \t{LC_CTYPE} and \t{LC_COLLATE}?}} \\
       \midrule
       0, 1, 2, 3, 4, 5  & Undefined \\
-      6, 7, 8           & Yes       \\
+      6, 7, 8, 9        & Yes       \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -446,7 +446,7 @@ contain at most one value.
 \subsection{Offset-prefix variables}
 \label{sec:offset-vars}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting offset-prefix}
     \label{tab:offset-support-table}
     \begin{tabular}{ll}
@@ -454,8 +454,8 @@ contain at most one value.
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{Supports offset-prefix?}}\\
       \midrule
-      0, 1, 2           & No  \\
-      3, 4, 5, 6, 7, 8  & Yes \\
+      0, 1, 2             & No  \\
+      3, 4, 5, 6, 7, 8, 9 & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -486,7 +486,7 @@ specifies the system root directory, it will consist of a single slash (\t{/}).
 a trailing slash, the package manager guarantees that a trailing slash will never be present.
 If the path specifies the system root directory, it will be empty.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Variables that always or never end with a trailing slash}
     \label{tab:trailing-slash}
     \begin{tabular}{lll}
@@ -498,7 +498,7 @@ If the path specifies the system root directory, it will be empty.
       \t{D}, \t{ED} \\
       \midrule
       0, 1, 2, 3, 4, 5, 6 & always & always \\
-      7, 8                & never  & never  \\
+      7, 8, 9             & never  & never  \\
       \bottomrule
     \end{tabular}
 \end{centertable}

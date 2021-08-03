@@ -43,7 +43,7 @@ the previous one is loaded. For EAPIs listed in table~\ref{tab:accumulate-vars} 
 value is appended to that defined by the ebuild. In the case of \t{RDEPEND}, this is done after
 the implicit \t{RDEPEND} rules in section~\ref{sec:rdepend-depend} are applied.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs accumulating \t{PROPERTIES} and \t{RESTRICT} across eclasses}
     \label{tab:accumulate-vars}
     \begin{tabular}{lll}
@@ -53,7 +53,7 @@ the implicit \t{RDEPEND} rules in section~\ref{sec:rdepend-depend} are applied.
       \multicolumn{1}{c}{\textbf{Accumulates \t{RESTRICT}?}} \\
       \midrule
       0, 1, 2, 3, 4, 5, 6, 7  & No  & No  \\
-      8                       & Yes & Yes \\
+      8, 9                    & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}

@@ -90,7 +90,7 @@ defined by an eclass.
 \item[IDEPEND] See chapter~\ref{ch:dependencies}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting \t{IUSE} defaults}
     \label{tab:iuse-defaults-table}
     \begin{tabular}{ll}
@@ -98,13 +98,13 @@ defined by an eclass.
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{Supports \t{IUSE} defaults?}} \\
       \midrule
-      0                      & No  \\
-      1, 2, 3, 4, 5, 6, 7, 8 & Yes \\
+      0                         & No  \\
+      1, 2, 3, 4, 5, 6, 7, 8, 9 & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting various ebuild-defined variables}
     \label{tab:optional-vars-table}
     \begin{tabular}{lll}
@@ -114,7 +114,7 @@ defined by an eclass.
       \multicolumn{1}{c}{\textbf{Supports \t{REQUIRED_USE}?}} \\
       \midrule
       0, 1, 2, 3        & Optionally & No  \\
-      4, 5, 6, 7, 8     & Yes        & Yes \\
+      4, 5, 6, 7, 8, 9  & Yes        & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -179,7 +179,7 @@ selective URI restrictions, the URI protocol can be prefixed by an additional \t
 restriction for the URI (but not the implied mirror restriction). If the ebuild is fetch or mirror
 restricted, the \t{mirror+} prefix undoes both fetch and mirror restrictions for the URI.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting \t{SRC_URI} arrows and selective URI restrictions}
     \label{tab:uri-arrows-table}
     \begin{tabular}{lll}
@@ -190,7 +190,7 @@ restricted, the \t{mirror+} prefix undoes both fetch and mirror restrictions for
       \midrule
       0, 1              & No  & No  \\
       2, 3, 4, 5, 6, 7  & Yes & No  \\
-      8                 & Yes & Yes \\
+      8, 9              & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -277,7 +277,7 @@ any \t{DEPEND} or \t{RDEPEND} set in an eclass does not change the implicit \t{R
 the ebuild portion, and any \t{DEPEND} value set in an eclass does not get treated as being part of
 \t{RDEPEND}.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs with \t{RDEPEND=DEPEND} default}
     \label{tab:rdepend-depend-table}
     \begin{tabular}{ll}
@@ -286,7 +286,7 @@ the ebuild portion, and any \t{DEPEND} value set in an eclass does not get treat
       \multicolumn{1}{c}{\textbf{\t{RDEPEND=DEPEND}?}} \\
       \midrule
       0, 1, 2, 3        & Yes \\
-      4, 5, 6, 7, 8     & No  \\
+      4, 5, 6, 7, 8, 9  & No  \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -321,7 +321,7 @@ not be exported to the ebuild environment:
 \note{Thus, by extension of section~\ref{sec:metadata-invariance}, phase functions must not be
 defined based upon any variant condition.}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting \t{DEFINED_PHASES}}
     \label{tab:defined-phases-table}
     \begin{tabular}{ll}
@@ -330,7 +330,7 @@ defined based upon any variant condition.}
       \multicolumn{1}{c}{\textbf{Supports \t{DEFINED_PHASES}?}} \\
       \midrule
       0, 1, 2, 3        & Optionally \\
-      4, 5, 6, 7, 8     & Yes        \\
+      4, 5, 6, 7, 8, 9  & Yes        \\
       \bottomrule
     \end{tabular}
 \end{centertable}

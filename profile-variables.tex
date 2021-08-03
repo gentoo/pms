@@ -40,7 +40,7 @@ Other variables, except where they affect only package-manager-specific function
 Portage's \t{FEATURES} variable), must not be treated incrementally---later definitions shall
 completely override those in parent profiles.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Profile-defined \t{IUSE} injection for EAPIs}
     \label{tab:profile-iuse-injection-table}
     \begin{tabular}{ll}
@@ -49,12 +49,12 @@ completely override those in parent profiles.
       \multicolumn{1}{c}{\textbf{Supports profile-defined \t{IUSE} injection?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  \\
-      5, 6, 7, 8        & Yes \\
+      5, 6, 7, 8, 9     & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Profile-defined unsetting of variables in EAPIs}
     \label{tab:profile-env-unset}
     \begin{tabular}{ll}
@@ -63,7 +63,7 @@ completely override those in parent profiles.
       \multicolumn{1}{c}{\textbf{Supports \t{ENV_UNSET}?}} \\
       \midrule
       0, 1, 2, 3, 4, 5, 6 & No  \\
-      7, 8                & Yes \\
+      7, 8, 9             & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
