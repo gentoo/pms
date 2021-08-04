@@ -386,7 +386,9 @@ commands once the current phase function has returned.
 \caption{\t{econf -{}-libdir} logic} \label{alg:econf-libdir}
 \begin{algorithmic}[1]
 \STATE let prefix=\$\{EPREFIX\}/usr
-\IF{the caller specified -{}-prefix=\$p}
+\IF{the caller specified -{}-exec-prefix=\$ep}
+    \STATE let prefix=\$ep
+\ELSIF{the caller specified -{}-prefix=\$p}
     \STATE let prefix=\$p
 \ENDIF
 \STATE let libdir=
