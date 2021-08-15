@@ -19,6 +19,10 @@
 \newcommand{\featureref}[1]{\textsc{#1} on page~\pageref{feat:#1}}
 \renewcommand{\familydefault}{\sfdefault}
 \urlstyle{sf}
+
+% These commands may occur in external aux files from pms
+\renewcommand{\i}[1]{\textit{#1}}
+\renewcommand{\t}[1]{\texttt{#1}}
 \externaldocument{pms}
 
 \title{EAPI Cheat Sheet}
