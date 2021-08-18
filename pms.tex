@@ -85,15 +85,7 @@
 
 \include{eapi-differences}
 
-\ifthenelse{\boolean{TEX4HT-HACKS}}{%
-    \chapter{Desk Reference}
-    \href{eapi-cheatsheet.pdf}{EAPI Cheat Sheet}
-}{%
-    % Make sure that the cheat sheet starts on an odd page
-    \clearpage\ifthenelse{\isodd{\thepage}}{}{\null\newpage}%
-    \includepdf[pages=-,landscape,turn=false,lastpage=2,%
-        addtotoc={1,chapter,0,Desk Reference,cheatsheet}]{eapi-cheatsheet}
-}
+\include{desk-reference}
 
 \end{document}
 

@@ -1,0 +1,21 @@
+\ifthenelse{\boolean{TEX4HT-HACKS}}{%
+    \chapter{Desk Reference}
+    \label{ch:cheatsheet}
+    \href{eapi-cheatsheet.pdf}{EAPI Cheat Sheet}
+}{%
+    % Make sure that the cheat sheet starts on an odd page
+    \ifthenelse{\isodd{\thepage}}{}{\null\newpage}%
+    \includepdf[pages=-,landscape,turn=false,lastpage=2,%
+        addtotoc={1,chapter,0,Desk Reference,ch:cheatsheet}]{eapi-cheatsheet}
+}
+
+% vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "pms"
+%%% LaTeX-indent-level: 4
+%%% LaTeX-item-indent: 0
+%%% TeX-brace-indent-level: 4
+%%% fill-column: 100
+%%% End:
