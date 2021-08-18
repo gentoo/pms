@@ -47,18 +47,6 @@
     gitinfo2    % Metadata from git
 }
 
-% tex4ht workaround: hyperref needs to be loaded /after/ tex4ht injects itself
-\g@addto@macro\@documentclasshook{
-    \RequirePackage{%
-        hyperref,       % Support for hyperlinks
-        algorithm,      %
-        algorithmic     % Set algorithms
-    }
-}
-
-\ClassInfo{pms}{Capsulation of LaTeX stuff for the Package Manager
-    Specification, loaded baseclass: \ClassToLoad\MessageBreak}
-
 % Make processing with TeX4HT possible
 \newboolean{TEX4HT-HACKS}
 \ifx\HCode\undefined
@@ -71,6 +59,18 @@
 \else
     \setboolean{TEX4HT-HACKS}{true}
 \fi
+
+% tex4ht workaround: hyperref needs to be loaded /after/ tex4ht injects itself
+\g@addto@macro\@documentclasshook{
+    \RequirePackage{%
+        hyperref,       % Support for hyperlinks
+        algorithm,      %
+        algorithmic     % Set algorithms
+    }
+}
+
+\ClassInfo{pms}{LaTeX class for the Package Manager Specification,
+    loaded baseclass: \ClassToLoad\MessageBreak}
 
 % Define own label and reference commands, that display the label in
 % the page margin.
