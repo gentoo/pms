@@ -1270,7 +1270,7 @@ has returned.
 \begin{algorithm}
 \caption{\t{get_libdir} logic} \label{alg:get-libdir}
 \begin{algorithmic}[1]
-\STATE let libdir=lib
+\STATE let libdir=\t{lib}
 \IF{the ABI environment variable is set}
     \STATE let libvar=LIBDIR_\$ABI
     \IF{the environment variable named by libvar is set}
