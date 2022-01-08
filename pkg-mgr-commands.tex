@@ -406,7 +406,7 @@ commands once the current phase function has returned.
 \end{algorithmic}
 \end{algorithm}
 
-\item[emake] Calls the \t{\$MAKE} program, or GNU make if the \t{MAKE} variable is unset.
+\item[emake] Calls the \t{\$\{MAKE\}} program, or GNU make if the \t{MAKE} variable is unset.
     Any arguments given are passed directly to the make command, as are the user's chosen
     \t{MAKEOPTS}\@. Arguments given to \t{emake} override user configuration. See also
     section~\ref{sec:guaranteed-system-commands}. \t{emake} must be an external program and cannot
@@ -507,7 +507,7 @@ the current phase function has returned.
     Only available in EAPIs listed in table~\ref{tab:doheader-table} as supporting \t{doheader}.
     Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
-\item[dohtml] Installs the given HTML files into a subdirectory under \t{/usr/share/doc/\$PF/}.
+\item[dohtml] Installs the given HTML files into a subdirectory under \t{/usr/share/doc/\$\{PF\}/}.
     The subdirectory is \t{html} by default, but this can be overridden with the \t{docinto}
     function. Files to be installed automatically are determined by extension and the default
     extensions are \t{css}, \t{gif}, \t{htm}, \t{html}, \t{jpeg}, \t{jpg}, \t{js} and \t{png}.
