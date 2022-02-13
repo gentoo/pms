@@ -2,9 +2,84 @@
 
 \input{ebuild-env-vars.tex}
 
-\input{ebuild-env-state.tex}
+\section{The State of Variables Between Functions}
+\label{sec:ebuild-env-state}
 
-\input{ebuild-env-invariancy.tex}
+Exported and default scope variables are saved between functions. A non-local variable set in a
+function earlier in the call sequence must have its value preserved for later functions, including
+functions executed as part of a later uninstall.
+
+\note{\t{pkg_pretend} is \emph{not} part of the normal call sequence, and does not take part in
+environment saving.}
+
+Variables that were exported must remain exported in later functions; variables with default
+visibility may retain default visibility or be exported. Variables with special meanings to the
+package manager are excluded from this rule.
+
+Global variables must only contain invariant values (see~\ref{sec:metadata-invariance}). If a global
+variable's value is invariant, it may have the value that would be generated at any given point
+in the build sequence.
+
+This is demonstrated by code listing~\ref{lst:env-saving}.
+
+\begin{listing}
+\caption{Environment state between functions} \label{lst:env-saving}
+\begin{verbatim}
+GLOBAL_VARIABLE="a"
+
+src_compile()
+{
+    GLOBAL_VARIABLE="b"
+    DEFAULT_VARIABLE="c"
+    export EXPORTED_VARIABLE="d"
+    local LOCAL_VARIABLE="e"
+}
+
+src_install(){
+    [[ ${GLOBAL_VARIABLE} == "a" ]] \
+        || [[ ${GLOBAL_VARIABLE} == "b" ]] \
+        || die "broken env saving for globals"
+
+    [[ ${DEFAULT_VARIABLE} == "c" ]] \
+        || die "broken env saving for default"
+
+    [[ ${EXPORTED_VARIABLE} == "d" ]] \
+        || die "broken env saving for exported"
+
+    [[ $(printenv EXPORTED_VARIABLE ) == "d" ]] \
+        || die "broken env saving for exported"
+
+    [[ -z ${LOCAL_VARIABLE} ]] \
+        || die "broken env saving for locals"
+}
+\end{verbatim}
+\end{listing}
+
+\section{The State of the System Between Functions}
+
+For the sake of this section:
+\nobreakpar
+\begin{compactitem}
+\item Variancy is any package manager action that modifies either \t{ROOT} or \t{/} in any way that
+    isn't merely a simple addition of something that doesn't alter other packages. This includes
+    any non-default call to any \t{pkg} phase function except \t{pkg_setup}, a merge of any package
+    or an unmerge of any package.
+\item As an exception, changes to \t{DISTDIR} do not count as variancy.
+\item The \t{pkg_setup} function may be assumed not to introduce variancy. Thus, ebuilds must not
+    perform variant actions in this phase.
+\end{compactitem}
+
+The following exclusivity and invariancy requirements are mandated:
+\nobreakpar
+\begin{compactitem}
+\item No variancy shall be introduced at any point between a package's \t{pkg_setup} being started
+    up to the point that that package is merged, except for any variancy introduced by that package.
+\item There must be no variancy between a package's \t{pkg_setup} and a package's \t{pkg_postinst},
+    except for any variancy introduced by that package.
+\item Any non-default \t{pkg} phase function must be run exclusively.
+\item Each phase function must be called at most once during the build process for any given
+    package.
+\end{compactitem}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 
