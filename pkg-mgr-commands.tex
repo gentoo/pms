@@ -345,6 +345,10 @@ commands once the current phase function has returned.
         \t{-{}-enable-static} occurs in the output of \t{configure -{}-help}.
     \end{itemize}
 
+    For EAPIs listed in table~\ref{tab:econf-match-end} as matching the end of the option string,
+    a string in \t{configure -{}-help} output will only match if is is not immediately followed by
+    any of the characters \t{[A-Za-z0-9+_.-]}.
+
     \ChangeWhenAddingAnEAPI{9}  % two places
     \begin{centertable}{Extra \t{econf} arguments for EAPIs}
         \label{tab:econf-options-table}
@@ -370,6 +374,20 @@ commands once the current phase function has returned.
           4                 & Yes & No  & No  & \\
           5, 6, 7           & Yes & Yes & No  & \\
           8, 9              & Yes & Yes & Yes & \\
+          \bottomrule
+        \end{tabular}
+    \end{centertable}
+
+    \ChangeWhenAddingAnEAPI{9}
+    \begin{centertable}{EAPIs matching end of option string in \t{configure -{}-help} output}
+        \label{tab:econf-match-end}
+        \begin{tabular}{ll}
+          \toprule
+          \multicolumn{1}{c}{\textbf{EAPI}} &
+          \multicolumn{1}{c}{\textbf{Matches end of option string?}} \\
+          \midrule
+          0, 1, 2, 3, 4, 5, 6, 7, 8 & No  \\
+          9                         & Yes \\
           \bottomrule
         \end{tabular}
     \end{centertable}
