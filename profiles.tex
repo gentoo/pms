@@ -25,7 +25,25 @@ first, left to right, with duplicate parent paths being sourced for every time t
 It is illegal for a profile's parent tree to contain cycles. Package manager behaviour upon
 encountering a cycle is undefined.
 
-This file must not contain comments, blank lines or make use of line continuations.
+This file must not make use of line continuations.
+
+\featurelabel{parent-comments} For EAPIs listed in table~\ref{tab:profile-parent-comments} as
+allowing comments, blank lines and lines beginning with a \t{\#} are discarded. For other EAPIs,
+this file must not contain comments or blank lines.
+
+\ChangeWhenAddingAnEAPI{9}
+\begin{centertable}{EAPIs allowing comments in \t{parent} file}
+    \label{tab:profile-parent-comments}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Allows comments?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6, 7, 8 & No  \\
+      9                         & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \subsection{The eapi file}
 \label{sec:profile-eapi}
