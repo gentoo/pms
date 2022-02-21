@@ -25,7 +25,8 @@ first, left to right, with duplicate parent paths being sourced for every time t
 It is illegal for a profile's parent tree to contain cycles. Package manager behaviour upon
 encountering a cycle is undefined.
 
-This file must not contain comments, blank lines or make use of line continuations.
+This file must not make use of line continuations. Blank lines and those beginning with a \t{\#}
+are discarded.
 
 \subsection{The eapi file}
 \label{sec:profile-eapi}
