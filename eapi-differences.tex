@@ -32,6 +32,9 @@ have identical entries for all listed EAPIs.}
 Less strict \t{updates} syntax & \compactfeatureref{updates-filenames} &
     No & No & Yes & Yes \\
 
+Default EAPI for profiles & \compactfeatureref{profile-eapi-default} &
+    0 & 0 & 0 & Top-level \\
+
 Profile files as directories & \compactfeatureref{profile-file-dirs} &
     No & Yes & Yes & Yes \\
 
@@ -353,6 +356,7 @@ EAPI 9 is EAPI 8 with the following changes:
 
 \begin{compactitem}
 \item Bash version is 5.2, \featureref{bash-version}.
+\item Different default EAPI for profiles, \featureref{profile-eapi-default}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{9}

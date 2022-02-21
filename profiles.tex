@@ -33,8 +33,27 @@ are discarded.
 A profile directory may contain an \t{eapi} file. This file, if it exists, must contain a single
 line with the name of an EAPI\@. This specifies the EAPI to use when handling the directory in
 question; a package manager must not attempt to use any profile using a directory which requires an
-EAPI it does not support. If no \t{eapi} file is present, EAPI 0 shall be used. The EAPI is neither
-inherited via the \t{parent} file nor in subdirectories.
+EAPI it does not support.
+
+\featurelabel{profile-eapi-default} If no \t{eapi} file is present, the default depends on the EAPI
+of the top-level profiles directory (see section~\ref{sec:profiles-dir}). That EAPI shall be used
+if table~\ref{tab:profile-eapi-default} lists it as ``top-level''. Otherwise, EAPI 0 shall be used.
+
+The EAPI is neither inherited via the \t{parent} file nor in subdirectories.
+
+\ChangeWhenAddingAnEAPI{9}
+\begin{centertable}{Default EAPI for profiles}
+    \label{tab:profile-eapi-default}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Default EAPI?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6, 7, 8 & 0         \\
+      9                         & Top-level \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \subsection{deprecated}
 If a profile contains a file named \t{deprecated}, it is treated as such. The first line of this
