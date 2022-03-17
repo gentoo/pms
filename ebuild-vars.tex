@@ -43,8 +43,9 @@ All ebuilds must define at least the following variables:
 \section{Optional Ebuild-defined Variables}
 \label{sec:optional-vars}
 
-Ebuilds may define any of the following variables:
-\nobreakpar
+Ebuilds may define any of the following variables. Unless otherwise stated, any of them may be
+defined by an eclass.
+
 \begin{description}
 \item[EAPI] The EAPI\@. See below in section~\ref{sec:eapi}.
 \item[HOMEPAGE] The URI or URIs for a package's homepage, including protocols.
@@ -146,6 +147,8 @@ matched by the capturing parentheses (\t{0} if empty), otherwise it is \t{0}. Fo
 EAPI, the package manager must make sure that the \t{EAPI} value obtained by sourcing the ebuild
 with bash is identical to the EAPI obtained by parsing. The ebuild must be treated as invalid if
 these values are different.
+
+Eclasses must not attempt to modify the \t{EAPI} variable.
 
 \subsection{SRC_URI}
 \label{sec:src-uri-behaviour}
