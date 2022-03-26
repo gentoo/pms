@@ -25,9 +25,9 @@ The owner, group and mode (including set*id and sticky bits) of the directory mu
 except as follows:
 
 \begin{compactitem}
-\item Any directory owned by the user used to perform the build must become owned by the root user.
+\item Any directory owned by the user used to perform the build must become owned by the superuser.
 \item Any directory whose group is the primary group of the user used to perform the build must have
-    its group be that of the root user.
+    its group be that of the superuser.
 \end{compactitem}
 
 On SELinux systems, the SELinux context must also be preserved. Other directory attributes, including
@@ -53,9 +53,9 @@ The owner, group and mode (including set*id and sticky bits) of the file must be
 as follows:
 
 \begin{compactitem}
-\item Any file owned by the user used to perform the build must become owned by the root user.
+\item Any file owned by the user used to perform the build must become owned by the superuser.
 \item Any file whose group is the primary group of the user used to perform the build must have
-    its group be that of the root user.
+    its group be that of the superuser.
 \item The package manager may reduce read and write permissions on executable files that have a
     set*id bit set.
 \end{compactitem}
