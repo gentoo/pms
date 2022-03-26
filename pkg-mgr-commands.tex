@@ -460,7 +460,7 @@ the current phase function has returned.
 \item[dobin] Installs the given files into \t{DESTTREE/bin}, where \t{DESTTREE} defaults to
     \t{/usr}. Gives the files mode \t{0755} and transfers file ownership to the superuser or its
     equivalent on the system or installation at hand. In a non-offset-prefix installation this
-    ownership is \t{root:root}, while in an offset-prefix aware installation this may be e.\,g.\
+    ownership is \t{0:0}, while in an offset-prefix aware installation this may be e.\,g.\
     \t{joe:users}. Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[doconfd] Installs the given config files into \t{/etc/conf.d/}, by default with file mode
