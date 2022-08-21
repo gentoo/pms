@@ -111,7 +111,7 @@ Use dependencies & \compactfeatureref{use-deps} &
 \t{!!}\ blockers & \compactfeatureref{bang-strength} &
     * & Strong & Strong & Strong & Strong \\
 
-Working directory in \t{pkg_*} phases & \compactfeatureref{phase-function-dir} &
+Working dir in \t{pkg_*} phases & \compactfeatureref{phase-function-dir} &
     Any & Any & Any & Any & Empty \\
 
 \t{S} to \t{WORKDIR} fallback & \compactfeatureref{s-workdir-fallback} &
@@ -152,7 +152,10 @@ Parallel tests & \compactfeatureref{parallel-tests} &
     \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure},
         \t{src_compile}, \t{src_test}, \t{src_install} \\
 
-Accumulate \t{RESTRICT} etc. & \compactfeatureref{accumulate-vars} &
+Accumulate \t{PROPERTIES} & \compactfeatureref{accumulate-vars} &
+    No & No & No & No & Yes \\
+
+Accumulate \t{RESTRICT} & \compactfeatureref{accumulate-vars} &
     No & No & No & No & Yes \\
 
 \t{AA} & \compactfeatureref{aa} &
