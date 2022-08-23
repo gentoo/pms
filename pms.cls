@@ -76,13 +76,13 @@
 % the page margin.
 \ifthenelse{\boolean{TEX4HT-HACKS}}{%
     \newcommand{\featureref}[1]{\hyperref[feat:#1]{\textsc{#1}}}
-    \newcommand{\compactfeatureref}[1]{\hyperref[feat:#1]{#1}}
+    \newcommand{\compactfeatureref}[1]{\featureref{#1}}
     \newcommand{\featurelabel}[1]{\leavevmode\label{feat:#1}%
         % tex4ht does not support marginnote
         \framebox{\textsc{#1}}}
 }{%
     \newcommand{\featureref}[1]{\textsc{#1} on page~\pageref{feat:#1}}
-    \newcommand{\compactfeatureref}[1]{#1~p\pageref{feat:#1}}
+    \newcommand{\compactfeatureref}[1]{p.\,\pageref{feat:#1}}
     \newcommand{\featurelabel}[1]{\leavevmode\label{feat:#1}%
         \marginnote{\framebox{\textsc{#1}}}\ignorespaces}
 }

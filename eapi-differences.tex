@@ -1,39 +1,24 @@
 \chapter{Feature Availability by EAPI}
 
 \note{This chapter is informative and for convenience only. Refer to the main text for specifics.
-For lack of space, EAPIs 0, 1, 2, 3, and~4 have been consolidated into a single column in the table
-below; entries marked with an asterisk differ between these EAPIs. See the 2012-09-20 edition
-of this document for a complete table of previous EAPIs.}
-% 2012-09-20 (EAPI 5) edition has a table of EAPIs 0 to 5
+For lack of space, EAPIs 0 to~4 have been omitted from the table below, as well as items that would
+have identical entries for all listed EAPIs.}
 
 \ChangeWhenAddingAnEAPI{8}
-\begin{landscape}
-\begin{longtable}{llP{7.5em}P{7.5em}P{7.5em}P{7.5em}P{7.5em}}
+\begin{longtable}{@{}llllll@{}} % @{} to avoid overfull box
 \caption{Features in EAPIs}\\
 \toprule
 \multicolumn{1}{c}{\textbf{Feature}} &
-\multicolumn{1}{c}{\textbf{Reference}} &
-\multicolumn{5}{c}{\textbf{EAPIs}} \\
-\multicolumn{1}{c}{} &
-\multicolumn{1}{c}{} &
-\multicolumn{1}{c}{0, 1, 2, 3, 4} &
-\multicolumn{1}{c}{5} &
-\multicolumn{1}{c}{6} &
-\multicolumn{1}{c}{7} &
-\multicolumn{1}{c}{8} \\
+\multicolumn{1}{c}{\textbf{Ref.}} &
+\multicolumn{4}{c}{\textbf{EAPIs}} \\
+& & 5 & 6 & 7 & 8 \\
 \midrule
 \endfirsthead
 \midrule
 \multicolumn{1}{c}{\textbf{Feature}} &
-\multicolumn{1}{c}{\textbf{Reference}} &
-\multicolumn{5}{c}{\textbf{EAPIs}} \\
-\multicolumn{1}{c}{} &
-\multicolumn{1}{c}{} &
-\multicolumn{1}{c}{0, 1, 2, 3, 4} &
-\multicolumn{1}{c}{5} &
-\multicolumn{1}{c}{6} &
-\multicolumn{1}{c}{7} &
-\multicolumn{1}{c}{8} \\
+\multicolumn{1}{c}{\textbf{Ref.}} &
+\multicolumn{4}{c}{\textbf{EAPIs}} \\
+& & 5 & 6 & 7 & 8 \\
 \midrule
 \endhead
 \midrule
@@ -42,334 +27,193 @@ of this document for a complete table of previous EAPIs.}
 \endlastfoot
 
 \t{package.mask} directory & \compactfeatureref{package-mask-dir} &
-    No & No & No & Yes & Yes \\
+    No & No & Yes & Yes \\
 
-Less strict filenames in \t{updates} & \compactfeatureref{updates-filenames} &
-    No & No & No & No & Yes \\
+Less strict \t{updates} syntax & \compactfeatureref{updates-filenames} &
+    No & No & No & Yes \\
 
 Profile files as directories & \compactfeatureref{profile-file-dirs} &
-    No & No & No & Yes & Yes \\
+    No & No & Yes & Yes \\
 
 \t{package.provided} & \compactfeatureref{package-provided} &
-    Optional & Optional & Optional & No & No \\
-
-Stable use masking/forcing & \compactfeatureref{stablemask} &
-    No & Yes & Yes & Yes & Yes \\
+    Optional & Optional & No & No \\
 
 Bash version & \compactfeatureref{bash-version} &
-    3.2 & 3.2 & 4.2 & 4.2 & 5.0 \\
+    3.2 & 4.2 & 4.2 & 5.0 \\
 
 \t{failglob} in global scope & \compactfeatureref{failglob} &
-    No & No & Yes & Yes & Yes \\
-
-\t{IUSE} defaults & \compactfeatureref{iuse-defaults} &
-    * & Yes & Yes & Yes & Yes \\
-
-\t{REQUIRED_USE} & \compactfeatureref{required-use} &
-    * & Yes & Yes & Yes & Yes \\
-
-\t{PROPERTIES} & \compactfeatureref{properties} &
-    * & Yes & Yes & Yes & Yes \\
-
-\t{SRC_URI} arrows & \compactfeatureref{src-uri-arrows} &
-    * & Yes & Yes & Yes & Yes \\
+    No & Yes & Yes & Yes \\
 
 Selective URI restrictions & \compactfeatureref{uri-restrict} &
-    No & No & No & No & Yes \\
-
-\t{RDEPEND=DEPEND} & \compactfeatureref{rdepend-depend} &
-    * & No & No & No & No \\
-
-\t{DEFINED_PHASES} & \compactfeatureref{defined-phases} &
-    * & Yes & Yes & Yes & Yes \\
+    No & No & No & Yes \\
 
 \t{BDEPEND} & \compactfeatureref{bdepend} &
-    No & No & No & Yes & Yes \\
+    No & No & Yes & Yes \\
 
 \t{IDEPEND} & \compactfeatureref{idepend} &
-    No & No & No & No & Yes \\
-
-\t{??\ ( )} groups & \compactfeatureref{at-most-one-of} &
-    No & Yes & Yes & Yes & Yes \\
+    No & No & No & Yes \\
 
 Empty \t{||}, \t{\textasciicircum\textasciicircum} groups match &
     \compactfeatureref{empty-dep-groups} &
-    Yes & Yes & Yes & No & No \\
-
-Slot dependencies & \compactfeatureref{slot-deps} &
-    * & Named and Operator & Named and Operator & Named and Operator & Named and Operator \\
-
-Sub-slots & \compactfeatureref{sub-slot} &
-    No & Yes & Yes & Yes & Yes \\
-
-Use dependencies & \compactfeatureref{use-deps} &
-    * & 4-style & 4-style & 4-style & 4-style \\
-
-\t{!}\ blockers & \compactfeatureref{bang-strength} &
-    * & Weak & Weak & Weak & Weak \\
-
-\t{!!}\ blockers & \compactfeatureref{bang-strength} &
-    * & Strong & Strong & Strong & Strong \\
+    Yes & Yes & No & No \\
 
 Working dir in \t{pkg_*} phases & \compactfeatureref{phase-function-dir} &
-    Any & Any & Any & Any & Empty \\
-
-\t{S} to \t{WORKDIR} fallback & \compactfeatureref{s-workdir-fallback} &
-    * & Conditional & Conditional & Conditional & Conditional \\
-
-\t{pkg_pretend} & \compactfeatureref{pkg-pretend} &
-    * & Yes & Yes & Yes & Yes \\
-
-\t{src_prepare} & \compactfeatureref{src-prepare} &
-    * & Yes & Yes & Yes & Yes \\
+    Any & Any & Any & Empty \\
 
 \t{src_prepare} style & \compactfeatureref{src-prepare} &
-    * & no-op & 6 & 6 & 8 \\
-
-\t{src_configure} & \compactfeatureref{src-configure} &
-    * & Yes & Yes & Yes & Yes \\
-
-\t{src_compile} style & \compactfeatureref{src-compile} &
-    * & 2 & 2 & 2 & 2 \\
-
-Parallel tests & \compactfeatureref{parallel-tests} &
-    No & Yes & Yes & Yes & Yes \\
+    no-op & 6 & 6 & 8 \\
 
 \t{src_install} style & \compactfeatureref{src-install} &
-    * & 4 & 6 & 6 & 6 \\
-
-\t{pkg_info} & \compactfeatureref{pkg-info} &
-    * & Both & Both & Both & Both \\
-
-\t{default_} phase functions & \compactfeatureref{default-phase-funcs} &
-    * &
-    \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure},
-        \t{src_compile}, \t{src_test}, \t{src_install} &
-    \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure},
-        \t{src_compile}, \t{src_test}, \t{src_install} &
-    \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure},
-        \t{src_compile}, \t{src_test}, \t{src_install} &
-    \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure},
-        \t{src_compile}, \t{src_test}, \t{src_install} \\
+    4 & 6 & 6 & 6 \\
 
 Accumulate \t{PROPERTIES} & \compactfeatureref{accumulate-vars} &
-    No & No & No & No & Yes \\
+    No & No & No & Yes \\
 
 Accumulate \t{RESTRICT} & \compactfeatureref{accumulate-vars} &
-    No & No & No & No & Yes \\
-
-\t{AA} & \compactfeatureref{aa} &
-    * & No & No & No & No \\
+    No & No & No & Yes \\
 
 \t{PORTDIR} & \compactfeatureref{portdir} &
-    Yes & Yes & Yes & No & No \\
+    Yes & Yes & No & No \\
 
 \t{ECLASSDIR} & \compactfeatureref{eclassdir} &
-    Yes & Yes & Yes & No & No \\
+    Yes & Yes & No & No \\
 
 \t{SYSROOT}, \t{ESYSROOT} & \compactfeatureref{sysroot} &
-    No & No & No & Yes & Yes \\
+    No & No & Yes & Yes \\
 
 \t{BROOT} & \compactfeatureref{broot} &
-    No & No & No & Yes & Yes \\
+    No & No & Yes & Yes \\
 
 \t{DESTTREE} & \compactfeatureref{desttree} &
-    Yes & Yes & Yes & No & No \\
+    Yes & Yes & No & No \\
 
 \t{INSDESTTREE} & \compactfeatureref{insdesttree} &
-    Yes & Yes & Yes & No & No \\
-
-\t{KV} & \compactfeatureref{kv} &
-    * & No & No & No & No \\
-
-\t{EBUILD_PHASE_FUNC} & \compactfeatureref{ebuild-phase-func} &
-    No & Yes & Yes & Yes & Yes \\
-
-\t{MERGE_TYPE} & \compactfeatureref{merge-type} &
-    * & Yes & Yes & Yes & Yes \\
+    Yes & Yes & No & No \\
 
 \t{ENV_UNSET} & \compactfeatureref{env-unset} &
-    No & No & No & Yes & Yes \\
+    No & No & Yes & Yes \\
 
 Sane locale settings & \compactfeatureref{locale-settings} &
-    Undefined & Undefined & Yes & Yes & Yes \\
-
-Profile \t{IUSE} injection & \compactfeatureref{profile-iuse-inject} &
-    No & Yes & Yes & Yes & Yes \\
-
-\t{REPLACING_VERSIONS} & \compactfeatureref{replace-version-vars} &
-    * & Yes & Yes & Yes & Yes \\
-
-\t{REPLACED_BY_VERSION} & \compactfeatureref{replace-version-vars} &
-    * & Yes & Yes & Yes & Yes \\
-
-\t{EPREFIX}, \t{ED}, \t{EROOT} & \compactfeatureref{offset-prefix-vars} &
-    * & Yes & Yes & Yes & Yes \\
+    Undefined & Yes & Yes & Yes \\
 
 Trailing slash in \t{D} etc. & \compactfeatureref{trailing-slash} &
-    Yes & Yes & Yes & No & No \\
+    Yes & Yes & No & No \\
 
 GNU \t{patch} version & \compactfeatureref{gnu-patch} &
-    Any & Any & Any & 2.7 & 2.7 \\
+    Any & Any & 2.7 & 2.7 \\
 
-\t{find} is GNU? & \compactfeatureref{gnu-find} &
-    Undefined & Yes & Yes & Yes & Yes \\
-
-Most utilities die & \compactfeatureref{die-on-failure} &
-    * & Yes & Yes & Yes & Yes \\
-
-\t{nonfatal} & \compactfeatureref{nonfatal} &
-    * & Yes & Yes & Function / external & Function / external \\
-
-\t{dohard} & \compactfeatureref{banned-commands} &
-    * & Banned & Banned & Banned & Banned \\
-
-\t{dosed} & \compactfeatureref{banned-commands} &
-    * & Banned & Banned & Banned & Banned \\
+\t{nonfatal} function / external & \compactfeatureref{nonfatal} &
+    No & No & Yes & Yes \\
 
 \t{einstall} & \compactfeatureref{banned-commands} &
-    Yes & Yes & Banned & Banned & Banned \\
+    Yes & Banned & Banned & Banned \\
 
 \t{dohtml} & \compactfeatureref{banned-commands} &
-    Yes & Yes & Yes & Banned & Banned \\
+    Yes & Yes & Banned & Banned \\
 
 \t{dolib} & \compactfeatureref{banned-commands} &
-    Yes & Yes & Yes & Banned & Banned \\
+    Yes & Yes & Banned & Banned \\
 
 \t{libopts} & \compactfeatureref{banned-commands} &
-    Yes & Yes & Yes & Banned & Banned \\
+    Yes & Yes & Banned & Banned \\
 
 \t{useq} & \compactfeatureref{banned-commands} &
-    Yes & Yes & Yes & Yes & Banned \\
+    Yes & Yes & Yes & Banned \\
 
 \t{hasv} & \compactfeatureref{banned-commands} &
-    Yes & Yes & Yes & Yes & Banned \\
+    Yes & Yes & Yes & Banned \\
 
 \t{hasq} & \compactfeatureref{banned-commands} &
-    Yes & Yes & Yes & Yes & Banned \\
+    Yes & Yes & Yes & Banned \\
 
 Query command options & \compactfeatureref{pm-query-options} &
-    None & \t{-{}-host-root} & \t{-{}-host-root} & \t{-b}, \t{-d}, \t{-r} &
-    \t{-b}, \t{-d}, \t{-r} \\
+    \t{-{}-host-root} & \t{-{}-host-root} & \t{-b}, \t{-d}, \t{-r} & \t{-b}, \t{-d}, \t{-r} \\
 
 Output commands use stdout & \compactfeatureref{output-no-stdout} &
-    Yes & Yes & Yes & No & No \\
+    Yes & Yes & No & No \\
 
 \t{eqawarn} & \compactfeatureref{eqawarn} &
-    No & No & No & Yes & Yes \\
+    No & No & Yes & Yes \\
 
 \t{die -n} & \compactfeatureref{nonfatal-die} &
-    No & No & Yes & Yes & Yes \\
+    No & Yes & Yes & Yes \\
 
 \t{die} in subshell & \compactfeatureref{subshell-die} &
-    No & No & No & Yes & Yes \\
+    No & No & Yes & Yes \\
 
 \t{eapply} & \compactfeatureref{eapply} &
-    No & No & Yes & Yes & Yes \\
+    No & Yes & Yes & Yes \\
 
 \t{eapply_user} & \compactfeatureref{eapply-user} &
-    No & No & Yes & Yes & Yes \\
+    No & Yes & Yes & Yes \\
 
-\t{econf} arguments & \compactfeatureref{econf-options} &
-    * &
-    disable dependency tracking, disable silent rules &
-    disable dependency tracking, disable silent rules, docdir, htmldir &
-    disable dependency tracking, disable silent rules, docdir, htmldir, with sysroot &
-    disable dependency tracking, disable silent rules, disable static,
-    datarootdir, docdir, htmldir, with sysroot \\
+\t{econf -{}-datarootdir} & \compactfeatureref{econf-options} &
+    No & No & No & Yes \\
 
-\t{dodoc -r} & \compactfeatureref{dodoc} &
-    * & Yes & Yes & Yes & Yes \\
+\t{econf -{}-docdir} & \compactfeatureref{econf-options} &
+    No & Yes & Yes & Yes \\
 
-\t{doheader} & \compactfeatureref{doheader} &
-    No & Yes & Yes & Yes & Yes \\
+\t{econf -{}-htmldir} & \compactfeatureref{econf-options} &
+    No & Yes & Yes & Yes \\
 
-\t{doins} handles symlinks & \compactfeatureref{doins} &
-    * & Yes & Yes & Yes & Yes \\
+\t{econf -{}-with-sysroot} & \compactfeatureref{econf-options} &
+    No & No & Yes & Yes \\
 
-\t{doman} languages & \compactfeatureref{doman-langs} &
-    * & Yes & Yes & Yes & Yes \\
-
-\t{doman -i18n} precedence & \compactfeatureref{doman-langs} &
-    * & Yes & Yes & Yes & Yes \\
+\t{econf -{}-disable-static} & \compactfeatureref{econf-options} &
+    No & No & No & Yes \\
 
 \t{domo} destination path & \compactfeatureref{domo-path} &
-    \t{\$\{DESTTREE\}} & \t{\$\{DESTTREE\}} & \t{\$\{DESTTREE\}} & \t{/usr} & \t{/usr} \\
+    \t{\$\{DESTTREE\}} & \t{\$\{DESTTREE\}} & \t{/usr} & \t{/usr} \\
 
 \t{dosym -r} & \compactfeatureref{dosym-relative} &
-    No & No & No & No & Yes \\
+    No & No & No & Yes \\
 
-\t{new*} support stdin & \compactfeatureref{newfoo-stdin} &
-    No & Yes & Yes & Yes & Yes \\
-
-\t{insopts} affects misc.\ commands & \compactfeatureref{insopts} &
-    Yes & Yes & Yes & Yes & No \\
+\t{insopts} affects misc.\ cmds & \compactfeatureref{insopts} &
+    Yes & Yes & Yes & No \\
 
 \t{exeopts} affects \t{doinitd} & \compactfeatureref{exeopts} &
-    Yes & Yes & Yes & Yes & No \\
-
-Controllable compression & \compactfeatureref{docompress} &
-    * & Yes & Yes & Yes & Yes \\
-
-\t{docompress} & \compactfeatureref{docompress} &
-    * & Yes & Yes & Yes & Yes \\
+    Yes & Yes & Yes & No \\
 
 Controllable stripping & \compactfeatureref{dostrip} &
-    No & No & No & Yes & Yes \\
+    No & No & Yes & Yes \\
 
 \t{dostrip} & \compactfeatureref{dostrip} &
-    No & No & No & Yes & Yes \\
+    No & No & Yes & Yes \\
 
 \t{usev} second arg & \compactfeatureref{usev} &
-    No & No & No & No & Yes \\
-
-\t{use_with} empty third arg & \compactfeatureref{use-with} &
-    * & Yes & Yes & Yes & Yes \\
-
-\t{usex} & \compactfeatureref{usex} &
-    No & Yes & Yes & Yes & Yes \\
+    No & No & No & Yes \\
 
 \t{in_iuse} & \compactfeatureref{in-iuse} &
-    No & No & Yes & Yes & Yes \\
+    No & Yes & Yes & Yes \\
 
 \t{ver_*} commands & \compactfeatureref{ver-commands} &
-    No & No & No & Yes & Yes \\
+    No & No & Yes & Yes \\
 
 \t{unpack} absolute paths & \compactfeatureref{unpack-absolute} &
-    No & No & Yes & Yes & Yes \\
-
-\t{unpack} support for \t{xz} & \compactfeatureref{unpack-extensions} &
-    * & Yes & Yes & Yes & Yes \\
+    No & Yes & Yes & Yes \\
 
 \t{unpack} support for \t{txz} & \compactfeatureref{unpack-extensions} &
-    No & No & Yes & Yes & Yes \\
+    No & Yes & Yes & Yes \\
 
 \t{unpack} support for \t{7z} & \compactfeatureref{unpack-extensions} &
-    Yes & Yes & Yes & Yes & No \\
+    Yes & Yes & Yes & No \\
 
 \t{unpack} support for \t{lha} & \compactfeatureref{unpack-extensions} &
-    Yes & Yes & Yes & Yes & No \\
+    Yes & Yes & Yes & No \\
 
 \t{unpack} support for \t{rar} & \compactfeatureref{unpack-extensions} &
-    Yes & Yes & Yes & Yes & No \\
+    Yes & Yes & Yes & No \\
 
 \t{unpack} case-insensitive & \compactfeatureref{unpack-ignore-case} &
-    No & No & Yes & Yes & Yes \\
-
-\t{default} function & \compactfeatureref{default-func} &
-    * & Yes & Yes & Yes & Yes \\
+    No & Yes & Yes & Yes \\
 
 \t{einstalldocs} & \compactfeatureref{einstalldocs} &
-    No & No & Yes & Yes & Yes \\
+    No & Yes & Yes & Yes \\
 
 \t{get_libdir} & \compactfeatureref{get-libdir} &
-    No & No & Yes & Yes & Yes \\
-
-File mtimes preserved & \compactfeatureref{mtime-preserve} &
-    * & Yes & Yes & Yes & Yes \\
+    No & Yes & Yes & Yes \\
 
 \end{longtable}
-\end{landscape}
 
 \chapter{Differences Between EAPIs}
 
