@@ -118,9 +118,11 @@ They were dropped from the specification in October 2017.
 The \t{-{}-disable-static} option in \t{econf} (see section~\ref{sec:build-commands}) was intended
 to disable only static Libtool archive building. The original check for either
 \t{-{}-disable-static} or \t{-{}-enable-static} occuring in \t{configure -{}-help} output produced
-false positives. The specification was therefore updated in November 2022; it now requires both
-\t{-{}-enable-static} and \t{-{}-enable-shared}, and in addition checks for a proper end of the
-option string.
+false positives.
+
+The test mentioned above was effective in EAPI~8. It was updated in November 2022 to require both
+\t{-{}-enable-static} and \t{-{}-enable-shared}, and in addition checks for a proper end of these
+option strings.
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 
