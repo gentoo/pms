@@ -29,7 +29,7 @@ Each category provided by the repository (see also: the \t{profiles/categories} 
 section~\ref{sec:profiles-dir}) shall be contained in one directory, whose name shall be that of
 the category. Each category directory shall contain:
 \begin{compactitem}
-\item A \t{metadata.xml} file, as described in appendix~\ref{ch:metadata-xml}\@. Optional.
+\item A \t{metadata.xml} file, as described in appendix~\ref{app:metadata-xml}\@. Optional.
 \item Zero or more package directories, one for each package in the category, as described in
     section~\ref{sec:package-dirs}. The name of the package directory shall be the corresponding
     package name.
@@ -51,7 +51,7 @@ A package directory contains the following:
 \nobreakpar
 \begin{compactitem}
 \item Zero or more ebuilds. These are as described in chapter~\ref{ch:ebuild-format} and others.
-\item A \t{metadata.xml} file, as described in appendix~\ref{ch:metadata-xml}\@. Optional only for
+\item A \t{metadata.xml} file, as described in appendix~\ref{app:metadata-xml}\@. Optional only for
     legacy support.
 \item A \t{ChangeLog}, in a format determined by the provider of the repository. Optional.
 \item A \t{Manifest} file, whose format is described in~\cite{Glep74}. Can be omitted if the file
