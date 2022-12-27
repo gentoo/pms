@@ -54,6 +54,11 @@ pms.html: $(LATEXFILES) pms.bbl $(COMMITINFO)
 	@# remove redundant span elements
 	LC_ALL=C sed -Ei ':x;/<span(\s+[^>]*)?$$/{N;bx;};'\
 	':y;s,(<span\s+[^>]*>)([^<]*)</span>\1,\1\2,;ty' $@
+	@# guessable names for sections
+	LC_ALL=C sed -Ei \
+	  -e 's/("#?)x1-[0-9]*00+([1-9][0-9]?")/\1chapter-\2/g' \
+	  -e 's/("#?)x1-[0-9]*00+([1-9][0-9]?(\.[0-9]+)+")/\1section-\2/g' \
+	  -e 's/("#?)x1-[0-9]*00+([A-Z](\.[0-9]+)*")/\1appendix-\2/g' $@
 
 pms.bbl: pms.bib $(LATEXFILES) $(COMMITINFO)
 	$(aux-clean)
