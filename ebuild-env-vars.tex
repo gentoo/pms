@@ -179,24 +179,27 @@ variable.
     See also~\ref{sec:offset-vars}. Only for EAPIs listed in table~\ref{tab:offset-env-vars-table}
     as supporting \t{EPREFIX}. \\
 \t{D} &
-    \t{src_install} &
-    No &
+    \t{src_*} &
+    Yes &
     Contains the full path to the image directory into which the package should be installed.
+    Ebuilds must not attempt to access the directory in \t{src_*} phases other than \t{src_install}.
     The presence of a trailing slash is EAPI dependent as listed in table~\ref{tab:trailing-slash}.
     \\
 \t{D} (continued) &
     \t{pkg_preinst}, \t{pkg_postinst} &
-    Yes &
+    Yes\footnote{Consistent across \t{pkg_preinst} and \t{pkg_postinst}, but may not necessarily
+    have the same value that it had in the \t{src_*} phases.} &
     Contains the full path to the image that is about to be or has just been merged.
     The presence of a trailing slash is EAPI dependent as listed in table~\ref{tab:trailing-slash}.
     \\
 \t{ED} &
-    \t{src_install}, \t{pkg_preinst}, \t{pkg_postinst} &
+    \t{src_*}, \t{pkg_preinst}, \t{pkg_postinst} &
     See \t{D} &
     Contains the concatenation of the paths in the \t{D} and \t{EPREFIX} variables,
     for convenience. See also the \t{EPREFIX} variable. Only for EAPIs listed in
-    table~\ref{tab:offset-env-vars-table} as supporting \t{ED}\@. The presence of a trailing slash
-    is EAPI dependent as listed in table~\ref{tab:trailing-slash}. \\
+    table~\ref{tab:offset-env-vars-table} as supporting \t{ED}\@. Ebuilds must not attempt to
+    access the directory in \t{src_*} phases other than \t{src_install}. The presence of a trailing
+    slash is EAPI dependent as listed in table~\ref{tab:trailing-slash}. \\
 \t{DESTTREE} &
     \t{src_install} &
     No &
