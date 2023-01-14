@@ -18,6 +18,11 @@ syntax described in section~\ref{sec:version-spec}.
 \note{A package name does not include the category. The term \i{qualified package name} is used
 where a \t{category/package} pair is meant.}
 
+\subsection{Eclass names}
+\label{sec:eclass-names}
+An eclass name may contain any of the characters [\t{A-Za-z0-9_.-}]. It must begin with a letter or
+an underscore. In addition, an eclass cannot be named \t{default}.
+
 \subsection{Slot names}
 \label{sec:slot-names}
 A slot name may contain any of the characters [\t{A-Za-z0-9+_.-}]. It must not begin with a
