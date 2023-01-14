@@ -87,7 +87,7 @@ should the author wish to override it he can access the function in \t{foo.eclas
 \t{foo_src_compile}.
 
 \t{EXPORT_FUNCTIONS} must only be used on ebuild phase functions. The function that is aliased
-must be named \t{eclassname_phasefunctionname}, where \t{eclassname} is the name of the eclass.
+must be named \t{<eclass>_<phase-function>}, where \t{<eclass>} is the name of the eclass.
 
 If \t{EXPORT_FUNCTIONS} is called multiple times for the same phase function, the last call takes
 precedence. Eclasses may not rely upon any particular behaviour if they inherit another eclass

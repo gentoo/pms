@@ -477,9 +477,9 @@ source files from their respective locations, with notes concerning licensing if
 
 \featurelabel{default-phase-funcs} In EAPIs listed in
 table~\ref{tab:default-phase-function-table} as supporting \t{default_} phase functions, a function
-named \t{default_}(phase) that behaves as the default implementation for that EAPI shall be defined
-when executing any ebuild phase listed in the table. Ebuilds must not call these functions except
-when in the phase in question.
+named \t{default_<phase-function>}) that behaves as the default implementation for that EAPI shall
+be defined when executing any ebuild phase function listed in the table. Ebuilds must not call
+these functions except when in the phase in question.
 
 \ChangeWhenAddingAnEAPI{8}
 \begin{centertable}{EAPIs supporting \t{default_} phase functions}
