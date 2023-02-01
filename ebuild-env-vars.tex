@@ -117,13 +117,13 @@ inconsistent variable.
     \featurelabel{eclassdir} The full path to the master repository's eclass directory. Only for
     EAPIs listed in table~\ref{tab:removed-env-vars-table} as supporting \t{ECLASSDIR}. \\
 \t{ROOT} &
-   \t{pkg_*} &
-   No &
-   The absolute path to the root directory into which the package is to be merged.  Phases which run
-   with full filesystem access must not touch any files outside of the directory given in
-   \t{ROOT}\@. Also of note is that in a cross-compiling environment, binaries inside of \t{ROOT}
-   will not be executable on the build machine, so ebuilds must not call them. The presence of
-   a trailing slash is EAPI dependent as listed in table~\ref{tab:trailing-slash}. \\
+    \t{pkg_*} &
+    No &
+    The absolute path to the root directory into which the package is to be merged. Phases which
+    run with full filesystem access must not touch any files outside of the directory given in
+    \t{ROOT}\@. Also of note is that in a cross-compiling environment, binaries inside of \t{ROOT}
+    will not be executable on the build machine, so ebuilds must not call them. The presence of
+    a trailing slash is EAPI dependent as listed in table~\ref{tab:trailing-slash}. \\
 \t{EROOT} &
     \t{pkg_*} &
     No &
