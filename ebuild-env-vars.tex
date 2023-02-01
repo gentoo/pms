@@ -6,7 +6,7 @@ meaningful in all phases; variables that are not meaningful in a given phase may
 any value. Ebuilds must not attempt to modify any of these variables, unless otherwise specified.
 
 Because of their special meanings, these variables may not be preserved consistently across all
-phases as would normally happen due to environment saving (see~\ref{sec:ebuild-env-state}).
+phases as would normally happen due to environment saving (see section~\ref{sec:ebuild-env-state}).
 For example, \t{EBUILD_PHASE} is different for every phase, and \t{ROOT} may have changed between
 the various different \t{pkg_*} phases. Ebuilds must recalculate any variable they derive from an
 inconsistent variable.
@@ -40,7 +40,7 @@ inconsistent variable.
 \endlastfoot
 \t{P} &
     All &
-    No\footnote{May change if a package has been updated (see~\ref{sec:updates-dir}).} &
+    No\footnote{May change if a package has been updated (see section~\ref{sec:updates-dir}).} &
     Package name and version, without the revision part. For example, \t{vim-7.0.174}. \\
 \t{PF} &
     All &
@@ -175,8 +175,8 @@ inconsistent variable.
     calling environment, \t{EPREFIX} defaults to the built-in offset-prefix that was set during
     installation of the package manager. When a different \t{EPREFIX} value than the built-in value
     is set in the calling environment, a cross-prefix build is performed where using the existing
-    utilities, a package is built for the given \t{EPREFIX}, akin to \t{ROOT}\@.
-    See also~\ref{sec:offset-vars}. Only for EAPIs listed in table~\ref{tab:offset-env-vars-table}
+    utilities, a package is built for the given \t{EPREFIX}, akin to \t{ROOT}\@. See also
+    section~\ref{sec:offset-vars}. Only for EAPIs listed in table~\ref{tab:offset-env-vars-table}
     as supporting \t{EPREFIX}. \\
 \t{D} &
     \t{src_*} &
