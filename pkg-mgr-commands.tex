@@ -343,9 +343,12 @@ commands once the current phase function has returned.
         occurs in the output of \t{configure -{}-help}.
     \item \t{-{}-disable-static}, if the EAPI is listed in table~\ref{tab:econf-options-table}
         as using it. This option will only be passed if both strings \t{-{}-enable-static} and
-        \t{-{}-enable-shared} occur in the output of \t{configure -{}-help}, and if neither of them
-        is immediately followed by any of the characters \t{[A-Za-z0-9+_.-]}.
+        \t{-{}-enable-shared} occur in the output of \t{configure -{}-help}.
     \end{itemize}
+
+    For the option names beginning with \t{with-}, \t{disable-} or \t{enable-}, a string in
+    \t{configure -{}-help} output matches only if it is not immediately followed by any of the
+    characters \t{[A-Za-z0-9+_.-]}.
 
     \ChangeWhenAddingAnEAPI{8}
     \begin{centertable}{Extra \t{econf} arguments for EAPIs}
