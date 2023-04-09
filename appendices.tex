@@ -124,6 +124,12 @@ The test mentioned above was effective in EAPI~8. It was updated in November 202
 \t{-{}-enable-static} and \t{-{}-enable-shared}, and in addition checks for a proper end of these
 option strings.
 
+\subsection{econf matches configure -{}-help output better}
+The simple string matching used for \t{configure -{}-help} output caused false positives for options
+like \t{-{}-with-sysroot}. It was effective in EAPIs 4, 5, 6, 7 and 8, and was updated in April 2023
+to check for a proper end of string for all option names beginning with \t{with-}, \t{disable-} or
+\t{enable-}.
+
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 
 %%% Local Variables:
