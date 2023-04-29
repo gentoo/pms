@@ -430,7 +430,7 @@ commands once the current phase function has returned.
     table~\ref{tab:offset-env-vars-table}, hence EAPIs lacking offset-prefix support should use
     \t{D} instead of \t{ED} in the command given in listing~\ref{lst:einstall}.
     Variable \t{libdir} is an auxiliary local variable whose value is determined by
-    algorithm~\ref{alg:ebuild-libdir}.
+    algorithm~\ref{alg:get-libdir}.
 
 \begin{listing}[H]
 \caption{\t{einstall} command} \label{lst:einstall}
@@ -554,7 +554,7 @@ the current phase function has returned.
     EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
 \item[dolib.a] For each argument, installs it into the appropriate library subdirectory under
-    \t{DESTTREE}, as determined by algorithm~\ref{alg:ebuild-libdir}. Files are installed with file
+    \t{DESTTREE}, as determined by algorithm~\ref{alg:get-libdir}. Files are installed with file
     mode \t{0644}. Any symlinks are installed into the same directory as relative links to their
     original target. Failure behaviour is EAPI dependent as per section~\ref{sec:failure-behaviour}.
 
@@ -564,28 +564,6 @@ the current phase function has returned.
     the \t{install} options set by the most recent \t{libopts} call. In EAPIs listed
     in table~\ref{tab:banned-commands-table}, this command is banned as per
     section~\ref{sec:banned-commands}.
-
-\begin{algorithm}
-\caption{Determining the library directory} \label{alg:ebuild-libdir}
-\begin{algorithmic}[1]
-\IF{CONF_LIBDIR_OVERRIDE is set in the environment}
-    \STATE return CONF_LIBDIR_OVERRIDE
-\ENDIF
-\IF{CONF_LIBDIR is set in the environment}
-    \STATE let LIBDIR_default=CONF_LIBDIR
-\ELSE
-    \STATE let LIBDIR_default=``lib''
-\ENDIF
-\IF{ABI is set in the environment}
-    \STATE let abi=ABI
-\ELSIF{DEFAULT_ABI is set in the environment}
-    \STATE let abi=DEFAULT_ABI
-\ELSE
-    \STATE let abi=``default''
-\ENDIF
-\STATE return the value of LIBDIR_\$abi
-\end{algorithmic}
-\end{algorithm}
 
 \item[doman] Installs the given man pages into the appropriate subdirectory of \t{/usr/share/man}
     depending upon its apparent section suffix (e.\,g.\ \t{foo.1} goes to
@@ -1273,7 +1251,7 @@ has returned.
     supporting \t{get_libdir}.
 
 \begin{algorithm}
-\caption{\t{get_libdir} logic} \label{alg:get-libdir}
+\caption{Library directory logic} \label{alg:get-libdir}
 \begin{algorithmic}[1]
 \STATE let libdir=\t{lib}
 \IF{the ABI environment variable is set}
@@ -1282,7 +1260,7 @@ has returned.
         \STATE let libdir=the value of the variable named by libvar
     \ENDIF
 \ENDIF
-\STATE print the value of libdir
+\RETURN the value of libdir
 \end{algorithmic}
 \end{algorithm}
 
