@@ -3,16 +3,19 @@
 
 \section{Directory Contents}
 
-The \t{metadata/cache} directory, if it exists, contains directories whose names are the same as
-categories in the repository. Each subdirectory may optionally contain one file per package version
-in that category, named \t{<package>-<version>}, in the format described below.
+The \t{metadata/cache} or \t{metadata/md5-cache} directories, if either of them exists, contain
+directories whose names are the same as categories in the repository. Each subdirectory may
+optionally contain one file per package version in that category, named \t{<package>-<version>},
+in one of the formats described below.
 
 The metadata cache may be incomplete or non-existent, and may contain additional bogus entries.
 
-\section{Cache File Format}
+\section{Legacy Cache File Format}
+\label{sec:legacy-cache}
 
-Each cache file contains the textual values of various metadata keys, one per line, in the following
-order. Other lines may be present following these; their meanings are not defined here.
+The legacy cache file format is used in the \t{metadata/cache} directory. Each cache file contains
+the textual values of various metadata keys, one per line, in the following order. Other lines may
+be present following these; their meanings are not defined here.
 
 \begin{compactenum}
 \item Build-time dependencies (\t{DEPEND})
@@ -46,6 +49,27 @@ format used for a particular variable, add or reduce the total length of the fil
 Any future EAPI that uses this cache format will continue to place the EAPI value on line~15 if
 such a concept makes sense for that EAPI, and will place a value that is clearly not a supported
 EAPI on line~15 if it does~not.
+
+\section{md5-dict Cache File Format}
+
+The ``md5-dict'' cache file format is used in the \t{metadata/md5-cache} directory. Each cache file
+contains \t{<key>=<value>} pairs, one per line, in arbitrary order. The keys are the same as those
+listed in section~\ref{sec:legacy-cache} except the \t{INHERITED} key. In addition, keys \t{_md5_}
+and \t{_eclasses_} contain values as defined below.
+
+\begin{description}
+\item[_md5_] The MD5 checksum of the ebuild for the package version.
+
+\item[_eclasses_] A list of \i{name-checksum} pairs for all eclasses directly or indirectly
+inherited by the ebuild, in arbitrary order, where \i{name} is the eclass name and \i{checksum}
+is the MD5 checksum of the eclass. Pairs are separated from each other by single tab characters,
+as are \i{name} and \i{checksum} in each pair.
+\end{description}
+
+All MD5 checksums are computed and formatted as described in RFC~1321~\cite{rfc1321}.
+
+Other keys may be present; their meanings are not defined here. Lines with an empty value can be
+omitted.
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 
