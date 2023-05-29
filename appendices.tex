@@ -3,7 +3,7 @@
 
 The \t{metadata.xml} file is used to contain extra package- or category-level information beyond
 what is stored in ebuild metadata. Its exact format is strictly beyond the scope of this document,
-and is described in GLEP~68~\cite{Glep68}.
+and is described in GLEP~68~\cite{glep68}.
 
 \chapter{Unspecified Items}
 
@@ -76,7 +76,7 @@ the \t{PROVIDE} metadata that it supplied certain virtuals, and the package mana
 in mind when handling dependencies.
 
 Old-style virtuals were supported by EAPIs 0, 1, 2, 3 and~4. They were phased out via
-GLEP~37~\cite{Glep37} and finally removed in 2011.
+GLEP~37~\cite{glep37} and finally removed in 2011.
 
 \note{A `new-style virtual' is a normal package that installs no files and uses its dependency
 requirements to pull in a `provider'. This does not require any special handling from the package
@@ -87,7 +87,7 @@ The method to specify the EAPI of an ebuild used to be a shell variable assignme
 manager had to source the ebuild in order to determine the EAPI\@. Therefore any ebuild using
 a future EAPI would still have to be sourceable by old package managers, which imposed restrictions
 e.\,g.\ on updating the Bash version or on possible changes of global scope functions. Several
-approaches to overcome this limitation were discussed, notably GLEP~55~\cite{Glep55}, which was
+approaches to overcome this limitation were discussed, notably GLEP~55~\cite{glep55}, which was
 rejected though.
 
 The current syntax of the \t{EAPI} assignment statement (see section~\ref{sec:eapi}), allowing
