@@ -149,7 +149,8 @@ inconsistent variable.
     by table~\ref{tab:depend-prefix}. Only for EAPIs listed in table~\ref{tab:offset-env-vars-table}
     as supporting \t{ESYSROOT}. \\
 \t{BROOT} &
-    \t{src_*}, \t{pkg_setup}\footnotemark[\value{footnote}] &
+    \t{src_*}, \t{pkg_setup},\footnotemark[\value{footnote}] \t{pkg_preinst}, \t{pkg_postinst},
+    \t{pkg_prerm}, \t{pkg_postrm} &
     No &
     \featurelabel{broot} The absolute path to the root directory containing build dependencies
     satisfied by \t{BDEPEND} and \t{IDEPEND}, typically executable build tools. This includes any
