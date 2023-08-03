@@ -12,13 +12,17 @@ the various different \t{pkg_*} phases. Ebuilds must recalculate any variable th
 inconsistent variable.
 
 \begin{landscape}
+% Reduce width of text area to make room for margin notes
+\addtolength{\hsize}{-25mm}
+\setlength{\linewidth}{\hsize}
+\setlength{\columnwidth}{\hsize}
+\addtolength{\footskip}{25mm}
 \reversemarginpar
-\addtolength{\marginparsep}{-25mm}
 % Workaround for broken marginnote positioning in lscape environment
 \addtolength{\marginparsep}{-\textwidth} % FIXME
-\setlength{\LTleft}{25mm plus 1fil}
+\setlength{\LTleft}{0pt plus 1fil}
 \setlength{\LTright}{0pt plus 1fil}
-\begin{longtable}{!{\extracolsep{\fill}} l P{7.5em} l p{0.5\linewidth}}
+\begin{longtable}{!{\extracolsep{\fill}} l P{7.5em} l p{35em}}
 \caption{Defined variables\label{tab:defined-vars}}\\
 \toprule
 \multicolumn{1}{c}{\textbf{Variable}} &
@@ -34,7 +38,7 @@ inconsistent variable.
 \multicolumn{1}{c}{\textbf{Description}} \\
 \midrule
 \endhead
-\midrule
+%\midrule
 \endfoot
 \bottomrule
 \endlastfoot

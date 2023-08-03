@@ -22,8 +22,10 @@
 \PassOptionsToPackage{utf8}{inputenc}
 \PassOptionsToPackage{quiet}{marginnote}
 \PassOptionsToPackage{nohyphen}{underscore}
+\PassOptionsToPackage{hang,flushmargin}{footmisc}
 \PassOptionsToPackage{nottoc,notlot,notlof}{tocbibind}
 \PassOptionsToPackage{hyphens}{url} % url.sty implicitly loaded by hyperref
+\PassOptionsToPackage{hyperfootnotes=false}{hyperref} % footmisc compatibility
 \PassOptionsToPackage{local}{gitinfo2}
 \PassOptionsToPackage{chapter}{algorithm}
 % algorithmic and algorithm to be loaded last to avoid failures
@@ -41,6 +43,7 @@
     marginnote, % Typeset a paragraph in the page margin
     paralist,   % Additional list environments
     underscore, % Allow simple _ instead of \_
+    footmisc,   % Customise footnotes
     chngcntr,   % Redefinition of counters
     tocbibind,  % Add bibliography to table of contents
     float,      % More control over float environments
