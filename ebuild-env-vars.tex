@@ -48,15 +48,15 @@ inconsistent variable.
     Package name and version, without the revision part. For example, \t{vim-7.0.174}. \\
 \t{PF} &
     All &
-    Ditto &
+    No\footnotemark[\value{footnote}] &
     Package name, version, and revision (if any), for example \t{vim-7.0.174-r1}. \\
 \t{PN} &
     All &
-    Ditto &
+    No\footnotemark[\value{footnote}] &
     Package name, for example \t{vim}. \\
 \t{CATEGORY} &
     All &
-    Ditto &
+    No\footnotemark[\value{footnote}] &
     The package's category, for example \t{app-editors}. \\
 \t{PV} &
     All &
@@ -81,7 +81,7 @@ inconsistent variable.
     assume that the package manager sets it in the EAPIs supporting it. For example, a few
     configure scripts use this variable to find the \t{aalib} package; ebuilds calling such
     configure scripts must thus work around this.} &
-    Ditto &
+    \t{src_*}, \t{pkg_nofetch} &
     Yes &
     \featurelabel{aa} All source files that could be available for the package, including any that
     are disabled in \t{A} because of USE conditionals. The value is calculated from the base names
@@ -96,11 +96,11 @@ inconsistent variable.
     not exist; if a repository provides no support files for the package in question then an ebuild
     must be prepared for the situation where \t{FILESDIR} points to a non-existent directory. \\
 \t{DISTDIR} &
-    Ditto &
+    \t{src_*}, global~scope\footnotemark[\value{footnote}] &
     Yes &
     The full path to the directory in which the files in the \t{A} variable are stored. \\
 \t{WORKDIR} &
-    Ditto &
+    \t{src_*}, global~scope\footnotemark[\value{footnote}] &
     Yes &
     The full path to the ebuild's working directory, where all build data should be contained. \\
 \t{S} &
@@ -143,19 +143,18 @@ inconsistent variable.
     satisfied by \t{DEPEND}\@. Only for EAPIs listed in table~\ref{tab:added-env-vars-table}
     as supporting \t{SYSROOT}. \\
 \t{ESYSROOT} &
-    Ditto &
+    \t{src_*}, \t{pkg_setup}\footnotemark[\value{footnote}] &
     No &
     Contains the concatenation of the \t{SYSROOT} path and applicable prefix value, as determined
     by table~\ref{tab:depend-prefix}. Only for EAPIs listed in table~\ref{tab:offset-env-vars-table}
     as supporting \t{ESYSROOT}. \\
 \t{BROOT} &
-    Ditto &
+    \t{src_*}, \t{pkg_setup}\footnotemark[\value{footnote}] &
     No &
     \featurelabel{broot} The absolute path to the root directory containing build dependencies
     satisfied by \t{BDEPEND} and \t{IDEPEND}, typically executable build tools. This includes any
     applicable offset prefix. Only for EAPIs listed in table~\ref{tab:added-env-vars-table} as
-    supporting \t{BROOT}.
-    \\
+    supporting \t{BROOT}. \\
 \t{T} &
     All &
     Partially\footnote{Consistent and preserved across a single connected sequence of install or
@@ -164,12 +163,12 @@ inconsistent variable.
     The full path to a temporary directory for use by the ebuild. \\
 \t{TMPDIR} &
     All &
-    Ditto &
+    Partially\footnotemark[\value{footnote}] &
     Must be set to the location of a usable temporary directory, for any applications
     called by an ebuild. Must not be used by ebuilds directly; see \t{T} above. \\
 \t{HOME} &
     All &
-    Ditto &
+    Partially\footnotemark[\value{footnote}] &
     The full path to an appropriate temporary directory for use by any programs invoked by the
     ebuild that may read or modify the home directory. \\
 \t{EPREFIX} &
