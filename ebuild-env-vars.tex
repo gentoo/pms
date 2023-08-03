@@ -2,8 +2,9 @@
 \label{sec:ebuild-env-vars}
 
 The package manager must define the following environment variables. Not all variables are
-meaningful in all phases; variables that are not meaningful in a given phase may be unset or set to
-any value. Ebuilds must not attempt to modify any of these variables, unless otherwise specified.
+universally meaningful; variables that are not meaningful in a given phase or in global scope may
+be unset or set to any value. Ebuilds must not attempt to modify any of these variables, unless
+otherwise specified.
 
 Because of their special meanings, these variables may not be preserved consistently across all
 phases as would normally happen due to environment saving (see section~\ref{sec:ebuild-env-state}).
