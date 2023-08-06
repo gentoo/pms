@@ -150,7 +150,8 @@ inconsistent variable.
     as supporting \t{ESYSROOT}. \\
 \t{BROOT} &
     \t{src_*}, \t{pkg_setup},\footnotemark[\value{footnote}] \t{pkg_preinst}, \t{pkg_postinst},
-    \t{pkg_prerm}, \t{pkg_postrm} &
+    \t{pkg_prerm}, \t{pkg_postrm}\footnote{Legal in \t{pkg_*inst} and \t{pkg_*rm} only for EAPIs
+    listed in table~\ref{tab:depend-table} as supporting \t{IDEPEND}.} &
     No &
     \featurelabel{broot} The absolute path to the root directory containing build dependencies
     satisfied by \t{BDEPEND} and \t{IDEPEND}, typically executable build tools. This includes any
