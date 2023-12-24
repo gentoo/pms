@@ -89,14 +89,14 @@ called, the package manager must abort the build process indicating an error.
 \end{centertable}
 
 \subsection{Sandbox commands}
-These commands affect the behaviour of the sandbox. Each command takes a single directory as
-argument. Ebuilds must not run any of these commands once the current phase function has returned.
+These commands affect the behaviour of the sandbox. Each command takes a single path as argument.
+Ebuilds must not run any of these commands once the current phase function has returned.
 \begin{description}
-\item[addread] Add a directory to the permitted read list.
-\item[addwrite] Add a directory to the permitted write list.
-\item[addpredict] Add a directory to the predict list. Any write to a location in this list will be
+\item[addread] Add a path to the permitted read list.
+\item[addwrite] Add a path to the permitted write list.
+\item[addpredict] Add a path to the predict list. Any write to a location in this list will be
     denied, but will not trigger access violation messages or abort the build process.
-\item[adddeny] Add a directory to the deny list.
+\item[adddeny] Add a path to the deny list.
 \end{description}
 
 \subsection{Package manager query commands}
