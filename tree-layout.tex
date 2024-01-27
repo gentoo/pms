@@ -229,9 +229,9 @@ to \t{slot2}.
 It is unspecified in what order the files in the \t{updates} directory are processed. Lines within
 each file are processed in ascending order.
 
-Any name that has appeared as the origin of a move must not be reused in the future. Any slot
-that has appeared as the origin of a slot move may not be used by packages matching the spec of
-that slot move in the future.
+At any given time, a name that appears as the origin of a move may not be used as a qualified
+package name in the repository. A slot that appears as the origin of a slot move may not be used
+by packages matching the spec of that slot move.
 
 \ChangeWhenAddingAnEAPI{8}
 \begin{centertable}{Naming rules for files in \t{updates} directory for EAPIs}
