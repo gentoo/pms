@@ -239,6 +239,8 @@ The following tokens are permitted inside \t{PROPERTIES}:
     installed.
 \item[test_network] The package manager may run tests that require an internet connection, even if
     the ebuild has \t{RESTRICT=test}.
+\item[test_privileged] The package manager may run tests that require superuser privileges, even
+    if the ebuild has \t{RESTRICT=test}.
 \end{description}
 
 Package managers may recognise other tokens. Ebuilds may not rely upon any token being supported.
