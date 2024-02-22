@@ -224,23 +224,23 @@ inconsistent variable.
     A whitespace-delimited list of all active USE flags for this ebuild. See
     section~\ref{sec:use-iuse-handling} for details. \\
 \t{EBUILD_PHASE} &
-    All &
+    \t{src_*}, \t{pkg_*} &
     No &
     Takes one of the values \t{config}, \t{setup}, \t{nofetch}, \t{unpack}, \t{prepare},
     \t{configure}, \t{compile}, \t{test}, \t{install}, \t{preinst}, \t{postinst}, \t{prerm},
     \t{postrm}, \t{info}, \t{pretend} according to the top level ebuild function that was executed
-    by the package manager. May be unset or any single word that is not any of the above when the
-    ebuild is being sourced for other (e.\,g.\ metadata or QA) purposes. \\
+    by the package manager. Behaviour is unspecified when the ebuild is being sourced for other
+    (e.\,g.\ metadata or QA) purposes. \\
 \t{EBUILD_PHASE_FUNC} &
-    All &
+    \t{src_*}, \t{pkg_*} &
     No &
     \featurelabel{ebuild-phase-func} Takes one of the values \t{pkg_config}, \t{pkg_setup},
     \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure}, \t{src_compile},
     \t{src_test}, \t{src_install}, \t{pkg_preinst}, \t{pkg_postinst}, \t{pkg_prerm},
     \t{pkg_postrm}, \t{pkg_info}, \t{pkg_pretend} according to the top level ebuild function that
-    was executed by the package manager. May be unset or any single word that is not any of the
-    above when the ebuild is being sourced for other (e.\,g.\ metadata or QA) purposes. Only for
-    EAPIs listed in table~\ref{tab:added-env-vars-table} as supporting \t{EBUILD_PHASE_FUNC}. \\
+    was executed by the package manager. Behaviour is unspecified when the ebuild is being sourced
+    for other (e.\,g.\ metadata or QA) purposes. Only for EAPIs listed in
+    table~\ref{tab:added-env-vars-table} as supporting \t{EBUILD_PHASE_FUNC}. \\
 \t{KV} &
     All &
     Yes &
