@@ -255,12 +255,13 @@ inconsistent variable.
     package, and \t{buildonly} if building a binary package without installing it. Only for EAPIs
     listed in table~\ref{tab:added-env-vars-table} as supporting \t{MERGE_TYPE}. \\
 \t{REPLACING_VERSIONS} &
-    \t{pkg_*} (see text) &
+    \t{pkg_preinst}, \t{pkg_postinst} (\t{pkg_pretend}, \t{pkg_setup}) &
     Yes &
     A list of all versions of this package (including revision, if specified), whitespace separated
     with no leading or trailing whitespace, that are being replaced (uninstalled or overwritten)
-    as a result of this install. See section~\ref{sec:replacing-versions}. Only for EAPIs listed
-    in table~\ref{tab:added-env-vars-table} as supporting \t{REPLACING_VERSIONS}. \\
+    as a result of this install. See section~\ref{sec:replacing-versions}, especially for the phases
+    in which the variable is legal. Only for EAPIs listed in table~\ref{tab:added-env-vars-table}
+    as supporting \t{REPLACING_VERSIONS}. \\
 \t{REPLACED_BY_VERSION} &
     \t{pkg_prerm}, \t{pkg_postrm} &
     Yes &
