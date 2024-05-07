@@ -1,12 +1,12 @@
 \ifthenelse{\boolean{TEX4HT-HACKS}}{%
-    \chapter{Desk Reference}
+    \chapter{Desk reference}
     \label{app:cheatsheet}
     \href{eapi-cheatsheet.pdf}{EAPI Cheat Sheet}
 }{%
     % Make sure that the cheat sheet starts on an odd page
     \ifthenelse{\isodd{\thepage}}{}{\null\newpage}%
     \includepdf[pages=-,landscape,turn=false,lastpage=2,%
-        addtotoc={1,chapter,0,Desk Reference,app:cheatsheet}]{eapi-cheatsheet}
+        addtotoc={1,chapter,0,Desk reference,app:cheatsheet}]{eapi-cheatsheet}
 }
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :

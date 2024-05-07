@@ -1,7 +1,7 @@
-\chapter{Metadata Cache}
+\chapter{Metadata cache}
 \label{ch:metadata-cache}
 
-\section{Directory Contents}
+\section{Directory contents}
 
 The \t{metadata/cache} or \t{metadata/md5-cache} directories, if either of them exists, contain
 directories whose names are the same as categories in the repository. Each subdirectory may
@@ -10,7 +10,7 @@ in one of the formats described below.
 
 The metadata cache may be incomplete or non-existent, and may contain additional bogus entries.
 
-\section{Legacy Cache File Format}
+\section{Legacy cache file format}
 \label{sec:legacy-cache}
 
 The legacy cache file format is used in the \t{metadata/cache} directory. Each cache file contains
@@ -50,7 +50,7 @@ Any future EAPI that uses this cache format will continue to place the EAPI valu
 such a concept makes sense for that EAPI, and will place a value that is clearly not a supported
 EAPI on line~15 if it does~not.
 
-\section{md5-dict Cache File Format}
+\section{md5-dict cache file format}
 
 The ``md5-dict'' cache file format is used in the \t{metadata/md5-cache} directory. Each cache file
 contains \t{<key>=<value>} pairs, one per line, in arbitrary order. The keys are the same as those

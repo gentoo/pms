@@ -1,4 +1,4 @@
-\chapter{Available Commands}
+\chapter{Available commands}
 
 This chapter documents the commands available to an ebuild. Unless otherwise specified, they may be
 aliases, shell functions, or executables in the ebuild's \t{PATH}.
@@ -7,7 +7,7 @@ When an ebuild is being sourced for metadata querying rather than for a build (t
 when none of the \t{src_} or \t{pkg_} functions are to be called), no external command may
 be executed. The package manager may take steps to enforce this.
 
-\section{System Commands}
+\section{System commands}
 
 Any ebuild not listed in the system set for the active profile(s) may assume the presence of every
 command that is always provided by the system set for that profile. However, it must target the
@@ -49,7 +49,7 @@ The following commands must always be available in the ebuild environment:
     \end{tabular}
 \end{centertable}
 
-\section{Commands Provided by Package Dependencies}
+\section{Commands provided by package dependencies}
 
 In some cases a package's build process will require the availability of executables not provided by
 the core system, a common example being autotools. The availability of commands provided by the

@@ -1,4 +1,4 @@
-\chapter{Merging and Unmerging}
+\chapter{Merging and unmerging}
 
 \note{In this chapter, \i{file} and \i{regular file} have their Unix meanings.}
 
@@ -38,7 +38,7 @@ including modification time, may be discarded.
 Behaviour upon encountering an empty directory is undefined. Ebuilds must not attempt to install an
 empty directory.
 
-\section{Regular Files}
+\section{Regular files}
 
 Regular files are merged onto the filesystem (but see the notes on configuration file protection,
 below). The method used to perform the merge is not specified, so long as the end result is correct.
@@ -141,11 +141,11 @@ Ebuilds must not attempt to merge a symlink on top of a directory.
 Any absolute symlink whose link starts with \t{D} must be rewritten with the leading \t{D} removed.
 The package manager should issue a notice when doing this.
 
-\section{Hard Links}
+\section{Hard links}
 
 A hard link may be merged either as a single file with links or as multiple independent files.
 
-\section{Other Files}
+\section{Other files}
 
 Ebuilds must not attempt to install any other type of file (FIFOs, device nodes etc).
 

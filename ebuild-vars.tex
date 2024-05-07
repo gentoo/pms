@@ -1,4 +1,4 @@
-\chapter{Ebuild-defined Variables}
+\chapter{Ebuild-defined variables}
 \label{ch:ebuild-vars}
 
 \note{This chapter describes variables that may or must be defined by ebuilds. For variables that
@@ -8,7 +8,7 @@ If any of these variables are set to invalid values, or if any of the mandatory 
 undefined, the package manager's behaviour is undefined; ideally, an error in one ebuild should not
 prevent operations upon other ebuilds or packages.
 
-\section{Metadata Invariance}
+\section{Metadata invariance}
 \label{sec:metadata-invariance}
 
 All ebuild-defined variables discussed in this chapter must be defined independently of
@@ -20,7 +20,7 @@ is used.
 Globally defined ebuild variables without a special meaning must similarly not rely upon
 variable data.
 
-\section{Mandatory Ebuild-defined Variables}
+\section{Mandatory ebuild-defined variables}
 \label{sec:mandatory-vars}
 
 All ebuilds must define at least the following variables:
@@ -40,7 +40,7 @@ All ebuilds must define at least the following variables:
     which is equal to the regular slot.
 \end{description}
 
-\section{Optional Ebuild-defined Variables}
+\section{Optional ebuild-defined variables}
 \label{sec:optional-vars}
 
 Ebuilds may define any of the following variables. Unless otherwise stated, any of them may be
@@ -291,7 +291,7 @@ the ebuild portion, and any \t{DEPEND} value set in an eclass does not get treat
     \end{tabular}
 \end{centertable}
 
-\section{Magic Ebuild-defined Variables}
+\section{Magic ebuild-defined variables}
 
 The following variables must be defined by \t{inherit} (see section~\ref{sec:inherit}), and may be
 considered to be part of the ebuild's metadata:

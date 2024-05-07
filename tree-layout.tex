@@ -1,11 +1,11 @@
-\chapter{Tree Layout}
+\chapter{Tree layout}
 
 This chapter defines the layout on-disk of an ebuild repository. In all cases below where a file or
 directory is specified, a symlink to a file or directory is also valid. In this case, the package
 manager must follow the operating system's semantics for symbolic links and must not behave
 differently from normal.
 
-\section{Top Level}
+\section{Top level}
 
 An ebuild repository shall occupy one directory on disk, with the following subdirectories:
 \nobreakpar
@@ -22,7 +22,7 @@ An ebuild repository shall occupy one directory on disk, with the following subd
 
 \end{compactitem}
 
-\section{Category Directories}
+\section{Category directories}
 \label{sec:category-dirs}
 
 Each category provided by the repository (see also: the \t{profiles/categories} file,
@@ -44,7 +44,7 @@ It is not required that a directory exists for each category provided by the rep
 directory that does not exist shall be considered equivalent to an empty category (and by extension,
 a package manager may treat an empty category as a category that does not exist).
 
-\section{Package Directories}
+\section{Package directories}
 \label{sec:package-dirs}
 
 A package directory contains the following:
@@ -71,7 +71,7 @@ with no versions).
 A package directory may contain other files or directories, whose purpose is not covered by
 this specification.
 
-\section{The Profiles Directory}
+\section{The profiles directory}
 \label{sec:profiles-dir}
 
 The profiles directory shall contain zero or more profile directories as described in
@@ -247,7 +247,7 @@ by packages matching the spec of that slot move.
     \end{tabular}
 \end{centertable}
 
-\section{The Licenses Directory}
+\section{The licenses directory}
 \label{sec:licenses-dir}
 
 The \t{licenses} directory shall contain copies of the licenses used by packages in the
@@ -255,14 +255,14 @@ repository. Each file will be named according to the name used in the \t{LICENSE
 described in section~\ref{sec:optional-vars}, and will contain the complete text of the license in
 human-readable form. Plain text format is strongly preferred but not required.
 
-\section{The Eclass Directory}
+\section{The eclass directory}
 \label{sec:eclass-dir}
 
 The \t{eclass} directory shall contain copies of the eclasses provided by this repository. The
 format of these files is described in chapter~\ref{ch:eclasses}. It may also contain, in their own
 directory, support files needed by these eclasses.
 
-\section{The Metadata Directory}
+\section{The metadata directory}
 \label{sec:metadata-dir}
 
 The \t{metadata} directory contains various repository-level metadata that are not contained in

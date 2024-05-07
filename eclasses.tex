@@ -12,7 +12,7 @@ section~\ref{sec:eclass-dir}. Each eclass is a single file named \t{<name>.eclas
 is the name of this eclass, used by \t{inherit} and \t{EXPORT_FUNCTIONS} among other places.
 \t{<name>} must be a valid eclass name, as per section~\ref{sec:eclass-names}.
 
-\section{The inherit Command}
+\section{The inherit command}
 \label{sec:inherit}
 
 An ebuild wishing to make use of an eclass does so by using the \t{inherit} command in global scope.
@@ -33,7 +33,7 @@ The \t{inherit} command must also ensure that:
     every eclass used, separated by whitespace.
 \end{compactitem}
 
-\section{Eclass-defined Metadata Keys}
+\section{Eclass-defined metadata keys}
 
 \featurelabel{accumulate-vars} The \t{IUSE}, \t{REQUIRED_USE}, \t{DEPEND}, \t{BDEPEND}, \t{RDEPEND},
 \t{PDEPEND} and \t{IDEPEND} variables are handled specially when set by an eclass. They must be

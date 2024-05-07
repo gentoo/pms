@@ -1,6 +1,6 @@
-\chapter{Names and Versions}
+\chapter{Names and versions}
 
-\section{Restrictions upon Names}
+\section{Restrictions upon names}
 
 No name may be empty. Package managers must not impose fixed upper boundaries upon the length of any
 name. A package manager should indicate or reject any name that is invalid according to these rules.
@@ -56,7 +56,7 @@ a tilde or a hyphen. In \t{KEYWORDS}, \t{-*} is also acceptable as a keyword.
 An EAPI name may contain any of the characters [\t{A-Za-z0-9+_.-}]. It must not begin with a
 hyphen, a dot or a plus sign.
 
-\section{Version Specifications}
+\section{Version specifications}
 \label{sec:version-spec}
 The package manager must neither impose fixed limits upon the number of version components, nor
 upon the length of any component. Package managers should indicate or reject any version that is
@@ -74,7 +74,7 @@ count as separate version components.
 This may optionally be followed by the suffix \t{-r} followed immediately by an unsigned integer
 (the ``revision number''). If this suffix is not present, it is assumed to be \t{-r0}.
 
-\section{Version Comparison}
+\section{Version comparison}
 
 Version specifications are compared component by component, moving from left to right,
 as detailed in algorithm~\ref{alg:version-comparison} and sub-algorithms.
@@ -211,7 +211,7 @@ from which it was invoked.
 \end{algorithmic}
 \end{algorithm}
 
-\section{Uniqueness of Versions}
+\section{Uniqueness of versions}
 
 No two packages in a given repository may have the same qualified package name and equal versions.
 For example, a repository may not contain more than one of \t{foo-bar/baz-1.0.2},
