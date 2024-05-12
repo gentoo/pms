@@ -15,7 +15,7 @@
 \PassOptionsToPackage{orig,english}{isodate}
 % Dimensions of the text area. Define a narrow left margin to make
 % room for margin notes in the right (outer) margin
-\PassOptionsToPackage{textwidth=400pt,textheight=700pt,
+\PassOptionsToPackage{textwidth=400pt,textheight=684pt,
     left=20mm,marginparsep=10pt,marginparwidth=40mm,
     vmarginratio=1:2,includehead}{geometry}
 % Enable UTF-8 input encoding
@@ -36,6 +36,7 @@
     inputenc,   % Allow input methods apart from ASCII
     booktabs,   % Nicer formatting of tables
     ifthen,     % Comfortable conditional routines
+    calc,       % Infix notation arithmetic
     longtable,  % Extend tables over more than one page
     array,      % Extended tabular environments
     lscape,     % Rotating pages
