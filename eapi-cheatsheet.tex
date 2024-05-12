@@ -33,11 +33,10 @@
     Ulrich Müller \\
     \href{mailto:ulm@gentoo.org}{ulm@gentoo.org}
 }
-\date{%
-    Version \version \\
-    \ifthenelse{\equal{\gitCommitterDate}{(None)}}
-    {Generated on: \today}
-    {\printdate{\gitCommitterDate}}%
+\ifthenelse{\equal{\gitCommitterDate}{(None)}}{%
+    \date{Version \version \\ Generated on: \today}
+}{%
+    \date{Version \version \\ \printdate{\gitCommitterDate}}
 }
 \CutLine*{1}
 \CutLine*{3}

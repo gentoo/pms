@@ -175,13 +175,12 @@
 
 % Reads the last commit date from the Git repository and even succeeds
 % when none is available
-\date{%
-    \ifthenelse{\equal{\gitCommitterDate}{(None)}}
-    {Generated on: \today}
-    {\printdate{\gitCommitterDate}}%
-}
-\newcommand{\commitinfo}{%
-    \ifthenelse{\equal{\gitCommitterDate}{(None)}}{}{%
+\ifthenelse{\equal{\gitCommitterDate}{(None)}}{%
+    \date{Generated on: \today}
+    \newcommand{\commitinfo}{}
+}{%
+    \date{\printdate{\gitCommitterDate}}
+    \newcommand{\commitinfo}{%
         This version corresponds to commit \gitAbbrevHash
         \ifthenelse{\equal{\gitBranch}{\detokenize{master}}}{}
         { on branch \gitBranch}%
