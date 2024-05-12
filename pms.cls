@@ -11,7 +11,6 @@
 \ProcessOptions\relax
 \LoadClass{\ClassToLoad}
 \PassOptionsToPackage{T1}{fontenc}
-\PassOptionsToPackage{scaled=0.92}{helvet}
 \PassOptionsToPackage{orig,english}{isodate}
 % Dimensions of the text area. Define a narrow left margin to make
 % room for margin notes in the right (outer) margin
@@ -24,6 +23,7 @@
 \PassOptionsToPackage{nohyphen}{underscore}
 \PassOptionsToPackage{hang,flushmargin}{footmisc}
 \PassOptionsToPackage{nottoc,notlot,notlof}{tocbibind}
+\PassOptionsToPackage{defaultsans,scaled=0.92}{opensans}
 \PassOptionsToPackage{hyphens}{url} % url.sty implicitly loaded by hyperref
 \PassOptionsToPackage{hyperfootnotes=false}{hyperref} % footmisc compatibility
 \PassOptionsToPackage{local}{gitinfo2}
@@ -48,6 +48,8 @@
     chngcntr,   % Redefinition of counters
     tocbibind,  % Add bibliography to table of contents
     float,      % More control over float environments
+    titling,    % Change appearance of title information
+    sectsty,    % Change font used for section headings
     gitinfo2    % Metadata from git
 }
 
@@ -55,8 +57,8 @@
 \newboolean{TEX4HT-HACKS}
 \ifx\HCode\undefined
     \RequirePackage{%
-        mathptmx,       % Use Postscript fonts: Times ...
-        helvet,         % ... and Helvetica
+        mathptmx,       % Use Postscript fonts: URW Nimbus Roman No9 L ...
+        opensans,       % ... and Open Sans
         pdfpages        % Insert whole PDF documents as separate pages
     }
     \setboolean{TEX4HT-HACKS}{false}
@@ -100,6 +102,18 @@
 
 % Redefine the titlepage environment not to reset the page number
 \renewenvironment{titlepage}{\newpage\thispagestyle{empty}}{\newpage}
+
+% Use sans serif font for title (titling.sty)
+\pretitle{\begin{center}\sffamily\bfseries\huge}
+\posttitle{\par\end{center}\vskip2.5em}
+\preauthor{\begin{center}\large\lineskip0.75em\begin{tabular}[t]{c}}
+\postauthor{\end{tabular}\par\end{center}\vskip2em}
+
+% Redefine fonts for section headings (sectsty.sty)
+\allsectionsfont{\sffamily}
+% Smaller chapter headings
+\chapternumberfont{\sffamily\LARGE} % default is \huge
+\chaptertitlefont{\sffamily\huge}   % ... and \Huge
 
 % Enumerate subsubsections and include them in the toc
 \setcounter{secnumdepth}{3}
