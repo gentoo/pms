@@ -128,11 +128,18 @@
 % Define a new column type P for tables, like p but with ragged-right text
 \newcolumntype{P}[1]{>{\setlength\rightskip{0pt plus 1fil}}p{#1}}
 
+% Redefine headings for list of tables/figures/algorithms
+\renewcommand{\listtablename}{Tables}
+\renewcommand{\listfigurename}{Figures}
+\g@addto@macro\@documentclasshook{
+    \renewcommand{\listalgorithmname}{Algorithms}
+}
+
 % Define a float environment for listings
 \floatstyle{ruled}
 \newfloat{listing}{tbp}{lol}[chapter]
 \floatname{listing}{Listing}
-\newcommand{\listoflistings}{\listof{listing}{List of Listings}}
+\newcommand{\listoflistings}{\listof{listing}{Listings}}
 
 % Prevent page break before a list
 \newcommand{\nobreakpar}{\par\nobreak\@afterheading}
