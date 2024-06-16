@@ -1,4 +1,10 @@
-LATEXFILES := $(wildcard *.tex) pms.cls
+LATEXFILES = pms.tex introduction.tex eapis.tex names.tex tree-layout.tex \
+	profiles.tex profile-variables.tex ebuild-format.tex ebuild-vars.tex \
+	dependencies.tex ebuild-functions.tex eclasses.tex \
+	ebuild-environment.tex ebuild-env-vars.tex commands.tex \
+	pkg-mgr-commands.tex merge.tex metadata-cache.tex glossary.tex \
+	appendices.tex eapi-differences.tex desk-reference.tex \
+	eapi-cheatsheet.tex pms.cls
 SOURCES = $(LATEXFILES) pms.bib Makefile
 COMMITINFO = gitHeadLocal.gin
 
