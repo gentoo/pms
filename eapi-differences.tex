@@ -195,6 +195,9 @@ Controllable stripping & \compactfeatureref{dostrip} &
 \t{edo} & \compactfeatureref{edo} &
     No & No & No & Yes \\
 
+Absolute symlink rewriting & \compactfeatureref{symlink-rewrite} &
+    Yes & Yes & Yes & No \\
+
 \end{longtable}
 
 \chapter{Differences between EAPIs}
@@ -388,6 +391,7 @@ EAPI 9 is EAPI 8 with the following changes:
 \item \t{pipestatus}, \featureref{pipestatus}.
 \item \t{ver_replacing}, \featureref{ver-replacing}.
 \item \t{edo}, \featureref{edo}.
+\item Absolute symlinks no longer rewritten, \featureref{symlink-rewrite}.
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{9}
