@@ -171,6 +171,9 @@ Controllable stripping & \compactfeatureref{dostrip} &
 \t{unpack} support for \t{rar} & \compactfeatureref{unpack-extensions} &
     Yes & Yes & No & No \\
 
+Absolute symlink rewriting & \compactfeatureref{symlink-rewrite} &
+    Yes & Yes & Yes & No \\
+
 \end{longtable}
 
 \chapter{Differences between EAPIs}
@@ -356,6 +359,8 @@ EAPI 9 is EAPI 8 with the following changes:
 
 \begin{compactitem}
 \item Different default EAPI for profiles, \featureref{profile-eapi-default}.
+\item Absolute symlinks no longer being rewritten, \featureref{symlink-rewrite}
+
 \end{compactitem}
 
 \ChangeWhenAddingAnEAPI{9}
