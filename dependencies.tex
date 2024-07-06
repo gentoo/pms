@@ -349,15 +349,16 @@ the following operators:
     the slot and sub-slot of the best version installed as a build-time (\t{DEPEND}) dependency is
     available.
 \item[slot=] Indicates that only a specific slot value is acceptable, and otherwise behaves
-    identically to the plain equals slot operator.
+    identically to the \t{=} operator. The specified slot must not contain a sub-slot part.
 \end{description}
 
-To implement the equals slot operator, the package manager will need to store the slot/sub-slot
-pair of the best installed version of the matching package. This syntax is only for package manager
-use and must not be used by ebuilds. The package manager may do this by inserting the appropriate
-slot/sub-slot pair between the colon and equals sign when saving the package's dependencies. The
-sub-slot part must not be omitted here (when the SLOT variable omits the sub-slot part, the package
-is considered to have an implicit sub-slot which is equal to the regular slot).
+To implement the equals slot operators \t{=} and \i{slot}\t{=}, the package manager will need to
+store the slot/sub-slot pair of the best installed version of the matching package. This syntax is
+only for package manager use and must not be used by ebuilds. The package manager may do this by
+inserting the appropriate slot/sub-slot pair between the colon and equals sign when saving the
+package's dependencies. The sub-slot part must not be omitted here (when the \t{SLOT} variable
+omits the sub-slot part, the package is considered to have an implicit sub-slot which is equal to
+the regular slot).
 
 Whenever the equals slot operator is used in an enabled dependency group, the dependencies
 (\t{DEPEND}) must ensure that a matching package is installed at build time. It is invalid to use
