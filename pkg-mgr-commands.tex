@@ -1126,8 +1126,8 @@ has returned.
         listed as \emph{not} supporting such paths, \t{unpack} shall abort the build process.
     \end{compactitem}
 
-    Any unrecognised file format shall be skipped silently. If unpacking a supported file format
-    fails, \t{unpack} shall abort the build process.
+    Any unrecognised file format shall be skipped without raising an error. If unpacking a supported
+    file format fails, \t{unpack} shall abort the build process.
 
     \featurelabel{unpack-extensions} Must be able to unpack the following file formats, if the
     relevant binaries are available:
