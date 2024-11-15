@@ -85,7 +85,7 @@ directory; a package manager must not attempt to use any repository whose profil
 requires an EAPI it does not support. If no \t{eapi} file is present, EAPI 0 shall be used.
 
 If the repository is not intended to be stand-alone, the contents of these files are to be taken
-from or merged with the master repository as necessary.
+from or merged with the master repository as necessary; this does not apply to the \t{eapi} file.
 
 Other files not described by this specification may exist, but may not be relied upon. The package
 manager must ignore any files in this directory that it does not recognise.
