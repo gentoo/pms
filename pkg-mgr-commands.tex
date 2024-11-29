@@ -199,20 +199,18 @@ completing. Ebuilds must not run any of these commands once the current phase fu
     \featurelabel{subshell-die} In EAPIs listed in table~\ref{tab:die-properties} as not providing
     subshell support, \t{die} is \emph{not} guaranteed to work correctly if called from a subshell
     environment.
-\item[assert] Checks the value of the shell's pipe status variable, and if any component is non-zero
-    (indicating failure), calls \t{die}, passing any parameters to it.
+\item[assert] Checks the shell's pipe status array, and if any element is non-zero (indicating
+    failure), calls \t{die}, passing any parameters to it.
 \end{description}
 
 \ChangeWhenAddingAnEAPI{8}
-\begin{centertable}{Properties of \t{die} and \t{assert} commands in EAPIs}
+\begin{centertable}{Properties of \t{die} command in EAPIs}
     \label{tab:die-properties}
     \begin{tabular}{lll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
-      \multicolumn{2}{c}{\textbf{\t{die} and \t{assert}}} \\
-      &
-      \multicolumn{1}{c}{\textbf{support \t{-n}?}} &
-      \multicolumn{1}{c}{\textbf{work in subshell?}} \\
+      \multicolumn{1}{c}{\textbf{Supports \t{die -n}?}} &
+      \multicolumn{1}{c}{\textbf{\t{die} works in subshell?}} \\
       \midrule
       0, 1, 2, 3, 4, 5  & No  & No  \\
       6                 & Yes & No  \\
