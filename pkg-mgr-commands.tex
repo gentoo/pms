@@ -206,6 +206,11 @@ completing. Ebuilds must not run any of these commands once the current phase fu
     failure), calls \t{die}, passing any parameters to it.
     In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as per
     section~\ref{sec:banned-commands}.
+\item[pipestatus] \featurelabel{pipestatus} Checks the shell's pipe status array, i.\,e.\ the exit
+    status of the command(s) in the most recently executed foreground pipeline. Returns shell true
+    (0) if all elements are zero, or the last non-zero element otherwise. If called with \t{-v}
+    as the first argument, also outputs the pipe status array as a space-separated list.
+    Only available in EAPIs listed in table~\ref{tab:pipestatus} as supporting \t{pipestatus}.
 \end{description}
 
 \ChangeWhenAddingAnEAPI{9}
@@ -220,6 +225,20 @@ completing. Ebuilds must not run any of these commands once the current phase fu
       0, 1, 2, 3, 4, 5  & No  & No  \\
       6                 & Yes & No  \\
       7, 8, 9           & Yes & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\ChangeWhenAddingAnEAPI{9}
+\begin{centertable}{EAPIs supporting \t{pipestatus}}
+    \label{tab:pipestatus}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{pipestatus}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6, 7, 8 & No  \\
+      9                         & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
