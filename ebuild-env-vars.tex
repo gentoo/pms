@@ -392,7 +392,7 @@ For EAPIs listed in table~\ref{tab:profile-iuse-injection-table} as not supporti
 \begin{compactitem}
 \item All values in the calculated \t{IUSE} value.
 \item All possible values for the \t{ARCH} variable.
-\item All legal use flag names whose name starts with the lowercase equivalent of any value in
+\item All legal use flag names whose name starts with the lower-case equivalent of any value in
     the profile \t{USE_EXPAND} variable followed by an underscore.
 \end{compactitem}
 
@@ -409,7 +409,7 @@ are equal and contain the following values:
 \item All values for \t{\$\{lower_v\}_\$\{x\}}, where \t{\$\{x\}} is all values in the profile
     variable named \t{USE_EXPAND_VALUES_\$\{v\}}, where \t{\$\{v\}} is any value in the
     intersection of the profile \t{USE_EXPAND} and \t{USE_EXPAND_IMPLICIT} variables and
-    \t{\$\{lower_v\}} is the lowercase equivalent of \t{\$\{v\}}.
+    \t{\$\{lower_v\}} is the lower-case equivalent of \t{\$\{v\}}.
 \end{compactitem}
 
 The \t{USE} variable is set by the package manager. For each value in \t{IUSE_EFFECTIVE}, \t{USE}
