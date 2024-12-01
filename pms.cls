@@ -163,6 +163,10 @@
 \setlength\hfuzz{0.2pt}          % was 0.1pt
 \setlength\emergencystretch{1em} % was 0
 
+% Avoid widows and orphans
+\widowpenalty=500                % was 150
+\clubpenalty=500                 % was 150
+
 % Don't add extra vertical space, to avoid underfull boxes. Only affects
 % two-sided layout, for one-sided it is already the default
 \raggedbottom
