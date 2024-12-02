@@ -78,9 +78,9 @@ The following variables have specific meanings when set in profiles.
     configuration file protection. Described more fully in section~\ref{sec:config-protect}.
 \item[USE] Defines the list of default USE flags for this profile. Flags may be added or removed by
     the user's configuration. \t{USE_EXPAND} values must not be specified in this way.
-\item[USE_EXPAND] Defines a list of variables which are to be treated incrementally and whose
-    contents are to be expanded into the USE variable as passed to ebuilds. See
-    section~\ref{sec:use-iuse-handling} for details.
+\item[USE_EXPAND] Defines a list of variables which are to be treated incrementally, exported to
+    the ebuild environment, and whose contents are to be expanded into the USE variable as passed
+    to ebuilds. See section~\ref{sec:use-iuse-handling} for details.
 \item[USE_EXPAND_UNPREFIXED] Similar to \t{USE_EXPAND}, but no prefix is used. If the repository
     contains any package using an EAPI supporting profile-defined \t{IUSE} injection (see
     table~\ref{tab:profile-iuse-injection-table}), this list must contain at least \t{ARCH}\@.
