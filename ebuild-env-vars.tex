@@ -211,14 +211,14 @@ inconsistent variable.
     No &
     \featurelabel{desttree} Controls the location where \t{dobin}, \t{dolib}, \t{domo},
     and \t{dosbin} install things. Only for EAPIs listed in table~\ref{tab:removed-env-vars-table}
-    as supporting \t{DESTTREE}\@. In all other EAPIs, this is retained as a conceptual variable not
-    exported to the ebuild environment. \\
+    as supporting \t{DESTTREE}\@. In all other EAPIs, this is retained as a conceptual variable
+    inaccessible from the ebuild environment. \\
 \t{INSDESTTREE} &
     \t{src_install} &
     No &
     \featurelabel{insdesttree} Controls the location where \t{doins} installs things. Only for EAPIs
     listed in table~\ref{tab:removed-env-vars-table} as supporting \t{INSDESTTREE}\@. In all other
-    EAPIs, this is retained as a conceptual variable not exported to the ebuild environment. \\
+    EAPIs, this is retained as a conceptual variable inaccessible from the ebuild environment. \\
 \t{USE} &
     All &
     Yes &
@@ -373,11 +373,11 @@ This section discusses the handling of four variables:
 \begin{description}
 \item[IUSE] is the variable calculated from the \t{IUSE} values defined in ebuilds and eclasses.
 \item[IUSE_REFERENCEABLE] is a variable calculated from \t{IUSE} and a variety of other sources
-    described below. It is purely a conceptual variable; it is not exported to the ebuild
+    described below. It is purely a conceptual variable; it is inaccessible from the ebuild
     environment. Values in \t{IUSE_REFERENCEABLE} may legally be used in queries from other
     packages about an ebuild's state (for example, for use dependencies).
-\item[IUSE_EFFECTIVE] is another conceptual, unexported variable. Values in \t{IUSE_EFFECTIVE} are
-    those which an ebuild may legally use in queries about itself (for example, for the \t{use}
+\item[IUSE_EFFECTIVE] is another conceptual, inaccessible variable. Values in \t{IUSE_EFFECTIVE}
+    are those which an ebuild may legally use in queries about itself (for example, for the \t{use}
     function, and for use in dependency specification conditional blocks).
 \item[USE] is a variable calculated by the package manager and exported to the ebuild environment.
 \end{description}
