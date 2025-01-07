@@ -1,16 +1,36 @@
 \section{Defined variables}
 \label{sec:ebuild-env-vars}
 
-The package manager must define the following environment variables. Not all variables are
-universally meaningful; variables that are not meaningful in a given phase or in global scope may
-be unset or set to any value. Ebuilds must not attempt to modify any of these variables, unless
-otherwise specified.
+The package manager must define the following variables. Not all variables are universally
+meaningful; variables that are not meaningful in a given phase or in global scope may be unset
+or set to any value. Ebuilds must not attempt to modify any of these variables, unless otherwise
+specified.
 
 Because of their special meanings, these variables may not be preserved consistently across all
 phases as would normally happen due to environment saving (see section~\ref{sec:ebuild-env-state}).
 For example, \t{EBUILD_PHASE} is different for every phase, and \t{ROOT} may have changed between
 the various different \t{pkg_*} phases. Ebuilds must recalculate any variable they derive from an
 inconsistent variable.
+
+\featurelabel{export-vars} These variables are either exported to the environment or kept as
+unexported shell variables, as specified for EAPIs in table~\ref{tab:export-vars}; exceptions are
+\t{TMPDIR} and \t{HOME} which are always exported. In EAPIs where variables are not exported,
+the package manager must pass those that are required by ebuild-specific external commands
+(see section~\ref{sec:pkg-mgr-commands}) in an implementation-defined manner.
+
+\ChangeWhenAddingAnEAPI{9}
+\begin{centertable}{EAPIs with variables exported to the environment}
+    \label{tab:export-vars}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Variables exported?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6, 7, 8 & Yes \\
+      9                         & No  \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \begin{landscape}
 % Reduce width of text area to make room for margin notes
@@ -168,13 +188,15 @@ inconsistent variable.
 \t{TMPDIR} &
     All &
     Partially\footnotemark[\value{footnote}] &
-    Must be set to the location of a usable temporary directory, for any applications
-    called by an ebuild. Must not be used by ebuilds directly; see \t{T} above. \\
+    Must be set to the location of a usable temporary directory, for any applications called
+    by an ebuild. Must not be used by ebuilds directly; see \t{T} above. \t{TMPDIR} is always
+    exported to the environment. \\
 \t{HOME} &
     All &
     Partially\footnotemark[\value{footnote}] &
     The full path to an appropriate temporary directory for use by any programs invoked by the
-    ebuild that may read or modify the home directory. \\
+    ebuild that may read or modify the home directory. \t{HOME} is always exported to the
+    environment. \\
 \t{EPREFIX} &
     All &
     Yes &
