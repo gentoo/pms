@@ -18,6 +18,12 @@ unexported shell variables, as specified for EAPIs in table~\ref{tab:export-vars
 the package manager must pass those that are required by ebuild-specific external commands
 (see section~\ref{sec:pkg-mgr-commands}) in an implementation-defined manner.
 
+Variables listed in section~\ref{sec:specific-profile-vars} as having specific meanings or special
+handling, and that are set in the active profiles' \t{make.defaults} files, obey the same export
+rules specified for EAPIs in table~\ref{tab:export-vars}. This behaviour is governed by the EAPI
+of the ebuild, not that of the profile. Except where otherwise noted, all other variables set in
+the active profiles' \t{make.defaults} files must be exported to the environment.
+
 \ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs with variables exported to the environment}
     \label{tab:export-vars}
@@ -354,10 +360,8 @@ the package manager must pass those that are required by ebuild-specific externa
     \end{tabular}
 \end{centertable}
 
-Except where otherwise noted, all variables set in the active profiles' \t{make.defaults} files must
-be exported to the ebuild environment. \t{CHOST}, \t{CBUILD} and \t{CTARGET}, if not set by
-profiles, must contain either an appropriate machine tuple (the definition of appropriate is beyond
-the scope of this specification) or be unset.
+\t{CHOST}, \t{CBUILD} and \t{CTARGET}, if not set by profiles, must contain either an appropriate
+machine tuple (the definition of appropriate is beyond the scope of this specification) or be unset.
 
 \t{PATH} must be initialized by the package manager to a ``usable'' default.  The exact value here
 is left up to interpretation, but it should include the equivalent ``sbin'' and ``bin'' and any
