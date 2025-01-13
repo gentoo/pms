@@ -95,8 +95,13 @@ The following variables have specific meanings when set in profiles.
 \end{description}
 
 In addition, for EAPIs listed in table~\ref{tab:profile-iuse-injection-table} as supporting profile
-defined \t{IUSE} injection, the variables named in \t{USE_EXPAND} and \t{USE_EXPAND_UNPREFIXED}
-have special handling as described in section~\ref{sec:use-iuse-handling}.
+defined \t{IUSE} injection, the following variables have special handling as described in
+section~\ref{sec:use-iuse-handling}:
+\begin{compactitem}
+\item All variables named in \t{USE_EXPAND} and \t{USE_EXPAND_UNPREFIXED}.
+\item All \t{USE_EXPAND_VALUES_\$\{v\}} variables, where \t{\$\{v\}} is a value in
+    \t{USE_EXPAND_IMPLICIT}.
+\end{compactitem}
 
 Any other variables set in \t{make.defaults} must be passed on into the ebuild environment as-is,
 and are not required to be interpreted by the package manager.
