@@ -1101,20 +1101,33 @@ the second, inclusively.
 
     Both version strings must conform to the version specification in
     section~\ref{sec:version-spec}. Comparison is done using algorithm~\ref{alg:version-comparison}.
+
+\item[ver_replacing] \featurelabel{ver-replacing} Takes an operator and a version string as
+    arguments, which follow the same specification as in \t{ver_test}. Iterates over the elements
+    of \t{REPLACING_VERSIONS}, using \t{ver_test} to compare each element against the version
+    string. Returns shell true (0) if the specified relation holds for at least one element,
+    shell false (1) otherwise. In particular, shell false is returned when \t{REPLACING_VERSIONS}
+    is empty.
+
+    Only available in EAPIs listed in table~\ref{tab:version-commands} as supporting
+    \t{ver_replacing}. The command is only meaningful in phases where \t{REPLACING_VERSIONS} is
+    defined.
 \end{description}
 
 \ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting version manipulation commands}
     \label{tab:version-commands}
-    \begin{tabular}{llll}
+    \begin{tabular}{lllll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{\t{ver_cut}?}} &
       \multicolumn{1}{c}{\textbf{\t{ver_rs}?}} &
-      \multicolumn{1}{c}{\textbf{\t{ver_test}?}} \\
+      \multicolumn{1}{c}{\textbf{\t{ver_test}?}} &
+      \multicolumn{1}{c}{\textbf{\t{ver_replacing}?}} \\
       \midrule
-      0, 1, 2, 3, 4, 5, 6 & No  & No  & No  \\
-      7, 8, 9             & Yes & Yes & Yes \\
+      0, 1, 2, 3, 4, 5, 6 & No  & No  & No  & No  \\
+      7, 8                & Yes & Yes & Yes & No  \\
+      9                   & Yes & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
