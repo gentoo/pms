@@ -1302,21 +1302,33 @@ has returned.
 \end{algorithmic}
 \end{algorithm}
 
+\item[edo] \featurelabel{edo} Takes a command line, prints it to stderr and executes the command.
+Specifically, the entire list of (one or more) arguments is output as an informational message
+to stderr; individual tokens may be reformatted to avoid ambiguity. The first argument is then
+executed as a command, with the remaining arguments passed to it. If the command fails, \t{edo}
+aborts the build process using \t{die}, unless it was called under \t{nonfatal}, in which case it
+returns a non-zero exit status.
+
+\t{edo} must be implemented internally as a shell function. Only available in EAPIs listed in
+table~\ref{tab:misc-commands} as supporting \t{edo}.
+
 \end{description}
 
 \ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Misc commands for EAPIs}
     \label{tab:misc-commands}
-    \begin{tabular}{llll}
+    \begin{tabular}{lllll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{\t{default}?}} &
       \multicolumn{1}{c}{\textbf{\t{einstalldocs}?}} &
-      \multicolumn{1}{c}{\textbf{\t{get_libdir}?}} \\
+      \multicolumn{1}{c}{\textbf{\t{get_libdir}?}} &
+      \multicolumn{1}{c}{\textbf{\t{edo}?}} \\
       \midrule
-      0, 1              & No  & No  & No  \\
-      2, 3, 4, 5        & Yes & No  & No  \\
-      6, 7, 8, 9        & Yes & Yes & Yes \\
+      0, 1              & No  & No  & No  & No  \\
+      2, 3, 4, 5        & Yes & No  & No  & No  \\
+      6, 7, 8           & Yes & Yes & Yes & No  \\
+      9                 & Yes & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
