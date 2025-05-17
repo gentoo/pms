@@ -165,6 +165,40 @@ specification, and then a space delimited list of USE flags to enable. A USE fla
 specification is limited to the forms defined by the directory's EAPI\@. In some EAPIs,
 \t{package.use} can be a directory instead of a regular file as per section~\ref{sec:line-stacking}.
 
+\subsection{use.stable and package.use.stable}
+\featurelabel{use-stable} The \t{use.stable} and \t{package.use.stable} files may be used to
+override the default USE flags specified by \t{make.defaults}. They only apply to packages that
+are merged due to a stable keyword in the sense of section~\ref{sec:keywords}. Each line in
+\t{use.stable} contains a USE flag to enable; the \t{-flag} syntax indicates that the flag should
+be disabled. The \t{package.use.stable} file uses the same format as \t{package.use}.
+\t{USE_EXPAND} values may be enabled or disabled by using \t{expand_name_value}.
+
+Stable restrictions are applied exactly when the following condition holds: If every stable keyword
+in \t{KEYWORDS} were replaced with its tilde-prefixed counterpart (see section~\ref{sec:keywords}),
+then the resulting \t{KEYWORDS} setting would prevent installation of the package.
+
+If a flag appears in more than one of \t{package.use}, \t{use.stable} and \t{package.use.stable},
+then \t{package.use.stable} takes precedence over \t{package.use}, which in turn takes precedence
+over \t{use.stable}.
+
+These files are supported in EAPIs as per table~\ref{tab:profile-use-stable}. They can be
+directories instead of regular files as per section~\ref{sec:line-stacking}.
+
+\ChangeWhenAddingAnEAPI{9}
+\begin{centertable}{EAPIs supporting \t{use.stable} and \t{package.use.stable} in profiles}
+    \label{tab:profile-use-stable}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{use.stable}?}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{package.use.stable}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6, 7, 8 & No  & No  \\
+      9                         & Yes & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
 \subsection{USE masking and forcing}
 \label{sec:use-masking}
 This section covers the eight files \t{use.mask}, \t{use.force}, \t{use.stable.mask},
