@@ -163,7 +163,7 @@ In profile directories with an EAPI supporting stable masking, as listed in
 table~\ref{tab:profile-stablemask}, the same is true for \t{use.stable.mask}, \t{use.stable.force},
 \t{package.use.stable.mask} and \t{package.use.\allowbreak stable.force}. These files, however,
 only act on packages that are merged due to a stable keyword in the sense of
-subsection~\ref{sec:keywords}. Thus, these files can be used to restrict the feature set deemed
+section~\ref{sec:keywords}. Thus, these files can be used to restrict the feature set deemed
 stable in a package.
 
 \ChangeWhenAddingAnEAPI{8}
@@ -222,7 +222,7 @@ described in algorithm~\ref{alg:use-masking}.
 
 Stable restrictions (``stable keyword in use'' in algorithm~\ref{alg:use-masking}) are applied
 exactly if replacing in \t{KEYWORDS} all stable keywords by the corresponding tilde prefixed
-keywords (see subsection~\ref{sec:keywords}) would result in the package installation being
+keywords (see section~\ref{sec:keywords}) would result in the package installation being
 prevented due to the \t{KEYWORDS} setting.
 
 The logic for \t{use.force}, \t{use.stable.force}, \t{package.use.force}, and
