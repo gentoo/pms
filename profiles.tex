@@ -221,9 +221,9 @@ described in algorithm~\ref{alg:use-masking}.
 \end{algorithm}
 
 Stable restrictions (``stable keyword in use'' in algorithm~\ref{alg:use-masking}) are applied
-exactly if replacing in \t{KEYWORDS} all stable keywords by the corresponding tilde prefixed
-keywords (see section~\ref{sec:keywords}) would result in the package installation being
-prevented due to the \t{KEYWORDS} setting.
+exactly when the following condition holds: If every stable keyword in \t{KEYWORDS} were replaced
+with its tilde-prefixed counterpart (see section~\ref{sec:keywords}), then the resulting
+\t{KEYWORDS} setting would prevent installation of the package.
 
 The logic for \t{use.force}, \t{use.stable.force}, \t{package.use.force}, and
 \t{package.use.\allowbreak stable.force} is identical. If a flag is both masked and forced, the
