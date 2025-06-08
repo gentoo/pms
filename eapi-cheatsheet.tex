@@ -15,7 +15,7 @@
 \usepackage[local]{gitinfo2}
 \newcommand{\code}[1]{\texttt{#1}}
 % This should reflect the latest approved EAPI version
-\newcommand{\version}{8.0}
+\newcommand{\version}{9.0}
 \newcommand{\featureref}[1]{\textsc{#1} on page~\pageref{feat:#1}}
 \renewcommand{\familydefault}{\sfdefault}
 \urlstyle{sf}
@@ -575,6 +575,52 @@ differences between these EAPIs.
     See \featureref{banned-commands}.
     \item[\code{unpack}] No longer supports unpacking of 7-Zip, RAR,
     and LHA archives. See \featureref{unpack-extensions}.
+\end{description}
+
+\section{EAPI 9}
+\label{sec:cs:eapi9}
+\subsection{Additions/changes}
+\label{sec:cs:eapi9-additions}
+\begin{description}
+    \item[Default EAPI for profiles] Profile directories without their
+    own \code{eapi} file no longer default to EAPI 0, but to the EAPI
+    specified in the top-level \code{profiles} directory.
+    See \featureref{profile-eapi-default}.
+    \item[\code{use.stable} and \code{package.use.stable}]
+    Profile dirs may contain two new files. They can be used to
+    override the USE flags specified by \code{make.defaults}, but act
+    only on packages that would be merged due to a stable keyword.
+    See \featureref{use-stable}.
+    \item[Bash version] Ebuilds can use features of Bash version 5.3
+    (was 5.0 before). See \featureref{bash-version}.
+    \item[Variables are no longer exported] The package manager no
+    longer exports its defined shell variables (exceptions are
+    \code{TMPDIR} and \code{HOME}) to the environment. The same
+    applies to variables defined in \code{make.defaults} that have
+    specific meanings. See \featureref{export-vars}.
+    \item[\code{pipestatus}] Checks if all commands in the last
+    executed pipeline have returned an exit status of zero. When the
+    \code{-v} option is specified, also prints the shell's pipe status
+    array. See \featureref{pipestatus}.
+    \item[\code{ver_replacing} \emph{op v2}] Checks if the relation
+    \emph{v1 op v2} is true for any element \emph{v1} of
+    \code{REPLACING_VERSIONS}\@. \emph{op} can be any operator that is
+    accepted by \code{ver_test}. See \featureref{ver-replacing}.
+    \item[\code{edo}] Outputs its entire argument list as an
+    informational message, then executes it as a simple shell command,
+    with standard failure behaviour. See \featureref{edo}.
+    \item[Merging of symlinks] When merging \code{D} to \code{ROOT},
+    absolute symlinks are now merged as-is. The package manager will
+    no longer strip a leading \code{D} from their link targets.
+    See \featureref{symlink-rewrite}.
+\end{description}
+\subsection{Removals/bans}
+\label{sec:cs:eapi9-removalsbans}
+\begin{description}
+    \item[\code{assert}] No longer allowed. Use \code{pipestatus}
+    instead. See \featureref{banned-commands}.
+    \item[\code{domo}] No longer allowed. Use \code{insinto} and
+    \code{newins} as replacement. See \featureref{banned-commands}.
 \end{description}
 
 \end{document}
