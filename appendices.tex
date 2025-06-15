@@ -32,7 +32,8 @@ The items described in this section are included for information only. Unless ot
 were deprecated or abandoned long before EAPI was introduced. Ebuilds must not use these features,
 and package managers should not be changed to support them.
 
-\subsection{If-else USE blocks}
+\begin{description}
+\item[If-else USE blocks]
 Historically, Portage supported if-else use conditionals, as shown by
 listing~\ref{lst:if-else-use-listing}. The block before the colon would be taken if the condition
 was met, and the block after the colon would be taken if the condition was not met.
@@ -50,27 +51,30 @@ DEPEND="
 \end{verbatim}
 \end{listing}
 
-\subsection{CVS versions}
+\item[CVS versions]
 Portage has very crude support for CVS packages. The package \t{foo} could contain a file named
 \t{foo-cvs.1.2.3.ebuild}. This version would order \emph{higher} than any non-CVS version (including
 \t{foo-2.ebuild}). This feature has not seen real world use and breaks versioned dependencies, so
 it must not be used.
 
-\subsection{use.defaults}
+\item[use.defaults]
 The \t{use.defaults} file in the profile directory was used to implement `autouse'---switching USE
 flags on or off depending upon which packages are installed. It was deprecated long ago and finally
 removed in 2009.
+
+\end{description}
 
 \section{Retroactive changes}
 
 In some exceptional cases, changes to the specification have been approved by the Gentoo Council
 without introducing a new EAPI\@. This section lists such retroactive changes.
 
-\subsection{Bash version}
+\begin{description}
+\item[Bash version]
 EAPIs 0, 1 and~2 originally specified GNU Bash version 3.0. This was retroactively updated to
 version 3.2 (see table~\ref{tab:bash-version}) in November 2009.
 
-\subsection{Old-style virtuals}
+\item[Old-style virtuals]
 Historically, virtuals were special packages rather than regular ebuilds. An ebuild could specify in
 the \t{PROVIDE} metadata that it supplied certain virtuals, and the package manager had to bear this
 in mind when handling dependencies.
@@ -82,7 +86,7 @@ GLEP~37~\cite{glep37} and finally removed in 2011.
 requirements to pull in a `provider'. This does not require any special handling from the package
 manager.}
 
-\subsection{EAPI parsing}
+\item[EAPI parsing]
 The method to specify the EAPI of an ebuild used to be a shell variable assignment, and the package
 manager had to source the ebuild in order to determine the EAPI\@. Therefore any ebuild using
 a future EAPI would still have to be sourceable by old package managers, which imposed restrictions
@@ -94,12 +98,12 @@ The current syntax of the \t{EAPI} assignment statement (see section~\ref{sec:ea
 the package manager to obtain the EAPI from the ebuild by a regular expression match and without
 sourcing it, was introduced in May 2012.
 
-\subsection{Package names}
+\item[Package names]
 Previously, package names were only required not to end in a hyphen followed by one or more digits.
 In October 2012 this was tightened to the specification in section~\ref{sec:package-names}, namely
 that they must not end in a hyphen followed by anything resembling a package version.
 
-\subsection{Asterisk in dependency specification}
+\item[Asterisk in dependency specification]
 In the \t{=} dependency operator specified in section~\ref{sec:dep-operator}, an asterisk used to
 induce string prefix comparison instead of the normal version comparison logic. That could lead to
 surprising results, e.\,g.\ \t{=dev-lang/perl-5.2*} matching \t{dev-lang/perl-5.22.0}. Moreover,
@@ -108,13 +112,13 @@ implementation in package managers deviated from what was specified.
 String prefix matching was effective in EAPIs 0, 1, 2, 3, 4 and~5. It was retroactively dropped
 in favour of the current behaviour in October 2015.
 
-\subsection{Empty dependency groups}
+\item[Empty dependency groups]
 The dependency specification format (see section~\ref{sec:dependency-spec}) originally permitted
 all-of, any-of, exactly-one-of, at-most-one-of and use-conditional groups with zero sub-elements.
 However, such empty groups were neither supported by all package managers nor used in ebuilds.
 They were dropped from the specification in October 2017.
 
-\subsection{econf -{}-disable-static option}
+\item[econf -{}-disable-static option]
 The \t{-{}-disable-static} option in \t{econf} (see section~\ref{sec:build-commands}) was intended
 to disable only static Libtool archive building. The original check for either
 \t{-{}-disable-static} or \t{-{}-enable-static} occuring in \t{configure -{}-help} output produced
@@ -124,11 +128,13 @@ The test mentioned above was effective in EAPI~8. It was updated in November 202
 \t{-{}-enable-static} and \t{-{}-enable-shared}, and in addition checks for a proper end of these
 option strings.
 
-\subsection{econf matches configure -{}-help output better}
+\item[econf matches configure -{}-help output better]
 The simple string matching used for \t{configure -{}-help} output caused false positives for options
 like \t{-{}-with-sysroot}. It was effective in EAPIs 4, 5, 6, 7 and 8, and was updated in April 2023
 to check for a proper end of string for all option names beginning with \t{with-}, \t{disable-} or
 \t{enable-}.
+
+\end{description}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 
