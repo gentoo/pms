@@ -215,7 +215,7 @@
         This version corresponds to commit \gitAbbrevHash
         \ifthenelse{\equal{\gitBranch}{\detokenize{master}}}{}
         { on branch \gitBranch}%
-        \ifthenelse{\equal{\gitDirty}{}}{}{ with local changes}.%
+        \ifthenelse{\equal{\gitDirty}{}}{}{, with local changes}.%
     }%
 }
 
