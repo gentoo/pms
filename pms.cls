@@ -86,6 +86,8 @@
     \newcommand{\featurelabel}[1]{\leavevmode\label{feat:#1}%
         % tex4ht does not support marginnote
         \framebox{\textsc{#1}}}
+    % Workaround for tex4ht bug #656 (https://puszcza.gnu.org.ua/bugs/?656)
+    \AtBeginDocument{\Configure{@newlabel}{\AnchorLabel}}
 }{%
     \newcommand{\featureref}[1]{\textsc{#1} on page~\pageref{feat:#1}}
     \newcommand{\compactfeatureref}[1]{p.\,\pageref{feat:#1}}
