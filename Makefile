@@ -74,6 +74,9 @@ $(COMMITINFO): $(SOURCES)
 	  reltag={$${reltag}}%n]{gitexinfo}%n" > $@; \
 	fi
 
+check-html: pms.html
+	xmllint --noout --nonet --valid $^
+
 dist: $(SOURCES) $(COMMITINFO) pms.pdf pms.html
 	PV='$(PV)'; \
 	if test -z "$${PV}"; then \
@@ -100,7 +103,7 @@ clean:
 maintainer-clean: clean
 	rm -f $(COMMITINFO)
 
-.PHONY: all html dist upload clean maintainer-clean
+.PHONY: all html check-html dist upload clean maintainer-clean
 
 .DELETE_ON_ERROR:
 .NOTPARALLEL:
