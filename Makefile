@@ -50,21 +50,10 @@ pms.dvi: $(LATEXFILES) pms.bbl $(COMMITINFO)
 pms.html: $(LATEXFILES) pms.bbl $(COMMITINFO)
 	set -e; sum=''; \
 	while true; do \
-	  mk4ht xhlatex pms 'xhtml,fn-in,charset=utf-8' ' -cunihtf -utf8'; \
+	  make4ht -f xhtml pms fn-in; \
 	  oldsum=$${sum}; sum=$$(cksum $@); \
 	  test "$${sum}" != "$${oldsum}" || break; \
 	done
-	@# replace ligatures by their component letters
-	LC_ALL=C sed -i "$$(printf 's/\\xef\\xac\\x8%s/%s/g;' \
-	  0 ff 1 fi 2 fl 3 ffi 4 ffl)" $@
-	@# remove redundant span elements
-	LC_ALL=C sed -Ei ':x;/<span(\s+[^>]*)?$$/{N;bx;};'\
-	':y;s,(<span\s+[^>]*>)([^<]*)</span>\1,\1\2,;ty' $@
-	@# guessable names for sections
-	LC_ALL=C sed -Ei \
-	  -e 's/("#?)x1-[0-9]*00+([1-9][0-9]?")/\1chapter-\2/g' \
-	  -e 's/("#?)x1-[0-9]*00+([1-9][0-9]?(\.[0-9]+)+")/\1section-\2/g' \
-	  -e 's/("#?)x1-[0-9]*00+([A-Z](\.[0-9]+)*")/\1appendix-\2/g' $@
 
 pms.bbl: pms.bib $(LATEXFILES) $(COMMITINFO)
 	$(aux-clean)
