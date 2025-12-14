@@ -1,24 +1,24 @@
 \chapter{Feature availability by EAPI}
 
 \note{This chapter is informative and for convenience only. Refer to the main text for specifics.
-For lack of space, EAPIs 0 to~4 have been omitted from the table below, as well as items that would
+For lack of space, EAPIs 0 to~5 have been omitted from the table below, as well as items that would
 have identical entries for all listed EAPIs.}
 
-\ChangeWhenAddingAnEAPI{8}
-\begin{longtable}{@{}llllll@{}} % @{} to avoid overfull box
+\ChangeWhenAddingAnEAPI{9}
+\begin{longtable}{llllll}
 \caption{Features in EAPIs}\\
 \toprule
 \multicolumn{1}{c}{\textbf{Feature}} &
 \multicolumn{1}{c}{\textbf{Ref.}} &
 \multicolumn{4}{c}{\textbf{EAPIs}} \\
-& & 5 & 6 & 7 & 8 \\
+& & 6 & 7 & 8 & 9 \\
 \midrule
 \endfirsthead
 \midrule
 \multicolumn{1}{c}{\textbf{Feature}} &
 \multicolumn{1}{c}{\textbf{Ref.}} &
 \multicolumn{4}{c}{\textbf{EAPIs}} \\
-& & 5 & 6 & 7 & 8 \\
+& & 6 & 7 & 8 & 9 \\
 \midrule
 \endhead
 \midrule
@@ -27,191 +27,176 @@ have identical entries for all listed EAPIs.}
 \endlastfoot
 
 \t{package.mask} directory & \compactfeatureref{package-mask-dir} &
-    No & No & Yes & Yes \\
-
-Less strict \t{updates} syntax & \compactfeatureref{updates-filenames} &
-    No & No & No & Yes \\
-
-Profile files as directories & \compactfeatureref{profile-file-dirs} &
-    No & No & Yes & Yes \\
-
-\t{package.provided} & \compactfeatureref{package-provided} &
-    Optional & Optional & No & No \\
-
-Bash version & \compactfeatureref{bash-version} &
-    3.2 & 4.2 & 4.2 & 5.0 \\
-
-\t{failglob} in global scope & \compactfeatureref{failglob} &
     No & Yes & Yes & Yes \\
 
-Selective URI restrictions & \compactfeatureref{uri-restrict} &
-    No & No & No & Yes \\
-
-\t{BDEPEND} & \compactfeatureref{bdepend} &
+Less strict \t{updates} syntax & \compactfeatureref{updates-filenames} &
     No & No & Yes & Yes \\
 
-\t{IDEPEND} & \compactfeatureref{idepend} &
+Default EAPI for profiles & \compactfeatureref{profile-eapi-default} &
+    0 & 0 & 0 & Top-level \\
+
+Profile files as directories & \compactfeatureref{profile-file-dirs} &
+    No & Yes & Yes & Yes \\
+
+\t{package.provided} & \compactfeatureref{package-provided} &
+    Optional & No & No & No \\
+
+\t{use.stable} & \compactfeatureref{use-stable} &
     No & No & No & Yes \\
+
+\t{package.use.stable} & \compactfeatureref{use-stable} &
+    No & No & No & Yes \\
+
+Bash version & \compactfeatureref{bash-version} &
+    4.2 & 4.2 & 5.0 & 5.3 \\
+
+Selective URI restrictions & \compactfeatureref{uri-restrict} &
+    No & No & Yes & Yes \\
+
+\t{BDEPEND} & \compactfeatureref{bdepend} &
+    No & Yes & Yes & Yes \\
+
+\t{IDEPEND} & \compactfeatureref{idepend} &
+    No & No & Yes & Yes \\
 
 Empty \t{||}, \t{\textasciicircum\textasciicircum} groups match &
     \compactfeatureref{empty-dep-groups} &
-    Yes & Yes & No & No \\
+    Yes & No & No & No \\
 
 Working dir in \t{pkg_*} phases & \compactfeatureref{phase-function-dir} &
-    Any & Any & Any & Empty \\
+    Any & Any & Empty & Empty \\
 
 \t{src_prepare} style & \compactfeatureref{src-prepare} &
-    no-op & 6 & 6 & 8 \\
-
-\t{src_install} style & \compactfeatureref{src-install} &
-    4 & 6 & 6 & 6 \\
+    6 & 6 & 8 & 8 \\
 
 Accumulate \t{PROPERTIES} & \compactfeatureref{accumulate-vars} &
-    No & No & No & Yes \\
+    No & No & Yes & Yes \\
 
 Accumulate \t{RESTRICT} & \compactfeatureref{accumulate-vars} &
-    No & No & No & Yes \\
+    No & No & Yes & Yes \\
+
+Export variables & \compactfeatureref{export-vars} &
+    Yes & Yes & Yes & No \\
 
 \t{PORTDIR} & \compactfeatureref{portdir} &
-    Yes & Yes & No & No \\
+    Yes & No & No & No \\
 
 \t{ECLASSDIR} & \compactfeatureref{eclassdir} &
-    Yes & Yes & No & No \\
+    Yes & No & No & No \\
 
 \t{SYSROOT}, \t{ESYSROOT} & \compactfeatureref{sysroot} &
-    No & No & Yes & Yes \\
+    No & Yes & Yes & Yes \\
 
 \t{BROOT} & \compactfeatureref{broot} &
-    No & No & Yes & Yes \\
+    No & Yes & Yes & Yes \\
 
 \t{DESTTREE} & \compactfeatureref{desttree} &
-    Yes & Yes & No & No \\
+    Yes & No & No & No \\
 
 \t{INSDESTTREE} & \compactfeatureref{insdesttree} &
-    Yes & Yes & No & No \\
+    Yes & No & No & No \\
 
 \t{ENV_UNSET} & \compactfeatureref{env-unset} &
-    No & No & Yes & Yes \\
-
-Sane locale settings & \compactfeatureref{locale-settings} &
-    Undefined & Yes & Yes & Yes \\
+    No & Yes & Yes & Yes \\
 
 Trailing slash in \t{D} etc. & \compactfeatureref{trailing-slash} &
-    Yes & Yes & No & No \\
+    Yes & No & No & No \\
 
 GNU \t{patch} version & \compactfeatureref{gnu-patch} &
-    Any & Any & 2.7 & 2.7 \\
+    Any & 2.7 & 2.7 & 2.7 \\
 
 \t{nonfatal} function / external & \compactfeatureref{nonfatal} &
-    No & No & Yes & Yes \\
-
-\t{einstall} & \compactfeatureref{banned-commands} &
-    Yes & Banned & Banned & Banned \\
+    No & Yes & Yes & Yes \\
 
 \t{dohtml} & \compactfeatureref{banned-commands} &
-    Yes & Yes & Banned & Banned \\
+    Yes & Banned & Banned & Banned \\
 
 \t{dolib} & \compactfeatureref{banned-commands} &
-    Yes & Yes & Banned & Banned \\
+    Yes & Banned & Banned & Banned \\
 
 \t{libopts} & \compactfeatureref{banned-commands} &
-    Yes & Yes & Banned & Banned \\
+    Yes & Banned & Banned & Banned \\
 
 \t{useq} & \compactfeatureref{banned-commands} &
-    Yes & Yes & Yes & Banned \\
+    Yes & Yes & Banned & Banned \\
 
 \t{hasv} & \compactfeatureref{banned-commands} &
-    Yes & Yes & Yes & Banned \\
+    Yes & Yes & Banned & Banned \\
 
 \t{hasq} & \compactfeatureref{banned-commands} &
+    Yes & Yes & Banned & Banned \\
+
+\t{assert} & \compactfeatureref{banned-commands} &
+    Yes & Yes & Yes & Banned \\
+
+\t{domo} & \compactfeatureref{banned-commands} &
     Yes & Yes & Yes & Banned \\
 
 Query command options & \compactfeatureref{pm-query-options} &
-    \t{-{}-host-root} & \t{-{}-host-root} & \t{-b}, \t{-d}, \t{-r} & \t{-b}, \t{-d}, \t{-r} \\
+    \t{-{}-host-root} & \t{-b}, \t{-d}, \t{-r} & \t{-b}, \t{-d}, \t{-r} & \t{-b}, \t{-d}, \t{-r} \\
 
 Output commands use stdout & \compactfeatureref{output-no-stdout} &
-    Yes & Yes & No & No \\
+    Yes & No & No & No \\
 
 \t{eqawarn} & \compactfeatureref{eqawarn} &
-    No & No & Yes & Yes \\
-
-\t{die -n} & \compactfeatureref{nonfatal-die} &
     No & Yes & Yes & Yes \\
 
 \t{die} in subshell & \compactfeatureref{subshell-die} &
-    No & No & Yes & Yes \\
-
-\t{eapply} & \compactfeatureref{eapply} &
     No & Yes & Yes & Yes \\
 
-\t{eapply_user} & \compactfeatureref{eapply-user} &
-    No & Yes & Yes & Yes \\
+\t{pipestatus} & \compactfeatureref{pipestatus} &
+    No & No & No & Yes \\
 
 \t{econf -{}-datarootdir} & \compactfeatureref{econf-options} &
-    No & No & No & Yes \\
-
-\t{econf -{}-docdir} & \compactfeatureref{econf-options} &
-    No & Yes & Yes & Yes \\
-
-\t{econf -{}-htmldir} & \compactfeatureref{econf-options} &
-    No & Yes & Yes & Yes \\
+    No & No & Yes & Yes \\
 
 \t{econf -{}-with-sysroot} & \compactfeatureref{econf-options} &
-    No & No & Yes & Yes \\
+    No & Yes & Yes & Yes \\
 
 \t{econf -{}-disable-static} & \compactfeatureref{econf-options} &
-    No & No & No & Yes \\
+    No & No & Yes & Yes \\
 
 \t{domo} destination path & \compactfeatureref{domo-path} &
-    \t{\$\{DESTTREE\}} & \t{\$\{DESTTREE\}} & \t{/usr} & \t{/usr} \\
+    \t{\$\{DESTTREE\}} & \t{/usr} & \t{/usr} & \t{/usr} \\
 
 \t{dosym -r} & \compactfeatureref{dosym-relative} &
-    No & No & No & Yes \\
+    No & No & Yes & Yes \\
 
 \t{insopts} affects misc.\ cmds & \compactfeatureref{insopts} &
-    Yes & Yes & Yes & No \\
+    Yes & Yes & No & No \\
 
 \t{exeopts} affects \t{doinitd} & \compactfeatureref{exeopts} &
-    Yes & Yes & Yes & No \\
+    Yes & Yes & No & No \\
 
 Controllable stripping & \compactfeatureref{dostrip} &
-    No & No & Yes & Yes \\
+    No & Yes & Yes & Yes \\
 
 \t{dostrip} & \compactfeatureref{dostrip} &
-    No & No & Yes & Yes \\
+    No & Yes & Yes & Yes \\
 
 \t{usev} second arg & \compactfeatureref{usev} &
-    No & No & No & Yes \\
-
-\t{in_iuse} & \compactfeatureref{in-iuse} &
-    No & Yes & Yes & Yes \\
-
-\t{ver_*} commands & \compactfeatureref{ver-commands} &
     No & No & Yes & Yes \\
 
-\t{unpack} absolute paths & \compactfeatureref{unpack-absolute} &
+\t{ver_*} commands & \compactfeatureref{ver-commands} &
     No & Yes & Yes & Yes \\
 
-\t{unpack} support for \t{txz} & \compactfeatureref{unpack-extensions} &
-    No & Yes & Yes & Yes \\
+\t{ver_replacing} & \compactfeatureref{ver-replacing} &
+    No & No & No & Yes \\
 
 \t{unpack} support for \t{7z} & \compactfeatureref{unpack-extensions} &
-    Yes & Yes & Yes & No \\
+    Yes & Yes & No & No \\
 
 \t{unpack} support for \t{lha} & \compactfeatureref{unpack-extensions} &
-    Yes & Yes & Yes & No \\
+    Yes & Yes & No & No \\
 
 \t{unpack} support for \t{rar} & \compactfeatureref{unpack-extensions} &
+    Yes & Yes & No & No \\
+
+\t{edo} & \compactfeatureref{edo} &
+    No & No & No & Yes \\
+
+Absolute symlink rewriting & \compactfeatureref{symlink-rewrite} &
     Yes & Yes & Yes & No \\
-
-\t{unpack} case-insensitive & \compactfeatureref{unpack-ignore-case} &
-    No & Yes & Yes & Yes \\
-
-\t{einstalldocs} & \compactfeatureref{einstalldocs} &
-    No & Yes & Yes & Yes \\
-
-\t{get_libdir} & \compactfeatureref{get-libdir} &
-    No & Yes & Yes & Yes \\
 
 \end{longtable}
 
@@ -392,7 +377,24 @@ EAPI 8 is EAPI 7 with the following changes:
 \item \t{unpack} no longer supports \t{.7z}, \t{.rar}, \t{.lha}, \featureref{unpack-extensions}.
 \end{compactitem}
 
-\ChangeWhenAddingAnEAPI{8}
+\section*{EAPI 9}
+
+EAPI 9 is EAPI 8 with the following changes:
+
+\begin{compactitem}
+\item Different default EAPI for profiles, \featureref{profile-eapi-default}.
+\item \t{use.stable} and \t{package.use.stable}, \featureref{use-stable}.
+\item Bash version is 5.3, \featureref{bash-version}.
+\item Variables no longer exported, \featureref{export-vars}.
+\item \t{assert} banned, \featureref{banned-commands}.
+\item \t{domo} banned, \featureref{banned-commands}.
+\item \t{pipestatus}, \featureref{pipestatus}.
+\item \t{ver_replacing}, \featureref{ver-replacing}.
+\item \t{edo}, \featureref{edo}.
+\item Absolute symlinks no longer rewritten, \featureref{symlink-rewrite}.
+\end{compactitem}
+
+\ChangeWhenAddingAnEAPI{9}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
 

@@ -8,10 +8,10 @@ by the package manager as part of the build and/or install process. In all cases
 must provide a default implementation of these functions; unless otherwise stated this must be a
 no-op. All functions may assume that they have read access to all system libraries, binaries and
 configuration files that are accessible to normal users, as well as write access to the temporary
-directories specified by the \t{T}, \t{TMPDIR} and \t{HOME} environment variables
+directories specified by the \t{T}, \t{TMPDIR} and \t{HOME} variables
 (see section~\ref{sec:ebuild-env-vars}). Most functions must assume only that they have additional
-write access to the package's working directory (the \t{WORKDIR} environment variable); exceptions
-are noted below.
+write access to the package's working directory (the \t{WORKDIR} variable); exceptions are noted
+below.
 
 The environment for functions run outside of the build sequence (that is, \t{pkg_config},
 \t{pkg_info}, \t{pkg_prerm} and \t{pkg_postrm}) must be the environment used for the build of the
@@ -46,7 +46,7 @@ fallback to \t{WORKDIR} is used:
     executed, are in \t{DEFINED_PHASES}.
 \end{compactitem}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Initial working directory in \t{pkg_*} phase functions for EAPIs}
     \label{tab:function-dirs}
     \begin{tabular}{ll}
@@ -55,12 +55,12 @@ fallback to \t{WORKDIR} is used:
       \multicolumn{1}{c}{\textbf{Initial working directory?}} \\
       \midrule
       0, 1, 2, 3, 4, 5, 6, 7  & Any   \\
-      8                       & Empty \\
+      8, 9                    & Empty \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs with \t{S} to \t{WORKDIR} fallbacks}
     \label{tab:s-fallback-table}
     \begin{tabular}{ll}
@@ -69,7 +69,7 @@ fallback to \t{WORKDIR} is used:
       \multicolumn{1}{c}{\textbf{Fallback to \t{WORKDIR} permitted?}} \\
       \midrule
       0, 1, 2, 3        & Always            \\
-      4, 5, 6, 7, 8     & Conditional error \\
+      4, 5, 6, 7, 8, 9  & Conditional error \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -91,7 +91,7 @@ before the next phase is executed.
 
 \t{pkg_pretend} must not write to the filesystem.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting \t{pkg_pretend}}
     \label{tab:pkg-pretend-table}
     \begin{tabular}{ll}
@@ -100,7 +100,7 @@ before the next phase is executed.
       \multicolumn{1}{c}{\textbf{Supports \t{pkg_pretend}?}} \\
       \midrule
       0, 1, 2, 3        & No  \\
-      4, 5, 6, 7, 8     & Yes \\
+      4, 5, 6, 7, 8, 9  & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -149,7 +149,7 @@ listing~\ref{lst:src-prepare-6} or listing~\ref{lst:src-prepare-8}, respectively
 For other EAPIs supporting \t{src_prepare}, the default implementation used when the ebuild lacks
 the \t{src_prepare} function is a no-op.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{\t{src_prepare} support and behaviour for EAPIs}
     \label{tab:src-prepare-table}
     \begin{tabular}{lll}
@@ -161,7 +161,7 @@ the \t{src_prepare} function is a no-op.
       0, 1              & No  & Not applicable \\
       2, 3, 4, 5        & Yes & no-op          \\
       6, 7              & Yes & 6              \\
-      8                 & Yes & 8              \\
+      8, 9              & Yes & 8              \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -206,7 +206,7 @@ The \t{src_configure} function configures the package's build environment. The d
 implementation used when the ebuild lacks the \t{src_configure} function shall behave as in
 listing~\ref{lst:src-configure-2}.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting \t{src_configure}}
     \label{tab:src-configure-table}
     \begin{tabular}{ll}
@@ -214,8 +214,8 @@ listing~\ref{lst:src-configure-2}.
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{Supports \t{src_configure}?}} \\
       \midrule
-      0, 1                & No  \\
-      2, 3, 4, 5, 6, 7, 8 & Yes \\
+      0, 1                    & No  \\
+      2, 3, 4, 5, 6, 7, 8, 9  & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -244,7 +244,7 @@ implementation used when the ebuild lacks the \t{src_prepare} function shall beh
 listing~\ref{lst:src-compile-0}, listing~\ref{lst:src-compile-1} or listing~\ref{lst:src-compile-2},
 respectively.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{\t{src_compile} behaviour for EAPIs}
     \label{tab:src-compile-table}
     \begin{tabular}{ll}
@@ -252,9 +252,9 @@ respectively.
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{Format}} \\
       \midrule
-      0                   & 0 \\
-      1                   & 1 \\
-      2, 3, 4, 5, 6, 7, 8 & 2 \\
+      0                       & 0 \\
+      1                       & 1 \\
+      2, 3, 4, 5, 6, 7, 8, 9  & 2 \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -317,7 +317,7 @@ parallel tests, the \t{emake} command must be called with option \t{-j1}.
 The \t{src_test} function may be disabled by \t{RESTRICT}\@. See section~\ref{sec:restrict}. It may
 be disabled by user too, using a PM-specific mechanism.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{\t{src_test} behaviour for EAPIs}
     \label{tab:src-test-table}
     \begin{tabular}{ll}
@@ -326,7 +326,7 @@ be disabled by user too, using a PM-specific mechanism.
       \multicolumn{1}{c}{\textbf{Supports parallel tests?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  \\
-      5, 6, 7, 8        & Yes \\
+      5, 6, 7, 8, 9     & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -346,7 +346,7 @@ listing~\ref{lst:src-install-4} or listing~\ref{lst:src-install-6}, respectively
 For other EAPIs, the default implementation used when the ebuild lacks the \t{src_install} function
 is a no-op.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{\t{src_install} behaviour for EAPIs}
     \label{tab:src-install-table}
     \begin{tabular}{ll}
@@ -356,7 +356,7 @@ is a no-op.
       \midrule
       0, 1, 2, 3        & no-op \\
       4, 5              & 4     \\
-      6, 7, 8           & 6     \\
+      6, 7, 8, 9        & 6     \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -400,37 +400,37 @@ src_install() {
 
 The \t{pkg_preinst} function performs any special tasks that are required immediately before
 merging the package to the live filesystem. It must not write outside of the directories specified
-by the \t{ROOT} and \t{D} environment variables.
+by the \t{ROOT} and \t{D} variables.
 
 \t{pkg_preinst} must be run with full access to all files and directories below that specified by
-the \t{ROOT} and \t{D} environment variables.
+the \t{ROOT} and \t{D} variables.
 
 \subsection{pkg_postinst}
 
 The \t{pkg_postinst} function performs any special tasks that are required immediately after
 merging the package to the live filesystem. It must not write outside of the directory specified
-in the \t{ROOT} environment variable.
+in the \t{ROOT} variable.
 
 \t{pkg_postinst}, like, \t{pkg_preinst}, must be run with full access to all files and directories
-below that specified by the \t{ROOT} environment variable.
+below that specified by the \t{ROOT} variable.
 
 \subsection{pkg_prerm}
 
 The \t{pkg_prerm} function performs any special tasks that are required immediately before
 unmerging the package from the live filesystem. It must not write outside of the directory specified
-by the \t{ROOT} environment variable.
+by the \t{ROOT} variable.
 
 \t{pkg_prerm} must be run with full access to all files and directories below that specified by
-the \t{ROOT} environment variable.
+the \t{ROOT} variable.
 
 \subsection{pkg_postrm}
 
 The \t{pkg_postrm} function performs any special tasks that are required immediately after
 unmerging the package from the live filesystem. It must not write outside of the directory specified
-by the \t{ROOT} environment variable.
+by the \t{ROOT} variable.
 
 \t{pkg_postrm} must be run with full access to all files and directories below that specified by
-the \t{ROOT} environment variable.
+the \t{ROOT} variable.
 
 \subsection{pkg_config}
 
@@ -450,7 +450,7 @@ that dependencies may not be installed.
 
 \t{pkg_info} must not write to the filesystem.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting \t{pkg_info} on non-installed packages}
     \label{tab:pkg-info-table}
     \begin{tabular}{ll}
@@ -459,7 +459,7 @@ that dependencies may not be installed.
       \multicolumn{1}{c}{\textbf{Supports \t{pkg_info} on non-installed packages?}} \\
       \midrule
       0, 1, 2, 3        & No  \\
-      4, 5, 6, 7, 8     & Yes \\
+      4, 5, 6, 7, 8, 9  & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -481,7 +481,7 @@ named \t{default_<phase-function>}) that behaves as the default implementation f
 be defined when executing any ebuild phase function listed in the table. Ebuilds must not call
 these functions except when in the phase in question.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting \t{default_} phase functions}
     \label{tab:default-phase-function-table}
     \begin{tabular}{l P{26em}}
@@ -492,7 +492,7 @@ these functions except when in the phase in question.
       0, 1              & None \\
       2, 3              & \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure},
                           \t{src_compile}, \t{src_test} \\
-      4, 5, 6, 7, 8     & \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure},
+      4, 5, 6, 7, 8, 9  & \t{pkg_nofetch}, \t{src_unpack}, \t{src_prepare}, \t{src_configure},
                           \t{src_compile}, \t{src_test}, \t{src_install} \\
       \bottomrule
     \end{tabular}

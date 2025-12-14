@@ -33,8 +33,27 @@ are discarded.
 A profile directory may contain an \t{eapi} file. This file, if it exists, must contain a single
 line with the name of an EAPI\@. This specifies the EAPI to use when handling the directory in
 question; a package manager must not attempt to use any profile using a directory which requires an
-EAPI it does not support. If no \t{eapi} file is present, EAPI 0 shall be used. The EAPI is neither
-inherited via the \t{parent} file nor in subdirectories.
+EAPI it does not support.
+
+\featurelabel{profile-eapi-default} If no \t{eapi} file is present, the default depends on the EAPI
+of the top-level profiles directory (see section~\ref{sec:profiles-dir}). That EAPI shall be used
+if table~\ref{tab:profile-eapi-default} lists it as ``top-level''. Otherwise, EAPI 0 shall be used.
+
+The EAPI is neither inherited via the \t{parent} file nor in subdirectories.
+
+\ChangeWhenAddingAnEAPI{9}
+\begin{centertable}{Default EAPI for profiles}
+    \label{tab:profile-eapi-default}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Default EAPI?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6, 7, 8 & 0         \\
+      9                         & Top-level \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \subsection{deprecated}
 If a profile contains a file named \t{deprecated}, it is treated as such. The first line of this
@@ -79,7 +98,7 @@ in that directory, unless their name begins with a dot, will be concatenated in 
 filename in the POSIX locale and the result will be processed as if it were a single file.
 Any subdirectories will be ignored.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting directories for profile files}
     \label{tab:profile-file-dirs}
     \begin{tabular}{ll}
@@ -88,7 +107,7 @@ Any subdirectories will be ignored.
       \multicolumn{1}{c}{\textbf{Supports directories for profile files?}} \\
       \midrule
       0, 1, 2, 3, 4, 5, 6 & No  \\
-      7, 8                & Yes \\
+      7, 8, 9             & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -124,7 +143,7 @@ it is actually installed. Because it has severe adverse effects on USE-based and
 dependencies, its use is strongly deprecated and package manager support must be regarded as purely
 optional. Supported in EAPIs as per table~\ref{tab:package-provided}.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting \t{package.provided} in profiles}
     \label{tab:package-provided}
     \begin{tabular}{ll}
@@ -133,7 +152,7 @@ optional. Supported in EAPIs as per table~\ref{tab:package-provided}.
       \multicolumn{1}{c}{\textbf{Supports \t{package.provided}?}} \\
       \midrule
       0, 1, 2, 3, 4, 5, 6 & Optionally \\
-      7, 8                & No         \\
+      7, 8, 9             & No         \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -145,6 +164,40 @@ specification, and then a space delimited list of USE flags to enable. A USE fla
 \t{-flag} indicates that the package should have the USE flag disabled. The package dependency
 specification is limited to the forms defined by the directory's EAPI\@. In some EAPIs,
 \t{package.use} can be a directory instead of a regular file as per section~\ref{sec:line-stacking}.
+
+\subsection{use.stable and package.use.stable}
+\featurelabel{use-stable} The \t{use.stable} and \t{package.use.stable} files may be used to
+override the default USE flags specified by \t{make.defaults}. They only apply to packages that
+are merged due to a stable keyword in the sense of section~\ref{sec:keywords}. Each line in
+\t{use.stable} contains a USE flag to enable; the \t{-flag} syntax indicates that the flag should
+be disabled. The \t{package.use.stable} file uses the same format as \t{package.use}.
+\t{USE_EXPAND} values may be enabled or disabled by using \t{expand_name_value}.
+
+Stable restrictions are applied exactly when the following condition holds: If every stable keyword
+in \t{KEYWORDS} were replaced with its tilde-prefixed counterpart (see section~\ref{sec:keywords}),
+then the resulting \t{KEYWORDS} setting would prevent installation of the package.
+
+If a flag appears in more than one of \t{package.use}, \t{use.stable} and \t{package.use.stable},
+then \t{package.use.stable} takes precedence over \t{package.use}, which in turn takes precedence
+over \t{use.stable}.
+
+These files are supported in EAPIs as per table~\ref{tab:profile-use-stable}. They can be
+directories instead of regular files as per section~\ref{sec:line-stacking}.
+
+\ChangeWhenAddingAnEAPI{9}
+\begin{centertable}{EAPIs supporting \t{use.stable} and \t{package.use.stable} in profiles}
+    \label{tab:profile-use-stable}
+    \begin{tabular}{lll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{use.stable}?}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{package.use.stable}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6, 7, 8 & No  & No  \\
+      9                         & Yes & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \subsection{USE masking and forcing}
 \label{sec:use-masking}
@@ -166,7 +219,7 @@ only act on packages that are merged due to a stable keyword in the sense of
 section~\ref{sec:keywords}. Thus, these files can be used to restrict the feature set deemed
 stable in a package.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Profile directory support for masking/forcing use flags in stable versions only}
     \label{tab:profile-stablemask}
     \begin{tabular}{ll}
@@ -175,7 +228,7 @@ stable in a package.
       \multicolumn{1}{c}{\textbf{Supports masking/forcing use flags in stable versions?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  \\
-      5, 6, 7, 8        & Yes \\
+      5, 6, 7, 8, 9     & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}

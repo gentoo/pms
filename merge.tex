@@ -86,7 +86,7 @@ held under the original image directory.
 In other EAPIs, the behaviour with respect to file modification times
 is undefined.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Preservation of file modification times (mtimes)}
     \label{tab:mtime-preserve}
     \begin{tabular}{ll}
@@ -94,8 +94,8 @@ is undefined.
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{mtimes preserved?}} \\
       \midrule
-      0, 1, 2           & Undefined \\
-      3, 4, 5, 6, 7, 8  & Yes       \\
+      0, 1, 2             & Undefined \\
+      3, 4, 5, 6, 7, 8, 9 & Yes       \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -138,8 +138,24 @@ Ebuilds must not attempt to merge a symlink on top of a directory.
 
 \subsection{Rewriting}
 
-Any absolute symlink whose link starts with \t{D} must be rewritten with the leading \t{D} removed.
-The package manager should issue a notice when doing this.
+\featurelabel{symlink-rewrite} In EAPIs listed in table~\ref{tab:symlink-rewrite} as rewriting
+symlinks, any absolute symlink whose link target starts with \t{D} must be rewritten with the
+leading \t{D} removed. The package manager should issue a notice when encountering such a symlink.
+In all other EAPIs, symlinks must be merged with their targets unmodified.
+
+\ChangeWhenAddingAnEAPI{9}
+\begin{centertable}{Rewriting of absolute symlinks in EAPIs}
+    \label{tab:symlink-rewrite}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Rewrite symlinks?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6, 7, 8 & Yes \\
+      9                         & No  \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \section{Hard links}
 

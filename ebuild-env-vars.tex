@@ -1,16 +1,42 @@
 \section{Defined variables}
 \label{sec:ebuild-env-vars}
 
-The package manager must define the following environment variables. Not all variables are
-universally meaningful; variables that are not meaningful in a given phase or in global scope may
-be unset or set to any value. Ebuilds must not attempt to modify any of these variables, unless
-otherwise specified.
+The package manager must define the following variables. Not all variables are universally
+meaningful; variables that are not meaningful in a given phase or in global scope may be unset
+or set to any value. Ebuilds must not attempt to modify any of these variables, unless otherwise
+specified.
 
 Because of their special meanings, these variables may not be preserved consistently across all
 phases as would normally happen due to environment saving (see section~\ref{sec:ebuild-env-state}).
 For example, \t{EBUILD_PHASE} is different for every phase, and \t{ROOT} may have changed between
 the various different \t{pkg_*} phases. Ebuilds must recalculate any variable they derive from an
 inconsistent variable.
+
+\featurelabel{export-vars} These variables are either exported to the environment or kept as
+unexported shell variables, as specified for EAPIs in table~\ref{tab:export-vars}; exceptions are
+\t{TMPDIR} and \t{HOME} which are always exported. In EAPIs where variables are not exported,
+the package manager must pass those that are required by ebuild-specific external commands
+(see section~\ref{sec:pkg-mgr-commands}) in an implementation-defined manner.
+
+Variables listed in section~\ref{sec:specific-profile-vars} as having specific meanings or special
+handling, and that are set in the active profiles' \t{make.defaults} files, obey the same export
+rules specified for EAPIs in table~\ref{tab:export-vars}. This behaviour is governed by the EAPI
+of the ebuild, not that of the profile. Except where otherwise noted, all other variables set in
+the active profiles' \t{make.defaults} files must be exported to the environment.
+
+\ChangeWhenAddingAnEAPI{9}
+\begin{centertable}{EAPIs with variables exported to the environment}
+    \label{tab:export-vars}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Variables exported?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6, 7, 8 & Yes \\
+      9                         & No  \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
 
 \begin{landscape}
 % Reduce width of text area to make room for margin notes
@@ -168,13 +194,15 @@ inconsistent variable.
 \t{TMPDIR} &
     All &
     Partially\footnotemark[\value{footnote}] &
-    Must be set to the location of a usable temporary directory, for any applications
-    called by an ebuild. Must not be used by ebuilds directly; see \t{T} above. \\
+    Must be set to the location of a usable temporary directory, for any applications called
+    by an ebuild. Must not be used by ebuilds directly; see \t{T} above. \t{TMPDIR} is always
+    exported to the environment. \\
 \t{HOME} &
     All &
     Partially\footnotemark[\value{footnote}] &
     The full path to an appropriate temporary directory for use by any programs invoked by the
-    ebuild that may read or modify the home directory. \\
+    ebuild that may read or modify the home directory. \t{HOME} is always exported to the
+    environment. \\
 \t{EPREFIX} &
     All &
     Yes &
@@ -211,14 +239,14 @@ inconsistent variable.
     No &
     \featurelabel{desttree} Controls the location where \t{dobin}, \t{dolib}, \t{domo},
     and \t{dosbin} install things. Only for EAPIs listed in table~\ref{tab:removed-env-vars-table}
-    as supporting \t{DESTTREE}\@. In all other EAPIs, this is retained as a conceptual variable not
-    exported to the ebuild environment. \\
+    as supporting \t{DESTTREE}\@. In all other EAPIs, this is retained as a conceptual variable
+    inaccessible from the ebuild environment. \\
 \t{INSDESTTREE} &
     \t{src_install} &
     No &
     \featurelabel{insdesttree} Controls the location where \t{doins} installs things. Only for EAPIs
     listed in table~\ref{tab:removed-env-vars-table} as supporting \t{INSDESTTREE}\@. In all other
-    EAPIs, this is retained as a conceptual variable not exported to the ebuild environment. \\
+    EAPIs, this is retained as a conceptual variable inaccessible from the ebuild environment. \\
 \t{USE} &
     All &
     Yes &
@@ -273,7 +301,7 @@ inconsistent variable.
 \end{longtable}
 \end{landscape}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting various added env variables}
     \label{tab:added-env-vars-table}
     \begin{tabular}{lllllll}
@@ -289,12 +317,12 @@ inconsistent variable.
       0, 1, 2, 3        & No  & No  & No  & No  & No  & No  \\
       4                 & Yes & Yes & Yes & No  & No  & No  \\
       5, 6              & Yes & Yes & Yes & Yes & No  & No  \\
-      7, 8              & Yes & Yes & Yes & Yes & Yes & Yes \\
+      7, 8, 9           & Yes & Yes & Yes & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting various removed env variables}
     \label{tab:removed-env-vars-table}
     \begin{tabular}{lllllll}
@@ -309,12 +337,12 @@ inconsistent variable.
       \midrule
       0, 1, 2, 3        & Yes & Yes & Yes & Yes & Yes & Yes \\
       4, 5, 6           & No  & No  & Yes & Yes & Yes & Yes \\
-      7, 8              & No  & No  & No  & No  & No  & No  \\
+      7, 8, 9           & No  & No  & No  & No  & No  & No  \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting offset-prefix env variables}
     \label{tab:offset-env-vars-table}
     \begin{tabular}{lllll}
@@ -327,15 +355,13 @@ inconsistent variable.
       \midrule
       0, 1, 2           & No  & No  & No  & No  \\
       3, 4, 5, 6        & Yes & Yes & Yes & No  \\
-      7, 8              & Yes & Yes & Yes & Yes \\
+      7, 8, 9           & Yes & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-Except where otherwise noted, all variables set in the active profiles' \t{make.defaults} files must
-be exported to the ebuild environment. \t{CHOST}, \t{CBUILD} and \t{CTARGET}, if not set by
-profiles, must contain either an appropriate machine tuple (the definition of appropriate is beyond
-the scope of this specification) or be unset.
+\t{CHOST}, \t{CBUILD} and \t{CTARGET}, if not set by profiles, must contain either an appropriate
+machine tuple (the definition of appropriate is beyond the scope of this specification) or be unset.
 
 \t{PATH} must be initialized by the package manager to a ``usable'' default.  The exact value here
 is left up to interpretation, but it should include the equivalent ``sbin'' and ``bin'' and any
@@ -351,7 +377,7 @@ must be unset, for EAPIs listed in table~\ref{tab:profile-env-unset} as supporti
 ASCII range (U+0000 to U+007F) are concerned. Only for EAPIs listed in such a manner in
 table~\ref{tab:locale-settings}.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Locale settings for EAPIs}
     \label{tab:locale-settings}
     \begin{tabular}{ll}
@@ -360,7 +386,7 @@ table~\ref{tab:locale-settings}.
       \multicolumn{1}{c}{\textbf{Sane \t{LC_CTYPE} and \t{LC_COLLATE}?}} \\
       \midrule
       0, 1, 2, 3, 4, 5  & Undefined \\
-      6, 7, 8           & Yes       \\
+      6, 7, 8, 9        & Yes       \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -373,11 +399,11 @@ This section discusses the handling of four variables:
 \begin{description}
 \item[IUSE] is the variable calculated from the \t{IUSE} values defined in ebuilds and eclasses.
 \item[IUSE_REFERENCEABLE] is a variable calculated from \t{IUSE} and a variety of other sources
-    described below. It is purely a conceptual variable; it is not exported to the ebuild
+    described below. It is purely a conceptual variable; it is inaccessible from the ebuild
     environment. Values in \t{IUSE_REFERENCEABLE} may legally be used in queries from other
     packages about an ebuild's state (for example, for use dependencies).
-\item[IUSE_EFFECTIVE] is another conceptual, unexported variable. Values in \t{IUSE_EFFECTIVE} are
-    those which an ebuild may legally use in queries about itself (for example, for the \t{use}
+\item[IUSE_EFFECTIVE] is another conceptual, inaccessible variable. Values in \t{IUSE_EFFECTIVE}
+    are those which an ebuild may legally use in queries about itself (for example, for the \t{use}
     function, and for use in dependency specification conditional blocks).
 \item[USE] is a variable calculated by the package manager and exported to the ebuild environment.
 \end{description}
@@ -446,7 +472,7 @@ contain at most one value.
 \subsection{Offset-prefix variables}
 \label{sec:offset-vars}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting offset-prefix}
     \label{tab:offset-support-table}
     \begin{tabular}{ll}
@@ -454,8 +480,8 @@ contain at most one value.
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{Supports offset-prefix?}}\\
       \midrule
-      0, 1, 2           & No  \\
-      3, 4, 5, 6, 7, 8  & Yes \\
+      0, 1, 2             & No  \\
+      3, 4, 5, 6, 7, 8, 9 & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -486,7 +512,7 @@ specifies the system root directory, it will consist of a single slash (\t{/}).
 a trailing slash, the package manager guarantees that a trailing slash will never be present.
 If the path specifies the system root directory, it will be empty.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Variables that always or never end with a trailing slash}
     \label{tab:trailing-slash}
     \begin{tabular}{lll}
@@ -498,7 +524,7 @@ If the path specifies the system root directory, it will be empty.
       \t{D}, \t{ED} \\
       \midrule
       0, 1, 2, 3, 4, 5, 6 & always & always \\
-      7, 8                & never  & never  \\
+      7, 8, 9             & never  & never  \\
       \bottomrule
     \end{tabular}
 \end{centertable}

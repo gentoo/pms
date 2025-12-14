@@ -32,7 +32,7 @@ The following commands affect this behaviour:
     option and in EAPIs supporting this option, see table~\ref{tab:die-properties}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPI command failure behaviour}
     \label{tab:commands-die-table}
     \begin{tabular}{llll}
@@ -44,7 +44,7 @@ The following commands affect this behaviour:
       \midrule
       0, 1, 2, 3        & Non-zero exit & No  & n/a \\
       4, 5, 6           & Aborts        & Yes & No  \\
-      7, 8              & Aborts        & Yes & Yes \\
+      7, 8, 9           & Aborts        & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -55,7 +55,7 @@ The following commands affect this behaviour:
 \featurelabel{banned-commands} Some commands are banned in some EAPIs. If a banned command is
 called, the package manager must abort the build process indicating an error.
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}  % two places
 \begin{centertable}{Banned commands}
     \label{tab:banned-commands-table}
     \begin{tabular}{lllllll}
@@ -73,17 +73,20 @@ called, the package manager must abort the build process indicating an error.
       0, 1, 2, 3        & No  & No  & No  & No  & No  & No  \\
       4, 5              & Yes & Yes & No  & No  & No  & No  \\
       6                 & Yes & Yes & Yes & No  & No  & No  \\
-      7, 8              & Yes & Yes & Yes & Yes & Yes & Yes \\
+      7, 8, 9           & Yes & Yes & Yes & Yes & Yes & Yes \\
       \midrule
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{6}{c}{\textbf{Command banned?}} \\
       \multicolumn{1}{c}{} &
       \multicolumn{1}{c}{\textbf{\t{useq}}} &
       \multicolumn{1}{c}{\textbf{\t{hasv}}} &
-      \multicolumn{1}{c}{\textbf{\t{hasq}}} & & & \\
+      \multicolumn{1}{c}{\textbf{\t{hasq}}} &
+      \multicolumn{1}{c}{\textbf{\t{assert}}} &
+      \multicolumn{1}{c}{\textbf{\t{domo}}} & \\
       \midrule
-      0, 1, 2, 3, 4, 5, 6, 7  & No  & No  & No  & & & \\
-      8                       & Yes & Yes & Yes & & & \\
+      0, 1, 2, 3, 4, 5, 6, 7  & No  & No  & No  & No  & No  & \\
+      8                       & Yes & Yes & Yes & No  & No  & \\
+      9                       & Yes & Yes & Yes & Yes & Yes & \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -121,7 +124,7 @@ are given, \t{-r} is assumed.
     otherwise, prints an empty string. The exit code is unspecified.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Package manager query command options supported by EAPIs}
     \label{tab:pm-query-options}
     \begin{tabular}{lllll}
@@ -134,7 +137,7 @@ are given, \t{-r} is assumed.
       \midrule
       0, 1, 2, 3, 4     & No  & No  & No  & No  \\
       5, 6              & Yes & No  & No  & No  \\
-      7, 8              & No  & Yes & Yes & Yes \\
+      7, 8, 9           & No  & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -171,7 +174,7 @@ output, using stdout as an output facility is forbidden.
     message followed by a failure indicator. Returns its first argument as exit status.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Output commands for EAPIs}
     \label{tab:output-commands}
     \begin{tabular}{lll}
@@ -181,7 +184,7 @@ output, using stdout as an output facility is forbidden.
       \multicolumn{1}{c}{\textbf{Supports \t{eqawarn}?}} \\
       \midrule
       0, 1, 2, 3, 4, 5, 6 & Yes & No  \\
-      7, 8                & No  & Yes \\
+      7, 8, 9             & No  & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -201,9 +204,16 @@ completing. Ebuilds must not run any of these commands once the current phase fu
     environment.
 \item[assert] Checks the shell's pipe status array, and if any element is non-zero (indicating
     failure), calls \t{die}, passing any parameters to it.
+    In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as per
+    section~\ref{sec:banned-commands}.
+\item[pipestatus] \featurelabel{pipestatus} Checks the shell's pipe status array, i.\,e.\ the exit
+    status of the command(s) in the most recently executed foreground pipeline. Returns shell true
+    (0) if all elements are zero, or the last non-zero element otherwise. If called with \t{-v}
+    as the first argument, also outputs the pipe status array as a space-separated list.
+    Only available in EAPIs listed in table~\ref{tab:pipestatus} as supporting \t{pipestatus}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Properties of \t{die} command in EAPIs}
     \label{tab:die-properties}
     \begin{tabular}{lll}
@@ -214,7 +224,21 @@ completing. Ebuilds must not run any of these commands once the current phase fu
       \midrule
       0, 1, 2, 3, 4, 5  & No  & No  \\
       6                 & Yes & No  \\
-      7, 8              & Yes & Yes \\
+      7, 8, 9           & Yes & Yes \\
+      \bottomrule
+    \end{tabular}
+\end{centertable}
+
+\ChangeWhenAddingAnEAPI{9}
+\begin{centertable}{EAPIs supporting \t{pipestatus}}
+    \label{tab:pipestatus}
+    \begin{tabular}{ll}
+      \toprule
+      \multicolumn{1}{c}{\textbf{EAPI}} &
+      \multicolumn{1}{c}{\textbf{Supports \t{pipestatus}?}} \\
+      \midrule
+      0, 1, 2, 3, 4, 5, 6, 7, 8 & No  \\
+      9                         & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -278,7 +302,7 @@ Ebuilds must not run any of these commands once the current phase function has r
     subsequent calls, the command will do nothing and return~0.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Patch commands for EAPIs}
     \label{tab:patch-commands}
     \begin{tabular}{lll}
@@ -288,7 +312,7 @@ Ebuilds must not run any of these commands once the current phase function has r
       \multicolumn{1}{c}{\textbf{\t{eapply_user}?}} \\
       \midrule
       0, 1, 2, 3, 4, 5  & No  & No  \\
-      6, 7, 8           & Yes & Yes \\
+      6, 7, 8, 9        & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -348,7 +372,7 @@ commands once the current phase function has returned.
     \t{configure -{}-help} output matches only if it is not immediately followed by any of the
     characters \t{[A-Za-z0-9+_.-]}.
 
-    \ChangeWhenAddingAnEAPI{8}
+    \ChangeWhenAddingAnEAPI{9}  % two places
     \begin{centertable}{Extra \t{econf} arguments for EAPIs}
         \label{tab:econf-options-table}
         \begin{tabular}{lllll}
@@ -362,7 +386,7 @@ commands once the current phase function has returned.
           0, 1, 2, 3, 4, 5  & No  & No  & No  & No  \\
           6                 & No  & Yes & Yes & No  \\
           7                 & No  & Yes & Yes & Yes \\
-          8                 & Yes & Yes & Yes & Yes \\
+          8, 9              & Yes & Yes & Yes & Yes \\
           \midrule
           \multicolumn{1}{c}{\textbf{EAPI}} &
           \multicolumn{1}{P{5.5em}}{\textbf{-{}-disable-dependency-tracking}} &
@@ -372,7 +396,7 @@ commands once the current phase function has returned.
           0, 1, 2, 3        & No  & No  & No  & \\
           4                 & Yes & No  & No  & \\
           5, 6, 7           & Yes & Yes & No  & \\
-          8                 & Yes & Yes & Yes & \\
+          8, 9              & Yes & Yes & Yes & \\
           \bottomrule
         \end{tabular}
     \end{centertable}
@@ -585,6 +609,8 @@ the current phase function has returned.
     is the package name with \t{.mo} appended. Failure behaviour is EAPI dependent as per
     section~\ref{sec:failure-behaviour}. The locale tree location is EAPI dependent as per
     table~\ref{tab:domo-path}.
+    In EAPIs listed in table~\ref{tab:banned-commands-table}, this command is banned as per
+    section~\ref{sec:banned-commands}.
 
 \item[dosbin] As \t{dobin}, but installs to \t{DESTTREE/sbin}.
 
@@ -651,7 +677,7 @@ dosym_relative_path() {
 
 \end{description}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting \t{dodoc -r}}
     \label{tab:dodoc-table}
     \begin{tabular}{ll}
@@ -660,12 +686,12 @@ dosym_relative_path() {
       \multicolumn{1}{c}{\textbf{Supports \t{dodoc -r}?}} \\
       \midrule
       0, 1, 2, 3        & No  \\
-      4, 5, 6, 7, 8     & Yes \\
+      4, 5, 6, 7, 8, 9  & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting \t{doheader} and \t{newheader}}
     \label{tab:doheader-table}
     \begin{tabular}{ll}
@@ -674,12 +700,12 @@ dosym_relative_path() {
       \multicolumn{1}{c}{\textbf{Supports \t{doheader} and \t{newheader}?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  \\
-      5, 6, 7, 8        & Yes \\
+      5, 6, 7, 8, 9     & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting symlinks for \t{doins}}
     \label{tab:doins-table}
     \begin{tabular}{ll}
@@ -688,12 +714,12 @@ dosym_relative_path() {
       \multicolumn{1}{c}{\textbf{\t{doins} supports symlinks?}} \\
       \midrule
       0, 1, 2, 3        & No  \\
-      4, 5, 6, 7, 8     & Yes \\
+      4, 5, 6, 7, 8, 9  & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{\t{doman} language support options for EAPIs}
     \label{tab:doman-table}
     \begin{tabular}{lll}
@@ -704,12 +730,12 @@ dosym_relative_path() {
       \midrule
       0, 1              & No  & Not applicable \\
       2, 3              & Yes & No             \\
-      4, 5, 6, 7, 8     & Yes & Yes            \\
+      4, 5, 6, 7, 8, 9  & Yes & Yes            \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting stdin for \t{new*} commands}
     \label{tab:newfoo-stdin-table}
     \begin{tabular}{ll}
@@ -718,12 +744,12 @@ dosym_relative_path() {
       \multicolumn{1}{c}{\textbf{\t{new*} can read from stdin?}} \\
       \midrule
       0, 1, 2, 3, 4     & No  \\
-      5, 6, 7, 8        & Yes \\
+      5, 6, 7, 8, 9     & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{\t{domo} destination path in EAPIs}
     \label{tab:domo-path}
     \begin{tabular}{ll}
@@ -732,12 +758,12 @@ dosym_relative_path() {
       \multicolumn{1}{c}{\textbf{Destination path}} \\
       \midrule
       0, 1, 2, 3, 4, 5, 6 & \t{\$\{DESTTREE\}/share/locale} \\
-      7, 8                & \t{/usr/share/locale} \\
+      7, 8, 9             & \t{/usr/share/locale} \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting \t{dosym -r}}
     \label{tab:dosym-r}
     \begin{tabular}{ll}
@@ -746,7 +772,7 @@ dosym_relative_path() {
       \multicolumn{1}{c}{\textbf{\t{dosym} supports creation of relative paths?}} \\
       \midrule
       0, 1, 2, 3, 4, 5, 6, 7  & No  \\
-      8                       & Yes \\
+      8, 9                    & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -788,7 +814,7 @@ function has returned.
 
 \end{description}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Commands respecting \t{insopts} for EAPIs}
     \label{tab:insopts-commands}
     \begin{tabular}{lllll}
@@ -800,12 +826,12 @@ function has returned.
       \multicolumn{1}{c}{\textbf{\t{doheader}?}} \\
       \midrule
       0, 1, 2, 3, 4, 5, 6, 7  & Yes & Yes & Yes & Yes \\
-      8                       & Yes & No  & No  & No  \\
+      8, 9                    & Yes & No  & No  & No  \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Commands respecting \t{exeopts} for EAPIs}
     \label{tab:exeopts-commands}
     \begin{tabular}{lll}
@@ -815,7 +841,7 @@ function has returned.
       \multicolumn{1}{c}{\textbf{\t{doinitd}?}} \\
       \midrule
       0, 1, 2, 3, 4, 5, 6, 7  & Yes & Yes \\
-      8                       & Yes & No  \\
+      8, 9                    & Yes & No  \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -892,7 +918,7 @@ any of these functions from any other phase.
     supporting \t{dostrip}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Commands controlling manipulation of files in the staging area in EAPIs}
     \label{tab:staging-area-commands}
     \begin{tabular}{lll}
@@ -903,7 +929,7 @@ any of these functions from any other phase.
       \midrule
       0, 1, 2, 3        & No  & No  \\
       4, 5, 6           & Yes & No  \\
-      7, 8              & Yes & Yes \\
+      7, 8, 9           & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -950,7 +976,7 @@ table~\ref{tab:use-list-strictness}.
     table~\ref{tab:use-list-functions} as supporting \t{in_iuse}.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPI behaviour for use queries not in \t{IUSE_EFFECTIVE}}
     \label{tab:use-list-strictness}
     \begin{tabular}{ll}
@@ -959,12 +985,12 @@ table~\ref{tab:use-list-strictness}.
       \multicolumn{1}{c}{\textbf{Behaviour}} \\
       \midrule
       0, 1, 2, 3        & Undefined \\
-      4, 5, 6, 7, 8     & Error     \\
+      4, 5, 6, 7, 8, 9  & Error     \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{\t{usev}, \t{use_with} and \t{use_enable} arguments for EAPIs}
     \label{tab:use-list-args}
     \begin{tabular}{lll}
@@ -976,12 +1002,12 @@ table~\ref{tab:use-list-strictness}.
       \midrule
       0, 1, 2, 3        & No  & No  \\
       4, 5, 6, 7        & No  & Yes \\
-      8                 & Yes & Yes \\
+      8, 9              & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting \t{usex} and \t{in_iuse}}
     \label{tab:use-list-functions}
     \begin{tabular}{lll}
@@ -992,7 +1018,7 @@ table~\ref{tab:use-list-strictness}.
       \midrule
       0, 1, 2, 3, 4     & No  & No  \\
       5                 & Yes & No  \\
-      6, 7, 8           & Yes & Yes \\
+      6, 7, 8, 9        & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -1075,20 +1101,33 @@ the second, inclusively.
 
     Both version strings must conform to the version specification in
     section~\ref{sec:version-spec}. Comparison is done using algorithm~\ref{alg:version-comparison}.
+
+\item[ver_replacing] \featurelabel{ver-replacing} Takes an operator and a version string as
+    arguments, which follow the same specification as in \t{ver_test}. Iterates over the elements
+    of \t{REPLACING_VERSIONS}, using \t{ver_test} to compare each element against the version
+    string. Returns shell true (0) if the specified relation holds for at least one element,
+    shell false (1) otherwise. In particular, shell false is returned when \t{REPLACING_VERSIONS}
+    is empty.
+
+    Only available in EAPIs listed in table~\ref{tab:version-commands} as supporting
+    \t{ver_replacing}. The command is only meaningful in phases where \t{REPLACING_VERSIONS} is
+    defined.
 \end{description}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{EAPIs supporting version manipulation commands}
     \label{tab:version-commands}
-    \begin{tabular}{llll}
+    \begin{tabular}{lllll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{\t{ver_cut}?}} &
       \multicolumn{1}{c}{\textbf{\t{ver_rs}?}} &
-      \multicolumn{1}{c}{\textbf{\t{ver_test}?}} \\
+      \multicolumn{1}{c}{\textbf{\t{ver_test}?}} &
+      \multicolumn{1}{c}{\textbf{\t{ver_replacing}?}} \\
       \midrule
-      0, 1, 2, 3, 4, 5, 6 & No  & No  & No  \\
-      7, 8                & Yes & Yes & Yes \\
+      0, 1, 2, 3, 4, 5, 6 & No  & No  & No  & No  \\
+      7, 8                & Yes & Yes & Yes & No  \\
+      9                   & Yes & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
@@ -1166,7 +1205,7 @@ has returned.
     \featurelabel{unpack-ignore-case} \t{unpack} matches filename extensions in a case-insensitive
     manner, for EAPIs listed such in table~\ref{tab:unpack-behaviour}.
 
-    \ChangeWhenAddingAnEAPI{8}
+    \ChangeWhenAddingAnEAPI{9}
     \begin{centertable}{\t{unpack} behaviour for EAPIs}
         \label{tab:unpack-behaviour}
         \begin{tabular}{lll}
@@ -1176,12 +1215,12 @@ has returned.
           \multicolumn{1}{c}{\textbf{Case-insensitive matching?}} \\
           \midrule
           0, 1, 2, 3, 4, 5  & No  & No  \\
-          6, 7, 8           & Yes & Yes \\
+          6, 7, 8, 9        & Yes & Yes \\
           \bottomrule
         \end{tabular}
     \end{centertable}
 
-    \ChangeWhenAddingAnEAPI{8}
+    \ChangeWhenAddingAnEAPI{9}
     \begin{centertable}{\t{unpack} extensions for EAPIs}
         \label{tab:unpack-extensions-table}
         \begin{tabular}{llllllll}
@@ -1197,7 +1236,7 @@ has returned.
           0, 1, 2           & No  & No  & No  & Yes & Yes & Yes \\
           3, 4, 5           & Yes & Yes & No  & Yes & Yes & Yes \\
           6, 7              & Yes & Yes & Yes & Yes & Yes & Yes \\
-          8                 & Yes & Yes & Yes & No  & No  & No  \\
+          8, 9              & Yes & Yes & Yes & No  & No  & No  \\
           \bottomrule
         \end{tabular}
     \end{centertable}
@@ -1263,21 +1302,33 @@ has returned.
 \end{algorithmic}
 \end{algorithm}
 
+\item[edo] \featurelabel{edo} Takes a command line, prints it to stderr and executes the command.
+Specifically, the entire list of (one or more) arguments is output as an informational message
+to stderr; individual tokens may be reformatted to avoid ambiguity. The first argument is then
+executed as a command, with the remaining arguments passed to it. If the command fails, \t{edo}
+aborts the build process using \t{die}, unless it was called under \t{nonfatal}, in which case it
+returns a non-zero exit status.
+
+\t{edo} must be implemented internally as a shell function. Only available in EAPIs listed in
+table~\ref{tab:misc-commands} as supporting \t{edo}.
+
 \end{description}
 
-\ChangeWhenAddingAnEAPI{8}
+\ChangeWhenAddingAnEAPI{9}
 \begin{centertable}{Misc commands for EAPIs}
     \label{tab:misc-commands}
-    \begin{tabular}{llll}
+    \begin{tabular}{lllll}
       \toprule
       \multicolumn{1}{c}{\textbf{EAPI}} &
       \multicolumn{1}{c}{\textbf{\t{default}?}} &
       \multicolumn{1}{c}{\textbf{\t{einstalldocs}?}} &
-      \multicolumn{1}{c}{\textbf{\t{get_libdir}?}} \\
+      \multicolumn{1}{c}{\textbf{\t{get_libdir}?}} &
+      \multicolumn{1}{c}{\textbf{\t{edo}?}} \\
       \midrule
-      0, 1              & No  & No  & No  \\
-      2, 3, 4, 5        & Yes & No  & No  \\
-      6, 7, 8           & Yes & Yes & Yes \\
+      0, 1              & No  & No  & No  & No  \\
+      2, 3, 4, 5        & Yes & No  & No  & No  \\
+      6, 7, 8           & Yes & Yes & Yes & No  \\
+      9                 & Yes & Yes & Yes & Yes \\
       \bottomrule
     \end{tabular}
 \end{centertable}
