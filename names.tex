@@ -67,9 +67,10 @@ A version starts with the number part, which is in the form \t{[0-9]+(\textbacks
 
 This may optionally be followed by one of \t{[a-z]} (a lower-case letter).
 
-This may be followed by zero or more of the suffixes \t{_alpha}, \t{_beta}, \t{_pre}, \t{_rc}
-or \t{_p}, each of which may optionally be followed by an unsigned integer. Suffix and integer
-count as separate version components.
+This may be followed by zero or more suffixes. Each suffix consists of one of the strings
+\t{_alpha}, \t{_beta}, \t{_pre}, \t{_rc} or \t{_p} indicating its type, optionally followed by
+an unsigned integer. The type part and the integer part of the suffix count as separate version
+components.
 
 This may optionally be followed by the suffix \t{-r} followed immediately by an unsigned integer
 (the ``revision number''). If this suffix is not present, it is assumed to be \t{-r0}.
