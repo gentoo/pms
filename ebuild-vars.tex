@@ -48,8 +48,8 @@ defined by an eclass.
 
 \begin{description}
 \item[EAPI] The EAPI\@. See below in section~\ref{sec:eapi}.
-\item[HOMEPAGE] The URI or URIs for a package's homepage, including protocols.
-    See section~\ref{sec:dependency-spec} for full syntax.
+\item[HOMEPAGE] The URI or whitespace separated URIs for a package's homepage, including the scheme
+    component.
 \item[SRC_URI] A list of source URIs for the package. Valid protocols are \t{http://},
     \t{https://}, \t{ftp://} and \t{mirror://} (see section~\ref{sec:thirdpartymirrors} for mirror
     behaviour). Fetch restricted packages may include URL parts consisting of just a filename.
