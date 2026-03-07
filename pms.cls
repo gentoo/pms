@@ -25,7 +25,8 @@
 \PassOptionsToPackage{nottoc,notlot,notlof}{tocbibind}
 \PassOptionsToPackage{defaultsans,scaled=0.92}{opensans}
 \PassOptionsToPackage{hyphens}{url} % url.sty implicitly loaded by hyperref
-\PassOptionsToPackage{hyperfootnotes=false}{hyperref} % footmisc compatibility
+\PassOptionsToPackage{hyperfootnotes=false, % footmisc compatibility
+    hidelinks,pdflang=en}{hyperref}
 \PassOptionsToPackage{local}{gitinfo2}
 \PassOptionsToPackage{chapter}{algorithm}
 % algorithmic and algorithm to be loaded last to avoid failures
@@ -191,20 +192,6 @@
 % Don't add extra vertical space, to avoid underfull boxes. Only affects
 % two-sided layout, for one-sided it is already the default
 \raggedbottom
-
-% Define some PDF meta-data.
-% tex4ht workaround: this needs to happen after loading hyperref
-\g@addto@macro\@documentclasshook{
-    \hypersetup{%
-        urlcolor=black,
-        colorlinks=true,
-        citecolor=black,
-        linkcolor=black,
-        pdflang={en},
-        pdfcreator={pdfLaTeX and hyperref},
-        pdfproducer={pdfLaTeX and hyperref},
-    }
-}
 
 % Reads the last commit date from the Git repository and even succeeds
 % when none is available
