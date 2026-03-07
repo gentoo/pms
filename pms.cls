@@ -51,7 +51,10 @@
     float,      % More control over float environments
     titling,    % Change appearance of title information
     sectsty,    % Change font used for section headings
-    gitinfo2    % Metadata from git
+    hyperref,   % Support for hyperlinks
+    gitinfo2,   % Metadata from git
+    algorithm,  %
+    algorithmic % Set algorithms
 }
 
 % Make processing with TeX4HT possible
@@ -66,15 +69,6 @@
 \else
     \setboolean{TEX4HT-HACKS}{true}
 \fi
-
-% tex4ht workaround: hyperref needs to be loaded /after/ tex4ht injects itself
-\g@addto@macro\@documentclasshook{
-    \RequirePackage{%
-        hyperref,       % Support for hyperlinks
-        algorithm,      %
-        algorithmic     % Set algorithms
-    }
-}
 
 \ClassInfo{pms}{LaTeX class for the Package Manager Specification,
     loaded baseclass: \ClassToLoad\MessageBreak}
@@ -126,11 +120,8 @@
 \counterwithout{footnote}{chapter}
 
 % Some shorthands for the lazy ones.
-% tex4ht workaround: this needs to happen after loading hyperref
-\g@addto@macro\@documentclasshook{
-    \renewcommand{\i}[1]{\textit{#1}}
-    \renewcommand{\t}[1]{\texttt{#1}}
-}
+\renewcommand{\i}[1]{\textit{#1}}
+\renewcommand{\t}[1]{\texttt{#1}}
 \newcommand{\note}[1]{\begin{trivlist}\item\textbf{Note:} #1\end{trivlist}}
 
 % Because we are lazy, we define a table environment to fulfil our needs
@@ -149,9 +140,7 @@
 % Redefine headings for list of tables/figures/algorithms
 \renewcommand{\listtablename}{Tables}
 \renewcommand{\listfigurename}{Figures}
-\g@addto@macro\@documentclasshook{
-    \renewcommand{\listalgorithmname}{Algorithms}
-}
+\renewcommand{\listalgorithmname}{Algorithms}
 
 % Define a float environment for listings
 \floatstyle{ruled}
