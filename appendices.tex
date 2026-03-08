@@ -134,6 +134,12 @@ like \t{-{}-with-sysroot}. It was effective in EAPIs 4, 5, 6, 7 and 8, and was u
 to check for a proper end of string for all option names beginning with \t{with-}, \t{disable-} or
 \t{enable-}.
 
+\item[Dependency groups in HOMEPAGE]
+The \t{HOMEPAGE} variable was originally listed as supporting dependency-style specifications,
+most notably use-conditional groups (see section~\ref{sec:dependency-spec}). This feature was
+neither supported by Portage nor used in ebuilds. It was retroactively dropped from existing EAPIs
+in March 2026.
+
 \end{description}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
