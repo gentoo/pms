@@ -12,6 +12,12 @@ functions executed as part of a later uninstall.
 \note{\t{pkg_pretend} is \emph{not} part of the normal call sequence, and does not take part in
 environment saving.}
 
+The visibility of variables defined at the top level of an ebuild or eclass is unspecified.
+Depending on the implementation, such variables may behave as if evaluated in global scope or as if
+evaluated within a function body; ebuilds must not rely upon either behaviour. Consequently, at the
+top level, the \t{local} builtin may not be used, and the \t{declare} builtin may only be used with
+the \t{-g} option when defining variables.
+
 Variables that were exported must remain exported in later functions; variables with default
 visibility may retain default visibility or be exported. Variables with special meanings to the
 package manager are excluded from this rule.
