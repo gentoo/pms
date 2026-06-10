@@ -134,6 +134,11 @@ like \t{-{}-with-sysroot}. It was effective in EAPIs 4, 5, 6, 7 and 8, and was u
 to check for a proper end of string for all option names beginning with \t{with-}, \t{disable-} or
 \t{enable-}.
 
+\item[Path variables re-exported to environment]
+EAPI~9 originally specified that \t{SYSROOT}, \t{ESYSROOT} and \t{BROOT} must not be exported.
+This was later found to break cross-compilation. Therefore, EAPI~9 was updated in June 2026 to
+export these variables to the environment again.
+
 \end{description}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
