@@ -14,9 +14,10 @@ inconsistent variable.
 
 \featurelabel{export-vars} These variables are either exported to the environment or kept as
 unexported shell variables, as specified for EAPIs in table~\ref{tab:export-vars}; exceptions are
-\t{TMPDIR} and \t{HOME} which are always exported. In EAPIs where variables are not exported,
-the package manager must pass those that are required by ebuild-specific external commands
-(see section~\ref{sec:pkg-mgr-commands}) in an implementation-defined manner.
+\t{SYSROOT}, \t{ESYSROOT}, \t{BROOT}, \t{TMPDIR} and \t{HOME}, which are always exported.
+In EAPIs where variables are not exported, the package manager must pass those that are required
+by ebuild-specific external commands (see section~\ref{sec:pkg-mgr-commands}) in an
+implementation-defined manner.
 
 Variables listed in section~\ref{sec:specific-profile-vars} as having specific meanings or special
 handling, and that are set in the active profiles' \t{make.defaults} files, obey the same export
@@ -169,13 +170,13 @@ the active profiles' \t{make.defaults} files must be exported to the environment
     No &
     \featurelabel{sysroot} The absolute path to the root directory containing build dependencies
     satisfied by \t{DEPEND}\@. Only for EAPIs listed in table~\ref{tab:added-env-vars-table}
-    as supporting \t{SYSROOT}. \\
+    as supporting \t{SYSROOT}\@. Always exported to the environment. \\
 \t{ESYSROOT} &
     \t{src_*}, \t{pkg_setup}\footnotemark[\value{footnote}] &
     No &
     Contains the concatenation of the \t{SYSROOT} path and applicable prefix value, as determined
     by table~\ref{tab:depend-prefix}. Only for EAPIs listed in table~\ref{tab:offset-env-vars-table}
-    as supporting \t{ESYSROOT}. \\
+    as supporting \t{ESYSROOT}\@. Always exported to the environment. \\
 \t{BROOT} &
     \t{src_*}, \t{pkg_setup},\footnotemark[\value{footnote}] \t{pkg_preinst}, \t{pkg_postinst},
     \t{pkg_prerm}, \t{pkg_postrm}\footnote{Legal in \t{pkg_*inst} and \t{pkg_*rm} only for EAPIs
@@ -184,7 +185,7 @@ the active profiles' \t{make.defaults} files must be exported to the environment
     \featurelabel{broot} The absolute path to the root directory containing build dependencies
     satisfied by \t{BDEPEND} and \t{IDEPEND}, typically executable build tools. This includes any
     applicable offset prefix. Only for EAPIs listed in table~\ref{tab:added-env-vars-table} as
-    supporting \t{BROOT}. \\
+    supporting \t{BROOT}\@. Always exported to the environment. \\
 \t{T} &
     All &
     Partially\footnote{Consistent and preserved across a single connected sequence of install or
