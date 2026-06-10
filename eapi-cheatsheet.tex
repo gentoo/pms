@@ -594,10 +594,10 @@ differences between these EAPIs.
     \item[Bash version] Ebuilds can use features of Bash version 5.3
     (was 5.0 before). See \featureref{bash-version}.
     \item[Variables are no longer exported] The package manager no
-    longer exports its defined shell variables (exceptions are
-    \code{TMPDIR} and \code{HOME}) to the environment. The same
-    applies to variables defined in \code{make.defaults} that have
-    specific meanings. See \featureref{export-vars}.
+    longer exports its defined shell variables to the environment,
+    except for certain path variables. The same applies to variables
+    defined in \code{make.defaults} that have specific meanings.
+    See \featureref{export-vars}.
     \item[\code{pipestatus}] Checks if all commands in the last
     executed pipeline have returned an exit status of zero. When the
     \code{-v} option is specified, also prints the shell's pipe status
