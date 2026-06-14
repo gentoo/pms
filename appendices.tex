@@ -140,6 +140,11 @@ most notably use-conditional groups (see section~\ref{sec:dependency-spec}). Thi
 neither supported by Portage nor used in ebuilds. It was retroactively dropped from existing EAPIs
 in March 2026.
 
+\item[Path variables re-exported to environment]
+EAPI~9 originally specified that \t{SYSROOT}, \t{ESYSROOT} and \t{BROOT} must not be exported.
+This was later found to break cross-compilation. Therefore, EAPI~9 was updated in June 2026 to
+export these variables to the environment again.
+
 \end{description}
 
 % vim: set filetype=tex fileencoding=utf8 et tw=100 spell spelllang=en :
