@@ -186,17 +186,17 @@ the active profiles' \t{make.defaults} files must be exported to the environment
     applicable offset prefix. Only for EAPIs listed in table~\ref{tab:added-env-vars-table} as
     supporting \t{BROOT}\@. Always exported to the environment. \\
 \t{T} &
-    All &
+    All\myfnmark{3} &
     Partially\myfnmark{5} &
     The full path to a temporary directory for use by the ebuild. \\
 \t{TMPDIR} &
-    All &
+    All\myfnmark{3} &
     Partially\myfnmark{5} &
     Must be set to the location of a usable temporary directory, for any applications called
     by an ebuild. Must not be used by ebuilds directly; see \t{T} above. \t{TMPDIR} is always
     exported to the environment. \\
 \t{HOME} &
-    All &
+    All\myfnmark{3} &
     Partially\myfnmark{5} &
     The full path to an appropriate temporary directory for use by any programs invoked by the
     ebuild that may read or modify the home directory. \t{HOME} is always exported to the
