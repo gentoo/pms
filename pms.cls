@@ -21,7 +21,7 @@
 \PassOptionsToPackage{utf8}{inputenc}
 \PassOptionsToPackage{quiet}{marginnote}
 \PassOptionsToPackage{nohyphen}{underscore}
-\PassOptionsToPackage{hang,flushmargin}{footmisc}
+\PassOptionsToPackage{bottom,flushmargin,hang,multiple}{footmisc}
 \PassOptionsToPackage{nottoc,notlot,notlof}{tocbibind}
 \PassOptionsToPackage{defaultsans,scaled=0.92}{opensans}
 \PassOptionsToPackage{hyphens}{url} % url.sty implicitly loaded by hyperref
@@ -163,6 +163,9 @@
 % Prevent numbers in list of tables from overrunning into the table captions
 \renewcommand*{\l@figure}{\@dottedtocline{1}{1.5em}{2.8em}} % was 2.3em
 \let\l@table\l@figure
+
+% Fix footmisc.sty multiple spacing: https://texnique.fr/osqa/questions/648
+\renewcommand*{\multfootsep}{\kern-\scriptspace,\kern-\scriptspace}
 
 % Be more tolerant when formatting paragraphs, to avoid overfull boxes
 \tolerance=400                   % was 200

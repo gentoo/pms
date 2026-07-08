@@ -48,6 +48,11 @@ the active profiles' \t{make.defaults} files must be exported to the environment
 \reversemarginpar
 % Workaround for broken marginnote positioning in lscape environment
 \addtolength{\marginparsep}{-\textwidth} % FIXME
+% Use explicit offsets for footnotes; increment the counter only at the end
+\newcommand{\myfnmark}[1]{\footnotemark[\numexpr\value{footnote}+#1\relax]}
+\newcommand{\myfntext}[2]{\footnotetext[\numexpr\value{footnote}+#1\relax]{#2}}
+\renewcommand{\footnoterule}{}
+
 \newlength{\mycolwidth}
 \setlength{\mycolwidth}{\linewidth-8\tabcolsep
     -\widthof{\t{REPLACED_BY_VERSION}}-7em-\widthof{\textbf{Consistent?}}}
@@ -73,19 +78,19 @@ the active profiles' \t{make.defaults} files must be exported to the environment
 \endlastfoot
 \t{P} &
     All &
-    No\footnote{May change if a package has been updated (see section~\ref{sec:updates-dir}).} &
+    No\myfnmark{1} &
     Package name and version, without the revision part. For example, \t{vim-7.0.174}. \\
 \t{PF} &
     All &
-    No\footnotemark[\value{footnote}] &
+    No\myfnmark{1} &
     Package name, version, and revision (if any), for example \t{vim-7.0.174-r1}. \\
 \t{PN} &
     All &
-    No\footnotemark[\value{footnote}] &
+    No\myfnmark{1} &
     Package name, for example \t{vim}. \\
 \t{CATEGORY} &
     All &
-    No\footnotemark[\value{footnote}] &
+    No\myfnmark{1} &
     The package's category, for example \t{app-editors}. \\
 \t{PV} &
     All &
@@ -114,19 +119,18 @@ the active profiles' \t{make.defaults} files must be exported to the environment
     of each element of the \t{SRC_URI} ebuild metadata variable. Only for EAPIs listed in
     table~\ref{tab:removed-env-vars-table} as supporting \t{AA}. \\
 \t{FILESDIR} &
-    \t{src_*}, global~scope\footnote{Not necessarily present when installing from a binary package.
-    Ebuilds must not access the directory in global scope.} &
+    \t{src_*}, global~scope\myfnmark{2}\myfnmark{3} &
     Yes &
     The full path to a directory where the files from the package's files directory (used for
     small support files or patches) are available. See section~\ref{sec:package-dirs}. May or may
     not exist; if a repository provides no support files for the package in question then an ebuild
     must be prepared for the situation where \t{FILESDIR} points to a non-existent directory. \\
 \t{DISTDIR} &
-    \t{src_*}, global~scope\footnotemark[\value{footnote}] &
+    \t{src_*}, global~scope\myfnmark{2}\myfnmark{3} &
     Yes &
     The full path to the directory in which the files in the \t{A} variable are stored. \\
 \t{WORKDIR} &
-    \t{src_*}, global~scope\footnotemark[\value{footnote}] &
+    \t{src_*}, global~scope\myfnmark{2}\myfnmark{3} &
     Yes &
     The full path to the ebuild's working directory, where all build data should be contained. \\
 \t{S} &
@@ -162,22 +166,20 @@ the active profiles' \t{make.defaults} files must be exported to the environment
     table~\ref{tab:offset-env-vars-table} as supporting \t{EROOT}\@. The presence of a trailing
     slash is EAPI dependent as listed in table~\ref{tab:trailing-slash}. \\
 \t{SYSROOT} &
-    \t{src_*}, \t{pkg_setup}\footnote{Not necessarily present when installing from a binary
-    package.} &
+    \t{src_*}, \t{pkg_setup}\myfnmark{2} &
     No &
     \featurelabel{sysroot} The absolute path to the root directory containing build dependencies
     satisfied by \t{DEPEND}\@. Only for EAPIs listed in table~\ref{tab:added-env-vars-table}
     as supporting \t{SYSROOT}\@. Always exported to the environment. \\
 \t{ESYSROOT} &
-    \t{src_*}, \t{pkg_setup}\footnotemark[\value{footnote}] &
+    \t{src_*}, \t{pkg_setup}\myfnmark{2} &
     No &
     Contains the concatenation of the \t{SYSROOT} path and applicable prefix value, as determined
     by table~\ref{tab:depend-prefix}. Only for EAPIs listed in table~\ref{tab:offset-env-vars-table}
     as supporting \t{ESYSROOT}\@. Always exported to the environment. \\
 \t{BROOT} &
-    \t{src_*}, \t{pkg_setup},\footnotemark[\value{footnote}] \t{pkg_preinst}, \t{pkg_postinst},
-    \t{pkg_prerm}, \t{pkg_postrm}\footnote{Legal in \t{pkg_*inst} and \t{pkg_*rm} only for EAPIs
-    listed in table~\ref{tab:depend-table} as supporting \t{IDEPEND}.} &
+    \t{src_*}, \t{pkg_setup},\myfnmark{2} \t{pkg_preinst}, \t{pkg_postinst}, \t{pkg_prerm},
+    \t{pkg_postrm}\myfnmark{4} &
     No &
     \featurelabel{broot} The absolute path to the root directory containing build dependencies
     satisfied by \t{BDEPEND} and \t{IDEPEND}, typically executable build tools. This includes any
@@ -185,19 +187,17 @@ the active profiles' \t{make.defaults} files must be exported to the environment
     supporting \t{BROOT}\@. Always exported to the environment. \\
 \t{T} &
     All &
-    Partially\footnote{Consistent and preserved across a single connected sequence of install or
-    uninstall phases, but not between install and uninstall. When reinstalling a package, this
-    variable must have different values for the install and the replacement.} &
+    Partially\myfnmark{5} &
     The full path to a temporary directory for use by the ebuild. \\
 \t{TMPDIR} &
     All &
-    Partially\footnotemark[\value{footnote}] &
+    Partially\myfnmark{5} &
     Must be set to the location of a usable temporary directory, for any applications called
     by an ebuild. Must not be used by ebuilds directly; see \t{T} above. \t{TMPDIR} is always
     exported to the environment. \\
 \t{HOME} &
     All &
-    Partially\footnotemark[\value{footnote}] &
+    Partially\myfnmark{5} &
     The full path to an appropriate temporary directory for use by any programs invoked by the
     ebuild that may read or modify the home directory. \t{HOME} is always exported to the
     environment. \\
@@ -220,7 +220,7 @@ the active profiles' \t{make.defaults} files must be exported to the environment
     \\
 \t{D} (continued) &
     \t{pkg_preinst} &
-    No\footnote{May not necessarily have the same value that it had in the \t{src_*} phases.} &
+    No\myfnmark{6} &
     Contains the full path to the image directory of the package about to be merged.
     The presence of a trailing slash is EAPI dependent as listed in table~\ref{tab:trailing-slash}.
     \\
@@ -297,6 +297,17 @@ the active profiles' \t{make.defaults} files must be exported to the environment
     See section~\ref{sec:replacing-versions}. Only for EAPIs listed in
     table~\ref{tab:added-env-vars-table} as supporting \t{REPLACED_BY_VERSION}. \\
 \end{longtable}
+
+\myfntext{1}{May change if a package has been updated (see section~\ref{sec:updates-dir}).}
+\myfntext{2}{Not necessarily present when installing from a binary package.}
+\myfntext{3}{Ebuilds must not access the directory in global scope.}
+\myfntext{4}{Legal in \t{pkg_*inst} and \t{pkg_*rm} only for EAPIs listed
+    in table~\ref{tab:depend-table} as supporting \t{IDEPEND}.}
+\myfntext{5}{Consistent and preserved across a single connected sequence of install or uninstall
+    phases, but not between install and uninstall. When reinstalling a package, this variable must
+    have different values for the install and the replacement.}
+\myfntext{6}{May not necessarily have the same value that it had in the \t{src_*} phases.}
+\addtocounter{footnote}{6}
 \end{landscape}
 
 \ChangeWhenAddingAnEAPI{9}
