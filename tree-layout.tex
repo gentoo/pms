@@ -260,7 +260,8 @@ human-readable form. Plain text format is strongly preferred but not required.
 
 The \t{eclass} directory shall contain copies of the eclasses provided by this repository. The
 format of these files is described in chapter~\ref{ch:eclasses}. It may also contain, in their own
-directory, support files needed by these eclasses.
+directory, support files needed by these eclasses. Ebuilds and eclasses can access such files only
+in EAPIs listed in table~\ref{tab:removed-env-vars-table} as supporting \t{ECLASSDIR}.
 
 \section{The metadata directory}
 \label{sec:metadata-dir}
