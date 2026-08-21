@@ -1264,7 +1264,7 @@ has returned.
     \STATE call \t{dodoc -r "\$\{DOCS[@]\}"}
 \ELSIF{the DOCS variable is a non-empty scalar}
     \STATE call \t{dodoc -r \$\{DOCS\}}
-\ELSIF{the DOCS variable is unset}
+\ELSIF{the DOCS variable is unassigned\footnotemark}
     \FORALL{$d$ matching the filename expansion of \t{README*} \t{ChangeLog} \t{AUTHORS} \t{NEWS}
             \t{TODO} \t{CHANGES} \t{THANKS} \t{BUGS} \t{FAQ} \t{CREDITS} \t{CHANGELOG}}
         \IF{file $d$ exists and has a size greater than zero}
@@ -1282,6 +1282,10 @@ has returned.
 \RETURN shell true (0)
 \end{algorithmic}
 \end{algorithm}
+\footnotetext{A variable is \i{assigned} if it has been given a value. The null string and
+    the empty array are valid values. We avoid the \i{set} terminology here because of the
+    subscript-based definition in the ``Arrays'' section of the Bash manual, under which an empty
+    array would not be considered set.}
 
 \item[get_libdir] \featurelabel{get-libdir} Prints the libdir name obtained according to
     algorithm~\ref{alg:get-libdir}. Must be implemented internally as a shell function and may be
