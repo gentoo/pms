@@ -41,6 +41,7 @@
     longtable,  % Extend tables over more than one page
     array,      % Extended tabular environments
     lscape,     % Rotating pages
+    pdflscape,  % Make landscape pages display as landscape
     marginnote, % Typeset a paragraph in the page margin
     paralist,   % Additional list environments
     parskip,    % Space between paragraphs instead of indentation
